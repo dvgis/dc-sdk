@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "env": {
+    "es6": true,
+    "node": true,
+    "browser": true
+  },
+  "plugins": ["html", "prettier"],
+  "extends": ["eslint:recommended", "plugin:prettier/recommended"],
+  "globals": {
+    "Cesium": false,
+    "GSpace": false
+  },
+  "rules": {
+    "global-require": 0,
+    "indent": 0,
+    "no-new": 0,
+    "camelcase": 0,
+    "padded-blocks": 0,
+    "no-unused-vars": 0,
+    "no-trailing-spaces": 0,
+    "no-mixed-spaces-and-tabs": 0,
+    "space-before-function-paren": [0, "always"],
+    "no-multiple-empty-lines": 0
+  }
+}
