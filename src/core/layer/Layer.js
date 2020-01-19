@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:01:16
+ * @Last Modified time: 2020-01-19 10:19:08
  */
 import LayerEvent from '../event/LayerEvent'
 
@@ -18,16 +18,8 @@ class Layer {
     this._layerEvent = new LayerEvent()
     this._layerEvent.on(DC.LayerEventType.ADD, this._addCallback, this)
     this._layerEvent.on(DC.LayerEventType.REMOVE, this._removeCallback, this)
-    this._layerEvent.on(
-      DC.LayerEventType.ADD_OVERLAY,
-      this._addOverlayCallback,
-      this
-    )
-    this._layerEvent.on(
-      DC.LayerEventType.REMOVE_OVERLAY,
-      this._removeOverlayCallback,
-      this
-    )
+    this._layerEvent.on(DC.LayerEventType.ADD_OVERLAY, this._addOverlayCallback, this)
+    this._layerEvent.on(DC.LayerEventType.REMOVE_OVERLAY, this._removeOverlayCallback, this)
     this.type = undefined
   }
 
@@ -71,22 +63,14 @@ class Layer {
   _removeCallback() {}
 
   _addOverlayCallback(overlay) {
-    if (
-      overlay &&
-      overlay.overlayEvent &&
-      overlay.state !== DC.OverlayState.ADDED
-    ) {
+    if (overlay && overlay.overlayEvent && overlay.state !== DC.OverlayState.ADDED) {
       overlay.overlayEvent.fire(DC.OverlayEventType.ADD, this)
       this._cache[overlay.id] = overlay
     }
   }
 
   _removeOverlayCallback(overlay) {
-    if (
-      overlay &&
-      overlay.overlayEvent &&
-      overlay.state !== DC.OverlayState.REMOVED
-    ) {
+    if (overlay && overlay.overlayEvent && overlay.state !== DC.OverlayState.REMOVED) {
       overlay.overlayEvent.fire(DC.OverlayEventType.REMOVE, this)
       delete this._cache[overlay.id]
     }

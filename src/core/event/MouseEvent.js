@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 14:11:04
+ * @Last Modified time: 2020-01-19 10:22:05
  */
 
-import Cesium from '../../namespace'
+import Cesium from '@/namespace'
 
 import Event from './Event'
 

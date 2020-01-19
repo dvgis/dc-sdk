@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:01:30
+ * @Last Modified time: 2020-01-19 10:19:30
  */
 
 import Overlay from '../Overlay'
-import Cesium from '../../../namespace'
+import Cesium from '@/namespace'
 
 DC.Model = class extends Overlay {
   constructor(position, modelUrl) {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 14:11:33
+ * @Last Modified time: 2020-01-19 10:43:03
  */
 import OverlayEvent from '../event/OverlayEvent'
 class Overlay {
@@ -16,11 +16,7 @@ class Overlay {
     this._attr = {}
     this._overlayEvent = new OverlayEvent()
     this._overlayEvent.on(DC.OverlayEventType.ADD, this._addCallback, this)
-    this._overlayEvent.on(
-      DC.OverlayEventType.REMOVE,
-      this._removeCallback,
-      this
-    )
+    this._overlayEvent.on(DC.OverlayEventType.REMOVE, this._removeCallback, this)
     this.type = undefined
   }
 
@@ -64,6 +60,12 @@ class Overlay {
   _removeCallback() {}
 
   setStyle(style) {}
+
+  remove() {
+    if (this._layer) {
+      this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
+    }
+  }
 }
 
 export default Overlay

@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:16:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-18 18:13:21
+ * @Last Modified time: 2020-01-19 10:18:54
  */
 
-import Cesium from '../../namespace'
+import Cesium from '@/namespace'
 import Layer from './Layer'
 
 DC.TilesetLayer = class extends Layer {

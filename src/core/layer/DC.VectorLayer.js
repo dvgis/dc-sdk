@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 12:59:54
+ * @Last Modified time: 2020-01-19 10:19:02
  */
 
-import Cesium from '../../namespace'
+import Cesium from '@/namespace'
 import Layer from './Layer'
 
 DC.VectorLayer = class extends Layer {

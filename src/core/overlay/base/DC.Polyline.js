@@ -2,18 +2,15 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:01:03
+ * @Last Modified time: 2020-01-19 10:43:36
  */
 
 import Overlay from '../Overlay'
-import Cesium from '../../../namespace'
+import Cesium from '@/namespace'
 
 DC.Polyline = class extends Overlay {
   constructor(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!positions || (typeof positions !== 'string' && !Array.isArray(positions))) {
       throw new Error('the positions invalid')
     }
     super()
@@ -33,28 +30,19 @@ DC.Polyline = class extends Overlay {
   }
 
   get center() {
-    let boundingSphere = Cesium.BoundingSphere.fromPoints(
-      DC.T.transformWSG84ArrayToCartesianArray(this._positions)
-    )
+    let boundingSphere = Cesium.BoundingSphere.fromPoints(DC.T.transformWSG84ArrayToCartesianArray(this._positions))
     return DC.T.transformCartesianToWSG84(boundingSphere.center)
   }
 
   get distance() {
     let result = 0
     for (var i = 0; i < this._positions.length - 1; i++) {
-      let startCartographic = DC.T.transformWSG84ToCartographic(
-        this._positions[i]
-      )
-      let endCartographic = DC.T.transformWSG84ToCartographic(
-        this._positions[i + 1]
-      )
+      let startCartographic = DC.T.transformWSG84ToCartographic(this._positions[i])
+      let endCartographic = DC.T.transformWSG84ToCartographic(this._positions[i + 1])
       let geodesic = new Cesium.EllipsoidGeodesic()
       geodesic.setEndPoints(startCartographic, endCartographic)
       let s = geodesic.surfaceDistance
-      s = Math.sqrt(
-        Math.pow(s, 2) +
-          Math.pow(endCartographic.height - startCartographic.height, 2)
-      )
+      s = Math.sqrt(Math.pow(s, 2) + Math.pow(endCartographic.height - startCartographic.height, 2))
       result = result + s
     }
     return result > 0 ? result.toFixed(2) : result
@@ -107,8 +95,7 @@ DC.Polyline = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.polyline &&
-      DC.Util.merge(this._delegate.polyline, this._style)
+    this._delegate.polyline && DC.Util.merge(this._delegate.polyline, this._style)
     return this
   }
 
@@ -116,5 +103,9 @@ DC.Polyline = class extends Overlay {
     if (this._layer) {
       this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
     }
+  }
+
+  fromEntity(entity) {
+    // this._positions =
   }
 }

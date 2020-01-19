@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:00:41
+ * @Last Modified time: 2020-01-19 10:43:27
  */
 
+import Cesium from '@/namespace'
 import Overlay from '../Overlay'
-import Cesium from '../../../namespace'
 
 const DEF_STYLE = {
   pixelSize: 8,
@@ -76,14 +76,7 @@ DC.Point = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.point &&
-      DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
+    this._delegate.point && DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
     return this
-  }
-
-  remove() {
-    if (this._layer) {
-      this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
-    }
   }
 }

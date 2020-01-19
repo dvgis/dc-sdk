@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 20:53:39
+ * @Last Modified time: 2020-01-19 10:34:16
  */
 
-import Cesium from '../../namespace'
+import Cesium from '@/namespace'
 import ViewerStyle from '../style/ViewerStyle'
 import MouseEvent from '../event/MouseEvent'
 import ViewerEvent from '../event/ViewerEvent'
@@ -38,22 +38,10 @@ DC.Viewer = class {
     new MouseEvent(this) // 注册全局鼠标事件
     this._style = new ViewerStyle(this) // 设置viewer样式
     this._viewerEvent = new ViewerEvent() //注册viewer事件
-    this._dcContainer = DC.DomUtil.create(
-      'div',
-      'dc-container',
-      document.getElementById(id)
-    ) //添加自定义容器
+    this._dcContainer = DC.DomUtil.create('div', 'dc-container', document.getElementById(id)) //添加自定义容器
     this._layerCache = {}
-    this.on(
-      DC.ViewerEventType.ADD_IMAGERY_LAYER,
-      this._addImageryLayerCallback,
-      this
-    )
-    this.on(
-      DC.ViewerEventType.CHANGE_IMAGERY_LAYER,
-      this._changeImageryLayerCallback,
-      this
-    )
+    this.on(DC.ViewerEventType.ADD_IMAGERY_LAYER, this._addImageryLayerCallback, this)
+    this.on(DC.ViewerEventType.CHANGE_IMAGERY_LAYER, this._changeImageryLayerCallback, this)
     this.on(DC.ViewerEventType.ADD_LAYER, this._addLayerCallback, this) //添加图层事件监听
     this.on(DC.ViewerEventType.REMOVE_LAYER, this._removeLayerCallback, this) //移除图层事件监听
     this.on(DC.ViewerEventType.ADD_EFFECT, this._addEffectCallback, this) //添加效果事件监听
@@ -111,10 +99,7 @@ DC.Viewer = class {
   _removeLayerCallback(layer) {
     if (layer && layer.layerEvent && layer.state !== DC.LayerState.REMOVED) {
       layer.layerEvent.fire(DC.LayerEventType.REMOVE, this)
-      if (
-        this._layerCache[layer.type] &&
-        this._layerCache[layer.type][layer.id]
-      ) {
+      if (this._layerCache[layer.type] && this._layerCache[layer.type][layer.id]) {
         delete this._layerCache[layer.type][layer.id]
       }
     }

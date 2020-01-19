@@ -2,17 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:00:51
+ * @Last Modified time: 2020-01-19 10:43:19
  */
 import Overlay from '../Overlay'
-import Cesium from '../../../namespace'
+import Cesium from '@/namespace'
 
 DC.Polygon = class extends Overlay {
   constructor(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!positions || (typeof positions !== 'string' && !Array.isArray(positions))) {
       throw new Error('the positions invalid')
     }
     super()
@@ -43,9 +40,7 @@ DC.Polygon = class extends Overlay {
   }
 
   get center() {
-    let boundingSphere = Cesium.BoundingSphere.fromPoints(
-      DC.T.transformWSG84ArrayToCartesianArray(this._positions)
-    )
+    let boundingSphere = Cesium.BoundingSphere.fromPoints(DC.T.transformWSG84ArrayToCartesianArray(this._positions))
     return DC.T.transformCartesianToWSG84(boundingSphere.center)
   }
 
@@ -57,12 +52,8 @@ DC.Polygon = class extends Overlay {
       let positions = [...this._positions]
       positions.push(positions[0])
       for (let i = 1; i < positions.length; i++) {
-        let oel = ellipsoid.cartographicToCartesian(
-          DC.T.transformWSG84ToCartographic(positions[i - 1])
-        )
-        let el = ellipsoid.cartographicToCartesian(
-          DC.T.transformWSG84ToCartographic(positions[i])
-        )
+        let oel = ellipsoid.cartographicToCartesian(DC.T.transformWSG84ToCartographic(positions[i - 1]))
+        let el = ellipsoid.cartographicToCartesian(DC.T.transformWSG84ToCartographic(positions[i]))
         h += oel.x * el.y - el.x * oel.y
       }
       result = Math.abs(h).toFixed(2)
@@ -89,12 +80,7 @@ DC.Polygon = class extends Overlay {
   _prepareHierarchy() {
     let result = new Cesium.PolygonHierarchy()
     result.positions = DC.T.transformWSG84ArrayToCartesianArray(this._positions)
-    result.holes = this._holes.map(
-      item =>
-        new Cesium.PolygonHierarchy(
-          DC.T.transformWSG84ArrayToCartesianArray(item)
-        )
-    )
+    result.holes = this._holes.map(item => new Cesium.PolygonHierarchy(DC.T.transformWSG84ArrayToCartesianArray(item)))
     return result
   }
 
@@ -129,14 +115,7 @@ DC.Polygon = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.polyline &&
-      DC.Util.merge(this._delegate.Polygon, this._style)
+    this._delegate.polyline && DC.Util.merge(this._delegate.Polygon, this._style)
     return this
-  }
-
-  remove() {
-    if (this._layer) {
-      this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
-    }
   }
 }

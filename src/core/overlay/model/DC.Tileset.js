@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:01:38
+ * @Last Modified time: 2020-01-19 10:19:39
  */
-import Cesium from '../../../namespace'
+import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
 DC.Tileset = class extends Overlay {
