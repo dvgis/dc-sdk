@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:43:27
+ * @Last Modified time: 2020-01-21 10:17:55
  */
 
 import Cesium from '@/namespace'
@@ -51,7 +51,10 @@ DC.Point = class extends Overlay {
       )
     })
     // 初始化Overlay参数
-    this._delegate.point = {}
+    this._delegate.point = {
+      ...DEF_STYLE,
+      ...this._style
+    }
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
   }
@@ -59,7 +62,6 @@ DC.Point = class extends Overlay {
   _addCallback(layer) {
     this._layer = layer
     this._prepareDelegate()
-    DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
     this._layer.delegate.entities.add(this._delegate)
     this._state = DC.OverlayState.ADDED
   }

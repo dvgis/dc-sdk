@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:43:19
+ * @Last Modified time: 2020-01-21 10:19:13
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -87,6 +87,7 @@ DC.Polygon = class extends Overlay {
   _prepareDelegate() {
     // 初始化Overlay参数
     this._delegate.polygon = {
+      ...this._style,
       hierarchy: new Cesium.CallbackProperty(time => {
         return this._prepareHierarchy()
       })
@@ -99,7 +100,6 @@ DC.Polygon = class extends Overlay {
     this._layer = layer
     this._prepareDelegate()
     this._layer.delegate.entities.add(this._delegate)
-    DC.Util.merge(this._delegate.polygon, this._style)
     this._state = DC.OverlayState.ADDED
   }
 
@@ -115,7 +115,9 @@ DC.Polygon = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.polyline && DC.Util.merge(this._delegate.Polygon, this._style)
+    this._delegate.polygon && this._delegate.polygon.merge(this._style)
     return this
   }
+
+  static fromEntity(entity) {}
 }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:19:30
+ * @Last Modified time: 2020-01-21 10:19:38
  */
 
 import Overlay from '../Overlay'
@@ -54,6 +54,7 @@ DC.Model = class extends Overlay {
     })
     // 设置模型参数
     this._delegate.model = {
+      ...this._style,
       uri: new Cesium.CallbackProperty(time => {
         return this._modelUrl
       })
@@ -66,7 +67,6 @@ DC.Model = class extends Overlay {
     this._layer = layer
     this._prepareDelegate()
     this._layer.delegate.entities.add(this._delegate)
-    DC.Util.merge(this._delegate.model, this._style)
     this._state = DC.OverlayState.ADDED
   }
 
@@ -82,12 +82,6 @@ DC.Model = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.model && DC.Util.merge(this._delegate.model, this._style)
-  }
-
-  remove() {
-    if (this._layer) {
-      this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
-    }
+    this._delegate.model && this._delegate.model.merge(this._style)
   }
 }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:19:39
+ * @Last Modified time: 2020-01-21 10:23:23
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -20,7 +20,6 @@ DC.Tileset = class extends Overlay {
   _addCallback(layer) {
     this._layer = layer
     this._layer.delegate.add(this._delegate)
-    DC.Util.merge(this._delegate, this._style)
     this._state = DC.OverlayState.ADDED
   }
 
@@ -32,11 +31,11 @@ DC.Tileset = class extends Overlay {
   }
 
   setStyle(style) {
-    if (Object.keys(style).length == 0) {
-      return
+    if (style && style instanceof Cesium.TilesetStyle) {
+      this._style = style
+      this._delegate && (this._delegate.style = this._style)
     }
-    this._style = style
-    this._delegate && DC.Util.merge(this._delegate, this._style)
+    return this
   }
 
   remove() {

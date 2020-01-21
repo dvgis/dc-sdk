@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:15:21
+ * @Last Modified time: 2020-01-21 10:03:33
  */
 import Cesium from '../../namespace'
 import Layer from './Layer'
@@ -65,17 +65,20 @@ DC.GeoJsonLayer = class extends Layer {
   }
 
   _createBillboard(entity) {
-    if (entity.position) {
-      let position = DC.T.transformCartesianToWSG84(entity.position)
-      let billboard = DC
+    if (entity.position && entity.billboard) {
+      return DC.Billboard.fromEntity(entity)
     }
   }
 
   _createPolyline(entity) {
-    // let position =
+    if (entity.polyline) {
+      return DC.Polyline.fromEntity(entity)
+    }
   }
 
   _createPolygon(entity) {
-    // let position =
+    if (entity.polygon) {
+      return DC.Polygon.fromEntity(entity)
+    }
   }
 }

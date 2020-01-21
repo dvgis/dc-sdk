@@ -7,9 +7,15 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn run clean && webpack  --mode development ",
-    "publish": "yarn run clean && webpack --mode production --env.production ",
-    "clean": "rimraf dist/"
+    "build": "yarn run build:core && yarn run build:plugins",
+    "publish": "yarn run publish:core && yarn run publish:plugins ",
+    "build:core": "yarn run clean:core && webpack --config webpack.conf --mode development",
+    "publish:core": "yarn run clean:core && webpack --config webpack.conf --mode production --env.production",
+    "build:plugins": "yarn run clean:plugins && webpack  --config webpack.plugins.conf --mode development",
+    "publish:plugins": "yarn run clean:plugins && webpack --config webpack.plugins.conf --mode production --env.production",
+    "clean": "rimraf dist/",
+    "clean:core": "rimraf dist/dc-sdk/resources dist/dc-sdk/dc.*.js dist/dc-sdk/dc.*.css",
+    "clean:plugins": "rimraf dist/dc-sdk/pulgins"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:43:36
+ * @Last Modified time: 2020-01-21 10:22:39
  */
 
 import Overlay from '../Overlay'
@@ -67,6 +67,7 @@ DC.Polyline = class extends Overlay {
   _prepareDelegate() {
     // 初始化Overlay参数
     this._delegate.polyline = {
+      ...this._style,
       positions: new Cesium.CallbackProperty(time => {
         return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
       })
@@ -79,7 +80,6 @@ DC.Polyline = class extends Overlay {
     this._layer = layer
     this._prepareDelegate()
     this._layer.delegate.entities.add(this._delegate)
-    DC.Util.merge(this._delegate.polyline, this._style)
     this._state = DC.OverlayState.ADDED
   }
 
@@ -95,14 +95,8 @@ DC.Polyline = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.polyline && DC.Util.merge(this._delegate.polyline, this._style)
+    this._delegate.polyline && this._delegate.polyline.merge(this._style)
     return this
-  }
-
-  remove() {
-    if (this._layer) {
-      this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
-    }
   }
 
   fromEntity(entity) {

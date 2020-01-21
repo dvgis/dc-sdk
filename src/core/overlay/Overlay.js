@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:43:03
+ * @Last Modified time: 2020-01-21 10:17:17
  */
 import OverlayEvent from '../event/OverlayEvent'
 class Overlay {
@@ -53,14 +53,33 @@ class Overlay {
     return this._state
   }
 
+  /***
+   * 构建代理，子类需要覆盖重写
+   */
   _prepareDelegate() {}
 
+  /**
+   *
+   * @param {*} layer
+   * 覆盖物添加调用的回调函数，子类需要覆盖重写
+   */
   _addCallback(layer) {}
 
+  /**
+   * 覆盖物删除调用的回调函数，子类需要覆盖重写
+   */
   _removeCallback() {}
 
+  /**
+   *
+   * @param {*} style
+   * 设置覆盖物样式，子类需要覆盖重写
+   */
   setStyle(style) {}
 
+  /**
+   * 覆盖物删除
+   */
   remove() {
     if (this._layer) {
       this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)

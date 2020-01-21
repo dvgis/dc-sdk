@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:43:54
+ * @Last Modified time: 2020-01-21 10:18:28
  */
 
 import Cesium from '@/namespace'
@@ -63,6 +63,7 @@ DC.Billboard = class extends Overlay {
     })
     // 初始化Overlay参数
     this._delegate.billboard = {
+      ...this._style,
       image: new Cesium.CallbackProperty(time => {
         return this._icon
       }),
@@ -80,7 +81,6 @@ DC.Billboard = class extends Overlay {
   _addCallback(layer) {
     this._layer = layer
     this._prepareDelegate()
-    DC.Util.merge(this._delegate.billboard, this._style)
     this._layer.delegate.entities.add(this._delegate)
     this._state = DC.OverlayState.ADDED
   }
@@ -97,7 +97,19 @@ DC.Billboard = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.point && DC.Util.merge(this._delegate.billboard, this._style)
+    this._delegate.billboard && this._delegate.billboard.merge(this._style)
     return this
+  }
+
+  static fromEntity(entity) {
+    let position = DC.T.transformCartesianToWSG84(entity.position._value)
+    let billboard = undefined
+    if (entity.billboard) {
+      billboard = new DC.Billboard(position, entity.billboard.image)
+      billboard.setStyle({
+        ...entity.billboard
+      })
+    }
+    return billboard
   }
 }
