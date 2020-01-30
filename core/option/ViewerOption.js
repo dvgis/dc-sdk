@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 17:09:01
+ * @Last Modified time: 2020-01-30 21:28:37
  */
 
 import Cesium from '@/namespace'
@@ -21,29 +21,32 @@ class ViewerOption {
     )
   }
 
-  _setViewerOption(option) {
-    this._viewer.delegate.shadows = Cesium.defaultValue(option.shadows, false)
+  _setViewerOption(options) {
+    this._viewer.delegate.shadows = Cesium.defaultValue(options.shadows, false)
     return this
   }
 
-  _setCanvasOption(option) {
+  _setCanvasOption(options) {
     return this
   }
 
-  _setSceneOption(option) {
+  _setSceneOption(options) {
     return this
   }
 
-  _setGlobeOption(option) {
+  _setGlobeOption(options) {
     return this
   }
 
-  _setClockOption(option) {
-    this._viewer.delegate.clock.shouldAnimate = Cesium.defaultValue(option.shouldAnimate, false)
+  _setClockOption(options) {
+    this._viewer.delegate.clock.shouldAnimate = Cesium.defaultValue(options.shouldAnimate, false)
     return this
   }
 
-  setOptions(option) {
+  setOptions(options) {
+    this._setViewerOption(options)
+      ._setCanvasOption(options)
+      ._setClockOption(options)
     return this
   }
 }

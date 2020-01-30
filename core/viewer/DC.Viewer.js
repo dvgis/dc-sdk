@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-22 10:54:38
+ * @Last Modified time: 2020-01-30 22:00:58
  */
 
 import Cesium from '@/namespace'
@@ -25,11 +25,9 @@ const DEF_OPTS = {
   timeline: false, //Whether to display the timeline
   navigationHelpButton: false, //Whether to display the help button in the upper right corner
   navigationInstructionsInitiallyVisible: false,
-  creditContainer: undefined
+  creditContainer: undefined,
+  shouldAnimate: true
 }
-
-// China view range
-Cesium.Camera.DEFAULT_VIEW_RECTANGLE = Cesium.Rectangle.fromDegrees(110.15, 34.54, 110.25, 34.56)
 
 DC.Viewer = class {
   constructor(id, options = {}) {
@@ -279,7 +277,7 @@ DC.Viewer = class {
 
   flyToPosition(position, completeCallback) {
     if (position instanceof DC.Position) {
-      this._delegate.flyTo({
+      this._delegate.camera.flyTo({
         destination: DC.T.transformWSG84ToCartesian(position),
         orientation: {
           heading: Cesium.Math.toRadians(position.heading),
