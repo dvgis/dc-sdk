@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:38:14
+ * @Last Modified time: 2020-01-21 16:59:50
  */
 import Cesium from '../../namespace'
 
@@ -17,8 +17,8 @@ DC.MouseEventType = {
 DC.ViewerEventType = {
   ADD_LAYER: 'addLayer',
   REMOVE_LAYER: 'removeLayer',
-  ADD_IMAGERY_LAYER: 'addImageryLayer',
-  CHANGE_IMAGERY_LAYER: 'changeImageryLayer',
+  ADD_BASE_LAYER: 'addBaseLayer',
+  CHANGE_BASE_LAYER: 'changeBaseLayer',
   ADD_EFFECT: 'addEffect',
   REMOVE_EFFECT: 'removeEffect'
 }

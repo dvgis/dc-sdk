@@ -10,7 +10,10 @@ import Cesium from '@/namespace'
 
 DC.Polyline = class extends Overlay {
   constructor(positions) {
-    if (!positions || (typeof positions !== 'string' && !Array.isArray(positions))) {
+    if (
+      !positions ||
+      (typeof positions !== 'string' && !Array.isArray(positions))
+    ) {
       throw new Error('the positions invalid')
     }
     super()
@@ -30,19 +33,28 @@ DC.Polyline = class extends Overlay {
   }
 
   get center() {
-    let boundingSphere = Cesium.BoundingSphere.fromPoints(DC.T.transformWSG84ArrayToCartesianArray(this._positions))
+    let boundingSphere = Cesium.BoundingSphere.fromPoints(
+      DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+    )
     return DC.T.transformCartesianToWSG84(boundingSphere.center)
   }
 
   get distance() {
     let result = 0
     for (var i = 0; i < this._positions.length - 1; i++) {
-      let startCartographic = DC.T.transformWSG84ToCartographic(this._positions[i])
-      let endCartographic = DC.T.transformWSG84ToCartographic(this._positions[i + 1])
+      let startCartographic = DC.T.transformWSG84ToCartographic(
+        this._positions[i]
+      )
+      let endCartographic = DC.T.transformWSG84ToCartographic(
+        this._positions[i + 1]
+      )
       let geodesic = new Cesium.EllipsoidGeodesic()
       geodesic.setEndPoints(startCartographic, endCartographic)
       let s = geodesic.surfaceDistance
-      s = Math.sqrt(Math.pow(s, 2) + Math.pow(endCartographic.height - startCartographic.height, 2))
+      s = Math.sqrt(
+        Math.pow(s, 2) +
+          Math.pow(endCartographic.height - startCartographic.height, 2)
+      )
       result = result + s
     }
     return result > 0 ? result.toFixed(2) : result
@@ -65,7 +77,9 @@ DC.Polyline = class extends Overlay {
   }
 
   _prepareDelegate() {
-    // 初始化Overlay参数
+    /**
+     *  initialize the Overlay parameter
+     */
     this._delegate.polyline = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {

@@ -46,11 +46,15 @@ DC.Billboard = class extends Overlay {
   }
 
   _prepareDelegate() {
-    // 设置位置
+    /**
+     * set the location
+     */
     this._delegate.position = new Cesium.CallbackProperty(time => {
       return DC.T.transformWSG84ToCartesian(this._position)
     })
-    // 设置朝向
+    /**
+     * set the orientation
+     */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
         DC.T.transformWSG84ToCartesian(this._position),
@@ -61,7 +65,9 @@ DC.Billboard = class extends Overlay {
         )
       )
     })
-    // 初始化Overlay参数
+    /**
+     *  initialize the Overlay parameter
+     */
     this._delegate.billboard = {
       ...this._style,
       image: new Cesium.CallbackProperty(time => {
