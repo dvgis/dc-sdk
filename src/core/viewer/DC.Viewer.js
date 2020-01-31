@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:09:00
+ * @Last Modified time: 2020-01-31 21:14:45
  */
 
 import Cesium from '@/namespace'
@@ -205,7 +205,7 @@ DC.Viewer = class {
    * remove a layer from the viewer
    */
   removeLayer(layer) {
-    this._viewerEvent.fire(DC.ViewerEventType.ADD_LAYER, layer)
+    this._viewerEvent.fire(DC.ViewerEventType.REMOVE_LAYER, layer)
     return this
   }
 
