@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 10:18:28
+ * @Last Modified time: 2020-01-31 15:06:03
  */
 
 import Cesium from '@/namespace'
@@ -13,6 +13,7 @@ DC.Billboard = class extends Overlay {
     if (!position || !(position instanceof DC.Position)) {
       throw new Error('the position invalid')
     }
+    super()
     this._position = position
     this._icon = icon
     this._size = [32, 32]
@@ -46,11 +47,15 @@ DC.Billboard = class extends Overlay {
   }
 
   _prepareDelegate() {
-    // 设置位置
+    /**
+     * set the location
+     */
     this._delegate.position = new Cesium.CallbackProperty(time => {
       return DC.T.transformWSG84ToCartesian(this._position)
     })
-    // 设置朝向
+    /**
+     * set the orientation
+     */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
         DC.T.transformWSG84ToCartesian(this._position),
@@ -61,7 +66,9 @@ DC.Billboard = class extends Overlay {
         )
       )
     })
-    // 初始化Overlay参数
+    /**
+     *  initialize the Overlay parameter
+     */
     this._delegate.billboard = {
       ...this._style,
       image: new Cesium.CallbackProperty(time => {

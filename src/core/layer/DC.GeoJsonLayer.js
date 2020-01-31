@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 10:03:33
+ * @Last Modified time: 2020-01-31 15:05:07
  */
-import Cesium from '../../namespace'
+import Cesium from '@/namespace'
 import Layer from './Layer'
 
 DC.GeoJsonLayer = class extends Layer {
@@ -27,6 +27,24 @@ DC.GeoJsonLayer = class extends Layer {
       this._delegate.removeAll()
       this._viewer.delegate.dataSources.remove(this._delegate)
       this._state = DC.LayerState.REMOVED
+    }
+  }
+
+  _createBillboard(entity) {
+    if (entity.position && entity.billboard) {
+      return DC.Billboard.fromEntity(entity)
+    }
+  }
+
+  _createPolyline(entity) {
+    if (entity.polyline) {
+      return DC.Polyline.fromEntity(entity)
+    }
+  }
+
+  _createPolygon(entity) {
+    if (entity.polygon) {
+      return DC.Polygon.fromEntity(entity)
     }
   }
 
@@ -62,23 +80,5 @@ DC.GeoJsonLayer = class extends Layer {
       }
     })
     return layer
-  }
-
-  _createBillboard(entity) {
-    if (entity.position && entity.billboard) {
-      return DC.Billboard.fromEntity(entity)
-    }
-  }
-
-  _createPolyline(entity) {
-    if (entity.polyline) {
-      return DC.Polyline.fromEntity(entity)
-    }
-  }
-
-  _createPolygon(entity) {
-    if (entity.polygon) {
-      return DC.Polygon.fromEntity(entity)
-    }
   }
 }

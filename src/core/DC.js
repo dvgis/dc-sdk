@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 21:10:19
+ * @Last Modified time: 2020-01-31 15:09:26
  */
 ;(function() {
   let namespace = {}
-
+  let initialized = false
   let DC = {
     Http: undefined,
     Version: '1.0.0',
@@ -40,13 +40,17 @@
    */
   DC.ready = function(callback) {
     try {
-      requireCesium().then(() => {
-        require('./DC.Loader')
-        delete window.Cesium //删除winow下的Cesium
-        callback && callback()
-      })
+      if (!initialized) {
+        requireCesium().then(() => {
+          require('./DC.Loader')
+          delete window.Cesium //删除winow下的Cesium
+        })
+      }
+      callback && callback()
+      initialized = true
     } catch (e) {
       delete window.Cesium
+      initialized = false
     }
   }
 })()

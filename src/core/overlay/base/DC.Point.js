@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 10:17:55
+ * @Last Modified time: 2020-01-31 15:06:13
  */
 
 import Cesium from '@/namespace'
@@ -10,7 +10,7 @@ import Overlay from '../Overlay'
 
 const DEF_STYLE = {
   pixelSize: 8,
-  outlineColor: DC.Color.BLUE,
+  outlineColor: Cesium.Color.BLUE,
   outlineWidth: 2
 }
 
@@ -35,11 +35,15 @@ DC.Point = class extends Overlay {
   }
 
   _prepareDelegate() {
-    // 设置位置
+    /**
+     * set the location
+     */
     this._delegate.position = new Cesium.CallbackProperty(time => {
       return DC.T.transformWSG84ToCartesian(this._position)
     })
-    // 设置朝向
+    /**
+     * set the orientation
+     */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
         DC.T.transformWSG84ToCartesian(this._position),
@@ -50,7 +54,9 @@ DC.Point = class extends Overlay {
         )
       )
     })
-    // 初始化Overlay参数
+    /**
+     *  initialize the Overlay parameter
+     */
     this._delegate.point = {
       ...DEF_STYLE,
       ...this._style

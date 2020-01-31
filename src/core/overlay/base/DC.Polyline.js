@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 10:22:39
+ * @Last Modified time: 2020-01-31 15:06:25
  */
 
 import Overlay from '../Overlay'
@@ -65,7 +65,9 @@ DC.Polyline = class extends Overlay {
   }
 
   _prepareDelegate() {
-    // 初始化Overlay参数
+    /**
+     *  initialize the Overlay parameter
+     */
     this._delegate.polyline = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:35:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:02:26
+ * @Last Modified time: 2020-01-31 15:07:00
  */
 
 DC.Position = class {
@@ -64,14 +64,7 @@ DC.Position = class {
   }
 
   serialize() {
-    let position = new DC.Position(
-      this._lng,
-      this._lat,
-      this._alt,
-      this._heading,
-      this._pitch,
-      this._roll
-    )
+    let position = new DC.Position(this._lng, this._lat, this._alt, this._heading, this._pitch, this._roll)
     return JSON.stringify(position)
   }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 10:19:13
+ * @Last Modified time: 2020-01-31 15:06:25
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -85,7 +85,9 @@ DC.Polygon = class extends Overlay {
   }
 
   _prepareDelegate() {
-    // 初始化Overlay参数
+    /**
+     *  initialize the Overlay parameter
+     */
     this._delegate.polygon = {
       ...this._style,
       hierarchy: new Cesium.CallbackProperty(time => {

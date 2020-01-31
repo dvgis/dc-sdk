@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:19:08
+ * @Last Modified time: 2020-01-31 15:05:35
  */
 import LayerEvent from '../event/LayerEvent'
 
@@ -56,12 +56,26 @@ class Layer {
     return this._state
   }
 
-  // 子类需要覆盖重写
+  /**
+   *
+   * @param {*} veiwer
+   * the layer added callback function
+   * subclasses need to be overridden
+   */
+
   _addCallback(veiwer) {}
 
-  // 子类需要覆盖重写
+  /**
+   * the layer removed callback function
+   * subclasses need to be overridden
+   */
   _removeCallback() {}
 
+  /**
+   *
+   * @param {*} overlay
+   * the layer add overlay callback function
+   */
   _addOverlayCallback(overlay) {
     if (overlay && overlay.overlayEvent && overlay.state !== DC.OverlayState.ADDED) {
       overlay.overlayEvent.fire(DC.OverlayEventType.ADD, this)
@@ -69,6 +83,11 @@ class Layer {
     }
   }
 
+  /**
+   *
+   * @param {*} overlay
+   * the layer remove overlay callback function
+   */
   _removeOverlayCallback(overlay) {
     if (overlay && overlay.overlayEvent && overlay.state !== DC.OverlayState.REMOVED) {
       overlay.overlayEvent.fire(DC.OverlayEventType.REMOVE, this)
@@ -76,6 +95,11 @@ class Layer {
     }
   }
 
+  /**
+   *
+   * @param {*} overlay
+   * the layer add overlay
+   */
   addOverlay(overlay) {
     this._addOverlayCallback(overlay)
     return this
@@ -103,7 +127,6 @@ class Layer {
     return this
   }
 
-  // 子类需要覆盖重写
   clear() {}
 
   remove() {
