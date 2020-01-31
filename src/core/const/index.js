@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:03:45
+ * @Last Modified time: 2020-01-31 20:54:46
  */
 import Cesium from '@/namespace'
 
@@ -51,7 +51,9 @@ DC.OverlayType = {
   POLYLINE: 'polyline',
   POLYGON: 'polygon',
   MODEL: 'model',
-  BILLBOARD: 'billboard'
+  BILLBOARD: 'billboard',
+  CIRCLE: 'circle',
+  RECT: 'rect'
 }
 
 DC.OverlayEventType = {

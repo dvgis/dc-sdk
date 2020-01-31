@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:04:36
+ * @Last Modified time: 2020-01-31 18:10:42
  */
 
 import Cesium from '@/namespace'
@@ -135,9 +135,7 @@ class MouseEvent extends Event {
       return
     }
     let target = this._viewer.scene.pick(movement.endPosition)
-    if (target) {
-      this._viewer.canvas.style.cursor = 'pointer'
-    }
+    this._viewer.canvas.style.cursor = target ? 'pointer' : 'default'
     let cartesian = this._viewer.scene.pickPosition(movement.endPosition)
     this._raiseEvent(Cesium.ScreenSpaceEventType.MOUSE_MOVE, target, cartesian)
   }
