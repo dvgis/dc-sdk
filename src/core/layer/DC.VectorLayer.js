@@ -2,12 +2,16 @@
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:19:02
+ * @Last Modified time: 2020-01-31 15:05:19
  */
 
 import Cesium from '@/namespace'
 import Layer from './Layer'
 
+/**
+ * The vector layer is used to add various enitity, which is essentially a CustomDataSource
+ * that is used to place entities of the same class or business attribute into the same layer
+ */
 DC.VectorLayer = class extends Layer {
   constructor(id) {
     super(id)

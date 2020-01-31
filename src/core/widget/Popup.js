@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 20:33:37
+ * @Last Modified time: 2020-01-31 15:09:12
  */
 class Popup {
   constructor() {
@@ -13,3 +13,5 @@ class Popup {
 
   _setWindowCoord(windowCoord) {}
 }
+
+export default Popup

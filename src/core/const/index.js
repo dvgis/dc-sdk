@@ -2,23 +2,23 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 16:59:50
+ * @Last Modified time: 2020-01-31 15:11:35
  */
-import Cesium from '../../namespace'
+import Cesium from '@/namespace'
 
 DC.MouseEventType = {
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
-  WHEEL: Cesium.ScreenSpaceEventType.WHEEL
+  WHEEL: Cesium.ScreenSpaceEventType.WHEEL,
+  MOUSE_OVER: 'mouseover',
+  MOUSE_OUT: 'mouseout'
 }
 
 DC.ViewerEventType = {
   ADD_LAYER: 'addLayer',
   REMOVE_LAYER: 'removeLayer',
-  ADD_BASE_LAYER: 'addBaseLayer',
-  CHANGE_BASE_LAYER: 'changeBaseLayer',
   ADD_EFFECT: 'addEffect',
   REMOVE_EFFECT: 'removeEffect'
 }

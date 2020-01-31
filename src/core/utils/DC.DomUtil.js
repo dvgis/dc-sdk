@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:50:13
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-15 13:03:13
+ * @Last Modified time: 2020-01-31 15:07:59
  */
 
 /**
@@ -78,12 +78,7 @@ DC.DomUtil = class {
     if (el.classList !== undefined) {
       el.classList.remove(name)
     } else {
-      this.setClass(
-        el,
-        DC.Util.trim(
-          (' ' + this.getClass(el) + ' ').replace(' ' + name + ' ', ' ')
-        )
-      )
+      this.setClass(el, DC.Util.trim((' ' + this.getClass(el) + ' ').replace(' ' + name + ' ', ' ')))
     }
   }
 
@@ -112,8 +107,6 @@ DC.DomUtil = class {
     if (el.correspondingElement) {
       el = el.correspondingElement
     }
-    return el.className.baseVal === undefined
-      ? el.className
-      : el.className.baseVal
+    return el.className.baseVal === undefined ? el.className : el.className.baseVal
   }
 }

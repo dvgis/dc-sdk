@@ -2,12 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:16:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 10:18:54
+ * @Last Modified time: 2020-01-31 15:05:09
  */
 
 import Cesium from '@/namespace'
 import Layer from './Layer'
-
+/**
+ * TilesetLayer is used to add various tileset
+ */
 DC.TilesetLayer = class extends Layer {
   constructor(id) {
     super(id)

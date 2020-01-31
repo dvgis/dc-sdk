@@ -2,59 +2,62 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 17:07:04
+ * @Last Modified time: 2020-01-31 15:12:20
  */
 
 import Cesium from '@/namespace'
-import ViewerStyle from '../style/ViewerStyle'
+import ViewerOption from '../option/ViewerOption'
+import CameraOption from '../option/CameraOption'
 import MouseEvent from '../event/MouseEvent'
 import ViewerEvent from '../event/ViewerEvent'
 import Popup from '../widget/Popup'
 import ContextMenu from '../widget/ContextMenu'
 
 const DEF_OPTS = {
-  animation: false, //是否创建动画小器件，左下角仪表
-  baseLayerPicker: false, //是否显示图层选择器
-  fullscreenButton: false, //是否显示全屏按钮
-  geocoder: false, //是否显示geocoder小器件，右上角查询按钮
-  homeButton: false, //是否显示Home按钮
-  infoBox: false, //是否显示信息框
-  sceneModePicker: false, //是否显示3D/2D选择器
-  selectionIndicator: false, //是否显示选取指示器组件
-  timeline: false, //是否显示时间轴
-  navigationHelpButton: false, //是否显示右上角的帮助按钮
-  navigationInstructionsInitiallyVisible: false
+  animation: false, //Whether to create animated widgets, lower left corner of the meter
+  baseLayerPicker: false, //Whether to display the layer selector
+  fullscreenButton: false, //Whether to display the full-screen button
+  geocoder: false, //To display the geocoder widget, query the button in the upper right corner
+  homeButton: false, //Whether to display the Home button
+  infoBox: false, //Whether to display the information box
+  sceneModePicker: false, //Whether to display 3D/2D selector
+  selectionIndicator: false, //Whether to display the selection indicator component
+  timeline: false, //Whether to display the timeline
+  navigationHelpButton: false, //Whether to display the help button in the upper right corner
+  navigationInstructionsInitiallyVisible: false,
+  creditContainer: undefined,
+  shouldAnimate: true
 }
 
 DC.Viewer = class {
   constructor(id, options = {}) {
-    if (!id) {
+    if (!id || !document.getElementById(id)) {
       throw Error('the id empty')
     }
     this._delegate = new Cesium.Viewer(id, {
       ...options,
       ...DEF_OPTS
-    }) // 初始化 viewer
-    new MouseEvent(this) // 注册全局鼠标事件
-    this._style = new ViewerStyle(this) // 设置viewer样式
-    this._viewerEvent = new ViewerEvent() //注册viewer事件
+    }) // Initialize the viewer
+    new MouseEvent(this) // Register global mouse events
+    this._viewerOption = new ViewerOption(this) // Initialize the viewer option
+    this._cameraOption = new CameraOption(this) // Initialize the camera option
+    this._viewerEvent = new ViewerEvent() // Register viewer events
     this._dcContainer = DC.DomUtil.create(
       'div',
       'dc-container',
       document.getElementById(id)
-    ) //添加自定义容器
+    ) //Register the custom container
+    this._baseLayerPicker = new Cesium.BaseLayerPickerViewModel({
+      globe: this._delegate.scene.globe
+    })
     this._layerCache = {}
-    this.on(DC.ViewerEventType.ADD_BASE_LAYER, this._addBaseLayerCallback, this) //添加地图事件监听
-    this.on(
-      DC.ViewerEventType.CHANGE_BASE_LAYER,
-      this._changeBaseLayerCallback,
-      this
-    ) //添加地图事件监听
-    this.on(DC.ViewerEventType.ADD_LAYER, this._addLayerCallback, this) //添加图层事件监听
-    this.on(DC.ViewerEventType.REMOVE_LAYER, this._removeLayerCallback, this) //移除图层事件监听
-    this.on(DC.ViewerEventType.ADD_EFFECT, this._addEffectCallback, this) //添加效果事件监听
-    this.on(DC.ViewerEventType.REMOVE_EFFECT, this._removeEffectCallback, this) //移除效果事件监听
-    //添加默认组件
+    this.on(DC.ViewerEventType.ADD_LAYER, this._addLayerCallback, this) //Initialize layer add event
+    this.on(DC.ViewerEventType.REMOVE_LAYER, this._removeLayerCallback, this) //Initialize layer remove event
+    this.on(DC.ViewerEventType.ADD_EFFECT, this._addEffectCallback, this) //Initialize effect add event
+    this.on(DC.ViewerEventType.REMOVE_EFFECT, this._removeEffectCallback, this) //Initialize effect remove event
+    /**
+     * Add default components
+     */
     this._popup = new Popup()
     this._contextMenu = new ContextMenu()
     this.use(this._popup).use(this._contextMenu)
@@ -92,10 +95,6 @@ DC.Viewer = class {
     return this._contextMenu
   }
 
-  _addBaseLayerCallback(imagerLayer) {}
-
-  _changeBaseLayerCallback(index) {}
-
   _addLayerCallback(layer) {
     if (layer && layer.layerEvent && layer.state !== DC.LayerState.ADDED) {
       !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
@@ -120,18 +119,112 @@ DC.Viewer = class {
 
   _removeEffectCallback(effect) {}
 
-  setStyle(style = {}) {}
+  /**
+   *
+   * @param {*} options
+   * set viewer options
+   *
+   */
+  setOptions(options) {
+    this._viewerOption.setOptions(options)
+    return this
+  }
 
+  /**
+   *
+   * @param {*} min
+   * @param {*} max
+   * set camera options
+   */
+  setPitchRange(min = -90, max = -20) {
+    this._cameraOption.setPichRange(min, max)
+    return this
+  }
+
+  /**
+   * Restrict camera access underground
+   */
+  limitCameraToGround() {
+    this._cameraOption.limitCameraToGround()
+    return this
+  }
+
+  /**
+   *
+   * @param {*} baseLayers
+   * Add the baselayer to the viewer.
+   * The baselayer can be a single or an array,
+   * and when the baselayer is an array, the baselayer will be loaded together
+   */
+  addBaseLayer(baseLayers) {
+    if (!baseLayers) {
+      return this
+    }
+    if (!Array.isArray(baseLayers)) {
+      baseLayers = [baseLayers]
+    }
+    baseLayers.forEach(item => {
+      if (
+        item instanceof Cesium.UrlTemplateImageryProvider ||
+        item instanceof Cesium.ArcGisMapServerImageryProvider ||
+        item instanceof Cesium.SingleTileImageryProvider ||
+        item instanceof Cesium.WebMapTileServiceImageryProvider
+      ) {
+        this._baseLayerPicker.imageryProviderViewModels.push(
+          new Cesium.ProviderViewModel({
+            name: '地图',
+            creationFunction: () => {
+              return item
+            }
+          })
+        )
+      }
+    })
+    if (!this._baseLayerPicker.selectedImagery) {
+      this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
+    }
+    return this
+  }
+
+  /**
+   *
+   * @param {*} index
+   * Change the current globe display of the baselayer
+   */
+  changeBaseLayer(index) {
+    if (this._baseLayerPicker && index >= 0) {
+      this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[
+        index
+      ]
+    }
+    return this
+  }
+
+  /**
+   *
+   * @param {*} layer
+   * Add a layer to the viewer
+   */
   addLayer(layer) {
     this._viewerEvent.fire(DC.ViewerEventType.ADD_LAYER, layer)
     return this
   }
 
+  /**
+   *
+   * @param {*} layer
+   * remove a layer from the viewer
+   */
   removeLayer(layer) {
     this._viewerEvent.fire(DC.ViewerEventType.ADD_LAYER, layer)
     return this
   }
 
+  /**
+   *
+   * @param {*} id
+   * get the layer by id
+   */
   getLayer(id) {
     let layer = undefined
     for (let type in this._layerCache) {
@@ -149,6 +242,26 @@ DC.Viewer = class {
     return layer
   }
 
+  /**
+   *  get all layers
+   */
+  getLayers() {
+    let result = []
+    for (let type in this._layerCache) {
+      let cache = this._layerCache[type]
+      for (let layerId in cache) {
+        result.push(cache[layerId])
+      }
+    }
+    return result
+  }
+
+  /**
+   *
+   * @param {*} method
+   * @param {*} context
+   *
+   */
   eachLayer(method, context) {
     for (let type in this._layerCache) {
       let cache = this._layerCache[type]
@@ -156,6 +269,7 @@ DC.Viewer = class {
         method.call(context, cache[layerId])
       }
     }
+    return this
   }
 
   addEffect(effect) {}
@@ -174,7 +288,7 @@ DC.Viewer = class {
 
   flyToPosition(position, completeCallback) {
     if (position instanceof DC.Position) {
-      this._delegate.flyTo({
+      this._delegate.camera.flyTo({
         destination: DC.T.transformWSG84ToCartesian(position),
         orientation: {
           heading: Cesium.Math.toRadians(position.heading),
@@ -188,12 +302,12 @@ DC.Viewer = class {
   }
 
   on(type, callback, context) {
-    this._viewerEvent.on(type, callback, context)
+    this._viewerEvent.on(type, callback, context || this)
     return this
   }
 
   off(type, callback, context) {
-    this._viewerEvent.off(type, callback, context)
+    this._viewerEvent.off(type, callback, context || this)
     return this
   }
 
