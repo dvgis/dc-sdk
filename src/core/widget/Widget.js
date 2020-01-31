@@ -2,15 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
-<<<<<<< HEAD
- * @Last Modified time: 2020-01-15 20:14:22
- */
-=======
- * @Last Modified time: 2020-01-21 12:13:45
+ * @Last Modified time: 2020-01-31 15:14:29
  */
 import Cesium from '@/namespace'
 
->>>>>>> 816784032383a4443bfb8de96a7b70447d385628
 class Widget {
   constructor() {
     this._viewer = undefined
@@ -38,16 +33,11 @@ class Widget {
     if (this._viewer) {
       let self = this
       let scene = this._viewer.scene
-<<<<<<< HEAD
-      scene.preRender.addEventListener(() => {
+      scene.postRender.addEventListener(() => {
         let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
           scene,
           self._position
         )
-=======
-      scene.postRender.addEventListener(() => {
-        let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, self._position)
->>>>>>> 816784032383a4443bfb8de96a7b70447d385628
         this._setWindowCoord(windowCoord)
       })
     }
