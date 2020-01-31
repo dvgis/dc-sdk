@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-22 10:57:02
+ * @Last Modified time: 2020-01-31 14:50:44
  */
 
 import Cesium from '@/namespace'
@@ -14,6 +14,10 @@ class MouseEvent extends Event {
     this._viewer = viewer
     this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
     this._registerEvent()
+    this.on(Cesium.ScreenSpaceEventType.LEFT_CLICK, this._clickCallback, this)
+    this.on(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK, this._dbclickCallback, this)
+    this.on(Cesium.ScreenSpaceEventType.RIGHT_CLICK, this._rightClickCallback, this)
+    this.on(Cesium.ScreenSpaceEventType.MOUSE_MOVE, this._mouseMoveCallback, this)
   }
 
   /**
@@ -27,10 +31,6 @@ class MouseEvent extends Event {
         this._eventCache[type].raiseEvent(movement)
       }, type)
     }
-    this.on('click', this._clickCallback, this)
-    this.on('rightclick', this._rightClickCallback, this)
-    this.on('mousemove', this._mouseMoveCallback, this)
-    this.on('dbclick', this._dbclickCallback, this)
   }
 
   /**
@@ -79,7 +79,7 @@ class MouseEvent extends Event {
     if (!stopPropagation) {
       let event = this._viewer.viewerEvent.getEvent(type)
       if (event && event.numberOfListeners > 0) {
-        event.raiseEvent({ position: position })
+        event.raiseEvent({ position: position, overlay: undefined })
       }
     }
   }
@@ -95,7 +95,7 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
-    this._raiseEvent('click', target, cartesian)
+    this._raiseEvent(Cesium.ScreenSpaceEventType.LEFT_CLICK, target, cartesian)
   }
 
   /**
@@ -109,7 +109,7 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
-    this._raiseEvent('dbclick', target, cartesian)
+    this._raiseEvent(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK, target, cartesian)
   }
 
   /**
@@ -122,7 +122,7 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
-    this._raiseEvent('rightclick', target, cartesian)
+    this._raiseEvent(Cesium.ScreenSpaceEventType.RIGHT_CLICK, target, cartesian)
   }
 
   /**
@@ -135,8 +135,11 @@ class MouseEvent extends Event {
       return
     }
     let target = this._viewer.scene.pick(movement.endPosition)
+    if (target) {
+      this._viewer.canvas.style.cursor = 'pointer'
+    }
     let cartesian = this._viewer.scene.pickPosition(movement.endPosition)
-    this._raiseEvent('mousemove', target, cartesian)
+    this._raiseEvent(Cesium.ScreenSpaceEventType.MOUSE_MOVE, target, cartesian)
   }
 }
 

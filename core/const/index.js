@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-30 22:31:03
+ * @Last Modified time: 2020-01-31 14:53:54
  */
 import Cesium from '@/namespace'
 
@@ -11,7 +11,9 @@ DC.MouseEventType = {
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
-  WHEEL: Cesium.ScreenSpaceEventType.WHEEL
+  WHEEL: Cesium.ScreenSpaceEventType.WHEEL,
+  MOUSE_OVER: 'mouseover',
+  MOUSE_OUT: 'mouseout'
 }
 
 DC.ViewerEventType = {

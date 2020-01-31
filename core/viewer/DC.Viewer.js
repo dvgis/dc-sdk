@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-30 22:00:58
+ * @Last Modified time: 2020-01-31 14:14:17
  */
 
 import Cesium from '@/namespace'
@@ -291,12 +291,12 @@ DC.Viewer = class {
   }
 
   on(type, callback, context) {
-    this._viewerEvent.on(type, callback, context)
+    this._viewerEvent.on(type, callback, context || this)
     return this
   }
 
   off(type, callback, context) {
-    this._viewerEvent.off(type, callback, context)
+    this._viewerEvent.off(type, callback, context || this)
     return this
   }
 
