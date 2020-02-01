@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:59:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 20:40:40
+ * @Last Modified time: 2020-02-01 13:41:25
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -35,7 +35,9 @@ class DrawPolygon extends Draw {
   }
 
   _mouseMoveHandler(movement) {
+    this._viewer.tooltip.setContent('单击选择点位,双击结束')
     let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.endPosition, Cesium.Ellipsoid.WGS84)
+    this._viewer.tooltip.setPosition(position)
     if (position && this._positions.length > 0) {
       this._tempPoints = [this._positions[this._positions.length - 1], position]
       this._hierarchy.positions = [...this._positions, position]

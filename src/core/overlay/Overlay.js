@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:06:56
+ * @Last Modified time: 2020-02-01 11:57:48
  */
 import OverlayEvent from '../event/OverlayEvent'
 class Overlay {
@@ -54,26 +54,37 @@ class Overlay {
   }
 
   /***
-   * 构建代理，子类需要覆盖重写
+   *
    */
   _prepareDelegate() {}
 
   /**
    *
    * @param {*} layer
-   * 覆盖物添加调用的回调函数，子类需要覆盖重写
    */
-  _addCallback(layer) {}
+  _addCallback(layer) {
+    this._layer = layer
+    this._prepareDelegate()
+    if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
+      this._layer.delegate.entities.add(this._delegate)
+      this._state = DC.OverlayState.ADDED
+    }
+  }
 
   /**
-   * 覆盖物删除调用的回调函数，子类需要覆盖重写
+   *
    */
-  _removeCallback() {}
+  _removeCallback() {
+    if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
+      this._layer.delegate.entities.remove(this._delegate)
+      this._state = DC.OverlayState.REMOVED
+    }
+  }
 
   /**
    *
    * @param {*} style
-   * 设置覆盖物样式，子类需要覆盖重写
+   * set overlay style
    */
   setStyle(style) {}
 

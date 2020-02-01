@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 20:54:46
+ * @Last Modified time: 2020-02-01 13:52:48
  */
 import Cesium from '@/namespace'
 
@@ -53,7 +53,8 @@ DC.OverlayType = {
   MODEL: 'model',
   BILLBOARD: 'billboard',
   CIRCLE: 'circle',
-  RECT: 'rect'
+  RECT: 'rect',
+  LABEL: 'label'
 }
 
 DC.OverlayEventType = {
@@ -84,14 +85,14 @@ DC.EffectState = {
 }
 
 DC.WidgetType = {
-  Popup: 'Popup',
-  ContextMenu: 'ContextMenu'
+  POPUP: 'Popup',
+  CONTEXT_MENU: 'ContextMenu',
+  TOOL_TIP: 'Tooltip'
 }
 
 DC.WidgetState = {
   INITIALIZED: 'initialized',
   INSTALLED: 'installed',
-  UNINSTALLED: 'uninstalled',
-  SHOW: 'show',
-  HIDDEN: 'hidden'
+  ENABLED: 'enabled',
+  DISABLED: 'disabled'
 }

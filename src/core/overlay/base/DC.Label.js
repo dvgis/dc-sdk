@@ -1,39 +1,39 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-31 18:57:02
+ * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 12:04:08
+ * @Last Modified time: 2020-02-01 12:03:20
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
-DC.Circle = class extends Overlay {
-  constructor(center, redius) {
-    if (!center || !(center instanceof DC.Position)) {
-      throw new Error('the center invalid')
+DC.Label = class extends Overlay {
+  constructor(position, text) {
+    if (!position || !(position instanceof DC.Position)) {
+      throw new Error('the position invalid')
     }
     super()
-    this._center = center
-    this._redius = redius
+    this._position = position
+    this._text = text
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.CIRCLE
+    this.type = DC.OverlayType.LABEL
   }
 
-  set center(center) {
-    this._center = center
+  set position(position) {
+    this._position = position
   }
 
-  get center() {
-    return this._center
+  get position() {
+    return this._position
   }
 
-  set radius(radius) {
-    this._redius = radius
+  set text(icon) {
+    this._text = text
   }
 
-  get radius() {
-    return this._redius
+  get text() {
+    return this._text
   }
 
   /**
@@ -44,7 +44,7 @@ DC.Circle = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWSG84ToCartesian(this._center)
+      return DC.T.transformWSG84ToCartesian(this._position)
     })
     /**
      * set the orientation
@@ -62,30 +62,14 @@ DC.Circle = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.ellipse = {
+    this._delegate.label = {
       ...this._style,
-      semiMajorAxis: new Cesium.CallbackProperty(time => {
-        return this._radius
-      }),
-      semiMinorAxis: new Cesium.CallbackProperty(time => {
-        return this._radius
+      text: new Cesium.CallbackProperty(time => {
+        return this._text
       })
     }
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
-  }
-
-  /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  bindLabel(text, textStyle) {
-    this._delegate.label = {
-      text: text,
-      ...textStyle
-    }
-    return this
   }
 
   /**
@@ -97,7 +81,7 @@ DC.Circle = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.ellipse && this._delegate.ellipse.merge(this._style)
+    this._delegate.label && this._delegate.label.merge(this._style)
     return this
   }
 }

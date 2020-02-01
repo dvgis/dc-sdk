@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:06:25
+ * @Last Modified time: 2020-02-01 11:58:54
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -61,6 +61,9 @@ DC.Polygon = class extends Overlay {
     return result
   }
 
+  /**
+   * prepare entity
+   */
   _preparePositions(positions) {
     if (typeof positions === 'string') {
       if (positions.indexOf('#') >= 0) {

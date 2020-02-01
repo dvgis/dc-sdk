@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 16:25:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 19:53:27
+ * @Last Modified time: 2020-02-01 13:41:39
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -30,7 +30,9 @@ class DrawPoint extends Draw {
   }
 
   _mouseMoveHandler(movement) {
+    this._viewer.tooltip.setContent('单击选择点位')
     this._position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.endPosition, Cesium.Ellipsoid.WGS84)
+    this._viewer.tooltip.setPosition(this._position)
   }
 
   _prepareDelegate() {

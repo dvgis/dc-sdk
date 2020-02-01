@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:06:39
+ * @Last Modified time: 2020-02-01 12:05:10
  */
 
 import Overlay from '../Overlay'
@@ -63,20 +63,23 @@ DC.Model = class extends Overlay {
     this._delegate.overlayId = this._id
   }
 
-  _addCallback(layer) {
-    this._layer = layer
-    this._prepareDelegate()
-    this._layer.delegate.entities.add(this._delegate)
-    this._state = DC.OverlayState.ADDED
-  }
-
-  _removeCallback() {
-    if (this._layer) {
-      this._layer.delegate.entities.remove(this._delegate)
-      this._state = DC.OverlayState.REMOVED
+  /**
+   *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  bindLabel(text, textStyle) {
+    this._delegate.label = {
+      ...textStyle,
+      text: text
     }
+    return this
   }
 
+  /**
+   *
+   * @param {*} style
+   */
   setStyle(style) {
     if (Object.keys(style).length == 0) {
       return

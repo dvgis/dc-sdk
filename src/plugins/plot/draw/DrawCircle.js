@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:44:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 20:50:24
+ * @Last Modified time: 2020-02-01 13:42:40
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -35,7 +35,9 @@ class DrawClicle extends Draw {
   }
 
   _mouseMoveHandler(movement) {
+    this._viewer.tooltip.setContent('单击选择点位')
     let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.endPosition, Cesium.Ellipsoid.WGS84)
+    this._viewer.tooltip.setPosition(position)
     if (position && this._center !== Cesium.Cartesian3.ZERO) {
       this._computeRadius(this._center, position)
     }

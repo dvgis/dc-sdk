@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 15:51:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 21:00:30
+ * @Last Modified time: 2020-02-01 13:56:39
  */
 import Cesium from '@/namespace'
 import DrawPoint from './draw/DrawPoint'
@@ -25,6 +25,7 @@ DC.Plot = class {
 
   _completeCallback(e) {
     this._drawWorker = undefined
+    this._viewer.tooltip.enable = false
     this._layer.entities.removeAll()
     if (this._callback) {
       this._callback.call(this, e)
@@ -67,6 +68,7 @@ DC.Plot = class {
   }
 
   draw(type, callback, style) {
+    this._viewer.tooltip.enable = true
     this._bindEvent(callback)
     this._createDrawWorker(type, style)
     this._drawWorker.start()

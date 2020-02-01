@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 21:14:45
+ * @Last Modified time: 2020-02-01 14:54:59
  */
 
 import Cesium from '@/namespace'
@@ -12,6 +12,7 @@ import MouseEvent from '../event/MouseEvent'
 import ViewerEvent from '../event/ViewerEvent'
 import Popup from '../widget/Popup'
 import ContextMenu from '../widget/ContextMenu'
+import Tooltip from '../widget/Tooltip'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -54,7 +55,10 @@ DC.Viewer = class {
      */
     this._popup = new Popup()
     this._contextMenu = new ContextMenu()
-    this.use(this._popup).use(this._contextMenu)
+    this._tooltip = new Tooltip()
+    this.use(this._popup)
+      .use(this._contextMenu)
+      .use(this._tooltip)
   }
 
   get delegate() {
@@ -87,6 +91,10 @@ DC.Viewer = class {
 
   get contextMenu() {
     return this._contextMenu
+  }
+
+  get tooltip() {
+    return this._tooltip
   }
 
   _addLayerCallback(layer) {

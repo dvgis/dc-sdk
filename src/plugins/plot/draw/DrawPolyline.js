@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:18:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 19:52:46
+ * @Last Modified time: 2020-02-01 13:43:09
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -32,8 +32,11 @@ class DrawPolyline extends Draw {
   }
 
   _mouseMoveHandler(movement) {
+    this._viewer.tooltip.setContent('单击选择点位,双击结束')
     let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.endPosition, Cesium.Ellipsoid.WGS84)
+    this._viewer.tooltip.setPosition(position)
     if (position && this._positions.length > 0) {
+      this._viewer.tooltip.setPosition(position)
       this._tempPoints = [this._positions[this._positions.length - 1], position]
     }
   }

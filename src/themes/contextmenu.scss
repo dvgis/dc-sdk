@@ -1,0 +1,27 @@
+.dc-context-menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 120px;
+  min-height: 10px;
+  color: #fff;
+  padding: 10px 10px;
+  background: rgba(255, 255, 255, 1);
+  border-radius: 4px;
+  visibility: hidden;
+  z-index: -1;
+  cursor: pointer;
+  .menu-list {
+    width: 100%;
+    color: #000;
+    .menu-item {
+      font-size: 14px;
+      list-style: none;
+      padding: 5px 0px 5px 10px;
+      border-top: 1px dashed #cecece;
+      &:hover {
+        color: rgb(42, 78, 236);
+      }
+    }
+  }
+}

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 20:52:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 21:04:42
+ * @Last Modified time: 2020-02-01 13:44:32
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -35,8 +35,10 @@ class DrawRect extends Draw {
   }
 
   _mouseMoveHandler(movement) {
+    this._viewer.tooltip.setContent('单击选择点位')
     let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.endPosition, Cesium.Ellipsoid.WGS84)
     if (position) {
+      this._viewer.tooltip.setPosition(position)
       this._coordinates = Cesium.Rectangle.fromCartesianArray([...this._positions, position], Cesium.Ellipsoid.WGS84)
     }
   }
