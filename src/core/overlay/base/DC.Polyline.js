@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:06:25
+ * @Last Modified time: 2020-02-04 14:14:16
  */
 
 import Overlay from '../Overlay'
@@ -76,6 +76,9 @@ DC.Polyline = class extends Overlay {
     })
   }
 
+  /**
+   * prepare entity
+   */
   _prepareDelegate() {
     /**
      *  initialize the Overlay parameter
@@ -90,20 +93,10 @@ DC.Polyline = class extends Overlay {
     this._delegate.overlayId = this._id
   }
 
-  _addCallback(layer) {
-    this._layer = layer
-    this._prepareDelegate()
-    this._layer.delegate.entities.add(this._delegate)
-    this._state = DC.OverlayState.ADDED
-  }
-
-  _removeCallback() {
-    if (this._layer) {
-      this._layer.delegate.entities.remove(this._delegate)
-      this._state = DC.OverlayState.REMOVED
-    }
-  }
-
+  /**
+   *
+   * @param {*} style
+   */
   setStyle(style) {
     if (Object.keys(style).length == 0) {
       return

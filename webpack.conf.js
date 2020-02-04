@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 10:35:44
+ * @Last Modified time: 2020-02-04 15:30:42
  */
 
 const path = require('path')
@@ -14,10 +14,18 @@ const cesiumBuild = './libs/cesium/Build/Cesium'
 const cesiumSource = './libs/cesium/Source'
 
 let cesiumCopyPlugin = [
-  new CopywebpackPlugin([{ from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' }]),
-  new CopywebpackPlugin([{ from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' }]),
-  new CopywebpackPlugin([{ from: path.join(cesiumBuild, 'Widgets'), to: 'resources/Widgets' }]),
-  new CopywebpackPlugin([{ from: path.join(cesiumBuild, 'ThirdParty'), to: 'resources/ThirdParty' }])
+  new CopywebpackPlugin([
+    { from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' }
+  ]),
+  new CopywebpackPlugin([
+    { from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' }
+  ]),
+  new CopywebpackPlugin([
+    { from: path.join(cesiumBuild, 'Widgets'), to: 'resources/Widgets' }
+  ]),
+  new CopywebpackPlugin([
+    { from: path.join(cesiumBuild, 'ThirdParty'), to: 'resources/ThirdParty' }
+  ])
 ]
 
 function resolve(dir) {

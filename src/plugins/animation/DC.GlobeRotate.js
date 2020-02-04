@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-30 20:47:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 13:58:24
+ * @Last Modified time: 2020-01-31 17:10:09
  */
 import Cesium from '@/namespace'
 DC.GlobeRotate = class {
@@ -54,6 +54,7 @@ DC.GlobeRotate = class {
   _endRotate() {
     this._viewer.delegate.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
     this._viewer.delegate.clock.multiplier = 1
+    this._viewer.delegate.clock.currentTime = Cesium.JulianDate.now().clone()
     this._viewer.delegate.scene.postUpdate.removeEventListener(this._icrf, this)
   }
 }

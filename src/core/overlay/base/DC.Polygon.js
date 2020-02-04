@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:06:25
+ * @Last Modified time: 2020-02-04 15:24:43
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -70,6 +70,9 @@ DC.Polygon = class extends Overlay {
     return result
   }
 
+  /**
+   * prepare entity
+   */
   _preparePositions(positions) {
     if (typeof positions === 'string') {
       if (positions.indexOf('#') >= 0) {
@@ -126,12 +129,55 @@ DC.Polygon = class extends Overlay {
     }
   }
 
+  /**
+   *
+   * @param {*} extrudedHeight
+   * @param {*} duration
+   */
+  setExtrudedHeight(extrudedHeight, duration) {
+    if (this._delegate.polygon) {
+      let now = Cesium.JulianDate.now()
+      let oriValue = this._delegate.polygon.extrudedHeight
+        ? this._delegate.polygon.extrudedHeight.getValue(now)
+        : 0
+      let rate = 0
+      let stopTime = now
+      if (duration) {
+        rate = (extrudedHeight - oriValue) / duration
+        stopTime = DC.JulianDate.addSeconds(
+          now,
+          duration,
+          new Cesium.JulianDate()
+        )
+      }
+      this._delegate.polygon.extrudedHeight = new Cesium.CallbackProperty(
+        time => {
+          let result = 0
+          if (DC.JulianDate.greaterThan(stopTime, time)) {
+            result =
+              oriValue +
+              (duration - Cesium.JulianDate.secondsDifference(stopTime, time)) *
+                rate
+          } else {
+            result = extrudedHeight
+          }
+          return result
+        }
+      )
+    }
+    return this
+  }
+
+  /**
+   *
+   * @param {*} style
+   */
   setStyle(style) {
-    if (Object.keys(style).length == 0) {
+    if (!style || Object.keys(style).length === 0) {
       return
     }
     this._style = style
-    this._delegate.polygon && this._delegate.polygon.merge(this._style)
+    this._delegate.polygon && this._delegate.polygon.merge(style)
     return this
   }
 

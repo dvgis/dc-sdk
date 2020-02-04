@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:06:03
+ * @Last Modified time: 2020-02-01 18:31:04
  */
 
 import Cesium from '@/namespace'
@@ -46,6 +46,9 @@ DC.Billboard = class extends Overlay {
     return this._size
   }
 
+  /**
+   * prepare entity
+   */
   _prepareDelegate() {
     /**
      * set the location
@@ -85,20 +88,23 @@ DC.Billboard = class extends Overlay {
     this._delegate.overlayId = this._id
   }
 
-  _addCallback(layer) {
-    this._layer = layer
-    this._prepareDelegate()
-    this._layer.delegate.entities.add(this._delegate)
-    this._state = DC.OverlayState.ADDED
-  }
-
-  _removeCallback() {
-    if (this._layer) {
-      this._layer.delegate.entities.remove(this._delegate)
-      this._state = DC.OverlayState.REMOVED
+  /**
+   *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
+    this._delegate.label = {
+      ...textStyle,
+      text: text
     }
+    return this
   }
 
+  /**
+   *
+   * @param {*} style
+   */
   setStyle(style) {
     if (Object.keys(style).length === 0) {
       return
@@ -108,11 +114,18 @@ DC.Billboard = class extends Overlay {
     return this
   }
 
+  /**
+   *
+   * @param {*} entity
+   */
   static fromEntity(entity) {
     let position = DC.T.transformCartesianToWSG84(entity.position._value)
     let billboard = undefined
     if (entity.billboard) {
       billboard = new DC.Billboard(position, entity.billboard.image)
+      billboard.attr = {
+        name: entity.name
+      }
       billboard.setStyle({
         ...entity.billboard
       })

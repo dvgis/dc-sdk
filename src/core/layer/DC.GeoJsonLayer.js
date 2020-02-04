@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:05:07
+ * @Last Modified time: 2020-02-03 13:44:14
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -67,6 +67,9 @@ DC.GeoJsonLayer = class extends Layer {
     return this
   }
 
+  /**
+   *
+   */
   toVectorLayer() {
     let layer = new DC.VectorLayer(this._id)
     let self = this

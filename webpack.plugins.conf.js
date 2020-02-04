@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 10:41:59
+ * @Last Modified time: 2020-02-03 17:28:37
  */
 
 const path = require('path')
@@ -47,20 +47,6 @@ module.exports = env => {
     module: {
       unknownContextCritical: false,
       rules: [
-        {
-          test: /\.js$/,
-          enforce: 'pre',
-          use: [
-            {
-              loader: 'strip-pragma-loader',
-              options: {
-                pragmas: {
-                  debug: false
-                }
-              }
-            }
-          ]
-        },
         {
           test: /\.js$/,
           exclude: /node_modules/,

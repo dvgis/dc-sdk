@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:06:56
+ * @Last Modified time: 2020-02-04 14:29:34
  */
 import OverlayEvent from '../event/OverlayEvent'
 class Overlay {
@@ -16,7 +16,11 @@ class Overlay {
     this._attr = {}
     this._overlayEvent = new OverlayEvent()
     this._overlayEvent.on(DC.OverlayEventType.ADD, this._addCallback, this)
-    this._overlayEvent.on(DC.OverlayEventType.REMOVE, this._removeCallback, this)
+    this._overlayEvent.on(
+      DC.OverlayEventType.REMOVE,
+      this._removeCallback,
+      this
+    )
     this.type = undefined
   }
 
@@ -54,26 +58,37 @@ class Overlay {
   }
 
   /***
-   * 构建代理，子类需要覆盖重写
+   *
    */
   _prepareDelegate() {}
 
   /**
    *
    * @param {*} layer
-   * 覆盖物添加调用的回调函数，子类需要覆盖重写
    */
-  _addCallback(layer) {}
+  _addCallback(layer) {
+    this._layer = layer
+    this._prepareDelegate()
+    if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
+      this._layer.delegate.entities.add(this._delegate)
+      this._state = DC.OverlayState.ADDED
+    }
+  }
 
   /**
-   * 覆盖物删除调用的回调函数，子类需要覆盖重写
+   *
    */
-  _removeCallback() {}
+  _removeCallback() {
+    if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
+      this._layer.delegate.entities.remove(this._delegate)
+      this._state = DC.OverlayState.REMOVED
+    }
+  }
 
   /**
    *
    * @param {*} style
-   * 设置覆盖物样式，子类需要覆盖重写
+   * set overlay style
    */
   setStyle(style) {}
 
@@ -84,6 +99,38 @@ class Overlay {
     if (this._layer) {
       this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
     }
+  }
+
+  /**
+   *
+   * @param {*} type
+   * @param {*} callback
+   * @param {*} context
+   */
+  on(type, callback, context) {
+    this._overlayEvent.on(type, callback, context || this)
+    return this
+  }
+
+  /**
+   *
+   * @param {*} type
+   * @param {*} callback
+   * @param {*} context
+   */
+  off(type, callback, context) {
+    this._overlayEvent.off(type, callback, context || this)
+    return this
+  }
+
+  /**
+   *
+   * @param {*} type
+   * @param {*} param
+   */
+  fire(type, params) {
+    this._overlayEvent.fire(type, params)
+    return this
   }
 }
 
