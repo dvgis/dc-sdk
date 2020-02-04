@@ -2,56 +2,35 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
-<<<<<<< HEAD
- * @Last Modified time: 2020-01-15 20:14:22
- */
-=======
- * @Last Modified time: 2020-01-21 12:13:45
+ * @Last Modified time: 2020-02-01 18:53:59
  */
 import Cesium from '@/namespace'
 
->>>>>>> 816784032383a4443bfb8de96a7b70447d385628
 class Widget {
   constructor() {
     this._viewer = undefined
     this._position = undefined
-    this._show = false
+    this._enable = false
     this._wapper = undefined
-    this._windowCoord = undefined
-    this._state = undefined
+    this._state = DC.WidgetState.INSTALLED
     this.type = undefined
+  }
+
+  set enable(enable) {
+    this._enable = enable
+    this._state = this._enable ? DC.WidgetState.ENABLED : DC.WidgetState.DISABLED
+  }
+
+  get state() {
+    return this._state
   }
 
   /**
    *
    * @param {*} windowCoord
-   * 更新Widget位置需要子类覆盖
+   * 更新 Widge 位置需要子类覆盖
    */
   _updateWindowCoord(windowCoord) {}
-
-  /**
-   *
-   * @param {*} viewer
-   */
-  setPosition(position) {
-    this._position = position
-    if (this._viewer) {
-      let self = this
-      let scene = this._viewer.scene
-<<<<<<< HEAD
-      scene.preRender.addEventListener(() => {
-        let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
-          scene,
-          self._position
-        )
-=======
-      scene.postRender.addEventListener(() => {
-        let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, self._position)
->>>>>>> 816784032383a4443bfb8de96a7b70447d385628
-        this._setWindowCoord(windowCoord)
-      })
-    }
-  }
 
   /**
    *
@@ -61,27 +40,32 @@ class Widget {
     this._viewer = viewer
     this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
     this._state = DC.WidgetState.INSTALLED
+    /**
+     *  add postRender Listener
+     */
+    if (this._viewer) {
+      let self = this
+      let scene = this._viewer.scene
+      scene.postRender.addEventListener(() => {
+        if (self._position && self._enable && self._updateWindowCoord) {
+          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, self._position)
+          self._updateWindowCoord(windowCoord)
+        }
+      })
+    }
+    /**
+     * excute installHook
+     */
+    this._installHook && this._installHook()
   }
 
   /**
    *
    * @param {*} position
-   * 显示组件
    */
-  show(position) {
-    this._show = true
-    position && position instanceof DC.Position && this.setPosition(position)
-    this._wapper && (this._wapper.style.visibility = 'visible')
-    this._state = DC.WidgetState.SHOW
-  }
-
-  /**
-   * 隐藏组件
-   */
-  hide() {
-    this._show = false
-    this._wapper && (this._wapper.style.visibility = 'hidden')
-    this._state = DC.WidgetState.HIDDEN
+  setPosition(position) {
+    this._position = position
+    return this
   }
 
   /**
@@ -94,6 +78,17 @@ class Widget {
     } else if (content && content instanceof Element) {
       this._wapper.appendChild(content)
     }
+    return this
+  }
+
+  /**
+   *
+   */
+  hide() {
+    this._wapper &&
+      (this._wapper.style.cssText = `
+    visibility:hidden;
+    `)
   }
 }
 

@@ -7,7 +7,7 @@
 
 import './const'
 import './utils'
-import './postion/DC.Position'
+import './position/DC.Position'
 import './transform/DC.T'
 import './imagery'
 import './layer'

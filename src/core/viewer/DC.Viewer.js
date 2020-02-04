@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:09:00
+ * @Last Modified time: 2020-02-02 20:45:25
  */
 
 import Cesium from '@/namespace'
@@ -12,6 +12,7 @@ import MouseEvent from '../event/MouseEvent'
 import ViewerEvent from '../event/ViewerEvent'
 import Popup from '../widget/Popup'
 import ContextMenu from '../widget/ContextMenu'
+import Tooltip from '../widget/Tooltip'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -42,8 +43,14 @@ DC.Viewer = class {
     this._viewerOption = new ViewerOption(this) // Initialize the viewer option
     this._cameraOption = new CameraOption(this) // Initialize the camera option
     this._viewerEvent = new ViewerEvent() // Register viewer events
-    this._dcContainer = DC.DomUtil.create('div', 'dc-container', document.getElementById(id)) //Register the custom container
-    this._baseLayerPicker = new Cesium.BaseLayerPickerViewModel({ globe: this._delegate.scene.globe })
+    this._dcContainer = DC.DomUtil.create(
+      'div',
+      'dc-container',
+      document.getElementById(id)
+    ) //Register the custom container
+    this._baseLayerPicker = new Cesium.BaseLayerPickerViewModel({
+      globe: this._delegate.scene.globe
+    })
     this._layerCache = {}
     this.on(DC.ViewerEventType.ADD_LAYER, this._addLayerCallback, this) //Initialize layer add event
     this.on(DC.ViewerEventType.REMOVE_LAYER, this._removeLayerCallback, this) //Initialize layer remove event
@@ -54,7 +61,10 @@ DC.Viewer = class {
      */
     this._popup = new Popup()
     this._contextMenu = new ContextMenu()
-    this.use(this._popup).use(this._contextMenu)
+    this._tooltip = new Tooltip()
+    this.use(this._popup)
+      .use(this._contextMenu)
+      .use(this._tooltip)
   }
 
   get delegate() {
@@ -77,6 +87,10 @@ DC.Viewer = class {
     return this._delegate.scene.canvas
   }
 
+  get clock() {
+    return this._delegate.clock
+  }
+
   get viewerEvent() {
     return this._viewerEvent
   }
@@ -87,6 +101,10 @@ DC.Viewer = class {
 
   get contextMenu() {
     return this._contextMenu
+  }
+
+  get tooltip() {
+    return this._tooltip
   }
 
   _addLayerCallback(layer) {
@@ -100,7 +118,10 @@ DC.Viewer = class {
   _removeLayerCallback(layer) {
     if (layer && layer.layerEvent && layer.state !== DC.LayerState.REMOVED) {
       layer.layerEvent.fire(DC.LayerEventType.REMOVE, this)
-      if (this._layerCache[layer.type] && this._layerCache[layer.type][layer.id]) {
+      if (
+        this._layerCache[layer.type] &&
+        this._layerCache[layer.type][layer.id]
+      ) {
         delete this._layerCache[layer.type][layer.id]
       }
     }
@@ -184,7 +205,9 @@ DC.Viewer = class {
    */
   changeBaseLayer(index) {
     if (this._baseLayerPicker && index >= 0) {
-      this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[index]
+      this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[
+        index
+      ]
     }
     return this
   }
@@ -205,7 +228,7 @@ DC.Viewer = class {
    * remove a layer from the viewer
    */
   removeLayer(layer) {
-    this._viewerEvent.fire(DC.ViewerEventType.ADD_LAYER, layer)
+    this._viewerEvent.fire(DC.ViewerEventType.REMOVE_LAYER, layer)
     return this
   }
 
@@ -265,17 +288,30 @@ DC.Viewer = class {
 
   removeEffect(effect) {}
 
+  /**
+   *
+   * @param {*} target
+   */
   flyTo(target) {
     this._delegate.flyTo(target.delegate || target)
     return this
   }
 
+  /**
+   *
+   * @param {*} target
+   */
   zoomTo(target) {
     this._delegate.zoomTo(target.delegate || target)
     return this
   }
 
-  flyToPosition(position, completeCallback) {
+  /**
+   *
+   * @param {*} position
+   * @param {*} completeCallback
+   */
+  flyToPosition(position, completeCallback, duration) {
     if (position instanceof DC.Position) {
       this._delegate.camera.flyTo({
         destination: DC.T.transformWSG84ToCartesian(position),
@@ -284,22 +320,39 @@ DC.Viewer = class {
           pitch: Cesium.Math.toRadians(position.pitch),
           roll: Cesium.Math.toRadians(position.roll)
         },
-        complete: completeCallback
+        complete: completeCallback,
+        duration: duration
       })
     }
     return this
   }
 
+  /**
+   *
+   * @param {*} type
+   * @param {*} callback
+   * @param {*} context
+   */
   on(type, callback, context) {
     this._viewerEvent.on(type, callback, context || this)
     return this
   }
 
+  /**
+   *
+   * @param {*} type
+   * @param {*} callback
+   * @param {*} context
+   */
   off(type, callback, context) {
     this._viewerEvent.off(type, callback, context || this)
     return this
   }
 
+  /**
+   *
+   * @param {*} plugin
+   */
   use(plugin) {
     if (plugin && plugin.install) {
       plugin.install(this)

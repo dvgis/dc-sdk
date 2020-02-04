@@ -2,7 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
+<<<<<<< HEAD
  * @Last Modified time: 2020-02-03 17:28:39
+=======
+ * @Last Modified time: 2020-01-31 15:49:20
+>>>>>>> 9de64d53260a4e8c311a15a85bbd18a16c4ea8b5
  */
 
 const path = require('path')

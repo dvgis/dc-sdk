@@ -1,37 +1,39 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-06 15:03:25
+ * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 18:29:54
+ * @Last Modified time: 2020-02-01 18:29:13
  */
-
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
-const DEF_STYLE = {
-  pixelSize: 8,
-  outlineColor: Cesium.Color.BLUE,
-  outlineWidth: 2
-}
-
-DC.Point = class extends Overlay {
-  constructor(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+DC.Circle = class extends Overlay {
+  constructor(center, redius) {
+    if (!center || !(center instanceof DC.Position)) {
+      throw new Error('the center invalid')
     }
     super()
-    this._position = position
+    this._center = center
+    this._redius = redius
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.POINT
+    this.type = DC.OverlayType.CIRCLE
   }
 
-  set position(position) {
-    this._position = position
+  set center(center) {
+    this._center = center
   }
 
-  get position() {
-    return this._position
+  get center() {
+    return this._center
+  }
+
+  set radius(radius) {
+    this._redius = radius
+  }
+
+  get radius() {
+    return this._redius
   }
 
   /**
@@ -42,7 +44,7 @@ DC.Point = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWSG84ToCartesian(this._position)
+      return DC.T.transformWSG84ToCartesian(this._center)
     })
     /**
      * set the orientation
@@ -60,12 +62,30 @@ DC.Point = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.point = {
-      ...DEF_STYLE,
-      ...this._style
+    this._delegate.ellipse = {
+      ...this._style,
+      semiMajorAxis: new Cesium.CallbackProperty(time => {
+        return this._radius
+      }),
+      semiMinorAxis: new Cesium.CallbackProperty(time => {
+        return this._radius
+      })
     }
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
+  }
+
+  /**
+   *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
+    this._delegate.label = {
+      text: text,
+      ...textStyle
+    }
+    return this
   }
 
   /**
@@ -77,7 +97,7 @@ DC.Point = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.point && DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
+    this._delegate.ellipse && this._delegate.ellipse.merge(this._style)
     return this
   }
 }

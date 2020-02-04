@@ -1,29 +1,23 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-06 15:03:25
+ * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 18:29:54
+ * @Last Modified time: 2020-02-01 12:03:20
  */
-
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
-const DEF_STYLE = {
-  pixelSize: 8,
-  outlineColor: Cesium.Color.BLUE,
-  outlineWidth: 2
-}
-
-DC.Point = class extends Overlay {
-  constructor(position) {
+DC.Label = class extends Overlay {
+  constructor(position, text) {
     if (!position || !(position instanceof DC.Position)) {
       throw new Error('the position invalid')
     }
     super()
     this._position = position
+    this._text = text
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.POINT
+    this.type = DC.OverlayType.LABEL
   }
 
   set position(position) {
@@ -32,6 +26,14 @@ DC.Point = class extends Overlay {
 
   get position() {
     return this._position
+  }
+
+  set text(icon) {
+    this._text = text
+  }
+
+  get text() {
+    return this._text
   }
 
   /**
@@ -60,9 +62,11 @@ DC.Point = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.point = {
-      ...DEF_STYLE,
-      ...this._style
+    this._delegate.label = {
+      ...this._style,
+      text: new Cesium.CallbackProperty(time => {
+        return this._text
+      })
     }
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
@@ -77,7 +81,7 @@ DC.Point = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.point && DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
+    this._delegate.label && this._delegate.label.merge(this._style)
     return this
   }
 }
