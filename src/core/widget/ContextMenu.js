@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 16:00:40
+ * @Last Modified time: 2020-02-01 18:57:30
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -33,7 +33,7 @@ class ContextMenu extends Widget {
     }
   }
   _rightclickHandler(e) {
-    if (e && e.position && this._enable) {
+    if (e && e.position && this._enable && this._updateWindowCoord) {
       this._updateWindowCoord(Cesium.SceneTransforms.wgs84ToWindowCoordinates(this._viewer.delegate.scene, e.position))
     }
   }
@@ -46,7 +46,7 @@ class ContextMenu extends Widget {
     this._wapper.style.cssText = `
     visibility:visible;
     z-index:1;
-    transform:translate3d(${windowCoord.x}px,${windowCoord.y}px, 0);
+    transform:translate3d(${Math.round(windowCoord.x)}px,${Math.round(windowCoord.y)}px, 0);
     `
   }
 

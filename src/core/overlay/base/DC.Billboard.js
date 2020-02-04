@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 12:05:36
+ * @Last Modified time: 2020-02-01 18:31:04
  */
 
 import Cesium from '@/namespace'
@@ -93,7 +93,7 @@ DC.Billboard = class extends Overlay {
    * @param {*} text
    * @param {*} textStyle
    */
-  bindLabel(text, textStyle) {
+  setLabel(text, textStyle) {
     this._delegate.label = {
       ...textStyle,
       text: text
@@ -123,6 +123,9 @@ DC.Billboard = class extends Overlay {
     let billboard = undefined
     if (entity.billboard) {
       billboard = new DC.Billboard(position, entity.billboard.image)
+      billboard.attr = {
+        name: entity.name
+      }
       billboard.setStyle({
         ...entity.billboard
       })

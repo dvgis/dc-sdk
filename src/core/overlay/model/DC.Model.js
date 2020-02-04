@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 12:05:10
+ * @Last Modified time: 2020-02-02 16:45:32
  */
 
 import Overlay from '../Overlay'
@@ -68,7 +68,7 @@ DC.Model = class extends Overlay {
    * @param {*} text
    * @param {*} textStyle
    */
-  bindLabel(text, textStyle) {
+  setLabel(text, textStyle) {
     this._delegate.label = {
       ...textStyle,
       text: text

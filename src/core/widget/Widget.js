@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 15:06:09
+ * @Last Modified time: 2020-02-01 18:53:59
  */
 import Cesium from '@/namespace'
 
@@ -47,7 +47,7 @@ class Widget {
       let self = this
       let scene = this._viewer.scene
       scene.postRender.addEventListener(() => {
-        if (self._position && self._enable) {
+        if (self._position && self._enable && self._updateWindowCoord) {
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, self._position)
           self._updateWindowCoord(windowCoord)
         }
@@ -65,6 +65,7 @@ class Widget {
    */
   setPosition(position) {
     this._position = position
+    return this
   }
 
   /**
@@ -77,6 +78,7 @@ class Widget {
     } else if (content && content instanceof Element) {
       this._wapper.appendChild(content)
     }
+    return this
   }
 
   /**

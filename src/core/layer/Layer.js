@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:05:35
+ * @Last Modified time: 2020-02-02 14:18:15
  */
 import LayerEvent from '../event/LayerEvent'
 
@@ -129,14 +129,21 @@ class Layer {
 
   clear() {}
 
+  /**
+   *
+   */
   remove() {
     if (this._viewer) {
       this._viewer.removeLayer(this)
     }
   }
 
+  /**
+   *
+   * @param {*} viewer
+   */
   addToViewer(viewer) {
-    if (viewer) {
+    if (viewer && viewer.addLayer) {
       viewer.addLayer(this)
     }
     return this

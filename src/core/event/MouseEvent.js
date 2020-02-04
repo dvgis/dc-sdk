@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 14:45:04
+ * @Last Modified time: 2020-02-04 13:27:36
  */
 
 import Cesium from '@/namespace'
@@ -15,9 +15,21 @@ class MouseEvent extends Event {
     this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
     this._registerEvent()
     this.on(Cesium.ScreenSpaceEventType.LEFT_CLICK, this._clickCallback, this)
-    this.on(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK, this._dbclickCallback, this)
-    this.on(Cesium.ScreenSpaceEventType.RIGHT_CLICK, this._rightClickCallback, this)
-    this.on(Cesium.ScreenSpaceEventType.MOUSE_MOVE, this._mouseMoveCallback, this)
+    this.on(
+      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+      this._dbclickCallback,
+      this
+    )
+    this.on(
+      Cesium.ScreenSpaceEventType.RIGHT_CLICK,
+      this._rightClickCallback,
+      this
+    )
+    this.on(
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+      this._mouseMoveCallback,
+      this
+    )
   }
 
   /**
@@ -44,7 +56,7 @@ class MouseEvent extends Event {
     let feature = undefined
     if (target.id && target.id instanceof Cesium.Entity) {
       layer = target.id.layer
-      if (layer) {
+      if (layer && layer.getOverlay) {
         overlay = layer.getOverlay(target.id.id)
       }
       //todo
@@ -109,7 +121,11 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
-    this._raiseEvent(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK, target, cartesian)
+    this._raiseEvent(
+      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+      target,
+      cartesian
+    )
   }
 
   /**
