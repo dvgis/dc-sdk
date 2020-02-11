@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-04 14:14:16
+ * @Last Modified time: 2020-02-11 19:26:51
  */
 
 import Overlay from '../Overlay'
@@ -70,6 +70,8 @@ DC.Polyline = class extends Overlay {
     this._positions = positions.map(item => {
       if (Array.isArray(item)) {
         return DC.Position.fromCoordArray(item)
+      } else if (item instanceof DC.Position) {
+        return item
       } else {
         return DC.Position.fromCoordString(item)
       }

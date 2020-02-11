@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 17:17:07
+ * @Last Modified time: 2020-02-11 15:26:08
  */
 ;(function() {
   let namespace = {}
@@ -12,7 +12,11 @@
     Version: '1.0.0',
     Config: {}
   }
+
+  delete window.DC
+
   window.DC = DC
+
   function requireCesium() {
     return new Promise((resolve, reject) => {
       let Cesium = require('cesium/Cesium')
@@ -22,35 +26,39 @@
   }
 
   /**
-   * 获取 namespace
+   *  namespace
    */
   DC.getNamespace = function() {
     return namespace
   }
 
   /**
-   * 开始
+   *  start
    */
   DC.init = function(callback) {
     DC.ready(callback)
   }
 
   /**
-   * 开始
+   * start
    */
   DC.ready = function(callback) {
     try {
       if (!initialized) {
         requireCesium().then(() => {
           require('./DC.Loader')
+          require('../thirdpart')
           delete window.Cesium //删除winow下的Cesium
+          callback && callback()
         })
+        initialized = true
+      } else {
+        callback && callback()
       }
-      callback && callback()
-      initialized = true
     } catch (e) {
       delete window.Cesium
       initialized = false
+      console.error(e)
     }
   }
 })()

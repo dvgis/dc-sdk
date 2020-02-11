@@ -2,12 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:27:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-21 16:12:38
+ * @Last Modified time: 2020-02-11 16:10:09
  */
 
 import Cesium from '@/namespace'
 
-const TEMP_MAP_URL = 'http://api{s}.map.bdimg.com/customimage/tile?&x={x}&y={y}&z={z}&scale=1&customid={style}'
+const TEMP_MAP_URL =
+  'http://api{s}.map.bdimg.com/customimage/tile?&x={x}&y={y}&z={z}&scale=1&customid={style}'
 
 class BaiduImageryProvider {
   constructor(options = {}) {
@@ -34,42 +35,54 @@ class BaiduImageryProvider {
 
   get tileWidth() {
     if (!this.ready) {
-      throw new Cesium.DeveloperError('tileWidth must not be called before the imagery provider is ready.')
+      throw new Cesium.DeveloperError(
+        'tileWidth must not be called before the imagery provider is ready.'
+      )
     }
     return this._tileWidth
   }
 
   get tileHeight() {
     if (!this.ready) {
-      throw new Cesium.DeveloperError('tileHeight must not be called before the imagery provider is ready.')
+      throw new Cesium.DeveloperError(
+        'tileHeight must not be called before the imagery provider is ready.'
+      )
     }
     return this._tileHeight
   }
 
   get maximumLevel() {
     if (!this.ready) {
-      throw new Cesium.DeveloperError('maximumLevel must not be called before the imagery provider is ready.')
+      throw new Cesium.DeveloperError(
+        'maximumLevel must not be called before the imagery provider is ready.'
+      )
     }
     return this._maximumLevel
   }
 
   get minimumLevel() {
     if (!this.ready) {
-      throw new Cesium.DeveloperError('minimumLevel must not be called before the imagery provider is ready.')
+      throw new Cesium.DeveloperError(
+        'minimumLevel must not be called before the imagery provider is ready.'
+      )
     }
     return 0
   }
 
   get tilingScheme() {
     if (!this.ready) {
-      throw new Cesium.DeveloperError('tilingScheme must not be called before the imagery provider is ready.')
+      throw new Cesium.DeveloperError(
+        'tilingScheme must not be called before the imagery provider is ready.'
+      )
     }
     return this._tilingScheme
   }
 
   get rectangle() {
     if (!this.ready) {
-      throw new Cesium.DeveloperError('rectangle must not be called before the imagery provider is ready.')
+      throw new Cesium.DeveloperError(
+        'rectangle must not be called before the imagery provider is ready.'
+      )
     }
     return this._rectangle
   }
@@ -86,7 +99,9 @@ class BaiduImageryProvider {
 
   requestImage(x, y, level) {
     if (!this.ready) {
-      throw new Cesium.DeveloperError('requestImage must not be called before the imagery provider is ready.')
+      throw new Cesium.DeveloperError(
+        'requestImage must not be called before the imagery provider is ready.'
+      )
     }
     let xTiles = this._tilingScheme.getNumberOfXTilesAtLevel(level)
     let yTiles = this._tilingScheme.getNumberOfYTilesAtLevel(level)

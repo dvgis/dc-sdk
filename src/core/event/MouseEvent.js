@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-04 13:27:36
+ * @Last Modified time: 2020-02-11 17:33:05
  */
 
 import Cesium from '@/namespace'
@@ -60,8 +60,16 @@ class MouseEvent extends Event {
         overlay = layer.getOverlay(target.id.id)
       }
       //todo
-    } else if (target.id instanceof Cesium.Cesium3DTileFeature) {
-      // todo
+    } else if (target instanceof Cesium.Cesium3DTileFeature) {
+      feature = target
+      layer = target.tileset.layer
+      if (layer && layer.getOverlay) {
+        overlay = layer.getOverlay(target.tileset.overlayId)
+        let propertyNames = feature.getPropertyNames()
+        propertyNames.forEach(item => {
+          overlay.attr[item] = feature.getProperty(item)
+        })
+      }
     }
     return { layer: layer, overlay: overlay, feature: feature }
   }

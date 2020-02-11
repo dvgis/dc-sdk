@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-04 15:24:43
+ * @Last Modified time: 2020-02-11 19:27:04
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -83,6 +83,8 @@ DC.Polygon = class extends Overlay {
     this._positions = positions.map(item => {
       if (Array.isArray(item)) {
         return DC.Position.fromCoordArray(item)
+      } else if (item instanceof DC.Position) {
+        return item
       } else {
         return DC.Position.fromCoordString(item)
       }
@@ -101,6 +103,9 @@ DC.Polygon = class extends Overlay {
     return result
   }
 
+  /**
+   * prepare entity
+   */
   _prepareDelegate() {
     /**
      *  initialize the Overlay parameter
@@ -113,20 +118,6 @@ DC.Polygon = class extends Overlay {
     }
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
-  }
-
-  _addCallback(layer) {
-    this._layer = layer
-    this._prepareDelegate()
-    this._layer.delegate.entities.add(this._delegate)
-    this._state = DC.OverlayState.ADDED
-  }
-
-  _removeCallback() {
-    if (this._layer) {
-      this._layer.delegate.entities.remove(this._delegate)
-      this._state = DC.OverlayState.REMOVED
-    }
   }
 
   /**
@@ -153,7 +144,7 @@ DC.Polygon = class extends Overlay {
       this._delegate.polygon.extrudedHeight = new Cesium.CallbackProperty(
         time => {
           let result = 0
-          if (DC.JulianDate.greaterThan(stopTime, time)) {
+          if (Cesium.JulianDate.greaterThan(stopTime, time)) {
             result =
               oriValue +
               (duration - Cesium.JulianDate.secondsDifference(stopTime, time)) *
@@ -180,6 +171,5 @@ DC.Polygon = class extends Overlay {
     this._delegate.polygon && this._delegate.polygon.merge(style)
     return this
   }
-
   static fromEntity(entity) {}
 }

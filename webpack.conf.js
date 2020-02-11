@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-04 15:30:42
+ * @Last Modified time: 2020-02-11 14:52:21
  */
 
 const path = require('path')
@@ -51,7 +51,7 @@ module.exports = env => {
   }
   return {
     entry: {
-      'dc.core': ['entry', 'thirdpart', 'theme']
+      'dc.core': ['entry', 'theme']
     },
     devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
     output: {
@@ -133,7 +133,6 @@ module.exports = env => {
         '@': resolve('src'),
         entry: './src/core/DC.js',
         theme: './src/themes/index.js',
-        thirdpart: './src/thirdpart/index.js',
         cesium: path.resolve(__dirname, cesiumSource)
       }
     },

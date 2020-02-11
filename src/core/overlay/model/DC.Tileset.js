@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-03 13:41:06
+ * @Last Modified time: 2020-02-11 17:56:19
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -16,7 +16,11 @@ DC.Tileset = class extends Overlay {
     })
     this._state = DC.OverlayState.INITIALIZED
     this._delegate.tileVisible.addEventListener(this._tileVisibleHandler, this)
-    this._propertyMap = undefined
+    this._height = undefined
+    this._properties = undefined
+    this._stopTime = undefined
+    this._duration = undefined
+    this._center = undefined
   }
 
   /**
@@ -35,6 +39,8 @@ DC.Tileset = class extends Overlay {
     this._layer = layer
     this._delegate.readyPromise.then(tileset => {
       this._layer.delegate.add(tileset)
+      tileset.layer = this._layer
+      tileset.overlayId = this._id
       this._state = DC.OverlayState.ADDED
     })
   }
@@ -55,6 +61,15 @@ DC.Tileset = class extends Overlay {
    * @param {*} tile
    */
   _tileVisibleHandler(tile) {
+    this._updateProperties(tile)
+    this._updateHeight(tile)
+  }
+
+  /**
+   *
+   * @param {*} tile
+   */
+  _updateProperties(tile) {
     if (this._properties && this._properties.length) {
       let content = tile.content
       for (let i = 0; i < content.featuresLength; i++) {
@@ -69,6 +84,51 @@ DC.Tileset = class extends Overlay {
         })
       }
     }
+  }
+  /**
+   *
+   * @param {*} height
+   */
+  _updateHeight(tile) {
+    if (this._duration) {
+      let rate = this._height / this._duration
+      let now = Cesium.JulianDate.now()
+      if (
+        this._stopTime &&
+        Cesium.JulianDate.greaterThan(this._stopTime, now)
+      ) {
+        this._setHeight(
+          (this._duration -
+            Cesium.JulianDate.secondsDifference(this._stopTime, now)) *
+            rate
+        )
+      }
+    }
+  }
+
+  /**
+   *
+   * @param {*} height
+   */
+  _setHeight(height) {
+    this._delegate.readyPromise.then(tileset => {
+      let surface = Cesium.Cartesian3.fromRadians(
+        this._center.longitude,
+        this._center.latitude,
+        this._center.height
+      )
+      let offset = Cesium.Cartesian3.fromRadians(
+        this._center.longitude,
+        this._center.latitude,
+        this._center.height + height
+      )
+      let translation = Cesium.Cartesian3.subtract(
+        offset,
+        surface,
+        new Cesium.Cartesian3()
+      )
+      tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
+    })
   }
 
   /**
@@ -96,27 +156,22 @@ DC.Tileset = class extends Overlay {
    *
    * @param {*} height
    */
-  setHeight(height) {
+  setHeight(height, duration) {
+    this._height = height
     this._delegate.readyPromise.then(tileset => {
-      let cartographic = Cesium.Cartographic.fromCartesian(
+      this._center = Cesium.Cartographic.fromCartesian(
         tileset.boundingSphere.center
       )
-      let surface = Cesium.Cartesian3.fromRadians(
-        cartographic.longitude,
-        cartographic.latitude,
-        cartographic.height
-      )
-      let offset = Cesium.Cartesian3.fromRadians(
-        cartographic.longitude,
-        cartographic.latitude,
-        cartographic.height + height
-      )
-      let translation = Cesium.Cartesian3.subtract(
-        offset,
-        surface,
-        new Cesium.Cartesian3()
-      )
-      tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
+      if (duration) {
+        this._duration = duration
+        this._stopTime = Cesium.JulianDate.addSeconds(
+          Cesium.JulianDate.now(),
+          duration,
+          new Cesium.JulianDate()
+        )
+      } else {
+        this._setHeight(this._height)
+      }
     })
     return this
   }

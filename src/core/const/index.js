@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-04 15:32:05
+ * @Last Modified time: 2020-02-12 00:23:14
  */
 import Cesium from '@/namespace'
 
@@ -28,7 +28,8 @@ DC.LayerType = {
   TILESET: 'tileset',
   KML: 'kml',
   CZML: 'czml',
-  GEOJSON: 'geojson'
+  GEOJSON: 'geojson',
+  CLUSTER: 'cluster'
 }
 
 DC.LayerEventType = {
@@ -87,7 +88,8 @@ DC.EffectState = {
 DC.WidgetType = {
   POPUP: 'Popup',
   CONTEXT_MENU: 'ContextMenu',
-  TOOL_TIP: 'Tooltip'
+  TOOL_TIP: 'Tooltip',
+  MAPSWITCH: 'MapSwitch'
 }
 
 DC.WidgetState = {
