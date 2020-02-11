@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 13:52:48
+ * @Last Modified time: 2020-02-10 11:30:45
  */
 import Cesium from '@/namespace'
 
@@ -28,7 +28,8 @@ DC.LayerType = {
   TILESET: 'tileset',
   KML: 'kml',
   CZML: 'czml',
-  GEOJSON: 'geojson'
+  GEOJSON: 'geojson',
+  CLUSTER: 'cluster'
 }
 
 DC.LayerEventType = {

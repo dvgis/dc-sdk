@@ -2,8 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-02 14:18:15
+ * @Last Modified time: 2020-02-11 11:15:30
  */
+import Cesium from '@/namespace'
 import LayerEvent from '../event/LayerEvent'
 
 class Layer {
@@ -18,8 +19,16 @@ class Layer {
     this._layerEvent = new LayerEvent()
     this._layerEvent.on(DC.LayerEventType.ADD, this._addCallback, this)
     this._layerEvent.on(DC.LayerEventType.REMOVE, this._removeCallback, this)
-    this._layerEvent.on(DC.LayerEventType.ADD_OVERLAY, this._addOverlayCallback, this)
-    this._layerEvent.on(DC.LayerEventType.REMOVE_OVERLAY, this._removeOverlayCallback, this)
+    this._layerEvent.on(
+      DC.LayerEventType.ADD_OVERLAY,
+      this._addOverlayCallback,
+      this
+    )
+    this._layerEvent.on(
+      DC.LayerEventType.REMOVE_OVERLAY,
+      this._removeOverlayCallback,
+      this
+    )
     this.type = undefined
   }
 
@@ -63,13 +72,41 @@ class Layer {
    * subclasses need to be overridden
    */
 
-  _addCallback(veiwer) {}
+  _addCallback(viewer) {
+    this._viewer = viewer
+    if (this._delegate && this._delegate instanceof Cesium.CustomDataSource) {
+      this._viewer.delegate.dataSources.add(this._delegate)
+      this._state = DC.LayerState.ADDED
+    } else if (
+      this._delegate &&
+      this._delegate instanceof Cesium.PrimitiveCollection
+    ) {
+      this._viewer.delegate.scene.primitives.add(this._delegate)
+      this._state = DC.LayerState.ADDED
+    }
+  }
 
   /**
    * the layer removed callback function
    * subclasses need to be overridden
    */
-  _removeCallback() {}
+  _removeCallback() {
+    if (this._viewer) {
+      this._cache = {}
+      if (this._delegate && this._delegate instanceof Cesium.CustomDataSource) {
+        this._delegate.entities.removeAll()
+        this._viewer.delegate.dataSources.remove(this._delegate)
+        this._state = DC.LayerState.REMOVED
+      } else if (
+        this._delegate &&
+        this._delegate instanceof Cesium.PrimitiveCollection
+      ) {
+        this._delegate.removeAll()
+        this._viewer.delegate.scene.primitives.remove(this._delegate)
+        this._state = DC.LayerState.REMOVED
+      }
+    }
+  }
 
   /**
    *
@@ -77,7 +114,11 @@ class Layer {
    * the layer add overlay callback function
    */
   _addOverlayCallback(overlay) {
-    if (overlay && overlay.overlayEvent && overlay.state !== DC.OverlayState.ADDED) {
+    if (
+      overlay &&
+      overlay.overlayEvent &&
+      overlay.state !== DC.OverlayState.ADDED
+    ) {
       overlay.overlayEvent.fire(DC.OverlayEventType.ADD, this)
       this._cache[overlay.id] = overlay
     }
@@ -89,7 +130,11 @@ class Layer {
    * the layer remove overlay callback function
    */
   _removeOverlayCallback(overlay) {
-    if (overlay && overlay.overlayEvent && overlay.state !== DC.OverlayState.REMOVED) {
+    if (
+      overlay &&
+      overlay.overlayEvent &&
+      overlay.state !== DC.OverlayState.REMOVED
+    ) {
       overlay.overlayEvent.fire(DC.OverlayEventType.REMOVE, this)
       delete this._cache[overlay.id]
     }
@@ -127,6 +172,9 @@ class Layer {
     return this
   }
 
+  /**
+   *
+   */
   clear() {}
 
   /**
