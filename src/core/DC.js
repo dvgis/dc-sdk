@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-10 10:47:17
+ * @Last Modified time: 2020-02-11 15:26:08
  */
 ;(function() {
   let namespace = {}
@@ -47,14 +47,18 @@
       if (!initialized) {
         requireCesium().then(() => {
           require('./DC.Loader')
+          require('../thirdpart')
           delete window.Cesium //删除winow下的Cesium
+          callback && callback()
         })
         initialized = true
+      } else {
+        callback && callback()
       }
-      callback && callback()
     } catch (e) {
       delete window.Cesium
       initialized = false
+      console.error(e)
     }
   }
 })()

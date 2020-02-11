@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-02 20:45:25
+ * @Last Modified time: 2020-02-11 16:21:27
  */
 
 import Cesium from '@/namespace'
@@ -33,7 +33,7 @@ const DEF_OPTS = {
 DC.Viewer = class {
   constructor(id, options = {}) {
     if (!id || !document.getElementById(id)) {
-      throw Error('the id empty')
+      throw new Error('the id is empty')
     }
     this._delegate = new Cesium.Viewer(id, {
       ...options,
@@ -176,21 +176,14 @@ DC.Viewer = class {
       baseLayers = [baseLayers]
     }
     baseLayers.forEach(item => {
-      if (
-        item instanceof Cesium.UrlTemplateImageryProvider ||
-        item instanceof Cesium.ArcGisMapServerImageryProvider ||
-        item instanceof Cesium.SingleTileImageryProvider ||
-        item instanceof Cesium.WebMapTileServiceImageryProvider
-      ) {
-        this._baseLayerPicker.imageryProviderViewModels.push(
-          new Cesium.ProviderViewModel({
-            name: '地图',
-            creationFunction: () => {
-              return item
-            }
-          })
-        )
-      }
+      this._baseLayerPicker.imageryProviderViewModels.push(
+        new Cesium.ProviderViewModel({
+          name: '地图',
+          creationFunction: () => {
+            return item
+          }
+        })
+      )
     })
     if (!this._baseLayerPicker.selectedImagery) {
       this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
