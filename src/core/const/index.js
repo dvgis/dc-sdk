@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-10 11:30:45
+ * @Last Modified time: 2020-02-11 18:37:36
  */
 import Cesium from '@/namespace'
 
@@ -88,7 +88,8 @@ DC.EffectState = {
 DC.WidgetType = {
   POPUP: 'Popup',
   CONTEXT_MENU: 'ContextMenu',
-  TOOL_TIP: 'Tooltip'
+  TOOL_TIP: 'Tooltip',
+  MAPSWITCH: 'MapSwitch'
 }
 
 DC.WidgetState = {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-06 16:28:52
+ * @Last Modified time: 2020-02-11 17:56:19
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -39,6 +39,8 @@ DC.Tileset = class extends Overlay {
     this._layer = layer
     this._delegate.readyPromise.then(tileset => {
       this._layer.delegate.add(tileset)
+      tileset.layer = this._layer
+      tileset.overlayId = this._id
       this._state = DC.OverlayState.ADDED
     })
   }

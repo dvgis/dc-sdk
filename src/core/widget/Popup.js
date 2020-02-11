@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 19:02:13
+ * @Last Modified time: 2020-02-11 18:37:46
  */
 
 import Widget from './Widget'
@@ -13,6 +13,7 @@ class Popup extends Widget {
     this._wapper = DC.DomUtil.create('div', 'dc-popup')
     this._contentEl = DC.DomUtil.create('div', 'popup-content', this._wapper)
     this._config = undefined
+    this.type = DC.WidgetType.POPUP
   }
 
   _installHook() {

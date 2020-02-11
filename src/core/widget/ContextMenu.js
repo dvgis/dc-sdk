@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 18:57:30
+ * @Last Modified time: 2020-02-11 21:08:06
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -17,7 +17,11 @@ class ContextMenu extends Widget {
 
   _installHook() {
     if (this._viewer) {
-      this._viewer.on(DC.MouseEventType.RIGHT_CLICK, this._rightclickHandler, this)
+      this._viewer.on(
+        DC.MouseEventType.RIGHT_CLICK,
+        this._rightclickHandler,
+        this
+      )
       this._viewer.on(DC.MouseEventType.CLICK, this._clickHandler, this)
     }
     this._prepareDefaultMenu()
@@ -34,7 +38,12 @@ class ContextMenu extends Widget {
   }
   _rightclickHandler(e) {
     if (e && e.position && this._enable && this._updateWindowCoord) {
-      this._updateWindowCoord(Cesium.SceneTransforms.wgs84ToWindowCoordinates(this._viewer.delegate.scene, e.position))
+      this._updateWindowCoord(
+        Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+          this._viewer.delegate.scene,
+          e.position
+        )
+      )
     }
   }
 
@@ -46,7 +55,9 @@ class ContextMenu extends Widget {
     this._wapper.style.cssText = `
     visibility:visible;
     z-index:1;
-    transform:translate3d(${Math.round(windowCoord.x)}px,${Math.round(windowCoord.y)}px, 0);
+    transform:translate3d(${Math.round(windowCoord.x)}px,${Math.round(
+      windowCoord.y
+    )}px, 0);
     `
   }
 

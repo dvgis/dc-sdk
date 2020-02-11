@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-06 20:29:32
+ * @Last Modified time: 2020-02-11 19:27:04
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -83,6 +83,8 @@ DC.Polygon = class extends Overlay {
     this._positions = positions.map(item => {
       if (Array.isArray(item)) {
         return DC.Position.fromCoordArray(item)
+      } else if (item instanceof DC.Position) {
+        return item
       } else {
         return DC.Position.fromCoordString(item)
       }

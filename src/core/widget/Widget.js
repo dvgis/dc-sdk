@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 18:53:59
+ * @Last Modified time: 2020-02-11 22:35:03
  */
 import Cesium from '@/namespace'
 
@@ -18,7 +18,9 @@ class Widget {
 
   set enable(enable) {
     this._enable = enable
-    this._state = this._enable ? DC.WidgetState.ENABLED : DC.WidgetState.DISABLED
+    this._state = this._enable
+      ? DC.WidgetState.ENABLED
+      : DC.WidgetState.DISABLED
   }
 
   get state() {
@@ -48,7 +50,10 @@ class Widget {
       let scene = this._viewer.scene
       scene.postRender.addEventListener(() => {
         if (self._position && self._enable && self._updateWindowCoord) {
-          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(scene, self._position)
+          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+            scene,
+            self._position
+          )
           self._updateWindowCoord(windowCoord)
         }
       })

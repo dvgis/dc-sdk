@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 11:15:30
+ * @Last Modified time: 2020-02-11 19:05:42
  */
 import Cesium from '@/namespace'
 import LayerEvent from '../event/LayerEvent'
@@ -74,14 +74,14 @@ class Layer {
 
   _addCallback(viewer) {
     this._viewer = viewer
-    if (this._delegate && this._delegate instanceof Cesium.CustomDataSource) {
-      this._viewer.delegate.dataSources.add(this._delegate)
-      this._state = DC.LayerState.ADDED
-    } else if (
+    if (
       this._delegate &&
       this._delegate instanceof Cesium.PrimitiveCollection
     ) {
       this._viewer.delegate.scene.primitives.add(this._delegate)
+      this._state = DC.LayerState.ADDED
+    } else if (this._delegate) {
+      this._viewer.delegate.dataSources.add(this._delegate)
       this._state = DC.LayerState.ADDED
     }
   }
@@ -153,6 +153,14 @@ class Layer {
   removeOverlay(overlay) {
     this._removeOverlayCallback(overlay)
     return this
+  }
+
+  /**
+   *
+   * @param {*} id
+   */
+  getOverlay(id) {
+    return this._cache[id] || undefined
   }
 
   getOverlayByAttr(atrrName, attrVal) {

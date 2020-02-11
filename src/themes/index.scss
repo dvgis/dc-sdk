@@ -9,3 +9,12 @@
   overflow: hidden;
   display: block;
 }
+
+.dc-attribution {
+  a {
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

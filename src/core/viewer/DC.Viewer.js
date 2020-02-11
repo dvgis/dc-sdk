@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 16:21:27
+ * @Last Modified time: 2020-02-11 23:04:07
  */
 
 import Cesium from '@/namespace'
@@ -13,6 +13,8 @@ import ViewerEvent from '../event/ViewerEvent'
 import Popup from '../widget/Popup'
 import ContextMenu from '../widget/ContextMenu'
 import Tooltip from '../widget/Tooltip'
+import Attribution from '../widget/Attribution'
+import MapSwitch from '../widget/MapSwitch'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -62,9 +64,12 @@ DC.Viewer = class {
     this._popup = new Popup()
     this._contextMenu = new ContextMenu()
     this._tooltip = new Tooltip()
+    this._mapSwitch = new MapSwitch()
     this.use(this._popup)
       .use(this._contextMenu)
       .use(this._tooltip)
+      .use(this._mapSwitch)
+      .use(new Attribution())
   }
 
   get delegate() {
@@ -168,26 +173,25 @@ DC.Viewer = class {
    * The baselayer can be a single or an array,
    * and when the baselayer is an array, the baselayer will be loaded together
    */
-  addBaseLayer(baseLayers) {
+  addBaseLayer(baseLayers, options = {}) {
     if (!baseLayers) {
       return this
     }
     if (!Array.isArray(baseLayers)) {
       baseLayers = [baseLayers]
     }
-    baseLayers.forEach(item => {
-      this._baseLayerPicker.imageryProviderViewModels.push(
-        new Cesium.ProviderViewModel({
-          name: '地图',
-          creationFunction: () => {
-            return item
-          }
-        })
-      )
-    })
+    this._baseLayerPicker.imageryProviderViewModels.push(
+      new Cesium.ProviderViewModel({
+        name: options.name || '地图',
+        creationFunction: () => {
+          return baseLayers
+        }
+      })
+    )
     if (!this._baseLayerPicker.selectedImagery) {
       this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
     }
+    this._mapSwitch.addMap(options)
     return this
   }
 
