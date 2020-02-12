@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:35:51
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 23:04:08
+ * @Last Modified time: 2020-02-13 00:53:36
  */
 import Cesium from '@/namespace'
 
@@ -17,7 +17,9 @@ DC.SceneMode = Cesium.SceneMode
 DC.CallbackProperty = Cesium.CallbackProperty
 DC.JulianDate = Cesium.JulianDate
 DC.Math = Cesium.Math
+DC.ClassificationType = Cesium.ClassificationType
 
 DC.PolylineDashMaterialProperty = Cesium.PolylineDashMaterialProperty
 DC.PolylineGlowMaterialProperty = Cesium.PolylineGlowMaterialProperty
 DC.PolylineOutlineMaterialProperty = Cesium.PolylineOutlineMaterialProperty
+DC.PolylineArrowMaterialProperty = Cesium.PolylineArrowMaterialProperty

@@ -2,11 +2,13 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 15:26:08
+ * @Last Modified time: 2020-02-13 00:45:23
  */
 ;(function() {
   let namespace = {}
+
   let initialized = false
+
   let DC = {
     Http: undefined,
     Version: '1.0.0',
@@ -14,10 +16,9 @@
   }
 
   delete window.DC
-
   window.DC = DC
 
-  function requireCesium() {
+  let requireCesium = () => {
     return new Promise((resolve, reject) => {
       let Cesium = require('cesium/Cesium')
       namespace['Cesium'] = Cesium
@@ -26,23 +27,31 @@
   }
 
   /**
+   *
+   */
+  DC.noConflict = (newVal = 'DC') => {
+    delete window[newVal]
+    window[newVal] = window.DC
+  }
+
+  /**
    *  namespace
    */
-  DC.getNamespace = function() {
+  DC.getNamespace = () => {
     return namespace
   }
 
   /**
    *  start
    */
-  DC.init = function(callback) {
+  DC.init = callback => {
     DC.ready(callback)
   }
 
   /**
    * start
    */
-  DC.ready = function(callback) {
+  DC.ready = callback => {
     try {
       if (!initialized) {
         requireCesium().then(() => {
