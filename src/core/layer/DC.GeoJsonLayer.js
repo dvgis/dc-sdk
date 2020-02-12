@@ -2,13 +2,16 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 18:59:58
+ * @Last Modified time: 2020-02-12 22:04:26
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
 
 DC.GeoJsonLayer = class extends Layer {
   constructor(id, url) {
+    if (!url) {
+      throw new Error('the url is empty')
+    }
     super(id)
     this._delegate = Cesium.GeoJsonDataSource.load(url)
     this._state = DC.LayerState.INITIALIZED

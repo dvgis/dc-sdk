@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 21:00:59
+ * @Last Modified time: 2020-02-12 23:59:39
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -14,7 +14,7 @@ DC.Circle = class extends Overlay {
     }
     super()
     this._center = center
-    this._redius = redius
+    this._radius = redius
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.CIRCLE
@@ -29,7 +29,7 @@ DC.Circle = class extends Overlay {
   }
 
   set radius(radius) {
-    this._redius = radius
+    this._radius = radius
   }
 
   get radius() {
