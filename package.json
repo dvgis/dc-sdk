@@ -15,7 +15,7 @@
     "publish:plugins": "yarn run clean:plugins && webpack --config webpack.plugins.conf --mode production --env.production",
     "clean": "rimraf dist/",
     "clean:core": "rimraf dist/dc-sdk/resources dist/dc-sdk/dc.*.js dist/dc-sdk/dc.*.css",
-    "clean:plugins": "rimraf dist/dc-sdk/pulgins"
+    "clean:plugins": "rimraf dist/dc-sdk/plugins"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
