@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 15:26:08
+ * @Last Modified time: 2020-02-12 19:22:21
  */
 ;(function() {
   let namespace = {}
@@ -16,6 +16,8 @@
   delete window.DC
 
   window.DC = DC
+
+  require('../log')
 
   function requireCesium() {
     return new Promise((resolve, reject) => {
