@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:54:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-22 11:15:17
+ * @Last Modified time: 2020-02-12 16:29:16
  */
 import Cesium from '@/namespace'
 import AmapImageryProvider from './provider/AmapImageryProvider'
 import BaiduImageryProvider from './provider/BaiduImageryProvider'
 import GoogleImageryProvider from './provider/GoogleImageryProvider'
 import TdtImageryProvider from './provider/TdtImageryProvider'
-import TecentImageryProvider from './provider/TecentImageryProvider'
+import TencentImageryProvider from './provider/TencentImageryProvider'
 
 DC.ImageryLayerFactory = class {
   /**
@@ -43,8 +43,8 @@ DC.ImageryLayerFactory = class {
   /**
    * create tecent image layer
    */
-  static createTecentImageryLayer(options) {
-    return new TecentImageryProvider(options)
+  static createTencentImageryLayer(options) {
+    return new TencentImageryProvider(options)
   }
 
   /**
@@ -73,5 +73,12 @@ DC.ImageryLayerFactory = class {
    */
   static createXYZImageryLayer(options) {
     return new Cesium.UrlTemplateImageryProvider(options)
+  }
+
+  /**
+   *  create coord image layer
+   */
+  static createCoordImageryLayer(options) {
+    return new Cesium.TileCoordinatesImageryProvider(options)
   }
 }
