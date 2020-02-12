@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 18:37:36
+ * @Last Modified time: 2020-02-12 22:04:00
  */
 import Cesium from '@/namespace'
 
@@ -26,10 +26,12 @@ DC.ViewerEventType = {
 DC.LayerType = {
   VECTOR: 'vector',
   TILESET: 'tileset',
+  CLUSTER: 'cluster',
+  GEOJSON: 'geojson',
   KML: 'kml',
   CZML: 'czml',
-  GEOJSON: 'geojson',
-  CLUSTER: 'cluster'
+  HTML: 'html',
+  HEAT: 'heat'
 }
 
 DC.LayerEventType = {

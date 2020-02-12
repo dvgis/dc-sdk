@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 18:29:13
+ * @Last Modified time: 2020-02-12 21:38:00
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -14,7 +14,7 @@ DC.Circle = class extends Overlay {
     }
     super()
     this._center = center
-    this._redius = redius
+    this._radius = redius
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.CIRCLE
@@ -29,7 +29,7 @@ DC.Circle = class extends Overlay {
   }
 
   set radius(radius) {
-    this._redius = radius
+    this._radius = radius
   }
 
   get radius() {
@@ -51,11 +51,11 @@ DC.Circle = class extends Overlay {
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWSG84ToCartesian(this._position),
+        DC.T.transformWSG84ToCartesian(this._center),
         new Cesium.HeadingPitchRoll(
-          Cesium.Math.toRadians(this._position.heading),
-          Cesium.Math.toRadians(this._position.pitch),
-          Cesium.Math.toRadians(this._position.roll)
+          Cesium.Math.toRadians(this._center.heading),
+          Cesium.Math.toRadians(this._center.pitch),
+          Cesium.Math.toRadians(this._center.roll)
         )
       )
     })
