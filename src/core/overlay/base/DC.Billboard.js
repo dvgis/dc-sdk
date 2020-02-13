@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-10 12:41:11
+ * @Last Modified time: 2020-02-13 17:19:33
  */
 
 import Cesium from '@/namespace'
@@ -14,7 +14,6 @@ DC.Billboard = class extends Overlay {
       throw new Error('the position invalid')
     }
     super()
-
     this._position = position
     this._icon = icon
     this._size = [32, 32]

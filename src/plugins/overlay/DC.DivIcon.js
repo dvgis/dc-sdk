@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 23:57:00
+ * @Last Modified time: 2020-02-13 16:28:20
  */
-import Cesium from '@/namespace'
+
 import Overlay from '../../core/overlay/Overlay'
 
 DC.DivIcon = class extends Overlay {

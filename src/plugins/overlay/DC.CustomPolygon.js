@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-06 13:11:58
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 21:43:49
+ * @Last Modified time: 2020-02-13 15:42:10
  */
 import Cesium from '@/namespace'
 import '../../core/overlay/base/DC.Polygon'
@@ -82,51 +82,17 @@ DC.CustomPolygon = class extends DC.Polygon {
    * @param {*} extrudedHeight
    * @param {*} duration
    */
-  setExtrudedHeight(extrudedHeight, duration) {
+  setExtrudedHeight(extrudedHeight, duration = 0) {
     if (this._delegate.polygon) {
-      let now = Cesium.JulianDate.now()
-      let oriValue = this._delegate.polygon.extrudedHeight
-        ? this._delegate.polygon.extrudedHeight.getValue(now)
-        : 0
-      let rate = 0
-      let stopTime = now
-      if (duration) {
-        rate = (extrudedHeight - oriValue) / duration
-        stopTime = DC.JulianDate.addSeconds(
-          now,
-          duration,
-          new Cesium.JulianDate()
-        )
-      }
       this._delegate.polygon.extrudedHeight = new Cesium.CallbackProperty(
         time => {
-          let result = 0
-          if (Cesium.JulianDate.greaterThan(stopTime, time)) {
-            result =
-              oriValue +
-              (duration - Cesium.JulianDate.secondsDifference(stopTime, time)) *
-                rate
-          } else {
-            result = extrudedHeight
-          }
-          return result
+          return extrudedHeight
         }
       )
       if (this._topOutline && this._topOutline.show) {
         this._topOutline.polyline.positions = new Cesium.CallbackProperty(
           time => {
-            let result = []
-            if (Cesium.JulianDate.greaterThan(stopTime, time)) {
-              result = this._computePolylinePositions(
-                oriValue +
-                  (duration -
-                    Cesium.JulianDate.secondsDifference(stopTime, time)) *
-                    rate
-              )
-            } else {
-              result = this._computePolylinePositions(extrudedHeight)
-            }
-            return result
+            return this._computePolylinePositions(extrudedHeight)
           }
         )
       }

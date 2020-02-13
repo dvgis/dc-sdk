@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 23:59:29
+ * @Last Modified time: 2020-02-13 20:33:06
  */
 import Cesium from '@/namespace'
 
@@ -31,7 +31,8 @@ DC.LayerType = {
   KML: 'kml',
   CZML: 'czml',
   HTML: 'html',
-  HEAT: 'heat'
+  HEAT: 'heat',
+  MAPV: 'mapv'
 }
 
 DC.LayerEventType = {
