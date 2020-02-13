@@ -29,6 +29,7 @@
       bottom: 2px;
       user-select: none;
       padding: 1px 3px;
+      pointer-events: none;
     }
     &.active {
       span {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 23:04:07
+ * @Last Modified time: 2020-02-12 01:11:13
  */
 
 import Cesium from '@/namespace'
@@ -176,9 +176,6 @@ DC.Viewer = class {
   addBaseLayer(baseLayers, options = {}) {
     if (!baseLayers) {
       return this
-    }
-    if (!Array.isArray(baseLayers)) {
-      baseLayers = [baseLayers]
     }
     this._baseLayerPicker.imageryProviderViewModels.push(
       new Cesium.ProviderViewModel({

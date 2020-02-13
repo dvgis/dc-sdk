@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 21:38:00
+ * @Last Modified time: 2020-02-12 23:59:39
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'

@@ -77,7 +77,8 @@ DC.Point = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.point && DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
+    this._delegate.point &&
+      DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
     return this
   }
 }

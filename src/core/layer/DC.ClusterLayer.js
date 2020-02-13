@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-10 10:05:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 17:53:26
+ * @Last Modified time: 2020-02-12 00:44:12
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -33,7 +33,7 @@ DC.ClusterLayer = class extends Layer {
       this._clusterEventHandler,
       this
     )
-    this._cicleCache = {}
+    this._circleCache = {}
     this._delegate.clustering.pixelRange = this._options.pixelRange
     this._state = DC.LayerState.INITIALIZED
     this.type = DC.LayerType.CLUSTER
@@ -42,7 +42,7 @@ DC.ClusterLayer = class extends Layer {
   _drawCircle(color) {
     let key = color.toCssColorString()
     let size = this._options.size
-    if (!this._cicleCache[key]) {
+    if (!this._circleCache[key]) {
       let canvas = document.createElement('canvas')
       canvas.width = size
       canvas.height = size
@@ -60,9 +60,9 @@ DC.ClusterLayer = class extends Layer {
       context2D.fill()
       context2D.closePath()
       context2D.restore()
-      this._cicleCache[key] = canvas.toDataURL()
+      this._circleCache[key] = canvas.toDataURL()
     }
-    return this._cicleCache[key]
+    return this._circleCache[key]
   }
 
   _clusterEventHandler(clusteredEntities, cluster) {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 16:06:14
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 16:15:25
+ * @Last Modified time: 2020-02-12 02:16:16
  */
 
 import Cesium from '@/namespace'
@@ -22,6 +22,9 @@ class GoogleImageryProvider extends Cesium.UrlTemplateImageryProvider {
         : options.style === 'ter'
         ? TER_URL
         : ELEC_URL
+    if (!options.subdomains) {
+      options['subdomains'] = ['1', '2', '3', '4', '5']
+    }
     super(options)
   }
 }
