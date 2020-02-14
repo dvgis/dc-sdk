@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './AttributeCompression-87682214', './GeometryPipeline-5fbc4143', './EncodedCartesian3-8b2b90d0', './IndexDatatype-3de60176', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './VertexFormat-fbb91dc7', './arrayRemoveDuplicates-dd708d81', './BoundingRectangle-b72810bd', './EllipsoidTangentPlane-d5dafbca', './EllipsoidRhumbLine-c6cdbfd3', './PolygonPipeline-c1943379', './PolylineVolumeGeometryLibrary-30e69a49', './EllipsoidGeodesic-53e988a6', './PolylinePipeline-22d74cb8'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, BoundingRectangle, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, PolylineVolumeGeometryLibrary, EllipsoidGeodesic, PolylinePipeline) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './AttributeCompression-3a5fff57', './GeometryPipeline-29d12af3', './EncodedCartesian3-e0dcfcb4', './IndexDatatype-7c4ae249', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './VertexFormat-c83968d5', './arrayRemoveDuplicates-7554b927', './BoundingRectangle-088307ba', './EllipsoidTangentPlane-54c911ea', './EllipsoidRhumbLine-c7012b36', './PolygonPipeline-e4f8240b', './PolylineVolumeGeometryLibrary-f9ee9c33', './EllipsoidGeodesic-fed93bc6', './PolylinePipeline-61420186'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, BoundingRectangle, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, PolylineVolumeGeometryLibrary, EllipsoidGeodesic, PolylinePipeline) { 'use strict';
 
     var warnings = {};
 
@@ -27,14 +27,14 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         function oneTimeWarning(identifier, message) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(identifier)) {
+            if (!when.defined(identifier)) {
                 throw new Check.DeveloperError('identifier is required.');
             }
             //>>includeEnd('debug');
 
-            if (!defined.defined(warnings[identifier])) {
+            if (!when.defined(warnings[identifier])) {
                 warnings[identifier] = true;
-                console.warn(defaultValue.defaultValue(message, identifier));
+                console.warn(when.defaultValue(message, identifier));
             }
         }
 
@@ -220,25 +220,25 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * });
          */
         function PolylineVolumeGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var positions = options.polylinePositions;
             var shape = options.shapePositions;
 
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(positions)) {
+            if (!when.defined(positions)) {
                 throw new Check.DeveloperError('options.polylinePositions is required.');
             }
-            if (!defined.defined(shape)) {
+            if (!when.defined(shape)) {
                 throw new Check.DeveloperError('options.shapePositions is required.');
             }
             //>>includeEnd('debug');
 
             this._positions = positions;
             this._shape = shape;
-            this._ellipsoid = Cartesian2.Ellipsoid.clone(defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
-            this._cornerType = defaultValue.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
-            this._vertexFormat = VertexFormat.VertexFormat.clone(defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT));
-            this._granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            this._ellipsoid = Cartesian2.Ellipsoid.clone(when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
+            this._cornerType = when.defaultValue(options.cornerType, PolylineVolumeGeometryLibrary.CornerType.ROUNDED);
+            this._vertexFormat = VertexFormat.VertexFormat.clone(when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT));
+            this._granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
             this._workerName = 'createPolylineVolumeGeometry';
 
             var numComponents = 1 + positions.length * Cartesian2.Cartesian3.packedLength;
@@ -262,15 +262,15 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         PolylineVolumeGeometry.pack = function(value, array, startingIndex) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(value)) {
+            if (!when.defined(value)) {
                 throw new Check.DeveloperError('value is required');
             }
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -323,12 +323,12 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         PolylineVolumeGeometry.unpack = function(array, startingIndex, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -355,7 +355,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var cornerType = array[startingIndex++];
             var granularity = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.polylinePositions = positions;
                 scratchOptions.shapePositions = shape;
                 scratchOptions.cornerType = cornerType;
@@ -401,7 +401,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createPolylineVolumeGeometry(polylineVolumeGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 polylineVolumeGeometry = PolylineVolumeGeometry.unpack(polylineVolumeGeometry, offset);
             }
             polylineVolumeGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(polylineVolumeGeometry._ellipsoid);

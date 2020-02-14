@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-02186f8d', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-4163fce2', './when-1faa3867', './EncodedCartesian3-323e61aa', './IntersectionTests-61ae5e02', './Plane-eeb8d7d9', './WebMercatorProjection-2a43d110', './arrayRemoveDuplicates-f4096661', './ArcType-e0f1982f', './EllipsoidRhumbLine-1d34a7ab', './EllipsoidGeodesic-1758a5f7'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, EncodedCartesian3, IntersectionTests, Plane, WebMercatorProjection, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic) { 'use strict';
+define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './ComponentDatatype-9fd090e4', './GeometryAttribute-b3d6422f', './EncodedCartesian3-67d5d816', './IntersectionTests-e4e803b1', './Plane-b44b7f20', './WebMercatorProjection-346eec3e', './arrayRemoveDuplicates-aa017891', './ArcType-318ba758', './EllipsoidRhumbLine-5aa5f0b7', './EllipsoidGeodesic-e61afcb0'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, EncodedCartesian3, IntersectionTests, Plane, WebMercatorProjection, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic) { 'use strict';
 
     /**
          * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -40,13 +40,13 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * the tile tree.
          */
         function GeographicTilingScheme(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
-            this._ellipsoid = defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
-            this._rectangle = defaultValue.defaultValue(options.rectangle, Cartesian2.Rectangle.MAX_VALUE);
+            this._ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            this._rectangle = when.defaultValue(options.rectangle, Cartesian2.Rectangle.MAX_VALUE);
             this._projection = new Transforms.GeographicProjection(this._ellipsoid);
-            this._numberOfLevelZeroTilesX = defaultValue.defaultValue(options.numberOfLevelZeroTilesX, 2);
-            this._numberOfLevelZeroTilesY = defaultValue.defaultValue(options.numberOfLevelZeroTilesY, 1);
+            this._numberOfLevelZeroTilesX = when.defaultValue(options.numberOfLevelZeroTilesX, 2);
+            this._numberOfLevelZeroTilesY = when.defaultValue(options.numberOfLevelZeroTilesY, 1);
         }
 
         defineProperties.defineProperties(GeographicTilingScheme.prototype, {
@@ -124,7 +124,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var east = _Math.CesiumMath.toDegrees(rectangle.east);
             var north = _Math.CesiumMath.toDegrees(rectangle.north);
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 return new Cartesian2.Rectangle(west, south, east, north);
             }
 
@@ -181,7 +181,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var north = rectangle.north - y * yTileHeight;
             var south = rectangle.north - (y + 1) * yTileHeight;
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = new Cartesian2.Rectangle(west, south, east, north);
             }
 
@@ -231,7 +231,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 yTileCoordinate = yTiles - 1;
             }
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 return new Cartesian2.Cartesian2(xTileCoordinate, yTileCoordinate);
             }
 
@@ -263,7 +263,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          */
         ApproximateTerrainHeights.initialize = function() {
             var initPromise = ApproximateTerrainHeights._initPromise;
-            if (defined.defined(initPromise)) {
+            if (when.defined(initPromise)) {
                 return initPromise;
             }
 
@@ -285,21 +285,21 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         ApproximateTerrainHeights.getMinimumMaximumHeights = function(rectangle, ellipsoid) {
             //>>includeStart('debug', pragmas.debug);
             Check.Check.defined('rectangle', rectangle);
-            if (!defined.defined(ApproximateTerrainHeights._terrainHeights)) {
+            if (!when.defined(ApproximateTerrainHeights._terrainHeights)) {
                 throw new Check.DeveloperError('You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function');
             }
             //>>includeEnd('debug');
-            ellipsoid = defaultValue.defaultValue(ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            ellipsoid = when.defaultValue(ellipsoid, Cartesian2.Ellipsoid.WGS84);
 
             var xyLevel = getTileXYLevel(rectangle);
 
             // Get the terrain min/max for that tile
             var minTerrainHeight = ApproximateTerrainHeights._defaultMinTerrainHeight;
             var maxTerrainHeight = ApproximateTerrainHeights._defaultMaxTerrainHeight;
-            if (defined.defined(xyLevel)) {
+            if (when.defined(xyLevel)) {
                 var key = xyLevel.level + '-' + xyLevel.x + '-' + xyLevel.y;
                 var heights = ApproximateTerrainHeights._terrainHeights[key];
-                if (defined.defined(heights)) {
+                if (when.defined(heights)) {
                     minTerrainHeight = heights[0];
                     maxTerrainHeight = heights[1];
                 }
@@ -312,7 +312,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
                 Cartesian2.Cartesian3.midpoint(scratchDiagonalCartesianSW, scratchDiagonalCartesianNE, scratchCenterCartesian);
                 var surfacePosition = ellipsoid.scaleToGeodeticSurface(scratchCenterCartesian, scratchSurfaceCartesian);
-                if (defined.defined(surfacePosition)) {
+                if (when.defined(surfacePosition)) {
                     var distance = Cartesian2.Cartesian3.distance(scratchCenterCartesian, surfacePosition);
                     minTerrainHeight = Math.min(minTerrainHeight, -distance);
                 } else {
@@ -337,20 +337,20 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         ApproximateTerrainHeights.getBoundingSphere = function(rectangle, ellipsoid) {
             //>>includeStart('debug', pragmas.debug);
             Check.Check.defined('rectangle', rectangle);
-            if (!defined.defined(ApproximateTerrainHeights._terrainHeights)) {
+            if (!when.defined(ApproximateTerrainHeights._terrainHeights)) {
                 throw new Check.DeveloperError('You must call ApproximateTerrainHeights.initialize and wait for the promise to resolve before using this function');
             }
             //>>includeEnd('debug');
-            ellipsoid = defaultValue.defaultValue(ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            ellipsoid = when.defaultValue(ellipsoid, Cartesian2.Ellipsoid.WGS84);
 
             var xyLevel = getTileXYLevel(rectangle);
 
             // Get the terrain max for that tile
             var maxTerrainHeight = ApproximateTerrainHeights._defaultMaxTerrainHeight;
-            if (defined.defined(xyLevel)) {
+            if (when.defined(xyLevel)) {
                 var key = xyLevel.level + '-' + xyLevel.x + '-' + xyLevel.y;
                 var heights = ApproximateTerrainHeights._terrainHeights[key];
-                if (defined.defined(heights)) {
+                if (when.defined(heights)) {
                     maxTerrainHeight = heights[1];
                 }
             }
@@ -421,7 +421,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
              */
             initialized: {
                 get: function() {
-                    return defined.defined(ApproximateTerrainHeights._terrainHeights);
+                    return when.defined(ApproximateTerrainHeights._terrainHeights);
                 }
             }
         });
@@ -474,14 +474,14 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * });
          */
         function GroundPolylineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var positions = options.positions;
 
             //>>includeStart('debug', pragmas.debug);
-            if ((!defined.defined(positions)) || (positions.length < 2)) {
+            if ((!when.defined(positions)) || (positions.length < 2)) {
                 throw new Check.DeveloperError('At least two positions are required.');
             }
-            if (defined.defined(options.arcType) && options.arcType !== ArcType.ArcType.GEODESIC && options.arcType !== ArcType.ArcType.RHUMB) {
+            if (when.defined(options.arcType) && options.arcType !== ArcType.ArcType.GEODESIC && options.arcType !== ArcType.ArcType.RHUMB) {
                 throw new Check.DeveloperError('Valid options for arcType are ArcType.GEODESIC and ArcType.RHUMB.');
             }
             //>>includeEnd('debug');
@@ -490,7 +490,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
              * The screen space width in pixels.
              * @type {Number}
              */
-            this.width = defaultValue.defaultValue(options.width, 1.0); // Doesn't get packed, not necessary for computing geometry.
+            this.width = when.defaultValue(options.width, 1.0); // Doesn't get packed, not necessary for computing geometry.
 
             this._positions = positions;
 
@@ -500,7 +500,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
              * @type {Boolean}
              * @default 9999.0
              */
-            this.granularity = defaultValue.defaultValue(options.granularity, 9999.0);
+            this.granularity = when.defaultValue(options.granularity, 9999.0);
 
             /**
              * Whether during geometry creation a line segment will be added between the last and first line positions to make this Polyline a loop.
@@ -508,14 +508,14 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
              * @type {Boolean}
              * @default false
              */
-            this.loop = defaultValue.defaultValue(options.loop, false);
+            this.loop = when.defaultValue(options.loop, false);
 
             /**
              * The type of path the polyline must follow. Valid options are {@link ArcType.GEODESIC} and {@link ArcType.RHUMB}.
              * @type {ArcType}
              * @default ArcType.GEODESIC
              */
-            this.arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
+            this.arcType = when.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
 
             this._ellipsoid = Cartesian2.Ellipsoid.WGS84;
 
@@ -645,7 +645,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            var index = defaultValue.defaultValue(startingIndex, 0);
+            var index = when.defaultValue(startingIndex, 0);
 
             var positions = value._positions;
             var positionsLength = positions.length;
@@ -683,7 +683,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            var index = defaultValue.defaultValue(startingIndex, 0);
+            var index = when.defaultValue(startingIndex, 0);
             var positionsLength = array[index++];
             var positions = new Array(positionsLength);
 
@@ -702,7 +702,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var projectionIndex = array[index++];
             var scene3DOnly = (array[index++] === 1.0);
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = new GroundPolylineGeometry({
                     positions : positions
                 });
@@ -824,7 +824,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 p0 = positions[i];
                 p1 = positions[i + 1];
                 intersection = IntersectionTests.IntersectionTests.lineSegmentPlane(p0, p1, XZ_PLANE, intersectionScratch);
-                if (defined.defined(intersection) &&
+                if (when.defined(intersection) &&
                     !Cartesian2.Cartesian3.equalsEpsilon(intersection, p0, _Math.CesiumMath.EPSILON7) &&
                     !Cartesian2.Cartesian3.equalsEpsilon(intersection, p1, _Math.CesiumMath.EPSILON7)) {
                     if (groundPolylineGeometry.arcType === ArcType.ArcType.GEODESIC) {
@@ -836,7 +836,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                         rhumbLine.setEndPoints(c0, c1);
                         intersectionCartographic = rhumbLine.findIntersectionWithLongitude(intersectionLongitude, cartographicIntersectionScratch);
                         intersection = ellipsoid.cartographicToCartesian(intersectionCartographic, intersectionScratch);
-                        if (defined.defined(intersection) &&
+                        if (when.defined(intersection) &&
                             !Cartesian2.Cartesian3.equalsEpsilon(intersection, p0, _Math.CesiumMath.EPSILON7) &&
                             !Cartesian2.Cartesian3.equalsEpsilon(intersection, p1, _Math.CesiumMath.EPSILON7)) {
                             splitPositions.push(Cartesian2.Cartesian3.clone(intersection));
@@ -850,7 +850,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 p0 = positions[positionsLength - 1];
                 p1 = positions[0];
                 intersection = IntersectionTests.IntersectionTests.lineSegmentPlane(p0, p1, XZ_PLANE, intersectionScratch);
-                if (defined.defined(intersection) &&
+                if (when.defined(intersection) &&
                     !Cartesian2.Cartesian3.equalsEpsilon(intersection, p0, _Math.CesiumMath.EPSILON7) &&
                     !Cartesian2.Cartesian3.equalsEpsilon(intersection, p1, _Math.CesiumMath.EPSILON7)) {
                     if (groundPolylineGeometry.arcType === ArcType.ArcType.GEODESIC) {
@@ -862,7 +862,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                         rhumbLine.setEndPoints(c0, c1);
                         intersectionCartographic = rhumbLine.findIntersectionWithLongitude(intersectionLongitude, cartographicIntersectionScratch);
                         intersection = ellipsoid.cartographicToCartesian(intersectionCartographic, intersectionScratch);
-                        if (defined.defined(intersection) &&
+                        if (when.defined(intersection) &&
                             !Cartesian2.Cartesian3.equalsEpsilon(intersection, p0, _Math.CesiumMath.EPSILON7) &&
                             !Cartesian2.Cartesian3.equalsEpsilon(intersection, p1, _Math.CesiumMath.EPSILON7)) {
                             splitPositions.push(Cartesian2.Cartesian3.clone(intersection));
@@ -1551,7 +1551,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
     function createGroundPolylineGeometry(groundPolylineGeometry, offset) {
             return ApproximateTerrainHeights.initialize()
                 .then(function() {
-                    if (defined.defined(offset)) {
+                    if (when.defined(offset)) {
                         groundPolylineGeometry = GroundPolylineGeometry.unpack(groundPolylineGeometry, offset);
                     }
                     return GroundPolylineGeometry.createGeometry(groundPolylineGeometry);

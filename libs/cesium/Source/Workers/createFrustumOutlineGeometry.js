@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './Plane-c601d1ec', './VertexFormat-fbb91dc7', './FrustumGeometry-e599825e'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, Plane, VertexFormat, FrustumGeometry) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './Plane-f6fa0f8f', './VertexFormat-c83968d5', './FrustumGeometry-2d888a7e'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, Plane, VertexFormat, FrustumGeometry) { 'use strict';
 
     var PERSPECTIVE = 0;
         var ORTHOGRAPHIC = 1;
@@ -30,7 +30,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             // This is private because it is used by DebugCameraPrimitive to draw a multi-frustum by
             // creating multiple FrustumOutlineGeometrys. This way the near plane of one frustum doesn't overlap
             // the far plane of another.
-            var drawNearPlane = defaultValue.defaultValue(options._drawNearPlane, true);
+            var drawNearPlane = when.defaultValue(options._drawNearPlane, true);
 
             var frustumType;
             var frustumPackedLength;
@@ -71,7 +71,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var frustumType = value._frustumType;
             var frustum = value._frustum;
@@ -112,7 +112,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var frustumType = array[startingIndex++];
 
@@ -131,7 +131,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             startingIndex += Transforms.Quaternion.packedLength;
             var drawNearPlane = array[startingIndex] === 1.0;
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 return new FrustumOutlineGeometry({
                     frustum : frustum,
                     origin : origin,
@@ -221,7 +221,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createFrustumOutlineGeometry(frustumGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 frustumGeometry = FrustumOutlineGeometry.unpack(frustumGeometry, offset);
             }
             return FrustumOutlineGeometry.createGeometry(frustumGeometry);

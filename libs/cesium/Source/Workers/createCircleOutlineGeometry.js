@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './IndexDatatype-3de60176', './GeometryOffsetAttribute-cb30cd97', './EllipseGeometryLibrary-c3a822fb', './EllipseOutlineGeometry-ac58dafa'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipseGeometryLibrary, EllipseOutlineGeometry) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './IndexDatatype-7c4ae249', './GeometryOffsetAttribute-b8954087', './EllipseGeometryLibrary-52f180e5', './EllipseOutlineGeometry-4335fcbc'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipseGeometryLibrary, EllipseOutlineGeometry) { 'use strict';
 
     /**
          * A description of the outline of a circle on the ellipsoid.
@@ -31,7 +31,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * var geometry = Cesium.CircleOutlineGeometry.createGeometry(circle);
          */
         function CircleOutlineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var radius = options.radius;
 
             //>>includeStart('debug', pragmas.debug);
@@ -108,7 +108,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             scratchOptions.granularity = ellipseGeometry._granularity;
             scratchOptions.numberOfVerticalLines = ellipseGeometry._numberOfVerticalLines;
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.radius = ellipseGeometry._semiMajorAxis;
                 return new CircleOutlineGeometry(scratchOptions);
             }
@@ -130,7 +130,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createCircleOutlineGeometry(circleGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 circleGeometry = CircleOutlineGeometry.unpack(circleGeometry, offset);
             }
             circleGeometry._ellipseGeometry._center = Cartesian2.Cartesian3.clone(circleGeometry._ellipseGeometry._center);

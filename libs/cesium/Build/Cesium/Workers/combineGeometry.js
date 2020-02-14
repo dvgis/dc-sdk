@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,4 +20,4 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(["./defined-2a4f2d00","./Check-e5651467","./freezeObject-a51e076f","./defaultValue-29c9b1af","./Math-7782f09e","./Cartesian2-ba70b51f","./defineProperties-c817531e","./Transforms-7d72c08c","./RuntimeError-51c34ab4","./WebGLConstants-90dbfe2f","./ComponentDatatype-418b1c61","./GeometryAttribute-75811f09","./when-1faa3867","./GeometryAttributes-f8548d3f","./AttributeCompression-5601f533","./GeometryPipeline-6fb2c91a","./EncodedCartesian3-4813be74","./IndexDatatype-2bcfc06b","./IntersectionTests-59cef209","./Plane-b1ca737b","./PrimitivePipeline-28a5eea5","./WebMercatorProjection-1ecca5ba","./createTaskProcessorWorker"],function(e,t,i,r,a,n,c,o,f,b,s,m,P,u,d,p,l,y,C,G,k,v,h){"use strict";return h(function(e,t){var i=k.PrimitivePipeline.unpackCombineGeometryParameters(e),r=k.PrimitivePipeline.combineGeometry(i);return k.PrimitivePipeline.packCombineGeometryResults(r,t)})});
+define(["./when-0488ac89","./Check-78ca6843","./Math-8a4c9da1","./Cartesian2-cc1e6450","./defineProperties-c6a70625","./Transforms-fa4f10bc","./RuntimeError-4d6e0952","./WebGLConstants-66e14a3b","./ComponentDatatype-9252f28f","./GeometryAttribute-3345e440","./GeometryAttributes-3227db5b","./AttributeCompression-fe1560e2","./GeometryPipeline-587f449d","./EncodedCartesian3-97ac8d01","./IndexDatatype-8575c917","./IntersectionTests-12255a09","./Plane-466db411","./PrimitivePipeline-0d9185c5","./WebMercatorProjection-c0de4fbc","./createTaskProcessorWorker"],function(e,t,i,r,n,a,o,c,s,m,b,P,d,f,p,u,y,C,l,G){"use strict";return G(function(e,t){var i=C.PrimitivePipeline.unpackCombineGeometryParameters(e),r=C.PrimitivePipeline.combineGeometry(i);return C.PrimitivePipeline.packCombineGeometryResults(r,t)})});

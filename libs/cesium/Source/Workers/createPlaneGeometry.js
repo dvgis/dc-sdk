@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './VertexFormat-fbb91dc7'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, VertexFormat) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './VertexFormat-c83968d5'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, VertexFormat) { 'use strict';
 
     /**
          * Describes geometry representing a plane centered at the origin, with a unit width and length.
@@ -16,9 +16,9 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * });
          */
         function PlaneGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
-            var vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+            var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
 
             this._vertexFormat = vertexFormat;
             this._workerName = 'createPlaneGeometry';
@@ -45,7 +45,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             VertexFormat.VertexFormat.pack(value._vertexFormat, array, startingIndex);
 
@@ -70,11 +70,11 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var vertexFormat = VertexFormat.VertexFormat.unpack(array, startingIndex, scratchVertexFormat);
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 return new PlaneGeometry(scratchOptions);
             }
 
@@ -236,7 +236,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createPlaneGeometry(planeGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 planeGeometry = PlaneGeometry.unpack(planeGeometry, offset);
             }
             return PlaneGeometry.createGeometry(planeGeometry);

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-13 20:49:19
+ * @Last Modified time: 2020-02-14 00:51:07
  */
 ;(function() {
   let namespace = {}
@@ -59,9 +59,7 @@
         requireCesium().then(() => {
           require('./DC.Loader')
           require('../thirdpart')
-          namespace['mapv'] = window.mapv
           delete window.Cesium //删除winow下的Cesium
-          delete window.mapv
           callback && callback()
         })
         initialized = true

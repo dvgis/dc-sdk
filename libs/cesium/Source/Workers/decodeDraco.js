@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './when-ee12a2cb', './IndexDatatype-3de60176', './createTaskProcessorWorker'], function (defined, Check, freezeObject, defaultValue, _Math, RuntimeError, WebGLConstants, ComponentDatatype, when, IndexDatatype, createTaskProcessorWorker) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './IndexDatatype-7c4ae249', './createTaskProcessorWorker'], function (when, Check, _Math, RuntimeError, WebGLConstants, ComponentDatatype, IndexDatatype, createTaskProcessorWorker) { 'use strict';
 
     /* global require */
 
@@ -133,7 +133,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var vertexArrayLength = numPoints * numComponents;
             var vertexArray;
-            if (defined.defined(quantization)) {
+            if (when.defined(quantization)) {
                 vertexArray = decodeQuantizedDracoTypedArray(dracoGeometry, dracoDecoder, dracoAttribute, quantization, vertexArrayLength);
             } else {
                 vertexArray = decodeDracoTypedArray(dracoGeometry, dracoDecoder, dracoAttribute, vertexArrayLength);
@@ -246,7 +246,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         }
 
         function decode(parameters) {
-            if (defined.defined(parameters.primitive)) {
+            if (when.defined(parameters.primitive)) {
                 return decodePrimitive(parameters);
             }
             return decodePointCloud(parameters);
@@ -263,11 +263,11 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             // Expect the first message to be to load a web assembly module
             var wasmConfig = data.webAssemblyConfig;
-            if (defined.defined(wasmConfig)) {
+            if (when.defined(wasmConfig)) {
                 // Require and compile WebAssembly module, or use fallback if not supported
                 return require([wasmConfig.modulePath], function(dracoModule) {
-                    if (defined.defined(wasmConfig.wasmBinaryFile)) {
-                        if (!defined.defined(dracoModule)) {
+                    if (when.defined(wasmConfig.wasmBinaryFile)) {
+                        if (!when.defined(dracoModule)) {
                             dracoModule = self.DracoDecoderModule;
                         }
 

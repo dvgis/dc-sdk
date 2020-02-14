@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './when-ee12a2cb', './AttributeCompression-87682214', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './WebMercatorProjection-f2dc467d', './createTaskProcessorWorker', './EllipsoidTangentPlane-d5dafbca', './OrientedBoundingBox-f789932a', './TerrainEncoding-3aaf3d8b'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, when, AttributeCompression, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './AttributeCompression-3a5fff57', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './WebMercatorProjection-b2b73805', './createTaskProcessorWorker', './EllipsoidTangentPlane-54c911ea', './OrientedBoundingBox-65a45d94', './TerrainEncoding-0e4b9743'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
 
     var sizeOfUint16 = Uint16Array.BYTES_PER_ELEMENT;
         var sizeOfInt32 = Int32Array.BYTES_PER_ELEMENT;
@@ -8,7 +8,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         var sizeOfDouble = Float64Array.BYTES_PER_ELEMENT;
 
         function indexOfEpsilon(arr, elem, elemType) {
-            elemType = defaultValue.defaultValue(elemType, _Math.CesiumMath);
+            elemType = when.defaultValue(elemType, _Math.CesiumMath);
             var count = arr.length;
             for (var i = 0; i < count; ++i) {
                 if (elemType.equalsEpsilon(arr[i], elem, _Math.CesiumMath.EPSILON12)) {
@@ -42,7 +42,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 occludeePointInScaledSpace : statistics.occludeePointInScaledSpace,
                 encoding : statistics.encoding,
                 vertexCountWithoutSkirts : statistics.vertexCountWithoutSkirts,
-                skirtIndex : statistics.skirtIndex,
+                indexCountWithoutSkirts : statistics.indexCountWithoutSkirts,
                 westIndicesSouthToNorth : statistics.westIndicesSouthToNorth,
                 southIndicesEastToWest : statistics.southIndicesEastToWest,
                 eastIndicesNorthToSouth : statistics.eastIndicesNorthToSouth,
@@ -63,7 +63,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var geographicNorth;
             var rectangleWidth, rectangleHeight;
 
-            if (!defined.defined(rectangle)) {
+            if (!when.defined(rectangle)) {
                 geographicWest = _Math.CesiumMath.toRadians(nativeRectangle.west);
                 geographicSouth = _Math.CesiumMath.toRadians(nativeRectangle.south);
                 geographicEast = _Math.CesiumMath.toRadians(nativeRectangle.east);
@@ -296,7 +296,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             }
 
             var vertexCountWithoutSkirts = pointOffset;
-            var skirtIndex = indicesOffset;
+            var indexCountWithoutSkirts = indicesOffset;
 
             // Add skirt points
             var skirtOptions = {
@@ -349,7 +349,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var boundingSphere3D = Transforms.BoundingSphere.fromPoints(positions);
             var orientedBoundingBox;
-            if (defined.defined(rectangle)) {
+            if (when.defined(rectangle)) {
                 orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(rectangle, minHeight, maxHeight, ellipsoid);
             }
 
@@ -386,7 +386,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 orientedBoundingBox : orientedBoundingBox,
                 occludeePointInScaledSpace : occludeePointInScaledSpace,
                 vertexCountWithoutSkirts : vertexCountWithoutSkirts,
-                skirtIndex : skirtIndex,
+                indexCountWithoutSkirts : indexCountWithoutSkirts,
                 westIndicesSouthToNorth : westIndicesSouthToNorth,
                 southIndicesEastToWest : southIndicesEastToWest,
                 eastIndicesNorthToSouth : eastIndicesNorthToSouth,
@@ -442,7 +442,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 Cartesian2.Cartesian3.maximumByComponent(scratchCartesian, maximum, maximum);
 
                 var lastBorderPoint = skirtOptions.lastBorderPoint;
-                if (defined.defined(lastBorderPoint)) {
+                if (when.defined(lastBorderPoint)) {
                     var lastBorderIndex = lastBorderPoint.index;
                     indices.push(lastBorderIndex, currentIndex - 1, currentIndex, currentIndex, borderIndex, lastBorderIndex);
                 }

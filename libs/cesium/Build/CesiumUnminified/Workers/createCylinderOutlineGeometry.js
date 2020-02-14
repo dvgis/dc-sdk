@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-02186f8d', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-4163fce2', './when-1faa3867', './GeometryAttributes-f8548d3f', './IndexDatatype-85d10a10', './GeometryOffsetAttribute-37c3dade', './CylinderGeometryLibrary-073d027c'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, CylinderGeometryLibrary) { 'use strict';
+define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './ComponentDatatype-9fd090e4', './GeometryAttribute-b3d6422f', './GeometryAttributes-3227db5b', './IndexDatatype-0b3c1fea', './GeometryOffsetAttribute-564f9954', './CylinderGeometryLibrary-dbea5424'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, CylinderGeometryLibrary) { 'use strict';
 
     var radiusScratch = new Cartesian2.Cartesian2();
 
@@ -55,20 +55,20 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * var geometry = Cesium.CylinderOutlineGeometry.createGeometry(cylinder);
          */
         function CylinderOutlineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             var length = options.length;
             var topRadius = options.topRadius;
             var bottomRadius = options.bottomRadius;
-            var slices = defaultValue.defaultValue(options.slices, 128);
-            var numberOfVerticalLines = Math.max(defaultValue.defaultValue(options.numberOfVerticalLines, 16), 0);
+            var slices = when.defaultValue(options.slices, 128);
+            var numberOfVerticalLines = Math.max(when.defaultValue(options.numberOfVerticalLines, 16), 0);
 
             //>>includeStart('debug', pragmas.debug);
             Check.Check.typeOf.number('options.positions', length);
             Check.Check.typeOf.number('options.topRadius', topRadius);
             Check.Check.typeOf.number('options.bottomRadius', bottomRadius);
             Check.Check.typeOf.number.greaterThanOrEquals('options.slices', slices, 3);
-            if (defined.defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+            if (when.defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
                 throw new Check.DeveloperError('GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.');
             }
             //>>includeEnd('debug');
@@ -103,14 +103,14 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             array[startingIndex++] = value._length;
             array[startingIndex++] = value._topRadius;
             array[startingIndex++] = value._bottomRadius;
             array[startingIndex++] = value._slices;
             array[startingIndex++] = value._numberOfVerticalLines;
-            array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+            array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
 
             return array;
         };
@@ -137,7 +137,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var length = array[startingIndex++];
             var topRadius = array[startingIndex++];
@@ -146,7 +146,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var numberOfVerticalLines = array[startingIndex++];
             var offsetAttribute = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.length = length;
                 scratchOptions.topRadius = topRadius;
                 scratchOptions.bottomRadius = bottomRadius;
@@ -228,7 +228,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             var boundingSphere = new Transforms.BoundingSphere(Cartesian2.Cartesian3.ZERO, Cartesian2.Cartesian2.magnitude(radiusScratch));
 
-            if (defined.defined(cylinderGeometry._offsetAttribute)) {
+            if (when.defined(cylinderGeometry._offsetAttribute)) {
                 length = positions.length;
                 var applyOffset = new Uint8Array(length / 3);
                 var offsetValue = cylinderGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
@@ -250,7 +250,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createCylinderOutlineGeometry(cylinderGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 cylinderGeometry = CylinderOutlineGeometry.unpack(cylinderGeometry, offset);
             }
             return CylinderOutlineGeometry.createGeometry(cylinderGeometry);

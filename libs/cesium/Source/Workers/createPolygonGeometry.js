@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './AttributeCompression-87682214', './GeometryPipeline-5fbc4143', './EncodedCartesian3-8b2b90d0', './IndexDatatype-3de60176', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './GeometryOffsetAttribute-cb30cd97', './VertexFormat-fbb91dc7', './GeometryInstance-2aa4ff3c', './arrayRemoveDuplicates-dd708d81', './BoundingRectangle-b72810bd', './EllipsoidTangentPlane-d5dafbca', './ArcType-d521909b', './EllipsoidRhumbLine-c6cdbfd3', './PolygonPipeline-c1943379', './PolygonGeometryLibrary-8fe70054', './EllipsoidGeodesic-53e988a6'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, VertexFormat, GeometryInstance, arrayRemoveDuplicates, BoundingRectangle, EllipsoidTangentPlane, ArcType, EllipsoidRhumbLine, PolygonPipeline, PolygonGeometryLibrary, EllipsoidGeodesic) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './AttributeCompression-3a5fff57', './GeometryPipeline-29d12af3', './EncodedCartesian3-e0dcfcb4', './IndexDatatype-7c4ae249', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './GeometryOffsetAttribute-b8954087', './VertexFormat-c83968d5', './GeometryInstance-53d21683', './arrayRemoveDuplicates-7554b927', './BoundingRectangle-088307ba', './EllipsoidTangentPlane-54c911ea', './ArcType-938f261b', './EllipsoidRhumbLine-c7012b36', './PolygonPipeline-e4f8240b', './PolygonGeometryLibrary-5374f3a5', './EllipsoidGeodesic-fed93bc6'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, VertexFormat, GeometryInstance, arrayRemoveDuplicates, BoundingRectangle, EllipsoidTangentPlane, ArcType, EllipsoidRhumbLine, PolygonPipeline, PolygonGeometryLibrary, EllipsoidGeodesic) { 'use strict';
 
     var scratchCarto1 = new Cartesian2.Cartographic();
         var scratchCarto2 = new Cartesian2.Cartographic();
@@ -286,7 +286,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 }
             }
 
-            if (options.extrude && defined.defined(options.offsetAttribute)) {
+            if (options.extrude && when.defined(options.offsetAttribute)) {
                 var size = flatPositions.length / 3;
                 var offsetAttribute = new Uint8Array(size);
 
@@ -319,8 +319,8 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
         var ellipsoidGeodesic = new EllipsoidGeodesic.EllipsoidGeodesic();
         function computeRectangle(positions, ellipsoid, arcType, granularity, result) {
-            result = defaultValue.defaultValue(result, new Cartesian2.Rectangle());
-            if (!defined.defined(positions) || positions.length < 3) {
+            result = when.defaultValue(result, new Cartesian2.Rectangle());
+            if (!when.defined(positions) || positions.length < 3) {
                 result.west = 0.0;
                 result.north = 0.0;
                 result.south = 0.0;
@@ -596,23 +596,23 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             //>>includeStart('debug', pragmas.debug);
             Check.Check.typeOf.object('options', options);
             Check.Check.typeOf.object('options.polygonHierarchy', options.polygonHierarchy);
-            if (defined.defined(options.perPositionHeight) && options.perPositionHeight && defined.defined(options.height)) {
+            if (when.defined(options.perPositionHeight) && options.perPositionHeight && when.defined(options.height)) {
                 throw new Check.DeveloperError('Cannot use both options.perPositionHeight and options.height');
             }
-            if (defined.defined(options.arcType) && options.arcType !== ArcType.ArcType.GEODESIC && options.arcType !== ArcType.ArcType.RHUMB) {
+            if (when.defined(options.arcType) && options.arcType !== ArcType.ArcType.GEODESIC && options.arcType !== ArcType.ArcType.RHUMB) {
                 throw new Check.DeveloperError('Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB.');
             }
             //>>includeEnd('debug');
 
             var polygonHierarchy = options.polygonHierarchy;
-            var vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
-            var ellipsoid = defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
-            var granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
-            var stRotation = defaultValue.defaultValue(options.stRotation, 0.0);
-            var perPositionHeight = defaultValue.defaultValue(options.perPositionHeight, false);
-            var perPositionHeightExtrude = perPositionHeight && defined.defined(options.extrudedHeight);
-            var height = defaultValue.defaultValue(options.height, 0.0);
-            var extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
+            var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+            var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            var granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            var stRotation = when.defaultValue(options.stRotation, 0.0);
+            var perPositionHeight = when.defaultValue(options.perPositionHeight, false);
+            var perPositionHeightExtrude = perPositionHeight && when.defined(options.extrudedHeight);
+            var height = when.defaultValue(options.height, 0.0);
+            var extrudedHeight = when.defaultValue(options.extrudedHeight, height);
 
             if (!perPositionHeightExtrude) {
                 var h = Math.max(height, extrudedHeight);
@@ -626,15 +626,15 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             this._stRotation = stRotation;
             this._height = height;
             this._extrudedHeight = extrudedHeight;
-            this._closeTop = defaultValue.defaultValue(options.closeTop, true);
-            this._closeBottom = defaultValue.defaultValue(options.closeBottom, true);
+            this._closeTop = when.defaultValue(options.closeTop, true);
+            this._closeBottom = when.defaultValue(options.closeBottom, true);
             this._polygonHierarchy = polygonHierarchy;
             this._perPositionHeight = perPositionHeight;
             this._perPositionHeightExtrude = perPositionHeightExtrude;
-            this._shadowVolume = defaultValue.defaultValue(options.shadowVolume, false);
+            this._shadowVolume = when.defaultValue(options.shadowVolume, false);
             this._workerName = 'createPolygonGeometry';
             this._offsetAttribute = options.offsetAttribute;
-            this._arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
+            this._arcType = when.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
 
             this._rectangle = undefined;
             this._textureCoordinateRotationPoints = undefined;
@@ -680,7 +680,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * @see PolygonGeometry#createGeometry
          */
         PolygonGeometry.fromPositions = function(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             //>>includeStart('debug', pragmas.debug);
             Check.Check.defined('options.positions', options.positions);
@@ -720,7 +720,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             startingIndex = PolygonGeometryLibrary.PolygonGeometryLibrary.packPolygonHierarchy(value._polygonHierarchy, array, startingIndex);
 
@@ -739,7 +739,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             array[startingIndex++] = value._closeTop ? 1.0 : 0.0;
             array[startingIndex++] = value._closeBottom ? 1.0 : 0.0;
             array[startingIndex++] = value._shadowVolume ? 1.0 : 0.0;
-            array[startingIndex++] = defaultValue.defaultValue(value._offsetAttribute, -1);
+            array[startingIndex++] = when.defaultValue(value._offsetAttribute, -1);
             array[startingIndex++] = value._arcType;
             array[startingIndex] = value.packedLength;
 
@@ -766,7 +766,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var polygonHierarchy = PolygonGeometryLibrary.PolygonGeometryLibrary.unpackPolygonHierarchy(array, startingIndex);
             startingIndex = polygonHierarchy.startingIndex;
@@ -791,7 +791,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var arcType = array[startingIndex++];
             var packedLength = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = new PolygonGeometry(dummyOptions);
             }
 
@@ -831,8 +831,8 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.typeOf.object('options.polygonHierarchy', options.polygonHierarchy);
             //>>includeEnd('debug');
 
-            var granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
-            var arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
+            var granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            var arcType = when.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
             //>>includeStart('debug', pragmas.debug);
             if (arcType !== ArcType.ArcType.GEODESIC && arcType !== ArcType.ArcType.RHUMB) {
                 throw new Check.DeveloperError('Invalid arcType. Valid options are ArcType.GEODESIC and ArcType.RHUMB.');
@@ -840,7 +840,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             //>>includeEnd('debug');
 
             var polygonHierarchy = options.polygonHierarchy;
-            var ellipsoid = defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
 
             return computeRectangle(polygonHierarchy.positions, ellipsoid, arcType, granularity, result);
         };
@@ -950,7 +950,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                     options.geometry = geometryInstance.geometry;
                     geometryInstance.geometry = computeAttributes(options);
 
-                    if (defined.defined(polygonGeometry._offsetAttribute)) {
+                    if (when.defined(polygonGeometry._offsetAttribute)) {
                         var length = geometryInstance.geometry.attributes.position.values.length;
                         var applyOffset = new Uint8Array(length / 3);
                         var offsetValue = polygonGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
@@ -1027,7 +1027,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
              */
             rectangle : {
                 get : function() {
-                    if (!defined.defined(this._rectangle)) {
+                    if (!when.defined(this._rectangle)) {
                         var positions = this._polygonHierarchy.positions;
                         this._rectangle = computeRectangle(positions, this._ellipsoid, this._arcType, this._granularity);
                     }
@@ -1041,7 +1041,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
              */
             textureCoordinateRotationPoints : {
                 get : function() {
-                    if (!defined.defined(this._textureCoordinateRotationPoints)) {
+                    if (!when.defined(this._textureCoordinateRotationPoints)) {
                         this._textureCoordinateRotationPoints = textureCoordinateRotationPoints(this);
                     }
                     return this._textureCoordinateRotationPoints;
@@ -1050,7 +1050,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         });
 
     function createPolygonGeometry(polygonGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 polygonGeometry = PolygonGeometry.unpack(polygonGeometry, offset);
             }
             polygonGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(polygonGeometry._ellipsoid);

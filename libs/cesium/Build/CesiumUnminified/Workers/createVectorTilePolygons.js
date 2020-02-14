@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-02186f8d', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './when-1faa3867', './AttributeCompression-bb5cef3d', './IndexDatatype-85d10a10', './IntersectionTests-61ae5e02', './Plane-eeb8d7d9', './createTaskProcessorWorker', './EllipsoidTangentPlane-11d79112', './OrientedBoundingBox-64ac44f2', './Color-25d0539e'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, when, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
+define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './AttributeCompression-3fc96685', './IndexDatatype-0b3c1fea', './IntersectionTests-e4e803b1', './Plane-b44b7f20', './createTaskProcessorWorker', './EllipsoidTangentPlane-5fcbd3a1', './OrientedBoundingBox-4edd890c', './Color-07ccb87a'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
 
     var scratchCenter = new Cartesian2.Cartesian3();
         var scratchEllipsoid = new Cartesian2.Ellipsoid();
@@ -134,7 +134,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             var minimumHeights = parameters.minimumHeights;
             var maximumHeights = parameters.maximumHeights;
-            if (defined.defined(minimumHeights) && defined.defined(maximumHeights)) {
+            if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
                 minimumHeights = new Float32Array(minimumHeights);
                 maximumHeights = new Float32Array(maximumHeights);
             }
@@ -183,7 +183,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var colorToBuffers = {};
             for (i = 0; i < countsLength; ++i) {
                 rgba = batchTableColors[i];
-                if (!defined.defined(colorToBuffers[rgba])) {
+                if (!when.defined(colorToBuffers[rgba])) {
                     colorToBuffers[rgba] = {
                         positionLength : counts[i],
                         indexLength : indexCounts[i],
@@ -247,7 +247,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
                 var polygonMinimumHeight = minHeight;
                 var polygonMaximumHeight = maxHeight;
-                if (defined.defined(minimumHeights) && defined.defined(maximumHeights)) {
+                if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
                     polygonMinimumHeight = minimumHeights[i];
                     polygonMaximumHeight = maximumHeights[i];
                 }

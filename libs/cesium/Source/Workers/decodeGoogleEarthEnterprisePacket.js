@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './RuntimeError-ad75c885', './when-ee12a2cb', './createTaskProcessorWorker'], function (defined, Check, freezeObject, defaultValue, RuntimeError, when, createTaskProcessorWorker) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './RuntimeError-bd79d86c', './createTaskProcessorWorker'], function (when, Check, RuntimeError, createTaskProcessorWorker) { 'use strict';
 
     var compressedMagic = 0x7468dead;
         var compressedMagicSwap = 0xadde6874;
@@ -126,7 +126,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * @returns {GoogleEarthEnterpriseTileInformation} The modified result parameter or a new GoogleEarthEnterpriseTileInformation instance if none was provided.
          */
         GoogleEarthEnterpriseTileInformation.clone = function(info, result) {
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = new GoogleEarthEnterpriseTileInformation(info._bits, info.cnodeVersion, info.imageryVersion, info.terrainVersion,
                     info.imageryProvider, info.terrainProvider);
             } else {

@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './freezeObject-2d83f591', './defaultValue-f2e68450', './when-ee12a2cb'], function (defined, freezeObject, defaultValue, when) { 'use strict';
+define(['./when-76089d4c'], function (when) { 'use strict';
 
     /**
          * Formats an error object into a String.  If available, uses name, message, and stack
@@ -15,14 +15,14 @@ define(['./defined-26bd4a03', './freezeObject-2d83f591', './defaultValue-f2e6845
 
             var name = object.name;
             var message = object.message;
-            if (defined.defined(name) && defined.defined(message)) {
+            if (when.defined(name) && when.defined(message)) {
                 result = name + ': ' + message;
             } else {
                 result = object.toString();
             }
 
             var stack = object.stack;
-            if (defined.defined(stack)) {
+            if (when.defined(stack)) {
                 result += '\n' + stack;
             }
 
@@ -98,8 +98,8 @@ define(['./defined-26bd4a03', './freezeObject-2d83f591', './defaultValue-f2e6845
                         }
                     })
                     .always(function() {
-                        if (!defined.defined(postMessage)) {
-                            postMessage = defaultValue.defaultValue(self.webkitPostMessage, self.postMessage);
+                        if (!when.defined(postMessage)) {
+                            postMessage = when.defaultValue(self.webkitPostMessage, self.postMessage);
                         }
 
                         if (!data.canTransferArrayBuffer) {

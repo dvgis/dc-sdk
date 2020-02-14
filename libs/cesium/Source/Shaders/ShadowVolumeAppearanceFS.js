@@ -112,7 +112,7 @@ void main(void)\n\
     material.diffuse = color.rgb;\n\
     material.alpha = color.a;\n\
 \n\
-    gl_FragColor = czm_phong(normalize(-eyeCoordinate.xyz), material);\n\
+    gl_FragColor = czm_phong(normalize(-eyeCoordinate.xyz), material, czm_lightDirectionEC);\n\
 #endif // FLAT\n\
 \n\
 #else // PER_INSTANCE_COLOR\n\
@@ -148,7 +148,7 @@ void main(void)\n\
 #ifdef FLAT\n\
     gl_FragColor = vec4(material.diffuse + material.emission, material.alpha);\n\
 #else // FLAT\n\
-    gl_FragColor = czm_phong(normalize(-eyeCoordinate.xyz), material);\n\
+    gl_FragColor = czm_phong(normalize(-eyeCoordinate.xyz), material, czm_lightDirectionEC);\n\
 #endif // FLAT\n\
 \n\
 #endif // PER_INSTANCE_COLOR\n\

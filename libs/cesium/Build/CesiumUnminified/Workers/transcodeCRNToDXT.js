@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1af', './defineProperties-c817531e', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './when-1faa3867', './createTaskProcessorWorker'], function (defined, freezeObject, defaultValue, defineProperties, RuntimeError, WebGLConstants, when, createTaskProcessorWorker) { 'use strict';
+define(['./when-0488ac89', './defineProperties-c6a70625', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './createTaskProcessorWorker'], function (when, defineProperties, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
 
     /**
          * Describes a compressed texture and contains a compressed texture buffer.
@@ -93,7 +93,7 @@ define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1a
          * @return {CompressedTextureBuffer} A shallow clone of the compressed texture buffer.
          */
         CompressedTextureBuffer.clone = function(object) {
-            if (!defined.defined(object)) {
+            if (!when.defined(object)) {
                 return undefined;
             }
 
@@ -159,7 +159,7 @@ define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1a
                         (pixelDatatype === PixelDatatype.UNSIGNED_SHORT_5_6_5));
             }
         };
-    var PixelDatatype$1 = freezeObject.freezeObject(PixelDatatype);
+    var PixelDatatype$1 = when.freezeObject(PixelDatatype);
 
     /**
          * The format of a pixel, i.e., the number of components it has and what they represent.
@@ -483,7 +483,7 @@ define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1a
                 return flipped;
             }
         };
-    var PixelFormat$1 = freezeObject.freezeObject(PixelFormat);
+    var PixelFormat$1 = when.freezeObject(PixelFormat);
 
     /**
      * @licence
@@ -610,7 +610,7 @@ define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1a
             // Determine what type of compressed data the file contains.
             var crnFormat = crunch._crn_get_dxt_format(src, srcSize);
             var format = DXT_FORMAT_MAP[crnFormat];
-            if (!defined.defined(format)) {
+            if (!when.defined(format)) {
                 throw new RuntimeError.RuntimeError('Unsupported compressed format.');
             }
 
@@ -630,7 +630,7 @@ define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1a
             // or reuse the existing allocation if a previous call to this function has
             // already acquired a large enough buffer.
             if(cachedDstSize < dstSize) {
-                if(defined.defined(dst)) {
+                if(when.defined(dst)) {
                     crunch._free(dst);
                 }
                 dst = crunch._malloc(dstSize);

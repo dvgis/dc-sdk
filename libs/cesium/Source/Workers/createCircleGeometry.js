@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './AttributeCompression-87682214', './GeometryPipeline-5fbc4143', './EncodedCartesian3-8b2b90d0', './IndexDatatype-3de60176', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './GeometryOffsetAttribute-cb30cd97', './VertexFormat-fbb91dc7', './EllipseGeometryLibrary-c3a822fb', './GeometryInstance-2aa4ff3c', './EllipseGeometry-99fcfea6'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, VertexFormat, EllipseGeometryLibrary, GeometryInstance, EllipseGeometry) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './AttributeCompression-3a5fff57', './GeometryPipeline-29d12af3', './EncodedCartesian3-e0dcfcb4', './IndexDatatype-7c4ae249', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './GeometryOffsetAttribute-b8954087', './VertexFormat-c83968d5', './EllipseGeometryLibrary-52f180e5', './GeometryInstance-53d21683', './EllipseGeometry-1c3df1f5'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, VertexFormat, EllipseGeometryLibrary, GeometryInstance, EllipseGeometry) { 'use strict';
 
     /**
          * A description of a circle on the ellipsoid. Circle geometry can be rendered with both {@link Primitive} and {@link GroundPrimitive}.
@@ -32,7 +32,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * var geometry = Cesium.CircleGeometry.createGeometry(circle);
          */
         function CircleGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var radius = options.radius;
 
             //>>includeStart('debug', pragmas.debug);
@@ -115,7 +115,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             scratchOptions.stRotation = ellipseGeometry._stRotation;
             scratchOptions.shadowVolume = ellipseGeometry._shadowVolume;
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.radius = ellipseGeometry._semiMajorAxis;
                 return new CircleGeometry(scratchOptions);
             }
@@ -180,7 +180,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         });
 
     function createCircleGeometry(circleGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 circleGeometry = CircleGeometry.unpack(circleGeometry, offset);
             }
             circleGeometry._ellipseGeometry._center = Cartesian2.Cartesian3.clone(circleGeometry._ellipseGeometry._center);

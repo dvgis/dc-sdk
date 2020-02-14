@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './IndexDatatype-3de60176', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './VertexFormat-fbb91dc7', './arrayRemoveDuplicates-dd708d81', './ArcType-d521909b', './EllipsoidRhumbLine-c6cdbfd3', './EllipsoidGeodesic-53e988a6', './PolylinePipeline-22d74cb8', './Color-179fe44e'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic, PolylinePipeline, Color) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './IndexDatatype-7c4ae249', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './VertexFormat-c83968d5', './arrayRemoveDuplicates-7554b927', './ArcType-938f261b', './EllipsoidRhumbLine-c7012b36', './EllipsoidGeodesic-fed93bc6', './PolylinePipeline-61420186', './Color-1397aec3'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic, PolylinePipeline, Color) { 'use strict';
 
     var scratchInterpolateColorsArray = [];
 
@@ -76,20 +76,20 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * var geometry = Cesium.PolylineGeometry.createGeometry(polyline);
          */
         function PolylineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var positions = options.positions;
             var colors = options.colors;
-            var width = defaultValue.defaultValue(options.width, 1.0);
-            var colorsPerVertex = defaultValue.defaultValue(options.colorsPerVertex, false);
+            var width = when.defaultValue(options.width, 1.0);
+            var colorsPerVertex = when.defaultValue(options.colorsPerVertex, false);
 
             //>>includeStart('debug', pragmas.debug);
-            if ((!defined.defined(positions)) || (positions.length < 2)) {
+            if ((!when.defined(positions)) || (positions.length < 2)) {
                 throw new Check.DeveloperError('At least two positions are required.');
             }
             if (typeof width !== 'number') {
                 throw new Check.DeveloperError('width must be a number');
             }
-            if (defined.defined(colors) && ((colorsPerVertex && colors.length < positions.length) || (!colorsPerVertex && colors.length < positions.length - 1))) {
+            if (when.defined(colors) && ((colorsPerVertex && colors.length < positions.length) || (!colorsPerVertex && colors.length < positions.length - 1))) {
                 throw new Check.DeveloperError('colors has an invalid length.');
             }
             //>>includeEnd('debug');
@@ -98,15 +98,15 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             this._colors = colors;
             this._width = width;
             this._colorsPerVertex = colorsPerVertex;
-            this._vertexFormat = VertexFormat.VertexFormat.clone(defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT));
+            this._vertexFormat = VertexFormat.VertexFormat.clone(when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT));
 
-            this._arcType = defaultValue.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
-            this._granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
-            this._ellipsoid = Cartesian2.Ellipsoid.clone(defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
+            this._arcType = when.defaultValue(options.arcType, ArcType.ArcType.GEODESIC);
+            this._granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            this._ellipsoid = Cartesian2.Ellipsoid.clone(when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84));
             this._workerName = 'createPolylineGeometry';
 
             var numComponents = 1 + positions.length * Cartesian2.Cartesian3.packedLength;
-            numComponents += defined.defined(colors) ? 1 + colors.length * Color.Color.packedLength : 1;
+            numComponents += when.defined(colors) ? 1 + colors.length * Color.Color.packedLength : 1;
 
             /**
              * The number of elements used to pack the object into an array.
@@ -126,15 +126,15 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         PolylineGeometry.pack = function(value, array, startingIndex) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(value)) {
+            if (!when.defined(value)) {
                 throw new Check.DeveloperError('value is required');
             }
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -147,7 +147,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             }
 
             var colors = value._colors;
-            length = defined.defined(colors) ? colors.length : 0.0;
+            length = when.defined(colors) ? colors.length : 0.0;
             array[startingIndex++] = length;
 
             for (i = 0; i < length; ++i, startingIndex += Color.Color.packedLength) {
@@ -191,12 +191,12 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         PolylineGeometry.unpack = function(array, startingIndex, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -225,7 +225,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var arcType = array[startingIndex++];
             var granularity = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.positions = positions;
                 scratchOptions.colors = colors;
                 scratchOptions.width = width;
@@ -293,7 +293,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
                 var heights = PolylinePipeline.PolylinePipeline.extractHeights(positions, ellipsoid);
 
-                if (defined.defined(colors)) {
+                if (when.defined(colors)) {
                     var colorLength = 1;
                     for (i = 0; i < positionsLength - 1; ++i) {
                         colorLength += numberOfPointsFunction(positions[i], positions[i + 1], subdivisionSize);
@@ -353,7 +353,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var nextPositions = new Float64Array(size * 3);
             var expandAndWidth = new Float32Array(size * 2);
             var st = vertexFormat.st ? new Float32Array(size * 2) : undefined;
-            var finalColors = defined.defined(colors) ? new Uint8Array(size * 4) : undefined;
+            var finalColors = when.defined(colors) ? new Uint8Array(size * 4) : undefined;
 
             var positionIndex = 0;
             var expandAndWidthIndex = 0;
@@ -384,7 +384,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 Cartesian2.Cartesian3.clone(position, scratchNextPosition);
 
                 var color0, color1;
-                if (defined.defined(finalColors)) {
+                if (when.defined(finalColors)) {
                     if (j !== 0 && !colorsPerVertex) {
                         color0 = colors[j - 1];
                     } else {
@@ -414,7 +414,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                         st[stIndex++] = Math.max(expandAndWidth[expandAndWidthIndex - 2], 0.0);
                     }
 
-                    if (defined.defined(finalColors)) {
+                    if (when.defined(finalColors)) {
                         var color = (k < 2) ? color0 : color1;
 
                         finalColors[colorIndex++] = Color.Color.floatToByte(color.red);
@@ -459,7 +459,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 });
             }
 
-            if (defined.defined(finalColors)) {
+            if (when.defined(finalColors)) {
                 attributes.color = new GeometryAttribute.GeometryAttribute({
                     componentDatatype : ComponentDatatype.ComponentDatatype.UNSIGNED_BYTE,
                     componentsPerAttribute : 4,
@@ -494,7 +494,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createPolylineGeometry(polylineGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 polylineGeometry = PolylineGeometry.unpack(polylineGeometry, offset);
             }
             polylineGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(polylineGeometry._ellipsoid);

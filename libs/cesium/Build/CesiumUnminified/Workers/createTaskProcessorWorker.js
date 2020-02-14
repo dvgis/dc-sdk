@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1af', './when-1faa3867'], function (defined, freezeObject, defaultValue, when) { 'use strict';
+define(['./when-0488ac89'], function (when) { 'use strict';
 
     /**
          * Formats an error object into a String.  If available, uses name, message, and stack
@@ -36,14 +36,14 @@ define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1a
 
             var name = object.name;
             var message = object.message;
-            if (defined.defined(name) && defined.defined(message)) {
+            if (when.defined(name) && when.defined(message)) {
                 result = name + ': ' + message;
             } else {
                 result = object.toString();
             }
 
             var stack = object.stack;
-            if (defined.defined(stack)) {
+            if (when.defined(stack)) {
                 result += '\n' + stack;
             }
 
@@ -119,8 +119,8 @@ define(['./defined-2a4f2d00', './freezeObject-a51e076f', './defaultValue-29c9b1a
                         }
                     })
                     .always(function() {
-                        if (!defined.defined(postMessage)) {
-                            postMessage = defaultValue.defaultValue(self.webkitPostMessage, self.postMessage);
+                        if (!when.defined(postMessage)) {
+                            postMessage = when.defaultValue(self.webkitPostMessage, self.postMessage);
                         }
 
                         if (!data.canTransferArrayBuffer) {

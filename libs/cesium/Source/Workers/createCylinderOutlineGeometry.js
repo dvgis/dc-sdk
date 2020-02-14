@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './IndexDatatype-3de60176', './GeometryOffsetAttribute-cb30cd97', './CylinderGeometryLibrary-1a22ba0e'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, CylinderGeometryLibrary) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './IndexDatatype-7c4ae249', './GeometryOffsetAttribute-b8954087', './CylinderGeometryLibrary-c7a66703'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, CylinderGeometryLibrary) { 'use strict';
 
     var radiusScratch = new Cartesian2.Cartesian2();
 
@@ -34,20 +34,20 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * var geometry = Cesium.CylinderOutlineGeometry.createGeometry(cylinder);
          */
         function CylinderOutlineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             var length = options.length;
             var topRadius = options.topRadius;
             var bottomRadius = options.bottomRadius;
-            var slices = defaultValue.defaultValue(options.slices, 128);
-            var numberOfVerticalLines = Math.max(defaultValue.defaultValue(options.numberOfVerticalLines, 16), 0);
+            var slices = when.defaultValue(options.slices, 128);
+            var numberOfVerticalLines = Math.max(when.defaultValue(options.numberOfVerticalLines, 16), 0);
 
             //>>includeStart('debug', pragmas.debug);
             Check.Check.typeOf.number('options.positions', length);
             Check.Check.typeOf.number('options.topRadius', topRadius);
             Check.Check.typeOf.number('options.bottomRadius', bottomRadius);
             Check.Check.typeOf.number.greaterThanOrEquals('options.slices', slices, 3);
-            if (defined.defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+            if (when.defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
                 throw new Check.DeveloperError('GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.');
             }
             //>>includeEnd('debug');
@@ -82,14 +82,14 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             array[startingIndex++] = value._length;
             array[startingIndex++] = value._topRadius;
             array[startingIndex++] = value._bottomRadius;
             array[startingIndex++] = value._slices;
             array[startingIndex++] = value._numberOfVerticalLines;
-            array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+            array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
 
             return array;
         };
@@ -116,7 +116,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var length = array[startingIndex++];
             var topRadius = array[startingIndex++];
@@ -125,7 +125,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var numberOfVerticalLines = array[startingIndex++];
             var offsetAttribute = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.length = length;
                 scratchOptions.topRadius = topRadius;
                 scratchOptions.bottomRadius = bottomRadius;
@@ -207,7 +207,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var boundingSphere = new Transforms.BoundingSphere(Cartesian2.Cartesian3.ZERO, Cartesian2.Cartesian2.magnitude(radiusScratch));
 
-            if (defined.defined(cylinderGeometry._offsetAttribute)) {
+            if (when.defined(cylinderGeometry._offsetAttribute)) {
                 length = positions.length;
                 var applyOffset = new Uint8Array(length / 3);
                 var offsetValue = cylinderGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
@@ -229,7 +229,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createCylinderOutlineGeometry(cylinderGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 cylinderGeometry = CylinderOutlineGeometry.unpack(cylinderGeometry, offset);
             }
             return CylinderOutlineGeometry.createGeometry(cylinderGeometry);

@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './IndexDatatype-3de60176', './createTaskProcessorWorker', './GeometryOffsetAttribute-cb30cd97', './VertexFormat-fbb91dc7', './BoxGeometry-ae68b2b8', './CylinderGeometryLibrary-1a22ba0e', './CylinderGeometry-8513ce4f', './EllipsoidGeometry-30e96a9a', './Color-179fe44e'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, createTaskProcessorWorker, GeometryOffsetAttribute, VertexFormat, BoxGeometry, CylinderGeometryLibrary, CylinderGeometry, EllipsoidGeometry, Color) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './IndexDatatype-7c4ae249', './createTaskProcessorWorker', './GeometryOffsetAttribute-b8954087', './VertexFormat-c83968d5', './BoxGeometry-254601e7', './CylinderGeometryLibrary-c7a66703', './CylinderGeometry-956fd076', './EllipsoidGeometry-8ae73b20', './Color-1397aec3'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, createTaskProcessorWorker, GeometryOffsetAttribute, VertexFormat, BoxGeometry, CylinderGeometryLibrary, CylinderGeometry, EllipsoidGeometry, Color) { 'use strict';
 
     /**
          * Describes a renderable batch of geometry.
@@ -118,7 +118,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         var scratchPosition = new Cartesian2.Cartesian3();
 
         function createPrimitive(options, primitive, primitiveBatchIds, geometry, getModelMatrixAndBoundingVolume) {
-            if (!defined.defined(primitive)) {
+            if (!when.defined(primitive)) {
                 return;
             }
 
@@ -251,19 +251,19 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         }
 
         function createVectorTileGeometries(parameters, transferableObjects) {
-            var boxes = defined.defined(parameters.boxes) ? new Float32Array(parameters.boxes) : undefined;
-            var boxBatchIds = defined.defined(parameters.boxBatchIds) ? new Uint16Array(parameters.boxBatchIds) : undefined;
-            var cylinders =  defined.defined(parameters.cylinders) ? new Float32Array(parameters.cylinders) : undefined;
-            var cylinderBatchIds = defined.defined(parameters.cylinderBatchIds) ? new Uint16Array(parameters.cylinderBatchIds) : undefined;
-            var ellipsoids =  defined.defined(parameters.ellipsoids) ? new Float32Array(parameters.ellipsoids) : undefined;
-            var ellipsoidBatchIds = defined.defined(parameters.ellipsoidBatchIds) ? new Uint16Array(parameters.ellipsoidBatchIds) : undefined;
-            var spheres = defined.defined(parameters.spheres) ?  new Float32Array(parameters.spheres) : undefined;
-            var sphereBatchIds = defined.defined(parameters.sphereBatchIds) ? new Uint16Array(parameters.sphereBatchIds) : undefined;
+            var boxes = when.defined(parameters.boxes) ? new Float32Array(parameters.boxes) : undefined;
+            var boxBatchIds = when.defined(parameters.boxBatchIds) ? new Uint16Array(parameters.boxBatchIds) : undefined;
+            var cylinders =  when.defined(parameters.cylinders) ? new Float32Array(parameters.cylinders) : undefined;
+            var cylinderBatchIds = when.defined(parameters.cylinderBatchIds) ? new Uint16Array(parameters.cylinderBatchIds) : undefined;
+            var ellipsoids =  when.defined(parameters.ellipsoids) ? new Float32Array(parameters.ellipsoids) : undefined;
+            var ellipsoidBatchIds = when.defined(parameters.ellipsoidBatchIds) ? new Uint16Array(parameters.ellipsoidBatchIds) : undefined;
+            var spheres = when.defined(parameters.spheres) ?  new Float32Array(parameters.spheres) : undefined;
+            var sphereBatchIds = when.defined(parameters.sphereBatchIds) ? new Uint16Array(parameters.sphereBatchIds) : undefined;
 
-            var numberOfBoxes = defined.defined(boxes) ? boxBatchIds.length : 0;
-            var numberOfCylinders = defined.defined(cylinders) ? cylinderBatchIds.length : 0;
-            var numberOfEllipsoids = defined.defined(ellipsoids) ? ellipsoidBatchIds.length : 0;
-            var numberOfSpheres = defined.defined(spheres) ? sphereBatchIds.length : 0;
+            var numberOfBoxes = when.defined(boxes) ? boxBatchIds.length : 0;
+            var numberOfCylinders = when.defined(cylinders) ? cylinderBatchIds.length : 0;
+            var numberOfEllipsoids = when.defined(ellipsoids) ? ellipsoidBatchIds.length : 0;
+            var numberOfSpheres = when.defined(spheres) ? sphereBatchIds.length : 0;
 
             var boxGeometry = BoxGeometry.BoxGeometry.getUnitBox();
             var cylinderGeometry = CylinderGeometry.CylinderGeometry.getUnitCylinder();

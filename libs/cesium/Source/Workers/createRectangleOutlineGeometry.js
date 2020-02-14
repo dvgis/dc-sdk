@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './IndexDatatype-3de60176', './GeometryOffsetAttribute-cb30cd97', './EllipsoidRhumbLine-c6cdbfd3', './PolygonPipeline-c1943379', './RectangleGeometryLibrary-b48cfe48'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipsoidRhumbLine, PolygonPipeline, RectangleGeometryLibrary) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './IndexDatatype-7c4ae249', './GeometryOffsetAttribute-b8954087', './EllipsoidRhumbLine-c7012b36', './PolygonPipeline-e4f8240b', './RectangleGeometryLibrary-b9168dbf'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipsoidRhumbLine, PolygonPipeline, RectangleGeometryLibrary) { 'use strict';
 
     var bottomBoundingSphere = new Transforms.BoundingSphere();
         var topBoundingSphere = new Transforms.BoundingSphere();
@@ -205,15 +205,15 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * var geometry = Cesium.RectangleOutlineGeometry.createGeometry(rectangle);
          */
         function RectangleOutlineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             var rectangle = options.rectangle;
-            var granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
-            var ellipsoid = defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
-            var rotation = defaultValue.defaultValue(options.rotation, 0.0);
+            var granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            var rotation = when.defaultValue(options.rotation, 0.0);
 
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(rectangle)) {
+            if (!when.defined(rectangle)) {
                 throw new Check.DeveloperError('rectangle is required.');
             }
             Cartesian2.Rectangle.validate(rectangle);
@@ -222,8 +222,8 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             }
             //>>includeEnd('debug');
 
-            var height = defaultValue.defaultValue(options.height, 0.0);
-            var extrudedHeight = defaultValue.defaultValue(options.extrudedHeight, height);
+            var height = when.defaultValue(options.height, 0.0);
+            var extrudedHeight = when.defaultValue(options.extrudedHeight, height);
 
             this._rectangle = Cartesian2.Rectangle.clone(rectangle);
             this._granularity = granularity;
@@ -252,16 +252,16 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         RectangleOutlineGeometry.pack = function(value, array, startingIndex) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(value)) {
+            if (!when.defined(value)) {
                 throw new Check.DeveloperError('value is required');
             }
 
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             Cartesian2.Rectangle.pack(value._rectangle, array, startingIndex);
             startingIndex += Cartesian2.Rectangle.packedLength;
@@ -273,7 +273,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             array[startingIndex++] = value._surfaceHeight;
             array[startingIndex++] = value._rotation;
             array[startingIndex++] = value._extrudedHeight;
-            array[startingIndex] = defaultValue.defaultValue(value._offsetAttribute, -1);
+            array[startingIndex] = when.defaultValue(value._offsetAttribute, -1);
 
             return array;
         };
@@ -300,12 +300,12 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         RectangleOutlineGeometry.unpack = function(array, startingIndex, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var rectangle = Cartesian2.Rectangle.unpack(array, startingIndex, scratchRectangle);
             startingIndex += Cartesian2.Rectangle.packedLength;
@@ -319,7 +319,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var extrudedHeight = array[startingIndex++];
             var offsetAttribute = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.granularity = granularity;
                 scratchOptions.height = height;
                 scratchOptions.rotation = rotation;
@@ -367,7 +367,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var offsetValue;
             if (extrude) {
                 geometry = constructExtrudedRectangle(rectangleGeometry, computedOptions);
-                if (defined.defined(rectangleGeometry._offsetAttribute)) {
+                if (when.defined(rectangleGeometry._offsetAttribute)) {
                     var size = geometry.attributes.position.values.length / 3;
                     var offsetAttribute = new Uint8Array(size);
                     if (rectangleGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
@@ -390,7 +390,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 geometry = constructRectangle(rectangleGeometry, computedOptions);
                 geometry.attributes.position.values = PolygonPipeline.PolygonPipeline.scaleToGeodeticHeight(geometry.attributes.position.values, surfaceHeight, ellipsoid, false);
 
-                if (defined.defined(rectangleGeometry._offsetAttribute)) {
+                if (when.defined(rectangleGeometry._offsetAttribute)) {
                     var length = geometry.attributes.position.values.length;
                     var applyOffset = new Uint8Array(length / 3);
                     offsetValue = rectangleGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
@@ -415,7 +415,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createRectangleOutlineGeometry(rectangleGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 rectangleGeometry = RectangleOutlineGeometry.unpack(rectangleGeometry, offset);
             }
             rectangleGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(rectangleGeometry._ellipsoid);

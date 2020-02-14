@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './RuntimeError-51c34ab4', './when-1faa3867', './createTaskProcessorWorker'], function (defined, Check, freezeObject, defaultValue, RuntimeError, when, createTaskProcessorWorker) { 'use strict';
+define(['./when-0488ac89', './Check-78ca6843', './RuntimeError-4d6e0952', './createTaskProcessorWorker'], function (when, Check, RuntimeError, createTaskProcessorWorker) { 'use strict';
 
     var compressedMagic = 0x7468dead;
         var compressedMagicSwap = 0xadde6874;
@@ -147,7 +147,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * @returns {GoogleEarthEnterpriseTileInformation} The modified result parameter or a new GoogleEarthEnterpriseTileInformation instance if none was provided.
          */
         GoogleEarthEnterpriseTileInformation.clone = function(info, result) {
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 result = new GoogleEarthEnterpriseTileInformation(info._bits, info.cnodeVersion, info.imageryVersion, info.terrainVersion,
                     info.imageryProvider, info.terrainProvider);
             } else {

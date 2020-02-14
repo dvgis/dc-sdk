@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-02186f8d', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-4163fce2', './when-1faa3867', './GeometryAttributes-f8548d3f', './IndexDatatype-85d10a10', './GeometryOffsetAttribute-37c3dade', './VertexFormat-ba88c609', './EllipsoidGeometry-000e235b'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, VertexFormat, EllipsoidGeometry) { 'use strict';
+define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './ComponentDatatype-9fd090e4', './GeometryAttribute-b3d6422f', './GeometryAttributes-3227db5b', './IndexDatatype-0b3c1fea', './GeometryOffsetAttribute-564f9954', './VertexFormat-f568cac2', './EllipsoidGeometry-78f9598f'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, VertexFormat, EllipsoidGeometry) { 'use strict';
 
     /**
          * A description of a sphere centered at the origin.
@@ -47,7 +47,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * var geometry = Cesium.SphereGeometry.createGeometry(sphere);
          */
         function SphereGeometry(options) {
-            var radius = defaultValue.defaultValue(options.radius, 1.0);
+            var radius = when.defaultValue(options.radius, 1.0);
             var radii = new Cartesian2.Cartesian3(radius, radius, radius);
             var ellipsoidOptions = {
                     radii: radii,
@@ -106,7 +106,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             scratchOptions.stackPartitions = ellipsoidGeometry._stackPartitions;
             scratchOptions.slicePartitions = ellipsoidGeometry._slicePartitions;
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.radius = ellipsoidGeometry._radii.x;
                 return new SphereGeometry(scratchOptions);
             }
@@ -127,7 +127,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createSphereGeometry(sphereGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 sphereGeometry = SphereGeometry.unpack(sphereGeometry, offset);
             }
             return SphereGeometry.createGeometry(sphereGeometry);

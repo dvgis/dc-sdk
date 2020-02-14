@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './when-ee12a2cb', './AttributeCompression-87682214', './IndexDatatype-3de60176', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './createTaskProcessorWorker', './EllipsoidTangentPlane-d5dafbca', './OrientedBoundingBox-f789932a', './Color-179fe44e'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, when, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './AttributeCompression-3a5fff57', './IndexDatatype-7c4ae249', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './createTaskProcessorWorker', './EllipsoidTangentPlane-54c911ea', './OrientedBoundingBox-65a45d94', './Color-1397aec3'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
 
     var scratchCenter = new Cartesian2.Cartesian3();
         var scratchEllipsoid = new Cartesian2.Ellipsoid();
@@ -113,7 +113,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var minimumHeights = parameters.minimumHeights;
             var maximumHeights = parameters.maximumHeights;
-            if (defined.defined(minimumHeights) && defined.defined(maximumHeights)) {
+            if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
                 minimumHeights = new Float32Array(minimumHeights);
                 maximumHeights = new Float32Array(maximumHeights);
             }
@@ -162,7 +162,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var colorToBuffers = {};
             for (i = 0; i < countsLength; ++i) {
                 rgba = batchTableColors[i];
-                if (!defined.defined(colorToBuffers[rgba])) {
+                if (!when.defined(colorToBuffers[rgba])) {
                     colorToBuffers[rgba] = {
                         positionLength : counts[i],
                         indexLength : indexCounts[i],
@@ -226,7 +226,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
                 var polygonMinimumHeight = minHeight;
                 var polygonMaximumHeight = maxHeight;
-                if (defined.defined(minimumHeights) && defined.defined(maximumHeights)) {
+                if (when.defined(minimumHeights) && when.defined(maximumHeights)) {
                     polygonMinimumHeight = minimumHeights[i];
                     polygonMaximumHeight = maximumHeights[i];
                 }

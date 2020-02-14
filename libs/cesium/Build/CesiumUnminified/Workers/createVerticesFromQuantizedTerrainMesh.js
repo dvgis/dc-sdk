@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,390 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-02186f8d', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './when-1faa3867', './AttributeCompression-bb5cef3d', './IndexDatatype-85d10a10', './IntersectionTests-61ae5e02', './Plane-eeb8d7d9', './WebMercatorProjection-2a43d110', './createTaskProcessorWorker', './EllipsoidTangentPlane-11d79112', './OrientedBoundingBox-64ac44f2', './TerrainEncoding-051e4691'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, when, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
+define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './ComponentDatatype-9fd090e4', './AttributeCompression-3fc96685', './IndexDatatype-0b3c1fea', './IntersectionTests-e4e803b1', './Plane-b44b7f20', './WebMercatorProjection-346eec3e', './createTaskProcessorWorker', './EllipsoidTangentPlane-5fcbd3a1', './OrientedBoundingBox-4edd890c', './TerrainEncoding-ff5342ee'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
+
+    /**
+         * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
+         * organized into a pyramid of tiles according to a {@link TilingScheme}.  This type describes an
+         * interface and is not intended to be instantiated directly.
+         *
+         * @alias TerrainProvider
+         * @constructor
+         *
+         * @see EllipsoidTerrainProvider
+         * @see CesiumTerrainProvider
+         * @see VRTheWorldTerrainProvider
+         * @see GoogleEarthEnterpriseTerrainProvider
+         */
+        function TerrainProvider() {
+            Check.DeveloperError.throwInstantiationError();
+        }
+
+        defineProperties.defineProperties(TerrainProvider.prototype, {
+            /**
+             * Gets an event that is raised when the terrain provider encounters an asynchronous error..  By subscribing
+             * to the event, you will be notified of the error and can potentially recover from it.  Event listeners
+             * are passed an instance of {@link TileProviderError}.
+             * @memberof TerrainProvider.prototype
+             * @type {Event}
+             */
+            errorEvent : {
+                get : Check.DeveloperError.throwInstantiationError
+            },
+
+            /**
+             * Gets the credit to display when this terrain provider is active.  Typically this is used to credit
+             * the source of the terrain. This function should
+             * not be called before {@link TerrainProvider#ready} returns true.
+             * @memberof TerrainProvider.prototype
+             * @type {Credit}
+             */
+            credit : {
+                get : Check.DeveloperError.throwInstantiationError
+            },
+
+            /**
+             * Gets the tiling scheme used by the provider.  This function should
+             * not be called before {@link TerrainProvider#ready} returns true.
+             * @memberof TerrainProvider.prototype
+             * @type {TilingScheme}
+             */
+            tilingScheme : {
+                get : Check.DeveloperError.throwInstantiationError
+            },
+
+            /**
+             * Gets a value indicating whether or not the provider is ready for use.
+             * @memberof TerrainProvider.prototype
+             * @type {Boolean}
+             */
+            ready : {
+                get : Check.DeveloperError.throwInstantiationError
+            },
+
+            /**
+             * Gets a promise that resolves to true when the provider is ready for use.
+             * @memberof TerrainProvider.prototype
+             * @type {Promise.<Boolean>}
+             * @readonly
+             */
+            readyPromise : {
+                get : Check.DeveloperError.throwInstantiationError
+            },
+
+            /**
+             * Gets a value indicating whether or not the provider includes a water mask.  The water mask
+             * indicates which areas of the globe are water rather than land, so they can be rendered
+             * as a reflective surface with animated waves.  This function should not be
+             * called before {@link TerrainProvider#ready} returns true.
+             * @memberof TerrainProvider.prototype
+             * @type {Boolean}
+             */
+            hasWaterMask : {
+                get : Check.DeveloperError.throwInstantiationError
+            },
+
+            /**
+             * Gets a value indicating whether or not the requested tiles include vertex normals.
+             * This function should not be called before {@link TerrainProvider#ready} returns true.
+             * @memberof TerrainProvider.prototype
+             * @type {Boolean}
+             */
+            hasVertexNormals : {
+                get : Check.DeveloperError.throwInstantiationError
+            },
+
+            /**
+             * Gets an object that can be used to determine availability of terrain from this provider, such as
+             * at points and in rectangles.  This function should not be called before
+             * {@link TerrainProvider#ready} returns true.  This property may be undefined if availability
+             * information is not available.
+             * @memberof TerrainProvider.prototype
+             * @type {TileAvailability}
+             */
+            availability : {
+                get : Check.DeveloperError.throwInstantiationError
+            }
+        });
+
+        var regularGridIndicesCache = [];
+
+        /**
+         * Gets a list of indices for a triangle mesh representing a regular grid.  Calling
+         * this function multiple times with the same grid width and height returns the
+         * same list of indices.  The total number of vertices must be less than or equal
+         * to 65536.
+         *
+         * @param {Number} width The number of vertices in the regular grid in the horizontal direction.
+         * @param {Number} height The number of vertices in the regular grid in the vertical direction.
+         * @returns {Uint16Array|Uint32Array} The list of indices. Uint16Array gets returned for 64KB or less and Uint32Array for 4GB or less.
+         */
+        TerrainProvider.getRegularGridIndices = function(width, height) {
+            //>>includeStart('debug', pragmas.debug);
+            if (width * height >= _Math.CesiumMath.FOUR_GIGABYTES) {
+                throw new Check.DeveloperError('The total number of vertices (width * height) must be less than 4,294,967,296.');
+            }
+            //>>includeEnd('debug');
+
+            var byWidth = regularGridIndicesCache[width];
+            if (!when.defined(byWidth)) {
+                regularGridIndicesCache[width] = byWidth = [];
+            }
+
+            var indices = byWidth[height];
+            if (!when.defined(indices)) {
+                if (width * height < _Math.CesiumMath.SIXTY_FOUR_KILOBYTES) {
+                    indices = byWidth[height] = new Uint16Array((width - 1) * (height - 1) * 6);
+                } else {
+                    indices = byWidth[height] = new Uint32Array((width - 1) * (height - 1) * 6);
+                }
+                addRegularGridIndices(width, height, indices, 0);
+            }
+
+            return indices;
+        };
+
+        var regularGridAndEdgeIndicesCache = [];
+
+        /**
+         * @private
+         */
+        TerrainProvider.getRegularGridIndicesAndEdgeIndices = function(width, height) {
+            //>>includeStart('debug', pragmas.debug);
+            if (width * height >= _Math.CesiumMath.FOUR_GIGABYTES) {
+                throw new Check.DeveloperError('The total number of vertices (width * height) must be less than 4,294,967,296.');
+            }
+            //>>includeEnd('debug');
+
+            var byWidth = regularGridAndEdgeIndicesCache[width];
+            if (!when.defined(byWidth)) {
+                regularGridAndEdgeIndicesCache[width] = byWidth = [];
+            }
+
+            var indicesAndEdges = byWidth[height];
+            if (!when.defined(indicesAndEdges)) {
+                var indices = TerrainProvider.getRegularGridIndices(width, height);
+
+                var edgeIndices = getEdgeIndices(width, height);
+                var westIndicesSouthToNorth = edgeIndices.westIndicesSouthToNorth;
+                var southIndicesEastToWest = edgeIndices.southIndicesEastToWest;
+                var eastIndicesNorthToSouth = edgeIndices.eastIndicesNorthToSouth;
+                var northIndicesWestToEast = edgeIndices.northIndicesWestToEast;
+
+                indicesAndEdges = byWidth[height] = {
+                    indices : indices,
+                    westIndicesSouthToNorth : westIndicesSouthToNorth,
+                    southIndicesEastToWest : southIndicesEastToWest,
+                    eastIndicesNorthToSouth : eastIndicesNorthToSouth,
+                    northIndicesWestToEast : northIndicesWestToEast
+                };
+            }
+
+            return indicesAndEdges;
+        };
+
+        var regularGridAndSkirtAndEdgeIndicesCache = [];
+
+        /**
+         * @private
+         */
+        TerrainProvider.getRegularGridAndSkirtIndicesAndEdgeIndices = function(width, height) {
+            //>>includeStart('debug', pragmas.debug);
+            if (width * height >= _Math.CesiumMath.FOUR_GIGABYTES) {
+                throw new Check.DeveloperError('The total number of vertices (width * height) must be less than 4,294,967,296.');
+            }
+            //>>includeEnd('debug');
+
+            var byWidth = regularGridAndSkirtAndEdgeIndicesCache[width];
+            if (!when.defined(byWidth)) {
+                regularGridAndSkirtAndEdgeIndicesCache[width] = byWidth = [];
+            }
+
+            var indicesAndEdges = byWidth[height];
+            if (!when.defined(indicesAndEdges)) {
+                var gridVertexCount = width * height;
+                var gridIndexCount = (width - 1) * (height - 1) * 6;
+                var edgeVertexCount = width * 2 + height * 2;
+                var edgeIndexCount = Math.max(0, edgeVertexCount - 4) * 6;
+                var vertexCount = gridVertexCount + edgeVertexCount;
+                var indexCount = gridIndexCount + edgeIndexCount;
+
+                var edgeIndices = getEdgeIndices(width, height);
+                var westIndicesSouthToNorth = edgeIndices.westIndicesSouthToNorth;
+                var southIndicesEastToWest = edgeIndices.southIndicesEastToWest;
+                var eastIndicesNorthToSouth = edgeIndices.eastIndicesNorthToSouth;
+                var northIndicesWestToEast = edgeIndices.northIndicesWestToEast;
+
+                var indices = IndexDatatype.IndexDatatype.createTypedArray(vertexCount, indexCount);
+                addRegularGridIndices(width, height, indices, 0);
+                TerrainProvider.addSkirtIndices(westIndicesSouthToNorth, southIndicesEastToWest, eastIndicesNorthToSouth, northIndicesWestToEast, gridVertexCount, indices, gridIndexCount);
+
+                indicesAndEdges = byWidth[height] = {
+                    indices : indices,
+                    westIndicesSouthToNorth : westIndicesSouthToNorth,
+                    southIndicesEastToWest : southIndicesEastToWest,
+                    eastIndicesNorthToSouth : eastIndicesNorthToSouth,
+                    northIndicesWestToEast : northIndicesWestToEast,
+                    indexCountWithoutSkirts : gridIndexCount
+                };
+            }
+
+            return indicesAndEdges;
+        };
+
+        /**
+         * @private
+         */
+        TerrainProvider.addSkirtIndices = function(westIndicesSouthToNorth, southIndicesEastToWest, eastIndicesNorthToSouth, northIndicesWestToEast, vertexCount, indices, offset) {
+            var vertexIndex = vertexCount;
+            offset = addSkirtIndices(westIndicesSouthToNorth, vertexIndex, indices, offset);
+            vertexIndex += westIndicesSouthToNorth.length;
+            offset = addSkirtIndices(southIndicesEastToWest, vertexIndex, indices, offset);
+            vertexIndex += southIndicesEastToWest.length;
+            offset = addSkirtIndices(eastIndicesNorthToSouth, vertexIndex, indices, offset);
+            vertexIndex += eastIndicesNorthToSouth.length;
+            addSkirtIndices(northIndicesWestToEast, vertexIndex, indices, offset);
+        };
+
+        function getEdgeIndices(width, height) {
+            var westIndicesSouthToNorth = new Array(height);
+            var southIndicesEastToWest = new Array(width);
+            var eastIndicesNorthToSouth = new Array(height);
+            var northIndicesWestToEast = new Array(width);
+
+            var i;
+            for (i = 0; i < width; ++i) {
+                northIndicesWestToEast[i] = i;
+                southIndicesEastToWest[i] = width * height - 1 - i;
+            }
+
+            for (i = 0; i < height; ++i) {
+                eastIndicesNorthToSouth[i] = (i + 1) * width - 1;
+                westIndicesSouthToNorth[i] = (height - i - 1) * width;
+            }
+
+            return {
+                westIndicesSouthToNorth : westIndicesSouthToNorth,
+                southIndicesEastToWest : southIndicesEastToWest,
+                eastIndicesNorthToSouth : eastIndicesNorthToSouth,
+                northIndicesWestToEast : northIndicesWestToEast
+            };
+        }
+
+        function addRegularGridIndices(width, height, indices, offset) {
+            var index = 0;
+            for (var j = 0; j < height - 1; ++j) {
+                for (var i = 0; i < width - 1; ++i) {
+                    var upperLeft = index;
+                    var lowerLeft = upperLeft + width;
+                    var lowerRight = lowerLeft + 1;
+                    var upperRight = upperLeft + 1;
+
+                    indices[offset++] = upperLeft;
+                    indices[offset++] = lowerLeft;
+                    indices[offset++] = upperRight;
+                    indices[offset++] = upperRight;
+                    indices[offset++] = lowerLeft;
+                    indices[offset++] = lowerRight;
+
+                    ++index;
+                }
+                ++index;
+            }
+        }
+
+        function addSkirtIndices(edgeIndices, vertexIndex, indices, offset) {
+            var previousIndex = edgeIndices[0];
+
+            var length = edgeIndices.length;
+            for (var i = 1; i < length; ++i) {
+                var index = edgeIndices[i];
+
+                indices[offset++] = previousIndex;
+                indices[offset++] = index;
+                indices[offset++] = vertexIndex;
+
+                indices[offset++] = vertexIndex;
+                indices[offset++] = index;
+                indices[offset++] = vertexIndex + 1;
+
+                previousIndex = index;
+                ++vertexIndex;
+            }
+
+            return offset;
+        }
+
+        /**
+         * Specifies the quality of terrain created from heightmaps.  A value of 1.0 will
+         * ensure that adjacent heightmap vertices are separated by no more than
+         * {@link Globe.maximumScreenSpaceError} screen pixels and will probably go very slowly.
+         * A value of 0.5 will cut the estimated level zero geometric error in half, allowing twice the
+         * screen pixels between adjacent heightmap vertices and thus rendering more quickly.
+         * @type {Number}
+         */
+        TerrainProvider.heightmapTerrainQuality = 0.25;
+
+        /**
+         * Determines an appropriate geometric error estimate when the geometry comes from a heightmap.
+         *
+         * @param {Ellipsoid} ellipsoid The ellipsoid to which the terrain is attached.
+         * @param {Number} tileImageWidth The width, in pixels, of the heightmap associated with a single tile.
+         * @param {Number} numberOfTilesAtLevelZero The number of tiles in the horizontal direction at tile level zero.
+         * @returns {Number} An estimated geometric error.
+         */
+        TerrainProvider.getEstimatedLevelZeroGeometricErrorForAHeightmap = function(ellipsoid, tileImageWidth, numberOfTilesAtLevelZero) {
+            return ellipsoid.maximumRadius * 2 * Math.PI * TerrainProvider.heightmapTerrainQuality / (tileImageWidth * numberOfTilesAtLevelZero);
+        };
+
+        /**
+         * Requests the geometry for a given tile.  This function should not be called before
+         * {@link TerrainProvider#ready} returns true.  The result must include terrain data and
+         * may optionally include a water mask and an indication of which child tiles are available.
+         * @function
+         *
+         * @param {Number} x The X coordinate of the tile for which to request geometry.
+         * @param {Number} y The Y coordinate of the tile for which to request geometry.
+         * @param {Number} level The level of the tile for which to request geometry.
+         * @param {Request} [request] The request object. Intended for internal use only.
+         *
+         * @returns {Promise.<TerrainData>|undefined} A promise for the requested geometry.  If this method
+         *          returns undefined instead of a promise, it is an indication that too many requests are already
+         *          pending and the request will be retried later.
+         */
+        TerrainProvider.prototype.requestTileGeometry = Check.DeveloperError.throwInstantiationError;
+
+        /**
+         * Gets the maximum geometric error allowed in a tile at a given level.  This function should not be
+         * called before {@link TerrainProvider#ready} returns true.
+         * @function
+         *
+         * @param {Number} level The tile level for which to get the maximum geometric error.
+         * @returns {Number} The maximum geometric error.
+         */
+        TerrainProvider.prototype.getLevelMaximumGeometricError = Check.DeveloperError.throwInstantiationError;
+
+        /**
+         * Determines whether data for a tile is available to be loaded.
+         * @function
+         *
+         * @param {Number} x The X coordinate of the tile for which to request geometry.
+         * @param {Number} y The Y coordinate of the tile for which to request geometry.
+         * @param {Number} level The level of the tile for which to request geometry.
+         * @returns {Boolean} Undefined if not supported by the terrain provider, otherwise true or false.
+         */
+        TerrainProvider.prototype.getTileDataAvailable = Check.DeveloperError.throwInstantiationError;
+
+        /**
+         * Makes sure we load availability data for a tile
+         * @function
+         *
+         * @param {Number} x The X coordinate of the tile for which to request geometry.
+         * @param {Number} y The Y coordinate of the tile for which to request geometry.
+         * @param {Number} level The level of the tile for which to request geometry.
+         * @returns {undefined|Promise} Undefined if nothing need to be loaded or a Promise that resolves when all required tiles are loaded
+         */
+        TerrainProvider.prototype.loadTileDataAvailability = Check.DeveloperError.throwInstantiationError;
 
     var maxShort = 32767;
 
@@ -67,7 +450,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var uBuffer = quantizedVertices.subarray(0, quantizedVertexCount);
             var vBuffer = quantizedVertices.subarray(quantizedVertexCount, 2 * quantizedVertexCount);
             var heightBuffer = quantizedVertices.subarray(quantizedVertexCount * 2, 3 * quantizedVertexCount);
-            var hasVertexNormals = defined.defined(octEncodedNormals);
+            var hasVertexNormals = when.defined(octEncodedNormals);
 
             var uvs = new Array(quantizedVertexCount);
             var heights = new Array(quantizedVertexCount);
@@ -208,14 +591,15 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
 
             // Add skirts.
             var vertexBufferIndex = quantizedVertexCount * vertexStride;
-            var indexBufferIndex = parameters.indices.length;
-            indexBufferIndex = addSkirt(vertexBuffer, vertexBufferIndex, indexBuffer, indexBufferIndex, parameters.westIndices, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.westSkirtHeight, true, exaggeration, southMercatorY, oneOverMercatorHeight, westLongitudeOffset, westLatitudeOffset);
+            addSkirt(vertexBuffer, vertexBufferIndex, westIndicesSouthToNorth, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.westSkirtHeight, exaggeration, southMercatorY, oneOverMercatorHeight, westLongitudeOffset, westLatitudeOffset);
             vertexBufferIndex += parameters.westIndices.length * vertexStride;
-            indexBufferIndex = addSkirt(vertexBuffer, vertexBufferIndex, indexBuffer, indexBufferIndex, parameters.southIndices, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.southSkirtHeight, false, exaggeration, southMercatorY, oneOverMercatorHeight, southLongitudeOffset, southLatitudeOffset);
+            addSkirt(vertexBuffer, vertexBufferIndex, southIndicesEastToWest, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.southSkirtHeight, exaggeration, southMercatorY, oneOverMercatorHeight, southLongitudeOffset, southLatitudeOffset);
             vertexBufferIndex += parameters.southIndices.length * vertexStride;
-            indexBufferIndex = addSkirt(vertexBuffer, vertexBufferIndex, indexBuffer, indexBufferIndex, parameters.eastIndices, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.eastSkirtHeight, false, exaggeration, southMercatorY, oneOverMercatorHeight, eastLongitudeOffset, eastLatitudeOffset);
+            addSkirt(vertexBuffer, vertexBufferIndex, eastIndicesNorthToSouth, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.eastSkirtHeight, exaggeration, southMercatorY, oneOverMercatorHeight, eastLongitudeOffset, eastLatitudeOffset);
             vertexBufferIndex += parameters.eastIndices.length * vertexStride;
-            addSkirt(vertexBuffer, vertexBufferIndex, indexBuffer, indexBufferIndex, parameters.northIndices, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.northSkirtHeight, true, exaggeration, southMercatorY, oneOverMercatorHeight, northLongitudeOffset, northLatitudeOffset);
+            addSkirt(vertexBuffer, vertexBufferIndex, northIndicesWestToEast, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, parameters.northSkirtHeight, exaggeration, southMercatorY, oneOverMercatorHeight, northLongitudeOffset, northLatitudeOffset);
+
+            TerrainProvider.addSkirtIndices(westIndicesSouthToNorth, southIndicesEastToWest, eastIndicesNorthToSouth, northIndicesWestToEast, quantizedVertexCount, indexBuffer, parameters.indices.length);
 
             transferableObjects.push(vertexBuffer.buffer, indexBuffer.buffer);
 
@@ -234,7 +618,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 orientedBoundingBox : orientedBoundingBox,
                 occludeePointInScaledSpace : occludeePointInScaledSpace,
                 encoding : encoding,
-                skirtIndex : parameters.indices.length
+                indexCountWithoutSkirts : parameters.indices.length
             };
         }
 
@@ -271,23 +655,8 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             return hMin;
         }
 
-        function addSkirt(vertexBuffer, vertexBufferIndex, indexBuffer, indexBufferIndex, edgeVertices, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, skirtLength, isWestOrNorthEdge, exaggeration, southMercatorY, oneOverMercatorHeight, longitudeOffset, latitudeOffset) {
-            var start, end, increment;
-            if (isWestOrNorthEdge) {
-                start = edgeVertices.length - 1;
-                end = -1;
-                increment = -1;
-            } else {
-                start = 0;
-                end = edgeVertices.length;
-                increment = 1;
-            }
-
-            var previousIndex = -1;
-
-            var hasVertexNormals = defined.defined(octEncodedNormals);
-            var vertexStride = encoding.getStride();
-            var vertexIndex = vertexBufferIndex / vertexStride;
+        function addSkirt(vertexBuffer, vertexBufferIndex, edgeVertices, encoding, heights, uvs, octEncodedNormals, ellipsoid, rectangle, skirtLength, exaggeration, southMercatorY, oneOverMercatorHeight, longitudeOffset, latitudeOffset) {
+            var hasVertexNormals = when.defined(octEncodedNormals);
 
             var north = rectangle.north;
             var south = rectangle.south;
@@ -298,7 +667,8 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 east += _Math.CesiumMath.TWO_PI;
             }
 
-            for (var i = start; i !== end; i += increment) {
+            var length = edgeVertices.length;
+            for (var i = 0; i < length; ++i) {
                 var index = edgeVertices[i];
                 var h = heights[index];
                 var uv = uvs[index];
@@ -336,22 +706,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 }
 
                 vertexBufferIndex = encoding.encode(vertexBuffer, vertexBufferIndex, position, uv, cartographicScratch.height, toPack, webMercatorT);
-
-                if (previousIndex !== -1) {
-                    indexBuffer[indexBufferIndex++] = previousIndex;
-                    indexBuffer[indexBufferIndex++] = vertexIndex - 1;
-                    indexBuffer[indexBufferIndex++] = index;
-
-                    indexBuffer[indexBufferIndex++] = vertexIndex - 1;
-                    indexBuffer[indexBufferIndex++] = vertexIndex;
-                    indexBuffer[indexBufferIndex++] = index;
-                }
-
-                previousIndex = index;
-                ++vertexIndex;
             }
-
-            return indexBufferIndex;
         }
 
         function copyAndSort(typedArray, comparator) {
@@ -364,7 +719,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
                 }
             }
 
-            if (!defined.defined(copy)) {
+            if (!when.defined(copy)) {
                 copy = Array.prototype.slice.call(typedArray);
             }
 

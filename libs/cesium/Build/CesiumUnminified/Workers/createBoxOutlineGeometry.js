@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './defaultValue-29c9b1af', './Math-9620d065', './Cartesian2-8defcb50', './defineProperties-c817531e', './Transforms-02186f8d', './RuntimeError-51c34ab4', './WebGLConstants-90dbfe2f', './ComponentDatatype-30d0acd7', './GeometryAttribute-4163fce2', './when-1faa3867', './GeometryAttributes-f8548d3f', './GeometryOffsetAttribute-37c3dade'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, GeometryOffsetAttribute) { 'use strict';
+define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './ComponentDatatype-9fd090e4', './GeometryAttribute-b3d6422f', './GeometryAttributes-3227db5b', './GeometryOffsetAttribute-564f9954'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, GeometryOffsetAttribute) { 'use strict';
 
     var diffScratch = new Cartesian2.Cartesian3();
 
@@ -46,7 +46,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * var geometry = Cesium.BoxOutlineGeometry.createGeometry(box);
          */
         function BoxOutlineGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             var min = options.minimum;
             var max = options.maximum;
@@ -54,7 +54,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             //>>includeStart('debug', pragmas.debug);
             Check.Check.typeOf.object('min', min);
             Check.Check.typeOf.object('max', max);
-            if (defined.defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
+            if (when.defined(options.offsetAttribute) && options.offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.TOP) {
                 throw new Check.DeveloperError('GeometryOffsetAttribute.TOP is not a supported options.offsetAttribute for this geometry.');
             }
             //>>includeEnd('debug');
@@ -84,7 +84,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
          * @see BoxOutlineGeometry.createGeometry
          */
         BoxOutlineGeometry.fromDimensions = function(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var dimensions = options.dimensions;
 
             //>>includeStart('debug', pragmas.debug);
@@ -155,11 +155,11 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             Cartesian2.Cartesian3.pack(value._min, array, startingIndex);
             Cartesian2.Cartesian3.pack(value._max, array, startingIndex + Cartesian2.Cartesian3.packedLength);
-            array[startingIndex + (Cartesian2.Cartesian3.packedLength * 2)] = defaultValue.defaultValue(value._offsetAttribute, -1);
+            array[startingIndex + (Cartesian2.Cartesian3.packedLength * 2)] = when.defaultValue(value._offsetAttribute, -1);
 
             return array;
         };
@@ -185,13 +185,13 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             Check.Check.defined('array', array);
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var min = Cartesian2.Cartesian3.unpack(array, startingIndex, scratchMin);
             var max = Cartesian2.Cartesian3.unpack(array, startingIndex + Cartesian2.Cartesian3.packedLength, scratchMax);
             var offsetAttribute = array[startingIndex + Cartesian2.Cartesian3.packedLength * 2];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.offsetAttribute = offsetAttribute === -1 ? undefined : offsetAttribute;
                 return new BoxOutlineGeometry(scratchOptions);
             }
@@ -288,7 +288,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
             var diff = Cartesian2.Cartesian3.subtract(max, min, diffScratch);
             var radius = Cartesian2.Cartesian3.magnitude(diff) * 0.5;
 
-            if (defined.defined(boxGeometry._offsetAttribute)) {
+            if (when.defined(boxGeometry._offsetAttribute)) {
                 var length = positions.length;
                 var applyOffset = new Uint8Array(length / 3);
                 var offsetValue = boxGeometry._offsetAttribute === GeometryOffsetAttribute.GeometryOffsetAttribute.NONE ? 0 : 1;
@@ -310,7 +310,7 @@ define(['./defined-2a4f2d00', './Check-e5651467', './freezeObject-a51e076f', './
         };
 
     function createBoxOutlineGeometry(boxGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 boxGeometry = BoxOutlineGeometry.unpack(boxGeometry, offset);
             }
             return BoxOutlineGeometry.createGeometry(boxGeometry);

@@ -81,8 +81,15 @@ varying vec3 v_positionEC;\n\
 \n\
 void main (void)\n\
 {\n\
+    float lightEnum = u_cameraAndRadiiAndDynamicAtmosphereColor.w;\n\
+    vec3 lightDirection =\n\
+        czm_viewerPositionWC * float(lightEnum == 0.0) +\n\
+        czm_lightDirectionWC * float(lightEnum == 1.0) +\n\
+        czm_sunDirectionWC * float(lightEnum == 2.0);\n\
+    lightDirection = normalize(lightDirection);\n\
+\n\
     // Extra normalize added for Android\n\
-    float cosAngle = dot(czm_sunDirectionWC, normalize(v_toCamera)) / length(v_toCamera);\n\
+    float cosAngle = dot(lightDirection, normalize(v_toCamera)) / length(v_toCamera);\n\
     float rayleighPhase = 0.75 * (1.0 + cosAngle * cosAngle);\n\
     float miePhase = 1.5 * ((1.0 - g2) / (2.0 + g2)) * (1.0 + cosAngle * cosAngle) / pow(1.0 + g2 - 2.0 * g * cosAngle, 1.5);\n\
 \n\
@@ -108,7 +115,7 @@ void main (void)\n\
     float atmosphereAlpha = clamp((u_cameraAndRadiiAndDynamicAtmosphereColor.y - u_cameraAndRadiiAndDynamicAtmosphereColor.x) / (u_cameraAndRadiiAndDynamicAtmosphereColor.y - u_cameraAndRadiiAndDynamicAtmosphereColor.z), 0.0, 1.0);\n\
 \n\
     // Alter alpha based on time of day (0.0 = night , 1.0 = day)\n\
-    float nightAlpha = (u_cameraAndRadiiAndDynamicAtmosphereColor.w > 0.0) ? clamp(dot(normalize(czm_viewerPositionWC), normalize(czm_sunPositionWC)), 0.0, 1.0) : 1.0;\n\
+    float nightAlpha = (lightEnum != 0.0) ? clamp(dot(normalize(czm_viewerPositionWC), lightDirection), 0.0, 1.0) : 1.0;\n\
     atmosphereAlpha *= pow(nightAlpha, 0.5);\n\
 \n\
     gl_FragColor = vec4(rgb, mix(rgb.b, 1.0, atmosphereAlpha) * smoothstep(0.0, 1.0, czm_morphTime));\n\

@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './GeometryAttribute-bb8a556c', './when-ee12a2cb', './GeometryAttributes-eecc9f43', './IndexDatatype-3de60176', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './VertexFormat-fbb91dc7', './EllipsoidTangentPlane-d5dafbca', './EllipsoidRhumbLine-c6cdbfd3', './PolygonPipeline-c1943379', './EllipsoidGeodesic-53e988a6', './PolylinePipeline-22d74cb8', './WallGeometryLibrary-f6631501'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, when, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, EllipsoidGeodesic, PolylinePipeline, WallGeometryLibrary) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './GeometryAttributes-36724c9f', './IndexDatatype-7c4ae249', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './VertexFormat-c83968d5', './EllipsoidTangentPlane-54c911ea', './EllipsoidRhumbLine-c7012b36', './PolygonPipeline-e4f8240b', './EllipsoidGeodesic-fed93bc6', './PolylinePipeline-61420186', './WallGeometryLibrary-544b4b5e'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, EllipsoidGeodesic, PolylinePipeline, WallGeometryLibrary) { 'use strict';
 
     var scratchCartesian3Position1 = new Cartesian2.Cartesian3();
         var scratchCartesian3Position2 = new Cartesian2.Cartesian3();
@@ -50,27 +50,27 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * var geometry = Cesium.WallGeometry.createGeometry(wall);
          */
         function WallGeometry(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
 
             var wallPositions = options.positions;
             var maximumHeights = options.maximumHeights;
             var minimumHeights = options.minimumHeights;
 
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(wallPositions)) {
+            if (!when.defined(wallPositions)) {
                 throw new Check.DeveloperError('options.positions is required.');
             }
-            if (defined.defined(maximumHeights) && maximumHeights.length !== wallPositions.length) {
+            if (when.defined(maximumHeights) && maximumHeights.length !== wallPositions.length) {
                 throw new Check.DeveloperError('options.positions and options.maximumHeights must have the same length.');
             }
-            if (defined.defined(minimumHeights) && minimumHeights.length !== wallPositions.length) {
+            if (when.defined(minimumHeights) && minimumHeights.length !== wallPositions.length) {
                 throw new Check.DeveloperError('options.positions and options.minimumHeights must have the same length.');
             }
             //>>includeEnd('debug');
 
-            var vertexFormat = defaultValue.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
-            var granularity = defaultValue.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
-            var ellipsoid = defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            var vertexFormat = when.defaultValue(options.vertexFormat, VertexFormat.VertexFormat.DEFAULT);
+            var granularity = when.defaultValue(options.granularity, _Math.CesiumMath.RADIANS_PER_DEGREE);
+            var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
 
             this._positions = wallPositions;
             this._minimumHeights = minimumHeights;
@@ -81,10 +81,10 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             this._workerName = 'createWallGeometry';
 
             var numComponents = 1 + wallPositions.length * Cartesian2.Cartesian3.packedLength + 2;
-            if (defined.defined(minimumHeights)) {
+            if (when.defined(minimumHeights)) {
                 numComponents += minimumHeights.length;
             }
-            if (defined.defined(maximumHeights)) {
+            if (when.defined(maximumHeights)) {
                 numComponents += maximumHeights.length;
             }
 
@@ -106,15 +106,15 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         WallGeometry.pack = function(value, array, startingIndex) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(value)) {
+            if (!when.defined(value)) {
                 throw new Check.DeveloperError('value is required');
             }
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -127,20 +127,20 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             }
 
             var minimumHeights = value._minimumHeights;
-            length = defined.defined(minimumHeights) ? minimumHeights.length : 0;
+            length = when.defined(minimumHeights) ? minimumHeights.length : 0;
             array[startingIndex++] = length;
 
-            if (defined.defined(minimumHeights)) {
+            if (when.defined(minimumHeights)) {
                 for (i = 0; i < length; ++i) {
                     array[startingIndex++] = minimumHeights[i];
                 }
             }
 
             var maximumHeights = value._maximumHeights;
-            length = defined.defined(maximumHeights) ? maximumHeights.length : 0;
+            length = when.defined(maximumHeights) ? maximumHeights.length : 0;
             array[startingIndex++] = length;
 
-            if (defined.defined(maximumHeights)) {
+            if (when.defined(maximumHeights)) {
                 for (i = 0; i < length; ++i) {
                     array[startingIndex++] = maximumHeights[i];
                 }
@@ -178,12 +178,12 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         WallGeometry.unpack = function(array, startingIndex, result) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(array)) {
+            if (!when.defined(array)) {
                 throw new Check.DeveloperError('array is required');
             }
             //>>includeEnd('debug');
 
-            startingIndex = defaultValue.defaultValue(startingIndex, 0);
+            startingIndex = when.defaultValue(startingIndex, 0);
 
             var i;
 
@@ -222,7 +222,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var granularity = array[startingIndex];
 
-            if (!defined.defined(result)) {
+            if (!when.defined(result)) {
                 scratchOptions.positions = positions;
                 scratchOptions.minimumHeights = minimumHeights;
                 scratchOptions.maximumHeights = maximumHeights;
@@ -273,11 +273,11 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          * @see WallGeometry#createGeometry
          */
         WallGeometry.fromConstantHeights = function(options) {
-            options = defaultValue.defaultValue(options, defaultValue.defaultValue.EMPTY_OBJECT);
+            options = when.defaultValue(options, when.defaultValue.EMPTY_OBJECT);
             var positions = options.positions;
 
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(positions)) {
+            if (!when.defined(positions)) {
                 throw new Check.DeveloperError('options.positions is required.');
             }
             //>>includeEnd('debug');
@@ -288,8 +288,8 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var min = options.minimumHeight;
             var max = options.maximumHeight;
 
-            var doMin = defined.defined(min);
-            var doMax = defined.defined(max);
+            var doMin = when.defined(min);
+            var doMax = when.defined(max);
             if (doMin || doMax) {
                 var length = positions.length;
                 minHeights = (doMin) ? new Array(length) : undefined;
@@ -331,7 +331,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var ellipsoid = wallGeometry._ellipsoid;
 
             var pos = WallGeometryLibrary.WallGeometryLibrary.computePositions(ellipsoid, wallPositions, maximumHeights, minimumHeights, granularity, true);
-            if (!defined.defined(pos)) {
+            if (!when.defined(pos)) {
                 return;
             }
 
@@ -537,7 +537,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
         };
 
     function createWallGeometry(wallGeometry, offset) {
-            if (defined.defined(offset)) {
+            if (when.defined(offset)) {
                 wallGeometry = WallGeometry.unpack(wallGeometry, offset);
             }
             wallGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(wallGeometry._ellipsoid);

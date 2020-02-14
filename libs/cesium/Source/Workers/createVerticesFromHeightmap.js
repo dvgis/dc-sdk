@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './defaultValue-f2e68450', './Math-fa6e45cb', './Cartesian2-2a723276', './defineProperties-6f7a50f2', './Transforms-a312718d', './RuntimeError-ad75c885', './WebGLConstants-497deb20', './ComponentDatatype-69643096', './when-ee12a2cb', './AttributeCompression-87682214', './IntersectionTests-a83a53f7', './Plane-c601d1ec', './WebMercatorProjection-f2dc467d', './createTaskProcessorWorker', './EllipsoidTangentPlane-d5dafbca', './OrientedBoundingBox-f789932a', './TerrainEncoding-3aaf3d8b'], function (defined, Check, freezeObject, defaultValue, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, when, AttributeCompression, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
+define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './AttributeCompression-3a5fff57', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './WebMercatorProjection-b2b73805', './createTaskProcessorWorker', './EllipsoidTangentPlane-54c911ea', './OrientedBoundingBox-65a45d94', './TerrainEncoding-0e4b9743'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
 
     /**
          * The encoding that is used for a heightmap
@@ -25,7 +25,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
              */
             LERC: 1
         };
-    var HeightmapEncoding$1 = freezeObject.freezeObject(HeightmapEncoding);
+    var HeightmapEncoding$1 = when.freezeObject(HeightmapEncoding);
 
     /**
          * Contains functions to create a mesh from a heightmap image.
@@ -41,7 +41,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          *
          * @constant
          */
-        HeightmapTessellator.DEFAULT_STRUCTURE = freezeObject.freezeObject({
+        HeightmapTessellator.DEFAULT_STRUCTURE = when.freezeObject({
             heightScale : 1.0,
             heightOffset : 0.0,
             elementsPerHeight : 1,
@@ -126,16 +126,16 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
          */
         HeightmapTessellator.computeVertices = function(options) {
             //>>includeStart('debug', pragmas.debug);
-            if (!defined.defined(options) || !defined.defined(options.heightmap)) {
+            if (!when.defined(options) || !when.defined(options.heightmap)) {
                 throw new Check.DeveloperError('options.heightmap is required.');
             }
-            if (!defined.defined(options.width) || !defined.defined(options.height)) {
+            if (!when.defined(options.width) || !when.defined(options.height)) {
                 throw new Check.DeveloperError('options.width and options.height are required.');
             }
-            if (!defined.defined(options.nativeRectangle)) {
+            if (!when.defined(options.nativeRectangle)) {
                 throw new Check.DeveloperError('options.nativeRectangle is required.');
             }
-            if (!defined.defined(options.skirtHeight)) {
+            if (!when.defined(options.skirtHeight)) {
                 throw new Check.DeveloperError('options.skirtHeight is required.');
             }
             //>>includeEnd('debug');
@@ -158,8 +158,8 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var height = options.height;
             var skirtHeight = options.skirtHeight;
 
-            var isGeographic = defaultValue.defaultValue(options.isGeographic, true);
-            var ellipsoid = defaultValue.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
+            var isGeographic = when.defaultValue(options.isGeographic, true);
+            var ellipsoid = when.defaultValue(options.ellipsoid, Cartesian2.Ellipsoid.WGS84);
 
             var oneOverGlobeSemimajorAxis = 1.0 / ellipsoid.maximumRadius;
 
@@ -171,7 +171,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             var geographicNorth;
 
             var rectangle = options.rectangle;
-            if (!defined.defined(rectangle)) {
+            if (!when.defined(rectangle)) {
                 if (isGeographic) {
                     geographicWest = toRadians(nativeRectangle.west);
                     geographicSouth = toRadians(nativeRectangle.south);
@@ -191,18 +191,18 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
             }
 
             var relativeToCenter = options.relativeToCenter;
-            var hasRelativeToCenter = defined.defined(relativeToCenter);
+            var hasRelativeToCenter = when.defined(relativeToCenter);
             relativeToCenter = hasRelativeToCenter ? relativeToCenter : Cartesian2.Cartesian3.ZERO;
-            var exaggeration = defaultValue.defaultValue(options.exaggeration, 1.0);
-            var includeWebMercatorT = defaultValue.defaultValue(options.includeWebMercatorT, false);
+            var exaggeration = when.defaultValue(options.exaggeration, 1.0);
+            var includeWebMercatorT = when.defaultValue(options.includeWebMercatorT, false);
 
-            var structure = defaultValue.defaultValue(options.structure, HeightmapTessellator.DEFAULT_STRUCTURE);
-            var heightScale = defaultValue.defaultValue(structure.heightScale, HeightmapTessellator.DEFAULT_STRUCTURE.heightScale);
-            var heightOffset = defaultValue.defaultValue(structure.heightOffset, HeightmapTessellator.DEFAULT_STRUCTURE.heightOffset);
-            var elementsPerHeight = defaultValue.defaultValue(structure.elementsPerHeight, HeightmapTessellator.DEFAULT_STRUCTURE.elementsPerHeight);
-            var stride = defaultValue.defaultValue(structure.stride, HeightmapTessellator.DEFAULT_STRUCTURE.stride);
-            var elementMultiplier = defaultValue.defaultValue(structure.elementMultiplier, HeightmapTessellator.DEFAULT_STRUCTURE.elementMultiplier);
-            var isBigEndian = defaultValue.defaultValue(structure.isBigEndian, HeightmapTessellator.DEFAULT_STRUCTURE.isBigEndian);
+            var structure = when.defaultValue(options.structure, HeightmapTessellator.DEFAULT_STRUCTURE);
+            var heightScale = when.defaultValue(structure.heightScale, HeightmapTessellator.DEFAULT_STRUCTURE.heightScale);
+            var heightOffset = when.defaultValue(structure.heightOffset, HeightmapTessellator.DEFAULT_STRUCTURE.heightOffset);
+            var elementsPerHeight = when.defaultValue(structure.elementsPerHeight, HeightmapTessellator.DEFAULT_STRUCTURE.elementsPerHeight);
+            var stride = when.defaultValue(structure.stride, HeightmapTessellator.DEFAULT_STRUCTURE.stride);
+            var elementMultiplier = when.defaultValue(structure.elementMultiplier, HeightmapTessellator.DEFAULT_STRUCTURE.elementMultiplier);
+            var isBigEndian = when.defaultValue(structure.isBigEndian, HeightmapTessellator.DEFAULT_STRUCTURE.isBigEndian);
 
             var rectangleWidth = Cartesian2.Rectangle.computeWidth(nativeRectangle);
             var rectangleHeight = Cartesian2.Rectangle.computeHeight(nativeRectangle);
@@ -245,13 +245,14 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var hMin = Number.POSITIVE_INFINITY;
 
-            var arrayWidth = width + (skirtHeight > 0.0 ? 2 : 0);
-            var arrayHeight = height + (skirtHeight > 0.0 ? 2 : 0);
-            var size = arrayWidth * arrayHeight;
-            var positions = new Array(size);
-            var heights = new Array(size);
-            var uvs = new Array(size);
-            var webMercatorTs = includeWebMercatorT ? new Array(size) : [];
+            var gridVertexCount = width * height;
+            var edgeVertexCount = skirtHeight > 0.0 ? (width * 2 + height * 2) : 0;
+            var vertexCount = gridVertexCount + edgeVertexCount;
+
+            var positions = new Array(vertexCount);
+            var heights = new Array(vertexCount);
+            var uvs = new Array(vertexCount);
+            var webMercatorTs = includeWebMercatorT ? new Array(vertexCount) : [];
 
             var startRow = 0;
             var endRow = height;
@@ -265,7 +266,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 ++endCol;
             }
 
-            var index = 0;
+            var skirtOffsetPercentage = 0.00001;
 
             for (var rowIndex = startRow; rowIndex < endRow; ++rowIndex) {
                 var row = rowIndex;
@@ -284,12 +285,22 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                     latitude = toRadians(latitude);
                 }
 
+                var v = (latitude - geographicSouth) / (geographicNorth - geographicSouth);
+                v = _Math.CesiumMath.clamp(v, 0.0, 1.0);
+
+                var isNorthEdge = rowIndex === startRow;
+                var isSouthEdge = rowIndex === endRow - 1;
+                if (skirtHeight > 0.0) {
+                    if (isNorthEdge) {
+                        latitude += skirtOffsetPercentage * rectangleHeight;
+                    } else if (isSouthEdge) {
+                        latitude -= skirtOffsetPercentage * rectangleHeight;
+                    }
+                }
+
                 var cosLatitude = cos(latitude);
                 var nZ = sin(latitude);
                 var kZ = radiiSquaredZ * nZ;
-
-                var v = (latitude - geographicSouth) / (geographicNorth - geographicSouth);
-                v = _Math.CesiumMath.clamp(v, 0.0, 1.0);
 
                 var webMercatorT;
                 if (includeWebMercatorT) {
@@ -303,14 +314,6 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                     }
                     if (col >= width) {
                         col = width - 1;
-                    }
-
-                    var longitude = nativeRectangle.west + granularityX * col;
-
-                    if (!isGeographic) {
-                        longitude = longitude * oneOverGlobeSemimajorAxis;
-                    } else {
-                        longitude = toRadians(longitude);
                     }
 
                     var terrainOffset = row * (width * stride) + col * stride;
@@ -335,30 +338,49 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
                     heightSample = (heightSample * heightScale + heightOffset) * exaggeration;
 
-                    var u = (longitude - geographicWest) / (geographicEast - geographicWest);
-                    u = _Math.CesiumMath.clamp(u, 0.0, 1.0);
-                    uvs[index] = new Cartesian2.Cartesian2(u, v);
-
                     maximumHeight = Math.max(maximumHeight, heightSample);
                     minimumHeight = Math.min(minimumHeight, heightSample);
 
-                    if (colIndex !== col || rowIndex !== row) {
-                        var percentage = 0.00001;
-                        if (colIndex < 0) {
-                            longitude -= percentage * rectangleWidth;
-                        } else {
-                            longitude += percentage * rectangleWidth;
-                        }
-                        if (rowIndex < 0) {
-                            latitude += percentage * rectangleHeight;
-                        } else {
-                            latitude -= percentage * rectangleHeight;
-                        }
+                    var longitude = nativeRectangle.west + granularityX * col;
 
-                        cosLatitude = cos(latitude);
-                        nZ = sin(latitude);
-                        kZ = radiiSquaredZ * nZ;
-                        heightSample -= skirtHeight;
+                    if (!isGeographic) {
+                        longitude = longitude * oneOverGlobeSemimajorAxis;
+                    } else {
+                        longitude = toRadians(longitude);
+                    }
+
+                    var u = (longitude - geographicWest) / (geographicEast - geographicWest);
+                    u = _Math.CesiumMath.clamp(u, 0.0, 1.0);
+
+                    var index = row * width + col;
+
+                    if (skirtHeight > 0.0) {
+                        var isWestEdge = colIndex === startCol;
+                        var isEastEdge = colIndex === endCol - 1;
+                        var isEdge = isNorthEdge || isSouthEdge || isWestEdge || isEastEdge;
+                        var isCorner = (isNorthEdge || isSouthEdge) && (isWestEdge || isEastEdge);
+                        if (isCorner) {
+                            // Don't generate skirts on the corners.
+                            continue;
+                        } else if (isEdge) {
+                            heightSample -= skirtHeight;
+
+                            if (isWestEdge) {
+                                // The outer loop iterates north to south but the indices are ordered south to north, hence the index flip below
+                                index = gridVertexCount + (height - row - 1);
+                                longitude -= skirtOffsetPercentage * rectangleWidth;
+                            } else if (isSouthEdge) {
+                                // Add after west indices. South indices are ordered east to west.
+                                index = gridVertexCount + height + (width - col - 1);
+                            } else if (isEastEdge) {
+                                // Add after west and south indices. East indices are ordered north to south. The index is flipped like above.
+                                index = gridVertexCount + height + width + row;
+                                longitude += skirtOffsetPercentage * rectangleWidth;
+                            } else if (isNorthEdge) {
+                                // Add after west, south, and east indices. North indices are ordered west to east.
+                                index = gridVertexCount + height + width + height + col;
+                            }
+                        }
                     }
 
                     var nX = cosLatitude * cos(longitude);
@@ -381,12 +403,11 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
                     positions[index] = position;
                     heights[index] = heightSample;
+                    uvs[index] = new Cartesian2.Cartesian2(u, v);
 
                     if (includeWebMercatorT) {
                         webMercatorTs[index] = webMercatorT;
                     }
-
-                    index++;
 
                     Transforms.Matrix4.multiplyByPoint(toENU, position, cartesian3Scratch);
 
@@ -398,7 +419,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var boundingSphere3D = Transforms.BoundingSphere.fromPoints(positions);
             var orientedBoundingBox;
-            if (defined.defined(rectangle)) {
+            if (when.defined(rectangle)) {
                 orientedBoundingBox = OrientedBoundingBox.OrientedBoundingBox.fromRectangle(rectangle, minimumHeight, maximumHeight, ellipsoid);
             }
 
@@ -410,46 +431,11 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
 
             var aaBox = new EllipsoidTangentPlane.AxisAlignedBoundingBox(minimum, maximum, relativeToCenter);
             var encoding = new TerrainEncoding.TerrainEncoding(aaBox, hMin, maximumHeight, fromENU, false, includeWebMercatorT);
-            var vertices = new Float32Array(size * encoding.getStride());
+            var vertices = new Float32Array(vertexCount * encoding.getStride());
 
             var bufferIndex = 0;
-            for (var j = 0; j < size; ++j) {
+            for (var j = 0; j < vertexCount; ++j) {
                 bufferIndex = encoding.encode(vertices, bufferIndex, positions[j], uvs[j], heights[j], undefined, webMercatorTs[j]);
-            }
-
-            var westIndicesSouthToNorth;
-            var southIndicesEastToWest;
-            var eastIndicesNorthToSouth;
-            var northIndicesWestToEast;
-
-            if (skirtHeight > 0.0) {
-                northIndicesWestToEast = [];
-                southIndicesEastToWest = [];
-                for (var i1 = 0; i1 < width; ++i1) {
-                    northIndicesWestToEast.push(arrayWidth + 1 + i1);
-                    southIndicesEastToWest.push(arrayWidth * (arrayHeight - 1) - 2 - i1);
-                }
-
-                westIndicesSouthToNorth = [];
-                eastIndicesNorthToSouth = [];
-                for (var i2 = 0; i2 < height; ++i2) {
-                    eastIndicesNorthToSouth.push((i2 + 1) * arrayWidth + width);
-                    westIndicesSouthToNorth.push((height - i2) * arrayWidth + 1);
-                }
-            } else {
-                northIndicesWestToEast = [];
-                southIndicesEastToWest = [];
-                for (var i3 = 0; i3 < width; ++i3) {
-                    northIndicesWestToEast.push(i3);
-                    southIndicesEastToWest.push(width * height - 1 - i3);
-                }
-
-                westIndicesSouthToNorth = [];
-                eastIndicesNorthToSouth = [];
-                for (var i4 = 0; i4 < height; ++i4) {
-                    eastIndicesNorthToSouth.push((i4 + 1) * width - 1);
-                    westIndicesSouthToNorth.push((height - i4 - 1) * width );
-                }
             }
 
             return {
@@ -459,11 +445,7 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 encoding : encoding,
                 boundingSphere3D : boundingSphere3D,
                 orientedBoundingBox : orientedBoundingBox,
-                occludeePointInScaledSpace : occludeePointInScaledSpace,
-                westIndicesSouthToNorth : westIndicesSouthToNorth,
-                southIndicesEastToWest : southIndicesEastToWest,
-                eastIndicesNorthToSouth : eastIndicesNorthToSouth,
-                northIndicesWestToEast : northIndicesWestToEast
+                occludeePointInScaledSpace : occludeePointInScaledSpace
             };
         };
 
@@ -2589,14 +2571,6 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 parameters.height = result.height;
             }
 
-            var arrayWidth = parameters.width;
-            var arrayHeight = parameters.height;
-
-            if (parameters.skirtHeight > 0.0) {
-                arrayWidth += 2;
-                arrayHeight += 2;
-            }
-
             parameters.ellipsoid = Cartesian2.Ellipsoid.clone(parameters.ellipsoid);
             parameters.rectangle = Cartesian2.Rectangle.clone(parameters.rectangle);
 
@@ -2609,8 +2583,8 @@ define(['./defined-26bd4a03', './Check-da037458', './freezeObject-2d83f591', './
                 numberOfAttributes : statistics.encoding.getStride(),
                 minimumHeight : statistics.minimumHeight,
                 maximumHeight : statistics.maximumHeight,
-                gridWidth : arrayWidth,
-                gridHeight : arrayHeight,
+                gridWidth : parameters.width,
+                gridHeight : parameters.height,
                 boundingSphere3D : statistics.boundingSphere3D,
                 orientedBoundingBox : statistics.orientedBoundingBox,
                 occludeePointInScaledSpace : statistics.occludeePointInScaledSpace,

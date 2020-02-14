@@ -136,7 +136,8 @@ void main()\n\
     float nearSq = distanceDisplayConditionAndDisableDepth.x;\n\
     float farSq = distanceDisplayConditionAndDisableDepth.y;\n\
     if (lengthSq < nearSq || lengthSq > farSq) {\n\
-        positionEC.xyz = vec3(0.0);\n\
+        // push vertex behind camera to force it to be clipped\n\
+        positionEC.xyz = vec3(0.0, 0.0, 1.0);\n\
     }\n\
 #endif\n\
 \n\

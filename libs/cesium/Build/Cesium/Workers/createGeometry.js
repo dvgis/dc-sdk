@@ -1,7 +1,7 @@
 /**
  * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
  *
- * Copyright 2011-2017 Cesium Contributors
+ * Copyright 2011-2020 Cesium Contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,4 +20,4 @@
  * Portions licensed separately.
  * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(["./defined-2a4f2d00","./Check-e5651467","./freezeObject-a51e076f","./defaultValue-29c9b1af","./Math-7782f09e","./Cartesian2-ba70b51f","./defineProperties-c817531e","./Transforms-7d72c08c","./RuntimeError-51c34ab4","./WebGLConstants-90dbfe2f","./ComponentDatatype-418b1c61","./GeometryAttribute-75811f09","./when-1faa3867","./GeometryAttributes-f8548d3f","./AttributeCompression-5601f533","./GeometryPipeline-6fb2c91a","./EncodedCartesian3-4813be74","./IndexDatatype-2bcfc06b","./IntersectionTests-59cef209","./Plane-b1ca737b","./PrimitivePipeline-28a5eea5","./WebMercatorProjection-1ecca5ba","./createTaskProcessorWorker"],function(b,e,r,t,a,n,i,o,f,c,s,u,d,m,l,p,y,P,k,v,C,h,G){"use strict";var W={};function A(e){var r=W[e];return b.defined(r)||("object"==typeof exports?W[r]=r=require("Workers/"+e):require(["Workers/"+e],function(e){W[r=e]=e})),r}return G(function(e,r){for(var t=e.subTasks,a=t.length,n=new Array(a),i=0;i<a;i++){var o=t[i],f=o.geometry,c=o.moduleName;if(b.defined(c)){var s=A(c);n[i]=s(f,o.offset)}else n[i]=f}return d.when.all(n,function(e){return C.PrimitivePipeline.packCreateGeometryResults(e,r)})})});
+define(["./when-0488ac89","./Check-78ca6843","./Math-8a4c9da1","./Cartesian2-cc1e6450","./defineProperties-c6a70625","./Transforms-fa4f10bc","./RuntimeError-4d6e0952","./WebGLConstants-66e14a3b","./ComponentDatatype-9252f28f","./GeometryAttribute-3345e440","./GeometryAttributes-3227db5b","./AttributeCompression-fe1560e2","./GeometryPipeline-587f449d","./EncodedCartesian3-97ac8d01","./IndexDatatype-8575c917","./IntersectionTests-12255a09","./Plane-466db411","./PrimitivePipeline-0d9185c5","./WebMercatorProjection-c0de4fbc","./createTaskProcessorWorker"],function(u,e,r,t,n,a,i,o,s,c,f,d,b,m,p,l,y,P,k,v){"use strict";var C={};function h(e){var r=C[e];return u.defined(r)||("object"==typeof exports?C[r]=r=require("Workers/"+e):require(["Workers/"+e],function(e){C[r=e]=e})),r}return v(function(e,r){for(var t=e.subTasks,n=t.length,a=new Array(n),i=0;i<n;i++){var o=t[i],s=o.geometry,c=o.moduleName;if(u.defined(c)){var f=h(c);a[i]=f(s,o.offset)}else a[i]=s}return u.when.all(a,function(e){return P.PrimitivePipeline.packCreateGeometryResults(e,r)})})});
