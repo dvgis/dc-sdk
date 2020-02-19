@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 19:26:51
+ * @Last Modified time: 2020-02-14 19:26:22
  */
 
 import Overlay from '../Overlay'
@@ -108,6 +108,10 @@ DC.Polyline = class extends Overlay {
     return this
   }
 
+  /**
+   *
+   * @param {*} entity
+   */
   fromEntity(entity) {
     // this._positions =
   }

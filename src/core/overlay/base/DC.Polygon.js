@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 19:27:04
+ * @Last Modified time: 2020-02-18 11:03:30
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -16,16 +16,16 @@ DC.Polygon = class extends Overlay {
       throw new Error('the positions invalid')
     }
     super()
-    this._positions = []
+    this._positions = this._preparePositions(positions)
     this._holes = []
-    this._preparePositions(positions)
+
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.POLYGON
   }
 
   set positions(positions) {
-    this._preparePositions(positions)
+    this._positions = this._preparePositions(positions)
   }
 
   get positions() {
@@ -80,7 +80,7 @@ DC.Polygon = class extends Overlay {
       }
       positions = positions.split(';')
     }
-    this._positions = positions.map(item => {
+    return positions.map(item => {
       if (Array.isArray(item)) {
         return DC.Position.fromCoordArray(item)
       } else if (item instanceof DC.Position) {
@@ -122,45 +122,6 @@ DC.Polygon = class extends Overlay {
 
   /**
    *
-   * @param {*} extrudedHeight
-   * @param {*} duration
-   */
-  setExtrudedHeight(extrudedHeight, duration) {
-    if (this._delegate.polygon) {
-      let now = Cesium.JulianDate.now()
-      let oriValue = this._delegate.polygon.extrudedHeight
-        ? this._delegate.polygon.extrudedHeight.getValue(now)
-        : 0
-      let rate = 0
-      let stopTime = now
-      if (duration) {
-        rate = (extrudedHeight - oriValue) / duration
-        stopTime = DC.JulianDate.addSeconds(
-          now,
-          duration,
-          new Cesium.JulianDate()
-        )
-      }
-      this._delegate.polygon.extrudedHeight = new Cesium.CallbackProperty(
-        time => {
-          let result = 0
-          if (Cesium.JulianDate.greaterThan(stopTime, time)) {
-            result =
-              oriValue +
-              (duration - Cesium.JulianDate.secondsDifference(stopTime, time)) *
-                rate
-          } else {
-            result = extrudedHeight
-          }
-          return result
-        }
-      )
-    }
-    return this
-  }
-
-  /**
-   *
    * @param {*} style
    */
   setStyle(style) {
@@ -171,5 +132,10 @@ DC.Polygon = class extends Overlay {
     this._delegate.polygon && this._delegate.polygon.merge(style)
     return this
   }
+
+  /**
+   *
+   * @param {*} entity
+   */
   static fromEntity(entity) {}
 }

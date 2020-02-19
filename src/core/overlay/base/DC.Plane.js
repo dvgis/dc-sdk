@@ -1,29 +1,26 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-06 15:03:25
+ * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-18 16:16:15
+ * @Last Modified time: 2020-02-18 16:42:15
  */
 
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
-const DEF_STYLE = {
-  pixelSize: 8,
-  outlineColor: Cesium.Color.BLUE,
-  outlineWidth: 2
-}
-
-DC.Point = class extends Overlay {
-  constructor(position) {
+DC.Plane = class extends Overlay {
+  constructor(position, width, height, direction) {
     if (!position || !(position instanceof DC.Position)) {
       throw new Error('the position invalid')
     }
     super()
     this._position = position
+    this._width = width
+    this._height = height
+    this._plane = new Cesium.Plane(direction, 0, 0)
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.POINT
+    this.type = DC.OverlayType.PLANE
   }
 
   set position(position) {
@@ -35,6 +32,26 @@ DC.Point = class extends Overlay {
 
   get position() {
     return this._position
+  }
+
+  set width(width) {
+    this._width = width
+  }
+
+  get width() {
+    return this._width
+  }
+
+  set height(height) {
+    this._height = height
+  }
+
+  get height() {
+    return this._height
+  }
+
+  set direction(direction) {
+    this._plane = new Cesium.Plane(direction, 0.0)
   }
 
   /**
@@ -52,7 +69,7 @@ DC.Point = class extends Overlay {
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWSG84ToCartesian(this._position),
+        DC.T.transformWSG84ToCartesian(this._center),
         new Cesium.HeadingPitchRoll(
           Cesium.Math.toRadians(this._position.heading),
           Cesium.Math.toRadians(this._position.pitch),
@@ -63,9 +80,14 @@ DC.Point = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.point = {
-      ...DEF_STYLE,
-      ...this._style
+    this._delegate.plane = {
+      ...this._style,
+      plane: new Cesium.CallbackProperty(time => {
+        return this._plane
+      }),
+      dimensions: new Cesium.CallbackProperty(time => {
+        return { x: this._width, y: this._height }
+      })
     }
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
@@ -80,8 +102,7 @@ DC.Point = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.point &&
-      DC.Util.merge(this._delegate.point, DEF_STYLE, this._style)
+    this._delegate.plane && this._delegate.plane.merge(this._style)
     return this
   }
 }

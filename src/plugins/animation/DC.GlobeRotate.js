@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-30 20:47:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 14:51:08
+ * @Last Modified time: 2020-02-17 14:20:59
  */
 import Cesium from '@/namespace'
 DC.GlobeRotate = class {
