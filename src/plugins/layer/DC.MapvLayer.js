@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-02-13 20:19:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-14 00:51:32
+ * @Last Modified time: 2020-02-20 13:45:13
  */
-import Layer from '../../core/layer/Layer'
+import Layer from '@/core/layer/Layer'
 
 const mapv = DC.getNamespace().mapv
 

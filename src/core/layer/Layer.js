@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 19:05:42
+ * @Last Modified time: 2020-02-20 14:07:08
  */
 import Cesium from '@/namespace'
 import LayerEvent from '../event/LayerEvent'
@@ -71,19 +71,17 @@ class Layer {
    * the layer added callback function
    * subclasses need to be overridden
    */
-
   _addCallback(viewer) {
     this._viewer = viewer
-    if (
-      this._delegate &&
-      this._delegate instanceof Cesium.PrimitiveCollection
-    ) {
-      this._viewer.delegate.scene.primitives.add(this._delegate)
-      this._state = DC.LayerState.ADDED
-    } else if (this._delegate) {
-      this._viewer.delegate.dataSources.add(this._delegate)
-      this._state = DC.LayerState.ADDED
+    if (!this._delegate) {
+      return
     }
+    if (this._delegate instanceof Cesium.PrimitiveCollection) {
+      this._viewer.delegate.scene.primitives.add(this._delegate)
+    } else {
+      this._viewer.delegate.dataSources.add(this._delegate)
+    }
+    this._state = DC.LayerState.ADDED
   }
 
   /**
@@ -91,20 +89,19 @@ class Layer {
    * subclasses need to be overridden
    */
   _removeCallback() {
+    if (!this._delegate) {
+      return
+    }
     if (this._viewer) {
       this._cache = {}
-      if (this._delegate && this._delegate instanceof Cesium.CustomDataSource) {
-        this._delegate.entities.removeAll()
-        this._viewer.delegate.dataSources.remove(this._delegate)
-        this._state = DC.LayerState.REMOVED
-      } else if (
-        this._delegate &&
-        this._delegate instanceof Cesium.PrimitiveCollection
-      ) {
+      if (this._delegate instanceof Cesium.PrimitiveCollection) {
         this._delegate.removeAll()
         this._viewer.delegate.scene.primitives.remove(this._delegate)
-        this._state = DC.LayerState.REMOVED
+      } else {
+        this._delegate.entities.removeAll()
+        this._viewer.delegate.dataSources.remove(this._delegate)
       }
+      this._state = DC.LayerState.REMOVED
     }
   }
 
@@ -163,6 +160,11 @@ class Layer {
     return this._cache[id] || undefined
   }
 
+  /**
+   *
+   * @param {*} atrrName
+   * @param {*} attrVal
+   */
   getOverlayByAttr(atrrName, attrVal) {
     let overlay = undefined
     for (let key in this._cache) {
@@ -173,6 +175,11 @@ class Layer {
     return overlay
   }
 
+  /**
+   *
+   * @param {*} method
+   * @param {*} context
+   */
   eachOverlay(method, context) {
     for (let key in this._cache) {
       method.call(context, this._cache[key])

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 22:52:08
+ * @Last Modified time: 2020-02-19 19:42:23
  */
 import Widget from './Widget'
 
@@ -23,6 +23,7 @@ class Attribution extends Widget {
     `
     this._config = undefined
   }
+
   _installHook() {
     let span = DC.DomUtil.create('span', '', this._wapper)
     span.innerHTML = '数字视觉'

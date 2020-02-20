@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-19 16:48:53
+ * @Last Modified time: 2020-02-20 10:08:56
  */
 import Cesium from '@/namespace'
 
@@ -17,13 +17,9 @@ DC.T = class {
       let ellipsoid = Cesium.Ellipsoid.WGS84
       let cartographic = ellipsoid.cartesianToCartographic(cartesian)
       return new DC.Position(
-        Cesium.Math.toDegrees(
-          cartographic.longitude ? cartographic.longitude.toFix(6) : 0
-        ),
-        Cesium.Math.toDegrees(
-          cartographic.latitude ? cartographic.latitude.toFix(6) : 0
-        ),
-        cartographic.height ? cartographic.height.toFix(2) : 0
+        Cesium.Math.toDegrees(cartographic.longitude),
+        Cesium.Math.toDegrees(cartographic.latitude),
+        cartographic.height
       )
     }
     return new DC.Position(0, 0)
@@ -81,12 +77,4 @@ DC.T = class {
       ? WSG84Arr.map(item => DC.T.transformWSG84ToCartesian(item))
       : []
   }
-
-  static transformWindowCoordToWSG84(position, viewer) {}
-
-  static transformWSG84ToWindowCoord(position, viewer) {}
-
-  static transformWSG84ToCanvasCoord(position) {}
-
-  static transformCanvasCoordToWSG84(position) {}
 }

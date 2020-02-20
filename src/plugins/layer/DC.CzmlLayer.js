@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-19 13:38:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 22:04:13
+ * @Last Modified time: 2020-02-20 13:44:46
  */
 
 import Cesium from '@/namespace'
-import Layer from '../../core/layer/Layer'
+import Layer from '@/core/layer/Layer'
 
 DC.CzmlLayer = class extends Layer {
   constructor(id, url) {

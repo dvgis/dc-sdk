@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-14 11:19:48
+ * @Last Modified time: 2020-02-20 14:07:52
  */
 
 import Cesium from '@/namespace'
@@ -54,6 +54,7 @@ DC.Viewer = class {
       globe: this._delegate.scene.globe
     })
     this._layerCache = {}
+    this._effectCache = {}
     this.on(DC.ViewerEventType.ADD_LAYER, this._addLayerCallback, this) //Initialize layer add event
     this.on(DC.ViewerEventType.REMOVE_LAYER, this._removeLayerCallback, this) //Initialize layer remove event
     this.on(DC.ViewerEventType.ADD_EFFECT, this._addEffectCallback, this) //Initialize effect add event
@@ -132,9 +133,29 @@ DC.Viewer = class {
     }
   }
 
-  _addEffectCallback(effect) {}
+  _addEffectCallback(effect) {
+    if (effect && effect.effectEvent && effect.state !== DC.EffectState.ADDED) {
+      !this._effectCache[effect.type] && (this._effectCache[effect.type] = {})
+      effect.effectEvent.fire(DC.EffectEventType.ADD, this)
+      this._effectCache[effect.type][effect.id] = effect
+    }
+  }
 
-  _removeEffectCallback(effect) {}
+  _removeEffectCallback(effect) {
+    if (
+      effect &&
+      effect.effectEvent &&
+      effect.state !== DC.EffectState.REMOVED
+    ) {
+      effect.effectEvent.fire(DC.EffectEventType.REMOVE, this)
+      if (
+        this._effectCache[effect.type] &&
+        this._effectCache[effect.type][effect.id]
+      ) {
+        delete this._effectCache[effect.type][effect.id]
+      }
+    }
+  }
 
   /**
    *
@@ -177,6 +198,7 @@ DC.Viewer = class {
     if (!baseLayers) {
       return this
     }
+    this._delegate.imageryLayers.removeAll()
     this._baseLayerPicker.imageryProviderViewModels.push(
       new Cesium.ProviderViewModel({
         name: options.name || '地图',
@@ -278,9 +300,23 @@ DC.Viewer = class {
     return this
   }
 
-  addEffect(effect) {}
+  /**
+   *
+   * @param {*} effect
+   */
+  addEffect(effect) {
+    this._viewerEvent.fire(DC.ViewerEventType.ADD_EFFECT, effect)
+    return this
+  }
 
-  removeEffect(effect) {}
+  /**
+   *
+   * @param {*} effect
+   */
+  removeEffect(effect) {
+    this._viewerEvent.fire(DC.ViewerEventType.REMOVE_EFFECT, effect)
+    return this
+  }
 
   /**
    *

@@ -2,17 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:03:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 22:05:57
- */
-/*
- * @Author: Caven
- * @Date: 2020-01-19 13:38:48
- * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 22:04:13
+ * @Last Modified time: 2020-02-20 13:45:06
  */
 
 import Cesium from '@/namespace'
-import Layer from '../../core/layer/Layer'
+import Layer from '@/core/layer/Layer'
 
 DC.KmlLayer = class extends Layer {
   constructor(id, url) {

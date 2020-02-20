@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 17:13:22
+ * @Last Modified time: 2020-02-20 13:55:55
  */
 import OverlayEvent from '../event/OverlayEvent'
 class Overlay {
@@ -15,13 +15,9 @@ class Overlay {
     this._style = {}
     this._attr = {}
     this._overlayEvent = new OverlayEvent()
-    this._overlayEvent.on(DC.OverlayEventType.ADD, this._addCallback, this)
-    this._overlayEvent.on(
-      DC.OverlayEventType.REMOVE,
-      this._removeCallback,
-      this
-    )
     this.type = undefined
+    this.on(DC.OverlayEventType.ADD, this._addCallback, this)
+    this.on(DC.OverlayEventType.REMOVE, this._removeCallback, this)
   }
 
   get id() {

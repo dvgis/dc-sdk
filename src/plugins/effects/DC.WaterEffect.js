@@ -2,10 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:25:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-19 11:09:00
+ * @Last Modified time: 2020-02-20 13:45:59
  */
-import Cesium from '../../namespace'
+import Cesium from '@/namespace'
 import Effect from './Effect'
+
 DC.WaterEffect = class extends Effect {
   constructor(positions) {
     super()

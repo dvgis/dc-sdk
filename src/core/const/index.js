@@ -2,9 +2,20 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-18 16:11:38
+ * @Last Modified time: 2020-02-20 14:07:36
  */
 import Cesium from '@/namespace'
+
+let baseEventType = {
+  ADD: 'add',
+  REMOVE: 'remove'
+}
+
+let baseState = {
+  INITIALIZED: 'initialized',
+  ADDED: 'added',
+  REMOVED: 'removed'
+}
 
 DC.MouseEventType = {
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
@@ -36,17 +47,14 @@ DC.LayerType = {
 }
 
 DC.LayerEventType = {
-  ADD: 'add',
-  CLEAR: 'clear',
-  REMOVE: 'remove',
+  ...baseEventType,
   ADD_OVERLAY: 'addOverlay',
-  REMOVE_OVERLAY: 'removeOverlay'
+  REMOVE_OVERLAY: 'removeOverlay',
+  CLEAR: 'clear'
 }
 
 DC.LayerState = {
-  INITIALIZED: 'initialized',
-  ADDED: 'added',
-  REMOVED: 'removed',
+  ...baseState,
   CLEARED: 'cleared'
 }
 
@@ -68,25 +76,21 @@ DC.OverlayEventType = {
 }
 
 DC.OverlayState = {
-  INITIALIZED: 'initialized',
-  ADDED: 'added',
-  REMOVED: 'removed'
+  ...baseState
 }
 
 DC.EffectType = {
   RAIN: 'rain',
-  SNOW: 'snow'
+  SNOW: 'snow',
+  BLOOM: 'bloom'
 }
 
 DC.EffectEventType = {
-  ADD: 'add',
-  REMOVE: 'remove'
+  ...baseEventType
 }
 
 DC.EffectState = {
-  INITIALIZED: 'initialized',
-  ADDED: 'added',
-  REMOVED: 'removed'
+  ...baseState
 }
 
 DC.WidgetType = {

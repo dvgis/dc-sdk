@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:21:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 17:17:16
+ * @Last Modified time: 2020-02-20 13:45:32
  */
 import Cesium from '@/namespace'
 
@@ -45,6 +45,8 @@ DC.Roaming = class {
     this._positions = positions.map(item => {
       if (Array.isArray(item)) {
         return DC.Position.fromCoordArray(item)
+      } else if (item instanceof DC.Position) {
+        return item
       } else {
         return DC.Position.fromCoordString(item)
       }
@@ -57,9 +59,17 @@ DC.Roaming = class {
       let timeInterval = this._time - (this._time % this._positions.length)
       this._startTime = Cesium.JulianDate.now()
       let increment = timeInterval / this._positions.length
-      this._endTime = Cesium.JulianDate.addSeconds(this._startTime, timeInterval, new Cesium.JulianDate())
+      this._endTime = Cesium.JulianDate.addSeconds(
+        this._startTime,
+        timeInterval,
+        new Cesium.JulianDate()
+      )
       this._positions.forEach((item, index) => {
-        let time = Cesium.JulianDate.addSeconds(this._startTime, index * increment, new Cesium.JulianDate())
+        let time = Cesium.JulianDate.addSeconds(
+          this._startTime,
+          index * increment,
+          new Cesium.JulianDate()
+        )
         property.addSample(time, DC.T.transformWSG84ToCartesian(item))
       })
     }
@@ -121,7 +131,10 @@ DC.Roaming = class {
         this._viewer.delegate.trackedEntity = this._delegate
       } else if (perspective === 1) {
         this._viewer.delegate.trackedEntity = undefined
-        this._viewer.delegate.zoomTo(this._delegate, new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-90)))
+        this._viewer.delegate.zoomTo(
+          this._delegate,
+          new Cesium.HeadingPitchRange(0, Cesium.Math.toRadians(-90))
+        )
       }
     }
   }
