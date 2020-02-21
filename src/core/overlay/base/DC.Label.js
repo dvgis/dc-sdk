@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:59:58
+ * @Last Modified time: 2020-02-20 19:30:04
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -81,7 +81,7 @@ DC.Label = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.label && this._delegate.label.merge(this._style)
+    this._delegate.label && DC.Util.merge(this._delegate.label, this._style)
     return this
   }
 }

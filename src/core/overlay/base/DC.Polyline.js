@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-14 19:26:22
+ * @Last Modified time: 2020-02-20 19:30:54
  */
 
 import Overlay from '../Overlay'
@@ -104,7 +104,8 @@ DC.Polyline = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.polyline && this._delegate.polyline.merge(this._style)
+    this._delegate.polyline &&
+      DC.Util.merge(this._delegate.polyline, this._style)
     return this
   }
 

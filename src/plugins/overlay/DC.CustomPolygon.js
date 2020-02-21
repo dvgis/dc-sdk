@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-02-06 13:11:58
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-14 19:39:10
+ * @Last Modified time: 2020-02-21 10:28:04
  */
 import Cesium from '@/namespace'
-import '../../core/overlay/base/DC.Polygon'
+import '@/core/overlay/base/DC.Polygon'
 
 DC.CustomPolygon = class extends DC.Polygon {
   constructor(positions) {
@@ -30,7 +30,7 @@ DC.CustomPolygon = class extends DC.Polygon {
     this._show = show
     this._delegate && (this._delegate.show = show)
     this._topOutline && (this._topOutline.show = show)
-    this._bottomOutline && (this._bottomOutline = show)
+    this._bottomOutline && (this._bottomOutline.show = show)
   }
 
   get show() {
@@ -106,8 +106,12 @@ DC.CustomPolygon = class extends DC.Polygon {
    */
   setTopOutline(lineStyle) {
     if (this._topOutline) {
-      this._topOutline.show = true
-      this._topOutline.polyline.merge(lineStyle)
+      this._topOutline.show = Cesium.defaultValue(lineStyle.show, true)
+      delete lineStyle.show
+      if (!lineStyle || Object.keys(lineStyle).length === 0) {
+        return
+      }
+      DC.Util.merge(this._topOutline.polyline, lineStyle)
     }
     return this
   }
@@ -118,8 +122,12 @@ DC.CustomPolygon = class extends DC.Polygon {
    */
   setBottomOutline(lineStyle) {
     if (this._bottomOutline) {
-      this._bottomOutline.show = true
-      this._bottomOutline.polyline.merge(lineStyle)
+      this._bottomOutline.show = Cesium.defaultValue(lineStyle.show, true)
+      delete lineStyle.show
+      if (!lineStyle || Object.keys(lineStyle).length === 0) {
+        return
+      }
+      DC.Util.merge(this._bottomOutline.polyline, lineStyle)
     }
     return this
   }

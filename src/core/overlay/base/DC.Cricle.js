@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-18 16:15:17
+ * @Last Modified time: 2020-02-20 19:29:46
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -97,7 +97,7 @@ DC.Circle = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.ellipse && this._delegate.ellipse.merge(this._style)
+    this._delegate.ellipse && DC.Util.merge(this._delegate.ellipse, this._style)
     return this
   }
 }

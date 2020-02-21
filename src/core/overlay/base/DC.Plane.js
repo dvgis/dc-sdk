@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-18 16:42:15
+ * @Last Modified time: 2020-02-20 19:30:20
  */
 
 import Cesium from '@/namespace'
@@ -102,7 +102,7 @@ DC.Plane = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.plane && this._delegate.plane.merge(this._style)
+    this._delegate.plane && DC.Util.merge(this._delegate.plane, this._style)
     return this
   }
 }

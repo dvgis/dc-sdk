@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-13 17:19:33
+ * @Last Modified time: 2020-02-20 19:29:15
  */
 
 import Cesium from '@/namespace'
@@ -110,7 +110,8 @@ DC.Billboard = class extends Overlay {
       return
     }
     this._style = style
-    this._delegate.billboard && this._delegate.billboard.merge(this._style)
+    this._delegate.billboard &&
+      DC.Util.merge(this._delegate.billboard, this._style)
     return this
   }
 
