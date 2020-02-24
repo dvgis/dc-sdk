@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-19 12:28:30
+ * @Last Modified time: 2020-02-24 16:03:49
  */
 
 import Cesium from '@/namespace'
@@ -44,6 +44,12 @@ class ViewerOption {
       options.moon,
       true
     )
+
+    this._viewer.delegate.scene.globe.depthTestAgainstTerrain = Cesium.defaultValue(
+      options.underground,
+      false
+    )
+
     return this
   }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-06 13:11:58
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-21 10:28:04
+ * @Last Modified time: 2020-02-24 17:24:48
  */
 import Cesium from '@/namespace'
 import '@/core/overlay/base/DC.Polygon'
@@ -109,7 +109,7 @@ DC.CustomPolygon = class extends DC.Polygon {
       this._topOutline.show = Cesium.defaultValue(lineStyle.show, true)
       delete lineStyle.show
       if (!lineStyle || Object.keys(lineStyle).length === 0) {
-        return
+        return this
       }
       DC.Util.merge(this._topOutline.polyline, lineStyle)
     }
@@ -125,7 +125,7 @@ DC.CustomPolygon = class extends DC.Polygon {
       this._bottomOutline.show = Cesium.defaultValue(lineStyle.show, true)
       delete lineStyle.show
       if (!lineStyle || Object.keys(lineStyle).length === 0) {
-        return
+        return this
       }
       DC.Util.merge(this._bottomOutline.polyline, lineStyle)
     }

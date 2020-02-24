@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-03 17:28:37
+ * @Last Modified time: 2020-02-24 13:30:31
  */
 
 const path = require('path')
@@ -87,6 +87,10 @@ module.exports = env => {
           options: {
             limit: 20000
           }
+        },
+        {
+          test: /\.glsl$/,
+          loader: 'webpack-glsl-loader'
         }
       ]
     },
