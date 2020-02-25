@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 14:07:52
+ * @Last Modified time: 2020-02-25 11:10:11
  */
 
 import Cesium from '@/namespace'
@@ -44,7 +44,7 @@ DC.Viewer = class {
     new MouseEvent(this) // Register global mouse events
     this._viewerOption = new ViewerOption(this) // Initialize the viewer option
     this._cameraOption = new CameraOption(this) // Initialize the camera option
-    this._viewerEvent = new ViewerEvent() // Register viewer events
+    this._viewerEvent = new ViewerEvent(this) // Register viewer events
     this._dcContainer = DC.DomUtil.create(
       'div',
       'dc-container',

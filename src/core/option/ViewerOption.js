@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-24 16:03:49
+ * @Last Modified time: 2020-02-25 10:49:36
  */
 
 import Cesium from '@/namespace'
@@ -45,23 +45,27 @@ class ViewerOption {
       true
     )
 
-    this._viewer.delegate.scene.globe.depthTestAgainstTerrain = Cesium.defaultValue(
-      options.underground,
-      false
+    this._viewer.delegate.scene.skyBox.show = Cesium.defaultValue(
+      options.skyBox,
+      true
     )
 
     return this
   }
 
   _setGlobeOption(options) {
+    this._viewer.delegate.scene.globe.show = Cesium.defaultValue(
+      options.globe,
+      true
+    )
     this._viewer.delegate.scene.globe.enableLighting = Cesium.defaultValue(
       options.enableLighting,
       false
     )
 
-    this._viewer.delegate.scene.globe.show = Cesium.defaultValue(
-      options.globe,
-      true
+    this._viewer.delegate.scene.globe.depthTestAgainstTerrain = Cesium.defaultValue(
+      options.underground,
+      false
     )
     return this
   }
@@ -78,6 +82,7 @@ class ViewerOption {
     this._setViewerOption(options)
       ._setCanvasOption(options)
       ._setSceneOption(options)
+      ._setGlobeOption(options)
       ._setClockOption(options)
     return this
   }
