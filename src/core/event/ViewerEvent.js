@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-25 11:59:04
+ * @Last Modified time: 2020-02-25 12:07:18
  */
 import Cesium from '@/namespace'
 
@@ -38,6 +38,9 @@ class ViewerEvent extends Event {
             event = this._viewer.delegate.scene.postRender
           case 'MORPH_COMPLETE':
             event = this._viewer.delegate.scene.morphComplete
+            break
+          case 'CLOCK_TICK':
+            event = this._viewer.delegate.clock.onTick
             break
           default:
             break

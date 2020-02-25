@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-25 11:19:43
+ * @Last Modified time: 2020-02-25 12:06:47
  */
 import Cesium from '@/namespace'
 
@@ -39,7 +39,8 @@ DC.SceneEventType = {
   CAMERA_CHANGED: 'cameraChanged',
   PRE_RENDER: 'preRender',
   POST_RENDER: 'postRender',
-  MORPH_COMPLETE: 'morphComplete'
+  MORPH_COMPLETE: 'morphComplete',
+  CLOCK_TICK: 'clockTick'
 }
 
 DC.LayerType = {
