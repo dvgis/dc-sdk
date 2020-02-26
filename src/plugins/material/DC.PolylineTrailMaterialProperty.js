@@ -2,15 +2,10 @@
  * @Author: Caven
  * @Date: 2020-02-24 13:09:09
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 22:43:55
+ * @Last Modified time: 2020-02-26 23:53:43
  */
 
 import Cesium from '@/namespace'
-
-const IMG =
-  'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAAgCAYAAABkS8DlAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADSSURBVHja7NYxEoUgDEDBYM39z2qHtZViwMFxt1FJnF/98ZXWWkRE7LWWOOt5Lsm9q/vsbu9Zdtazs/J19O5bs1XPZrwze/6V31zxbOZs1n905Wt2p3f25GzE7ohv6q3nLQCA3xEAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAA8g4AAAD//wMA4WEFTJOT5UIAAAAASUVORK5CYII='
-
-let LineTrailShader = require('../shader/PolylineTrailShader.glsl')
 
 DC.PolylineTrailMaterialProperty = class {
   constructor(options) {
@@ -65,20 +60,4 @@ DC.PolylineTrailMaterialProperty = class {
 Cesium.defineProperties(DC.PolylineTrailMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
-})
-
-Cesium.Material.PolylineTrailType = 'PolylineTrail'
-Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineTrailType, {
-  fabric: {
-    type: Cesium.Material.PolylineTrailType,
-    uniforms: {
-      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      image: IMG,
-      duration: 45
-    },
-    source: LineTrailShader
-  },
-  translucent: function(material) {
-    return true
-  }
 })

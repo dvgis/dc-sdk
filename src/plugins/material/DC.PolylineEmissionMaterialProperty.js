@@ -2,11 +2,9 @@
  * @Author: Caven
  * @Date: 2020-02-26 10:15:55
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 22:43:40
+ * @Last Modified time: 2020-02-26 23:39:38
  */
 import Cesium from '@/namespace'
-
-let LineEmissionShader = require('../shader/PolylineEmissionShader.glsl')
 
 DC.PolylineEmissionMaterialProperty = class {
   constructor(options) {
@@ -52,20 +50,3 @@ DC.PolylineEmissionMaterialProperty = class {
 Cesium.defineProperties(DC.PolylineEmissionMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color')
 })
-
-Cesium.Material.PolylineEmissionType = 'PolylineEmission'
-Cesium.Material._materialCache.addMaterial(
-  Cesium.Material.PolylineEmissionType,
-  {
-    fabric: {
-      type: Cesium.Material.PolylineEmissionType,
-      uniforms: {
-        color: new Cesium.Color(1.0, 0.0, 0.0, 0.7)
-      },
-      source: LineEmissionShader
-    },
-    translucent: function(material) {
-      return true
-    }
-  }
-)

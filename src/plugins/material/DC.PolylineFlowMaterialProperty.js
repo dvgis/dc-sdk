@@ -2,12 +2,10 @@
  * @Author: Caven
  * @Date: 2020-02-24 13:53:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 22:43:52
+ * @Last Modified time: 2020-02-26 23:52:52
  */
 
 import Cesium from '@/namespace'
-
-let LineFlowShader = require('../shader/PolylineFlowShader.glsl')
 
 DC.PolylineFlowMaterialProperty = class {
   constructor(options) {
@@ -62,19 +60,4 @@ DC.PolylineFlowMaterialProperty = class {
 Cesium.defineProperties(DC.PolylineFlowMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
-})
-
-Cesium.Material.PolylineFlowType = 'PolylineFlow'
-Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineFlowType, {
-  fabric: {
-    type: Cesium.Material.PolylineFlowType,
-    uniforms: {
-      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      duration: 45
-    },
-    source: LineFlowShader
-  },
-  translucent: function(material) {
-    return true
-  }
 })
