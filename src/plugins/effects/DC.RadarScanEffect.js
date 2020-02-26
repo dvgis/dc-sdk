@@ -2,13 +2,13 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-24 16:29:30
+ * @Last Modified time: 2020-02-26 23:11:42
  */
 
 import Cesium from '@/namespace'
 import Effect from './Effect'
 
-let RadarScanShader = require('../shader/RadarScanMaterial.glsl')
+let RadarScanShader = require('../shader/RadarScanShader.glsl')
 
 DC.RadarScanEffect = class extends Effect {
   constructor(id, position, radius, color, duration) {
@@ -154,28 +154,5 @@ DC.RadarScanEffect = class extends Effect {
         u_scanColor: this._color
       }
     })
-  }
-  /**
-   *
-   * @param {*} viewer
-   * 效果添加的回调函数,
-   */
-  _addCallback(viewer) {
-    this._viewer = viewer
-    this._prepareDelegate()
-    if (this._delegate) {
-      this._viewer.delegate.scene.postProcessStages.add(this._delegate)
-    }
-    this._state = DC.EffectState.ADDED
-  }
-
-  /**
-   * 效果添加的回调函数
-   */
-  _removeCallback() {
-    if ((this._viewer, this._delegate)) {
-      this._viewer.delegate.scene.postProcessStages.remove(this._delegate)
-    }
-    this._state = DC.EffectState.REMOVED
   }
 }

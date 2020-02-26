@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-24 13:53:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-24 13:57:34
+ * @Last Modified time: 2020-02-26 22:43:52
  */
 
 import Cesium from '@/namespace'
 
-let LineFlowShader = require('../shader/PolylineFlowMaterial.glsl')
+let LineFlowShader = require('../shader/PolylineFlowShader.glsl')
 
 DC.PolylineFlowMaterialProperty = class {
   constructor(options) {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-25 12:06:47
+ * @Last Modified time: 2020-02-26 23:11:16
  */
 import Cesium from '@/namespace'
 
@@ -76,7 +76,8 @@ DC.OverlayType = {
   CIRCLE: 'circle',
   RECT: 'rect',
   LABEL: 'label',
-  PLANE: 'plane'
+  PLANE: 'plane',
+  WALL: 'wall'
 }
 
 DC.OverlayEventType = {
@@ -91,6 +92,7 @@ DC.OverlayState = {
 DC.EffectType = {
   RAIN: 'rain',
   SNOW: 'snow',
+  FOG: 'fog',
   BLOOM: 'bloom',
   CIRCLE_SCAN: 'circleScan',
   RADAR_SCAN: 'radarScan'

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-24 13:09:09
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-24 14:07:45
+ * @Last Modified time: 2020-02-26 22:43:55
  */
 
 import Cesium from '@/namespace'
@@ -10,7 +10,7 @@ import Cesium from '@/namespace'
 const IMG =
   'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAAgCAYAAABkS8DlAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAADSSURBVHja7NYxEoUgDEDBYM39z2qHtZViwMFxt1FJnF/98ZXWWkRE7LWWOOt5Lsm9q/vsbu9Zdtazs/J19O5bs1XPZrwze/6V31zxbOZs1n905Wt2p3f25GzE7ohv6q3nLQCA3xEAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAAABAAAIAABAAAAAAgAAEAAAgAAAAAQAACAAAEAAAAACAAAQAACAAAAABAAAIAAAAAEAAAgAAEAAAAACAAAQAACAAAAA8g4AAAD//wMA4WEFTJOT5UIAAAAASUVORK5CYII='
 
-let LineTrailShader = require('../shader/PolylineTrailMaterial.glsl')
+let LineTrailShader = require('../shader/PolylineTrailShader.glsl')
 
 DC.PolylineTrailMaterialProperty = class {
   constructor(options) {

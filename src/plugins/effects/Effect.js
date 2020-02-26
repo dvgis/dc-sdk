@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 14:20:41
+ * @Last Modified time: 2020-02-26 23:12:14
  */
 
 import EffectEvent from '@/core/event/EffectEvent'
@@ -36,12 +36,25 @@ class Effect {
    * @param {*} viewer
    * 效果添加的回调函数,
    */
-  _addCallback(viewer) {}
+  _addCallback(viewer) {
+    this._viewer = viewer
+    this._prepareDelegate()
+    if (this._delegate) {
+      this._viewer.delegate.scene.postProcessStages.add(this._delegate)
+    }
+    this._state = DC.EffectState.ADDED
+  }
 
   /**
    * 效果添加的回调函数
    */
-  _removeCallback() {}
+  _removeCallback() {
+    if ((this._viewer, this._delegate)) {
+      this._viewer.delegate.scene.postProcessStages.remove(this._delegate)
+      this._delegate = undefined
+    }
+    this._state = DC.EffectState.REMOVED
+  }
 
   /**
    *

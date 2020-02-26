@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-25 10:49:36
+ * @Last Modified time: 2020-02-25 20:38:05
  */
 
 import Cesium from '@/namespace'
@@ -20,6 +20,7 @@ class ViewerOption {
     )
     this._viewer.delegate.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
     this._viewer.delegate.scene.backgroundColor = Cesium.Color.TRANSPARENT
+    this._viewer.delegate.scene.postProcessStages.fxaa.enabled = true
   }
 
   _setViewerOption(options) {
@@ -48,6 +49,11 @@ class ViewerOption {
     this._viewer.delegate.scene.skyBox.show = Cesium.defaultValue(
       options.skyBox,
       true
+    )
+
+    this._viewer.delegate.scene.postProcessStages.fxaa.enabled = Cesium.defaultValue(
+      options.fxaa,
+      false
     )
 
     return this
