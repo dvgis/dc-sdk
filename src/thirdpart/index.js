@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:35:51
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:45:46
+ * @Last Modified time: 2020-02-29 01:12:48
  */
 import Cesium from '@/namespace'
 
@@ -12,7 +12,6 @@ DC.Cartesian4 = Cesium.Cartesian4
 
 DC.TilesetStyle = Cesium.Cesium3DTileStyle
 
-DC.SceneMode = Cesium.SceneMode
 DC.CallbackProperty = Cesium.CallbackProperty
 DC.JulianDate = Cesium.JulianDate
 DC.Math = Cesium.Math
