@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 00:23:23
+ * @Last Modified time: 2020-02-28 22:26:59
  */
 import Cesium from '@/namespace'
 
@@ -21,6 +21,10 @@ class Widget {
     this._state = this._enable
       ? DC.WidgetState.ENABLED
       : DC.WidgetState.DISABLED
+  }
+
+  get enable() {
+    return this._enable
   }
 
   get state() {

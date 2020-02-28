@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-26 23:05:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:10:48
+ * @Last Modified time: 2020-02-28 22:38:31
  */
 import Cesium from '@/namespace'
 import Effect from './Effect'
@@ -14,6 +14,7 @@ DC.FogEffect = class extends Effect {
     super(id)
     this._trength = trength || 1
     this._color = color || new Cesium.Color(0.8, 0.8, 0.8, 0.5)
+    this._state = DC.EffectState.INITIALIZED
     this.type = DC.EffectType.FOG
   }
 

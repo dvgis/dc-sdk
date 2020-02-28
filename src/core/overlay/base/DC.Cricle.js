@@ -2,19 +2,19 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 19:29:46
+ * @Last Modified time: 2020-02-28 14:31:34
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
 DC.Circle = class extends Overlay {
-  constructor(center, redius) {
+  constructor(center, radius) {
     if (!center || !(center instanceof DC.Position)) {
       throw new Error('the center invalid')
     }
     super()
     this._center = center
-    this._radius = redius
+    this._radius = radius
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.CIRCLE

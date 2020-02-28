@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:11:42
+ * @Last Modified time: 2020-02-28 23:23:19
  */
 
 import Cesium from '@/namespace'
@@ -19,7 +19,8 @@ DC.RadarScanEffect = class extends Effect {
     this._position = position
     this._radius = radius || 0
     this._color = Cesium.defaultValue(color, Cesium.Color.RED)
-    this._duration = Cesium.defaultValue(duration, 1e3)
+    this._duration = Cesium.defaultValue(duration, 1) * 1e3
+    this._state = DC.EffectState.INITIALIZED
     this.type = DC.EffectType.RADAR_SCAN
   }
 

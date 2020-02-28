@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:12:14
+ * @Last Modified time: 2020-02-28 22:37:18
  */
 
 import EffectEvent from '@/core/event/EffectEvent'
@@ -11,8 +11,9 @@ class Effect {
   constructor(id) {
     this._id = id || DC.Util.uuid()
     this._viewer = undefined
-    this._effectEvent = new EffectEvent()
     this._delegate = undefined
+    this._state = undefined
+    this._effectEvent = new EffectEvent()
     this.type = undefined
     this.on(DC.EffectEventType.ADD, this._addCallback, this)
     this.on(DC.EffectEventType.REMOVE, this._removeCallback, this)

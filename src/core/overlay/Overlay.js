@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:55:55
+ * @Last Modified time: 2020-02-28 13:06:56
  */
 import OverlayEvent from '../event/OverlayEvent'
 class Overlay {
@@ -93,7 +93,17 @@ class Overlay {
    */
   remove() {
     if (this._layer) {
-      this._layer.layerEvent.fire(DC.LayerEventType.REMOVE_OVERLAY, this)
+      this._layer.removeOverlay(this)
+    }
+  }
+
+  /**
+   *
+   * @param {*} layer
+   */
+  addToLayer(layer) {
+    if (layer) {
+      layer.addOverlay(this)
     }
   }
 

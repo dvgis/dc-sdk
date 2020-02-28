@@ -2,22 +2,20 @@
  * @Author: Caven
  * @Date: 2020-01-30 20:47:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-17 14:20:59
+ * @Last Modified time: 2020-02-28 23:33:41
  */
 import Cesium from '@/namespace'
 DC.GlobeRotate = class {
-  constructor(viewer, time = 5, callback = null) {
+  constructor(viewer, time = 5, callback, context) {
     this._viewer = viewer
     this._time = time
     this._callback = callback
     this._startRotate()
     let flag = setTimeout(() => {
       this._endRotate()
-      if (this._callback) {
-        this._callback()
-      }
+      this._callback && this._callback.call(context || this)
       clearTimeout(flag)
-    }, Number(this._time) * 1000)
+    }, Number(this._time) * 1e3)
   }
 
   /**

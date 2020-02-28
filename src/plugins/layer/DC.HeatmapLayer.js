@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-27 15:40:20
+ * @Last Modified time: 2020-02-28 15:36:31
  */
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
@@ -189,8 +189,10 @@ DC.HeatmapLayer = class extends Layer {
     this._entity.show = false
     this._entity.rectangle = {
       coordinates: bounds,
-      fill: false
+      fill: false,
+      distanceDisplayCondition: this._options.distanceDisplayCondition
     }
+
     this._delegate.entities.add(this._entity)
   }
 

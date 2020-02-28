@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-25 12:16:57
+ * @Last Modified time: 2020-02-29 01:03:14
  */
 
 import Cesium from '@/namespace'
@@ -230,6 +230,42 @@ DC.Viewer = class {
 
   /**
    *
+   * @param {*} terrain
+   * Add the terrain to the viewer.
+   */
+  addTerrain(terrain) {
+    if (!terrain) {
+      return this
+    }
+    this._baseLayerPicker.terrainProviderViewModels.push(
+      new Cesium.ProviderViewModel({
+        name: options.name || '地形',
+        creationFunction: () => {
+          return terrain
+        }
+      })
+    )
+    if (!this._baseLayerPicker.selectedTerrain) {
+      this._baseLayerPicker.selectedTerrain = this._baseLayerPicker.terrainProviderViewModels[0]
+    }
+  }
+
+  /**
+   *
+   * @param {*} index
+   * Change the current globe display of the terrain
+   */
+  changeTerrain(index) {
+    if (this._baseLayerPicker && index >= 0) {
+      this._baseLayerPicker.selectedTerrain = this._baseLayerPicker.terrainProviderViewModels[
+        index
+      ]
+    }
+    return this
+  }
+
+  /**
+   *
    * @param {*} layer
    * Add a layer to the viewer
    */
@@ -288,7 +324,7 @@ DC.Viewer = class {
    *
    * @param {*} method
    * @param {*} context
-   *
+   * loop through each layer
    */
   eachLayer(method, context) {
     for (let type in this._layerCache) {

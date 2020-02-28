@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 14:07:08
+ * @Last Modified time: 2020-02-28 12:55:07
  */
 import Cesium from '@/namespace'
 import LayerEvent from '../event/LayerEvent'
@@ -147,6 +147,10 @@ class Layer {
     return this
   }
 
+  /**
+   *
+   * @param {*} overlay
+   */
   removeOverlay(overlay) {
     this._removeOverlayCallback(overlay)
     return this

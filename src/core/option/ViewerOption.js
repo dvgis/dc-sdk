@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-25 20:38:05
+ * @Last Modified time: 2020-02-27 23:30:08
  */
 
 import Cesium from '@/namespace'
@@ -34,25 +34,25 @@ class ViewerOption {
 
   _setSceneOption(options) {
     this._viewer.delegate.scene.skyAtmosphere.show = Cesium.defaultValue(
-      options.skyAtmosphere,
+      options.showAtmosphere,
       true
     )
     this._viewer.delegate.scene.sun.show = Cesium.defaultValue(
-      options.sun,
+      options.showSun,
       true
     )
     this._viewer.delegate.scene.moon.show = Cesium.defaultValue(
-      options.moon,
+      options.showMoon,
       true
     )
 
     this._viewer.delegate.scene.skyBox.show = Cesium.defaultValue(
-      options.skyBox,
+      options.showSkyBox,
       true
     )
 
     this._viewer.delegate.scene.postProcessStages.fxaa.enabled = Cesium.defaultValue(
-      options.fxaa,
+      options.enableFxaa,
       false
     )
 
@@ -61,7 +61,7 @@ class ViewerOption {
 
   _setGlobeOption(options) {
     this._viewer.delegate.scene.globe.show = Cesium.defaultValue(
-      options.globe,
+      options.showGlobe,
       true
     )
     this._viewer.delegate.scene.globe.enableLighting = Cesium.defaultValue(

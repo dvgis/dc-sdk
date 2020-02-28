@@ -2,19 +2,19 @@
  * @Author: Caven
  * @Date: 2020-01-19 13:38:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:44:46
+ * @Last Modified time: 2020-02-28 17:21:51
  */
 
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
 
 DC.CzmlLayer = class extends Layer {
-  constructor(id, url) {
+  constructor(id, url, options = {}) {
     if (!url) {
       throw new Error('the url is empty')
     }
     super(id)
-    this._delegate = Cesium.CzmlDataSource.load(url, {})
+    this._delegate = Cesium.CzmlDataSource.load(url, options)
     this._state = DC.LayerState.INITIALIZED
     this.type = DC.LayerType.CZML
   }
