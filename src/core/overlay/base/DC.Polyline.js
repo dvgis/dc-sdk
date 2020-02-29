@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:22:26
+ * @Last Modified time: 2020-02-29 18:51:49
  */
 
 import Overlay from '../Overlay'
@@ -113,8 +113,19 @@ DC.Polyline = class extends Overlay {
    *
    * @param {*} entity
    */
-  fromEntity(entity) {
-    // this._positions =
+  static fromEntity(entity) {
+    let polyline = undefined
+    if (entity.polyline) {
+      let positions = GS.T.transformCartesianArrayToWSG84Array(
+        entity.polyline.positions.getValue(Cesium.JulianDate.now())
+      )
+      polyline = new GS.Polyline(positions)
+      polyline.attr = {
+        ...entity.properties
+      }
+    }
+
+    return polyline
   }
 }
 

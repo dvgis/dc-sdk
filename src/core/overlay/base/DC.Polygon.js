@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:19:38
+ * @Last Modified time: 2020-02-29 18:54:09
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -137,7 +137,20 @@ DC.Polygon = class extends Overlay {
    *
    * @param {*} entity
    */
-  static fromEntity(entity) {}
+  static fromEntity(entity) {
+    let polygon = undefined
+    if (entity.polygon) {
+      let positions = DC.T.transformCartesianArrayToWSG84Array(
+        item.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions
+      )
+      polygon = new DC.Polygon(positions)
+      polygon.attr = {
+        ...entity.properties
+      }
+    }
+
+    return polygon
+  }
 }
 
 DC.OverlayType.POLYGON = 'polygon'
