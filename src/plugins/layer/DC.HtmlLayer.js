@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:44:59
+ * @Last Modified time: 2020-02-29 18:12:48
  */
 
 import Cesium from '@/namespace'
@@ -71,3 +71,5 @@ DC.HtmlLayer = class extends Layer {
     return this
   }
 }
+
+DC.LayerType.HTML = 'html'

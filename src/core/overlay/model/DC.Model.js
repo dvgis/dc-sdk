@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 19:31:48
+ * @Last Modified time: 2020-02-29 18:23:10
  */
 
 import Overlay from '../Overlay'
@@ -18,6 +18,7 @@ DC.Model = class extends Overlay {
     this._modelUrl = modelUrl
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
+    this.type = DC.OverlayType.MODEL
   }
 
   set position(position) {
@@ -92,3 +93,5 @@ DC.Model = class extends Overlay {
     this._delegate.model && DC.Util.merge(this._delegate.model, this._style)
   }
 }
+
+DC.OverlayType.MODEL = 'model'

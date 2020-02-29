@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-26 23:05:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 22:38:31
+ * @Last Modified time: 2020-02-29 18:16:18
  */
 import Cesium from '@/namespace'
 import Effect from './Effect'
@@ -37,3 +37,5 @@ DC.FogEffect = class extends Effect {
     })
   }
 }
+
+DC.EffectType.FOG = 'fog'

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 15:36:31
+ * @Last Modified time: 2020-02-29 18:12:36
  */
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
@@ -250,3 +250,5 @@ DC.HeatmapLayer = class extends Layer {
     }
   }
 }
+
+DC.LayerType.HEAT = 'heat'

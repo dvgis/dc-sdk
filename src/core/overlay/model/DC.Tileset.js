@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 16:22:54
+ * @Last Modified time: 2020-02-29 18:25:29
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -21,6 +21,7 @@ DC.Tileset = class extends Overlay {
     this._stopTime = undefined
     this._duration = undefined
     this._center = undefined
+    this.type = DC.OverlayType.TILESET
   }
 
   /**
@@ -211,3 +212,5 @@ DC.Tileset = class extends Overlay {
     return this
   }
 }
+
+DC.OverlayType.TILESET = 'tileset'

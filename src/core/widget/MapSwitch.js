@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 13:14:42
+ * @Last Modified time: 2020-02-29 18:34:05
  */
 import Widget from './Widget'
 
@@ -13,6 +13,10 @@ class MapSwitch extends Widget {
     this._config = undefined
     this._cache = []
     this.type = DC.WidgetType.MAPSWITCH
+  }
+
+  _installHook() {
+    this.enable = true
     this._wapper.onmouseover = () => {
       let width = 80
       if (this._cache.length > 0) {
@@ -23,10 +27,6 @@ class MapSwitch extends Widget {
     this._wapper.onmouseout = () => {
       this._wapper.style.width = `80px`
     }
-  }
-
-  _installHook() {
-    this.enable = true
   }
 
   _addItem(map) {
@@ -69,5 +69,7 @@ class MapSwitch extends Widget {
     }
   }
 }
+
+DC.WidgetType.MAPSWITCH = 'mapswitch'
 
 export default MapSwitch

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-19 19:42:23
+ * @Last Modified time: 2020-02-29 18:32:18
  */
 import Widget from './Widget'
 
@@ -22,6 +22,7 @@ class Attribution extends Widget {
       user-select: none;
     `
     this._config = undefined
+    this.type = DC.WidgetType.ATTRIBUTION
   }
 
   _installHook() {
@@ -44,5 +45,7 @@ class Attribution extends Widget {
     this._installHook && this._installHook()
   }
 }
+
+DC.WidgetType.ATTRIBUTION = 'attribution'
 
 export default Attribution

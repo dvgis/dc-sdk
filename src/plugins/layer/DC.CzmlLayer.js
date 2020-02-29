@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 13:38:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 17:21:51
+ * @Last Modified time: 2020-02-29 18:11:57
  */
 
 import Cesium from '@/namespace'
@@ -31,3 +31,5 @@ DC.CzmlLayer = class extends Layer {
     }
   }
 }
+
+DC.LayerType.CZML = 'czml'

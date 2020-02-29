@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 19:30:28
+ * @Last Modified time: 2020-02-29 18:19:38
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -139,3 +139,5 @@ DC.Polygon = class extends Overlay {
    */
   static fromEntity(entity) {}
 }
+
+DC.OverlayType.POLYGON = 'polygon'

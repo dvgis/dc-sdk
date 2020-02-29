@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:44:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-13 17:42:56
+ * @Last Modified time: 2020-02-29 18:27:08
  */
 import Cesium from '@/namespace'
 import '../../core/overlay/base/DC.Billboard'
@@ -10,6 +10,8 @@ import '../../core/overlay/base/DC.Billboard'
 DC.CustomBillboard = class extends DC.Billboard {
   constructor(position, icon) {
     super(position, icon)
+    this._state = DC.OverlayState.INITIALIZED
+    this.type = DC.OverlayType.CUSTOM_BILLBOARD
   }
 
   setLine(style) {
@@ -43,3 +45,5 @@ DC.CustomBillboard = class extends DC.Billboard {
     return this
   }
 }
+
+DC.OverlayType.CUSTOM_BILLBOARD = 'customBillboard'

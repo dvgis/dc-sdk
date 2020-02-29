@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:03:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 12:14:25
+ * @Last Modified time: 2020-02-29 18:13:10
  */
 
 import Cesium from '@/namespace'
@@ -31,3 +31,5 @@ DC.KmlLayer = class extends Layer {
     }
   }
 }
+
+DC.LayerType.KML = 'kml'

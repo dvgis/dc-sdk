@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 19:30:04
+ * @Last Modified time: 2020-02-29 18:18:47
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -85,3 +85,5 @@ DC.Label = class extends Overlay {
     return this
   }
 }
+
+DC.OverlayType.LABEL = 'label'

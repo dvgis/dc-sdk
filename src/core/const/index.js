@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-27 09:38:08
+ * @Last Modified time: 2020-02-29 18:15:18
  */
 import Cesium from '@/namespace'
 
@@ -43,17 +43,7 @@ DC.SceneEventType = {
   CLOCK_TICK: 'clockTick'
 }
 
-DC.LayerType = {
-  VECTOR: 'vector',
-  TILESET: 'tileset',
-  CLUSTER: 'cluster',
-  GEOJSON: 'geojson',
-  KML: 'kml',
-  CZML: 'czml',
-  HTML: 'html',
-  HEAT: 'heat',
-  MAPV: 'mapv'
-}
+DC.LayerType = {}
 
 DC.LayerEventType = {
   ...baseEventType,
@@ -67,36 +57,17 @@ DC.LayerState = {
   CLEARED: 'cleared'
 }
 
-DC.OverlayType = {
-  POINT: 'point',
-  POLYLINE: 'polyline',
-  POLYGON: 'polygon',
-  MODEL: 'model',
-  BILLBOARD: 'billboard',
-  CIRCLE: 'circle',
-  RECT: 'rect',
-  LABEL: 'label',
-  PLANE: 'plane',
-  WALL: 'wall'
-}
+DC.OverlayType = {}
 
 DC.OverlayEventType = {
-  ADD: 'add',
-  REMOVE: 'remove'
+  ...baseEventType
 }
 
 DC.OverlayState = {
   ...baseState
 }
 
-DC.EffectType = {
-  RAIN: 'rain',
-  SNOW: 'snow',
-  FOG: 'fog',
-  BLOOM: 'bloom',
-  CIRCLE_SCAN: 'circleScan',
-  RADAR_SCAN: 'radarScan'
-}
+DC.EffectType = {}
 
 DC.EffectEventType = {
   ...baseEventType
@@ -106,12 +77,7 @@ DC.EffectState = {
   ...baseState
 }
 
-DC.WidgetType = {
-  POPUP: 'Popup',
-  CONTEXT_MENU: 'ContextMenu',
-  TOOL_TIP: 'Tooltip',
-  MAPSWITCH: 'MapSwitch'
-}
+DC.WidgetType = {}
 
 DC.WidgetState = {
   INITIALIZED: 'initialized',

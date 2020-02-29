@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-13 16:28:20
+ * @Last Modified time: 2020-02-29 18:29:38
  */
 
 import Overlay from '../../core/overlay/Overlay'
@@ -24,13 +24,8 @@ DC.DivIcon = class extends Overlay {
     } else if (content && content instanceof Element) {
       this._delegate.appendChild(content)
     }
-    this._delegate.addEventListener('click', e => {
-      this._overlayEvent.fire(DC.MouseEventType.CLICK, {
-        layer: this._layer,
-        overlay: this,
-        position: DC.T.transformWSG84ToCartesian(this._position)
-      })
-    })
+    this._state = DC.OverlayState.INITIALIZED
+    this.type = DC.OverlayType.DIVICON
   }
 
   set show(show) {
@@ -66,6 +61,13 @@ DC.DivIcon = class extends Overlay {
   _addCallback(layer) {
     this._layer = layer
     this._layer.delegate.appendChild(this._delegate)
+    this._delegate.addEventListener('click', e => {
+      this._overlayEvent.fire(DC.MouseEventType.CLICK, {
+        layer: layer,
+        overlay: this,
+        position: DC.T.transformWSG84ToCartesian(this._position)
+      })
+    })
     this._state = DC.OverlayState.ADDED
   }
 
@@ -75,6 +77,7 @@ DC.DivIcon = class extends Overlay {
   _removeCallback() {
     if (this._layer) {
       this._layer.delegate.removeChild(this._delegate)
+      this._overlayEvent()
       this._state = DC.OverlayState.REMOVED
     }
   }
@@ -84,3 +87,5 @@ DC.DivIcon = class extends Overlay {
     return this
   }
 }
+
+DC.OverlayType.DIVICON = 'divICon'

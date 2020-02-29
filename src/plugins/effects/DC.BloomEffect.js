@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-20 13:26:49
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:11:36
+ * @Last Modified time: 2020-02-29 18:15:47
  */
 import Effect from './Effect'
 
@@ -98,3 +98,5 @@ DC.BloomEffect = class extends Effect {
     this._state = DC.EffectState.REMOVED
   }
 }
+
+DC.EffectType.BLOOM = 'bloom'

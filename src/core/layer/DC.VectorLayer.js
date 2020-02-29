@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 01:03:38
+ * @Last Modified time: 2020-02-29 18:09:45
  */
 
 import Cesium from '@/namespace'
@@ -27,3 +27,5 @@ DC.VectorLayer = class extends Layer {
     return this
   }
 }
+
+DC.LayerType.VECTOR = 'vector'

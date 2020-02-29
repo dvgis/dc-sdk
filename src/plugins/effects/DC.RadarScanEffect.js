@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 23:23:19
+ * @Last Modified time: 2020-02-29 18:16:47
  */
 
 import Cesium from '@/namespace'
@@ -157,3 +157,5 @@ DC.RadarScanEffect = class extends Effect {
     })
   }
 }
+
+DC.EffectType.RADAR_SCAN = 'radarScan'

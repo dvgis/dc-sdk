@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 18:37:46
+ * @Last Modified time: 2020-02-29 18:34:21
  */
 
 import Widget from './Widget'
@@ -50,5 +50,7 @@ class Popup extends Widget {
     config.arrow && this._setArrowStyle()
   }
 }
+
+DC.WidgetType.POPUP = 'popup'
 
 export default Popup

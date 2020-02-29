@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 19:30:27
+ * @Last Modified time: 2020-02-29 18:19:15
  */
 
 import Cesium from '@/namespace'
@@ -85,3 +85,5 @@ DC.Point = class extends Overlay {
     return this
   }
 }
+
+DC.OverlayType.POINT = 'point'

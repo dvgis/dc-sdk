@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 12:01:58
+ * @Last Modified time: 2020-02-29 18:22:00
  */
 
 import Cesium from '@/namespace'
@@ -127,6 +127,7 @@ DC.Billboard = class extends Overlay {
       billboard.attr = {
         name: entity.name
       }
+      delete entity.billboard.image
       billboard.setStyle({
         ...entity.billboard
       })
@@ -134,3 +135,5 @@ DC.Billboard = class extends Overlay {
     return billboard
   }
 }
+
+DC.OverlayType.BILLBOARD = 'billboard'

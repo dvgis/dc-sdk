@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-13 20:19:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:45:13
+ * @Last Modified time: 2020-02-29 18:13:15
  */
 import Layer from '@/core/layer/Layer'
 
@@ -65,3 +65,5 @@ DC.MapvLayer = class extends Layer {
       this._delegate.update({ data: this._dataSet, option: this._option })
   }
 }
+
+DC.LayerType.MAPV = 'mapv'

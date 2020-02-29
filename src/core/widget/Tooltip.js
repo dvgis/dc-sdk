@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 12:07:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-11 18:32:54
+ * @Last Modified time: 2020-02-29 18:35:29
  */
 
 import Widget from './Widget'
@@ -11,7 +11,7 @@ class Tooltip extends Widget {
   constructor() {
     super()
     this._wapper = DC.DomUtil.create('div', 'dc-tool-tip')
-    this.type = DC.WidgetType.TOOL_TIP
+    this.type = DC.WidgetType.TOOLTIP
   }
 
   _updateWindowCoord(windowCoord) {
@@ -24,5 +24,7 @@ class Tooltip extends Widget {
     `
   }
 }
+
+DC.WidgetType.TOOLTIP = 'tooltip'
 
 export default Tooltip

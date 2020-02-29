@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 19:30:54
+ * @Last Modified time: 2020-02-29 18:22:26
  */
 
 import Overlay from '../Overlay'
@@ -117,3 +117,5 @@ DC.Polyline = class extends Overlay {
     // this._positions =
   }
 }
+
+DC.OverlayType.POLYLINE = 'polyline'

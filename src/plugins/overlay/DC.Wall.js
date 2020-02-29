@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-25 18:28:36
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 17:17:16
+ * @Last Modified time: 2020-02-29 18:30:26
  */
 import Cesium from '@/namespace'
 import Overlay from '../../core/overlay/Overlay'
@@ -83,3 +83,5 @@ DC.Wall = class extends Overlay {
     return this
   }
 }
+
+DC.OverlayType.WALL = 'wall'

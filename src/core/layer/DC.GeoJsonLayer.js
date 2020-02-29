@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-19 10:47:28
+ * @Last Modified time: 2020-02-29 18:08:14
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -66,3 +66,5 @@ DC.GeoJsonLayer = class extends Layer {
     return layer
   }
 }
+
+DC.LayerType.GEOJSON = 'geojson'

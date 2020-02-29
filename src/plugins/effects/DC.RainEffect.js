@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:23:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 22:38:50
+ * @Last Modified time: 2020-02-29 18:17:15
  */
 import Cesium from '@/namespace'
 import Effect from './Effect'
@@ -26,3 +26,5 @@ DC.RainEffect = class extends Effect {
     })
   }
 }
+
+DC.EffectType.RAIN = 'rain'

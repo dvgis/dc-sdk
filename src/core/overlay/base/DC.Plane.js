@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 19:30:20
+ * @Last Modified time: 2020-02-29 18:18:50
  */
 
 import Cesium from '@/namespace'
@@ -106,3 +106,5 @@ DC.Plane = class extends Overlay {
     return this
   }
 }
+
+DC.OverlayType.PLANE = 'plane'

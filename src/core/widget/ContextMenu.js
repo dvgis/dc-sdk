@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-19 19:42:34
+ * @Last Modified time: 2020-02-29 18:32:39
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -85,5 +85,7 @@ class ContextMenu extends Widget {
     return this
   }
 }
+
+DC.WidgetType.CONTEXT_MENU = 'contextmenu'
 
 export default ContextMenu
