@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:54:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 00:48:56
+ * @Last Modified time: 2020-02-29 18:41:35
  */
 import Cesium from '@/namespace'
 
@@ -38,7 +38,7 @@ DC.TerrainFactory = class {
   /**
    *  create vr terrain
    */
-  static createArcgisTerrain(options) {
+  static createVRTerrain(options) {
     return new Cesium.VRTheWorldTerrainProvider(options)
   }
 }
