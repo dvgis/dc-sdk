@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 01:03:14
+ * @Last Modified time: 2020-02-29 20:14:28
  */
 
 import Cesium from '@/namespace'
@@ -198,7 +198,6 @@ DC.Viewer = class {
     if (!baseLayers) {
       return this
     }
-    this._delegate.imageryLayers.removeAll()
     this._baseLayerPicker.imageryProviderViewModels.push(
       new Cesium.ProviderViewModel({
         name: options.name || '地图',

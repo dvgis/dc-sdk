@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:34:05
+ * @Last Modified time: 2020-02-29 20:16:56
  */
 import Widget from './Widget'
 
@@ -17,15 +17,16 @@ class MapSwitch extends Widget {
 
   _installHook() {
     this.enable = true
+    let self = this
     this._wapper.onmouseover = () => {
       let width = 80
-      if (this._cache.length > 0) {
-        width = this._cache.length * 85.7
+      if (self._cache.length > 0) {
+        width = self._cache.length * 85.7
       }
       this._wapper.style.width = `${width}px`
     }
     this._wapper.onmouseout = () => {
-      this._wapper.style.width = `80px`
+      self._wapper.style.width = `80px`
     }
   }
 
