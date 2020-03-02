@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:21:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:45:32
+ * @Last Modified time: 2020-03-02 23:17:50
  */
 import Cesium from '@/namespace'
 
@@ -109,7 +109,6 @@ DC.Roaming = class {
     this._viewer.delegate.clock.startTime = this._startTime.clone()
     this._viewer.delegate.clock.stopTime = this._endTime.clone()
     this._viewer.delegate.clock.currentTime = this._startTime.clone()
-    this._viewer.delegate.clock.clockRange = Cesium.ClockRange.UNBOUNDED
   }
 
   /**

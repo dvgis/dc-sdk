@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 10:13:32
+ * @Last Modified time: 2020-03-02 21:37:21
  */
 class Event {
   constructor() {
@@ -21,7 +21,7 @@ class Event {
    * @param {*} context
    */
   _on(type, callback, context) {
-    let event = this._eventCache[type] || undefined
+    let event = this.getEvent(type)
     if (callback && event) {
       event.addEventListener(callback, context || this)
     }
@@ -34,7 +34,7 @@ class Event {
    * @param {*} context
    */
   _off(type, callback, context) {
-    let event = this._eventCache[type] || undefined
+    let event = this.getEvent(type)
     if (event && callback) {
       event.removeEventListener(callback, context || this)
     }
@@ -46,7 +46,7 @@ class Event {
    * @param {*} params
    */
   _fire(type, params) {
-    let event = this._eventCache[type]
+    let event = this.getEvent(type)
     if (event) {
       event.raiseEvent(params)
     }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 20:14:28
+ * @Last Modified time: 2020-03-02 21:43:30
  */
 
 import Cesium from '@/namespace'
@@ -10,6 +10,7 @@ import ViewerOption from '../option/ViewerOption'
 import CameraOption from '../option/CameraOption'
 import MouseEvent from '../event/MouseEvent'
 import ViewerEvent from '../event/ViewerEvent'
+import SceneEvent from '../event/SceneEvent'
 import Popup from '../widget/Popup'
 import ContextMenu from '../widget/ContextMenu'
 import Tooltip from '../widget/Tooltip'
@@ -44,7 +45,8 @@ DC.Viewer = class {
     new MouseEvent(this) // Register global mouse events
     this._viewerOption = new ViewerOption(this) // Initialize the viewer option
     this._cameraOption = new CameraOption(this) // Initialize the camera option
-    this._viewerEvent = new ViewerEvent(this) // Register viewer events
+    this._viewerEvent = new ViewerEvent() // Register viewer events
+    this._sceneEvent = new SceneEvent(this) // Register viewer events
     this._dcContainer = DC.DomUtil.create(
       'div',
       'dc-container',
@@ -400,6 +402,7 @@ DC.Viewer = class {
    */
   on(type, callback, context) {
     this._viewerEvent.on(type, callback, context || this)
+    this._sceneEvent.on(type, callback, context || this)
     return this
   }
 
@@ -411,6 +414,7 @@ DC.Viewer = class {
    */
   off(type, callback, context) {
     this._viewerEvent.off(type, callback, context || this)
+    this._sceneEvent.off(type, callback, context || this)
     return this
   }
 
