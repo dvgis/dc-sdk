@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 22:26:59
+ * @Last Modified time: 2020-03-02 16:36:39
  */
 import Cesium from '@/namespace'
 
@@ -49,11 +49,16 @@ class Widget {
     /**
      *  add postRender Listener
      */
-    if (this._viewer) {
+    if (this._viewer && this._wapper) {
       let self = this
       let scene = this._viewer.scene
       scene.postRender.addEventListener(() => {
-        if (self._position && self._enable && self._updateWindowCoord) {
+        if (
+          self._position &&
+          self._enable &&
+          self._updateWindowCoord &&
+          self._wapper.style.visibility === 'visible'
+        ) {
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
             scene,
             self._position
@@ -74,6 +79,10 @@ class Widget {
    */
   setPosition(position) {
     this._position = position
+    this._wapper &&
+      (this._wapper.style.cssText = `
+    visibility:visible;
+    `)
     return this
   }
 
