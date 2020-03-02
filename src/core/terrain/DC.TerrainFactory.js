@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:54:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:41:35
+ * @Last Modified time: 2020-03-02 15:30:47
  */
 import Cesium from '@/namespace'
 
@@ -22,7 +22,7 @@ DC.TerrainFactory = class {
   }
 
   /**
-   *  create coord terrain
+   *  create google terrain
    */
   static createGoogleTerrain(options) {
     return new Cesium.GoogleEarthEnterpriseTerrainProvider(options)
