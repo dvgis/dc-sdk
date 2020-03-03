@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-02 15:30:04
+ * @Last Modified time: 2020-03-03 22:05:07
  */
 
 import Widget from './Widget'
@@ -20,6 +20,9 @@ class Popup extends Widget {
   }
 
   _updateWindowCoord(windowCoord) {
+    if (!windowCoord) {
+      return
+    }
     let x = windowCoord.x - this._wapper.offsetWidth / 2
     let y = windowCoord.y - this._wapper.offsetHeight
     if (this._config && this._config.position === 'left') {

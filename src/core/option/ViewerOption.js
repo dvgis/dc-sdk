@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 20:15:49
+ * @Last Modified time: 2020-03-03 12:25:35
  */
 
 import Cesium from '@/namespace'
@@ -30,6 +30,11 @@ class ViewerOption {
   }
 
   _setCanvasOption(options) {
+    options.tabIndex &&
+      this._viewer.delegate.scene.canvas.setAttribute(
+        'tabIndex',
+        options.tabIndex
+      )
     return this
   }
 

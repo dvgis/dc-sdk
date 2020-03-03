@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-13 20:19:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:13:15
+ * @Last Modified time: 2020-03-03 22:30:35
  */
 import Layer from '@/core/layer/Layer'
 
@@ -47,6 +47,7 @@ DC.MapvLayer = class extends Layer {
       this._dataSet || new DC.MapvDataSet([]),
       this._option
     )
+    viewer.delegate.scene.canvas.setAttribute('tabIndex', 0)
     this._state = DC.LayerState.ADDED
   }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-02 21:43:30
+ * @Last Modified time: 2020-03-03 23:43:35
  */
 
 import Cesium from '@/namespace'
@@ -113,6 +113,16 @@ DC.Viewer = class {
 
   get tooltip() {
     return this._tooltip
+  }
+
+  get cameraPosition() {
+    let position = DC.T.transformCartesianToWSG84(this.camera.positionWC)
+    if (position) {
+      position.heading = Cesium.Math.toDegrees(this.camera.heading)
+      position.pitch = Cesium.Math.toDegrees(this.camera.pitch)
+      position.roll = Cesium.Math.toDegrees(this.camera.roll)
+    }
+    return position
   }
 
   _addLayerCallback(layer) {
