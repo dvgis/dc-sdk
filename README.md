@@ -13,7 +13,7 @@ Tips：本框架是JS+GIS的框架包。开发者需要有一定的前端技术�
 ```js
 <script src="/libs/dc-sdk/dc.core.min.js"></script> // 核心框架包
 <script src="/libs/dc-sdk/plugins/dc.plugins.min.js"></script> // 插件框架包
-<link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet"type="text/css" / > // 主要样式
+<link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet"type="text/css"  > // 主要样式
 ```
 
 > 开始
@@ -26,7 +26,7 @@ DC.init(() => {
 
 > API
 
-相关文档可查看 [Cesium-Api](https://cesium.com/docs/cesiumjs-ref-doc/) 和 [DC-SDK-Api](http://dc.cavencj.cn/home/#/docs)
+相关文档可查看 [Cesium-Api](https://cesium.com/docs/cesiumjs-ref-doc/) 和 [DC-SDK-Api](http://dc.cavencj.cn/home/#/docs/api)
 
 ## 示例
 
