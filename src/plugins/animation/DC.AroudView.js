@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-03-02 23:14:20
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-02 23:15:42
+ * @Last Modified time: 2020-03-04 10:10:10
  */
 
 import Cesium from '@/namespace'
 
-DC.AroundPoint = class {
+DC.AroundView = class {
   constructor(viewer, options = {}) {
     this._viewer = viewer
     this._options = options
