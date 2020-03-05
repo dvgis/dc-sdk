@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 14:42:31
+ * @Last Modified time: 2020-03-05 16:12:24
  */
 
 import Widget from './Widget'
@@ -38,14 +38,14 @@ class MapSplit extends Widget {
       self._moveActive = true
     }, Cesium.ScreenSpaceEventType.PINCH_START)
 
-    handler.setInputAction(
-      self._moveHandler,
-      Cesium.ScreenSpaceEventType.MOUSE_MOVE
-    )
-    handler.setInputAction(
-      self._moveHandler,
-      Cesium.ScreenSpaceEventType.PINCH_MOVE
-    )
+    handler.setInputAction(movement => {
+      self._moveHandler(movement)
+    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+
+    handler.setInputAction(movement => {
+      self._moveHandler(movement)
+    }, Cesium.ScreenSpaceEventType.PINCH_MOVE)
+
     handler.setInputAction(() => {
       self._moveActive = false
     }, Cesium.ScreenSpaceEventType.LEFT_UP)
@@ -81,8 +81,12 @@ class MapSplit extends Widget {
       this._viewer.delegate.imageryLayers.remove(this._baseLayer)
     }
     if (baseLayer) {
-      this._baseLayer = layers.addImageryProvider(baseLayer)
+      this._baseLayer = this._viewer.delegate.imageryLayers.addImageryProvider(
+        baseLayer
+      )
       this._baseLayer.splitDirection = splitDirection || 0
+      this._viewer.scene.imagerySplitPosition =
+        this._wapper.offsetLeft / this._wapper.parentElement.offsetWidth
     }
     return this
   }

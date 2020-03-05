@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-24 13:09:09
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:53:43
+ * @Last Modified time: 2020-03-05 15:38:43
  */
 
 import Cesium from '@/namespace'
@@ -57,7 +57,7 @@ DC.PolylineTrailMaterialProperty = class {
   }
 }
 
-Cesium.defineProperties(DC.PolylineTrailMaterialProperty.prototype, {
+Object.defineProperties(DC.PolylineTrailMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
 })

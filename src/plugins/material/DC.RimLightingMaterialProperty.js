@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-25 22:49:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:54:20
+ * @Last Modified time: 2020-03-05 15:41:23
  */
 
 import Cesium from '@/namespace'
@@ -59,7 +59,7 @@ DC.RimLightingMaterialProperty = class {
   }
 }
 
-Cesium.defineProperties(DC.RimLightingMaterialProperty.prototype, {
+Object.defineProperties(DC.RimLightingMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   rimColor: Cesium.createPropertyDescriptor('rimColor'),
   width: Cesium.createPropertyDescriptor('width')

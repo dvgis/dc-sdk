@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-25 21:16:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:54:21
+ * @Last Modified time: 2020-03-05 15:41:31
  */
 import Cesium from '@/namespace'
 
@@ -90,7 +90,7 @@ DC.WaterMaterialProperty = class {
   }
 }
 
-Cesium.defineProperties(DC.WaterMaterialProperty.prototype, {
+Object.defineProperties(DC.WaterMaterialProperty.prototype, {
   baseWaterColor: Cesium.createPropertyDescriptor('baseWaterColor'),
   blendColor: Cesium.createPropertyDescriptor('blendColor'),
   specularMap: Cesium.createPropertyDescriptor('specularMap'),

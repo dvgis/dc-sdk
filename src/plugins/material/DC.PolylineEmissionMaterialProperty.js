@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-26 10:15:55
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:39:38
+ * @Last Modified time: 2020-03-05 15:39:32
  */
 import Cesium from '@/namespace'
 
@@ -47,6 +47,6 @@ DC.PolylineEmissionMaterialProperty = class {
   }
 }
 
-Cesium.defineProperties(DC.PolylineEmissionMaterialProperty.prototype, {
+Object.defineProperties(DC.PolylineEmissionMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color')
 })

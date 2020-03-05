@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-24 13:53:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-26 23:52:52
+ * @Last Modified time: 2020-03-05 15:39:25
  */
 
 import Cesium from '@/namespace'
@@ -57,7 +57,7 @@ DC.PolylineFlowMaterialProperty = class {
   }
 }
 
-Cesium.defineProperties(DC.PolylineFlowMaterialProperty.prototype, {
+Object.defineProperties(DC.PolylineFlowMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
 })
