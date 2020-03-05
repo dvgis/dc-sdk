@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-76089d4c', './defineProperties-7057a760', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './createTaskProcessorWorker'], function (when, defineProperties, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./when-e6e3e713', './RuntimeError-717c34db', './WebGLConstants-7f7d68ac', './createTaskProcessorWorker'], function (when, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
 
     /**
          * Describes a compressed texture and contains a compressed texture buffer.
@@ -18,7 +18,7 @@ define(['./when-76089d4c', './defineProperties-7057a760', './RuntimeError-bd79d8
             this._buffer =  buffer;
         }
 
-        defineProperties.defineProperties(CompressedTextureBuffer.prototype, {
+        Object.defineProperties(CompressedTextureBuffer.prototype, {
             /**
              * The format of the compressed texture.
              * @type PixelFormat
@@ -138,7 +138,7 @@ define(['./when-76089d4c', './defineProperties-7057a760', './RuntimeError-bd79d8
                         (pixelDatatype === PixelDatatype.UNSIGNED_SHORT_5_6_5));
             }
         };
-    var PixelDatatype$1 = when.freezeObject(PixelDatatype);
+    var PixelDatatype$1 = Object.freeze(PixelDatatype);
 
     /**
          * The format of a pixel, i.e., the number of components it has and what they represent.
@@ -462,7 +462,7 @@ define(['./when-76089d4c', './defineProperties-7057a760', './RuntimeError-bd79d8
                 return flipped;
             }
         };
-    var PixelFormat$1 = when.freezeObject(PixelFormat);
+    var PixelFormat$1 = Object.freeze(PixelFormat);
 
     /**
      * @licence

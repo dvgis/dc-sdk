@@ -4,7 +4,7 @@ export default "/**\n\
  * The transform from window to normalized device coordinates is done using components\n\
  * of (@link czm_viewport} and {@link czm_viewportTransformation} instead of calculating\n\
  * the inverse of <code>czm_viewportTransformation</code>. The transformation from\n\
- * normalized device coordinates to clip coordinates is done using <code>positionWC.w</code>,\n\
+ * normalized device coordinates to clip coordinates is done using <code>fragmentCoordinate.w</code>,\n\
  * which is expected to be the scalar used in the perspective divide. The transformation\n\
  * from clip to eye coordinates is done using {@link czm_inverseProjection}.\n\
  *\n\
@@ -26,12 +26,16 @@ export default "/**\n\
  */\n\
 vec4 czm_windowToEyeCoordinates(vec4 fragmentCoordinate)\n\
 {\n\
+    // Reconstruct NDC coordinates\n\
     float x = 2.0 * (fragmentCoordinate.x - czm_viewport.x) / czm_viewport.z - 1.0;\n\
     float y = 2.0 * (fragmentCoordinate.y - czm_viewport.y) / czm_viewport.w - 1.0;\n\
     float z = (fragmentCoordinate.z - czm_viewportTransformation[3][2]) / czm_viewportTransformation[2][2];\n\
     vec4 q = vec4(x, y, z, 1.0);\n\
+\n\
+    // Reverse the perspective division to obtain clip coordinates.\n\
     q /= fragmentCoordinate.w;\n\
 \n\
+    // Reverse the projection transformation to obtain eye coordinates.\n\
     if (!(czm_inverseProjection == mat4(0.0))) // IE and Edge sometimes do something weird with != between mat4s\n\
     {\n\
         q = czm_inverseProjection * q;\n\
@@ -81,10 +85,13 @@ vec4 czm_windowToEyeCoordinates(vec2 fragmentCoordinateXY, float depthOrLogDepth
 #ifdef LOG_DEPTH\n\
     float near = czm_currentFrustum.x;\n\
     float far = czm_currentFrustum.y;\n\
-    float unscaledDepth = pow(2.0, depthOrLogDepth * czm_log2FarPlusOne) - 1.0;\n\
-    vec4 windowCoord = vec4(fragmentCoordinateXY, far * (1.0 - near / unscaledDepth) / (far - near), 1.0);\n\
+    float log2Depth = depthOrLogDepth * czm_log2FarDepthFromNearPlusOne;\n\
+    float depthFromNear = pow(2.0, log2Depth) - 1.0;\n\
+    float depthFromCamera = depthFromNear + near;\n\
+    vec4 windowCoord = vec4(fragmentCoordinateXY, far * (1.0 - near / depthFromCamera) / (far - near), 1.0);\n\
     vec4 eyeCoordinate = czm_windowToEyeCoordinates(windowCoord);\n\
-    eyeCoordinate.w = 1.0 / unscaledDepth; // Better precision\n\
+    eyeCoordinate.w = 1.0 / depthFromCamera; // Better precision\n\
+    return eyeCoordinate;\n\
 #else\n\
     vec4 windowCoord = vec4(fragmentCoordinateXY, depthOrLogDepth, 1.0);\n\
     vec4 eyeCoordinate = czm_windowToEyeCoordinates(windowCoord);\n\

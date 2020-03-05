@@ -1,5 +1,5 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
  * Copyright 2011-2020 Cesium Contributors
  *
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './AttributeCompression-3fc96685', './IndexDatatype-0b3c1fea', './IntersectionTests-e4e803b1', './Plane-b44b7f20', './createTaskProcessorWorker', './EllipsoidTangentPlane-5fcbd3a1', './OrientedBoundingBox-4edd890c', './Color-07ccb87a'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './AttributeCompression-6cfb9427', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './createTaskProcessorWorker', './EllipsoidTangentPlane-323c7a98', './OrientedBoundingBox-764de7b5', './Color-7baed48c'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
 
     var scratchCenter = new Cartesian2.Cartesian3();
         var scratchEllipsoid = new Cartesian2.Ellipsoid();

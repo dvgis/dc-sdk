@@ -1,5 +1,5 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
  * Copyright 2011-2020 Cesium Contributors
  *
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './ComponentDatatype-9fd090e4', './AttributeCompression-3fc96685', './IndexDatatype-0b3c1fea', './IntersectionTests-e4e803b1', './Plane-b44b7f20', './WebMercatorProjection-346eec3e', './createTaskProcessorWorker', './EllipsoidTangentPlane-5fcbd3a1', './OrientedBoundingBox-4edd890c', './TerrainEncoding-ff5342ee'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './AttributeCompression-6cfb9427', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './WebMercatorProjection-e471eea5', './createTaskProcessorWorker', './EllipsoidTangentPlane-323c7a98', './OrientedBoundingBox-764de7b5', './TerrainEncoding-69e30123'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
 
     /**
          * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
@@ -39,7 +39,7 @@ define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-
             Check.DeveloperError.throwInstantiationError();
         }
 
-        defineProperties.defineProperties(TerrainProvider.prototype, {
+        Object.defineProperties(TerrainProvider.prototype, {
             /**
              * Gets an event that is raised when the terrain provider encounters an asynchronous error..  By subscribing
              * to the event, you will be notified of the error and can potentially recover from it.  Event listeners

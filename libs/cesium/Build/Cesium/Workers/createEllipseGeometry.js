@@ -1,5 +1,5 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
  * Copyright 2011-2020 Cesium Contributors
  *
@@ -18,6 +18,6 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(["./when-0488ac89","./Check-78ca6843","./Math-8a4c9da1","./Cartesian2-cc1e6450","./defineProperties-c6a70625","./Transforms-fa4f10bc","./RuntimeError-4d6e0952","./WebGLConstants-66e14a3b","./ComponentDatatype-9252f28f","./GeometryAttribute-3345e440","./GeometryAttributes-3227db5b","./AttributeCompression-fe1560e2","./GeometryPipeline-587f449d","./EncodedCartesian3-97ac8d01","./IndexDatatype-8575c917","./IntersectionTests-12255a09","./Plane-466db411","./GeometryOffsetAttribute-22febf92","./VertexFormat-7996cb24","./EllipseGeometryLibrary-ff71c40e","./GeometryInstance-2a7fafaf","./EllipseGeometry-e762155f"],function(r,e,t,n,a,i,o,s,c,f,l,d,m,p,b,y,u,G,C,E,A,_){"use strict";return function(e,t){return r.defined(t)&&(e=_.EllipseGeometry.unpack(e,t)),e._center=n.Cartesian3.clone(e._center),e._ellipsoid=n.Ellipsoid.clone(e._ellipsoid),_.EllipseGeometry.createGeometry(e)}});
+define(["./when-a55a8a4c","./Check-bc1d37d9","./Math-73a8bd13","./Cartesian2-8c9f79ed","./Transforms-7a81c8c2","./RuntimeError-7c184ac0","./WebGLConstants-4c11ee5f","./ComponentDatatype-c2c50230","./GeometryAttribute-f9641809","./GeometryAttributes-1c7ce91d","./AttributeCompression-fbcb3321","./GeometryPipeline-24d3be03","./EncodedCartesian3-11d9c783","./IndexDatatype-486e7786","./IntersectionTests-3bb891b7","./Plane-a6a20716","./GeometryOffsetAttribute-9ecab91f","./VertexFormat-e1477d0a","./EllipseGeometryLibrary-fa954a7f","./GeometryInstance-08f0b75f","./EllipseGeometry-5bbb43be"],function(r,e,t,n,a,c,i,o,s,b,l,d,f,m,p,y,u,G,C,E,A){"use strict";return function(e,t){return r.defined(t)&&(e=A.EllipseGeometry.unpack(e,t)),e._center=n.Cartesian3.clone(e._center),e._ellipsoid=n.Ellipsoid.clone(e._ellipsoid),A.EllipseGeometry.createGeometry(e)}});

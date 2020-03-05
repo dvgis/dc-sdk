@@ -1,5 +1,5 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
  * Copyright 2011-2020 Cesium Contributors
  *
@@ -18,6 +18,6 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(["./when-0488ac89","./Check-78ca6843","./Math-8a4c9da1","./Cartesian2-cc1e6450","./defineProperties-c6a70625","./Transforms-fa4f10bc","./RuntimeError-4d6e0952","./WebGLConstants-66e14a3b","./ComponentDatatype-9252f28f","./GeometryAttribute-3345e440","./GeometryAttributes-3227db5b","./Plane-466db411","./VertexFormat-7996cb24","./FrustumGeometry-c9257195"],function(r,e,t,n,a,c,o,u,m,s,i,f,b,d){"use strict";return function(e,t){return r.defined(t)&&(e=d.FrustumGeometry.unpack(e,t)),d.FrustumGeometry.createGeometry(e)}});
+define(["./when-a55a8a4c","./Check-bc1d37d9","./Math-73a8bd13","./Cartesian2-8c9f79ed","./Transforms-7a81c8c2","./RuntimeError-7c184ac0","./WebGLConstants-4c11ee5f","./ComponentDatatype-c2c50230","./GeometryAttribute-f9641809","./GeometryAttributes-1c7ce91d","./Plane-a6a20716","./VertexFormat-e1477d0a","./FrustumGeometry-5307cd16"],function(r,e,t,a,c,n,u,o,m,s,d,i,f){"use strict";return function(e,t){return r.defined(t)&&(e=f.FrustumGeometry.unpack(e,t)),f.FrustumGeometry.createGeometry(e)}});

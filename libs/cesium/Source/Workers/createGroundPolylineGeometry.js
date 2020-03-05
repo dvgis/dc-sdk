@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './GeometryAttribute-21a3ec3f', './EncodedCartesian3-e0dcfcb4', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './WebMercatorProjection-b2b73805', './arrayRemoveDuplicates-7554b927', './ArcType-938f261b', './EllipsoidRhumbLine-c7012b36', './EllipsoidGeodesic-fed93bc6'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, EncodedCartesian3, IntersectionTests, Plane, WebMercatorProjection, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic) { 'use strict';
+define(['./when-e6e3e713', './Check-1df6b9a0', './Math-c5f6c994', './Cartesian2-1d7364fa', './Transforms-943e8463', './RuntimeError-717c34db', './WebGLConstants-7f7d68ac', './ComponentDatatype-2b8834a4', './GeometryAttribute-3a303898', './EncodedCartesian3-d723731d', './IntersectionTests-c05f88ce', './Plane-2e419ea5', './WebMercatorProjection-2eb538cc', './arrayRemoveDuplicates-11ba5123', './ArcType-4e1c0bc3', './EllipsoidRhumbLine-0dab698e', './EllipsoidGeodesic-8b33d834'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, EncodedCartesian3, IntersectionTests, Plane, WebMercatorProjection, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic) { 'use strict';
 
     /**
          * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -28,7 +28,7 @@ define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-
             this._numberOfLevelZeroTilesY = when.defaultValue(options.numberOfLevelZeroTilesY, 1);
         }
 
-        defineProperties.defineProperties(GeographicTilingScheme.prototype, {
+        Object.defineProperties(GeographicTilingScheme.prototype, {
             /**
              * Gets the ellipsoid that is tiled by this tiling scheme.
              * @memberof GeographicTilingScheme.prototype
@@ -390,7 +390,7 @@ define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-
         ApproximateTerrainHeights._terrainHeights = undefined;
         ApproximateTerrainHeights._initPromise = undefined;
 
-        defineProperties.defineProperties(ApproximateTerrainHeights, {
+        Object.defineProperties(ApproximateTerrainHeights, {
             /**
              * Determines if the terrain heights are initialized and ready to use. To initialize the terrain heights,
              * call {@link ApproximateTerrainHeights#initialize} and wait for the returned promise to resolve.
@@ -506,7 +506,7 @@ define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-
             this._scene3DOnly = false;
         }
 
-        defineProperties.defineProperties(GroundPolylineGeometry.prototype, {
+        Object.defineProperties(GroundPolylineGeometry.prototype, {
             /**
              * The number of elements used to pack the object into an array.
              * @memberof GroundPolylineGeometry.prototype

@@ -4,8 +4,9 @@ export default "float czm_reverseLogDepth(float logZ)\n\
 #ifdef LOG_DEPTH\n\
     float near = czm_currentFrustum.x;\n\
     float far = czm_currentFrustum.y;\n\
-    logZ = pow(2.0, logZ * czm_log2FarPlusOne) - 1.0;\n\
-    logZ = far * (1.0 - near / logZ) / (far - near);\n\
+    float log2Depth = logZ * czm_log2FarDepthFromNearPlusOne;\n\
+    float depthFromNear = pow(2.0, log2Depth) - 1.0;\n\
+    return far * (1.0 - near / (depthFromNear + near)) / (far - near);\n\
 #endif\n\
     return logZ;\n\
 }\n\

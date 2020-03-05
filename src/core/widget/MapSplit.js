@@ -1,0 +1,93 @@
+/*
+ * @Author: Caven
+ * @Date: 2020-03-04 15:38:40
+ * @Last Modified by: Caven
+ * @Last Modified time: 2020-03-05 14:42:31
+ */
+
+import Widget from './Widget'
+import Cesium from '@/namespace'
+
+class MapSplit extends Widget {
+  constructor() {
+    super()
+    this._wapper = DC.DomUtil.create('div', 'dc-slider')
+    this._baseLayer = undefined
+    this._moveActive = false
+  }
+
+  set enable(enable) {
+    this._enable = enable
+    this._state = this._enable
+      ? DC.WidgetState.ENABLED
+      : DC.WidgetState.DISABLED
+    this._wapper.style.visibility = this._enable ? 'visible' : 'hidden'
+  }
+
+  get enable() {
+    return this._enable
+  }
+
+  _installHook() {
+    let handler = new Cesium.ScreenSpaceEventHandler(this._wapper)
+    let self = this
+    handler.setInputAction(() => {
+      self._moveActive = true
+    }, Cesium.ScreenSpaceEventType.LEFT_DOWN)
+    handler.setInputAction(() => {
+      self._moveActive = true
+    }, Cesium.ScreenSpaceEventType.PINCH_START)
+
+    handler.setInputAction(
+      self._moveHandler,
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE
+    )
+    handler.setInputAction(
+      self._moveHandler,
+      Cesium.ScreenSpaceEventType.PINCH_MOVE
+    )
+    handler.setInputAction(() => {
+      self._moveActive = false
+    }, Cesium.ScreenSpaceEventType.LEFT_UP)
+    handler.setInputAction(() => {
+      self._moveActive = false
+    }, Cesium.ScreenSpaceEventType.PINCH_END)
+  }
+
+  _moveHandler(movement) {
+    if (!this._moveActive) {
+      return
+    }
+    let relativeOffset = movement.endPosition.x
+    let splitPosition =
+      (this._wapper.offsetLeft + relativeOffset) /
+      this._wapper.parentElement.offsetWidth
+    this._wapper.style.left = 100.0 * splitPosition + '%'
+    this._viewer.scene.imagerySplitPosition = splitPosition
+  }
+
+  install(viewer) {
+    this._viewer = viewer
+    this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
+    this._state = DC.WidgetState.INSTALLED
+    this._installHook && this._installHook()
+  }
+
+  addBaseLayer(baseLayer, splitDirection) {
+    if (!this._viewer || !this._enable) {
+      return this
+    }
+    if (this._baseLayer) {
+      this._viewer.delegate.imageryLayers.remove(this._baseLayer)
+    }
+    if (baseLayer) {
+      this._baseLayer = layers.addImageryProvider(baseLayer)
+      this._baseLayer.splitDirection = splitDirection || 0
+    }
+    return this
+  }
+}
+
+DC.WidgetType.MAPSPLIT = 'mapsplit'
+
+export default MapSplit

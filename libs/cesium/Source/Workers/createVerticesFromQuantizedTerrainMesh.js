@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './Transforms-7fc36d34', './RuntimeError-bd79d86c', './WebGLConstants-e4e9c6cc', './ComponentDatatype-7dd74ff6', './AttributeCompression-3a5fff57', './IndexDatatype-7c4ae249', './IntersectionTests-fc908a59', './Plane-f6fa0f8f', './WebMercatorProjection-b2b73805', './createTaskProcessorWorker', './EllipsoidTangentPlane-54c911ea', './OrientedBoundingBox-65a45d94', './TerrainEncoding-0e4b9743'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
+define(['./when-e6e3e713', './Check-1df6b9a0', './Math-c5f6c994', './Cartesian2-1d7364fa', './Transforms-943e8463', './RuntimeError-717c34db', './WebGLConstants-7f7d68ac', './ComponentDatatype-2b8834a4', './AttributeCompression-d68d64ef', './IndexDatatype-e2961542', './IntersectionTests-c05f88ce', './Plane-2e419ea5', './WebMercatorProjection-2eb538cc', './createTaskProcessorWorker', './EllipsoidTangentPlane-c3f1b2da', './OrientedBoundingBox-02d47ca6', './TerrainEncoding-e37552cb'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, AttributeCompression, IndexDatatype, IntersectionTests, Plane, WebMercatorProjection, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, TerrainEncoding) { 'use strict';
 
     /**
          * Provides terrain or other geometry for the surface of an ellipsoid.  The surface geometry is
@@ -18,7 +18,7 @@ define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-
             Check.DeveloperError.throwInstantiationError();
         }
 
-        defineProperties.defineProperties(TerrainProvider.prototype, {
+        Object.defineProperties(TerrainProvider.prototype, {
             /**
              * Gets an event that is raised when the terrain provider encounters an asynchronous error..  By subscribing
              * to the event, you will be notified of the error and can potentially recover from it.  Event listeners

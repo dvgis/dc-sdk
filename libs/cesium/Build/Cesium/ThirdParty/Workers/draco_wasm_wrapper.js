@@ -1,5 +1,5 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
  * Copyright 2011-2020 Cesium Contributors
  *
@@ -18,7 +18,7 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 var $jscomp=$jscomp||{};$jscomp.scope={};$jscomp.ASSUME_ES5=!1;$jscomp.ASSUME_NO_NATIVE_MAP=!1;$jscomp.ASSUME_NO_NATIVE_SET=!1;$jscomp.defineProperty=$jscomp.ASSUME_ES5||"function"==typeof Object.defineProperties?Object.defineProperty:function(d,f,n){d!=Array.prototype&&d!=Object.prototype&&(d[f]=n.value)};$jscomp.getGlobal=function(d){return"undefined"!=typeof window&&window===d?d:"undefined"!=typeof global&&null!=global?global:d};$jscomp.global=$jscomp.getGlobal(this);
 $jscomp.polyfill=function(d,f,n,w){if(f){n=$jscomp.global;d=d.split(".");for(w=0;w<d.length-1;w++){var g=d[w];g in n||(n[g]={});n=n[g]}d=d[d.length-1];w=n[d];f=f(w);f!=w&&null!=f&&$jscomp.defineProperty(n,d,{configurable:!0,writable:!0,value:f})}};$jscomp.polyfill("Math.imul",function(d){return d?d:function(f,d){f=Number(f);d=Number(d);var n=f&65535,g=d&65535;return n*g+((f>>>16&65535)*g+n*(d>>>16&65535)<<16>>>0)|0}},"es6","es3");

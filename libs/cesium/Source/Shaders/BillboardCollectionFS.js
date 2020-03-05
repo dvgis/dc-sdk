@@ -156,7 +156,9 @@ void main()\n\
 #endif\n\
     gl_FragColor = color;\n\
 \n\
+#ifdef LOG_DEPTH\n\
     czm_writeLogDepth();\n\
+#endif\n\
 \n\
 #ifdef FRAGMENT_DEPTH_CHECK\n\
     float temp = v_compressed.y;\n\

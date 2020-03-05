@@ -1,5 +1,5 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
  * Copyright 2011-2020 Cesium Contributors
  *
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-0488ac89', './defineProperties-c6a70625', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './createTaskProcessorWorker'], function (when, defineProperties, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
+define(['./when-a55a8a4c', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './createTaskProcessorWorker'], function (when, RuntimeError, WebGLConstants, createTaskProcessorWorker) { 'use strict';
 
     /**
          * Describes a compressed texture and contains a compressed texture buffer.
@@ -39,7 +39,7 @@ define(['./when-0488ac89', './defineProperties-c6a70625', './RuntimeError-4d6e09
             this._buffer =  buffer;
         }
 
-        defineProperties.defineProperties(CompressedTextureBuffer.prototype, {
+        Object.defineProperties(CompressedTextureBuffer.prototype, {
             /**
              * The format of the compressed texture.
              * @type PixelFormat
@@ -159,7 +159,7 @@ define(['./when-0488ac89', './defineProperties-c6a70625', './RuntimeError-4d6e09
                         (pixelDatatype === PixelDatatype.UNSIGNED_SHORT_5_6_5));
             }
         };
-    var PixelDatatype$1 = when.freezeObject(PixelDatatype);
+    var PixelDatatype$1 = Object.freeze(PixelDatatype);
 
     /**
          * The format of a pixel, i.e., the number of components it has and what they represent.
@@ -483,7 +483,7 @@ define(['./when-0488ac89', './defineProperties-c6a70625', './RuntimeError-4d6e09
                 return flipped;
             }
         };
-    var PixelFormat$1 = when.freezeObject(PixelFormat);
+    var PixelFormat$1 = Object.freeze(PixelFormat);
 
     /**
      * @licence

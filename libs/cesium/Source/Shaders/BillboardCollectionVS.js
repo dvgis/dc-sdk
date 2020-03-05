@@ -362,7 +362,7 @@ if (lengthSq < disableDepthTestDistance) {\n\
             // Position z on the near plane.\n\
             gl_Position.z = -gl_Position.w;\n\
 #ifdef LOG_DEPTH\n\
-            czm_vertexLogDepth(vec4(czm_currentFrustum.x));\n\
+            v_depthFromNearPlusOne = 1.0;\n\
 #endif\n\
         }\n\
     }\n\

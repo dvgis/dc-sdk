@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-03 23:43:35
+ * @Last Modified time: 2020-03-04 21:12:55
  */
 
 import Cesium from '@/namespace'
@@ -16,6 +16,7 @@ import ContextMenu from '../widget/ContextMenu'
 import Tooltip from '../widget/Tooltip'
 import Attribution from '../widget/Attribution'
 import MapSwitch from '../widget/MapSwitch'
+import MapSplit from '../widget/MapSplit'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -68,10 +69,12 @@ DC.Viewer = class {
     this._contextMenu = new ContextMenu()
     this._tooltip = new Tooltip()
     this._mapSwitch = new MapSwitch()
+    this._mapSplit = new MapSplit()
     this.use(this._popup)
       .use(this._contextMenu)
       .use(this._tooltip)
       .use(this._mapSwitch)
+      .use(this._mapSplit)
       .use(new Attribution())
   }
 

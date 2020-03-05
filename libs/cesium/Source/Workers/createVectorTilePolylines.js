@@ -1,5 +1,5 @@
 /* This file is automatically rebuilt by the Cesium build process. */
-define(['./when-76089d4c', './Check-5cd4f88e', './Math-4da9b357', './Cartesian2-88a9081c', './defineProperties-7057a760', './WebGLConstants-e4e9c6cc', './AttributeCompression-3a5fff57', './IndexDatatype-7c4ae249', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, defineProperties, WebGLConstants, AttributeCompression, IndexDatatype, createTaskProcessorWorker) { 'use strict';
+define(['./when-e6e3e713', './Check-1df6b9a0', './Math-c5f6c994', './Cartesian2-1d7364fa', './WebGLConstants-7f7d68ac', './AttributeCompression-d68d64ef', './IndexDatatype-e2961542', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, WebGLConstants, AttributeCompression, IndexDatatype, createTaskProcessorWorker) { 'use strict';
 
     var maxShort = 32767;
 

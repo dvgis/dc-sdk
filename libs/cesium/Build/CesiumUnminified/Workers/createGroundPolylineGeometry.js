@@ -1,5 +1,5 @@
 /**
- * Cesium - https://github.com/AnalyticalGraphicsInc/cesium
+ * Cesium - https://github.com/CesiumGS/cesium
  *
  * Copyright 2011-2020 Cesium Contributors
  *
@@ -18,9 +18,9 @@
  * Columbus View (Pat. Pend.)
  *
  * Portions licensed separately.
- * See https://github.com/AnalyticalGraphicsInc/cesium/blob/master/LICENSE.md for full licensing details.
+ * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-e22df635', './defineProperties-c6a70625', './Transforms-2f1d88cd', './RuntimeError-4d6e0952', './WebGLConstants-66e14a3b', './ComponentDatatype-9fd090e4', './GeometryAttribute-b3d6422f', './EncodedCartesian3-67d5d816', './IntersectionTests-e4e803b1', './Plane-b44b7f20', './WebMercatorProjection-346eec3e', './arrayRemoveDuplicates-aa017891', './ArcType-318ba758', './EllipsoidRhumbLine-5aa5f0b7', './EllipsoidGeodesic-e61afcb0'], function (when, Check, _Math, Cartesian2, defineProperties, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, EncodedCartesian3, IntersectionTests, Plane, WebMercatorProjection, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic) { 'use strict';
+define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './EncodedCartesian3-5ad054af', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './WebMercatorProjection-e471eea5', './arrayRemoveDuplicates-69403a22', './ArcType-66bc286a', './EllipsoidRhumbLine-4d1a57d2', './EllipsoidGeodesic-365e69f7'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, EncodedCartesian3, IntersectionTests, Plane, WebMercatorProjection, arrayRemoveDuplicates, ArcType, EllipsoidRhumbLine, EllipsoidGeodesic) { 'use strict';
 
     /**
          * A tiling scheme for geometry referenced to a simple {@link GeographicProjection} where
@@ -49,7 +49,7 @@ define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-
             this._numberOfLevelZeroTilesY = when.defaultValue(options.numberOfLevelZeroTilesY, 1);
         }
 
-        defineProperties.defineProperties(GeographicTilingScheme.prototype, {
+        Object.defineProperties(GeographicTilingScheme.prototype, {
             /**
              * Gets the ellipsoid that is tiled by this tiling scheme.
              * @memberof GeographicTilingScheme.prototype
@@ -411,7 +411,7 @@ define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-
         ApproximateTerrainHeights._terrainHeights = undefined;
         ApproximateTerrainHeights._initPromise = undefined;
 
-        defineProperties.defineProperties(ApproximateTerrainHeights, {
+        Object.defineProperties(ApproximateTerrainHeights, {
             /**
              * Determines if the terrain heights are initialized and ready to use. To initialize the terrain heights,
              * call {@link ApproximateTerrainHeights#initialize} and wait for the returned promise to resolve.
@@ -527,7 +527,7 @@ define(['./when-0488ac89', './Check-78ca6843', './Math-a09b4ca4', './Cartesian2-
             this._scene3DOnly = false;
         }
 
-        defineProperties.defineProperties(GroundPolylineGeometry.prototype, {
+        Object.defineProperties(GroundPolylineGeometry.prototype, {
             /**
              * The number of elements used to pack the object into an array.
              * @memberof GroundPolylineGeometry.prototype
