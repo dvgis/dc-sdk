@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 13:06:56
+ * @Last Modified time: 2020-03-05 22:50:35
  */
-import OverlayEvent from '../event/OverlayEvent'
+import { OverlayEvent } from '@/core/event'
 class Overlay {
   constructor() {
     this._id = DC.Util.uuid()

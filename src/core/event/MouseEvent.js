@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-19 16:24:09
+ * @Last Modified time: 2020-03-06 11:15:14
  */
 
 import Cesium from '@/namespace'
@@ -114,6 +114,10 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
+    if (!target) {
+      let ray = this._viewer.scene.camera.getPickRay(movement.position)
+      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+    }
     this._raiseEvent(Cesium.ScreenSpaceEventType.LEFT_CLICK, target, cartesian)
   }
 
@@ -128,6 +132,10 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
+    if (!target) {
+      let ray = this._viewer.scene.camera.getPickRay(movement.position)
+      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+    }
     this._raiseEvent(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
       target,
@@ -145,6 +153,10 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
+    if (!target) {
+      let ray = this._viewer.scene.camera.getPickRay(movement.endPosition)
+      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+    }
     this._raiseEvent(Cesium.ScreenSpaceEventType.RIGHT_CLICK, target, cartesian)
   }
 
@@ -160,6 +172,10 @@ class MouseEvent extends Event {
     let target = this._viewer.scene.pick(movement.endPosition)
     this._viewer.canvas.style.cursor = target ? 'pointer' : 'default'
     let cartesian = this._viewer.scene.pickPosition(movement.endPosition)
+    if (!target) {
+      let ray = this._viewer.scene.camera.getPickRay(movement.endPosition)
+      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+    }
     this._raiseEvent(Cesium.ScreenSpaceEventType.MOUSE_MOVE, target, cartesian)
   }
 }

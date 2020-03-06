@@ -2,21 +2,21 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 17:02:48
+ * @Last Modified time: 2020-03-06 00:10:44
  */
 
 import Cesium from '@/namespace'
-import ViewerOption from '../option/ViewerOption'
-import CameraOption from '../option/CameraOption'
-import MouseEvent from '../event/MouseEvent'
-import ViewerEvent from '../event/ViewerEvent'
-import SceneEvent from '../event/SceneEvent'
-import Popup from '../widget/Popup'
-import ContextMenu from '../widget/ContextMenu'
-import Tooltip from '../widget/Tooltip'
-import Attribution from '../widget/Attribution'
-import MapSwitch from '../widget/MapSwitch'
-import MapSplit from '../widget/MapSplit'
+import { ViewerOption, CameraOption } from '@/core/option'
+import { MouseEvent, ViewerEvent, SceneEvent } from '@/core/event'
+import {
+  Attribution,
+  ContextMenu,
+  LocationBar,
+  MapSplit,
+  MapSwitch,
+  Popup,
+  Tooltip
+} from '@/core/widget'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -65,17 +65,18 @@ DC.Viewer = class {
     /**
      * Add default components
      */
-    this._popup = new Popup()
-    this._contextMenu = new ContextMenu()
-    this._tooltip = new Tooltip()
-    this._mapSwitch = new MapSwitch()
-    this._mapSplit = new MapSplit()
-    this.use(this._popup)
-      .use(this._contextMenu)
-      .use(this._tooltip)
-      .use(this._mapSwitch)
-      .use(this._mapSplit)
-      .use(new Attribution())
+    this._comps = {
+      popup: new Popup(),
+      contextMenu: new ContextMenu(),
+      tooltip: new Tooltip(),
+      mapSwitch: new MapSwitch(),
+      mapSplit: new MapSplit(),
+      locationBar: new LocationBar()
+    }
+    for (let key in this._comps) {
+      this.use(this._comps[key])
+    }
+    this.use(new Attribution())
   }
 
   get delegate() {
@@ -107,15 +108,23 @@ DC.Viewer = class {
   }
 
   get popup() {
-    return this._popup
+    return this._comps.popup
   }
 
   get contextMenu() {
-    return this._contextMenu
+    return this._comps.contextMenu
   }
 
   get tooltip() {
-    return this._tooltip
+    return this._comps.tooltip
+  }
+
+  get mapSplit() {
+    return this._comps.mapSplit
+  }
+
+  get locationBar() {
+    return this._comps.locationBar
   }
 
   get cameraPosition() {
@@ -238,7 +247,7 @@ DC.Viewer = class {
     if (!this._baseLayerPicker.selectedImagery) {
       this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
     }
-    this._mapSwitch.addMap(options)
+    this._comps.mapSwitch.addMap(options)
     return this
   }
 

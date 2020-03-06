@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:44:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:27:08
+ * @Last Modified time: 2020-03-05 22:43:08
  */
 import Cesium from '@/namespace'
-import '../../core/overlay/base/DC.Billboard'
+import '@/core/overlay/base/DC.Billboard'
 
 DC.CustomBillboard = class extends DC.Billboard {
   constructor(position, icon) {

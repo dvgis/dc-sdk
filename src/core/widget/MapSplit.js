@@ -2,11 +2,10 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 16:12:24
+ * @Last Modified time: 2020-03-06 00:06:37
  */
-
-import Widget from './Widget'
 import Cesium from '@/namespace'
+import Widget from './Widget'
 
 class MapSplit extends Widget {
   constructor() {
@@ -14,18 +13,6 @@ class MapSplit extends Widget {
     this._wapper = DC.DomUtil.create('div', 'dc-slider')
     this._baseLayer = undefined
     this._moveActive = false
-  }
-
-  set enable(enable) {
-    this._enable = enable
-    this._state = this._enable
-      ? DC.WidgetState.ENABLED
-      : DC.WidgetState.DISABLED
-    this._wapper.style.visibility = this._enable ? 'visible' : 'hidden'
-  }
-
-  get enable() {
-    return this._enable
   }
 
   _installHook() {
@@ -55,7 +42,7 @@ class MapSplit extends Widget {
   }
 
   _moveHandler(movement) {
-    if (!this._moveActive) {
+    if (!this._moveActive || !this._enable) {
       return
     }
     let relativeOffset = movement.endPosition.x

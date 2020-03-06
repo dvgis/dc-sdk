@@ -2,11 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:24:57
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-02 23:19:58
+ * @Last Modified time: 2020-03-05 22:15:41
  */
-import './animation/DC.GlobeRotate'
-import './animation/DC.AroudView'
-import './animation/DC.AroundPoint'
+import './animation'
 import './roaming/DC.Roaming'
 import './plot/DC.Plot'
 import './material'

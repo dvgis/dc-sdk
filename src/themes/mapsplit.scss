@@ -6,7 +6,7 @@
   width: 5px;
   height: 100%;
   z-index: 9999;
-
+  visibility: hidden;
   &:hover {
     cursor: ew-resize;
   }

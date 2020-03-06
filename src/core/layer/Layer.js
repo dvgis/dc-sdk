@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:09:58
+ * @Last Modified time: 2020-03-05 22:41:46
  */
 import Cesium from '@/namespace'
-import LayerEvent from '../event/LayerEvent'
+import { LayerEvent } from '@/core/event'
 
 class Layer {
   constructor(id) {

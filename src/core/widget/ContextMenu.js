@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:32:39
+ * @Last Modified time: 2020-03-05 23:38:09
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -36,6 +36,7 @@ class ContextMenu extends Widget {
       self.hide()
     }
   }
+
   _rightclickHandler(e) {
     if (e && e.position && this._enable && this._updateWindowCoord) {
       this._updateWindowCoord(
