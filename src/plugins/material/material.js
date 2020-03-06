@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-26 23:38:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-27 00:22:41
+ * @Last Modified time: 2020-03-06 18:06:04
  */
 import Cesium from '@/namespace'
 
@@ -26,6 +26,8 @@ let ReflectionMaterial = require('../shader/ReflectionMaterial.glsl')
 let RefractionMaterial = require('../shader/RefractionMaterial.glsl')
 let TieDyeMaterial = require('../shader/TieDyeMaterial.glsl')
 let WoodMaterial = require('../shader/WoodMaterial.glsl')
+let CircleFadeShader = require('../shader/CircleFadeShader.glsl')
+let CircleWaveShader = require('../shader/CircleWaveShader.glsl')
 
 Cesium.ShaderSource._czmBuiltinsAndUniforms.czm_cellular = czm_cellular
 Cesium.ShaderSource._czmBuiltinsAndUniforms.czm_snoise = czm_snoise
@@ -291,5 +293,38 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.WoodType, {
     return (
       uniforms.lightWoodColor.alpha < 1.0 || uniforms.darkWoodColor.alpha < 1.0
     )
+  }
+})
+
+// CircleFade
+Cesium.Material.CircleFadeType = 'CircleFade'
+Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleFadeType, {
+  fabric: {
+    type: Cesium.Material.CircleFadeType,
+    uniforms: {
+      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
+      duration: 45
+    },
+    source: CircleFadeShader
+  },
+  translucent: function(material) {
+    return true
+  }
+})
+
+// CircleWave
+
+Cesium.Material.CircleWaveType = 'CircleWave'
+Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleWaveType, {
+  fabric: {
+    type: Cesium.Material.CircleWaveType,
+    uniforms: {
+      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
+      duration: 45
+    },
+    source: CircleWaveShader
+  },
+  translucent: function(material) {
+    return true
   }
 })
