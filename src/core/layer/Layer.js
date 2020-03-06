@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 22:41:46
+ * @Last Modified time: 2020-03-06 17:11:02
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -16,6 +16,7 @@ class Layer {
     this._show = true
     this._cache = {}
     this._attr = {}
+    this._style = {}
     this._layerEvent = new LayerEvent()
     this._layerEvent.on(DC.LayerEventType.ADD, this._addCallback, this)
     this._layerEvent.on(DC.LayerEventType.REMOVE, this._removeCallback, this)
@@ -215,6 +216,11 @@ class Layer {
     }
     return this
   }
+  /**
+   *
+   * @param {*} Style
+   */
+  setStyle(Style) {}
 }
 
 export default Layer

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 22:50:35
+ * @Last Modified time: 2020-03-06 17:13:45
  */
 import { OverlayEvent } from '@/core/event'
 class Overlay {

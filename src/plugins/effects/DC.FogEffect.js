@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-26 23:05:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:16:18
+ * @Last Modified time: 2020-03-06 17:33:43
  */
 import Cesium from '@/namespace'
 import Effect from './Effect'
@@ -28,10 +28,10 @@ DC.FogEffect = class extends Effect {
       fragmentShader: FogShader,
       uniforms: {
         trength: () => {
-          return _this.trength
+          return _this._trength
         },
         fogcolor: () => {
-          return _this.color
+          return _this._color
         }
       }
     })
