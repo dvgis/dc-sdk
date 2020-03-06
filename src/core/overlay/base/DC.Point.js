@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:19:15
+ * @Last Modified time: 2020-03-06 17:02:20
  */
 
 import Cesium from '@/namespace'
@@ -77,7 +77,7 @@ DC.Point = class extends Overlay {
    */
   setStyle(style) {
     if (Object.keys(style).length === 0) {
-      return
+      return this
     }
     this._style = style
     this._delegate.point &&

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:23:10
+ * @Last Modified time: 2020-03-06 17:03:07
  */
 
 import Overlay from '../Overlay'
@@ -87,7 +87,7 @@ DC.Model = class extends Overlay {
    */
   setStyle(style) {
     if (Object.keys(style).length == 0) {
-      return
+      return this
     }
     this._style = style
     this._delegate.model && DC.Util.merge(this._delegate.model, this._style)

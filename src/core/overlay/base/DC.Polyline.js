@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:51:49
+ * @Last Modified time: 2020-03-06 17:02:38
  */
 
 import Overlay from '../Overlay'
@@ -101,7 +101,7 @@ DC.Polyline = class extends Overlay {
    */
   setStyle(style) {
     if (Object.keys(style).length == 0) {
-      return
+      return this
     }
     this._style = style
     this._delegate.polyline &&

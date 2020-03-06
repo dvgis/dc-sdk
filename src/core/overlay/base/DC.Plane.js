@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:18:50
+ * @Last Modified time: 2020-03-06 17:02:11
  */
 
 import Cesium from '@/namespace'
@@ -99,7 +99,7 @@ DC.Plane = class extends Overlay {
    */
   setStyle(style) {
     if (Object.keys(style).length === 0) {
-      return
+      return this
     }
     this._style = style
     this._delegate.plane && DC.Util.merge(this._delegate.plane, this._style)

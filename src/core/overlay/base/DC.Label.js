@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:18:47
+ * @Last Modified time: 2020-03-06 17:01:55
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -78,7 +78,7 @@ DC.Label = class extends Overlay {
    */
   setStyle(style) {
     if (Object.keys(style).length === 0) {
-      return
+      return this
     }
     this._style = style
     this._delegate.label && DC.Util.merge(this._delegate.label, this._style)

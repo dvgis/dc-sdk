@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:54:09
+ * @Last Modified time: 2020-03-06 17:02:29
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -126,7 +126,7 @@ DC.Polygon = class extends Overlay {
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
-      return
+      return this
     }
     this._style = style
     this._delegate.polygon && DC.Util.merge(this._delegate.polygon, this._style)
