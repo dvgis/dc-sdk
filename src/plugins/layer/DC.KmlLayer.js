@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:03:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:13:10
+ * @Last Modified time: 2020-03-09 21:28:59
  */
 
 import Cesium from '@/namespace'
@@ -17,6 +17,18 @@ DC.KmlLayer = class extends Layer {
     this._delegate = Cesium.KmlDataSource.load(url, options)
     this._state = DC.LayerState.INITIALIZED
     this.type = DC.LayerType.KML
+  }
+
+  set show(show) {
+    this._show = show
+    this._delegate &&
+      this._delegate.then(dataSource => {
+        dataSource.show = this._show
+      })
+  }
+
+  get show() {
+    return this._show
   }
 
   eachOverlay(method, context) {

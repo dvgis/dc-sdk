@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:11:02
+ * @Last Modified time: 2020-03-09 21:13:02
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -99,7 +99,7 @@ class Layer {
         this._delegate.removeAll()
         this._viewer.delegate.scene.primitives.remove(this._delegate)
       } else {
-        this._delegate.entities.removeAll()
+        this._delegate.entities && this._delegate.entities.removeAll()
         this._viewer.delegate.dataSources.remove(this._delegate)
       }
       this._state = DC.LayerState.REMOVED

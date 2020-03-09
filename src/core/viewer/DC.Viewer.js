@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 00:10:44
+ * @Last Modified time: 2020-03-07 22:25:38
  */
 
 import Cesium from '@/namespace'
@@ -121,6 +121,10 @@ DC.Viewer = class {
 
   get mapSplit() {
     return this._comps.mapSplit
+  }
+
+  get mapSwitch() {
+    return this._comps.mapSwitch
   }
 
   get locationBar() {

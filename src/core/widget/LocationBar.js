@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-03-04 18:02:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 23:25:02
+ * @Last Modified time: 2020-03-09 20:59:35
  */
-import Cesium from '@/namespace'
+
 import Widget from './Widget'
 
 class LocationBar extends Widget {
@@ -23,13 +23,11 @@ class LocationBar extends Widget {
 
   _moveHandler(movement) {
     if (this._enable) {
-      console.log(movement)
     }
   }
 
   _cameraHandler(e) {
     if (this._enable) {
-      console.log(movement)
     }
   }
 

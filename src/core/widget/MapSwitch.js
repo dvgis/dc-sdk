@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 23:41:38
+ * @Last Modified time: 2020-03-07 21:15:41
  */
 import Widget from './Widget'
 
@@ -63,10 +63,12 @@ class MapSwitch extends Widget {
   }
 
   addMap(map = {}) {
-    this._cache.push(map)
-    this._addItem(map)
-    if (this._cache.length > 1) {
-      this._wapper.style.visibility = 'visible'
+    if (this._enable) {
+      this._cache.push(map)
+      this._addItem(map)
+      if (this._cache.length > 1) {
+        this._wapper.style.visibility = 'visible'
+      }
     }
   }
 }

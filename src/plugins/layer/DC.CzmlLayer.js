@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 13:38:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:11:57
+ * @Last Modified time: 2020-03-09 21:28:16
  */
 
 import Cesium from '@/namespace'
@@ -17,6 +17,18 @@ DC.CzmlLayer = class extends Layer {
     this._delegate = Cesium.CzmlDataSource.load(url, options)
     this._state = DC.LayerState.INITIALIZED
     this.type = DC.LayerType.CZML
+  }
+
+  set show(show) {
+    this._show = show
+    this._delegate &&
+      this._delegate.then(dataSource => {
+        dataSource.show = this._show
+      })
+  }
+
+  get show() {
+    return this._show
   }
 
   eachOverlay(method, context) {

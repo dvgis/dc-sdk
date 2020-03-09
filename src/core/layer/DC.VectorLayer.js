@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:09:45
+ * @Last Modified time: 2020-03-09 21:11:05
  */
 
 import Cesium from '@/namespace'
@@ -22,7 +22,7 @@ DC.VectorLayer = class extends Layer {
 
   clear() {
     this._cache = {}
-    this._delegate.entities.removeAll()
+    this._delegate.entities && this._delegate.entities.removeAll()
     this._state = DC.LayerState.CLEARED
     return this
   }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:08:14
+ * @Last Modified time: 2020-03-09 21:26:57
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -16,6 +16,18 @@ DC.GeoJsonLayer = class extends Layer {
     this._delegate = Cesium.GeoJsonDataSource.load(url, options)
     this._state = DC.LayerState.INITIALIZED
     this.type = DC.LayerType.GEOJSON
+  }
+
+  set show(show) {
+    this._show = show
+    this._delegate &&
+      this._delegate.then(dataSource => {
+        dataSource.show = this._show
+      })
+  }
+
+  get show() {
+    return this._show
   }
 
   _createBillboard(entity) {
