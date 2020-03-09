@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-09 21:13:02
+ * @Last Modified time: 2020-03-09 22:49:39
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -98,6 +98,11 @@ class Layer {
       if (this._delegate instanceof Cesium.PrimitiveCollection) {
         this._delegate.removeAll()
         this._viewer.delegate.scene.primitives.remove(this._delegate)
+      } else if (this._delegate.then) {
+        this._delegate.then(dataSource => {
+          dataSource.entities.removeAll()
+        })
+        this._viewer.delegate.dataSources.remove(this._delegate)
       } else {
         this._delegate.entities && this._delegate.entities.removeAll()
         this._viewer.delegate.dataSources.remove(this._delegate)
