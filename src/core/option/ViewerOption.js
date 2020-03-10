@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-10 09:43:03
+ * @Last Modified time: 2020-03-10 09:46:45
  */
 
 import Cesium from '@/namespace'
@@ -62,27 +62,27 @@ class ViewerOption {
       false
     )
 
-    tthis._viewer.delegate.scene.screenSpaceCameraController.enableRotate = GS.Util.defaultValue(
+    tthis._viewer.delegate.scene.screenSpaceCameraController.enableRotate = Cesium.defaultValue(
       this._options.enableRotate,
       true
     )
-    this._viewer.delegate.scene.screenSpaceCameraController.enableTilt = GS.Util.defaultValue(
+    this._viewer.delegate.scene.screenSpaceCameraController.enableTilt = Cesium.defaultValue(
       this._options.enableTilt,
       true
     )
-    this._viewer.delegate.scene.screenSpaceCameraController.enableTranslate = GS.Util.defaultValue(
+    this._viewer.delegate.scene.screenSpaceCameraController.enableTranslate = Cesium.defaultValue(
       this._options.enableTranslate,
       true
     )
-    this._viewer.delegate.scene.screenSpaceCameraController.enableZoom = GS.Util.defaultValue(
+    this._viewer.delegate.scene.screenSpaceCameraController.enableZoom = Cesium.defaultValue(
       this._options.enableZoom,
       true
     )
-    this._viewer.delegate.scene.screenSpaceCameraController.maximumZoomDistance = GS.Util.defaultValue(
+    this._viewer.delegate.scene.screenSpaceCameraController.maximumZoomDistance = Cesium.defaultValue(
       this._options.maxZoomDistance,
       Number.POSITIVE_INFINITY
     )
-    this._viewer.delegate.scene.screenSpaceCameraController.minimumZoomDistance = GS.Util.defaultValue(
+    this._viewer.delegate.scene.screenSpaceCameraController.minimumZoomDistance = Cesium.defaultValue(
       this._options.minZoomDistance,
       1.0
     )
