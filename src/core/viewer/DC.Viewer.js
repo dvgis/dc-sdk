@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-07 22:25:38
+ * @Last Modified time: 2020-03-11 10:41:05
  */
 
 import Cesium from '@/namespace'
@@ -225,6 +225,8 @@ DC.Viewer = class {
       this._delegate.scene.morphTo2D(duration)
     } else if (sceneMode === 3) {
       this._delegate.scene.morphTo3D(duration)
+    } else if (sceneMode === 2.5) {
+      this._delegate.scene.morphToColumbusView(duration)
     }
     return this
   }

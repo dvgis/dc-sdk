@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 23:38:09
+ * @Last Modified time: 2020-03-11 11:01:48
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -12,6 +12,7 @@ class ContextMenu extends Widget {
     super()
     this._wapper = DC.DomUtil.create('div', 'dc-context-menu')
     this._ulEl = DC.DomUtil.create('ul', 'menu-list', this._wapper)
+    this._positionChangeAble = true
     this.type = DC.WidgetType.CONTEXT_MENU
   }
 

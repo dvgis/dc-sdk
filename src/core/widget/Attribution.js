@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:32:18
+ * @Last Modified time: 2020-03-11 17:34:37
  */
 import Widget from './Widget'
 
@@ -36,13 +36,6 @@ class Attribution extends Widget {
       window.open('http://dv.cavencj.cn')
     }
     a.style.cssText = `color:#0078A8;`
-  }
-
-  install(viewer) {
-    this._viewer = viewer
-    this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
-    this._state = DC.WidgetState.INSTALLED
-    this._installHook && this._installHook()
   }
 }
 

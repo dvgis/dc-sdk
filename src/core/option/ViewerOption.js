@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-10 09:51:45
+ * @Last Modified time: 2020-03-11 23:09:48
  */
 
 import Cesium from '@/namespace'
@@ -80,7 +80,7 @@ class ViewerOption {
     )
     this._viewer.delegate.scene.screenSpaceCameraController.maximumZoomDistance = Cesium.defaultValue(
       options.maxZoomDistance,
-      Number.POSITIVE_INFINITY
+      40489014.0
     )
     this._viewer.delegate.scene.screenSpaceCameraController.minimumZoomDistance = Cesium.defaultValue(
       options.minZoomDistance,

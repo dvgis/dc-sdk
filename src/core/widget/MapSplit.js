@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 00:06:37
+ * @Last Modified time: 2020-03-11 17:37:10
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -53,27 +53,21 @@ class MapSplit extends Widget {
     this._viewer.scene.imagerySplitPosition = splitPosition
   }
 
-  install(viewer) {
-    this._viewer = viewer
-    this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
-    this._state = DC.WidgetState.INSTALLED
-    this._installHook && this._installHook()
-  }
-
   addBaseLayer(baseLayer, splitDirection) {
     if (!this._viewer || !this._enable) {
       return this
     }
-    if (this._baseLayer) {
-      this._viewer.delegate.imageryLayers.remove(this._baseLayer)
-    }
     if (baseLayer) {
+      if (this._baseLayer) {
+        this._viewer.delegate.imageryLayers.remove(this._baseLayer)
+      }
       this._baseLayer = this._viewer.delegate.imageryLayers.addImageryProvider(
         baseLayer
       )
       this._baseLayer.splitDirection = splitDirection || 0
       this._viewer.scene.imagerySplitPosition =
         this._wapper.offsetLeft / this._wapper.parentElement.offsetWidth
+      this._wapper.style.visibility = 'visible'
     }
     return this
   }

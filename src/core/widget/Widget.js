@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 00:07:01
+ * @Last Modified time: 2020-03-12 13:13:02
  */
 import Cesium from '@/namespace'
 
@@ -12,6 +12,7 @@ class Widget {
     this._position = undefined
     this._enable = false
     this._wapper = undefined
+    this._positionChangeAble = false
     this._state = DC.WidgetState.INSTALLED
     this.type = undefined
   }
@@ -21,6 +22,7 @@ class Widget {
     this._state = this._enable
       ? DC.WidgetState.ENABLED
       : DC.WidgetState.DISABLED
+    this._enableHook && this._enableHook()
   }
 
   get enable() {
@@ -31,6 +33,16 @@ class Widget {
     return this._state
   }
 
+  /**
+   * 当enable修改后执行的钩子，子类根据需求复写
+   */
+  _enableHook() {
+    if (!this._wapper.parentNode && this._viewer) {
+      this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
+    }
+    this._wapper &&
+      (this._wapper.style.visibility = this._enable ? 'visible' : 'hidden')
+  }
   /**
    *
    * @param {*} windowCoord
@@ -44,12 +56,11 @@ class Widget {
    */
   install(viewer) {
     this._viewer = viewer
-    this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
     this._state = DC.WidgetState.INSTALLED
     /**
      *  add postRender Listener
      */
-    if (this._viewer && this._wapper) {
+    if (this._viewer && this._wapper && this._positionChangeAble) {
       let self = this
       let scene = this._viewer.scene
       scene.postRender.addEventListener(() => {

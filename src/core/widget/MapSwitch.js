@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-07 21:15:41
+ * @Last Modified time: 2020-03-11 17:37:21
  */
 import Widget from './Widget'
 
@@ -53,13 +53,6 @@ class MapSwitch extends Widget {
     }
     let span = DC.DomUtil.create('span', '', mapEl)
     span.innerHTML = map.name || '地图'
-  }
-
-  install(viewer) {
-    this._viewer = viewer
-    this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
-    this._state = DC.WidgetState.INSTALLED
-    this._installHook && this._installHook()
   }
 
   addMap(map = {}) {
