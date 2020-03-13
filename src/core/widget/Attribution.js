@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-11 17:34:37
+ * @Last Modified time: 2020-03-13 10:32:04
  */
 import Widget from './Widget'
 
@@ -33,9 +33,10 @@ class Attribution extends Widget {
     a.innerHTML = 'Digital Visual'
     a.href = 'javascirpt:void(0)'
     a.onclick = () => {
-      window.open('http://dv.cavencj.cn')
+      window.open('http://dc.cavencj.cn')
     }
     a.style.cssText = `color:#0078A8;`
+    this.enable = true
   }
 }
 

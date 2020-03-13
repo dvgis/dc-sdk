@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-11 10:41:05
+ * @Last Modified time: 2020-03-12 17:32:46
  */
 
 import Cesium from '@/namespace'
@@ -282,7 +282,7 @@ DC.Viewer = class {
     }
     this._baseLayerPicker.terrainProviderViewModels.push(
       new Cesium.ProviderViewModel({
-        name: options.name || '地形',
+        name: '地形',
         creationFunction: () => {
           return terrain
         }

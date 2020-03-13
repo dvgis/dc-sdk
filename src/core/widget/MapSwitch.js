@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-11 17:37:21
+ * @Last Modified time: 2020-03-12 17:57:28
  */
 import Widget from './Widget'
 
@@ -13,6 +13,15 @@ class MapSwitch extends Widget {
     this._config = undefined
     this._cache = []
     this.type = DC.WidgetType.MAPSWITCH
+  }
+
+  /**
+   * 当enable修改后执行的钩子，子类根据需求复写
+   */
+  _enableHook() {
+    if (!this._wapper.parentNode && this._viewer) {
+      this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
+    }
   }
 
   _installHook() {

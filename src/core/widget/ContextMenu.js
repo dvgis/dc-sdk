@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-11 11:01:48
+ * @Last Modified time: 2020-03-13 10:32:04
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
