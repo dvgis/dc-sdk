@@ -10,7 +10,7 @@ czm_material czm_getMaterial(czm_materialInput materialInput)
   vec2 st = materialInput.st;
   vec3 str = materialInput.str;
   float dis = distance(st, vec2(0.5, 0.5));
-  float per = fract(czm_frameNumber / duration);
+  float per = fract(czm_frameNumber / duration );
   if(abs(str.z)>0.001){
     discard;
   }
@@ -36,4 +36,4 @@ czm_material czm_getMaterial(czm_materialInput materialInput)
   }
   return material;
 }
-`s
+

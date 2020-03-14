@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-26 23:38:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 18:06:04
+ * @Last Modified time: 2020-03-14 21:43:27
  */
 import Cesium from '@/namespace'
 
@@ -320,7 +320,9 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleWaveType, {
     type: Cesium.Material.CircleWaveType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      duration: 45
+      duration: 45,
+      count: 1,
+      gradient: 0.1
     },
     source: CircleWaveShader
   },

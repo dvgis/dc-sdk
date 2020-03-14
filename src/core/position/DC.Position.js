@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:35:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 12:46:26
+ * @Last Modified time: 2020-03-14 16:28:42
  */
 
 DC.Position = class {
@@ -75,6 +75,22 @@ DC.Position = class {
     return JSON.stringify(position)
   }
 
+  /**
+   *
+   * @param {*} src
+   */
+  static copy(src) {
+    let position = new DC.Position()
+    if (src) {
+      position.lng = src.lng || 0
+      position.lat = src.lat || 0
+      position.alt = src.alt || 0
+      position.heading = src.heading || 0
+      position.pitch = src.pitch || 0
+      position.roll = src.roll || 0
+    }
+    return position
+  }
   /**
    *
    * @param {*} valStr

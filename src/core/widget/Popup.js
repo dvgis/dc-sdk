@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-13 09:57:53
+ * @Last Modified time: 2020-03-14 14:59:33
  */
 
 import Widget from './Widget'
@@ -21,9 +21,6 @@ class Popup extends Widget {
   }
 
   _updateWindowCoord(windowCoord) {
-    if (!windowCoord) {
-      return
-    }
     let x = windowCoord.x - this._wapper.offsetWidth / 2
     let y = windowCoord.y - this._wapper.offsetHeight
     if (this._config && this._config.position === 'left') {
@@ -41,8 +38,6 @@ class Popup extends Widget {
   _setCustomClass() {
     DC.DomUtil.setClass(this._wapper, `dc-popup ${this._config.customClass}`)
   }
-
-  _setArrowStyle() {}
 
   set config(config) {
     this._config = config
