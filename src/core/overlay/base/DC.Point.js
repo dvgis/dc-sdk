@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:02:20
+ * @Last Modified time: 2020-03-14 14:04:13
  */
 
 import Cesium from '@/namespace'
@@ -28,7 +28,7 @@ DC.Point = class extends Overlay {
 
   set position(position) {
     if (!position || !(position instanceof DC.Position)) {
-      return
+      throw new Error('the position invalid')
     }
     this._position = position
   }

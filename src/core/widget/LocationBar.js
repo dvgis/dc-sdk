@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-04 18:02:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-11 17:36:18
+ * @Last Modified time: 2020-03-14 14:16:54
  */
 
 import Widget from './Widget'
@@ -16,7 +16,6 @@ class LocationBar extends Widget {
   }
 
   _installHook() {
-    this._wapper && (this._wapper.style.visibility = 'hidden')
     this._viewer.on(DC.MouseEventType.MOUSE_MOVE, this._moveHandler, this)
     this._viewer.on(DC.SceneEventType.CAMERA_CHANGED, this._cameraHandler, this)
   }
@@ -29,13 +28,6 @@ class LocationBar extends Widget {
   _cameraHandler(e) {
     if (this._enable) {
     }
-  }
-
-  install(viewer) {
-    this._viewer = viewer
-    this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
-    this._state = DC.WidgetState.INSTALLED
-    this._installHook && this._installHook()
   }
 }
 

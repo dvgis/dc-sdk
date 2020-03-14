@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:02:01
+ * @Last Modified time: 2020-03-14 14:03:40
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -16,11 +16,16 @@ DC.Circle = class extends Overlay {
     this._center = center
     this._radius = radius
     this._delegate = new Cesium.Entity()
+    this._rotateAmount = 0
+    this._stRotation = 0
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.CIRCLE
   }
 
   set center(center) {
+    if (!center || !(center instanceof DC.Position)) {
+      throw new Error('the center invalid')
+    }
     this._center = center
   }
 
@@ -34,6 +39,14 @@ DC.Circle = class extends Overlay {
 
   get radius() {
     return this._redius
+  }
+
+  set rotateAmount(amount) {
+    this._rotateAmount = amount
+  }
+
+  get rotateAmount() {
+    return this._rotateAmount
   }
 
   /**
@@ -69,6 +82,15 @@ DC.Circle = class extends Overlay {
       }),
       semiMinorAxis: new Cesium.CallbackProperty(time => {
         return this._radius
+      }),
+      stRotation: new Cesium.CallbackProperty(time => {
+        if (this._rotateAmount > 0) {
+          this._stRotation += this._rotateAmount
+          if (this._stRotation === 360) {
+            this._stRotation = 0
+          }
+        }
+        return this._stRotation
       })
     }
     this._delegate.layer = this._layer

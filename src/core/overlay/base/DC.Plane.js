@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:02:11
+ * @Last Modified time: 2020-03-14 14:03:09
  */
 
 import Cesium from '@/namespace'
@@ -17,7 +17,7 @@ DC.Plane = class extends Overlay {
     this._position = position
     this._width = width
     this._height = height
-    this._plane = new Cesium.Plane(direction, 0, 0)
+    this._plane = new Cesium.Plane(Cesium.Cartesian3.clone(direction), 0.0)
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.PLANE

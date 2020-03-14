@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:01:55
+ * @Last Modified time: 2020-03-14 14:04:02
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -21,6 +21,9 @@ DC.Label = class extends Overlay {
   }
 
   set position(position) {
+    if (!position || !(position instanceof DC.Position)) {
+      throw new Error('the position invalid')
+    }
     this._position = position
   }
 

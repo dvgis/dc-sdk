@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:03:07
+ * @Last Modified time: 2020-03-14 14:04:38
  */
 
 import Overlay from '../Overlay'
@@ -18,10 +18,14 @@ DC.Model = class extends Overlay {
     this._modelUrl = modelUrl
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
+    this._rotateAmount = 0
     this.type = DC.OverlayType.MODEL
   }
 
   set position(position) {
+    if (!position || !(position instanceof DC.Position)) {
+      throw new Error('the position invalid')
+    }
     this._position = position
   }
 
@@ -37,6 +41,14 @@ DC.Model = class extends Overlay {
     return this._modelUrl
   }
 
+  set rotateAmount(amount) {
+    this._rotateAmount = amount
+  }
+
+  get rotateAmount() {
+    return this._rotateAmount
+  }
+
   _prepareDelegate() {
     /**
      * set the location
@@ -48,6 +60,12 @@ DC.Model = class extends Overlay {
      * set the orientation
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
+      if (this._rotateAmount > 0) {
+        this._position.heading += this._rotateAmount
+        if (this._position.heading === 360) {
+          this._position.heading = 0
+        }
+      }
       return Cesium.Transforms.headingPitchRollQuaternion(
         DC.T.transformWSG84ToCartesian(this._position),
         new Cesium.HeadingPitchRoll(

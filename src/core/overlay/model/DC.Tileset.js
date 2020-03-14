@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:03:19
+ * @Last Modified time: 2020-03-14 14:08:48
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -84,6 +84,7 @@ DC.Tileset = class extends Overlay {
           }
         })
       }
+      this._properties = []
     }
   }
   /**
