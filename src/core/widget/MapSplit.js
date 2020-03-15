@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-14 14:59:40
+ * @Last Modified time: 2020-03-15 17:52:35
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -67,7 +67,6 @@ class MapSplit extends Widget {
       this._baseLayer.splitDirection = splitDirection || 0
       this._viewer.scene.imagerySplitPosition =
         this._wapper.offsetLeft / this._wapper.parentElement.offsetWidth
-      this._wapper.style.visibility = 'visible'
     }
     return this
   }

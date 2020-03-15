@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-13 10:32:04
+ * @Last Modified time: 2020-03-15 18:47:07
  */
 import Widget from './Widget'
 
@@ -20,6 +20,7 @@ class Attribution extends Widget {
       padding: 2px 5px;
       border-radius: 2px;
       user-select: none;
+      box-shadow: 2px 2px 3px #2b2b2b;
     `
     this._config = undefined
     this.type = DC.WidgetType.ATTRIBUTION
