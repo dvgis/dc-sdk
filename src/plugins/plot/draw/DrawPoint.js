@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 16:25:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 15:52:30
+ * @Last Modified time: 2020-03-17 23:00:40
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -23,11 +23,8 @@ class DrawPoint extends Draw {
     }
   }
 
-  _mouseClickHandler(movement) {
-    this._position = this._viewer.delegate.scene.camera.pickEllipsoid(
-      movement.position,
-      Cesium.Ellipsoid.WGS84
-    )
+  _mouseClickHandler(e) {
+    this._position = e.surfacePosition
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POINT,
@@ -35,12 +32,9 @@ class DrawPoint extends Draw {
     })
   }
 
-  _mouseMoveHandler(movement) {
+  _mouseMoveHandler(e) {
     this._viewer.tooltip.setContent('单击选择点位')
-    this._position = this._viewer.delegate.scene.camera.pickEllipsoid(
-      movement.endPosition,
-      Cesium.Ellipsoid.WGS84
-    )
+    this._position = e.surfacePosition
     this._viewer.tooltip.setPosition(this._position)
   }
 

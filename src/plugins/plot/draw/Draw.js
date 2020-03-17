@@ -2,37 +2,62 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:45:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 14:08:37
+ * @Last Modified time: 2020-03-17 22:16:28
  */
 import Cesium from '@/namespace'
 
 class Draw {
   constructor(plotInfo) {
     this._viewer = plotInfo.viewer
-    this._handler = plotInfo.handler
     this._plotEvent = plotInfo.plotEvent
     this._layer = plotInfo.layer
     this._delegate = new Cesium.Entity()
   }
 
+  _mouseClickHandler() {}
+
+  _mouseMoveHandler() {}
+
+  _mouseDbClickHandler() {}
+
   _bindEvent() {
-    this._handler.setInputAction(movement => {
-      this._mouseClickHandler && this._mouseClickHandler(movement)
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+    this._viewer.on(
+      Cesium.ScreenSpaceEventType.LEFT_CLICK,
+      this._mouseClickHandler,
+      this
+    )
 
-    this._handler.setInputAction(movement => {
-      this._mouseMoveHandler && this._mouseMoveHandler(movement)
-    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+    this._viewer.on(
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+      this._mouseMoveHandler,
+      this
+    )
 
-    this._handler.setInputAction(movement => {
-      this._mouseDbClickHandler && this._mouseDbClickHandler(movement)
-    }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
+    this._viewer.on(
+      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+      this._mouseDbClickHandler,
+      this
+    )
   }
 
   _unbindEnvet() {
-    this._handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK)
-    this._handler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE)
-    this._handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
+    this._viewer.off(
+      Cesium.ScreenSpaceEventType.LEFT_CLICK,
+      this._mouseClickHandler,
+      this
+    )
+
+    this._viewer.off(
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+      this._mouseMoveHandler,
+      this
+    )
+
+    this._viewer.off(
+      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+      this._mouseDbClickHandler,
+      this
+    )
   }
 
   _prepareDelegate() {}

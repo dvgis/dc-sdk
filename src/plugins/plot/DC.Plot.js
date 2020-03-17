@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 15:51:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 18:02:24
+ * @Last Modified time: 2020-03-17 23:48:47
  */
 import Cesium from '@/namespace'
 import DrawPoint from './draw/DrawPoint'
@@ -11,23 +11,28 @@ import DrawPolygon from './draw/DrawPolygon'
 import DrawCircle from './draw/DrawCircle'
 import DrawRect from './draw/DrawRect'
 import EditPoint from './edit/EditPoint'
+import EditPolyline from './edit/EditPolyline'
 
 DC.Plot = class {
   constructor(viewer) {
     this._viewer = viewer
     this._plotEvent = new Cesium.Event()
-    this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
     this._callback = undefined
     this._drawWorker = undefined
     this._editWorker = undefined
-    this._layer = new Cesium.CustomDataSource('dc-plot')
-    this._viewer.delegate && this._viewer.delegate.dataSources.add(this._layer)
+    this._drawLayer = new Cesium.CustomDataSource('plot-draw-layer')
+    this._viewer.delegate.dataSources.add(this._drawLayer)
+    this._markerLayer = new DC.VectorLayer('plot-marker-layer')
+    this._viewer.addLayer(this._markerLayer)
+    this._state = undefined
   }
 
   _completeCallback(e) {
     this._drawWorker = undefined
+    this._editWorker = undefined
     this._viewer.tooltip.enable = false
-    this._layer.entities.removeAll()
+    this._state === 'draw' && this._drawLayer.entities.removeAll()
+    this._state === 'edit' && this._markerLayer.clear()
     if (this._callback) {
       this._callback.call(this, e)
     }
@@ -42,54 +47,71 @@ DC.Plot = class {
   _createDrawWorker(type, style) {
     let info = {
       viewer: this._viewer,
-      handler: this._handler,
       plotEvent: this._plotEvent,
-      layer: this._layer
+      layer: this._drawLayer
     }
-    if (type === DC.OverlayType.POINT) {
-      this._drawWorker = new DrawPoint(info, style)
-    } else if (type === DC.OverlayType.POLYLINE) {
-      this._drawWorker = new DrawPolyline(info, style)
-    } else if (type === DC.OverlayType.POLYGON) {
-      this._drawWorker = new DrawPolygon(info, style)
-    } else if (type === DC.OverlayType.CIRCLE) {
-      this._drawWorker = new DrawCircle(info, style)
-    } else if (type === DC.OverlayType.RECT) {
-      this._drawWorker = new DrawRect(info, style)
+    switch (type) {
+      case DC.OverlayType.POINT:
+        this._drawWorker = new DrawPoint(info, style)
+        break
+      case DC.OverlayType.POLYLINE:
+        this._drawWorker = new DrawPolyline(info, style)
+        break
+      case DC.OverlayType.POLYGON:
+        this._drawWorker = new DrawPolygon(info, style)
+        break
+      case DC.OverlayType.CIRCLE:
+        this._drawWorker = new DrawCircle(info, style)
+        break
+      case DC.OverlayType.RECT:
+        this._drawWorker = new DrawRect(info, style)
+        break
+      default:
+        break
     }
   }
 
   _createEditWorker(overlay) {
     let info = {
       viewer: this._viewer,
-      handler: this._handler,
       plotEvent: this._plotEvent,
-      layer: this._layer
+      layer: this._markerLayer,
+      overlay: overlay
     }
-    if (overlay.type === DC.OverlayType.POINT) {
-      this._editWorker = new EditPoint(info, style)
-    } else if (type === DC.OverlayType.POLYLINE) {
-      this._drawWorker = new DrawPolyline(info, style)
-    } else if (type === DC.OverlayType.POLYGON) {
-      this._drawWorker = new DrawPolygon(info, style)
-    } else if (type === DC.OverlayType.CIRCLE) {
-      this._drawWorker = new DrawCircle(info, style)
-    } else if (type === DC.OverlayType.RECT) {
-      this._drawWorker = new DrawRect(info, style)
+    switch (overlay.type) {
+      case DC.OverlayType.POINT:
+        this._editWorker = new EditPoint(info)
+        break
+      case DC.OverlayType.POLYLINE:
+        this._editWorker = new EditPolyline(info)
+        break
+      case DC.OverlayType.POLYGON:
+        this._drawWorker = new DrawPolygon(info, style)
+        break
+      case DC.OverlayType.CIRCLE:
+        this._drawWorker = new DrawCircle(info, style)
+        break
+      case DC.OverlayType.RECT:
+        this._drawWorker = new DrawRect(info, style)
+        break
+      default:
+        break
     }
   }
 
   draw(type, callback, style) {
+    this._state = 'draw'
     this._viewer.tooltip.enable = true
     this._bindEvent(callback)
     this._createDrawWorker(type, style)
-    this._drawWorker.start()
+    this._drawWorker && this._drawWorker.start()
   }
 
   edit(overlay, callback) {
+    this._state = 'edit'
     this._viewer.tooltip.enable = true
     this._bindEvent(callback)
     this._createEditWorker(overlay)
-    this._editWorker.start()
+    this._editWorker && this._editWorker.start()
   }
 }

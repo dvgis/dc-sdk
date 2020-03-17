@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:59:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 13:41:25
+ * @Last Modified time: 2020-03-17 23:00:57
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -23,8 +23,8 @@ class DrawPolygon extends Draw {
     }
   }
 
-  _mouseClickHandler(movement) {
-    let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.position, Cesium.Ellipsoid.WGS84)
+  _mouseClickHandler(e) {
+    let position = e.surfacePosition
     if (position) {
       if (this._positions.length === 2) {
         this._delegate.polyline.show = false
@@ -34,9 +34,9 @@ class DrawPolygon extends Draw {
     }
   }
 
-  _mouseMoveHandler(movement) {
+  _mouseMoveHandler(e) {
     this._viewer.tooltip.setContent('单击选择点位,双击结束')
-    let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.endPosition, Cesium.Ellipsoid.WGS84)
+    let position = e.surfacePosition
     this._viewer.tooltip.setPosition(position)
     if (position && this._positions.length > 0) {
       this._tempPoints = [this._positions[this._positions.length - 1], position]
@@ -44,12 +44,15 @@ class DrawPolygon extends Draw {
     }
   }
 
-  _mouseDbClickHandler(movement) {
+  _mouseDbClickHandler(e) {
     this._unbindEnvet()
     if (this._positions.length > 2) {
       this._positions = this._positions.slice(0, -1)
     }
-    this._plotEvent.raiseEvent({ type: DC.OverlayType.POLYGON, points: DC.T.transformCartesianArrayToWSG84Array(this._positions) })
+    this._plotEvent.raiseEvent({
+      type: DC.OverlayType.POLYGON,
+      points: DC.T.transformCartesianArrayToWSG84Array(this._positions)
+    })
   }
 
   _prepareDelegate() {

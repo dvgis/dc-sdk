@@ -2,46 +2,35 @@
  * @Author: Caven
  * @Date: 2020-03-17 16:19:15
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 20:17:37
+ * @Last Modified time: 2020-03-17 23:48:21
  */
 import Cesium from '@/namespace'
 
 class Edit {
   constructor(plotInfo) {
     this._viewer = plotInfo.viewer
-    this._handler = plotInfo.handler
     this._plotEvent = plotInfo.plotEvent
-    this._layer = plotInfo._layer
+    this._layer = plotInfo.layer
     this._overlay = plotInfo.overlay
-    this._editMarkers = []
+    this._markers = []
+    this._currentMarker = undefined
   }
 
-  _bindEvent() {
-    this._handler.setInputAction(movement => {
-      this._mouseClickHandler && this._mouseClickHandler(movement)
-    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
+  _mouseClickHandler() {}
 
-    this._handler.setInputAction(movement => {
-      this._mouseMoveHandler && this._mouseMoveHandler(movement)
-    }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
+  _mouseMoveHandler() {}
 
-    this._handler.setInputAction(movement => {
-      this._mouseDbClickHandler && this._mouseDbClickHandler(movement)
-    }, Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK)
-  }
+  _mouseDbClickHandler() {}
 
-  _unbindEnvet() {
-    this._handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK)
-    this._handler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE)
-    this._handler.removeInputAction(
-      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
-    )
-  }
+  _bindEvent() {}
+
+  _unbindEnvet() {}
+
+  _createMarker() {}
 
   _prepareMarkers() {}
 
   start() {
-    this._bindEvent()
     this._prepareMarkers()
   }
 }

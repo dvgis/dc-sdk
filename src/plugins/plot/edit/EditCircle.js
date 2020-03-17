@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-17 18:23:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 18:40:12
+ * @Last Modified time: 2020-03-17 21:59:25
  */
 import Edit from './Edit'
 
@@ -25,5 +25,12 @@ class EditCircle extends Edit {
     )
   }
 
-  _prepareMarkers() {}
+  _prepareMarkers() {
+    let rectangle = Cesium.EllipseGeometry.computeRectangle({
+      center: DC.T.this._center,
+      semiMajorAxis: this._radius,
+      semiMinorAxis: this._radius
+    })
+    let positions = [this._center]
+  }
 }

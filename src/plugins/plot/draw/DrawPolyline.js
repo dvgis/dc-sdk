@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:18:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-01 13:43:09
+ * @Last Modified time: 2020-03-17 23:01:22
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -24,16 +24,16 @@ class DrawPolyline extends Draw {
     }
   }
 
-  _mouseClickHandler(movement) {
-    let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.position, Cesium.Ellipsoid.WGS84)
+  _mouseClickHandler(e) {
+    let position = e.surfacePosition
     if (position) {
       this._positions.push(position)
     }
   }
 
-  _mouseMoveHandler(movement) {
+  _mouseMoveHandler(e) {
     this._viewer.tooltip.setContent('单击选择点位,双击结束')
-    let position = this._viewer.delegate.scene.camera.pickEllipsoid(movement.endPosition, Cesium.Ellipsoid.WGS84)
+    let position = e.surfacePosition
     this._viewer.tooltip.setPosition(position)
     if (position && this._positions.length > 0) {
       this._viewer.tooltip.setPosition(position)
@@ -41,12 +41,15 @@ class DrawPolyline extends Draw {
     }
   }
 
-  _mouseDbClickHandler(movement) {
+  _mouseDbClickHandler(e) {
     this._unbindEnvet()
     if (this._positions.length > 2) {
       this._positions = this._positions.slice(0, -1)
     }
-    this._plotEvent.raiseEvent({ type: DC.OverlayType.POLYLINE, points: DC.T.transformCartesianArrayToWSG84Array(this._positions) })
+    this._plotEvent.raiseEvent({
+      type: DC.OverlayType.POLYLINE,
+      points: DC.T.transformCartesianArrayToWSG84Array(this._positions)
+    })
   }
 
   _prepareDelegate() {
