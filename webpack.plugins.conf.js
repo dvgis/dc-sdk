@@ -2,13 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-07 21:34:45
+ * @Last Modified time: 2020-03-17 20:56:18
  */
 
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, '.', dir)
@@ -92,6 +93,22 @@ module.exports = env => {
           test: /\.glsl$/,
           loader: 'webpack-glsl-loader'
         }
+      ]
+    },
+    optimization: {
+      minimize: IS_PROD,
+      minimizer: [
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            output: {
+              comments: false
+            },
+            compress: {
+              drop_debugger: true,
+              drop_console: true
+            }
+          }
+        })
       ]
     },
     resolve: {

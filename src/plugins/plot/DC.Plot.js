@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 15:51:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-20 13:45:36
+ * @Last Modified time: 2020-03-17 18:02:24
  */
 import Cesium from '@/namespace'
 import DrawPoint from './draw/DrawPoint'
@@ -10,6 +10,7 @@ import DrawPolyline from './draw/DrawPolyline'
 import DrawPolygon from './draw/DrawPolygon'
 import DrawCircle from './draw/DrawCircle'
 import DrawRect from './draw/DrawRect'
+import EditPoint from './edit/EditPoint'
 
 DC.Plot = class {
   constructor(viewer) {
@@ -65,6 +66,17 @@ DC.Plot = class {
       plotEvent: this._plotEvent,
       layer: this._layer
     }
+    if (overlay.type === DC.OverlayType.POINT) {
+      this._editWorker = new EditPoint(info, style)
+    } else if (type === DC.OverlayType.POLYLINE) {
+      this._drawWorker = new DrawPolyline(info, style)
+    } else if (type === DC.OverlayType.POLYGON) {
+      this._drawWorker = new DrawPolygon(info, style)
+    } else if (type === DC.OverlayType.CIRCLE) {
+      this._drawWorker = new DrawCircle(info, style)
+    } else if (type === DC.OverlayType.RECT) {
+      this._drawWorker = new DrawRect(info, style)
+    }
   }
 
   draw(type, callback, style) {
@@ -74,7 +86,10 @@ DC.Plot = class {
     this._drawWorker.start()
   }
 
-  edit(overlay, clallback) {
+  edit(overlay, callback) {
+    this._viewer.tooltip.enable = true
     this._bindEvent(callback)
+    this._createEditWorker(overlay)
+    this._editWorker.start()
   }
 }

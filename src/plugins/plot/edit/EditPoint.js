@@ -1,26 +1,15 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-31 16:25:29
+ * @Date: 2020-03-17 17:52:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 15:52:30
+ * @Last Modified time: 2020-03-17 18:00:14
  */
-import Cesium from '@/namespace'
-import Draw from './Draw'
+import Edit from './Edit'
 
-const DEF_STYLE = {
-  pixelSize: 10,
-  outlineColor: Cesium.Color.BLUE,
-  outlineWidth: 5
-}
-
-class DrawPoint extends Draw {
-  constructor(plotInfo, style) {
+class EditPoint extends Edit {
+  constructor(plotInfo) {
     super(plotInfo)
-    this._position = Cesium.Cartesian3.ZERO
-    this._style = {
-      ...DEF_STYLE,
-      ...style
-    }
+    this._position = this._overlay.position
   }
 
   _mouseClickHandler(movement) {
@@ -43,16 +32,6 @@ class DrawPoint extends Draw {
     )
     this._viewer.tooltip.setPosition(this._position)
   }
-
-  _prepareDelegate() {
-    this._delegate.position = new Cesium.CallbackProperty(time => {
-      return this._position
-    })
-    this._delegate.point = {
-      ...this._style
-    }
-    this._layer.entities.add(this._delegate)
-  }
 }
 
-export default DrawPoint
+export default EditPoint

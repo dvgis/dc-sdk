@@ -5994,7 +5994,7 @@ uglify-js@^3.6.0:
     commander "~2.20.3"
     source-map "~0.6.1"
 
-uglifyjs-webpack-plugin@^2.1.2:
+uglifyjs-webpack-plugin@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/uglifyjs-webpack-plugin/-/uglifyjs-webpack-plugin-2.2.0.tgz#e75bc80e7f1937f725954c9b4c5a1e967ea9d0d7"
   integrity sha512-mHSkufBmBuJ+KHQhv5H0MXijtsoA1lynJt1lXOaotja8/I0pR4L9oGaPIZw+bQBOFittXZg9OC1sXSGO9D9ZYg==
