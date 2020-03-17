@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-13 09:42:47
+ * @Last Modified time: 2020-03-17 15:47:09
  */
 
 import Cesium from '@/namespace'
@@ -114,7 +114,7 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
-    if (!cartesian) {
+    if (!cartesian || !target) {
       let ray = this._viewer.scene.camera.getPickRay(movement.position)
       cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
     }
@@ -132,7 +132,7 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
-    if (!cartesian) {
+    if (!cartesian || !target) {
       let ray = this._viewer.scene.camera.getPickRay(movement.position)
       cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
     }
@@ -153,7 +153,7 @@ class MouseEvent extends Event {
     }
     let target = this._viewer.scene.pick(movement.position)
     let cartesian = this._viewer.scene.pickPosition(movement.position)
-    if (!cartesian) {
+    if (!cartesian || !target) {
       let ray = this._viewer.scene.camera.getPickRay(movement.position)
       cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
     }
@@ -172,7 +172,7 @@ class MouseEvent extends Event {
     let target = this._viewer.scene.pick(movement.endPosition)
     this._viewer.canvas.style.cursor = target ? 'pointer' : 'default'
     let cartesian = this._viewer.scene.pickPosition(movement.endPosition)
-    if (!cartesian) {
+    if (!cartesian || !target) {
       let ray = this._viewer.scene.camera.getPickRay(movement.endPosition)
       cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
     }
