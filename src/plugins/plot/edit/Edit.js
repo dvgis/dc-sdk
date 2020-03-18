@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-17 16:19:15
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 23:48:21
+ * @Last Modified time: 2020-03-18 21:26:22
  */
 import Cesium from '@/namespace'
 
@@ -16,21 +16,50 @@ class Edit {
     this._currentMarker = undefined
   }
 
-  _mouseClickHandler() {}
+  _mouseMoveHandler(e) {}
 
-  _mouseMoveHandler() {}
+  _mouseDbClickHandler(e) {
+    this._unbindEnvet()
+    this._layer.clear()
+    this._plotEvent.raiseEvent({
+      type: DC.OverlayType.POLYLINE,
+      points: DC.T.transformCartesianArrayToWSG84Array(this._positions)
+    })
+  }
 
-  _mouseDbClickHandler() {}
+  _bindEvent() {
+    this._viewer.on(
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+      this._mouseMoveHandler,
+      this
+    )
 
-  _bindEvent() {}
+    this._viewer.on(
+      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+      this._mouseDbClickHandler,
+      this
+    )
+  }
 
-  _unbindEnvet() {}
+  _unbindEnvet() {
+    this._viewer.off(
+      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+      this._mouseMoveHandler,
+      this
+    )
 
-  _createMarker() {}
+    this._viewer.off(
+      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+      this._mouseDbClickHandler,
+      this
+    )
+  }
 
   _prepareMarkers() {}
 
   start() {
+    this._layer.clear()
+    this._bindEvent()
     this._prepareMarkers()
   }
 }

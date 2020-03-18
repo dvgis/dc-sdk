@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-09 22:49:39
+ * @Last Modified time: 2020-03-18 22:21:57
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -124,6 +124,9 @@ class Layer {
     ) {
       overlay.overlayEvent.fire(DC.OverlayEventType.ADD, this)
       this._cache[overlay.id] = overlay
+      if (this._state === DC.LayerState.CLEARED) {
+        this._state = DC.LayerState.ADDED
+      }
     }
   }
 
