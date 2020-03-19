@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-10 10:05:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:08:19
+ * @Last Modified time: 2020-03-19 20:39:21
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -98,8 +98,6 @@ DC.ClusterLayer = class extends Layer {
     }
     return this
   }
-
-  toVectorLayer() {}
 
   clear() {
     this._cache = {}

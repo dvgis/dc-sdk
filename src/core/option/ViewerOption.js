@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-11 23:09:48
+ * @Last Modified time: 2020-03-19 21:05:06
  */
 
 import Cesium from '@/namespace'
@@ -20,7 +20,6 @@ class ViewerOption {
     )
     this._viewer.delegate.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
     this._viewer.delegate.scene.backgroundColor = Cesium.Color.TRANSPARENT
-    this._viewer.delegate.scene.postProcessStages.fxaa.enabled = true
     this._viewer.delegate.imageryLayers.removeAll()
   }
 
@@ -101,7 +100,7 @@ class ViewerOption {
     )
 
     this._viewer.delegate.scene.globe.depthTestAgainstTerrain = Cesium.defaultValue(
-      options.underground,
+      options.undergroundMode,
       false
     )
     return this
