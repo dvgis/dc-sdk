@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-05 21:53:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-15 18:10:37
+ * @Last Modified time: 2020-03-19 13:49:05
  */
 
 import Attribution from './Attribution'
@@ -13,6 +13,7 @@ import MapSwitch from './MapSwitch'
 import Popup from './Popup'
 import Tooltip from './Tooltip'
 import HawkeyeMap from './HawkeyeMap'
+import Compass from './Compass'
 
 export {
   Attribution,
@@ -22,5 +23,6 @@ export {
   MapSwitch,
   Popup,
   Tooltip,
-  HawkeyeMap
+  HawkeyeMap,
+  Compass
 }

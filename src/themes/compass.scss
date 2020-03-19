@@ -1,0 +1,68 @@
+.dc-compass {
+  overflow: hidden;
+  pointer-events: auto;
+  user-select: none;
+  top: 20px;
+  right: 20px;
+  .svg-path {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .out-ring-bg {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    width: 44px;
+    height: 44px;
+    border-radius: 44px;
+    border: 12px solid rgba(47, 43, 60, 0.8);
+    box-sizing: content-box;
+  }
+
+  .out-ring {
+    top: 0;
+    fill: rgba(255, 255, 255, 0.5);
+  }
+
+  .gyro-bg {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    width: 33px;
+    height: 33px;
+    border-radius: 33px;
+    background: rgba(47, 43, 60, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: content-box;
+  }
+
+  .gyro {
+    position: absolute;
+    top: 0;
+    width: 95px;
+    height: 95px;
+    fill: #ccc;
+    pointer-events: none;
+  }
+
+  .rotation_marker {
+    top: 0%;
+    fill: #68adfe;
+  }
+}
+.dc-compass,
+.dc-compass .out-ring,
+.dc-compass .rotation_marker {
+  position: absolute;
+  width: 95px;
+  height: 95px;
+}
+
+.dc-compass .gyro-active,
+.dc-compass .gyro-bg:hover + .gyro {
+  fill: #68adfe;
+}

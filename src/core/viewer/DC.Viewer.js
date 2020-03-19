@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-15 18:11:45
+ * @Last Modified time: 2020-03-19 13:50:16
  */
 
 import Cesium from '@/namespace'
@@ -16,7 +16,8 @@ import {
   MapSwitch,
   Popup,
   Tooltip,
-  HawkeyeMap
+  HawkeyeMap,
+  Compass
 } from '@/core/widget'
 
 const DEF_OPTS = {
@@ -73,7 +74,8 @@ DC.Viewer = class {
       mapSwitch: new MapSwitch(),
       mapSplit: new MapSplit(),
       locationBar: new LocationBar(),
-      hawkeyeMap: new HawkeyeMap()
+      hawkeyeMap: new HawkeyeMap(),
+      compass: new Compass()
     }
     for (let key in this._comps) {
       this.use(this._comps[key])
@@ -135,6 +137,10 @@ DC.Viewer = class {
 
   get hawkeyeMap() {
     return this._comps.hawkeyeMap
+  }
+
+  get compass() {
+    return this._comps.compass
   }
 
   get cameraPosition() {

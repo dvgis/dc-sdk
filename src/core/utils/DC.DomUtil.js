@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:50:13
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:07:59
+ * @Last Modified time: 2020-03-19 13:27:27
  */
 
 /**
@@ -78,7 +78,12 @@ DC.DomUtil = class {
     if (el.classList !== undefined) {
       el.classList.remove(name)
     } else {
-      this.setClass(el, DC.Util.trim((' ' + this.getClass(el) + ' ').replace(' ' + name + ' ', ' ')))
+      this.setClass(
+        el,
+        DC.Util.trim(
+          (' ' + this.getClass(el) + ' ').replace(' ' + name + ' ', ' ')
+        )
+      )
     }
   }
 
@@ -107,6 +112,29 @@ DC.DomUtil = class {
     if (el.correspondingElement) {
       el = el.correspondingElement
     }
-    return el.className.baseVal === undefined ? el.className : el.className.baseVal
+    return el.className.baseVal === undefined
+      ? el.className
+      : el.className.baseVal
+  }
+
+  /**
+   *
+   * @param {*} path
+   * @param {*} width
+   * @param {*} height
+   */
+  static createSvg(width, height, path, container) {
+    let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg:svg')
+    svg.setAttribute('class', 'svg-path')
+    svg.setAttribute('width', width)
+    svg.setAttribute('height', height)
+    svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height)
+    let pathEl = document.createElementNS('http://www.w3.org/2000/svg', 'path')
+    pathEl.setAttribute('d', path)
+    svg.appendChild(pathEl)
+    if (container) {
+      container.appendChild(svg)
+    }
+    return svg
   }
 }
