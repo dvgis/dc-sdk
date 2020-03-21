@@ -25,15 +25,15 @@ const DEF_OPTS = {
 class HawkeyeMap extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', 'dc-hawkeye-map')
-    this._wapper.setAttribute('id', DC.Util.uuid())
+    this._wrapper = DC.DomUtil.create('div', 'dc-hawkeye-map')
+    this._wrapper.setAttribute('id', DC.Util.uuid())
     this._baseLayer = undefined
     this._delegate = undefined
     this.type = DC.WidgetType.HAWkEYEMAP
   }
 
   _prepareDelegate() {
-    this._delegate = new Cesium.Viewer(this._wapper, {
+    this._delegate = new Cesium.Viewer(this._wrapper, {
       ...DEF_OPTS,
       sceneMode: Cesium.SceneMode.SCENE2D
     })

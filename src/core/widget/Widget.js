@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-14 14:58:31
+ * @Last Modified time: 2020-03-21 12:08:18
  */
 import Cesium from '@/namespace'
 
@@ -11,7 +11,7 @@ class Widget {
     this._viewer = undefined
     this._position = undefined
     this._enable = false
-    this._wapper = undefined
+    this._wrapper = undefined
     this._positionChangeAble = false
     this._state = DC.WidgetState.INSTALLED
     this.type = undefined
@@ -37,11 +37,11 @@ class Widget {
    * 当enable修改后执行的钩子，子类根据需求复写
    */
   _enableHook() {
-    if (!this._wapper.parentNode && this._viewer) {
-      this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
+    if (!this._wrapper.parentNode && this._viewer) {
+      this._wrapper && this._viewer.dcContainer.appendChild(this._wrapper)
     }
-    this._wapper &&
-      (this._wapper.style.visibility = this._enable ? 'visible' : 'hidden')
+    this._wrapper &&
+      (this._wrapper.style.visibility = this._enable ? 'visible' : 'hidden')
   }
   /**
    *
@@ -60,7 +60,7 @@ class Widget {
     /**
      *  add postRender Listener
      */
-    if (this._viewer && this._wapper && this._positionChangeAble) {
+    if (this._viewer && this._wrapper && this._positionChangeAble) {
       let self = this
       let scene = this._viewer.scene
       scene.postRender.addEventListener(() => {
@@ -90,8 +90,8 @@ class Widget {
    */
   setPosition(position) {
     this._position = position
-    this._wapper &&
-      (this._wapper.style.cssText = `
+    this._wrapper &&
+      (this._wrapper.style.cssText = `
     visibility:visible;
     `)
     return this
@@ -103,9 +103,9 @@ class Widget {
    */
   setContent(content) {
     if (content && typeof content === 'string') {
-      this._wapper.innerHTML = content
+      this._wrapper.innerHTML = content
     } else if (content && content instanceof Element) {
-      this._wapper.appendChild(content)
+      this._wrapper.appendChild(content)
     }
     return this
   }
@@ -114,8 +114,8 @@ class Widget {
    *
    */
   hide() {
-    this._wapper &&
-      (this._wapper.style.cssText = `
+    this._wrapper &&
+      (this._wrapper.style.cssText = `
     visibility:hidden;
     `)
   }

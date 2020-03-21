@@ -10,8 +10,8 @@ import Widget from './Widget'
 class ContextMenu extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', 'dc-context-menu')
-    this._ulEl = DC.DomUtil.create('ul', 'menu-list', this._wapper)
+    this._wrapper = DC.DomUtil.create('div', 'dc-context-menu')
+    this._ulEl = DC.DomUtil.create('ul', 'menu-list', this._wrapper)
     this._config = {}
     this._positionChangeAble = true
     this.type = DC.WidgetType.CONTEXT_MENU
@@ -55,7 +55,7 @@ class ContextMenu extends Widget {
   }
 
   _updateWindowCoord(windowCoord) {
-    this._wapper.style.cssText = `
+    this._wrapper.style.cssText = `
     visibility:visible;
     z-index:1;
     transform:translate3d(${Math.round(windowCoord.x)}px,${Math.round(
@@ -66,7 +66,7 @@ class ContextMenu extends Widget {
 
   _setCustomClass() {
     DC.DomUtil.setClass(
-      this._wapper,
+      this._wrapper,
       `dc-context-menu ${this._config.customClass}`
     )
   }

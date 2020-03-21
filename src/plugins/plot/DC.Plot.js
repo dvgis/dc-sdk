@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 15:51:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 23:48:47
+ * @Last Modified time: 2020-03-21 10:51:52
  */
 import Cesium from '@/namespace'
 import DrawPoint from './draw/DrawPoint'
@@ -99,7 +99,7 @@ DC.Plot = class {
     }
   }
 
-  draw(type, callback, style) {
+  draw(type, callback) {
     this._state = 'draw'
     this._viewer.tooltip.enable = true
     this._bindEvent(callback)

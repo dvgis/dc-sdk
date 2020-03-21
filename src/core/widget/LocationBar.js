@@ -10,9 +10,9 @@ import Widget from './Widget'
 class LocationBar extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', 'dc-location-bar')
-    this._mouseEl = DC.DomUtil.create('div', 'mouse-location', this._wapper)
-    this._cameraEl = DC.DomUtil.create('div', 'camera-location', this._wapper)
+    this._wrapper = DC.DomUtil.create('div', 'dc-location-bar')
+    this._mouseEl = DC.DomUtil.create('div', 'mouse-location', this._wrapper)
+    this._cameraEl = DC.DomUtil.create('div', 'camera-location', this._wrapper)
   }
 
   _installHook() {

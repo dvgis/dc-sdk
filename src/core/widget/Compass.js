@@ -17,7 +17,7 @@ const svg_gyro =
 class Compass extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', `dc-compass`)
+    this._wrapper = DC.DomUtil.create('div', `dc-compass`)
     this._compassRectangle = undefined
     this._outRing = undefined
     this._gyro = undefined
@@ -35,10 +35,10 @@ class Compass extends Widget {
 
   _installHook() {
     this._createCompassDom()
-    this._wapper.onmousedown = e => {
+    this._wrapper.onmousedown = e => {
       this._handleMouseDown(e)
     }
-    this._wapper.ondblclick = e => {
+    this._wrapper.ondblclick = e => {
       this._handleDoubleClick(e)
     }
     this._removeSubscription = this._viewer.scene.postRender.addEventListener(
@@ -56,16 +56,16 @@ class Compass extends Widget {
   _createCompassDom() {
     let svg_width = 145
     let svg_height = 145
-    DC.DomUtil.create('div', 'out-ring-bg', this._wapper)
-    this._outRing = DC.DomUtil.create('div', 'out-ring', this._wapper)
+    DC.DomUtil.create('div', 'out-ring-bg', this._wrapper)
+    this._outRing = DC.DomUtil.create('div', 'out-ring', this._wrapper)
     DC.DomUtil.createSvg(svg_width, svg_height, svg_out_ring, this._outRing)
-    DC.DomUtil.create('div', 'gyro-bg', this._wapper)
-    this._gyro = DC.DomUtil.create('div', 'gyro', this._wapper)
+    DC.DomUtil.create('div', 'gyro-bg', this._wrapper)
+    this._gyro = DC.DomUtil.create('div', 'gyro', this._wrapper)
     DC.DomUtil.createSvg(svg_width, svg_height, svg_gyro, this._gyro)
     this._rotation_marker = GS.DomUtil.create(
       'div',
       'rotation_marker',
-      this._wapper
+      this._wrapper
     )
     DC.DomUtil.createSvg(
       svg_width,

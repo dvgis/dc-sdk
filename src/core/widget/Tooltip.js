@@ -10,15 +10,15 @@ import Widget from './Widget'
 class Tooltip extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', 'dc-tool-tip')
+    this._wrapper = DC.DomUtil.create('div', 'dc-tool-tip')
     this._positionChangeAble = true
     this.type = DC.WidgetType.TOOLTIP
   }
 
   _updateWindowCoord(windowCoord) {
     let x = windowCoord.x + 10
-    let y = windowCoord.y - this._wapper.offsetHeight / 2
-    this._wapper.style.cssText = `
+    let y = windowCoord.y - this._wrapper.offsetHeight / 2
+    this._wrapper.style.cssText = `
     visibility:visible;
     z-index:1;
     transform:translate3d(${Math.round(x)}px,${Math.round(y)}px, 0);

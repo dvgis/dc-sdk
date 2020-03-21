@@ -9,7 +9,7 @@ import Widget from './Widget'
 class MapSwitch extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', 'dc-map-switch')
+    this._wrapper = DC.DomUtil.create('div', 'dc-map-switch')
     this._config = undefined
     this._cache = []
     this.type = DC.WidgetType.MAPSWITCH
@@ -19,28 +19,28 @@ class MapSwitch extends Widget {
    * 当enable修改后执行的钩子，子类根据需求复写
    */
   _enableHook() {
-    if (!this._wapper.parentNode && this._viewer) {
-      this._wapper && this._viewer.dcContainer.appendChild(this._wapper)
+    if (!this._wrapper.parentNode && this._viewer) {
+      this._wrapper && this._viewer.dcContainer.appendChild(this._wrapper)
     }
   }
 
   _installHook() {
     this.enable = true
     let self = this
-    this._wapper.onmouseover = () => {
+    this._wrapper.onmouseover = () => {
       let width = 80
       if (self._cache.length > 0) {
         width = self._cache.length * 85.7
       }
-      this._wapper.style.width = `${width}px`
+      this._wrapper.style.width = `${width}px`
     }
-    this._wapper.onmouseout = () => {
+    this._wrapper.onmouseout = () => {
       self._wapper.style.width = `80px`
     }
   }
 
   _addItem(map) {
-    let mapEl = DC.DomUtil.create('div', 'map-item', this._wapper)
+    let mapEl = DC.DomUtil.create('div', 'map-item', this._wrapper)
     let index = this._cache.length ? this._cache.length - 1 : 0
     mapEl.setAttribute('data-index', index)
     mapEl.onclick = e => {
@@ -69,7 +69,7 @@ class MapSwitch extends Widget {
       this._cache.push(map)
       this._addItem(map)
       if (this._cache.length > 1) {
-        this._wapper.style.visibility = 'visible'
+        this._wrapper.style.visibility = 'visible'
       }
     }
   }

@@ -9,8 +9,8 @@ import Widget from './Widget'
 class Attribution extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', 'dc-attribution')
-    this._wapper.style.cssText = `
+    this._wrapper = DC.DomUtil.create('div', 'dc-attribution')
+    this._wrapper.style.cssText = `
       position: absolute;
       left: 2px;
       bottom: 2px;
@@ -27,10 +27,10 @@ class Attribution extends Widget {
   }
 
   _installHook() {
-    let span = DC.DomUtil.create('span', '', this._wapper)
+    let span = DC.DomUtil.create('span', '', this._wrapper)
     span.innerHTML = '数字视觉'
     span.style.cssText = `margin-right:5px;`
-    let a = DC.DomUtil.create('a', '', this._wapper)
+    let a = DC.DomUtil.create('a', '', this._wrapper)
     a.innerHTML = 'Digital Visual'
     a.href = 'javascirpt:void(0)'
     a.onclick = () => {

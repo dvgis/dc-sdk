@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-15 17:52:35
+ * @Last Modified time: 2020-03-21 11:29:16
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -10,13 +10,13 @@ import Widget from './Widget'
 class MapSplit extends Widget {
   constructor() {
     super()
-    this._wapper = DC.DomUtil.create('div', 'dc-slider')
+    this._wrapper = DC.DomUtil.create('div', 'dc-slider')
     this._baseLayer = undefined
     this._moveActive = false
   }
 
   _installHook() {
-    let handler = new Cesium.ScreenSpaceEventHandler(this._wapper)
+    let handler = new Cesium.ScreenSpaceEventHandler(this._wrapper)
     let self = this
     handler.setInputAction(() => {
       self._moveActive = true
@@ -47,9 +47,9 @@ class MapSplit extends Widget {
     }
     let relativeOffset = movement.endPosition.x
     let splitPosition =
-      (this._wapper.offsetLeft + relativeOffset) /
-      this._wapper.parentElement.offsetWidth
-    this._wapper.style.left = 100.0 * splitPosition + '%'
+      (this._wrapper.offsetLeft + relativeOffset) /
+      this._wrapper.parentElement.offsetWidth
+    this._wrapper.style.left = 100.0 * splitPosition + '%'
     this._viewer.scene.imagerySplitPosition = splitPosition
   }
 
@@ -66,7 +66,7 @@ class MapSplit extends Widget {
       )
       this._baseLayer.splitDirection = splitDirection || 0
       this._viewer.scene.imagerySplitPosition =
-        this._wapper.offsetLeft / this._wapper.parentElement.offsetWidth
+        this._wrapper.offsetLeft / this._wrapper.parentElement.offsetWidth
     }
     return this
   }
