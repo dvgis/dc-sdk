@@ -2,17 +2,19 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:35:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-16 16:25:20
+ * @Last Modified time: 2020-03-22 00:15:31
  */
 
+import Cesium from '@/namespace'
+
 DC.Position = class {
-  constructor(lng, lat, alt = 0, heading = 0, pitch = 0, roll = 0) {
-    this._lng = lng
-    this._lat = lat
-    this._alt = alt
-    this._heading = heading
-    this._pitch = pitch
-    this._roll = roll
+  constructor(lng, lat, alt, heading, pitch, roll) {
+    this._lng = lng || 0
+    this._lat = lat || 0
+    this._alt = alt || 0
+    this._heading = heading || 0
+    this._pitch = pitch || 0
+    this._roll = roll || 0
   }
 
   set lng(lng) {
@@ -77,6 +79,20 @@ DC.Position = class {
 
   /**
    *
+   * @param {*} target
+   */
+  distance(target) {
+    if (!target || !(target instanceof DC.Position)) {
+      return 0
+    }
+    return Cesium.Cartesian3.distance(
+      DC.T.transformWSG84ToCartesian(this),
+      DC.T.transformWSG84ToCartesian(target)
+    )
+  }
+
+  /**
+   *
    * @param {*} src
    */
   static copy(src) {
@@ -91,6 +107,7 @@ DC.Position = class {
     }
     return position
   }
+
   /**
    *
    * @param {*} valStr
@@ -110,19 +127,22 @@ DC.Position = class {
     return position
   }
 
+  /**
+   *
+   * @param {*} str
+   */
   static fromCoordString(str) {
     let position = new DC.Position()
     if (str && typeof str === 'string') {
-      let temp = str.split(',')
-      if (temp && temp.length) {
-        position.lng = temp[0] || 0
-        position.lat = temp[1] || 0
-        position.alt = temp[2] || 0
-      }
+      position = this.fromCoordArray(str.split(','))
     }
     return position
   }
 
+  /**
+   *
+   * @param {*} arr
+   */
   static fromCoordArray(arr) {
     let position = new DC.Position()
     if (Array.isArray(arr)) {

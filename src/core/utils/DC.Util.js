@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:58:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:08:11
+ * @Last Modified time: 2020-03-22 01:03:49
  */
 
-const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
+const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
+  ''
+)
 /**
  *  工具类
  *  部分代码借鉴leaflet
@@ -13,9 +15,9 @@ const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.s
  */
 DC.Util = class {
   /**
-   *
-   * @param {*} prefix
    * generate uuid
+   * @param {*} prefix
+   *
    */
   static uuid(prefix = 'D') {
     let uuid = []
@@ -33,9 +35,10 @@ DC.Util = class {
 
   /**
    *
+   * Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter.
    * @param {*} dest
    * @param {*} sources
-   * Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter.
+   *
    */
 
   static merge(dest, ...sources) {
@@ -51,19 +54,38 @@ DC.Util = class {
 
   /**
    *
-   * @param {*} str
+   * @function trim(str: String): String
    * Compatibility polyfill for [String.prototype.trim](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
+   * @param {*} str
+   *
    */
   static trim(str) {
     return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '')
   }
 
   /**
-   *
+   * @function splitWords(str: String): String[]
+   * Trims and splits the string on whitespace and returns the array of parts.
    * @param {*} str
-   *  Trims and splits the string on whitespace and returns the array of parts.
+   *
    */
   static splitWords(str) {
     return this.trim(str).split(/\s+/)
+  }
+
+  /**
+   * @function setOptions(obj: Object, options: Object): Object
+   * Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`.
+   * @param {*} obj
+   * @param {*} options
+   */
+  static setOptions(obj, options) {
+    if (!obj.hasOwnProperty('options')) {
+      obj.options = obj.options ? create(obj.options) : {}
+    }
+    for (var i in options) {
+      obj.options[i] = options[i]
+    }
+    return obj.options
   }
 }

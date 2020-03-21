@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:02:38
+ * @Last Modified time: 2020-03-22 00:43:10
  */
 
 import Overlay from '../Overlay'
@@ -17,15 +17,14 @@ DC.Polyline = class extends Overlay {
       throw new Error('the positions invalid')
     }
     super()
-    this._positions = []
-    this._preparePositions(positions)
+    this._positions = DC.P.parsePositions(positions)
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.POLYLINE
   }
 
   set positions(positions) {
-    this._preparePositions(positions)
+    this._positions = DC.P.parsePositions(positions)
   }
 
   get positions() {
@@ -58,24 +57,6 @@ DC.Polyline = class extends Overlay {
       result = result + s
     }
     return result > 0 ? result.toFixed(2) : result
-  }
-
-  _preparePositions(positions) {
-    if (typeof positions === 'string') {
-      if (positions.indexOf('#') >= 0) {
-        throw new Error('the positions invalid')
-      }
-      positions = positions.split(';')
-    }
-    this._positions = positions.map(item => {
-      if (Array.isArray(item)) {
-        return DC.Position.fromCoordArray(item)
-      } else if (item instanceof DC.Position) {
-        return item
-      } else {
-        return DC.Position.fromCoordString(item)
-      }
-    })
   }
 
   /**

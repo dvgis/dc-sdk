@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:50:13
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-19 13:27:27
+ * @Last Modified time: 2020-03-22 01:00:54
  */
 
 /**
@@ -11,6 +11,33 @@
  * https://github.com/Leaflet/Leaflet/tree/master/src/core
  */
 DC.DomUtil = class {
+  /**
+   * @function get(id: String|HTMLElement): HTMLElement
+   * Returns an element given its DOM id, or returns the element itself
+   *  if it was passed directly.
+   * @param {*} id
+   */
+  static get(id) {
+    return typeof id === 'string' ? document.getElementById(id) : id
+  }
+
+  /**
+   * @function getStyle(el: HTMLElement, styleAttrib: String): String
+   * Returns the value for a certain style attribute on an element,
+   * including computed values or values set through CSS.
+   * @param {*} el
+   * @param {*} style
+   */
+  static getStyle(el, style) {
+    var value = el.style[style] || (el.currentStyle && el.currentStyle[style])
+
+    if ((!value || value === 'auto') && document.defaultView) {
+      var css = document.defaultView.getComputedStyle(el, null)
+      value = css ? css[style] : null
+    }
+    return value === 'auto' ? null : value
+  }
+
   /**
    *
    * @param {*} tagName
@@ -48,6 +75,23 @@ DC.DomUtil = class {
     while (el.firstChild) {
       el.removeChild(el.firstChild)
     }
+  }
+
+  /**
+   * @function hasClass(el: HTMLElement, name: String): Boolean
+   * Returns `true` if the element's class attribute contains `name`.
+   * @param {*} el
+   * @param {*} name
+   */
+  hasClass(el, name) {
+    if (el.classList !== undefined) {
+      return el.classList.contains(name)
+    }
+    var className = getClass(el)
+    return (
+      className.length > 0 &&
+      new RegExp('(^|\\s)' + name + '(\\s|$)').test(className)
+    )
   }
 
   /**

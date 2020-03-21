@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:02:29
+ * @Last Modified time: 2020-03-22 00:45:08
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -16,16 +16,15 @@ DC.Polygon = class extends Overlay {
       throw new Error('the positions invalid')
     }
     super()
-    this._positions = this._preparePositions(positions)
+    this._positions = DC.P.parsePositions(positions)
     this._holes = []
-
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.POLYGON
   }
 
   set positions(positions) {
-    this._positions = this._preparePositions(positions)
+    this._positions = DC.P.parsePositions(positions)
   }
 
   get positions() {
@@ -34,7 +33,7 @@ DC.Polygon = class extends Overlay {
 
   set holes(holes) {
     if (holes && holes.length) {
-      this._holes = holes.map(item => this._preparePositions(item))
+      this._holes = holes.map(item => DC.P.parsePositions(item))
     }
   }
 
@@ -71,26 +70,8 @@ DC.Polygon = class extends Overlay {
   }
 
   /**
-   * prepare entity
+   *
    */
-  _preparePositions(positions) {
-    if (typeof positions === 'string') {
-      if (positions.indexOf('#') >= 0) {
-        throw new Error('the positions invalid')
-      }
-      positions = positions.split(';')
-    }
-    return positions.map(item => {
-      if (Array.isArray(item)) {
-        return DC.Position.fromCoordArray(item)
-      } else if (item instanceof DC.Position) {
-        return item
-      } else {
-        return DC.Position.fromCoordString(item)
-      }
-    })
-  }
-
   _prepareHierarchy() {
     let result = new Cesium.PolygonHierarchy()
     result.positions = DC.T.transformWSG84ArrayToCartesianArray(this._positions)

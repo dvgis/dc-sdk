@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:54:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 22:00:03
+ * @Last Modified time: 2020-03-21 23:52:50
  */
 import Cesium from '@/namespace'
 import AmapImageryProvider from './provider/AmapImageryProvider'
