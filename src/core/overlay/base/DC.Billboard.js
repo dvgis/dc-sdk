@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 00:19:03
+ * @Last Modified time: 2020-03-22 01:18:17
  */
 
 import Cesium from '@/namespace'
@@ -123,12 +123,14 @@ DC.Billboard = class extends Overlay {
    * @param {*} entity
    */
   static fromEntity(entity) {
-    let position = DC.T.transformCartesianToWSG84(entity.position._value)
+    let position = DC.T.transformCartesianToWSG84(
+      entity.position.getValue(Cesium.JulianDate.now())
+    )
     let billboard = undefined
     if (entity.billboard) {
       billboard = new DC.Billboard(position, entity.billboard.image)
       billboard.attr = {
-        ...entity.properties
+        ...entity.properties.getValue(Cesium.JulianDate.now())
       }
     }
     return billboard

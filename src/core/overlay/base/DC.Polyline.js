@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 00:43:10
+ * @Last Modified time: 2020-03-22 01:17:58
  */
 
 import Overlay from '../Overlay'
@@ -102,10 +102,9 @@ DC.Polyline = class extends Overlay {
       )
       polyline = new GS.Polyline(positions)
       polyline.attr = {
-        ...entity.properties
+        ...entity.properties.getValue(Cesium.JulianDate.now())
       }
     }
-
     return polyline
   }
 }

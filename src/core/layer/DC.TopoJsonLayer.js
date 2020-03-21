@@ -1,13 +1,13 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-13 10:13:53
+ * @Date: 2020-03-22 01:12:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:12:01
+ * @Last Modified time: 2020-03-22 01:21:20
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
 
-DC.GeoJsonLayer = class extends Layer {
+DC.TopoJsonLayer = class extends Layer {
   constructor(id, url, options = {}) {
     if (!url) {
       throw new Error('the url invalid')
@@ -60,9 +60,6 @@ DC.GeoJsonLayer = class extends Layer {
     }
   }
 
-  /**
-   *
-   */
   toVectorLayer() {
     let layer = new DC.VectorLayer(this._id)
     let self = this
@@ -79,4 +76,4 @@ DC.GeoJsonLayer = class extends Layer {
   }
 }
 
-DC.LayerType.GEOJSON = 'geojson'
+DC.LayerType.TOPOJSON = 'topojson'

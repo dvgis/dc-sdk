@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 00:45:08
+ * @Last Modified time: 2020-03-22 01:17:51
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -126,7 +126,7 @@ DC.Polygon = class extends Overlay {
       )
       polygon = new DC.Polygon(positions)
       polygon.attr = {
-        ...entity.properties
+        ...entity.properties.getValue(Cesium.JulianDate.now())
       }
     }
 

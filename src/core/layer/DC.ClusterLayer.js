@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-10 10:05:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-19 20:39:21
+ * @Last Modified time: 2020-03-22 01:23:33
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -39,6 +39,14 @@ DC.ClusterLayer = class extends Layer {
     this.type = DC.LayerType.CLUSTER
   }
 
+  set enableCluster(enableCluster) {
+    this._delegate.clustering.enabled = enableCluster
+  }
+
+  /**
+   *
+   * @param {*} color
+   */
   _drawCircle(color) {
     let key = color.toCssColorString()
     let size = this._options.size
@@ -65,7 +73,15 @@ DC.ClusterLayer = class extends Layer {
     return this._circleCache[key]
   }
 
+  /**
+   *
+   * @param {*} clusteredEntities
+   * @param {*} cluster
+   */
   _clusterEventHandler(clusteredEntities, cluster) {
+    if (!this._delegate.clustering.enabled) {
+      return false
+    }
     cluster.billboard.show = true
     cluster.label.font = `bold ${this._options.fontSize}px sans-serif`
     cluster.label.fillColor = this._options.fontColor
@@ -90,6 +106,10 @@ DC.ClusterLayer = class extends Layer {
     }
   }
 
+  /**
+   *
+   * @param {*} overlays
+   */
   addOverlays(overlays) {
     if (Array.isArray(overlays)) {
       overlays.forEach(item => {
