@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-23 20:04:11
+ * @Last Modified time: 2020-03-23 20:05:30
  */
 import Cesium from '@/namespace'
 
@@ -68,7 +68,7 @@ class Widget {
           self._position &&
           self._enable &&
           self._updateWindowCoord &&
-          self._wapper.style.visibility === 'visible'
+          self._wrapper.style.visibility === 'visible'
         ) {
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
             scene,

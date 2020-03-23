@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-12 17:57:28
+ * @Last Modified time: 2020-03-23 20:05:41
  */
 import Widget from './Widget'
 
@@ -35,7 +35,7 @@ class MapSwitch extends Widget {
       this._wrapper.style.width = `${width}px`
     }
     this._wrapper.onmouseout = () => {
-      self._wapper.style.width = `80px`
+      self._wrapper.style.width = `80px`
     }
   }
 
