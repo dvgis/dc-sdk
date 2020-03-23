@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-19 13:11:12
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-19 14:17:36
+ * @Last Modified time: 2020-03-23 20:04:13
  */
 import Cesium from '@/namespace'
 import Widget from './Widget'
@@ -62,7 +62,7 @@ class Compass extends Widget {
     DC.DomUtil.create('div', 'gyro-bg', this._wrapper)
     this._gyro = DC.DomUtil.create('div', 'gyro', this._wrapper)
     DC.DomUtil.createSvg(svg_width, svg_height, svg_gyro, this._gyro)
-    this._rotation_marker = GS.DomUtil.create(
+    this._rotation_marker = DC.DomUtil.create(
       'div',
       'rotation_marker',
       this._wrapper
