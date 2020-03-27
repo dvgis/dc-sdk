@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-22 01:12:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:21:20
+ * @Last Modified time: 2020-03-27 15:06:13
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -15,7 +15,7 @@ DC.TopoJsonLayer = class extends Layer {
     super(id)
     this._delegate = Cesium.GeoJsonDataSource.load(url, options)
     this._state = DC.LayerState.INITIALIZED
-    this.type = DC.LayerType.GEOJSON
+    this.type = DC.LayerType.TOPOJSON
   }
 
   set show(show) {

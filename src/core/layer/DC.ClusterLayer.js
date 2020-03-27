@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-10 10:05:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:23:33
+ * @Last Modified time: 2020-03-27 15:24:09
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -11,10 +11,10 @@ const DEF_OPT = {
   size: 48,
   pixelRange: 40,
   gradient: {
-    0.0001: Cesium.Color.BLUE,
-    0.001: Cesium.Color.GREEN,
-    0.01: Cesium.Color.ORANGE,
-    0.1: Cesium.Color.RED
+    0.0001: Cesium.Color.BLUE.withAlpha(0.5),
+    0.001: Cesium.Color.GREEN.withAlpha(0.5),
+    0.01: Cesium.Color.ORANGE.withAlpha(0.5),
+    0.1: Cesium.Color.RED.withAlpha(0.5)
   },
   fontSize: 14,
   fontColor: Cesium.Color.BLACK
