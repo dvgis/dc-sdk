@@ -2,13 +2,12 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:35:51
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-03 00:03:23
+ * @Last Modified time: 2020-03-24 09:45:09
  */
 import Cesium from '@/namespace'
 
 DC.Cartesian2 = Cesium.Cartesian2
 DC.Cartesian3 = Cesium.Cartesian3
-DC.Cartesian4 = Cesium.Cartesian4
 
 DC.SceneMode = Cesium.SceneMode
 DC.TilesetStyle = Cesium.Cesium3DTileStyle
