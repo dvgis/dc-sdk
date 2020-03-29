@@ -2,9 +2,14 @@
  * @Author: Caven
  * @Date: 2020-03-22 00:10:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 00:47:45
+ * @Last Modified time: 2020-03-29 13:14:42
  */
 DC.P = class {
+  /**
+   *
+   * @param {*} positions
+   *
+   */
   static parsePositions(positions) {
     if (typeof positions === 'string') {
       if (positions.indexOf('#') >= 0) {

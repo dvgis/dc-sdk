@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-22 01:12:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-27 15:06:13
+ * @Last Modified time: 2020-03-29 13:19:44
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -48,6 +48,12 @@ DC.TopoJsonLayer = class extends Layer {
     }
   }
 
+  /**
+   *
+   * @param {*} method
+   * @param {*} context
+   *
+   */
   eachOverlay(method, context) {
     if (this._delegate) {
       this._delegate.then(dataSource => {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-19 13:50:16
+ * @Last Modified time: 2020-03-29 13:12:25
  */
 
 import Cesium from '@/namespace'
@@ -200,7 +200,7 @@ DC.Viewer = class {
   /**
    *
    * @param {*} options
-   * set viewer options
+   * Set viewer options
    *
    */
   setOptions(options) {
@@ -212,7 +212,8 @@ DC.Viewer = class {
    *
    * @param {*} min
    * @param {*} max
-   * set camera options
+   * Set camera pitch range
+   *
    */
   setPitchRange(min = -90, max = -20) {
     this._cameraOption.setPichRange(min, max)
@@ -220,7 +221,9 @@ DC.Viewer = class {
   }
 
   /**
+   *
    * Restrict camera access underground
+   *
    */
   limitCameraToGround() {
     this._cameraOption.limitCameraToGround()
@@ -229,10 +232,12 @@ DC.Viewer = class {
 
   /**
    *
+   * 修改场景的模式，2：2D，2.5：2.5D，3：3D
    * @param {*} sceneMode
    * @param {*} duration
+   *
    */
-  changeMode(sceneMode, duration = 0) {
+  changeSceneMode(sceneMode, duration = 0) {
     if (sceneMode === 2) {
       this._delegate.scene.morphTo2D(duration)
     } else if (sceneMode === 3) {
@@ -245,10 +250,11 @@ DC.Viewer = class {
 
   /**
    *
-   * @param {*} baseLayers
    * Add the baselayer to the viewer.
    * The baselayer can be a single or an array,
    * and when the baselayer is an array, the baselayer will be loaded together
+   * @param {*} baseLayers
+   *
    */
   addBaseLayer(baseLayers, options = {}) {
     if (!baseLayers) {
@@ -271,8 +277,9 @@ DC.Viewer = class {
 
   /**
    *
-   * @param {*} index
    * Change the current globe display of the baselayer
+   * @param {*} index
+   *
    */
   changeBaseLayer(index) {
     if (this._baseLayerPicker && index >= 0) {
@@ -285,8 +292,9 @@ DC.Viewer = class {
 
   /**
    *
-   * @param {*} terrain
    * Add the terrain to the viewer.
+   * @param {*} terrain
+   *
    */
   addTerrain(terrain) {
     if (!terrain) {
@@ -307,8 +315,9 @@ DC.Viewer = class {
 
   /**
    *
-   * @param {*} index
    * Change the current globe display of the terrain
+   * @param {*} index
+   *
    */
   changeTerrain(index) {
     if (this._baseLayerPicker && index >= 0) {
@@ -321,8 +330,9 @@ DC.Viewer = class {
 
   /**
    *
-   * @param {*} layer
    * Add a layer to the viewer
+   * @param {*} layer
+   *
    */
   addLayer(layer) {
     this._viewerEvent.fire(DC.ViewerEventType.ADD_LAYER, layer)
@@ -331,8 +341,9 @@ DC.Viewer = class {
 
   /**
    *
+   * Remove a layer from the viewer
    * @param {*} layer
-   * remove a layer from the viewer
+   *
    */
   removeLayer(layer) {
     this._viewerEvent.fire(DC.ViewerEventType.REMOVE_LAYER, layer)
@@ -342,7 +353,8 @@ DC.Viewer = class {
   /**
    *
    * @param {*} id
-   * get the layer by id
+   * Get the layer by id
+   *
    */
   getLayer(id) {
     let layer = undefined
@@ -362,7 +374,7 @@ DC.Viewer = class {
   }
 
   /**
-   *  get all layers
+   *  Get all layers
    */
   getLayers() {
     let result = []
@@ -380,6 +392,7 @@ DC.Viewer = class {
    * @param {*} method
    * @param {*} context
    * loop through each layer
+   *
    */
   eachLayer(method, context) {
     for (let type in this._layerCache) {
@@ -412,6 +425,7 @@ DC.Viewer = class {
   /**
    *
    * @param {*} target
+   *
    */
   flyTo(target) {
     this._delegate.flyTo(target.delegate || target)
@@ -421,6 +435,7 @@ DC.Viewer = class {
   /**
    *
    * @param {*} target
+   *
    */
   zoomTo(target) {
     this._delegate.zoomTo(target.delegate || target)
@@ -431,6 +446,7 @@ DC.Viewer = class {
    *
    * @param {*} position
    * @param {*} completeCallback
+   *
    */
   flyToPosition(position, completeCallback, duration) {
     if (position instanceof DC.Position) {
@@ -453,6 +469,7 @@ DC.Viewer = class {
    * @param {*} type
    * @param {*} callback
    * @param {*} context
+   *
    */
   on(type, callback, context) {
     this._viewerEvent.on(type, callback, context || this)
@@ -465,6 +482,7 @@ DC.Viewer = class {
    * @param {*} type
    * @param {*} callback
    * @param {*} context
+   *
    */
   off(type, callback, context) {
     this._viewerEvent.off(type, callback, context || this)
@@ -475,6 +493,7 @@ DC.Viewer = class {
   /**
    *
    * @param {*} plugin
+   *
    */
   use(plugin) {
     if (plugin && plugin.install) {

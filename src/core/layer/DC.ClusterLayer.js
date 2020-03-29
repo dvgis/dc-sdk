@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-10 10:05:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-27 15:24:09
+ * @Last Modified time: 2020-03-29 13:19:33
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -106,22 +106,9 @@ DC.ClusterLayer = class extends Layer {
     }
   }
 
-  /**
-   *
-   * @param {*} overlays
-   */
-  addOverlays(overlays) {
-    if (Array.isArray(overlays)) {
-      overlays.forEach(item => {
-        this.addOverlay(item)
-      })
-    }
-    return this
-  }
-
   clear() {
-    this._cache = {}
     this._delegate.entities.removeAll()
+    this._cache = {}
     this._state = DC.LayerState.CLEARED
     return this
   }

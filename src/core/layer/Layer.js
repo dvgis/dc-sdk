@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-18 22:21:57
+ * @Last Modified time: 2020-03-29 13:18:17
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -68,9 +68,10 @@ class Layer {
 
   /**
    *
+   * The layer added callback function
+   * Subclasses need to be overridden
    * @param {*} veiwer
-   * the layer added callback function
-   * subclasses need to be overridden
+   *
    */
   _addCallback(viewer) {
     this._viewer = viewer
@@ -86,8 +87,8 @@ class Layer {
   }
 
   /**
-   * the layer removed callback function
-   * subclasses need to be overridden
+   * The layer removed callback function
+   * Subclasses need to be overridden
    */
   _removeCallback() {
     if (!this._delegate) {
@@ -132,8 +133,9 @@ class Layer {
 
   /**
    *
+   * The layer remove overlay callback function
    * @param {*} overlay
-   * the layer remove overlay callback function
+   *
    */
   _removeOverlayCallback(overlay) {
     if (
@@ -148,11 +150,26 @@ class Layer {
 
   /**
    *
+   * The layer add overlay
    * @param {*} overlay
-   * the layer add overlay
+   *
    */
   addOverlay(overlay) {
     this._addOverlayCallback(overlay)
+    return this
+  }
+
+  /**
+   *
+   * @param {*} overlays
+   *
+   */
+  addOverlays(overlays) {
+    if (Array.isArray(overlays)) {
+      overlays.forEach(item => {
+        this.addOverlay(item)
+      })
+    }
     return this
   }
 

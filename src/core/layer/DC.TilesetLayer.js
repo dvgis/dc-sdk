@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:16:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:21:05
+ * @Last Modified time: 2020-03-29 13:19:25
  */
 
 import Cesium from '@/namespace'
@@ -19,8 +19,8 @@ DC.TilesetLayer = class extends Layer {
   }
 
   clear() {
-    this._cache = {}
     this._delegate.removeAll()
+    this._cache = {}
     this._state = DC.LayerState.CLEARED
     return this
   }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:12:01
+ * @Last Modified time: 2020-03-29 13:18:53
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -48,6 +48,11 @@ DC.GeoJsonLayer = class extends Layer {
     }
   }
 
+  /**
+   *
+   * @param {*} method
+   * @param {*} context
+   */
   eachOverlay(method, context) {
     if (this._delegate) {
       this._delegate.then(dataSource => {
@@ -60,9 +65,6 @@ DC.GeoJsonLayer = class extends Layer {
     }
   }
 
-  /**
-   *
-   */
   toVectorLayer() {
     let layer = new DC.VectorLayer(this._id)
     let self = this

@@ -2,10 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-01-31 15:03:58
+ * @Last Modified time: 2020-03-29 13:00:38
  */
 import Cesium from '@/namespace'
-
 import Event from './Event'
 
 class LayerEvent extends Event {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-14 14:04:38
+ * @Last Modified time: 2020-03-29 13:22:33
  */
 
 import Overlay from '../Overlay'
@@ -75,7 +75,9 @@ DC.Model = class extends Overlay {
         )
       )
     })
-    // 设置模型参数
+    /**
+     *  initialize the Overlay parameter
+     */
     this._delegate.model = {
       ...this._style,
       uri: new Cesium.CallbackProperty(time => {

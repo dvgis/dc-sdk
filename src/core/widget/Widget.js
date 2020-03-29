@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-23 20:05:30
+ * @Last Modified time: 2020-03-29 13:05:26
  */
 import Cesium from '@/namespace'
 
@@ -34,7 +34,7 @@ class Widget {
   }
 
   /**
-   * 当enable修改后执行的钩子，子类根据需求复写
+   * When enable modifies the hook executed, the subclass copies it as required
    */
   _enableHook() {
     if (!this._wrapper.parentNode && this._viewer) {
@@ -43,12 +43,17 @@ class Widget {
     this._wrapper &&
       (this._wrapper.style.visibility = this._enable ? 'visible' : 'hidden')
   }
+
   /**
-   *
+   * updating the Widge location requires subclass overrides
    * @param {*} windowCoord
-   * 更新 Widge 位置需要子类覆盖
    */
   _updateWindowCoord(windowCoord) {}
+
+  /**
+   *
+   */
+  _installHook() {}
 
   /**
    *
@@ -78,6 +83,7 @@ class Widget {
         }
       })
     }
+
     /**
      * excute installHook
      */
@@ -85,7 +91,7 @@ class Widget {
   }
 
   /**
-   *
+   * setting widget position
    * @param {*} position
    */
   setPosition(position) {
@@ -98,7 +104,7 @@ class Widget {
   }
 
   /**
-   *
+   * setting widget content
    * @param {*} content
    */
   setContent(content) {
@@ -111,7 +117,7 @@ class Widget {
   }
 
   /**
-   *
+   * hide widget
    */
   hide() {
     this._wrapper &&

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:58:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:03:49
+ * @Last Modified time: 2020-03-29 13:13:43
  */
 
 const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
@@ -74,10 +74,12 @@ DC.Util = class {
   }
 
   /**
+   *
    * @function setOptions(obj: Object, options: Object): Object
    * Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`.
    * @param {*} obj
    * @param {*} options
+   *
    */
   static setOptions(obj, options) {
     if (!obj.hasOwnProperty('options')) {

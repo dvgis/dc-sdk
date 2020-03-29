@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-30 20:47:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 23:33:41
+ * @Last Modified time: 2020-03-29 13:23:28
  */
 import Cesium from '@/namespace'
 DC.GlobeRotate = class {
@@ -30,7 +30,7 @@ DC.GlobeRotate = class {
     }
     let icrfToFixed = Cesium.Transforms.computeIcrfToFixedMatrix(time)
     if (Cesium.defined(icrfToFixed)) {
-      let camera = this._viewer.delegate.camera
+      let camera = this._viewer.camera
       let offset = Cesium.Cartesian3.clone(camera.position)
       let transform = Cesium.Matrix4.fromRotationTranslation(icrfToFixed)
       camera.lookAtTransform(transform, offset)
@@ -41,18 +41,18 @@ DC.GlobeRotate = class {
    * Start the rotation
    */
   _startRotate() {
-    this._viewer.delegate.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
-    this._viewer.delegate.clock.multiplier = 12 * 1000
-    this._viewer.delegate.scene.postUpdate.addEventListener(this._icrf, this)
+    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+    this._viewer.clock.multiplier = 12 * 1000
+    this._viewer.scene.postUpdate.addEventListener(this._icrf, this)
   }
 
   /**
    * End the rotation
    */
   _endRotate() {
-    this._viewer.delegate.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
-    this._viewer.delegate.clock.multiplier = 1
-    this._viewer.delegate.clock.currentTime = Cesium.JulianDate.now().clone()
-    this._viewer.delegate.scene.postUpdate.removeEventListener(this._icrf, this)
+    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+    this._viewer.clock.multiplier = 1
+    this._viewer.clock.currentTime = Cesium.JulianDate.now().clone()
+    this._viewer.scene.postUpdate.removeEventListener(this._icrf, this)
   }
 }
