@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:18:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 00:18:59
+ * @Last Modified time: 2020-03-31 21:02:22
  */
 
 import './const'
 import './utils'
+import './math'
 import './imagery'
 import './layer'
 import './overlay'

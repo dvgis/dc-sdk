@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-23 20:03:46
+ * @Last Modified time: 2020-03-31 21:03:27
  */
 
 import Overlay from '../Overlay'
@@ -39,24 +39,7 @@ DC.Polyline = class extends Overlay {
   }
 
   get distance() {
-    let result = 0
-    for (var i = 0; i < this._positions.length - 1; i++) {
-      let startCartographic = DC.T.transformWSG84ToCartographic(
-        this._positions[i]
-      )
-      let endCartographic = DC.T.transformWSG84ToCartographic(
-        this._positions[i + 1]
-      )
-      let geodesic = new Cesium.EllipsoidGeodesic()
-      geodesic.setEndPoints(startCartographic, endCartographic)
-      let s = geodesic.surfaceDistance
-      s = Math.sqrt(
-        Math.pow(s, 2) +
-          Math.pow(endCartographic.height - startCartographic.height, 2)
-      )
-      result = result + s
-    }
-    return result > 0 ? result.toFixed(2) : result
+    return DC.Math.getDistance(this._positions)
   }
 
   /**

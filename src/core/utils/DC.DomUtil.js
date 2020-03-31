@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:50:13
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:00:54
+ * @Last Modified time: 2020-03-31 14:08:27
  */
 
 /**
- *  Dom工具类
- *  部分代码借鉴leaflet
+ * Dom工具类
+ * 部分代码借鉴leaflet
  * https://github.com/Leaflet/Leaflet/tree/master/src/core
  */
 DC.DomUtil = class {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:58:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:13:43
+ * @Last Modified time: 2020-03-31 14:08:09
  */
 
 const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
@@ -40,7 +40,6 @@ DC.Util = class {
    * @param {*} sources
    *
    */
-
   static merge(dest, ...sources) {
     let i, j, len, src
     for (j = 0, len = sources.length; j < len; j++) {
