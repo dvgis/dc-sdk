@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:18:17
+ * @Last Modified time: 2020-03-30 09:39:55
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -243,9 +243,9 @@ class Layer {
   }
   /**
    *
-   * @param {*} Style
+   * @param {*} style
    */
-  setStyle(Style) {}
+  setStyle(style) {}
 }
 
 export default Layer
