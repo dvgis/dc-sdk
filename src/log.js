@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-02-12 18:53:12
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-31 21:32:15
+ * @Last Modified time: 2020-03-31 21:33:58
  */
 console.clear()
 console.log(
-  `%c \n DC-SDK \n  %c \n 数字描绘世界之美  %c \n
+  `%c \n DC-SDK \n  %c \n 用数字描绘世界之美  %c \n
     版本:${DC.Version}
     作者:Caven Chen
     主页: http://dc.cavencj.com
