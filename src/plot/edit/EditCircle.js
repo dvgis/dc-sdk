@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-17 18:23:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 21:59:25
+ * @Last Modified time: 2020-04-03 10:35:22
  */
 import Edit from './Edit'
 
@@ -34,3 +34,5 @@ class EditCircle extends Edit {
     let positions = [this._center]
   }
 }
+
+export default EditCircle

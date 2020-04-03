@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 22:59:30
+ * @Last Modified time: 2020-04-03 11:01:19
  */
 
 import Cesium from '@/namespace'
@@ -45,6 +45,30 @@ class MouseEvent extends Event {
     }
   }
 
+  /**
+   * Get mouse event  info
+   * @param {*} position
+   */
+  _getMouseInfo(position) {
+    let target = this._viewer.scene.pick(position)
+    let cartesian = undefined
+    if (this._viewer.scene.pickPositionSupported && target) {
+      cartesian = this._viewer.scene.pickPosition(position)
+    }
+    if (!cartesian || !target) {
+      let ray = this._viewer.scene.camera.getPickRay(position)
+      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+    }
+    let surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
+      position,
+      Cesium.Ellipsoid.WGS84
+    )
+    return {
+      target: target,
+      cartesian: cartesian,
+      surfaceCartesian: surfaceCartesian
+    }
+  }
   /**
    *
    * @param {*} target
@@ -119,21 +143,12 @@ class MouseEvent extends Event {
     if (!movement || !movement.position) {
       return
     }
-    let target = this._viewer.scene.pick(movement.position)
-    let cartesian = this._viewer.scene.pickPosition(movement.position)
-    if (!cartesian || !target) {
-      let ray = this._viewer.scene.camera.getPickRay(movement.position)
-      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
-    }
-    let surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
-      movement.position,
-      Cesium.Ellipsoid.WGS84
-    )
+    let result = this._getMouseInfo(movement.position)
     this._raiseEvent(
       Cesium.ScreenSpaceEventType.LEFT_CLICK,
-      target,
-      cartesian,
-      surfaceCartesian
+      result.target,
+      result.cartesian,
+      result.surfaceCartesian
     )
   }
 
@@ -146,21 +161,12 @@ class MouseEvent extends Event {
     if (!movement || !movement.position) {
       return
     }
-    let target = this._viewer.scene.pick(movement.position)
-    let cartesian = this._viewer.scene.pickPosition(movement.position)
-    if (!cartesian || !target) {
-      let ray = this._viewer.scene.camera.getPickRay(movement.position)
-      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
-    }
-    let surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
-      movement.position,
-      Cesium.Ellipsoid.WGS84
-    )
+    let result = this._getMouseInfo(movement.position)
     this._raiseEvent(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-      target,
-      cartesian,
-      surfaceCartesian
+      result.target,
+      result.cartesian,
+      result.surfaceCartesian
     )
   }
 
@@ -172,21 +178,12 @@ class MouseEvent extends Event {
     if (!movement || !movement.position) {
       return
     }
-    let target = this._viewer.scene.pick(movement.position)
-    let cartesian = this._viewer.scene.pickPosition(movement.position)
-    if (!cartesian || !target) {
-      let ray = this._viewer.scene.camera.getPickRay(movement.position)
-      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
-    }
-    let surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
-      movement.position,
-      Cesium.Ellipsoid.WGS84
-    )
+    let result = this._getMouseInfo(movement.position)
     this._raiseEvent(
       Cesium.ScreenSpaceEventType.RIGHT_CLICK,
-      target,
-      cartesian,
-      surfaceCartesian
+      result.target,
+      result.cartesian,
+      result.surfaceCartesian
     )
   }
 
@@ -199,22 +196,13 @@ class MouseEvent extends Event {
     if (!movement || !movement.endPosition) {
       return
     }
-    let target = this._viewer.scene.pick(movement.endPosition)
-    this._viewer.canvas.style.cursor = target ? 'pointer' : 'default'
-    let cartesian = this._viewer.scene.pickPosition(movement.endPosition)
-    if (!cartesian || !target) {
-      let ray = this._viewer.scene.camera.getPickRay(movement.endPosition)
-      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
-    }
-    let surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
-      movement.endPosition,
-      Cesium.Ellipsoid.WGS84
-    )
+    let result = this._getMouseInfo(movement.endPosition)
+    this._viewer.canvas.style.cursor = result.target ? 'pointer' : 'default'
     this._raiseEvent(
       Cesium.ScreenSpaceEventType.MOUSE_MOVE,
-      target,
-      cartesian,
-      surfaceCartesian
+      result.target,
+      result.cartesian,
+      result.surfaceCartesian
     )
   }
 }
