@@ -20,7 +20,8 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './AttributeCompression-6cfb9427', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './createTaskProcessorWorker', './EllipsoidTangentPlane-323c7a98', './OrientedBoundingBox-764de7b5', './Color-7baed48c'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
+
+define(['./when-c2e8ef35', './Check-c4f3a3fc', './Math-a06249ed', './Cartesian2-a4e73c05', './Transforms-533d1994', './RuntimeError-6122571f', './WebGLConstants-4ae0db90', './AttributeCompression-6b12d004', './IndexDatatype-755cb3fd', './IntersectionTests-11682642', './Plane-beebe18b', './createTaskProcessorWorker', './EllipsoidTangentPlane-cf837d4c', './OrientedBoundingBox-85824f79', './Color-c113c1b2'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, AttributeCompression, IndexDatatype, IntersectionTests, Plane, createTaskProcessorWorker, EllipsoidTangentPlane, OrientedBoundingBox, Color) { 'use strict';
 
     var scratchCenter = new Cartesian2.Cartesian3();
         var scratchEllipsoid = new Cartesian2.Ellipsoid();
@@ -148,7 +149,7 @@ define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-
             var vBuffer = positions.subarray(positionsLength, 2 * positionsLength);
             AttributeCompression.AttributeCompression.zigZagDeltaDecode(uBuffer, vBuffer);
 
-            var decodedPositions = new Float32Array(positionsLength * 3);
+            var decodedPositions = new Float64Array(positionsLength * 3);
             for (i = 0; i < positionsLength; ++i) {
                 var u = uBuffer[i];
                 var v = vBuffer[i];
@@ -373,3 +374,4 @@ define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-
     return createVectorTilePolygons$1;
 
 });
+//# sourceMappingURL=createVectorTilePolygons.js.map

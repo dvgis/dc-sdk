@@ -28,9 +28,5 @@ void main()\n\
 \n\
     vec4 positionWC = getPolylineWindowCoordinates(p, prev, next, expandDir, width, usePrev, v_polylineAngle);\n\
     gl_Position = czm_viewportOrthographic * positionWC;\n\
-\n\
-#ifdef LOG_DEPTH\n\
-    czm_vertexLogDepth(czm_modelViewProjectionRelativeToEye * p);\n\
-#endif\n\
 }\n\
 ";

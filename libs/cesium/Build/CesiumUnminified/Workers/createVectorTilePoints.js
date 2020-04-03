@@ -20,7 +20,8 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './AttributeCompression-6cfb9427', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, AttributeCompression, createTaskProcessorWorker) { 'use strict';
+
+define(['./when-c2e8ef35', './Check-c4f3a3fc', './Math-a06249ed', './Cartesian2-a4e73c05', './AttributeCompression-6b12d004', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, AttributeCompression, createTaskProcessorWorker) { 'use strict';
 
     var maxShort = 32767;
 
@@ -88,3 +89,4 @@ define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-
     return createVectorTilePoints$1;
 
 });
+//# sourceMappingURL=createVectorTilePoints.js.map

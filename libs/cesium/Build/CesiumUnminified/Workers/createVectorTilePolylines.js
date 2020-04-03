@@ -20,7 +20,8 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './WebGLConstants-4c11ee5f', './AttributeCompression-6cfb9427', './IndexDatatype-4351ba4c', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, WebGLConstants, AttributeCompression, IndexDatatype, createTaskProcessorWorker) { 'use strict';
+
+define(['./when-c2e8ef35', './Check-c4f3a3fc', './Math-a06249ed', './Cartesian2-a4e73c05', './WebGLConstants-4ae0db90', './AttributeCompression-6b12d004', './IndexDatatype-755cb3fd', './createTaskProcessorWorker'], function (when, Check, _Math, Cartesian2, WebGLConstants, AttributeCompression, IndexDatatype, createTaskProcessorWorker) { 'use strict';
 
     var maxShort = 32767;
 
@@ -34,7 +35,7 @@ define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-
             var heightBuffer = positions.subarray(2 * positionsLength, 3 * positionsLength);
             AttributeCompression.AttributeCompression.zigZagDeltaDecode(uBuffer, vBuffer, heightBuffer);
 
-            var decoded = new Float32Array(positions.length);
+            var decoded = new Float64Array(positions.length);
             for (var i = 0; i < positionsLength; ++i) {
                 var u = uBuffer[i];
                 var v = vBuffer[i];
@@ -201,3 +202,4 @@ define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-
     return createVectorTilePolylines$1;
 
 });
+//# sourceMappingURL=createVectorTilePolylines.js.map

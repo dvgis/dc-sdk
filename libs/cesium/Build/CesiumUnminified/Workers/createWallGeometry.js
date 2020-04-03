@@ -20,7 +20,8 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-6ec3db89', './Transforms-a4d7073e', './RuntimeError-7c184ac0', './WebGLConstants-4c11ee5f', './ComponentDatatype-919a7463', './GeometryAttribute-291ff23b', './GeometryAttributes-1c7ce91d', './IndexDatatype-4351ba4c', './IntersectionTests-3d9e1b94', './Plane-37b84dad', './VertexFormat-7f136973', './EllipsoidTangentPlane-323c7a98', './EllipsoidRhumbLine-4d1a57d2', './PolygonPipeline-5b0d203a', './EllipsoidGeodesic-365e69f7', './PolylinePipeline-83c8909c', './WallGeometryLibrary-9b863158'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, EllipsoidGeodesic, PolylinePipeline, WallGeometryLibrary) { 'use strict';
+
+define(['./when-c2e8ef35', './Check-c4f3a3fc', './Math-a06249ed', './Cartesian2-a4e73c05', './Transforms-533d1994', './RuntimeError-6122571f', './WebGLConstants-4ae0db90', './ComponentDatatype-762ab5b7', './GeometryAttribute-47fb6f1a', './GeometryAttributes-57608efc', './IndexDatatype-755cb3fd', './IntersectionTests-11682642', './Plane-beebe18b', './VertexFormat-5ae20b72', './EllipsoidTangentPlane-cf837d4c', './EllipsoidRhumbLine-33694923', './PolygonPipeline-99528590', './EllipsoidGeodesic-0b95fd8b', './PolylinePipeline-6b7c02de', './WallGeometryLibrary-4d391ee2'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, IntersectionTests, Plane, VertexFormat, EllipsoidTangentPlane, EllipsoidRhumbLine, PolygonPipeline, EllipsoidGeodesic, PolylinePipeline, WallGeometryLibrary) { 'use strict';
 
     var scratchCartesian3Position1 = new Cartesian2.Cartesian3();
         var scratchCartesian3Position2 = new Cartesian2.Cartesian3();
@@ -568,3 +569,4 @@ define(['./when-a55a8a4c', './Check-bc1d37d9', './Math-d7cbfcf6', './Cartesian2-
     return createWallGeometry;
 
 });
+//# sourceMappingURL=createWallGeometry.js.map

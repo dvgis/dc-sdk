@@ -1,4 +1,4 @@
-export var VERSION = '1.67';
+export var VERSION = '1.68';
 export { default as ApproximateTerrainHeights } from './Core/ApproximateTerrainHeights.js';
 export { default as ArcGISTiledElevationTerrainProvider } from './Core/ArcGISTiledElevationTerrainProvider.js';
 export { default as ArcType } from './Core/ArcType.js';
@@ -822,8 +822,6 @@ export { default as viewerDragDropMixin } from './Widgets/Viewer/viewerDragDropM
 export { default as viewerPerformanceWatchdogMixin } from './Widgets/Viewer/viewerPerformanceWatchdogMixin.js';
 export { default as _shadersdegreesPerRadian } from './Shaders/Builtin/Constants/degreesPerRadian.js';
 export { default as _shadersdepthRange } from './Shaders/Builtin/Constants/depthRange.js';
-export { default as _shadersellipsoidInverseRadii } from './Shaders/Builtin/Constants/ellipsoidInverseRadii.js';
-export { default as _shadersellipsoidRadii } from './Shaders/Builtin/Constants/ellipsoidRadii.js';
 export { default as _shadersepsilon1 } from './Shaders/Builtin/Constants/epsilon1.js';
 export { default as _shadersepsilon2 } from './Shaders/Builtin/Constants/epsilon2.js';
 export { default as _shadersepsilon3 } from './Shaders/Builtin/Constants/epsilon3.js';

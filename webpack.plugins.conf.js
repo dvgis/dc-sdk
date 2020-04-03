@@ -2,14 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-18 18:10:09
+ * @Last Modified time: 2020-04-03 09:54:54
  */
 
 const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, '.', dir)

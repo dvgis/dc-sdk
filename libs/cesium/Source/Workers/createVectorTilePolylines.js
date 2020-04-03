@@ -13,7 +13,7 @@ define(['./when-e6e3e713', './Check-1df6b9a0', './Math-c5f6c994', './Cartesian2-
             var heightBuffer = positions.subarray(2 * positionsLength, 3 * positionsLength);
             AttributeCompression.AttributeCompression.zigZagDeltaDecode(uBuffer, vBuffer, heightBuffer);
 
-            var decoded = new Float32Array(positions.length);
+            var decoded = new Float64Array(positions.length);
             for (var i = 0; i < positionsLength; ++i) {
                 var u = uBuffer[i];
                 var v = vBuffer[i];

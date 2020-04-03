@@ -20,7 +20,8 @@
  * Portions licensed separately.
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
-define(['./when-a55a8a4c'], function (when) { 'use strict';
+
+define(['./when-c2e8ef35'], function (when) { 'use strict';
 
     /**
          * Formats an error object into a String.  If available, uses name, message, and stack
@@ -143,3 +144,4 @@ define(['./when-a55a8a4c'], function (when) { 'use strict';
     return createTaskProcessorWorker;
 
 });
+//# sourceMappingURL=createTaskProcessorWorker.js.map

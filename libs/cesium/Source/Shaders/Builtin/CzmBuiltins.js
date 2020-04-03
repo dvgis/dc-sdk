@@ -1,8 +1,6 @@
 //This file is automatically rebuilt by the Cesium build process.
 import czm_degreesPerRadian from './Constants/degreesPerRadian.js'
 import czm_depthRange from './Constants/depthRange.js'
-import czm_ellipsoidInverseRadii from './Constants/ellipsoidInverseRadii.js'
-import czm_ellipsoidRadii from './Constants/ellipsoidRadii.js'
 import czm_epsilon1 from './Constants/epsilon1.js'
 import czm_epsilon2 from './Constants/epsilon2.js'
 import czm_epsilon3 from './Constants/epsilon3.js'
@@ -118,8 +116,6 @@ import czm_writeLogDepth from './Functions/writeLogDepth.js'
 export default {
     czm_degreesPerRadian : czm_degreesPerRadian,
     czm_depthRange : czm_depthRange,
-    czm_ellipsoidInverseRadii : czm_ellipsoidInverseRadii,
-    czm_ellipsoidRadii : czm_ellipsoidRadii,
     czm_epsilon1 : czm_epsilon1,
     czm_epsilon2 : czm_epsilon2,
     czm_epsilon3 : czm_epsilon3,

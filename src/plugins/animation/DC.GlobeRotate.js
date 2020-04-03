@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-30 20:47:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:23:28
+ * @Last Modified time: 2020-04-01 10:38:06
  */
 import Cesium from '@/namespace'
+
 DC.GlobeRotate = class {
   constructor(viewer, time = 5, callback, context) {
     this._viewer = viewer
@@ -20,9 +21,10 @@ DC.GlobeRotate = class {
 
   /**
    *
+   * The main method of rotation
    * @param {*} scene
    * @param {*} time
-   * The main method of rotation
+   *
    */
   _icrf(scene, time) {
     if (scene.mode !== Cesium.SceneMode.SCENE3D) {

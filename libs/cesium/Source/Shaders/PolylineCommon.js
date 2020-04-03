@@ -4,7 +4,8 @@ export default "void clipLineSegmentToNearPlane(\n\
     vec3 p1,\n\
     out vec4 positionWC,\n\
     out bool clipped,\n\
-    out bool culledByNearPlane)\n\
+    out bool culledByNearPlane,\n\
+    out vec4 clippedPositionEC)\n\
 {\n\
     culledByNearPlane = false;\n\
     clipped = false;\n\
@@ -19,7 +20,7 @@ export default "void clipLineSegmentToNearPlane(\n\
     {\n\
         culledByNearPlane = true;\n\
     }\n\
-    else if (endPoint0Distance < 0.0 && abs(denominator) > czm_epsilon7)\n\
+    else if (endPoint0Distance < 0.0)\n\
     {\n\
         // t = (-plane distance - dot(plane normal, ray origin)) / dot(plane normal, ray direction)\n\
         float t = (czm_currentFrustum.x + p0.z) / denominator;\n\
@@ -34,7 +35,8 @@ export default "void clipLineSegmentToNearPlane(\n\
         }\n\
     }\n\
 \n\
-    positionWC = czm_eyeToWindowCoordinates(vec4(p0, 1.0));\n\
+    clippedPositionEC = vec4(p0, 1.0);\n\
+    positionWC = czm_eyeToWindowCoordinates(clippedPositionEC);\n\
 }\n\
 \n\
 vec4 getPolylineWindowCoordinatesEC(vec4 positionEC, vec4 prevEC, vec4 nextEC, float expandDirection, float width, bool usePrevious, out float angle)\n\
@@ -62,9 +64,14 @@ vec4 getPolylineWindowCoordinatesEC(vec4 positionEC, vec4 prevEC, vec4 nextEC, f
     angle = floor(angle / czm_piOverFour + 0.5) * czm_piOverFour;\n\
 #endif\n\
 \n\
-    clipLineSegmentToNearPlane(prevEC.xyz, positionEC.xyz, p0, clipped, culledByNearPlane);\n\
-    clipLineSegmentToNearPlane(nextEC.xyz, positionEC.xyz, p1, clipped, culledByNearPlane);\n\
-    clipLineSegmentToNearPlane(positionEC.xyz, usePrevious ? prevEC.xyz : nextEC.xyz, endPointWC, clipped, culledByNearPlane);\n\
+    vec4 clippedPositionEC;\n\
+    clipLineSegmentToNearPlane(prevEC.xyz, positionEC.xyz, p0, clipped, culledByNearPlane, clippedPositionEC);\n\
+    clipLineSegmentToNearPlane(nextEC.xyz, positionEC.xyz, p1, clipped, culledByNearPlane, clippedPositionEC);\n\
+    clipLineSegmentToNearPlane(positionEC.xyz, usePrevious ? prevEC.xyz : nextEC.xyz, endPointWC, clipped, culledByNearPlane, clippedPositionEC);\n\
+\n\
+#ifdef LOG_DEPTH\n\
+    czm_vertexLogDepth(czm_projection * clippedPositionEC);\n\
+#endif\n\
 \n\
     if (culledByNearPlane)\n\
     {\n\
