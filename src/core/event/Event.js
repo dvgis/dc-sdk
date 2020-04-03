@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-02 21:37:21
+ * @Last Modified time: 2020-04-03 13:28:43
  */
 class Event {
   constructor() {
@@ -85,7 +85,7 @@ class Event {
   }
 
   /**
-   *
+   * Gets events by type
    * @param {*} type
    */
   getEvent(type) {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:45:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 22:16:28
+ * @Last Modified time: 2020-04-03 13:48:38
  */
 import Cesium from '@/namespace'
 
@@ -18,7 +18,7 @@ class Draw {
 
   _mouseMoveHandler() {}
 
-  _mouseDbClickHandler() {}
+  _mouseRightClickHandler() {}
 
   _bindEvent() {
     this._viewer.on(
@@ -34,8 +34,8 @@ class Draw {
     )
 
     this._viewer.on(
-      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-      this._mouseDbClickHandler,
+      Cesium.ScreenSpaceEventType.RIGHT_CLICK,
+      this._mouseRightClickHandler,
       this
     )
   }
@@ -54,8 +54,8 @@ class Draw {
     )
 
     this._viewer.off(
-      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-      this._mouseDbClickHandler,
+      Cesium.ScreenSpaceEventType.RIGHT_CLICK,
+      this._mouseRightClickHandler,
       this
     )
   }

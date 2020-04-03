@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:59:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 23:00:57
+ * @Last Modified time: 2020-04-03 13:43:49
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -35,8 +35,8 @@ class DrawPolygon extends Draw {
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('单击选择点位,双击结束')
-    let position = e.surfacePosition
+    this._viewer.tooltip.setContent('左击选择点位,右击结束')
+    let position = e.target ? e.position : e.surfacePosition
     this._viewer.tooltip.setPosition(position)
     if (position && this._positions.length > 0) {
       this._tempPoints = [this._positions[this._positions.length - 1], position]
@@ -46,9 +46,6 @@ class DrawPolygon extends Draw {
 
   _mouseDbClickHandler(e) {
     this._unbindEnvet()
-    if (this._positions.length > 2) {
-      this._positions = this._positions.slice(0, -1)
-    }
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POLYGON,
       points: DC.T.transformCartesianArrayToWSG84Array(this._positions)

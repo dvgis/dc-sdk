@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:12:25
+ * @Last Modified time: 2020-04-03 13:32:17
  */
 
 import Cesium from '@/namespace'
@@ -271,7 +271,9 @@ DC.Viewer = class {
     if (!this._baseLayerPicker.selectedImagery) {
       this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
     }
+
     this._comps.mapSwitch.addMap(options)
+
     return this
   }
 
@@ -311,6 +313,7 @@ DC.Viewer = class {
     if (!this._baseLayerPicker.selectedTerrain) {
       this._baseLayerPicker.selectedTerrain = this._baseLayerPicker.terrainProviderViewModels[0]
     }
+    return this
   }
 
   /**

@@ -2,10 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-19 19:55:29
+ * @Last Modified time: 2020-04-03 11:48:20
  */
 import Cesium from '@/namespace'
-
 import Event from './Event'
 
 class EffectEvent extends Event {

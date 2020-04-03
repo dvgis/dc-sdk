@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:18:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 23:01:22
+ * @Last Modified time: 2020-04-03 13:44:05
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -32,8 +32,8 @@ class DrawPolyline extends Draw {
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('单击选择点位,双击结束')
-    let position = e.surfacePosition
+    this._viewer.tooltip.setContent('单击选择点位,右击结束')
+    let position = e.target ? e.position : e.surfacePosition
     this._viewer.tooltip.setPosition(position)
     if (position && this._positions.length > 0) {
       this._viewer.tooltip.setPosition(position)
@@ -41,11 +41,8 @@ class DrawPolyline extends Draw {
     }
   }
 
-  _mouseDbClickHandler(e) {
+  _mouseRightClickHandler(e) {
     this._unbindEnvet()
-    if (this._positions.length > 2) {
-      this._positions = this._positions.slice(0, -1)
-    }
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POLYLINE,
       points: DC.T.transformCartesianArrayToWSG84Array(this._positions)

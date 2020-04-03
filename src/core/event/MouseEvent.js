@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 11:01:19
+ * @Last Modified time: 2020-04-03 16:55:56
  */
 
 import Cesium from '@/namespace'
@@ -17,7 +17,7 @@ class MouseEvent extends Event {
     this.on(Cesium.ScreenSpaceEventType.LEFT_CLICK, this._clickCallback, this)
     this.on(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-      this._dbclickCallback,
+      this._dbClickCallback,
       this
     )
     this.on(
@@ -46,7 +46,7 @@ class MouseEvent extends Event {
   }
 
   /**
-   * Get mouse event  info
+   * Gets the mouse information for the mouse event
    * @param {*} position
    */
   _getMouseInfo(position) {
@@ -70,20 +70,20 @@ class MouseEvent extends Event {
     }
   }
   /**
-   *
+   * Gets the target information for the mouse event
    * @param {*} target
-   * gets the target information for the mouse event
+   *
    */
   _getTargetInfo(target) {
     let overlay = undefined
     let layer = undefined
     let feature = undefined
-    if (target.id && target.id instanceof Cesium.Entity) {
+    if (target && target.id && target.id instanceof Cesium.Entity) {
       layer = target.id.layer
       if (layer && layer.getOverlay) {
         overlay = layer.getOverlay(target.id.overlayId)
       }
-    } else if (target instanceof Cesium.Cesium3DTileFeature) {
+    } else if (target && target instanceof Cesium.Cesium3DTileFeature) {
       feature = target
       layer = target.tileset.layer
       if (layer && layer.getOverlay) {
@@ -103,21 +103,20 @@ class MouseEvent extends Event {
    */
   _raiseEvent(type, target, position = null, surfacePosition = null) {
     let stopPropagation = false
-    if (target) {
-      let targetInfo = this._getTargetInfo(target)
-      let overlay = targetInfo.overlay
-      if (overlay && overlay.overlayEvent) {
-        let event = overlay.overlayEvent.getEvent(type)
-        if (event && event.numberOfListeners > 0) {
-          event.raiseEvent({
-            layer: targetInfo.layer,
-            overlay: overlay,
-            feature: targetInfo.feature,
-            position: position,
-            surfacePosition: surfacePosition
-          })
-          stopPropagation = true
-        }
+    let targetInfo = this._getTargetInfo(target)
+    let overlay = targetInfo.overlay
+    if (overlay && overlay.overlayEvent) {
+      let event = overlay.overlayEvent.getEvent(type)
+      if (event && event.numberOfListeners > 0) {
+        event.raiseEvent({
+          layer: targetInfo.layer,
+          overlay: overlay,
+          feature: targetInfo.feature,
+          target: target,
+          position: position,
+          surfacePosition: surfacePosition
+        })
+        stopPropagation = true
       }
     }
     if (!stopPropagation) {
@@ -127,6 +126,7 @@ class MouseEvent extends Event {
           layer: undefined,
           overlay: undefined,
           feature: undefined,
+          target: target,
           position: position,
           surfacePosition: surfacePosition
         })
@@ -136,8 +136,9 @@ class MouseEvent extends Event {
 
   /**
    *
+   * Default click event callback
    * @param {*} movement
-   * default click event callback
+   *
    */
   _clickCallback(movement) {
     if (!movement || !movement.position) {
@@ -154,10 +155,11 @@ class MouseEvent extends Event {
 
   /**
    *
+   * Default dbClick event callback
    * @param {*} movement
-   * default dbclick event callback
+   *
    */
-  _dbclickCallback(movement) {
+  _dbClickCallback(movement) {
     if (!movement || !movement.position) {
       return
     }
@@ -171,8 +173,10 @@ class MouseEvent extends Event {
   }
 
   /**
+   *
+   * Default rightclick event callback
    * @param {*} movement
-   * default rightclick event callback
+   *
    */
   _rightClickCallback(movement) {
     if (!movement || !movement.position) {
@@ -189,8 +193,9 @@ class MouseEvent extends Event {
 
   /**
    *
+   * Default mousemove event callback
    * @param {*} movement
-   * default mousemove event callback
+   *
    */
   _mouseMoveCallback(movement) {
     if (!movement || !movement.endPosition) {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-17 17:52:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 10:33:50
+ * @Last Modified time: 2020-04-03 13:47:36
  */
 import Edit from './Edit'
 
@@ -25,7 +25,7 @@ class EditPoint extends Edit {
   }
 
   _mouseMoveHandler(movement) {
-    this._viewer.tooltip.setContent('单击选择点位')
+    this._viewer.tooltip.setContent('左击选择点位,右击结束编辑')
     this._position = this._viewer.scene.camera.pickEllipsoid(
       movement.endPosition,
       Cesium.Ellipsoid.WGS84

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 16:25:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 23:00:40
+ * @Last Modified time: 2020-04-03 13:43:42
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -24,7 +24,7 @@ class DrawPoint extends Draw {
   }
 
   _mouseClickHandler(e) {
-    this._position = e.surfacePosition
+    this._position = e.target ? e.position : e.surfacePosition
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POINT,

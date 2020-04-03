@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-30 09:39:55
+ * @Last Modified time: 2020-04-03 11:07:26
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -241,6 +241,7 @@ class Layer {
     }
     return this
   }
+
   /**
    *
    * @param {*} style

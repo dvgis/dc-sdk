@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 20:52:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-17 23:01:55
+ * @Last Modified time: 2020-04-03 13:44:09
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -41,8 +41,8 @@ class DrawRect extends Draw {
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('单击选择点位')
-    let position = e.surfacePosition
+    this._viewer.tooltip.setContent('左击选择点位')
+    let position = e.target ? e.position : e.surfacePosition
     if (position) {
       this._viewer.tooltip.setPosition(position)
       this._coordinates = Cesium.Rectangle.fromCartesianArray(
