@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:45:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:48:38
+ * @Last Modified time: 2020-04-04 20:34:08
  */
 import Cesium from '@/namespace'
 
@@ -19,6 +19,8 @@ class Draw {
   _mouseMoveHandler() {}
 
   _mouseRightClickHandler() {}
+
+  _prepareDelegate() {}
 
   _bindEvent() {
     this._viewer.on(
@@ -59,8 +61,6 @@ class Draw {
       this
     )
   }
-
-  _prepareDelegate() {}
 
   start() {
     this._bindEvent()

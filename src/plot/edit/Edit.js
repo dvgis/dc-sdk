@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-17 16:19:15
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:48:17
+ * @Last Modified time: 2020-04-04 20:33:25
  */
 import Cesium from '@/namespace'
 
@@ -33,7 +33,6 @@ class Edit {
       this._mouseMoveHandler,
       this
     )
-
     this._viewer.on(
       Cesium.ScreenSpaceEventType.RIGHT_CLICK,
       this._mouseRightClickHandler,
@@ -61,15 +60,6 @@ class Edit {
     this._layer.clear()
     this._bindEvent()
     this._prepareMarkers()
-  }
-
-  end() {
-    this._unbindEnvet()
-    this._layer.clear()
-    this._plotEvent.raiseEvent({
-      type: DC.OverlayType.POLYLINE,
-      points: DC.T.transformCartesianArrayToWSG84Array(this._positions)
-    })
   }
 }
 

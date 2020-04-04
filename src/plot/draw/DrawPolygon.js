@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:59:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:43:49
+ * @Last Modified time: 2020-04-04 20:50:43
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -24,7 +24,7 @@ class DrawPolygon extends Draw {
   }
 
   _mouseClickHandler(e) {
-    let position = e.surfacePosition
+    let position = e.target ? e.position : e.surfacePosition
     if (position) {
       if (this._positions.length === 2) {
         this._delegate.polyline.show = false
@@ -35,16 +35,15 @@ class DrawPolygon extends Draw {
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('左击选择点位,右击结束')
     let position = e.target ? e.position : e.surfacePosition
-    this._viewer.tooltip.setPosition(position)
+    this._viewer.tooltip.showAt(e.windowPosition, '左击选择点位,右击结束')
     if (position && this._positions.length > 0) {
       this._tempPoints = [this._positions[this._positions.length - 1], position]
       this._hierarchy.positions = [...this._positions, position]
     }
   }
 
-  _mouseDbClickHandler(e) {
+  _mouseRightClickHandler(e) {
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POLYGON,
@@ -57,13 +56,17 @@ class DrawPolygon extends Draw {
       hierarchy: new Cesium.CallbackProperty(time => {
         return this._hierarchy
       }),
-      ...this._style
+      ...this._style,
+      heightReference: this._viewer.scene.globe.show
+        ? Cesium.HeightReference.CLAMP_TO_GROUND
+        : Cesium.HeightReference.NONE
     }
     this._delegate.polyline = {
       positions: new Cesium.CallbackProperty(time => {
         return this._tempPoints
       }),
-      ...this._style
+      ...this._style,
+      clampToGround: this._viewer.scene.globe.show
     }
     this._layer.entities.add(this._delegate)
   }

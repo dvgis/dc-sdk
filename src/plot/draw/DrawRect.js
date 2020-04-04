@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 20:52:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:44:09
+ * @Last Modified time: 2020-04-04 20:51:35
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -23,7 +23,7 @@ class DrawRect extends Draw {
   }
 
   _mouseClickHandler(e) {
-    let position = e.surfacePosition
+    let position = e.target ? e.position : e.surfacePosition
     if (position) {
       this._positions.push(position)
       if (this._positions.length === 2) {
@@ -41,10 +41,9 @@ class DrawRect extends Draw {
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('左击选择点位')
     let position = e.target ? e.position : e.surfacePosition
     if (position) {
-      this._viewer.tooltip.setPosition(position)
+      this._viewer.tooltip.showAt(e.windowPosition, '左击选择点位')
       this._coordinates = Cesium.Rectangle.fromCartesianArray(
         [...this._positions, position],
         Cesium.Ellipsoid.WGS84
@@ -57,7 +56,10 @@ class DrawRect extends Draw {
       coordinates: new Cesium.CallbackProperty(time => {
         return this._coordinates
       }),
-      ...this._style
+      ...this._style,
+      heightReference: this._viewer.scene.globe.show
+        ? Cesium.HeightReference.CLAMP_TO_GROUND
+        : Cesium.HeightReference.NONE
     }
     this._layer.entities.add(this._delegate)
   }

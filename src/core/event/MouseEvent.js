@@ -2,12 +2,15 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 16:55:56
+ * @Last Modified time: 2020-04-04 20:32:00
  */
 
 import Cesium from '@/namespace'
 import Event from './Event'
 
+/**
+ * Mouse events in 3D scene, optimized Cesium event model
+ */
 class MouseEvent extends Event {
   constructor(viewer) {
     super()
@@ -33,7 +36,9 @@ class MouseEvent extends Event {
   }
 
   /**
+   *
    * Register Cesium mouse events
+   *
    */
   _registerEvent() {
     for (let key in Cesium.ScreenSpaceEventType) {
@@ -46,30 +51,37 @@ class MouseEvent extends Event {
   }
 
   /**
+   *
    * Gets the mouse information for the mouse event
    * @param {*} position
+   *
    */
   _getMouseInfo(position) {
     let target = this._viewer.scene.pick(position)
     let cartesian = undefined
-    if (this._viewer.scene.pickPositionSupported && target) {
+    if (this._viewer.scene.pickPositionSupported) {
       cartesian = this._viewer.scene.pickPosition(position)
     }
-    if (!cartesian || !target) {
+    let surfaceCartesian = undefined
+    if (this._viewer.scene.mode === DC.SceneMode.SCENE3D) {
       let ray = this._viewer.scene.camera.getPickRay(position)
-      cartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+      surfaceCartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+    } else {
+      surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
+        position,
+        Cesium.Ellipsoid.WGS84
+      )
     }
-    let surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
-      position,
-      Cesium.Ellipsoid.WGS84
-    )
     return {
       target: target,
       cartesian: cartesian,
+      windowCartesian: position,
       surfaceCartesian: surfaceCartesian
     }
   }
+
   /**
+   *
    * Gets the target information for the mouse event
    * @param {*} target
    *
@@ -98,10 +110,12 @@ class MouseEvent extends Event {
   }
 
   /**
+   *
    * @param {*} type
    * @param {*} target
+   *
    */
-  _raiseEvent(type, target, position = null, surfacePosition = null) {
+  _raiseEvent(type, target, position, windowPosition, surfacePosition) {
     let stopPropagation = false
     let targetInfo = this._getTargetInfo(target)
     let overlay = targetInfo.overlay
@@ -114,6 +128,7 @@ class MouseEvent extends Event {
           feature: targetInfo.feature,
           target: target,
           position: position,
+          windowPosition: windowPosition,
           surfacePosition: surfacePosition
         })
         stopPropagation = true
@@ -128,6 +143,7 @@ class MouseEvent extends Event {
           feature: undefined,
           target: target,
           position: position,
+          windowPosition: windowPosition,
           surfacePosition: surfacePosition
         })
       }
@@ -149,6 +165,7 @@ class MouseEvent extends Event {
       Cesium.ScreenSpaceEventType.LEFT_CLICK,
       result.target,
       result.cartesian,
+      result.windowCartesian,
       result.surfaceCartesian
     )
   }
@@ -168,6 +185,7 @@ class MouseEvent extends Event {
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
       result.target,
       result.cartesian,
+      result.windowCartesian,
       result.surfaceCartesian
     )
   }
@@ -187,6 +205,7 @@ class MouseEvent extends Event {
       Cesium.ScreenSpaceEventType.RIGHT_CLICK,
       result.target,
       result.cartesian,
+      result.windowCartesian,
       result.surfaceCartesian
     )
   }
@@ -207,6 +226,7 @@ class MouseEvent extends Event {
       Cesium.ScreenSpaceEventType.MOUSE_MOVE,
       result.target,
       result.cartesian,
+      result.windowCartesian,
       result.surfaceCartesian
     )
   }

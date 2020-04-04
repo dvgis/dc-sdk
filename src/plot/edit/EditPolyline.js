@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-17 21:59:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:42:09
+ * @Last Modified time: 2020-04-04 20:53:10
  */
 import Edit from './Edit'
 
@@ -14,9 +14,7 @@ class EditPolyline extends Edit {
 
   _mouseMoveHandler(e) {
     if (this._currentMarker) {
-      this._currentMarker.position = DC.T.transformCartesianToWSG84(
-        e.surfacePosition
-      )
+      this._currentMarker.position = DC.T.transformCartesianToWSG84(e.position)
       this._overlay.positions = this._markers.map(item => item.position)
     }
   }

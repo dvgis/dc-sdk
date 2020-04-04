@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 15:51:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 10:38:56
+ * @Last Modified time: 2020-04-04 20:35:53
  */
 import Cesium from '@/namespace'
 import DrawPoint from './draw/DrawPoint'
@@ -86,20 +86,20 @@ DC.Plot = class {
         this._editWorker = new EditPolyline(info)
         break
       case DC.OverlayType.POLYGON:
-        this._drawWorker = new DrawPolygon(info, style)
+        this._drawWorker = new DrawPolygon(info)
         break
       case DC.OverlayType.CIRCLE:
-        this._drawWorker = new DrawCircle(info, style)
+        this._drawWorker = new DrawCircle(info)
         break
       case DC.OverlayType.RECT:
-        this._drawWorker = new DrawRect(info, style)
+        this._drawWorker = new DrawRect(info)
         break
       default:
         break
     }
   }
 
-  draw(type, callback) {
+  draw(type, callback, style) {
     this._state = 'draw'
     this._viewer.tooltip.enable = true
     this._bindEvent(callback)

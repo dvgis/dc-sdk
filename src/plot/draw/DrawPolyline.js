@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:18:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:44:05
+ * @Last Modified time: 2020-04-04 20:55:26
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -25,18 +25,16 @@ class DrawPolyline extends Draw {
   }
 
   _mouseClickHandler(e) {
-    let position = e.surfacePosition
+    let position = e.target ? e.position : e.surfacePosition
     if (position) {
       this._positions.push(position)
     }
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('单击选择点位,右击结束')
     let position = e.target ? e.position : e.surfacePosition
-    this._viewer.tooltip.setPosition(position)
+    this._viewer.tooltip.showAt(e.windowPosition, '单击选择点位,右击结束')
     if (position && this._positions.length > 0) {
-      this._viewer.tooltip.setPosition(position)
       this._tempPoints = [this._positions[this._positions.length - 1], position]
     }
   }
@@ -54,13 +52,19 @@ class DrawPolyline extends Draw {
       positions: new Cesium.CallbackProperty(time => {
         return this._positions
       }),
-      ...this._style
+      ...this._style,
+      heightReference: this._viewer.scene.globe.show
+        ? Cesium.HeightReference.CLAMP_TO_GROUND
+        : Cesium.HeightReference.NONE
     }
     this._tempLine.polyline = {
       positions: new Cesium.CallbackProperty(time => {
         return this._tempPoints
       }),
-      ...this._style
+      ...this._style,
+      heightReference: this._viewer.scene.globe.show
+        ? Cesium.HeightReference.CLAMP_TO_GROUND
+        : Cesium.HeightReference.NONE
     }
     this._layer.entities.add(this._delegate)
     this._layer.entities.add(this._tempLine)

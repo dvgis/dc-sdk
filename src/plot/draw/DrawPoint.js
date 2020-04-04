@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 16:25:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:43:42
+ * @Last Modified time: 2020-04-04 20:49:17
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -33,9 +33,8 @@ class DrawPoint extends Draw {
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('单击选择点位')
-    this._position = e.surfacePosition
-    this._viewer.tooltip.setPosition(this._position)
+    this._position = e.target ? e.position : e.surfacePosition
+    this._viewer.tooltip.showAt(e.windowPosition, '单击选择点位')
   }
 
   _prepareDelegate() {
@@ -43,7 +42,10 @@ class DrawPoint extends Draw {
       return this._position
     })
     this._delegate.point = {
-      ...this._style
+      ...this._style,
+      heightReference: this._viewer.scene.globe.show
+        ? Cesium.HeightReference.CLAMP_TO_GROUND
+        : Cesium.HeightReference.NONE
     }
     this._layer.entities.add(this._delegate)
   }

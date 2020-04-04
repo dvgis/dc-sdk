@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:28:43
+ * @Last Modified time: 2020-04-04 19:35:49
  */
 class Event {
   constructor() {
@@ -10,6 +10,9 @@ class Event {
   }
 
   /**
+   *
+   * Event registration
+   * Subclasses need to override
    *
    */
   _registerEvent() {}

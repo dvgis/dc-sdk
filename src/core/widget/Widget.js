@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:05:26
+ * @Last Modified time: 2020-04-04 20:27:25
  */
 import Cesium from '@/namespace'
 
@@ -88,19 +88,6 @@ class Widget {
      * excute installHook
      */
     this._installHook && this._installHook()
-  }
-
-  /**
-   * setting widget position
-   * @param {*} position
-   */
-  setPosition(position) {
-    this._position = position
-    this._wrapper &&
-      (this._wrapper.style.cssText = `
-    visibility:visible;
-    `)
-    return this
   }
 
   /**

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:44:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 13:44:38
+ * @Last Modified time: 2020-04-04 20:52:50
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -39,9 +39,8 @@ class DrawClicle extends Draw {
   }
 
   _mouseMoveHandler(e) {
-    this._viewer.tooltip.setContent('左击选择点位')
     let position = e.target ? e.position : e.surfacePosition
-    this._viewer.tooltip.setPosition(position)
+    this._viewer.tooltip.showAt(e.windowPosition, '左击选择点位')
     if (position && this._center !== Cesium.Cartesian3.ZERO) {
       this._computeRadius(this._center, position)
     }
@@ -70,12 +69,18 @@ class DrawClicle extends Draw {
       semiMinorAxis: new Cesium.CallbackProperty(time => {
         return this._radius
       }),
-      ...this._style
+      ...this._style,
+      heightReference: this._viewer.scene.globe.show
+        ? Cesium.HeightReference.CLAMP_TO_GROUND
+        : Cesium.HeightReference.NONE
     }
     this._delegate.point = {
       pixelSize: 10,
       outlineColor: Cesium.Color.RED,
-      outlineWidth: 3
+      outlineWidth: 3,
+      heightReference: this._viewer.scene.globe.show
+        ? Cesium.HeightReference.CLAMP_TO_GROUND
+        : Cesium.HeightReference.NONE
     }
 
     this._layer.entities.add(this._delegate)

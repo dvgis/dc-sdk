@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-14 14:59:33
+ * @Last Modified time: 2020-04-04 20:24:16
  */
 
 import Widget from './Widget'
@@ -42,6 +42,21 @@ class Popup extends Widget {
   set config(config) {
     this._config = config
     config.customClass && this._setCustomClass()
+  }
+
+  /**
+   *
+   * Setting widget position
+   * @param {*} position
+   *
+   */
+  setPosition(position) {
+    this._position = position
+    this._wrapper &&
+      (this._wrapper.style.cssText = `
+    visibility:visible;
+    `)
+    return this
   }
 }
 
