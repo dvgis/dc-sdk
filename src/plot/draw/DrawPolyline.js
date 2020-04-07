@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:18:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:55:26
+ * @Last Modified time: 2020-04-04 21:35:59
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -52,19 +52,13 @@ class DrawPolyline extends Draw {
       positions: new Cesium.CallbackProperty(time => {
         return this._positions
       }),
-      ...this._style,
-      heightReference: this._viewer.scene.globe.show
-        ? Cesium.HeightReference.CLAMP_TO_GROUND
-        : Cesium.HeightReference.NONE
+      ...this._style
     }
     this._tempLine.polyline = {
       positions: new Cesium.CallbackProperty(time => {
         return this._tempPoints
       }),
-      ...this._style,
-      heightReference: this._viewer.scene.globe.show
-        ? Cesium.HeightReference.CLAMP_TO_GROUND
-        : Cesium.HeightReference.NONE
+      ...this._style
     }
     this._layer.entities.add(this._delegate)
     this._layer.entities.add(this._tempLine)

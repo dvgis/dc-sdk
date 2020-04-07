@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 16:25:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:49:17
+ * @Last Modified time: 2020-04-04 21:37:08
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -42,10 +42,7 @@ class DrawPoint extends Draw {
       return this._position
     })
     this._delegate.point = {
-      ...this._style,
-      heightReference: this._viewer.scene.globe.show
-        ? Cesium.HeightReference.CLAMP_TO_GROUND
-        : Cesium.HeightReference.NONE
+      ...this._style
     }
     this._layer.entities.add(this._delegate)
   }

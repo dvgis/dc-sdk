@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:44:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:52:50
+ * @Last Modified time: 2020-04-04 21:37:42
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -69,20 +69,13 @@ class DrawClicle extends Draw {
       semiMinorAxis: new Cesium.CallbackProperty(time => {
         return this._radius
       }),
-      ...this._style,
-      heightReference: this._viewer.scene.globe.show
-        ? Cesium.HeightReference.CLAMP_TO_GROUND
-        : Cesium.HeightReference.NONE
+      ...this._style
     }
     this._delegate.point = {
       pixelSize: 10,
       outlineColor: Cesium.Color.RED,
-      outlineWidth: 3,
-      heightReference: this._viewer.scene.globe.show
-        ? Cesium.HeightReference.CLAMP_TO_GROUND
-        : Cesium.HeightReference.NONE
+      outlineWidth: 3
     }
-
     this._layer.entities.add(this._delegate)
   }
 }

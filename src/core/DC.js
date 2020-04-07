@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-31 21:00:58
+ * @Last Modified time: 2020-04-07 13:43:18
  */
 ;(function() {
   let namespace = {}
@@ -10,7 +10,8 @@
   let initialized = false
 
   let DC = {
-    Http: undefined,
+    Author: 'Caven Chen',
+    GitHub: 'https://github.com/Digital-Visual',
     Version: '1.0.0',
     Config: {}
   }

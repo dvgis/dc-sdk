@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:59:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:50:43
+ * @Last Modified time: 2020-04-04 21:37:06
  */
 import Cesium from '@/namespace'
 import Draw from './Draw'
@@ -56,17 +56,13 @@ class DrawPolygon extends Draw {
       hierarchy: new Cesium.CallbackProperty(time => {
         return this._hierarchy
       }),
-      ...this._style,
-      heightReference: this._viewer.scene.globe.show
-        ? Cesium.HeightReference.CLAMP_TO_GROUND
-        : Cesium.HeightReference.NONE
+      ...this._style
     }
     this._delegate.polyline = {
       positions: new Cesium.CallbackProperty(time => {
         return this._tempPoints
       }),
-      ...this._style,
-      clampToGround: this._viewer.scene.globe.show
+      ...this._style
     }
     this._layer.entities.add(this._delegate)
   }

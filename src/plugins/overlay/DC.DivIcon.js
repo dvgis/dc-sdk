@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-25 15:19:44
+ * @Last Modified time: 2020-04-07 13:46:49
  */
 
 import Overlay from '@/core/overlay/Overlay'
@@ -88,4 +88,4 @@ DC.DivIcon = class extends Overlay {
   }
 }
 
-DC.OverlayType.DIVICON = 'divICon'
+DC.OverlayType.DIVICON = 'divIcon'
