@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 12:31:35
+ * @Last Modified time: 2020-04-09 12:32:11
  */
 
 import Cesium from '@/namespace'
@@ -488,7 +488,6 @@ DC.Viewer = class {
    */
   once(type, callback, context) {
     this._viewerEvent.once(type, callback, context || this)
-    this._sceneEvent.once(type, callback, context || this)
     return this
   }
 
