@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 19:35:49
+ * @Last Modified time: 2020-04-09 12:29:41
  */
 class Event {
   constructor() {
@@ -25,9 +25,11 @@ class Event {
    */
   _on(type, callback, context) {
     let event = this.getEvent(type)
+    let removeCallback = undefined
     if (callback && event) {
-      event.addEventListener(callback, context || this)
+      removeCallback = event.addEventListener(callback, context || this)
     }
+    return removeCallback
   }
 
   /**
@@ -63,6 +65,18 @@ class Event {
    */
   on(type, callback, context) {
     this._on(type, callback, context)
+    return this
+  }
+
+  /**
+   *
+   * @param {*} type
+   * @param {*} callback
+   * @param {*} context
+   */
+  once(type, callback, context) {
+    let removeCallback = this._on(type, callback, context)
+    removeCallback && removeCallback()
     return this
   }
 
