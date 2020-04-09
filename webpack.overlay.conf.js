@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 20:49:30
+ * @Last Modified time: 2020-04-09 20:49:23
  */
 
 const path = require('path')
@@ -29,12 +29,12 @@ module.exports = env => {
   }
   return {
     entry: {
-      'dc.plot': ['entry']
+      'dc.overlay': ['entry']
     },
     devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
     output: {
       filename: IS_PROD ? '[name].min.js' : '[name].js',
-      path: path.resolve(__dirname, 'dist/dc-sdk/plot'),
+      path: path.resolve(__dirname, 'dist/dc-sdk/overlay'),
       publicPath: publicPath,
       sourcePrefix: ''
     },
@@ -94,7 +94,7 @@ module.exports = env => {
       extensions: ['.js', '.json', '.css'],
       alias: {
         '@': resolve('src'),
-        entry: './src/plot'
+        entry: './src/overlay'
       }
     },
     plugins

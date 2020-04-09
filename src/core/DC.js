@@ -2,12 +2,14 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-08 19:44:15
+ * @Last Modified time: 2020-04-09 20:29:07
  */
 ;(function() {
   let namespace = {}
 
   let initialized = false
+
+  let isCesiumLoaded = false
 
   let DC = {
     Author: 'Caven Chen',
@@ -15,17 +17,18 @@
     Version: '1.0.0',
     Config: {}
   }
-
   delete window.DC
   window.DC = DC
 
   require('../log')
 
-  let requireCesium = () => {
+  /**
+   * load Cesium
+   */
+  function requireCesium() {
     return new Promise((resolve, reject) => {
       let Cesium = require('cesium/Cesium')
-      namespace['Cesium'] = Cesium
-      resolve()
+      resolve(Cesium)
     })
   }
 
@@ -45,25 +48,33 @@
   }
 
   /**
-   *  start
+   *
    */
   DC.init = callback => {
-    DC.ready(callback)
+    if (!isCesiumLoaded) {
+      requireCesium().then(Cesium => {
+        namespace['Cesium'] = Cesium
+        delete window.Cesium
+        isCesiumLoaded = true
+        callback && callback()
+      })
+    } else {
+      callback && callback()
+    }
   }
 
   /**
-   * start
+   *
    */
   DC.ready = callback => {
     try {
       if (!initialized) {
-        requireCesium().then(() => {
+        DC.init(() => {
           require('../thirdpart')
           require('./DC.Loader')
-          delete window.Cesium //删除winow下的Cesium
           callback && callback()
+          initialized = true
         })
-        initialized = true
       } else {
         callback && callback()
       }

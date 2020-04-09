@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 10:09:19
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:15:18
+ * @Last Modified time: 2020-04-09 20:42:47
  */
 import Cesium from '@/namespace'
 
@@ -43,7 +43,9 @@ DC.SceneEventType = {
   CLOCK_TICK: 'clockTick'
 }
 
-DC.LayerType = {}
+DC.LayerType = {
+  ...DC.LayerType
+}
 
 DC.LayerEventType = {
   ...baseEventType,
@@ -57,7 +59,9 @@ DC.LayerState = {
   CLEARED: 'cleared'
 }
 
-DC.OverlayType = {}
+DC.OverlayType = {
+  ...DC.OverlayType
+}
 
 DC.OverlayEventType = {
   ...baseEventType
@@ -67,7 +71,9 @@ DC.OverlayState = {
   ...baseState
 }
 
-DC.EffectType = {}
+DC.EffectType = {
+  ...DC.EffectType
+}
 
 DC.EffectEventType = {
   ...baseEventType
@@ -77,7 +83,9 @@ DC.EffectState = {
   ...baseState
 }
 
-DC.WidgetType = {}
+DC.WidgetType = {
+  ...DC.WidgetType
+}
 
 DC.WidgetState = {
   INITIALIZED: 'initialized',

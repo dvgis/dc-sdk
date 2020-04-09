@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-02-10 10:05:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:19:33
+ * @Last Modified time: 2020-04-09 20:36:27
  */
 import Cesium from '@/namespace'
-import Layer from './Layer'
+import Layer from '@/core/layer/Layer'
 
 const DEF_OPT = {
   size: 48,

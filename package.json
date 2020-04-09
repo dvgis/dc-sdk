@@ -7,18 +7,21 @@
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn run build:core && yarn run build:plugins && yarn run build:plot",
-    "publish": "yarn run publish:core && yarn run publish:plugins && yarn run publish:plot",
+    "build": "yarn run build:core && yarn run build:plugins && yarn run build:plot && yarn run build:overlay",
     "build:core": "yarn run clean:core && webpack --config webpack.conf --mode development",
-    "publish:core": "yarn run clean:core && webpack --config webpack.conf --mode production --env.production",
     "build:plugins": "yarn run clean:plugins && webpack  --config webpack.plugins.conf --mode development",
-    "publish:plugins": "yarn run clean:plugins && webpack --config webpack.plugins.conf --mode production --env.production",
     "build:plot": "yarn run clean:plot && webpack  --config webpack.plot.conf --mode development",
+    "build:overlay": "yarn run clean:overlay && webpack  --config webpack.overlay.conf --mode development",
+    "publish": "yarn run publish:core && yarn run publish:plugins && yarn run publish:plot && yarn run publish:overlay",
+    "publish:core": "yarn run clean:core && webpack --config webpack.conf --mode production --env.production",
+    "publish:plugins": "yarn run clean:plugins && webpack --config webpack.plugins.conf --mode production --env.production",
     "publish:plot": "yarn run clean:plot && webpack --config webpack.plot.conf --mode production --env.production",
+    "publish:overlay": "yarn run clean:overlay && webpack --config webpack.overlay.conf --mode production --env.production",
     "clean": "rimraf dist/",
     "clean:core": "rimraf dist/dc-sdk/resources dist/dc-sdk/dc.*.js dist/dc-sdk/dc.*.css",
     "clean:plugins": "rimraf dist/dc-sdk/plugins",
-    "clean:plot": "rimraf dist/dc-sdk/plot"
+    "clean:plot": "rimraf dist/dc-sdk/plot",
+    "clean:overlay": "rimraf dist/dc-sdk/overlay"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
