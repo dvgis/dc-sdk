@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 11:07:26
+ * @Last Modified time: 2020-04-10 13:42:55
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -114,8 +114,9 @@ class Layer {
 
   /**
    *
+   * The layer add overlay callback function
    * @param {*} overlay
-   * the layer add overlay callback function
+   *
    */
   _addOverlayCallback(overlay) {
     if (

@@ -2,9 +2,25 @@
  * @Author: Caven
  * @Date: 2020-03-22 00:10:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:14:42
+ * @Last Modified time: 2020-04-10 13:40:47
  */
 DC.P = class {
+  /**
+   *
+   * @param {*} position
+   */
+  static parsePosition(position) {
+    let result = new DC.Position()
+    if (typeof position === 'string') {
+      result = DC.Position.fromCoordString(position)
+    } else if (Array.isArray(position)) {
+      result = DC.Position.fromCoordArray(position)
+    } else if (item instanceof DC.Position) {
+      result = item
+    }
+    return result
+  }
+
   /**
    *
    * @param {*} positions

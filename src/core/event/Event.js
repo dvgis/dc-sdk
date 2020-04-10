@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 12:29:41
+ * @Last Modified time: 2020-04-10 16:53:08
  */
 class Event {
   constructor() {
@@ -40,9 +40,11 @@ class Event {
    */
   _off(type, callback, context) {
     let event = this.getEvent(type)
+    let removed = false
     if (event && callback) {
-      event.removeEventListener(callback, context || this)
+      removed = event.removeEventListener(callback, context || this)
     }
+    return removed
   }
 
   /**
@@ -64,8 +66,7 @@ class Event {
    * @param {*} context
    */
   on(type, callback, context) {
-    this._on(type, callback, context)
-    return this
+    return this._on(type, callback, context)
   }
 
   /**
@@ -77,7 +78,6 @@ class Event {
   once(type, callback, context) {
     let removeCallback = this._on(type, callback, context)
     removeCallback && removeCallback()
-    return this
   }
 
   /**
@@ -87,8 +87,7 @@ class Event {
    * @param {*} context
    */
   off(type, callback, context) {
-    this._off(type, callback, context)
-    return this
+    return this._off(type, callback, context)
   }
 
   /**
@@ -98,7 +97,6 @@ class Event {
    */
   fire(type, params) {
     this._fire(type, params)
-    return this
   }
 
   /**

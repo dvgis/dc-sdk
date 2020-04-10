@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:27:25
+ * @Last Modified time: 2020-04-10 13:24:04
  */
 import Cesium from '@/namespace'
 
@@ -58,6 +58,7 @@ class Widget {
   /**
    *
    * @param {*} viewer
+   *
    */
   install(viewer) {
     this._viewer = viewer
@@ -91,7 +92,7 @@ class Widget {
   }
 
   /**
-   * setting widget content
+   * Setting widget content
    * @param {*} content
    */
   setContent(content) {

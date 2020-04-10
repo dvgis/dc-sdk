@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-30 17:14:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-30 17:34:12
+ * @Last Modified time: 2020-04-10 13:14:25
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -18,8 +18,6 @@ DC.LabelLayer = class extends Layer {
     this._state = DC.LayerState.INITIALIZED
     this.type = DC.LayerType.LABEL
   }
-
-  _addCallback(viewer) {}
 }
 
 DC.LayerType.LABEL = 'label'

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:24:16
+ * @Last Modified time: 2020-04-10 13:23:33
  */
 
 import Widget from './Widget'
@@ -14,6 +14,11 @@ class Popup extends Widget {
     this._config = undefined
     this._positionChangeAble = true
     this.type = DC.WidgetType.POPUP
+  }
+
+  set config(config) {
+    this._config = config
+    config.customClass && this._setCustomClass()
   }
 
   _installHook() {
@@ -37,11 +42,6 @@ class Popup extends Widget {
 
   _setCustomClass() {
     DC.DomUtil.setClass(this._wrapper, `dc-popup ${this._config.customClass}`)
-  }
-
-  set config(config) {
-    this._config = config
-    config.customClass && this._setCustomClass()
   }
 
   /**

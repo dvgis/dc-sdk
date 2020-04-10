@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-02 22:38:10
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-02 23:09:34
+ * @Last Modified time: 2020-04-10 13:32:45
  */
 
 import Cesium from '@/namespace'
@@ -25,16 +25,14 @@ DC.AroundPoint = class {
   }
 
   _start() {
-    this._viewer.clock.startTime = this._startTime.clone()
-    this._viewer.clock.stopTime = this._stopTime.clone()
     this._viewer.clock.currentTime = this._startTime.clone()
-    this._viewer.clock.onTick.addEventListener(this._onTickHandler, this)
+    this._viewer.on(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
   }
 
   _onTickHandler() {
     let diff = Cesium.JulianDate.secondsDifference(
       this._viewer.clock.currentTime,
-      this._viewer.clock.startTime
+      this._startTime
     )
     let duration = this._options.duration || 10
     let heading = Cesium.Math.toRadians(diff * (360 / duration)) + this._heading
@@ -50,12 +48,12 @@ DC.AroundPoint = class {
     if (
       Cesium.JulianDate.compare(
         this._viewer.clock.currentTime,
-        this._viewer.clock.stopTime
+        this._stopTime
       ) >= 0
     ) {
-      this._viewer.clock.onTick.removeEventListener(this._onTickHandler, this)
-      this._options._callback &&
-        this._options._callback.call(this._options.context || this)
+      this._viewer.off(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
+      this._options.callback &&
+        this._options.callback.call(this._options.context || this)
     }
   }
 }

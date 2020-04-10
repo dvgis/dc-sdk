@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 20:29:07
+ * @Last Modified time: 2020-04-10 13:26:03
  */
 ;(function() {
   let namespace = {}
@@ -64,7 +64,7 @@
   }
 
   /**
-   *
+   * 框架开始
    */
   DC.ready = callback => {
     try {
