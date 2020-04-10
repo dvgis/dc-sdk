@@ -24,16 +24,6 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 <link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
 
-> ES6 Import
-
-```js
-import './libs/dc-sdk/dc.core.min.js' //核心包
-import './libs/dc-sdk/plugins/dc.plugins.min.js' //插件包
-import './libs/dc-sdk/plot/dc.plot.min.js' //标绘包
-import './libs/dc-sdk/overlay/dc.overlay.min.js' //覆盖物/要素包
-import './libs/dc-sdk/dc.core.min.css' //主要样式
-```
-
 > 开始
 
 ```js
