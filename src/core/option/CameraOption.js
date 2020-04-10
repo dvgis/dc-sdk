@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:33:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-30 13:28:17
+ * @Last Modified time: 2020-04-10 09:35:23
  */
 import Cesium from '@/namespace'
 
@@ -11,6 +11,11 @@ class CameraOption {
     this._viewer = viewer
   }
 
+  /**
+   *
+   * @param {*} min
+   * @param {*} max
+   */
   setPitchRange(min, max) {
     let handler = new Cesium.ScreenSpaceEventHandler(this._viewer.scene.canvas)
     if (this._viewer.scene.mode === Cesium.SceneMode.SCENE3D) {
@@ -38,6 +43,9 @@ class CameraOption {
     }
   }
 
+  /**
+   *
+   */
   limitCameraToGround() {
     this._viewer.camera.changed.addEventListener(framestate => {
       if (
