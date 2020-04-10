@@ -1,7 +1,7 @@
 # DC-SDK
 
 > 数字视觉的 3D 框架，该框架是基于开源项目 Cesium 进行的二次开发，优化了 Cesium 一些操作，通过该框架开发者可以快速的开发 3D 应用。
-> [主页](http://www.cavencj.cn)
+> [主页](http://dc.cavencj.cn)
 
 ```warning
 Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技术和 GIS 相关技术
@@ -11,17 +11,34 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 
 > CDN
 
+```html
+<!--核心包-->
+<script src="/libs/dc-sdk/dc.core.min.js"></script>
+<!--插件包-->
+<script src="/libs/dc-sdk/plugins/dc.plugins.min.js"></script>
+<!--标绘包-->
+<script src="/libs/dc-sdk/plot/dc.plot.min.js"></script>
+<!--覆盖物/要素包-->
+<script src="/libs/dc-sdk/overlay/dc.overlay.min.js"></script>
+<!--主要样式-->
+<link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
+```
+
+> ES6 Import
+
 ```js
-<script src="/libs/dc-sdk/dc.core.min.js"></script> // 核心框架包
-<script src="/libs/dc-sdk/plugins/dc.plugins.min.js"></script> // 插件框架包
-<link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet"type="text/css"  > // 主要样式
+import './libs/dc-sdk/dc.core.min.js' //核心包
+import './libs/dc-sdk/plugins/dc.plugins.min.js' //插件包
+import './libs/dc-sdk/plot/dc.plot.min.js' //标绘包
+import './libs/dc-sdk/overlay/dc.overlay.min.js' //覆盖物/要素包
+import './libs/dc-sdk/dc.core.min.css' //主要样式
 ```
 
 > 开始
 
 ```js
-DC.init(() => {
-  let viewer = new DC.Viewer(divId) // divId 为一个div节点的Id属性值，如果不传入，会无法初始化
+DC.ready(() => {
+  let viewer = new DC.Viewer(divId) // divId 为一个div节点的Id属性值，如果不传入，会无法初始化3D场景
 })
 ```
 
