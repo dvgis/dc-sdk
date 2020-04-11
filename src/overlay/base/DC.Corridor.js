@@ -1,13 +1,14 @@
 /*
  * @Author: Caven
- * @Date: 2020-02-25 18:28:36
+ * @Date: 2020-04-11 12:58:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 12:27:25
+ * @Last Modified time: 2020-04-11 12:59:25
  */
+
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
 
-DC.Wall = class extends Overlay {
+DC.Corridor = class extends Overlay {
   constructor(positions) {
     if (
       !positions ||
@@ -19,7 +20,7 @@ DC.Wall = class extends Overlay {
     this._positions = DC.P.parsePositions(positions)
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.WALL
+    this.type = DC.OverlayType.CORRIDOR
   }
 
   set positions(positions) {
@@ -37,7 +38,7 @@ DC.Wall = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.wall = {
+    this._delegate.corridor = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {
         return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
@@ -56,9 +57,10 @@ DC.Wall = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.wall && DC.Util.merge(this._delegate.wall, this._style)
+    this._delegate.corridor &&
+      DC.Util.merge(this._delegate.corridor, this._style)
     return this
   }
 }
 
-DC.OverlayType.WALL = 'wall'
+DC.OverlayType.CORRIDOR = 'corridor'

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:41:19
+ * @Last Modified time: 2020-04-11 19:42:29
  */
 
 import Cesium from '@/namespace'
@@ -45,7 +45,7 @@ class MouseEvent extends Event {
       let type = Cesium.ScreenSpaceEventType[key]
       this._cache[type] = new Cesium.Event()
       this._handler.setInputAction(movement => {
-        this._eventCache[type].raiseEvent(movement)
+        this._cache[type].raiseEvent(movement)
       }, type)
     })
   }
