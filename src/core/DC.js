@@ -2,8 +2,9 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 13:26:03
+ * @Last Modified time: 2020-04-10 22:11:07
  */
+
 ;(function() {
   let namespace = {}
 
@@ -85,3 +86,5 @@
     }
   }
 })()
+
+export default DC

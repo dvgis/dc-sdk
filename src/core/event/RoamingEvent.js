@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-10 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 16:59:18
+ * @Last Modified time: 2020-04-11 11:42:42
  */
 import Cesium from '@/namespace'
 import Event from './Event'
@@ -14,10 +14,10 @@ class RoamingEvent extends Event {
   }
 
   _registerEvent() {
-    for (let key in DC.RoamingEventType) {
+    Object.keys(DC.RoamingEventType).forEach(key => {
       let type = DC.RoamingEventType[key]
-      this._eventCache[type] = new Cesium.Event()
-    }
+      this._cache[type] = new Cesium.Event()
+    })
   }
 }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:32:00
+ * @Last Modified time: 2020-04-11 11:41:19
  */
 
 import Cesium from '@/namespace'
@@ -17,20 +17,20 @@ class MouseEvent extends Event {
     this._viewer = viewer
     this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
     this._registerEvent()
-    this.on(Cesium.ScreenSpaceEventType.LEFT_CLICK, this._clickCallback, this)
+    this.on(Cesium.ScreenSpaceEventType.LEFT_CLICK, this._clickHandler, this)
     this.on(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-      this._dbClickCallback,
+      this._dbClickHandler,
       this
     )
     this.on(
       Cesium.ScreenSpaceEventType.RIGHT_CLICK,
-      this._rightClickCallback,
+      this._rightClickHandler,
       this
     )
     this.on(
       Cesium.ScreenSpaceEventType.MOUSE_MOVE,
-      this._mouseMoveCallback,
+      this._mouseMoveHandler,
       this
     )
   }
@@ -41,13 +41,13 @@ class MouseEvent extends Event {
    *
    */
   _registerEvent() {
-    for (let key in Cesium.ScreenSpaceEventType) {
+    Object.keys(Cesium.ScreenSpaceEventType).forEach(key => {
       let type = Cesium.ScreenSpaceEventType[key]
-      this._eventCache[type] = new Cesium.Event()
+      this._cache[type] = new Cesium.Event()
       this._handler.setInputAction(movement => {
         this._eventCache[type].raiseEvent(movement)
       }, type)
-    }
+    })
   }
 
   /**
@@ -57,17 +57,18 @@ class MouseEvent extends Event {
    *
    */
   _getMouseInfo(position) {
-    let target = this._viewer.scene.pick(position)
+    let scene = this._viewer.scene
+    let target = scene.pick(position)
     let cartesian = undefined
-    if (this._viewer.scene.pickPositionSupported) {
-      cartesian = this._viewer.scene.pickPosition(position)
+    if (scene.pickPositionSupported) {
+      cartesian = scene.pickPosition(position)
     }
     let surfaceCartesian = undefined
-    if (this._viewer.scene.mode === DC.SceneMode.SCENE3D) {
-      let ray = this._viewer.scene.camera.getPickRay(position)
-      surfaceCartesian = this._viewer.scene.globe.pick(ray, this._viewer.scene)
+    if (scene.mode === DC.SceneMode.SCENE3D) {
+      let ray = scene.camera.getPickRay(position)
+      surfaceCartesian = scene.globe.pick(ray, scene)
     } else {
-      surfaceCartesian = this._viewer.scene.camera.pickEllipsoid(
+      surfaceCartesian = scene.camera.pickEllipsoid(
         position,
         Cesium.Ellipsoid.WGS84
       )
@@ -152,11 +153,11 @@ class MouseEvent extends Event {
 
   /**
    *
-   * Default click event callback
+   * Default click event handler
    * @param {*} movement
    *
    */
-  _clickCallback(movement) {
+  _clickHandler(movement) {
     if (!movement || !movement.position) {
       return
     }
@@ -172,11 +173,11 @@ class MouseEvent extends Event {
 
   /**
    *
-   * Default dbClick event callback
+   * Default dbClick event handler
    * @param {*} movement
    *
    */
-  _dbClickCallback(movement) {
+  _dbClickHandler(movement) {
     if (!movement || !movement.position) {
       return
     }
@@ -192,11 +193,11 @@ class MouseEvent extends Event {
 
   /**
    *
-   * Default rightclick event callback
+   * Default rightclick event handler
    * @param {*} movement
    *
    */
-  _rightClickCallback(movement) {
+  _rightClickHandler(movement) {
     if (!movement || !movement.position) {
       return
     }
@@ -212,11 +213,11 @@ class MouseEvent extends Event {
 
   /**
    *
-   * Default mousemove event callback
+   * Default mousemove event handler
    * @param {*} movement
    *
    */
-  _mouseMoveCallback(movement) {
+  _mouseMoveHandler(movement) {
     if (!movement || !movement.endPosition) {
       return
     }

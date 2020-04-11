@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-14 14:03:09
+ * @Last Modified time: 2020-04-10 23:14:02
  */
 
 import Cesium from '@/namespace'
@@ -64,6 +64,7 @@ DC.Plane = class extends Overlay {
     this._delegate.position = new Cesium.CallbackProperty(time => {
       return DC.T.transformWSG84ToCartesian(this._position)
     })
+
     /**
      * set the orientation
      */

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-31 21:03:27
+ * @Last Modified time: 2020-04-10 23:14:40
  */
 
 import Overlay from '../Overlay'
@@ -55,6 +55,7 @@ DC.Polyline = class extends Overlay {
         return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
       })
     }
+
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
   }

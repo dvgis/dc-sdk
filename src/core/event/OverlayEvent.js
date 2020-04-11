@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 11:48:24
+ * @Last Modified time: 2020-04-11 11:42:23
  */
 import Cesium from '@/namespace'
 import Event from './Event'
@@ -14,16 +14,15 @@ class OverlayEvent extends Event {
   }
 
   _registerEvent() {
-    // mouse event
-    for (let key in DC.MouseEventType) {
+    Object.keys(DC.MouseEventType).forEach(key => {
       let type = DC.MouseEventType[key]
-      this._eventCache[type] = new Cesium.Event()
-    }
-    //
-    for (let key in DC.OverlayEventType) {
+      this._cache[type] = new Cesium.Event()
+    })
+
+    Object.keys(DC.OverlayEventType).forEach(key => {
       let type = DC.OverlayEventType[key]
-      this._eventCache[type] = new Cesium.Event()
-    }
+      this._cache[type] = new Cesium.Event()
+    })
   }
 }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-20 13:26:49
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:15:47
+ * @Last Modified time: 2020-04-10 23:17:11
  */
 import Effect from './Effect'
 
@@ -78,7 +78,7 @@ DC.BloomEffect = class extends Effect {
    * @param {*} viewer
    * 效果添加的回调函数,
    */
-  _addCallback(viewer) {
+  _addHandler(viewer) {
     this._viewer = viewer
     this._prepareDelegate()
     if (this._delegate) {
@@ -90,7 +90,7 @@ DC.BloomEffect = class extends Effect {
   /**
    * 效果添加的回调函数
    */
-  _removeCallback() {
+  _removeHandler() {
     if (this._delegate) {
       this._delegate.enabled = false
       this.delegate = undefined

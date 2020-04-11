@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 13:42:55
+ * @Last Modified time: 2020-04-11 11:52:22
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -18,18 +18,8 @@ class Layer {
     this._attr = {}
     this._style = {}
     this._layerEvent = new LayerEvent()
-    this._layerEvent.on(DC.LayerEventType.ADD, this._addCallback, this)
-    this._layerEvent.on(DC.LayerEventType.REMOVE, this._removeCallback, this)
-    this._layerEvent.on(
-      DC.LayerEventType.ADD_OVERLAY,
-      this._addOverlayCallback,
-      this
-    )
-    this._layerEvent.on(
-      DC.LayerEventType.REMOVE_OVERLAY,
-      this._removeOverlayCallback,
-      this
-    )
+    this._layerEvent.on(DC.LayerEventType.ADD, this._addHandler, this)
+    this._layerEvent.on(DC.LayerEventType.REMOVE, this._removeHandler, this)
     this.type = undefined
   }
 
@@ -73,7 +63,7 @@ class Layer {
    * @param {*} veiwer
    *
    */
-  _addCallback(viewer) {
+  _addHandler(viewer) {
     this._viewer = viewer
     if (!this._delegate) {
       return
@@ -90,7 +80,7 @@ class Layer {
    * The layer removed callback function
    * Subclasses need to be overridden
    */
-  _removeCallback() {
+  _removeHandler() {
     if (!this._delegate) {
       return
     }
@@ -114,11 +104,11 @@ class Layer {
 
   /**
    *
-   * The layer add overlay callback function
+   * The layer add overlay function
    * @param {*} overlay
    *
    */
-  _addOverlayCallback(overlay) {
+  _addOverlay(overlay) {
     if (
       overlay &&
       overlay.overlayEvent &&
@@ -134,11 +124,11 @@ class Layer {
 
   /**
    *
-   * The layer remove overlay callback function
+   * The layer remove overlay function
    * @param {*} overlay
    *
    */
-  _removeOverlayCallback(overlay) {
+  _removeOverlay(overlay) {
     if (
       overlay &&
       overlay.overlayEvent &&
@@ -151,35 +141,36 @@ class Layer {
 
   /**
    *
-   * The layer add overlay
+   * Add overlay
    * @param {*} overlay
    *
    */
   addOverlay(overlay) {
-    this._addOverlayCallback(overlay)
+    this._addOverlay(overlay)
     return this
   }
 
   /**
    *
+   * Add overlays
    * @param {*} overlays
    *
    */
   addOverlays(overlays) {
     if (Array.isArray(overlays)) {
       overlays.forEach(item => {
-        this.addOverlay(item)
+        this._addOverlay(overlay)
       })
     }
     return this
   }
 
   /**
-   *
+   * Remove overlay
    * @param {*} overlay
    */
   removeOverlay(overlay) {
-    this._removeOverlayCallback(overlay)
+    this._removeOverlay(overlay)
     return this
   }
 
@@ -212,10 +203,21 @@ class Layer {
    * @param {*} context
    */
   eachOverlay(method, context) {
-    for (let key in this._cache) {
-      method.call(context, this._cache[key])
-    }
+    Object.keys(this._cache).forEach(key => {
+      method && method.call(context, this._cache[key])
+    })
     return this
+  }
+
+  /**
+   * Get all Overlays
+   */
+  getOverlays() {
+    let arr = []
+    Object.keys(this._cache).forEach(key => {
+      arr.push(this._cache[key])
+    })
+    return arr
   }
 
   /**

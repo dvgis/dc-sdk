@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-30 16:52:34
+ * @Last Modified time: 2020-04-10 23:15:07
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -36,7 +36,7 @@ DC.Tileset = class extends Overlay {
    * @param {*} layer
    * Overrides parent methods
    */
-  _addCallback(layer) {
+  _addHandler(layer) {
     this._layer = layer
     this._delegate.readyPromise.then(tileset => {
       this._layer.delegate.add(tileset)
@@ -49,7 +49,7 @@ DC.Tileset = class extends Overlay {
   /**
    * Overrides parent methods
    */
-  _removeCallback() {
+  _removeHandler() {
     if (this._layer) {
       this._delegate.readyPromise.then(tileset => {
         this._layer.delegate.remove(tileset)

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 19:34:55
+ * @Last Modified time: 2020-04-11 11:37:23
  */
 import Cesium from '@/namespace'
 import Event from './Event'
@@ -14,10 +14,10 @@ class LayerEvent extends Event {
   }
 
   _registerEvent() {
-    for (let key in DC.LayerEventType) {
+    Object.keys(DC.LayerEventType).forEach(key => {
       let type = DC.LayerEventType[key]
-      this._eventCache[type] = new Cesium.Event()
-    }
+      this._cache[type] = new Cesium.Event()
+    })
   }
 }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 01:23:47
+ * @Last Modified time: 2020-04-10 23:14:14
  */
 
 import Cesium from '@/namespace'
@@ -47,19 +47,7 @@ DC.Point = class extends Overlay {
     this._delegate.position = new Cesium.CallbackProperty(time => {
       return DC.T.transformWSG84ToCartesian(this._position)
     })
-    /**
-     * set the orientation
-     */
-    this._delegate.orientation = new Cesium.CallbackProperty(time => {
-      return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWSG84ToCartesian(this._position),
-        new Cesium.HeadingPitchRoll(
-          Cesium.Math.toRadians(this._position.heading),
-          Cesium.Math.toRadians(this._position.pitch),
-          Cesium.Math.toRadians(this._position.roll)
-        )
-      )
-    })
+
     /**
      *  initialize the Overlay parameter
      */

@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 16:53:08
+ * @Last Modified time: 2020-04-11 11:55:18
  */
 class Event {
   constructor() {
-    this._eventCache = {}
+    this._cache = {}
   }
 
   /**
@@ -104,7 +104,7 @@ class Event {
    * @param {*} type
    */
   getEvent(type) {
-    return this._eventCache[type] || undefined
+    return this._cache[type] || undefined
   }
 }
 

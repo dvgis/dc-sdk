@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 09:42:29
+ * @Last Modified time: 2020-04-11 11:48:54
  */
 
 import Cesium from '@/namespace'
@@ -39,50 +39,48 @@ class ViewerOption {
   }
 
   _setSceneOption() {
-    this._viewer.scene.skyAtmosphere.show = Cesium.defaultValue(
+    let scene = this._viewer.scene
+    scene.skyAtmosphere.show = Cesium.defaultValue(
       this._options.showAtmosphere,
       true
     )
-    this._viewer.scene.sun.show = Cesium.defaultValue(
-      this._options.showSun,
-      true
-    )
-    this._viewer.scene.moon.show = Cesium.defaultValue(
-      this._options.showMoon,
-      true
-    )
+    scene.sun.show = Cesium.defaultValue(this._options.showSun, true)
 
-    this._viewer.scene.skyBox.show = Cesium.defaultValue(
-      this._options.showSkyBox,
-      true
-    )
+    scene.moon.show = Cesium.defaultValue(this._options.showMoon, true)
 
-    this._viewer.scene.postProcessStages.fxaa.enabled = Cesium.defaultValue(
+    scene.skyBox.show = Cesium.defaultValue(this._options.showSkyBox, true)
+
+    scene.postProcessStages.fxaa.enabled = Cesium.defaultValue(
       this._options.enableFxaa,
       false
     )
 
-    this._viewer.scene.screenSpaceCameraController.enableRotate = Cesium.defaultValue(
+    scene.screenSpaceCameraController.enableRotate = Cesium.defaultValue(
       this._options.enableRotate,
       true
     )
-    this._viewer.scene.screenSpaceCameraController.enableTilt = Cesium.defaultValue(
+
+    scene.screenSpaceCameraController.enableTilt = Cesium.defaultValue(
       this._options.enableTilt,
       true
     )
-    this._viewer.scene.screenSpaceCameraController.enableTranslate = Cesium.defaultValue(
+
+    scene.screenSpaceCameraController.enableTranslate = Cesium.defaultValue(
       this._options.enableTranslate,
       true
     )
-    this._viewer.scene.screenSpaceCameraController.enableZoom = Cesium.defaultValue(
+
+    scene.screenSpaceCameraController.enableZoom = Cesium.defaultValue(
       this._options.enableZoom,
       true
     )
-    this._viewer.scene.screenSpaceCameraController.maximumZoomDistance = Cesium.defaultValue(
+
+    scene.screenSpaceCameraController.maximumZoomDistance = Cesium.defaultValue(
       this._options.maxZoomDistance,
       40489014.0
     )
-    this._viewer.scene.screenSpaceCameraController.minimumZoomDistance = Cesium.defaultValue(
+
+    scene.screenSpaceCameraController.minimumZoomDistance = Cesium.defaultValue(
       this._options.minZoomDistance,
       1.0
     )
@@ -91,16 +89,16 @@ class ViewerOption {
   }
 
   _setGlobeOption() {
-    this._viewer.scene.globe.show = Cesium.defaultValue(
-      this._options.showGlobe,
-      true
-    )
-    this._viewer.scene.globe.enableLighting = Cesium.defaultValue(
+    let globe = this._viewer.scene.globe
+
+    globe.show = Cesium.defaultValue(this._options.showGlobe, true)
+
+    globe.enableLighting = Cesium.defaultValue(
       this._options.enableLighting,
       false
     )
 
-    this._viewer.scene.globe.depthTestAgainstTerrain = Cesium.defaultValue(
+    globe.depthTestAgainstTerrain = Cesium.defaultValue(
       this._options.undergroundMode,
       false
     )

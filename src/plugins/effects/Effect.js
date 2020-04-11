@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-28 22:37:18
+ * @Last Modified time: 2020-04-10 23:16:43
  */
 
 import EffectEvent from '@/core/event/EffectEvent'
@@ -15,8 +15,8 @@ class Effect {
     this._state = undefined
     this._effectEvent = new EffectEvent()
     this.type = undefined
-    this.on(DC.EffectEventType.ADD, this._addCallback, this)
-    this.on(DC.EffectEventType.REMOVE, this._removeCallback, this)
+    this.on(DC.EffectEventType.ADD, this._addHandler, this)
+    this.on(DC.EffectEventType.REMOVE, this._removeHandler, this)
   }
 
   get id() {
@@ -37,7 +37,7 @@ class Effect {
    * @param {*} viewer
    * 效果添加的回调函数,
    */
-  _addCallback(viewer) {
+  _addHandler(viewer) {
     this._viewer = viewer
     this._prepareDelegate()
     if (this._delegate) {
@@ -49,7 +49,7 @@ class Effect {
   /**
    * 效果添加的回调函数
    */
-  _removeCallback() {
+  _removeHandler() {
     if ((this._viewer, this._delegate)) {
       this._viewer.delegate.scene.postProcessStages.remove(this._delegate)
       this._delegate = undefined

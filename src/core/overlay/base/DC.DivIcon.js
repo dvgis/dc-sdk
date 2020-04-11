@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-07 13:46:49
+ * @Last Modified time: 2020-04-10 23:13:50
  */
 
 import Overlay from '@/core/overlay/Overlay'
@@ -58,7 +58,7 @@ DC.DivIcon = class extends Overlay {
    * @param {*} layer
    * Overrides parent methods
    */
-  _addCallback(layer) {
+  _addHandler(layer) {
     this._layer = layer
     this._layer.delegate.appendChild(this._delegate)
     this._delegate.addEventListener('click', e => {
@@ -74,10 +74,9 @@ DC.DivIcon = class extends Overlay {
   /**
    * Overrides parent methods
    */
-  _removeCallback() {
+  _removeHandler() {
     if (this._layer) {
       this._layer.delegate.removeChild(this._delegate)
-      this._overlayEvent()
       this._state = DC.OverlayState.REMOVED
     }
   }

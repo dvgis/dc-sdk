@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-10 17:02:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 17:07:09
+ * @Last Modified time: 2020-04-10 23:25:55
  */
 import Cesium from '@/namespace'
 
@@ -39,8 +39,6 @@ DC.SceneEventType = {
 
 DC.LayerEventType = {
   ...baseEventType,
-  ADD_OVERLAY: 'addOverlay',
-  REMOVE_OVERLAY: 'removeOverlay',
   CLEAR: 'clear'
 }
 
@@ -54,5 +52,6 @@ DC.EffectEventType = {
 
 DC.RoamingEventType = {
   ...baseEventType,
+  TICK: 'tick',
   ACTIVE: 'active'
 }

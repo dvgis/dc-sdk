@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 20:36:13
+ * @Last Modified time: 2020-04-11 11:44:02
  */
 
 import Cesium from '@/namespace'
@@ -15,7 +15,7 @@ DC.HtmlLayer = class extends Layer {
     this._delegate.setAttribute('id', this._id)
     this._state = DC.LayerState.INITIALIZED
     this.type = DC.LayerType.HTML
-    this._renderCallback = undefined
+    this._renderRemoveCallback = undefined
   }
 
   set show(show) {
@@ -29,15 +29,15 @@ DC.HtmlLayer = class extends Layer {
   /**
    *
    * @param {*} veiwer
-   * the layer added callback function
+   * the layer added handler function
    * subclasses need to be overridden
    */
 
-  _addCallback(viewer) {
+  _addHandler(viewer) {
     this._viewer = viewer
     this._viewer.dcContainer.appendChild(this._delegate)
     let scene = this._viewer.scene
-    this._renderCallback = scene.postRender.addEventListener(() => {
+    this._renderRemoveCallback = scene.postRender.addEventListener(() => {
       this.eachOverlay(item => {
         if (item && item.position) {
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
@@ -52,11 +52,11 @@ DC.HtmlLayer = class extends Layer {
   }
 
   /**
-   * the layer removed callback function
+   * the layer removed handler function
    * subclasses need to be overridden
    */
-  _removeCallback() {
-    this._renderCallback()
+  _removeHandler() {
+    this._renderRemoveCallback && this._renderRemoveCallback()
     this._viewer.dcContainer.removeChild(this._delegate)
     this._state = DC.LayerState.REMOVED
   }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 11:48:20
+ * @Last Modified time: 2020-04-11 11:36:16
  */
 import Cesium from '@/namespace'
 import Event from './Event'
@@ -14,10 +14,10 @@ class EffectEvent extends Event {
   }
 
   _registerEvent() {
-    for (let key in DC.EffectEventType) {
+    Object.keys(DC.EffectEventType).forEach(key => {
       let type = DC.EffectEventType[key]
-      this._eventCache[type] = new Cesium.Event()
-    }
+      this._cache[type] = new Cesium.Event()
+    })
   }
 }
 

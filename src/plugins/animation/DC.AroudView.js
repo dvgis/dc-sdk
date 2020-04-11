@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-02 23:14:20
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 13:36:39
+ * @Last Modified time: 2020-04-10 23:18:36
  */
 
 import Cesium from '@/namespace'
@@ -25,7 +25,7 @@ DC.AroundView = class {
 
   _start() {
     this._viewer.clock.currentTime = this._startTime.clone()
-    this._viewer.clock.onTick.addEventListener(this._onTickHandler, this)
+    this._viewer.on(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
   }
 
   _onTickHandler() {
@@ -46,7 +46,7 @@ DC.AroundView = class {
         this._stopTime
       ) >= 0
     ) {
-      this._viewer.clock.onTick.removeEventListener(this._onTickHandler, this)
+      this._viewer.off(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
       this._options.callback &&
         this._options.callback.call(this._options.context || this)
     }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 12:32:11
+ * @Last Modified time: 2020-04-10 22:55:22
  */
 
 import Cesium from '@/namespace'
@@ -60,10 +60,6 @@ DC.Viewer = class {
     })
     this._layerCache = {}
     this._effectCache = {}
-    this.on(DC.ViewerEventType.ADD_LAYER, this._addLayerCallback, this) //Initialize layer add event
-    this.on(DC.ViewerEventType.REMOVE_LAYER, this._removeLayerCallback, this) //Initialize layer remove event
-    this.on(DC.ViewerEventType.ADD_EFFECT, this._addEffectCallback, this) //Initialize effect add event
-    this.on(DC.ViewerEventType.REMOVE_EFFECT, this._removeEffectCallback, this) //Initialize effect remove event
     /**
      * Add default components
      */
@@ -153,7 +149,7 @@ DC.Viewer = class {
     return position
   }
 
-  _addLayerCallback(layer) {
+  _addLayer(layer) {
     if (layer && layer.layerEvent && layer.state !== DC.LayerState.ADDED) {
       !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
       layer.layerEvent.fire(DC.LayerEventType.ADD, this)
@@ -161,7 +157,7 @@ DC.Viewer = class {
     }
   }
 
-  _removeLayerCallback(layer) {
+  _removeLayer(layer) {
     if (layer && layer.layerEvent && layer.state !== DC.LayerState.REMOVED) {
       layer.layerEvent.fire(DC.LayerEventType.REMOVE, this)
       if (
@@ -173,7 +169,7 @@ DC.Viewer = class {
     }
   }
 
-  _addEffectCallback(effect) {
+  _addEffect(effect) {
     if (effect && effect.effectEvent && effect.state !== DC.EffectState.ADDED) {
       !this._effectCache[effect.type] && (this._effectCache[effect.type] = {})
       effect.effectEvent.fire(DC.EffectEventType.ADD, this)
@@ -181,7 +177,7 @@ DC.Viewer = class {
     }
   }
 
-  _removeEffectCallback(effect) {
+  _removeEffect(effect) {
     if (
       effect &&
       effect.effectEvent &&
@@ -338,7 +334,7 @@ DC.Viewer = class {
    *
    */
   addLayer(layer) {
-    this._viewerEvent.fire(DC.ViewerEventType.ADD_LAYER, layer)
+    this._addLayer(layer)
     return this
   }
 
@@ -349,7 +345,7 @@ DC.Viewer = class {
    *
    */
   removeLayer(layer) {
-    this._viewerEvent.fire(DC.ViewerEventType.REMOVE_LAYER, layer)
+    this._removeLayer(layer)
     return this
   }
 
@@ -412,7 +408,7 @@ DC.Viewer = class {
    * @param {*} effect
    */
   addEffect(effect) {
-    this._viewerEvent.fire(DC.ViewerEventType.ADD_EFFECT, effect)
+    this._addEffect(effect)
     return this
   }
 
@@ -421,7 +417,7 @@ DC.Viewer = class {
    * @param {*} effect
    */
   removeEffect(effect) {
-    this._viewerEvent.fire(DC.ViewerEventType.REMOVE_EFFECT, effect)
+    this._removeEffect(effect)
     return this
   }
 
