@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 23:14:27
+ * @Last Modified time: 2020-04-14 19:04:16
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -84,10 +84,7 @@ DC.Polygon = class extends Overlay {
     return result
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      *  initialize the Overlay parameter
      */
@@ -97,9 +94,6 @@ DC.Polygon = class extends Overlay {
         return this._prepareHierarchy()
       })
     }
-
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

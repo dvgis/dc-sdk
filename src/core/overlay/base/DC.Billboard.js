@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-27 15:08:43
+ * @Last Modified time: 2020-04-14 19:04:02
  */
 
 import Cesium from '@/namespace'
@@ -49,10 +49,7 @@ DC.Billboard = class extends Overlay {
     return this._size
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      * set the location
      */
@@ -74,8 +71,6 @@ DC.Billboard = class extends Overlay {
         return this._size[1] || 32
       })
     }
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

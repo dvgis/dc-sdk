@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-11 12:58:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 12:59:25
+ * @Last Modified time: 2020-04-14 19:05:21
  */
 
 import Cesium from '@/namespace'
@@ -14,7 +14,7 @@ DC.Corridor = class extends Overlay {
       !positions ||
       (typeof positions !== 'string' && !Array.isArray(positions))
     ) {
-      throw new Error('the positions invalid')
+      throw new Error('DC.Corridor: the positions invalid')
     }
     super()
     this._positions = DC.P.parsePositions(positions)
@@ -24,6 +24,12 @@ DC.Corridor = class extends Overlay {
   }
 
   set positions(positions) {
+    if (
+      !positions ||
+      (typeof positions !== 'string' && !Array.isArray(positions))
+    ) {
+      throw new Error('DC.Corridor: the positions invalid')
+    }
     this._positions = DC.P.parsePositions(positions)
   }
 
@@ -31,10 +37,7 @@ DC.Corridor = class extends Overlay {
     return this._positions
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      *  initialize the Overlay parameter
      */
@@ -44,8 +47,6 @@ DC.Corridor = class extends Overlay {
         return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
       })
     }
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

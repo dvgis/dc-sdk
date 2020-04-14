@@ -1,25 +1,26 @@
 /*
  * @Author: Caven
- * @Date: 2020-02-25 18:28:36
+ * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:33
+ * @Last Modified time: 2020-04-14 19:05:31
  */
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
 
-DC.Wall = class extends Overlay {
-  constructor(positions) {
+DC.PolylineVolume = class extends Overlay {
+  constructor(positions, shape) {
     if (
       !positions ||
       (typeof positions !== 'string' && !Array.isArray(positions))
     ) {
-      throw new Error('DC.Wall: the positions invalid')
+      throw new Error('DC.PolylineVolume: the positions invalid')
     }
     super()
     this._positions = DC.P.parsePositions(positions)
+    this._shape = shape
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.WALL
+    this.type = DC.OverlayType.POLYLINE_VOLUME
   }
 
   set positions(positions) {
@@ -27,7 +28,7 @@ DC.Wall = class extends Overlay {
       !positions ||
       (typeof positions !== 'string' && !Array.isArray(positions))
     ) {
-      throw new Error('DC.Wall: the positions invalid')
+      throw new Error('DC.PolylineVolume: the positions invalid')
     }
     this._positions = DC.P.parsePositions(positions)
   }
@@ -36,14 +37,28 @@ DC.Wall = class extends Overlay {
     return this._positions
   }
 
+  set shape(shape) {
+    if (!shape || !Array.isArray(shape)) {
+      throw new Error('DC.PolylineVolume: the shape invalid')
+    }
+    this._shape = shape
+  }
+
+  get shape() {
+    return this._shape
+  }
+
   _mountedHook() {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.wall = {
+    this._delegate.polylineVolume = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {
         return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+      }),
+      shape: new Cesium.CallbackProperty(time => {
+        return this._shape
       })
     }
   }
@@ -57,9 +72,10 @@ DC.Wall = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.wall && DC.Util.merge(this._delegate.wall, this._style)
+    this._delegate.polylineVolume &&
+      DC.Util.merge(this._delegate.polylineVolume, this._style)
     return this
   }
 }
 
-DC.OverlayType.WALL = 'wall'
+DC.OverlayType.POLYLINE_VOLUME = 'polylineVolume'

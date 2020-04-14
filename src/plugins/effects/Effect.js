@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 23:16:43
+ * @Last Modified time: 2020-04-14 19:05:50
  */
 
-import EffectEvent from '@/core/event/EffectEvent'
+import { EffectEvent } from '@/core/event'
 
 class Effect {
   constructor(id) {

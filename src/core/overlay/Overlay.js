@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 23:15:08
+ * @Last Modified time: 2020-04-14 19:04:33
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -54,10 +54,20 @@ class Overlay {
     return this._state
   }
 
+  /**
+   * The hook for added
+   */
+  _addedHook() {
+    if (this._delegate) {
+      this._delegate.layer = this._layer
+      this._delegate.overlayId = this._id
+    }
+  }
+
   /***
    *
    */
-  _prepareDelegate() {}
+  _mountedHook() {}
 
   /**
    *
@@ -65,9 +75,10 @@ class Overlay {
    */
   _addHandler(layer) {
     this._layer = layer
-    this._prepareDelegate()
+    this._mountedHook && this._mountedHook()
     if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
       this._layer.delegate.entities.add(this._delegate)
+      this._addedHook && this._addedHook()
       this._state = DC.OverlayState.ADDED
     }
   }

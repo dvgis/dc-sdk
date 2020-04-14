@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 23:14:14
+ * @Last Modified time: 2020-04-14 19:04:13
  */
 
 import Cesium from '@/namespace'
@@ -37,10 +37,7 @@ DC.Point = class extends Overlay {
     return this._position
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      * set the location
      */
@@ -55,8 +52,6 @@ DC.Point = class extends Overlay {
       ...DEF_STYLE,
       ...this._style
     }
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

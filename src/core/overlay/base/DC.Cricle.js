@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-22 00:39:02
+ * @Last Modified time: 2020-04-14 19:04:02
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -49,10 +49,7 @@ DC.Circle = class extends Overlay {
     return this._rotateAmount
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      * set the location
      */
@@ -72,6 +69,7 @@ DC.Circle = class extends Overlay {
         )
       )
     })
+
     /**
      *  initialize the Overlay parameter
      */
@@ -86,15 +84,13 @@ DC.Circle = class extends Overlay {
       stRotation: new Cesium.CallbackProperty(time => {
         if (this._rotateAmount > 0) {
           this._stRotation += this._rotateAmount
-          if (this._stRotation === 360) {
+          if (this._stRotation >= 360) {
             this._stRotation = 0
           }
         }
         return this._stRotation
       })
     }
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

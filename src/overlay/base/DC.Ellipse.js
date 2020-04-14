@@ -1,30 +1,29 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-06 15:03:25
+ * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:24
+ * @Last Modified time: 2020-04-14 19:05:27
  */
-
-import Overlay from '../Overlay'
 import Cesium from '@/namespace'
+import Overlay from '@/core/overlay/Overlay'
 
-DC.Model = class extends Overlay {
-  constructor(position, modelUrl) {
+DC.Ellipse = class extends Overlay {
+  constructor(position, semiMajorAxis, semiMinorAxis) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Ellipse: the position invalid')
     }
     super()
     this._position = position
-    this._modelUrl = modelUrl
+    this._semiMajorAxis = semiMajorAxis
+    this._semiMinorAxis = semiMinorAxis
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this._rotateAmount = 0
-    this.type = DC.OverlayType.MODEL
+    this.type = DC.OverlayType.ELLIPSE
   }
 
   set position(position) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Ellipse: the position invalid')
     }
     this._position = position
   }
@@ -33,20 +32,20 @@ DC.Model = class extends Overlay {
     return this._position
   }
 
-  set modelUrl(modelUrl) {
-    this._modelUrl = modelUrl
+  set semiMajorAxis(semiMajorAxis) {
+    this._semiMajorAxis = semiMajorAxis
   }
 
-  get modelUrl() {
-    return this._modelUrl
+  get semiMajorAxis() {
+    return this._semiMajorAxis
   }
 
-  set rotateAmount(amount) {
-    this._rotateAmount = amount
+  set semiMinorAxis(semiMinorAxis) {
+    this._semiMinorAxis = semiMinorAxis
   }
 
-  get rotateAmount() {
-    return this._rotateAmount
+  get semiMinorAxis() {
+    return this._semiMinorAxis
   }
 
   _mountedHook() {
@@ -60,12 +59,6 @@ DC.Model = class extends Overlay {
      * set the orientation
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
-      if (this._rotateAmount > 0) {
-        this._position.heading += this._rotateAmount
-        if (this._position.heading === 360) {
-          this._position.heading = 0
-        }
-      }
       return Cesium.Transforms.headingPitchRollQuaternion(
         DC.T.transformWSG84ToCartesian(this._position),
         new Cesium.HeadingPitchRoll(
@@ -78,25 +71,15 @@ DC.Model = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.model = {
+    this._delegate.ellipse = {
       ...this._style,
-      uri: new Cesium.CallbackProperty(time => {
-        return this._modelUrl
+      semiMajorAxis: new Cesium.CallbackProperty(time => {
+        return this._semiMajorAxis
+      }),
+      semiMinorAxis: new Cesium.CallbackProperty(time => {
+        return this._semiMinorAxis
       })
     }
-  }
-
-  /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  setLabel(text, textStyle) {
-    this._delegate.label = {
-      ...textStyle,
-      text: text
-    }
-    return this
   }
 
   /**
@@ -108,8 +91,9 @@ DC.Model = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.model && DC.Util.merge(this._delegate.model, this._style)
+    this._delegate.ellipse && DC.Util.merge(this._delegate.ellipse, this._style)
+    return this
   }
 }
 
-DC.OverlayType.MODEL = 'model'
+DC.OverlayType.ELLIPSE = 'ellipse'

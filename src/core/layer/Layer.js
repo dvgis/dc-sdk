@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:52:22
+ * @Last Modified time: 2020-04-14 10:05:17
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -69,9 +69,9 @@ class Layer {
       return
     }
     if (this._delegate instanceof Cesium.PrimitiveCollection) {
-      this._viewer.delegate.scene.primitives.add(this._delegate)
+      this._viewer.scene.primitives.add(this._delegate)
     } else {
-      this._viewer.delegate.dataSources.add(this._delegate)
+      this._viewer.dataSources.add(this._delegate)
     }
     this._state = DC.LayerState.ADDED
   }
@@ -88,15 +88,15 @@ class Layer {
       this._cache = {}
       if (this._delegate instanceof Cesium.PrimitiveCollection) {
         this._delegate.removeAll()
-        this._viewer.delegate.scene.primitives.remove(this._delegate)
+        this._viewer.scene.primitives.remove(this._delegate)
       } else if (this._delegate.then) {
         this._delegate.then(dataSource => {
           dataSource.entities.removeAll()
         })
-        this._viewer.delegate.dataSources.remove(this._delegate)
+        this._viewer.dataSources.remove(this._delegate)
       } else {
         this._delegate.entities && this._delegate.entities.removeAll()
-        this._viewer.delegate.dataSources.remove(this._delegate)
+        this._viewer.dataSources.remove(this._delegate)
       }
       this._state = DC.LayerState.REMOVED
     }

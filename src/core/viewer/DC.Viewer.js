@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 22:55:22
+ * @Last Modified time: 2020-04-14 19:05:07
  */
 
 import Cesium from '@/namespace'
@@ -39,27 +39,36 @@ const DEF_OPTS = {
 DC.Viewer = class {
   constructor(id, options = {}) {
     if (!id || !document.getElementById(id)) {
-      throw new Error('the id is empty')
+      throw new Error('DC.Viewer：the id is empty')
     }
     this._delegate = new Cesium.Viewer(id, {
       ...options,
       ...DEF_OPTS
     }) // Initialize the viewer
+
+    /**
+     *  Register events
+     */
     new MouseEvent(this) // Register global mouse events
-    this._viewerOption = new ViewerOption(this) // Initialize the viewer option
-    this._cameraOption = new CameraOption(this) // Initialize the camera option
     this._viewerEvent = new ViewerEvent() // Register viewer events
     this._sceneEvent = new SceneEvent(this) // Register viewer events
+
+    this._viewerOption = new ViewerOption(this) // Initialize the viewer option
+    this._cameraOption = new CameraOption(this) // Initialize the camera option
+
     this._dcContainer = DC.DomUtil.create(
       'div',
       'dc-container',
       document.getElementById(id)
     ) //Register the custom container
+
     this._baseLayerPicker = new Cesium.BaseLayerPickerViewModel({
       globe: this._delegate.scene.globe
     })
+
     this._layerCache = {}
     this._effectCache = {}
+
     /**
      * Add default components
      */
@@ -71,12 +80,13 @@ DC.Viewer = class {
       mapSplit: new MapSplit(),
       locationBar: new LocationBar(),
       hawkeyeMap: new HawkeyeMap(),
-      compass: new Compass()
+      compass: new Compass(),
+      attribution: new Attribution()
     }
-    for (let key in this._comps) {
+
+    Object.keys(this._comps).forEach(key => {
       this.use(this._comps[key])
-    }
-    this.use(new Attribution())
+    })
   }
 
   get delegate() {
@@ -97,6 +107,10 @@ DC.Viewer = class {
 
   get canvas() {
     return this._delegate.scene.canvas
+  }
+
+  get dataSources() {
+    return this._delegate.dataSources
   }
 
   get clock() {
@@ -357,18 +371,19 @@ DC.Viewer = class {
    */
   getLayer(id) {
     let layer = undefined
-    for (let type in this._layerCache) {
+
+    Object.keys(this._layerCache).forEach(type => {
       let cache = this._layerCache[type]
-      for (let layerId in cache) {
+      Object.keys(cache).forEach(layerId => {
         if (layerId === id) {
           layer = cache[layerId]
           break
         }
-      }
+      })
       if (layer) {
         break
       }
-    }
+    })
     return layer
   }
 
@@ -377,12 +392,12 @@ DC.Viewer = class {
    */
   getLayers() {
     let result = []
-    for (let type in this._layerCache) {
+    Object.keys(this._layerCache).forEach(type => {
       let cache = this._layerCache[type]
-      for (let layerId in cache) {
+      Object.keys(cache).forEach(layerId => {
         result.push(cache[layerId])
-      }
-    }
+      })
+    })
     return result
   }
 
@@ -394,12 +409,12 @@ DC.Viewer = class {
    *
    */
   eachLayer(method, context) {
-    for (let type in this._layerCache) {
+    Object.keys(this._layerCache).forEach(type => {
       let cache = this._layerCache[type]
-      for (let layerId in cache) {
+      Object.keys(cache).forEach(layerId => {
         method.call(context, cache[layerId])
-      }
-    }
+      })
+    })
     return this
   }
 

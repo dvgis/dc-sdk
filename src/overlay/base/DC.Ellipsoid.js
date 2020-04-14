@@ -1,30 +1,28 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-06 15:03:25
+ * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:24
+ * @Last Modified time: 2020-04-14 14:13:29
  */
-
-import Overlay from '../Overlay'
 import Cesium from '@/namespace'
+import Overlay from '@/core/overlay/Overlay'
 
-DC.Model = class extends Overlay {
-  constructor(position, modelUrl) {
+DC.Ellipsoid = class extends Overlay {
+  constructor(position, radius) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Ellipsoid: the position invalid')
     }
     super()
     this._position = position
-    this._modelUrl = modelUrl
+    this._radius = radius
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this._rotateAmount = 0
-    this.type = DC.OverlayType.MODEL
+    this.type = DC.OverlayType.ELLIPSOID
   }
 
   set position(position) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Ellipsoid：the position invalid')
     }
     this._position = position
   }
@@ -33,20 +31,12 @@ DC.Model = class extends Overlay {
     return this._position
   }
 
-  set modelUrl(modelUrl) {
-    this._modelUrl = modelUrl
+  set radius(radius) {
+    this._radius = radius
   }
 
-  get modelUrl() {
-    return this._modelUrl
-  }
-
-  set rotateAmount(amount) {
-    this._rotateAmount = amount
-  }
-
-  get rotateAmount() {
-    return this._rotateAmount
+  get radius() {
+    return this._redius
   }
 
   _mountedHook() {
@@ -60,12 +50,6 @@ DC.Model = class extends Overlay {
      * set the orientation
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
-      if (this._rotateAmount > 0) {
-        this._position.heading += this._rotateAmount
-        if (this._position.heading === 360) {
-          this._position.heading = 0
-        }
-      }
       return Cesium.Transforms.headingPitchRollQuaternion(
         DC.T.transformWSG84ToCartesian(this._position),
         new Cesium.HeadingPitchRoll(
@@ -78,25 +62,12 @@ DC.Model = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.model = {
+    this._delegate.ellipsoid = {
       ...this._style,
-      uri: new Cesium.CallbackProperty(time => {
-        return this._modelUrl
+      radii: new Cesium.CallbackProperty(time => {
+        return this._radius
       })
     }
-  }
-
-  /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  setLabel(text, textStyle) {
-    this._delegate.label = {
-      ...textStyle,
-      text: text
-    }
-    return this
   }
 
   /**
@@ -108,8 +79,10 @@ DC.Model = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.model && DC.Util.merge(this._delegate.model, this._style)
+    this._delegate.ellipsoid &&
+      DC.Util.merge(this._delegate.ellipsoid, this._style)
+    return this
   }
 }
 
-DC.OverlayType.MODEL = 'model'
+DC.OverlayType.ELLIPSOID = 'ellipsoid'

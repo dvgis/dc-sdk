@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:16:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-29 13:19:25
+ * @Last Modified time: 2020-04-14 14:53:31
  */
 
 import Cesium from '@/namespace'
 import Layer from './Layer'
+
 /**
  * TilesetLayer is used to add various tileset
  */

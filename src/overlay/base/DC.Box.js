@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-25 18:28:36
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 12:54:37
+ * @Last Modified time: 2020-04-14 19:05:19
  */
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
@@ -10,7 +10,7 @@ import Overlay from '@/core/overlay/Overlay'
 DC.Box = class extends Overlay {
   constructor(position, length, width, height) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Box: the position invalid')
     }
     super()
     this._position = position
@@ -24,7 +24,7 @@ DC.Box = class extends Overlay {
 
   set position(position) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Box: the position invalid')
     }
     this._position = position
   }
@@ -57,10 +57,7 @@ DC.Box = class extends Overlay {
     return this._height
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      * set the location
      */
@@ -89,8 +86,6 @@ DC.Box = class extends Overlay {
         return new Cesium.Cartesian3(this._length, this._width, this._height)
       })
     }
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

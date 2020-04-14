@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:44:02
+ * @Last Modified time: 2020-04-14 19:04:40
  */
 
 import Cesium from '@/namespace'
@@ -62,11 +62,11 @@ DC.HtmlLayer = class extends Layer {
   }
 
   clear() {
-    this._cache = {}
     let childs = this._delegate.childNodes
     for (let i = childs.length - 1; i >= 0; i--) {
       this._delegate.removeChild(childs[i])
     }
+    this._cache = {}
     this._state = DC.LayerState.CLEARED
     return this
   }

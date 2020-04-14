@@ -1,30 +1,30 @@
 /*
  * @Author: Caven
- * @Date: 2020-01-06 15:03:25
+ * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:24
+ * @Last Modified time: 2020-04-14 19:05:24
  */
-
-import Overlay from '../Overlay'
 import Cesium from '@/namespace'
+import Overlay from '@/core/overlay/Overlay'
 
-DC.Model = class extends Overlay {
-  constructor(position, modelUrl) {
+DC.Cylinder = class extends Overlay {
+  constructor(position, length, topRadius, bottomRadius) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Cylinder：the position invalid')
     }
     super()
     this._position = position
-    this._modelUrl = modelUrl
+    this._length = length
+    this._topRadius = topRadius
+    this._bottomRadius = bottomRadius
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
-    this._rotateAmount = 0
-    this.type = DC.OverlayType.MODEL
+    this.type = DC.OverlayType.CYLINDER
   }
 
   set position(position) {
     if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+      throw new Error('DC.Cylinder：the position invalid')
     }
     this._position = position
   }
@@ -33,20 +33,28 @@ DC.Model = class extends Overlay {
     return this._position
   }
 
-  set modelUrl(modelUrl) {
-    this._modelUrl = modelUrl
+  set length(length) {
+    this._length = length
   }
 
-  get modelUrl() {
-    return this._modelUrl
+  get length() {
+    return this._length
   }
 
-  set rotateAmount(amount) {
-    this._rotateAmount = amount
+  set topRadius(topRadius) {
+    this._topRadius = topRadius
   }
 
-  get rotateAmount() {
-    return this._rotateAmount
+  get topRadius() {
+    return this._topRadius
+  }
+
+  set bottomRadius(bottomRadius) {
+    this._bottomRadius = bottomRadius
+  }
+
+  get bottomRadius() {
+    return this._bottomRadius
   }
 
   _mountedHook() {
@@ -60,12 +68,6 @@ DC.Model = class extends Overlay {
      * set the orientation
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
-      if (this._rotateAmount > 0) {
-        this._position.heading += this._rotateAmount
-        if (this._position.heading === 360) {
-          this._position.heading = 0
-        }
-      }
       return Cesium.Transforms.headingPitchRollQuaternion(
         DC.T.transformWSG84ToCartesian(this._position),
         new Cesium.HeadingPitchRoll(
@@ -78,25 +80,18 @@ DC.Model = class extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.model = {
+    this._delegate.cylinder = {
       ...this._style,
-      uri: new Cesium.CallbackProperty(time => {
-        return this._modelUrl
+      topRadius: new Cesium.CallbackProperty(time => {
+        return this._topRadius
+      }),
+      bottomRadius: new Cesium.CallbackProperty(time => {
+        return this._bottomRadius
+      }),
+      length: new Cesium.CallbackProperty(time => {
+        return this._length
       })
     }
-  }
-
-  /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  setLabel(text, textStyle) {
-    this._delegate.label = {
-      ...textStyle,
-      text: text
-    }
-    return this
   }
 
   /**
@@ -108,8 +103,10 @@ DC.Model = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.model && DC.Util.merge(this._delegate.model, this._style)
+    this._delegate.cylinder &&
+      DC.Util.merge(this._delegate.cylinder, this._style)
+    return this
   }
 }
 
-DC.OverlayType.MODEL = 'model'
+DC.OverlayType.CYLINDER = 'cylinder'

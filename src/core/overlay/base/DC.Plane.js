@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 23:14:02
+ * @Last Modified time: 2020-04-14 19:04:09
  */
 
 import Cesium from '@/namespace'
@@ -54,10 +54,7 @@ DC.Plane = class extends Overlay {
     this._plane = new Cesium.Plane(direction, 0.0)
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      * set the location
      */
@@ -90,8 +87,6 @@ DC.Plane = class extends Overlay {
         return { x: this._width, y: this._height }
       })
     }
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

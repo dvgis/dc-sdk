@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 23:14:40
+ * @Last Modified time: 2020-04-14 19:04:18
  */
 
 import Overlay from '../Overlay'
@@ -14,7 +14,7 @@ DC.Polyline = class extends Overlay {
       !positions ||
       (typeof positions !== 'string' && !Array.isArray(positions))
     ) {
-      throw new Error('the positions invalid')
+      throw new Error('DC.Polyline: the positions invalid')
     }
     super()
     this._positions = DC.P.parsePositions(positions)
@@ -42,10 +42,7 @@ DC.Polyline = class extends Overlay {
     return DC.Math.getDistance(this._positions)
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      *  initialize the Overlay parameter
      */
@@ -55,9 +52,6 @@ DC.Polyline = class extends Overlay {
         return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
       })
     }
-
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-27 15:08:39
+ * @Last Modified time: 2020-04-14 19:04:07
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -39,16 +39,14 @@ DC.Label = class extends Overlay {
     return this._text
   }
 
-  /**
-   * prepare entity
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     /**
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
       return DC.T.transformWSG84ToCartesian(this._position)
     })
+
     /**
      *  initialize the Overlay parameter
      */
@@ -58,8 +56,6 @@ DC.Label = class extends Overlay {
         return this._text
       })
     }
-    this._delegate.layer = this._layer
-    this._delegate.overlayId = this._id
   }
 
   /**
