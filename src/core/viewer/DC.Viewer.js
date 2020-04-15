@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:07
+ * @Last Modified time: 2020-04-15 10:35:24
  */
 
 import Cesium from '@/namespace'
@@ -377,12 +377,8 @@ DC.Viewer = class {
       Object.keys(cache).forEach(layerId => {
         if (layerId === id) {
           layer = cache[layerId]
-          break
         }
       })
-      if (layer) {
-        break
-      }
     })
     return layer
   }
