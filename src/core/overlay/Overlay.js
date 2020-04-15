@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:22:36
+ * @Last Modified time: 2020-04-15 16:20:24
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -65,7 +65,7 @@ class Overlay {
   }
 
   /***
-   *
+   * The hook for mounted
    */
   _mountedHook() {}
 

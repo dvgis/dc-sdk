@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-13 20:19:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-21 12:46:56
+ * @Last Modified time: 2020-04-15 16:23:23
  */
 import Layer from '@/core/layer/Layer'
 
@@ -36,11 +36,11 @@ DC.MapvLayer = class extends Layer {
   /**
    *
    * @param {*} veiwer
-   * the layer added callback function
+   * the layer added handler function
    * subclasses need to be overridden
    */
 
-  _addCallback(viewer) {
+  _addHandler(viewer) {
     this._viewer = viewer
     this._delegate = new mapv.cesiumMapLayer(
       this._viewer.delegate,
@@ -52,14 +52,18 @@ DC.MapvLayer = class extends Layer {
   }
 
   /**
-   * the layer removed callback function
+   * the layer removed handler function
    * subclasses need to be overridden
    */
-  _removeCallback() {
+  _removeHandler() {
     this._delegate && this._delegate.remove()
     this._state = DC.LayerState.REMOVED
   }
 
+  /**
+   *
+   * @param {*} dataSet
+   */
   setDataSet(dataSet) {
     this._dataSet = dataSet
     this._delegate &&

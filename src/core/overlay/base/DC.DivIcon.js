@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 13:32:34
+ * @Last Modified time: 2020-04-15 16:19:48
  */
 
 import Overlay from '@/core/overlay/Overlay'
@@ -16,14 +16,12 @@ DC.DivIcon = class extends Overlay {
     this._position = position
     this._delegate = DC.DomUtil.create('div', 'div-icon')
     this._delegate.setAttribute('id', this._id)
-    this._delegate.style.position = 'absolute'
-    this._delegate.style.top = '0'
-    this._delegate.style.left = '0'
-    if (content && typeof content === 'string') {
-      this._delegate.innerHTML = content
-    } else if (content && content instanceof Element) {
-      this._delegate.appendChild(content)
-    }
+    DC.Util.merge(this._delegate.style, {
+      position: 'absolute',
+      top: '0',
+      left: '0'
+    })
+    this.content = content
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.DIVICON
   }
@@ -43,6 +41,14 @@ DC.DivIcon = class extends Overlay {
 
   get position() {
     return this._position
+  }
+
+  set content(content) {
+    if (content && typeof content === 'string') {
+      this._delegate.innerHTML = content
+    } else if (content && content instanceof Element) {
+      this._delegate.appendChild(content)
+    }
   }
 
   _updateWindowCoord(windowCoord) {
@@ -81,6 +87,10 @@ DC.DivIcon = class extends Overlay {
     }
   }
 
+  /**
+   *
+   * @param {*} name
+   */
   addClass(name) {
     DC.DomUtil.addClass(this._delegate, name)
     return this
