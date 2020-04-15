@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-15 16:19:48
+ * @Last Modified time: 2020-04-15 20:48:09
  */
 
 import Overlay from '@/core/overlay/Overlay'
@@ -51,12 +51,40 @@ DC.DivIcon = class extends Overlay {
     }
   }
 
-  _updateWindowCoord(windowCoord) {
-    let x = windowCoord.x - this._delegate.offsetWidth / 2
-    let y = windowCoord.y - this._delegate.offsetHeight / 2
-    this._delegate.style.transform = `translate3d(${Math.round(
-      x
-    )}px,${Math.round(y)}px, 0)`
+  _updateStyle(style, distance) {
+    let translate3d = 'translate3d(0,0,0)'
+    if (style.transform) {
+      let x = style.transform.x - this._delegate.offsetWidth / 2
+      let y = style.transform.y - this._delegate.offsetHeight / 2
+      translate3d = `translate3d(${Math.round(x)}px,${Math.round(y)}px, 0)`
+    }
+
+    let scale3d = 'scale3d(1,1,1)'
+    let scaleByDistance = this._style.scaleByDistance
+    if (distance && scaleByDistance) {
+      let nearValue = scaleByDistance.nearValue
+      let farValue = scaleByDistance.farValue
+      let f = distance / scaleByDistance.far
+      if (distance < scaleByDistance.near) {
+        scale3d = `scale3d(${nearValue},${nearValue},1)`
+      } else if (distance > scaleByDistance.far) {
+        scale3d = `scale3d(${farValue},${farValue},1)`
+      } else {
+        let scale = farValue + f * (nearValue - farValue)
+        scale3d = `scale3d(${scale},${scale},1)`
+      }
+    }
+
+    let distanceDisplayCondition = this._style.distanceDisplayCondition
+    if (distance && distanceDisplayCondition) {
+      this.show = DC.Math.isBetween(
+        distance,
+        distanceDisplayCondition.near,
+        distanceDisplayCondition.far
+      )
+    }
+
+    this._delegate.style.transform = `${translate3d} ${scale3d}`
   }
 
   /**
@@ -91,8 +119,12 @@ DC.DivIcon = class extends Overlay {
    *
    * @param {*} name
    */
-  addClass(name) {
-    DC.DomUtil.addClass(this._delegate, name)
+  setStyle(style) {
+    if (Object.keys(style).length === 0) {
+      return this
+    }
+    this._style = style
+    style.className && DC.DomUtil.addClass(this._delegate, style.className)
     return this
   }
 }

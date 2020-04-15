@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:40
+ * @Last Modified time: 2020-04-15 20:59:42
  */
 
 import Cesium from '@/namespace'
@@ -38,13 +38,16 @@ DC.HtmlLayer = class extends Layer {
     this._viewer.dcContainer.appendChild(this._delegate)
     let scene = this._viewer.scene
     this._renderRemoveCallback = scene.postRender.addEventListener(() => {
+      let cameraPosition = this._viewer.camera.positionWC
       this.eachOverlay(item => {
         if (item && item.position) {
+          let position = DC.T.transformWSG84ToCartesian(item.position)
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
             scene,
-            DC.T.transformWSG84ToCartesian(item.position)
+            position
           )
-          windowCoord && item._updateWindowCoord(windowCoord)
+          let distance = Cesium.Cartesian3.distance(position, cameraPosition)
+          item._updateStyle({ transform: windowCoord }, distance)
         }
       })
     }, this)
