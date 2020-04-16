@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-02-25 18:28:36
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:19
+ * @Last Modified time: 2020-04-16 20:29:02
  */
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
 
 DC.Box = class extends Overlay {
   constructor(position, length, width, height) {
-    if (!position || !(position instanceof DC.Position)) {
+    if (!DC.Util.checkPosition(position)) {
       throw new Error('DC.Box: the position invalid')
     }
     super()
@@ -23,7 +23,7 @@ DC.Box = class extends Overlay {
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
+    if (!DC.Util.checkPosition(position)) {
       throw new Error('DC.Box: the position invalid')
     }
     this._position = position

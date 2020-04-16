@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:24
+ * @Last Modified time: 2020-04-16 20:28:41
  */
 
 import Overlay from '../Overlay'
@@ -10,8 +10,8 @@ import Cesium from '@/namespace'
 
 DC.Model = class extends Overlay {
   constructor(position, modelUrl) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Model: the position invalid')
     }
     super()
     this._position = position
@@ -23,8 +23,8 @@ DC.Model = class extends Overlay {
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Model: the position invalid')
     }
     this._position = position
   }

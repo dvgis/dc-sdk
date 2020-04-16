@@ -2,19 +2,19 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:02
+ * @Last Modified time: 2020-04-16 20:28:09
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
 DC.Circle = class extends Overlay {
   constructor(center, radius) {
-    if (!center || !(center instanceof DC.Position)) {
-      throw new Error('the center invalid')
+    if (!DC.Util.checkPosition(center)) {
+      throw new Error('DC.Circle: the center invalid')
     }
     super()
     this._center = center
-    this._radius = radius
+    this._radius = radius || 0
     this._delegate = new Cesium.Entity()
     this._rotateAmount = 0
     this._stRotation = 0
@@ -23,8 +23,8 @@ DC.Circle = class extends Overlay {
   }
 
   set center(center) {
-    if (!center || !(center instanceof DC.Position)) {
-      throw new Error('the center invalid')
+    if (!DC.Util.checkPosition(center)) {
+      throw new Error('DC.Circle: the center invalid')
     }
     this._center = center
   }

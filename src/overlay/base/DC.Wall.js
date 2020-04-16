@@ -2,17 +2,14 @@
  * @Author: Caven
  * @Date: 2020-02-25 18:28:36
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:33
+ * @Last Modified time: 2020-04-16 20:29:32
  */
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
 
 DC.Wall = class extends Overlay {
   constructor(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!DC.Util.checkPositions(positions)) {
       throw new Error('DC.Wall: the positions invalid')
     }
     super()
@@ -23,10 +20,7 @@ DC.Wall = class extends Overlay {
   }
 
   set positions(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!DC.Util.checkPositions(positions)) {
       throw new Error('DC.Wall: the positions invalid')
     }
     this._positions = DC.P.parsePositions(positions)

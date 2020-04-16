@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:29
+ * @Last Modified time: 2020-04-16 20:28:45
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -137,7 +137,7 @@ DC.Tileset = class extends Overlay {
    * @param {*} position
    */
   setPosition(position) {
-    if (!position || !position instanceof DC.Position) {
+    if (!DC.Util.checkPosition(position)) {
       return this
     }
     this._delegate.readyPromise.then(tileset => {

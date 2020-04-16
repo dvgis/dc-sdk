@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 22:11:07
+ * @Last Modified time: 2020-04-16 17:13:19
  */
 
 ;(function() {
@@ -86,5 +86,3 @@
     }
   }
 })()
-
-export default DC

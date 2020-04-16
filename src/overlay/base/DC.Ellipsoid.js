@@ -2,27 +2,27 @@
  * @Author: Caven
  * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 14:13:29
+ * @Last Modified time: 2020-04-16 20:29:20
  */
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
 
 DC.Ellipsoid = class extends Overlay {
   constructor(position, radius) {
-    if (!position || !(position instanceof DC.Position)) {
+    if (!DC.Util.checkPosition(position)) {
       throw new Error('DC.Ellipsoid: the position invalid')
     }
     super()
     this._position = position
-    this._radius = radius
+    this._radius = radius || 0
     this._delegate = new Cesium.Entity()
     this._state = DC.OverlayState.INITIALIZED
     this.type = DC.OverlayType.ELLIPSOID
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('DC.Ellipsoid：the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Ellipsoid: the position invalid')
     }
     this._position = position
   }

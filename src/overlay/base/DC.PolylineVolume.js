@@ -2,17 +2,14 @@
  * @Author: Caven
  * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:31
+ * @Last Modified time: 2020-04-16 20:29:27
  */
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
 
 DC.PolylineVolume = class extends Overlay {
   constructor(positions, shape) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!DC.Util.checkPositions(positions)) {
       throw new Error('DC.PolylineVolume: the positions invalid')
     }
     super()
@@ -24,10 +21,7 @@ DC.PolylineVolume = class extends Overlay {
   }
 
   set positions(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!DC.Util.checkPositions(positions)) {
       throw new Error('DC.PolylineVolume: the positions invalid')
     }
     this._positions = DC.P.parsePositions(positions)

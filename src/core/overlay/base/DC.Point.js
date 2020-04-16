@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:13
+ * @Last Modified time: 2020-04-16 20:28:21
  */
 
 import Cesium from '@/namespace'
@@ -16,8 +16,8 @@ const DEF_STYLE = {
 
 DC.Point = class extends Overlay {
   constructor(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Point: the position invalid')
     }
     super()
     this._position = position
@@ -27,8 +27,8 @@ DC.Point = class extends Overlay {
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Point: the position invalid')
     }
     this._position = position
   }

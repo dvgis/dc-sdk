@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-15 10:35:24
+ * @Last Modified time: 2020-04-16 20:28:55
  */
 
 import Cesium from '@/namespace'
@@ -370,17 +370,8 @@ DC.Viewer = class {
    *
    */
   getLayer(id) {
-    let layer = undefined
-
-    Object.keys(this._layerCache).forEach(type => {
-      let cache = this._layerCache[type]
-      Object.keys(cache).forEach(layerId => {
-        if (layerId === id) {
-          layer = cache[layerId]
-        }
-      })
-    })
-    return layer
+    let filters = this.getLayers().filter(item.id === id)
+    return filters && filters.length ? filters[0] : undefined
   }
 
   /**

@@ -2,15 +2,15 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:07
+ * @Last Modified time: 2020-04-16 20:28:16
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
 
 DC.Label = class extends Overlay {
   constructor(position, text) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Label: the position invalid')
     }
     super()
     this._position = position
@@ -21,8 +21,8 @@ DC.Label = class extends Overlay {
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Label: the position invalid')
     }
     this._position = position
   }
@@ -31,7 +31,7 @@ DC.Label = class extends Overlay {
     return this._position
   }
 
-  set text(icon) {
+  set text(text) {
     this._text = text
   }
 

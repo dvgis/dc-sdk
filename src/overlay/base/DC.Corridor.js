@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-11 12:58:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:21
+ * @Last Modified time: 2020-04-16 20:29:06
  */
 
 import Cesium from '@/namespace'
@@ -10,10 +10,7 @@ import Overlay from '@/core/overlay/Overlay'
 
 DC.Corridor = class extends Overlay {
   constructor(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!DC.Util.checkPositions(positions)) {
       throw new Error('DC.Corridor: the positions invalid')
     }
     super()
@@ -24,10 +21,7 @@ DC.Corridor = class extends Overlay {
   }
 
   set positions(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!DC.Util.checkPositions(positions)) {
       throw new Error('DC.Corridor: the positions invalid')
     }
     this._positions = DC.P.parsePositions(positions)

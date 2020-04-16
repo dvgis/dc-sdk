@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:58:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-31 14:08:09
+ * @Last Modified time: 2020-04-16 20:28:51
  */
 
 const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
@@ -88,5 +88,25 @@ DC.Util = class {
       obj.options[i] = options[i]
     }
     return obj.options
+  }
+
+  /**
+   * @function checkPosition(position: Object): Boolean
+   * Check position for validity
+   * @param {*} position
+   */
+  static checkPosition(position) {
+    return position && position instanceof DC.Position
+  }
+
+  /**
+   * @function checkPositions(positions: Object): Boolean
+   * Check positions for validity
+   * @param {*} position
+   */
+  static checkPositions(positions) {
+    return (
+      positions && (typeof positions === 'string' || Array.isArray(positions))
+    )
   }
 }

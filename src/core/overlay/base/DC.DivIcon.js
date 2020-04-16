@@ -2,15 +2,15 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-15 20:48:09
+ * @Last Modified time: 2020-04-16 20:28:12
  */
 
 import Overlay from '@/core/overlay/Overlay'
 
 DC.DivIcon = class extends Overlay {
   constructor(position, content) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.DivIcon: the position invalid')
     }
     super()
     this._position = position
@@ -36,6 +36,9 @@ DC.DivIcon = class extends Overlay {
   }
 
   set position(position) {
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.DivIcon: the position invalid')
+    }
     this._position = position
   }
 

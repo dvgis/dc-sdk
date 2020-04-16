@@ -2,16 +2,16 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:09
+ * @Last Modified time: 2020-04-16 20:29:24
  */
 
 import Cesium from '@/namespace'
-import Overlay from '../Overlay'
+import Overlay from '@/core/overlay/Overlay'
 
 DC.Plane = class extends Overlay {
   constructor(position, width, height, direction) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Plane: the position invalid')
     }
     super()
     this._position = position
@@ -24,8 +24,8 @@ DC.Plane = class extends Overlay {
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      return
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Plane: the position invalid')
     }
     this._position = position
   }

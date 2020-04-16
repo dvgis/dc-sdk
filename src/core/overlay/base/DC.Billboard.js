@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:02
+ * @Last Modified time: 2020-04-16 20:27:59
  */
 
 import Cesium from '@/namespace'
@@ -10,8 +10,8 @@ import Overlay from '../Overlay'
 
 DC.Billboard = class extends Overlay {
   constructor(position, icon) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Billboard: the position invalid')
     }
     super()
     this._position = position
@@ -23,8 +23,8 @@ DC.Billboard = class extends Overlay {
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Billboard: the position invalid')
     }
     this._position = position
   }

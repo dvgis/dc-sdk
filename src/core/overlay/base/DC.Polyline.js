@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:18
+ * @Last Modified time: 2020-04-16 20:28:33
  */
 
 import Overlay from '../Overlay'
@@ -10,10 +10,7 @@ import Cesium from '@/namespace'
 
 DC.Polyline = class extends Overlay {
   constructor(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
+    if (!DC.Util.checkPositions(positions)) {
       throw new Error('DC.Polyline: the positions invalid')
     }
     super()
@@ -24,6 +21,9 @@ DC.Polyline = class extends Overlay {
   }
 
   set positions(positions) {
+    if (!DC.Util.checkPositions(positions)) {
+      throw new Error('DC.Polyline: the positions invalid')
+    }
     this._positions = DC.P.parsePositions(positions)
   }
 

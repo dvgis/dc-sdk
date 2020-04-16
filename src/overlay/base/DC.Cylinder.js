@@ -2,15 +2,15 @@
  * @Author: Caven
  * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:24
+ * @Last Modified time: 2020-04-16 20:29:10
  */
 import Cesium from '@/namespace'
 import Overlay from '@/core/overlay/Overlay'
 
 DC.Cylinder = class extends Overlay {
   constructor(position, length, topRadius, bottomRadius) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('DC.Cylinder：the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Cylinder: the position invalid')
     }
     super()
     this._position = position
@@ -23,8 +23,8 @@ DC.Cylinder = class extends Overlay {
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('DC.Cylinder：the position invalid')
+    if (!DC.Util.checkPosition(position)) {
+      throw new Error('DC.Cylinder: the position invalid')
     }
     this._position = position
   }

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:48:54
+ * @Last Modified time: 2020-04-16 20:27:54
  */
 
 import Cesium from '@/namespace'
@@ -102,6 +102,9 @@ class ViewerOption {
       this._options.undergroundMode,
       false
     )
+
+    globe.tileCacheSize = Cesium.defaultValue(this._options.tileCacheSize, 100)
+
     return this
   }
 

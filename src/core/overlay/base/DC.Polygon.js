@@ -2,18 +2,15 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:16
+ * @Last Modified time: 2020-04-16 09:32:09
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
 
 DC.Polygon = class extends Overlay {
   constructor(positions) {
-    if (
-      !positions ||
-      (typeof positions !== 'string' && !Array.isArray(positions))
-    ) {
-      throw new Error('the positions invalid')
+    if (!DC.Util.checkPositions(positions)) {
+      throw new Error('DC.Polygon: the positions invalid')
     }
     super()
     this._positions = DC.P.parsePositions(positions)
@@ -24,6 +21,9 @@ DC.Polygon = class extends Overlay {
   }
 
   set positions(positions) {
+    if (!DC.Util.checkPositions(positions)) {
+      throw new Error('DC.Polygon: the positions invalid')
+    }
     this._positions = DC.P.parsePositions(positions)
   }
 
