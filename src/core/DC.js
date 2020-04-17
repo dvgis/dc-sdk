@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 17:13:19
+ * @Last Modified time: 2020-04-17 16:50:50
  */
 
 ;(function() {
@@ -16,7 +16,8 @@
     Author: 'Caven Chen',
     GitHub: 'https://github.com/Digital-Visual',
     Version: '1.0.0',
-    Config: {}
+    Config: {},
+    Namespace: {}
   }
   delete window.DC
   window.DC = DC
@@ -55,6 +56,10 @@
     if (!isCesiumLoaded) {
       requireCesium().then(Cesium => {
         namespace['Cesium'] = Cesium
+        DC.Namespace = {
+          ...DC.Namespace,
+          ...namespace
+        }
         delete window.Cesium
         isCesiumLoaded = true
         callback && callback()
