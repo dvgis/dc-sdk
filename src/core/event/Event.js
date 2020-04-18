@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:55:18
+ * @Last Modified time: 2020-04-18 18:52:38
  */
 class Event {
   constructor() {
     this._cache = {}
+    this._registerEvent()
   }
 
   /**

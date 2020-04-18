@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 19:42:29
+ * @Last Modified time: 2020-04-18 19:17:58
  */
 
 import Cesium from '@/namespace'
@@ -15,24 +15,10 @@ class MouseEvent extends Event {
   constructor(viewer) {
     super()
     this._viewer = viewer
-    this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
-    this._registerEvent()
-    this.on(Cesium.ScreenSpaceEventType.LEFT_CLICK, this._clickHandler, this)
-    this.on(
-      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-      this._dbClickHandler,
-      this
-    )
-    this.on(
-      Cesium.ScreenSpaceEventType.RIGHT_CLICK,
-      this._rightClickHandler,
-      this
-    )
-    this.on(
-      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
-      this._mouseMoveHandler,
-      this
-    )
+    this.on(DC.MouseEventType.CLICK, this._clickHandler, this)
+    this.on(DC.MouseEventType.DB_CLICK, this._dbClickHandler, this)
+    this.on(DC.MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
+    this.on(DC.MouseEventType.MOUSE_MOVE, this._mouseMoveHandler, this)
   }
 
   /**
@@ -41,10 +27,11 @@ class MouseEvent extends Event {
    *
    */
   _registerEvent() {
+    let handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
     Object.keys(Cesium.ScreenSpaceEventType).forEach(key => {
       let type = Cesium.ScreenSpaceEventType[key]
       this._cache[type] = new Cesium.Event()
-      this._handler.setInputAction(movement => {
+      handler.setInputAction(movement => {
         this._cache[type].raiseEvent(movement)
       }, type)
     })
@@ -75,9 +62,9 @@ class MouseEvent extends Event {
     }
     return {
       target: target,
-      cartesian: cartesian,
-      windowCartesian: position,
-      surfaceCartesian: surfaceCartesian
+      windowPosition: position,
+      position: cartesian,
+      surfacePosition: surfaceCartesian
     }
   }
 
@@ -91,14 +78,23 @@ class MouseEvent extends Event {
     let overlay = undefined
     let layer = undefined
     let feature = undefined
+
+    /**
+     * Entity
+     */
     if (target && target.id && target.id instanceof Cesium.Entity) {
       layer = target.id.layer
       if (layer && layer.getOverlay) {
         overlay = layer.getOverlay(target.id.overlayId)
       }
-    } else if (target && target instanceof Cesium.Cesium3DTileFeature) {
-      feature = target
+    }
+
+    /**
+     * Cesium3DTileFeature
+     */
+    if (target && target instanceof Cesium.Cesium3DTileFeature) {
       layer = target.tileset.layer
+      feature = target
       if (layer && layer.getOverlay) {
         overlay = layer.getOverlay(target.tileset.overlayId)
         let propertyNames = feature.getPropertyNames()
@@ -107,48 +103,31 @@ class MouseEvent extends Event {
         })
       }
     }
+
     return { layer: layer, overlay: overlay, feature: feature }
   }
 
   /**
    *
    * @param {*} type
-   * @param {*} target
+   * @param {*} mouseInfo
    *
    */
-  _raiseEvent(type, target, position, windowPosition, surfacePosition) {
-    let stopPropagation = false
-    let targetInfo = this._getTargetInfo(target)
+  _raiseEvent(type, mouseInfo = {}) {
+    let event = undefined
+    let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo.overlay
     if (overlay && overlay.overlayEvent) {
-      let event = overlay.overlayEvent.getEvent(type)
-      if (event && event.numberOfListeners > 0) {
-        event.raiseEvent({
-          layer: targetInfo.layer,
-          overlay: overlay,
-          feature: targetInfo.feature,
-          target: target,
-          position: position,
-          windowPosition: windowPosition,
-          surfacePosition: surfacePosition
-        })
-        stopPropagation = true
-      }
+      event = overlay.overlayEvent.getEvent(type)
+    } else {
+      event = this._viewer.viewerEvent.getEvent(type)
     }
-    if (!stopPropagation) {
-      let event = this._viewer.viewerEvent.getEvent(type)
-      if (event && event.numberOfListeners > 0) {
-        event.raiseEvent({
-          layer: undefined,
-          overlay: undefined,
-          feature: undefined,
-          target: target,
-          position: position,
-          windowPosition: windowPosition,
-          surfacePosition: surfacePosition
-        })
-      }
-    }
+    event &&
+      event.numberOfListeners > 0 &&
+      event.raiseEvent({
+        ...targetInfo,
+        ...mouseInfo
+      })
   }
 
   /**
@@ -159,16 +138,10 @@ class MouseEvent extends Event {
    */
   _clickHandler(movement) {
     if (!movement || !movement.position) {
-      return
+      return false
     }
-    let result = this._getMouseInfo(movement.position)
-    this._raiseEvent(
-      Cesium.ScreenSpaceEventType.LEFT_CLICK,
-      result.target,
-      result.cartesian,
-      result.windowCartesian,
-      result.surfaceCartesian
-    )
+    let mouseInfo = this._getMouseInfo(movement.position)
+    this._raiseEvent(DC.MouseEventType.CLICK, mouseInfo)
   }
 
   /**
@@ -179,16 +152,10 @@ class MouseEvent extends Event {
    */
   _dbClickHandler(movement) {
     if (!movement || !movement.position) {
-      return
+      return false
     }
-    let result = this._getMouseInfo(movement.position)
-    this._raiseEvent(
-      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
-      result.target,
-      result.cartesian,
-      result.windowCartesian,
-      result.surfaceCartesian
-    )
+    let mouseInfo = this._getMouseInfo(movement.position)
+    this._raiseEvent(DC.MouseEventType.DB_CLICK, mouseInfo)
   }
 
   /**
@@ -199,16 +166,10 @@ class MouseEvent extends Event {
    */
   _rightClickHandler(movement) {
     if (!movement || !movement.position) {
-      return
+      return false
     }
-    let result = this._getMouseInfo(movement.position)
-    this._raiseEvent(
-      Cesium.ScreenSpaceEventType.RIGHT_CLICK,
-      result.target,
-      result.cartesian,
-      result.windowCartesian,
-      result.surfaceCartesian
-    )
+    let mouseInfo = this._getMouseInfo(movement.position)
+    this._raiseEvent(DC.MouseEventType.RIGHT_CLICK, mouseInfo)
   }
 
   /**
@@ -219,17 +180,11 @@ class MouseEvent extends Event {
    */
   _mouseMoveHandler(movement) {
     if (!movement || !movement.endPosition) {
-      return
+      return false
     }
-    let result = this._getMouseInfo(movement.endPosition)
-    this._viewer.canvas.style.cursor = result.target ? 'pointer' : 'default'
-    this._raiseEvent(
-      Cesium.ScreenSpaceEventType.MOUSE_MOVE,
-      result.target,
-      result.cartesian,
-      result.windowCartesian,
-      result.surfaceCartesian
-    )
+    let mouseInfo = this._getMouseInfo(movement.endPosition)
+    this._viewer.canvas.style.cursor = mouseInfo.target ? 'pointer' : 'default'
+    this._raiseEvent(DC.MouseEventType.MOUSE_MOVE, mouseInfo)
   }
 }
 

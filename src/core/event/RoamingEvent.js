@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-10 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:42:42
+ * @Last Modified time: 2020-04-18 18:51:57
  */
 import Cesium from '@/namespace'
 import Event from './Event'
@@ -10,7 +10,6 @@ import Event from './Event'
 class RoamingEvent extends Event {
   constructor() {
     super()
-    this._registerEvent()
   }
 
   _registerEvent() {

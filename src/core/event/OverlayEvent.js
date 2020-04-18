@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:42:23
+ * @Last Modified time: 2020-04-18 18:52:49
  */
 import Cesium from '@/namespace'
 import Event from './Event'
@@ -10,7 +10,6 @@ import Event from './Event'
 class OverlayEvent extends Event {
   constructor() {
     super()
-    this._registerEvent()
   }
 
   _registerEvent() {

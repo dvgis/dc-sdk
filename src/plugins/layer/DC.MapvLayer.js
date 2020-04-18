@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-02-13 20:19:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-15 16:23:23
+ * @Last Modified time: 2020-04-18 14:25:56
  */
 import Layer from '@/core/layer/Layer'
 
-const mapv = DC.getNamespace().mapv
+const mapv = DC.Namespace.mapv
 
 DC.MapvDataSet = mapv ? mapv.DataSet : undefined
 
