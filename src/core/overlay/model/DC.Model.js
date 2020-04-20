@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:28:41
+ * @Last Modified time: 2020-04-20 10:32:44
  */
 
 import Overlay from '../Overlay'
@@ -109,6 +109,7 @@ DC.Model = class extends Overlay {
     }
     this._style = style
     this._delegate.model && DC.Util.merge(this._delegate.model, this._style)
+    return this
   }
 }
 

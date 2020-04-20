@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-15 16:20:24
+ * @Last Modified time: 2020-04-20 10:31:54
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -58,10 +58,11 @@ class Overlay {
    * The hook for added
    */
   _addedHook() {
-    if (this._delegate) {
-      this._delegate.layer = this._layer
-      this._delegate.overlayId = this._id
+    if (!this._delegate) {
+      return false
     }
+    this._delegate.layer = this._layer
+    this._delegate.overlayId = this._id
   }
 
   /***
@@ -70,10 +71,18 @@ class Overlay {
   _mountedHook() {}
 
   /**
+   * The hook for removed
+   */
+  _removedHook() {}
+
+  /**
    *
    * @param {*} layer
    */
   _addHandler(layer) {
+    if (!layer) {
+      return false
+    }
     this._layer = layer
     this._mountedHook && this._mountedHook()
     if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
@@ -89,6 +98,7 @@ class Overlay {
   _removeHandler() {
     if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
       this._layer.delegate.entities.remove(this._delegate)
+      this._removedHook && this._removedHook()
       this._state = DC.OverlayState.REMOVED
     }
   }
@@ -98,7 +108,9 @@ class Overlay {
    * @param {*} style
    * set overlay style
    */
-  setStyle(style) {}
+  setStyle(style) {
+    return this
+  }
 
   /**
    * Overlay remove
@@ -107,6 +119,7 @@ class Overlay {
     if (this._layer) {
       this._layer.removeOverlay(this)
     }
+    return this
   }
 
   /**
@@ -119,6 +132,7 @@ class Overlay {
     if (layer) {
       layer.addOverlay(this)
     }
+    return this
   }
 
   /**

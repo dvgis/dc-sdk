@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:04:38
+ * @Last Modified time: 2020-04-20 19:27:23
  */
 import Cesium from '@/namespace'
 import Layer from './Layer'
@@ -10,7 +10,7 @@ import Layer from './Layer'
 DC.GeoJsonLayer = class extends Layer {
   constructor(id, url, options = {}) {
     if (!url) {
-      throw new Error('DC.GeoJsonLayer： the url invalid')
+      throw new Error('DC.GeoJsonLayer：the url invalid')
     }
     super(id)
     this._delegate = Cesium.GeoJsonDataSource.load(url, options)
@@ -65,6 +65,9 @@ DC.GeoJsonLayer = class extends Layer {
     }
   }
 
+  /**
+   *
+   */
   toVectorLayer() {
     let layer = new DC.VectorLayer(this._id)
     let self = this

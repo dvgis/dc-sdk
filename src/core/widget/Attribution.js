@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-19 14:02:17
+ * @Last Modified time: 2020-04-20 19:27:19
  */
 import Widget from './Widget'
 
@@ -34,7 +34,7 @@ class Attribution extends Widget {
     a.innerHTML = 'Digital Visual'
     a.href = 'javascirpt:void(0)'
     a.onclick = () => {
-      window.open('http://dc.cavencj.cn')
+      window.open('http://www.dvgis.cn')
     }
     a.style.cssText = `color:#0078A8;`
     this.enable = true

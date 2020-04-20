@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 10:05:17
+ * @Last Modified time: 2020-04-20 19:27:43
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -66,7 +66,7 @@ class Layer {
   _addHandler(viewer) {
     this._viewer = viewer
     if (!this._delegate) {
-      return
+      return false
     }
     if (this._delegate instanceof Cesium.PrimitiveCollection) {
       this._viewer.scene.primitives.add(this._delegate)
@@ -82,7 +82,7 @@ class Layer {
    */
   _removeHandler() {
     if (!this._delegate) {
-      return
+      return false
     }
     if (this._viewer) {
       this._cache = {}

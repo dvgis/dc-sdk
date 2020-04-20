@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:28:16
+ * @Last Modified time: 2020-04-20 09:53:54
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -69,6 +69,24 @@ DC.Label = class extends Overlay {
     this._style = style
     this._delegate.label && DC.Util.merge(this._delegate.label, this._style)
     return this
+  }
+
+  /**
+   *
+   * @param {*} entity
+   */
+  static fromEntity(entity) {
+    let position = DC.T.transformCartesianToWSG84(
+      entity.position.getValue(Cesium.JulianDate.now())
+    )
+    let label = undefined
+    if (entity.billboard) {
+      label = new DC.Label(position, item.name)
+      label.attr = {
+        ...entity.properties.getValue(Cesium.JulianDate.now())
+      }
+    }
+    return label
   }
 }
 
