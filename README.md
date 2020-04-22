@@ -12,6 +12,8 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 > CDN
 
 ```html
+<!--基础包-->
+<script src="/libs/dc-sdk/dc.base.min.js"></script>
 <!--核心包-->
 <script src="/libs/dc-sdk/dc.core.min.js"></script>
 <!--插件包-->
@@ -22,6 +24,21 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 <script src="/libs/dc-sdk/overlay/dc.overlay.min.js"></script>
 <!--主要样式-->
 <link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
+```
+
+> ES6
+
+```html
+<!--基础包-->
+<script src="/libs/dc-sdk/dc.base.min.js"></script>
+```
+
+```js
+import '/libs/dc-sdk/dc.core.min' //核心包
+import 'libs/dc-sdk/plugins/dc.plugins.min' //插件包
+import 'libs/dc-sdk/plot/dc.plot.min' //标绘包
+import 'libs/dc-sdk/overlay/dc.overlay.min' // 覆盖物/要素包
+import 'libs/dc-sdk/dc.core.min.css' // 主要样式
 ```
 
 > 开始
