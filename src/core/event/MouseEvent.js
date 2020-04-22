@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-20 19:25:21
+ * @Last Modified time: 2020-04-22 12:35:16
  */
 
 import Cesium from '@/namespace'
@@ -15,6 +15,7 @@ class MouseEvent extends Event {
   constructor(viewer) {
     super()
     this._viewer = viewer
+    this._setInputAction()
     this.on(DC.MouseEventType.CLICK, this._clickHandler, this)
     this.on(DC.MouseEventType.DB_CLICK, this._dbClickHandler, this)
     this.on(DC.MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
@@ -26,7 +27,7 @@ class MouseEvent extends Event {
    * Register Cesium mouse events
    *
    */
-  _registerEvent() {
+  _setInputAction() {
     let handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
     Object.keys(Cesium.ScreenSpaceEventType).forEach(key => {
       let type = Cesium.ScreenSpaceEventType[key]

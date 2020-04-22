@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-20 12:06:07
+ * @Last Modified time: 2020-04-22 10:09:35
  */
 
 const path = require('path')
@@ -52,6 +52,7 @@ module.exports = env => {
   }
   return {
     entry: {
+      'dc.base': ['base'],
       'dc.core': ['entry', 'theme']
     },
     devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
@@ -136,6 +137,7 @@ module.exports = env => {
       extensions: ['.js', '.json', '.css'],
       alias: {
         '@': resolve('src'),
+        base: './src/base/index.js',
         entry: './src/core/DC.js',
         theme: './src/themes/index.js',
         cesium: path.resolve(__dirname, cesiumSource)

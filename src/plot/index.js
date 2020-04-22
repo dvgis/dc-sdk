@@ -2,17 +2,23 @@
  * @Author: Caven
  * @Date: 2020-04-03 10:13:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 20:29:17
+ * @Last Modified time: 2020-04-22 13:18:04
  */
-;(function() {
-  let initialized = false
 
+const install = function(DC) {
   if (!DC) {
-    console.error('DC.Plot: Missing DC Sdk')
+    throw new Error('DC.Plot: Missing DC Base SDK')
   }
-
   DC.init(() => {
-    !initialized && require('./DC.Plot')
-    initialized = true
+    require('./DC.Plot')
   })
-})()
+}
+
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.DC) {
+  install(window.DC)
+}
+
+export default {
+  install
+}

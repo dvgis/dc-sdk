@@ -2,15 +2,23 @@
  * @Author: Caven
  * @Date: 2020-04-09 20:02:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:43
+ * @Last Modified time: 2020-04-22 13:12:15
  */
-;(function() {
-  let initialized = false
+
+const install = function(DC) {
   if (!DC) {
-    console.error('DC.Overlay: Missing DC Sdk')
+    throw new Error('DC.Overlay: Missing DC Base SDK')
   }
   DC.init(() => {
-    isCesiumLoaded && !initialized && require('./DC.Overlay.Loader')
-    initialized = true
+    require('./DC.Overlay.Loader')
   })
-})()
+}
+
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.DC) {
+  install(window.DC)
+}
+
+export default {
+  install
+}

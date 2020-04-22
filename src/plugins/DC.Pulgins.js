@@ -2,18 +2,27 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:22:10
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-17 16:47:34
+ * @Last Modified time: 2020-04-22 13:13:33
  */
-;(function() {
-  let initialized = false
-  if (!DC) {
-    console.error('DC.Plugins: Missing DC Sdk')
-  }
-  DC.Namespace['mapv'] = window.mapv || undefined
-  delete window.mapv
 
+const install = function(DC) {
+  if (!DC) {
+    throw new Error('DC.Plugins: Missing DC Base SDK')
+  }
   DC.init(() => {
-    !initialized && require('./DC.Pulgins.Loader')
-    initialized = true
+    if (window.mapv) {
+      DC.Namespace['mapv'] = window.mapv
+      delete window.mapv
+    }
+    require('./DC.Pulgins.Loader')
   })
-})()
+}
+
+/* istanbul ignore if */
+if (typeof window !== 'undefined' && window.DC) {
+  install(DC)
+}
+
+export default {
+  install
+}
