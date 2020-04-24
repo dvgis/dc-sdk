@@ -9,10 +9,10 @@ import Cesium from '@/namespace'
 export default function getHeading(startPosition, endPosition) {
   let heading = 0
   if (startPosition instanceof DC.Position) {
-    startPosition = DC.T.transformWSG84ToCartesian(startPosition)
+    startPosition = DC.T.transformWGS84ToCartesian(startPosition)
   }
   if (endPosition instanceof DC.Position) {
-    endPosition = DC.T.transformWSG84ToCartesian(endPosition)
+    endPosition = DC.T.transformWGS84ToCartesian(endPosition)
   }
   let v = Cesium.Cartesian3.subtract(
     endPosition,

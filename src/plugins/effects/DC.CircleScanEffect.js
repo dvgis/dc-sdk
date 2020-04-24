@@ -28,14 +28,14 @@ DC.CircleScanEffect = class extends Effect {
    * 准备代理
    */
   _prepareDelegate() {
-    let cartesian3Center = DC.T.transformWSG84ToCartesian(this._position)
+    let cartesian3Center = DC.T.transformWGS84ToCartesian(this._position)
     let cartesian4Center = new Cesium.Cartesian4(
       cartesian3Center.x,
       cartesian3Center.y,
       cartesian3Center.z,
       1
     )
-    let cartesian3Center1 = DC.T.transformWSG84ToCartesian(
+    let cartesian3Center1 = DC.T.transformWGS84ToCartesian(
       new DC.Position(
         this._position.lng,
         this._position.lat,

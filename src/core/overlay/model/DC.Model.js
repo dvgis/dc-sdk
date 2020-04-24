@@ -54,7 +54,7 @@ DC.Model = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWSG84ToCartesian(this._position)
+      return DC.T.transformWGS84ToCartesian(this._position)
     })
     /**
      * set the orientation
@@ -67,7 +67,7 @@ DC.Model = class extends Overlay {
         }
       }
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWSG84ToCartesian(this._position),
+        DC.T.transformWGS84ToCartesian(this._position),
         new Cesium.HeadingPitchRoll(
           Cesium.Math.toRadians(this._position.heading),
           Cesium.Math.toRadians(this._position.pitch),

@@ -34,7 +34,7 @@ class DrawRect extends Draw {
         this._unbindEnvet()
         this._plotEvent.raiseEvent({
           type: DC.OverlayType.RECT,
-          points: DC.T.transformCartesianArrayToWSG84Array(this._positions)
+          points: DC.T.transformCartesianArrayToWGS84Array(this._positions)
         })
       }
     }

@@ -23,7 +23,7 @@ class Edit {
     this._layer.clear()
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POLYLINE,
-      points: DC.T.transformCartesianArrayToWSG84Array(this._positions)
+      points: DC.T.transformCartesianArrayToWGS84Array(this._positions)
     })
   }
 

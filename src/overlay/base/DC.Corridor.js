@@ -38,7 +38,7 @@ DC.Corridor = class extends Overlay {
     this._delegate.corridor = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {
-        return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+        return DC.T.transformWGS84ArrayToCartesianArray(this._positions)
       })
     }
   }

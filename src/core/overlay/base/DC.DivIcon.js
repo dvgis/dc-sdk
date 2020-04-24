@@ -101,7 +101,7 @@ DC.DivIcon = class extends Overlay {
       this._overlayEvent.fire(DC.MouseEventType.CLICK, {
         layer: layer,
         overlay: this,
-        position: DC.T.transformWSG84ToCartesian(this._position)
+        position: DC.T.transformWGS84ToCartesian(this._position)
       })
     })
     this._state = DC.OverlayState.ADDED

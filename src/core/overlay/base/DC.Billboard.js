@@ -54,7 +54,7 @@ DC.Billboard = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWSG84ToCartesian(this._position)
+      return DC.T.transformWGS84ToCartesian(this._position)
     })
     /**
      *  initialize the Overlay parameter
@@ -105,7 +105,7 @@ DC.Billboard = class extends Overlay {
    * @param {*} entity
    */
   static fromEntity(entity) {
-    let position = DC.T.transformCartesianToWSG84(
+    let position = DC.T.transformCartesianToWGS84(
       entity.position.getValue(Cesium.JulianDate.now())
     )
     let billboard = undefined

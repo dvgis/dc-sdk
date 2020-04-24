@@ -27,7 +27,7 @@ DC.CustomBillboard = class extends DC.Billboard {
           position.lng = this._position.lng
           position.lat = this._position.lat
           position.alt = 0
-          return DC.T.transformWSG84ArrayToCartesianArray([
+          return DC.T.transformWGS84ArrayToCartesianArray([
             position,
             this._position
           ])

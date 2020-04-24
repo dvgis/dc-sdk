@@ -59,7 +59,7 @@ DC.Plane = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWSG84ToCartesian(this._position)
+      return DC.T.transformWGS84ToCartesian(this._position)
     })
 
     /**
@@ -67,7 +67,7 @@ DC.Plane = class extends Overlay {
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWSG84ToCartesian(this._center),
+        DC.T.transformWGS84ToCartesian(this._center),
         new Cesium.HeadingPitchRoll(
           Cesium.Math.toRadians(this._position.heading),
           Cesium.Math.toRadians(this._position.pitch),

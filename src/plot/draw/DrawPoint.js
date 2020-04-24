@@ -28,7 +28,7 @@ class DrawPoint extends Draw {
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POINT,
-      points: [DC.T.transformCartesianToWSG84(this._position)]
+      points: [DC.T.transformCartesianToWGS84(this._position)]
     })
   }
 

@@ -43,9 +43,9 @@ DC.Polygon = class extends Overlay {
 
   get center() {
     let boundingSphere = Cesium.BoundingSphere.fromPoints(
-      DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+      DC.T.transformWGS84ArrayToCartesianArray(this._positions)
     )
-    return DC.T.transformCartesianToWSG84(boundingSphere.center)
+    return DC.T.transformCartesianToWGS84(boundingSphere.center)
   }
 
   get area() {
@@ -57,10 +57,10 @@ DC.Polygon = class extends Overlay {
       positions.push(positions[0])
       for (let i = 1; i < positions.length; i++) {
         let oel = ellipsoid.cartographicToCartesian(
-          DC.T.transformWSG84ToCartographic(positions[i - 1])
+          DC.T.transformWGS84ToCartographic(positions[i - 1])
         )
         let el = ellipsoid.cartographicToCartesian(
-          DC.T.transformWSG84ToCartographic(positions[i])
+          DC.T.transformWGS84ToCartographic(positions[i])
         )
         h += oel.x * el.y - el.x * oel.y
       }
@@ -74,11 +74,11 @@ DC.Polygon = class extends Overlay {
    */
   _prepareHierarchy() {
     let result = new Cesium.PolygonHierarchy()
-    result.positions = DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+    result.positions = DC.T.transformWGS84ArrayToCartesianArray(this._positions)
     result.holes = this._holes.map(
       item =>
         new Cesium.PolygonHierarchy(
-          DC.T.transformWSG84ArrayToCartesianArray(item)
+          DC.T.transformWGS84ArrayToCartesianArray(item)
         )
     )
     return result
@@ -116,7 +116,7 @@ DC.Polygon = class extends Overlay {
   static fromEntity(entity) {
     let polygon = undefined
     if (entity.polygon) {
-      let positions = DC.T.transformCartesianArrayToWSG84Array(
+      let positions = DC.T.transformCartesianArrayToWGS84Array(
         item.polygon.hierarchy.getValue(Cesium.JulianDate.now()).positions
       )
       polygon = new DC.Polygon(positions)

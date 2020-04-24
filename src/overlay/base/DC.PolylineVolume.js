@@ -49,7 +49,7 @@ DC.PolylineVolume = class extends Overlay {
     this._delegate.polylineVolume = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {
-        return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+        return DC.T.transformWGS84ArrayToCartesianArray(this._positions)
       }),
       shape: new Cesium.CallbackProperty(time => {
         return this._shape

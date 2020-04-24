@@ -7,8 +7,8 @@
 export default function getDistance(positions) {
   let distance = 0
   for (let i = 0; i < positions.length - 1; i++) {
-    let point1cartographic = DC.T.transformWSG84ToCartographic(positions[i])
-    let point2cartographic = DC.T.transformWSG84ToCartographic(positions[i + 1])
+    let point1cartographic = DC.T.transformWGS84ToCartographic(positions[i])
+    let point2cartographic = DC.T.transformWGS84ToCartographic(positions[i + 1])
     let geodesic = new Cesium.EllipsoidGeodesic()
     geodesic.setEndPoints(point1cartographic, point2cartographic)
     let s = geodesic.surfaceDistance

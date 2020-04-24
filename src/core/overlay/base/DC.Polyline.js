@@ -33,9 +33,9 @@ DC.Polyline = class extends Overlay {
 
   get center() {
     let boundingSphere = Cesium.BoundingSphere.fromPoints(
-      DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+      DC.T.transformWGS84ArrayToCartesianArray(this._positions)
     )
-    return DC.T.transformCartesianToWSG84(boundingSphere.center)
+    return DC.T.transformCartesianToWGS84(boundingSphere.center)
   }
 
   get distance() {
@@ -49,7 +49,7 @@ DC.Polyline = class extends Overlay {
     this._delegate.polyline = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {
-        return DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+        return DC.T.transformWGS84ArrayToCartesianArray(this._positions)
       })
     }
   }
@@ -75,7 +75,7 @@ DC.Polyline = class extends Overlay {
   static fromEntity(entity) {
     let polyline = undefined
     if (entity.polyline) {
-      let positions = DC.T.transformCartesianArrayToWSG84Array(
+      let positions = DC.T.transformCartesianArrayToWGS84Array(
         entity.polyline.positions.getValue(Cesium.JulianDate.now())
       )
       polyline = new DC.Polyline(positions)

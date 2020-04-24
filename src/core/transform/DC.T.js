@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-23 12:46:21
+ * @Last Modified time: 2020-04-24 12:53:50
  */
 import Cesium from '@/namespace'
 
@@ -15,7 +15,7 @@ DC.T = class {
    * @param {*} cartesian
    *
    */
-  static transformCartesianToWSG84(cartesian) {
+  static transformCartesianToWGS84(cartesian) {
     if (cartesian) {
       let ellipsoid = Cesium.Ellipsoid.WGS84
       let cartographic = ellipsoid.cartesianToCartographic(cartesian)
@@ -34,7 +34,7 @@ DC.T = class {
    * @param {*} position
    *
    */
-  static transformWSG84ToCartesian(position) {
+  static transformWGS84ToCartesian(position) {
     return position
       ? Cesium.Cartesian3.fromDegrees(
           position.lng,
@@ -51,7 +51,7 @@ DC.T = class {
    * @param {*} position
    *
    */
-  static transformWSG84ToCartographic(position) {
+  static transformWGS84ToCartographic(position) {
     return position
       ? Cesium.Cartographic.fromDegrees(
           position.lng,
@@ -67,21 +67,21 @@ DC.T = class {
    * @param {*} cartesianArr
    *
    */
-  static transformCartesianArrayToWSG84Array(cartesianArr) {
+  static transformCartesianArrayToWGS84Array(cartesianArr) {
     return cartesianArr
-      ? cartesianArr.map(item => DC.T.transformCartesianToWSG84(item))
+      ? cartesianArr.map(item => DC.T.transformCartesianToWGS84(item))
       : []
   }
 
   /**
    *
    * 84坐标数组转卡迪尔坐标数组
-   * @param {*} WSG84Arr
+   * @param {*} WGS84Arr
    *
    */
-  static transformWSG84ArrayToCartesianArray(WSG84Arr) {
-    return WSG84Arr
-      ? WSG84Arr.map(item => DC.T.transformWSG84ToCartesian(item))
+  static transformWGS84ArrayToCartesianArray(WGS84Arr) {
+    return WGS84Arr
+      ? WGS84Arr.map(item => DC.T.transformWGS84ToCartesian(item))
       : []
   }
 
@@ -90,7 +90,7 @@ DC.T = class {
    * @param {*} position
    *
    */
-  static transformWgs84ToMercator(position) {
+  static transformWGS84ToMercator(position) {
     let mp = WMP.project(
       Cesium.Cartographic.fromDegrees(position.lng, position.lat, position.alt)
     )
@@ -102,7 +102,7 @@ DC.T = class {
    * @param {*} position
    *
    */
-  static transformMercatorToWgs84(position) {
+  static transformMercatorToWGS84(position) {
     let mp = WMP.unproject(
       new Cesium.Cartesian3(position.lng, position.lat, position.alt)
     )

@@ -47,7 +47,7 @@ class DrawPolygon extends Draw {
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
       type: DC.OverlayType.POLYGON,
-      points: DC.T.transformCartesianArrayToWSG84Array(this._positions)
+      points: DC.T.transformCartesianArrayToWGS84Array(this._positions)
     })
   }
 

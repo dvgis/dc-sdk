@@ -14,7 +14,7 @@ class EditPolyline extends Edit {
 
   _mouseMoveHandler(e) {
     if (this._currentMarker) {
-      this._currentMarker.position = DC.T.transformCartesianToWSG84(e.position)
+      this._currentMarker.position = DC.T.transformCartesianToWGS84(e.position)
       this._overlay.positions = this._markers.map(item => item.position)
     }
   }

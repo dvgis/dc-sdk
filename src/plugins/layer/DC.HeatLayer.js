@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 10:38:12
+ * @Last Modified time: 2020-04-24 12:56:27
  */
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
@@ -69,8 +69,8 @@ DC.HeatLayer = class extends Layer {
    *
    * @param {*} position
    */
-  _transformWgs84ToHeatmap(position) {
-    position = DC.T.transformWgs84ToMercator(position)
+  _transformWGS84ToHeatmap(position) {
+    position = DC.T.transformWGS84ToMercator(position)
     let coord = {}
     coord.x = Math.round(
       (position.lng - this._mBounds.west) / this._scale + this._options.spacing
@@ -87,10 +87,10 @@ DC.HeatLayer = class extends Layer {
    * @param {*} bounds
    */
   _getMBounds() {
-    let mWestSouth = DC.T.transformWgs84ToMercator(
+    let mWestSouth = DC.T.transformWGS84ToMercator(
       new DC.Position(this._bounds.west, this._bounds.south)
     )
-    let mEastNorth = DC.T.transformWgs84ToMercator(
+    let mEastNorth = DC.T.transformWGS84ToMercator(
       new DC.Position(this._bounds.east, this._bounds.north)
     )
     return {
@@ -147,11 +147,11 @@ DC.HeatLayer = class extends Layer {
     this._mBounds.south -= offset
     this._mBounds.east += offset
     this._mBounds.north += offset
-    let westSouth = DC.T.transformMercatorToWgs84({
+    let westSouth = DC.T.transformMercatorToWGS84({
       lng: this._mBounds.west,
       lat: this._mBounds.south
     })
-    let eastNorth = DC.T.transformMercatorToWgs84({
+    let eastNorth = DC.T.transformMercatorToWGS84({
       lng: this._mBounds.east,
       lat: this._mBounds.north
     })
@@ -206,7 +206,7 @@ DC.HeatLayer = class extends Layer {
     let data = []
 
     this._positions.forEach(item => {
-      let coord = this._transformWgs84ToHeatmap({
+      let coord = this._transformWGS84ToHeatmap({
         lng: item.lng || item.x,
         lat: item.lat || item.y
       })

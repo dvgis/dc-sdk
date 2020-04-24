@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:35:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:53:21
+ * @Last Modified time: 2020-04-24 12:54:22
  */
 
 import Cesium from '@/namespace'
@@ -86,8 +86,8 @@ DC.Position = class {
       return 0
     }
     return Cesium.Cartesian3.distance(
-      DC.T.transformWSG84ToCartesian(this),
-      DC.T.transformWSG84ToCartesian(target)
+      DC.T.transformWGS84ToCartesian(this),
+      DC.T.transformWGS84ToCartesian(target)
     )
   }
 

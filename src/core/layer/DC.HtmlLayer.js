@@ -40,7 +40,7 @@ DC.HtmlLayer = class extends Layer {
       let cameraPosition = this._viewer.camera.positionWC
       this.eachOverlay(item => {
         if (item && item.position) {
-          let position = DC.T.transformWSG84ToCartesian(item.position)
+          let position = DC.T.transformWGS84ToCartesian(item.position)
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
             scene,
             position

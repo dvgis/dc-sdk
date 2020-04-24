@@ -32,7 +32,7 @@ class DrawClicle extends Draw {
       this._unbindEnvet()
       this._plotEvent.raiseEvent({
         type: DC.OverlayType.CIRCLE,
-        points: [DC.T.transformCartesianToWSG84(this._center)],
+        points: [DC.T.transformCartesianToWGS84(this._center)],
         radius: this._radius
       })
     }

@@ -85,10 +85,10 @@ DC.RoamingPath = class {
         viewer.trackedEntity = this._delegate
       } else if (viewMode === 1) {
         let heading = DC.Math.getHeading(tickPosition, nextTickPosition)
-        let WSG84TickPosition = DC.T.transformCartesianToWSG84(tickPosition)
-        WSG84TickPosition.alt = viewOption.alt || 5
+        let WGS84TickPosition = DC.T.transformCartesianToWGS84(tickPosition)
+        WGS84TickPosition.alt = viewOption.alt || 5
         camera.lookAt(
-          DC.T.transformWSG84ToCartesian(WSG84TickPosition),
+          DC.T.transformWGS84ToCartesian(WGS84TickPosition),
           new Cesium.HeadingPitchRange(
             heading,
             Cesium.Math.toRadians(viewOption.pitch || 0),
@@ -161,7 +161,7 @@ DC.RoamingPath = class {
     this._sampledPosition = new Cesium.SampledPositionProperty()
     this._sampledPosition.addSamples(
       this._timeLine,
-      DC.T.transformWSG84ArrayToCartesianArray(this._positions)
+      DC.T.transformWGS84ArrayToCartesianArray(this._positions)
     )
   }
 

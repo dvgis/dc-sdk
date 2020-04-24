@@ -154,7 +154,7 @@ DC.Viewer = class {
   }
 
   get cameraPosition() {
-    let position = DC.T.transformCartesianToWSG84(this.camera.positionWC)
+    let position = DC.T.transformCartesianToWGS84(this.camera.positionWC)
     if (position) {
       position.heading = Cesium.Math.toDegrees(this.camera.heading)
       position.pitch = Cesium.Math.toDegrees(this.camera.pitch)
@@ -452,7 +452,7 @@ DC.Viewer = class {
   flyToPosition(position, completeCallback, duration) {
     if (position instanceof DC.Position) {
       this._delegate.camera.flyTo({
-        destination: DC.T.transformWSG84ToCartesian(position),
+        destination: DC.T.transformWGS84ToCartesian(position),
         orientation: {
           heading: Cesium.Math.toRadians(position.heading),
           pitch: Cesium.Math.toRadians(position.pitch),

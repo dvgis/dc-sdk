@@ -54,14 +54,14 @@ DC.Circle = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWSG84ToCartesian(this._center)
+      return DC.T.transformWGS84ToCartesian(this._center)
     })
     /**
      * set the orientation
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWSG84ToCartesian(this._center),
+        DC.T.transformWGS84ToCartesian(this._center),
         new Cesium.HeadingPitchRoll(
           Cesium.Math.toRadians(this._center.heading),
           Cesium.Math.toRadians(this._center.pitch),

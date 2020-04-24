@@ -37,7 +37,7 @@ DC.AroundPoint = class {
     let duration = this._options.duration || 10
     let heading = Cesium.Math.toRadians(diff * (360 / duration)) + this._heading
     this._viewer.scene.camera.setView({
-      destination: DC.T.transformWSG84ToCartesian(this._position),
+      destination: DC.T.transformWGS84ToCartesian(this._position),
       orientation: {
         heading: heading,
         pitch: Cesium.Math.toRadians(this._options.pitch || 0)
