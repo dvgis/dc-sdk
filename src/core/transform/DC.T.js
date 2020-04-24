@@ -2,9 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 11:53:40
+ * @Last Modified time: 2020-04-23 12:46:21
  */
 import Cesium from '@/namespace'
+
+const WMP = new Cesium.WebMercatorProjection()
 
 DC.T = class {
   /**
@@ -81,5 +83,33 @@ DC.T = class {
     return WSG84Arr
       ? WSG84Arr.map(item => DC.T.transformWSG84ToCartesian(item))
       : []
+  }
+
+  /**
+   *
+   * @param {*} position
+   *
+   */
+  static transformWgs84ToMercator(position) {
+    let mp = WMP.project(
+      Cesium.Cartographic.fromDegrees(position.lng, position.lat, position.alt)
+    )
+    return new DC.Position(mp.x, mp.y, mp.z)
+  }
+
+  /**
+   *
+   * @param {*} position
+   *
+   */
+  static transformMercatorToWgs84(position) {
+    let mp = WMP.unproject(
+      new Cesium.Cartesian3(position.lng, position.lat, position.alt)
+    )
+    return new DC.Position(
+      Cesium.Math.toDegrees(mp.longitude),
+      Cesium.Math.toDegrees(mp.latitude),
+      mp.height
+    )
   }
 }

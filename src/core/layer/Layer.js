@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-20 19:27:43
+ * @Last Modified time: 2020-04-23 13:16:03
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -57,6 +57,16 @@ class Layer {
   }
 
   /**
+   * The hook for added
+   */
+  _addedHook() {}
+
+  /**
+   * The hook for removed
+   */
+  _removedHook() {}
+
+  /**
    *
    * The layer added callback function
    * Subclasses need to be overridden
@@ -65,14 +75,12 @@ class Layer {
    */
   _addHandler(viewer) {
     this._viewer = viewer
-    if (!this._delegate) {
-      return false
-    }
     if (this._delegate instanceof Cesium.PrimitiveCollection) {
       this._viewer.scene.primitives.add(this._delegate)
     } else {
       this._viewer.dataSources.add(this._delegate)
     }
+    this._addedHook && this._addedHook()
     this._state = DC.LayerState.ADDED
   }
 
@@ -98,6 +106,7 @@ class Layer {
         this._delegate.entities && this._delegate.entities.removeAll()
         this._viewer.dataSources.remove(this._delegate)
       }
+      this._removedHook && this._removedHook()
       this._state = DC.LayerState.REMOVED
     }
   }

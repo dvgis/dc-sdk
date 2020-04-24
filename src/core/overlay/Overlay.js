@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-20 10:31:54
+ * @Last Modified time: 2020-04-22 22:43:45
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -80,9 +80,6 @@ class Overlay {
    * @param {*} layer
    */
   _addHandler(layer) {
-    if (!layer) {
-      return false
-    }
     this._layer = layer
     this._mountedHook && this._mountedHook()
     if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
