@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:28:12
+ * @Last Modified time: 2020-04-24 11:10:38
  */
 
 import Overlay from '@/core/overlay/Overlay'
@@ -86,7 +86,6 @@ DC.DivIcon = class extends Overlay {
         distanceDisplayCondition.far
       )
     }
-
     this._delegate.style.transform = `${translate3d} ${scale3d}`
   }
 

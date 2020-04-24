@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 10:35:18
+ * @Last Modified time: 2020-04-24 10:38:12
  */
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
@@ -183,7 +183,7 @@ DC.HeatLayer = class extends Layer {
     }
     this._options.radius = radius
     this._options.spacing = this._options.radius * 1.5
-    this._heat.configure(this._options)
+    this._heat && this._heat.configure(this._options)
   }
 
   _reDraw() {

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-22 22:43:45
+ * @Last Modified time: 2020-04-24 11:01:38
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -12,6 +12,7 @@ class Overlay {
     this._layer = undefined
     this._state = undefined
     this._delegate = undefined
+    this._bid = DC.Util.uuid() // Business id
     this._show = true
     this._style = {}
     this._attr = {}
@@ -21,8 +22,12 @@ class Overlay {
     this.on(DC.OverlayEventType.REMOVE, this._removeHandler, this)
   }
 
+  set id(id) {
+    this._bid = id
+  }
+
   get id() {
-    return this._id
+    return this._bid
   }
 
   set show(show) {

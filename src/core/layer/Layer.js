@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-23 13:16:03
+ * @Last Modified time: 2020-04-24 10:57:23
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -185,10 +185,24 @@ class Layer {
 
   /**
    *
+   * @param {*} overlayId
+   */
+  getOverlay(overlayId) {
+    return this._cache[overlayId] || undefined
+  }
+
+  /**
+   *
    * @param {*} id
    */
-  getOverlay(id) {
-    return this._cache[id] || undefined
+  getOverlayById(id) {
+    let overlay = undefined
+    Object.keys(this._cache).forEach(key => {
+      if (this._cache[key].id === id) {
+        overlay = this._cache[key]
+      }
+    })
+    return overlay
   }
 
   /**
@@ -196,14 +210,14 @@ class Layer {
    * @param {*} atrrName
    * @param {*} attrVal
    */
-  getOverlayByAttr(atrrName, attrVal) {
-    let overlay = undefined
-    for (let key in this._cache) {
+  getOverlaysByAttr(atrrName, attrVal) {
+    let result = []
+    Object.keys(this._cache).forEach(key => {
       if (this._cache[key].attr[atrrName] === attrVal) {
-        overlay = this._cache[key]
+        result.push[this._cache[key]]
       }
-    }
-    return overlay
+    })
+    return result
   }
 
   /**
@@ -222,11 +236,11 @@ class Layer {
    * Get all Overlays
    */
   getOverlays() {
-    let arr = []
+    let result = []
     Object.keys(this._cache).forEach(key => {
-      arr.push(this._cache[key])
+      result.push(this._cache[key])
     })
-    return arr
+    return result
   }
 
   /**

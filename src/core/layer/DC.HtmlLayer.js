@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-20 19:27:28
+ * @Last Modified time: 2020-04-24 11:08:52
  */
 
 import Cesium from '@/namespace'
@@ -32,7 +32,6 @@ DC.HtmlLayer = class extends Layer {
    * the layer added handler function
    * subclasses need to be overridden
    */
-
   _addHandler(viewer) {
     this._viewer = viewer
     this._viewer.dcContainer.appendChild(this._delegate)
