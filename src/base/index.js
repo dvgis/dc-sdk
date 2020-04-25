@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-22 13:13:05
+ * @Last Modified time: 2020-04-25 15:09:26
  */
 ;(function() {
   let isCesiumLoaded = false
   let DC = {
     Author: 'Caven Chen',
     GitHub: 'https://github.com/Digital-Visual',
-    Version: '1.0.0',
+    Version: '1.0.2',
     Config: {},
     Namespace: {},
     Initialized: false

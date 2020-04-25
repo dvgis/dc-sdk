@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:28:33
+ * @Last Modified time: 2020-04-24 14:54:24
  */
 
 import Overlay from '../Overlay'
@@ -32,14 +32,11 @@ DC.Polyline = class extends Overlay {
   }
 
   get center() {
-    let boundingSphere = Cesium.BoundingSphere.fromPoints(
-      DC.T.transformWGS84ArrayToCartesianArray(this._positions)
-    )
-    return DC.T.transformCartesianToWGS84(boundingSphere.center)
+    return DC.Math.center(this._positions)
   }
 
   get distance() {
-    return DC.Math.getDistance(this._positions)
+    return DC.Math.distance(this._positions)
   }
 
   _mountedHook() {

@@ -2,22 +2,20 @@
  * @Author: Caven
  * @Date: 2020-04-23 09:29:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-23 12:38:10
+ * @Last Modified time: 2020-04-24 15:36:58
  */
 
-export default function getBounds(positions = [], expand = 0) {
+export default function bounds(positions = [], expand = 0) {
   let minLng = 180
   let minLat = 90
   let maxLng = -180
   let maxLat = -90
-  positions
-    .filter(item => item instanceof DC.Position)
-    .forEach(item => {
-      minLng = Math.min(minLng, item.lng)
-      minLat = Math.min(minLat, item.lat)
-      maxLng = Math.max(maxLng, item.lng)
-      maxLat = Math.max(maxLat, item.lat)
-    })
+  positions.forEach(item => {
+    minLng = Math.min(minLng, item.lng || item.x)
+    minLat = Math.min(minLat, item.lat || item.y)
+    maxLng = Math.max(maxLng, item.lng || item.x)
+    maxLat = Math.max(maxLat, item.lat || item.y)
+  })
 
   if (expand > 0) {
     let diffLng = Math.abs(maxLng - maxLng)

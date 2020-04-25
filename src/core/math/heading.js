@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-04-11 00:41:47
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-11 00:47:54
+ * @Last Modified time: 2020-04-24 14:52:51
  */
 import Cesium from '@/namespace'
 
-export default function getHeading(startPosition, endPosition) {
+export default function heading(startPosition, endPosition) {
   let heading = 0
   if (startPosition instanceof DC.Position) {
     startPosition = DC.T.transformWGS84ToCartesian(startPosition)

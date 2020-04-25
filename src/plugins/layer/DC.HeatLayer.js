@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 12:56:27
+ * @Last Modified time: 2020-04-24 14:42:49
  */
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
@@ -244,7 +244,7 @@ DC.HeatLayer = class extends Layer {
       return this
     }
     this._positions = positions
-    this._bounds = DC.Math.getBounds(this._positions)
+    this._bounds = DC.Math.bounds(this._positions)
     this._reDraw()
     return this
   }
@@ -255,7 +255,7 @@ DC.HeatLayer = class extends Layer {
    */
   addPosition(position) {
     this._positions.push(position)
-    this._bounds = DC.Math.getBounds(this._positions)
+    this._bounds = DC.Math.bounds(this._positions)
     this._reDraw()
     return this
   }

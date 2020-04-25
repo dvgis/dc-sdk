@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:21:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-15 13:24:49
+ * @Last Modified time: 2020-04-24 14:43:15
  */
 import Cesium from '@/namespace'
 import { RoamingEvent } from '@/core/event'
@@ -84,7 +84,7 @@ DC.RoamingPath = class {
       if (viewMode === 0) {
         viewer.trackedEntity = this._delegate
       } else if (viewMode === 1) {
-        let heading = DC.Math.getHeading(tickPosition, nextTickPosition)
+        let heading = DC.Math.heading(tickPosition, nextTickPosition)
         let WGS84TickPosition = DC.T.transformCartesianToWGS84(tickPosition)
         WGS84TickPosition.alt = viewOption.alt || 5
         camera.lookAt(
@@ -136,10 +136,10 @@ DC.RoamingPath = class {
   _mountedPosition() {
     let interval = 0
     if (this._mode === 'speed') {
-      let v = DC.Math.getDistance(this._positions) / this._duration
+      let v = DC.Math.distance(this._positions) / this._duration
       this._timeLine = this._positions.map((item, index, arr) => {
         if (index !== 0) {
-          interval += DC.Math.getDistance([arr[index - 1], item]) / v
+          interval += DC.Math.distance([arr[index - 1], item]) / v
         }
         return Cesium.JulianDate.addSeconds(
           this._startTime,

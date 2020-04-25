@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 09:32:09
+ * @Last Modified time: 2020-04-24 15:01:54
  */
 import Overlay from '../Overlay'
 import Cesium from '@/namespace'
@@ -42,31 +42,11 @@ DC.Polygon = class extends Overlay {
   }
 
   get center() {
-    let boundingSphere = Cesium.BoundingSphere.fromPoints(
-      DC.T.transformWGS84ArrayToCartesianArray(this._positions)
-    )
-    return DC.T.transformCartesianToWGS84(boundingSphere.center)
+    return DC.Math.center(this._positions)
   }
 
   get area() {
-    let result = 0
-    if (this._positions) {
-      let h = 0
-      let ellipsoid = Cesium.Ellipsoid.WGS84
-      let positions = [...this._positions]
-      positions.push(positions[0])
-      for (let i = 1; i < positions.length; i++) {
-        let oel = ellipsoid.cartographicToCartesian(
-          DC.T.transformWGS84ToCartographic(positions[i - 1])
-        )
-        let el = ellipsoid.cartographicToCartesian(
-          DC.T.transformWGS84ToCartographic(positions[i])
-        )
-        h += oel.x * el.y - el.x * oel.y
-      }
-      result = Math.abs(h).toFixed(2)
-    }
-    return result
+    return DC.Math.area(this._positions)
   }
 
   /**
