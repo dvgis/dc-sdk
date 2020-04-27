@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:33:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 15:42:35
+ * @Last Modified time: 2020-04-26 11:53:30
  */
 import Cesium from '@/namespace'
 
@@ -57,6 +57,15 @@ class CameraOption {
       }
     })
   }
+
+  /**
+   *
+   * @param {*} west
+   * @param {*} south
+   * @param {*} east
+   * @param {*} north
+   */
+  setBounds(west, south, east, north) {}
 }
 
 export default CameraOption

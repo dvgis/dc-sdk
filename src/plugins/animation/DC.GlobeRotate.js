@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-30 20:47:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-01 10:38:06
+ * @Last Modified time: 2020-04-27 13:21:24
  */
 import Cesium from '@/namespace'
 
@@ -28,7 +28,7 @@ DC.GlobeRotate = class {
    */
   _icrf(scene, time) {
     if (scene.mode !== Cesium.SceneMode.SCENE3D) {
-      return
+      return false
     }
     let icrfToFixed = Cesium.Transforms.computeIcrfToFixedMatrix(time)
     if (Cesium.defined(icrfToFixed)) {

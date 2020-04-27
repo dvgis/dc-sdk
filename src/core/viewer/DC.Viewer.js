@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:28:55
+ * @Last Modified time: 2020-04-27 13:37:03
  */
 
 import Cesium from '@/namespace'
@@ -242,6 +242,18 @@ DC.Viewer = class {
 
   /**
    *
+   * @param {*} west
+   * @param {*} south
+   * @param {*} east
+   * @param {*} north
+   */
+  setBounds(west, south, east, north) {
+    this._cameraOption.setBounds(west, south, east, north)
+    return this
+  }
+
+  /**
+   *
    * 修改场景的模式，2：2D，2.5：2.5D，3：3D
    * @param {*} sceneMode
    * @param {*} duration
@@ -460,6 +472,28 @@ DC.Viewer = class {
         },
         complete: completeCallback,
         duration: duration
+      })
+    }
+    return this
+  }
+
+  /**
+   *
+   * @param {*} position
+   * @param {*} completeCallback
+   *
+   */
+  zoomToPosition(position, completeCallback) {
+    if (position instanceof DC.Position) {
+      this._delegate.camera.flyTo({
+        destination: DC.T.transformWGS84ToCartesian(position),
+        orientation: {
+          heading: Cesium.Math.toRadians(position.heading),
+          pitch: Cesium.Math.toRadians(position.pitch),
+          roll: Cesium.Math.toRadians(position.roll)
+        },
+        complete: completeCallback,
+        duration: 0
       })
     }
     return this
