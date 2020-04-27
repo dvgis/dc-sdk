@@ -2,14 +2,15 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-25 15:09:26
+ * @Last Modified time: 2020-04-27 13:50:20
  */
 ;(function() {
   let isCesiumLoaded = false
   let DC = {
     Author: 'Caven Chen',
     GitHub: 'https://github.com/Digital-Visual',
-    Version: '1.0.2',
+    Home: 'https://www.dvgis.cn',
+    Version: '1.0.3',
     Config: {},
     Namespace: {},
     Initialized: false
