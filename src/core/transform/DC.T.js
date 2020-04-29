@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 12:53:50
+ * @Last Modified time: 2020-04-29 20:50:55
  */
 import Cesium from '@/namespace'
 
@@ -111,5 +111,21 @@ DC.T = class {
       Cesium.Math.toDegrees(mp.latitude),
       mp.height
     )
+  }
+
+  /**
+   *
+   * @param {*} position
+   * @param {*} viewer
+   */
+  static transformWindowToWGS84(position, viewer) {
+    let scene = viewer.scene
+    if (scene.mode === DC.SceneMode.SCENE3D) {
+      let ray = scene.camera.getPickRay(position)
+      cartesian = scene.globe.pick(ray, scene)
+    } else {
+      cartesian = scene.camera.pickEllipsoid(position, Cesium.Ellipsoid.WGS84)
+    }
+    return DC.T.transformCartesianToWGS84(cartesian)
   }
 }
