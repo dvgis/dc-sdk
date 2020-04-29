@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:50
+ * @Last Modified time: 2020-04-29 21:04:43
  */
 
 import { EffectEvent } from '@/core/event'
@@ -62,8 +62,10 @@ class Effect {
    * @param {*} viewer
    * 添加到Viewer
    */
-  addToViewer(viewer) {
-    viewer.addEffect(this)
+  addTo(viewer) {
+    if (viewer && viewer.addEffect) {
+      viewer.addEffect(this)
+    }
     return this
   }
 

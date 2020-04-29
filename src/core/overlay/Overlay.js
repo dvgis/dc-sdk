@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 11:01:38
+ * @Last Modified time: 2020-04-29 21:05:30
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -130,8 +130,8 @@ class Overlay {
    * @param {*} layer
    *
    */
-  addToLayer(layer) {
-    if (layer) {
+  addTo(layer) {
+    if (layer && layer.addOverlay) {
       layer.addOverlay(this)
     }
     return this

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 10:57:23
+ * @Last Modified time: 2020-04-29 21:08:32
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -261,7 +261,7 @@ class Layer {
    *
    * @param {*} viewer
    */
-  addToViewer(viewer) {
+  addTo(viewer) {
     if (viewer && viewer.addLayer) {
       viewer.addLayer(this)
     }
