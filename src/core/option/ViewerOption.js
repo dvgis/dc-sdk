@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:27:54
+ * @Last Modified time: 2020-04-29 13:43:56
  */
 
 import Cesium from '@/namespace'
@@ -75,16 +75,15 @@ class ViewerOption {
       true
     )
 
-    scene.screenSpaceCameraController.maximumZoomDistance = Cesium.defaultValue(
-      this._options.maxZoomDistance,
-      40489014.0
-    )
-
     scene.screenSpaceCameraController.minimumZoomDistance = Cesium.defaultValue(
-      this._options.minZoomDistance,
+      this._options.distanceRange[0],
       1.0
     )
 
+    scene.screenSpaceCameraController.maximumZoomDistance = Cesium.defaultValue(
+      this._options.distanceRange[1],
+      40489014.0
+    )
     return this
   }
 
@@ -121,6 +120,7 @@ class ViewerOption {
       return this
     }
     this._options = {
+      distanceRange: [1.0, 40489014.0],
       ...this._options,
       ...options
     }

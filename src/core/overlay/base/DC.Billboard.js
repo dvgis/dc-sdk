@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:27:59
+ * @Last Modified time: 2020-04-28 12:42:43
  */
 
 import Cesium from '@/namespace'
@@ -42,6 +42,9 @@ DC.Billboard = class extends Overlay {
   }
 
   set size(size) {
+    if (!Array.isArray(size)) {
+      throw new Error('DC.Billboard: the size invalid')
+    }
     this._size = size
   }
 
