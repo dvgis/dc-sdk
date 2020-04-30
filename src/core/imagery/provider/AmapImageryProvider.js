@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:31:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:25:09
+ * @Last Modified time: 2020-04-30 12:33:06
  */
 
 import Cesium from '@/namespace'
@@ -16,7 +16,7 @@ const ELEC_URL =
 class AmapImageryProvider extends Cesium.UrlTemplateImageryProvider {
   constructor(options = {}) {
     options['url'] = options.style === 'img' ? IMG_URL : ELEC_URL
-    if (!options.subdomains) {
+    if (!options.subdomains || !options.subdomains.length) {
       options['subdomains'] = ['01', '02', '03', '04']
     }
     super(options)

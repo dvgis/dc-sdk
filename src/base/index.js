@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-27 13:50:20
+ * @Last Modified time: 2020-04-30 12:09:34
  */
 ;(function() {
   let isCesiumLoaded = false
@@ -59,4 +59,4 @@
   DC.ready = callback => {}
 })()
 
-export default DC
+module.exports = DC

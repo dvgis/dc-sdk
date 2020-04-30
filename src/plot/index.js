@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-03 10:13:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-22 13:18:04
+ * @Last Modified time: 2020-04-30 12:09:12
  */
 
 const install = function(DC) {
@@ -19,6 +19,6 @@ if (typeof window !== 'undefined' && window.DC) {
   install(window.DC)
 }
 
-export default {
+module.exports = {
   install
 }

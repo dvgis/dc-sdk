@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 16:10:47
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 02:12:48
+ * @Last Modified time: 2020-04-30 12:32:51
  */
 
 import Cesium from '@/namespace'
@@ -13,7 +13,7 @@ const ELEC_URL =
 class TencentImageryProvider extends Cesium.UrlTemplateImageryProvider {
   constructor(options = {}) {
     options['url'] = ELEC_URL
-    if (!options.subdomains) {
+    if (!options.subdomains || !options.subdomains.length) {
       options['subdomains'] = ['0', '1', '2']
     }
     super(options)

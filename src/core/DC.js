@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-22 13:13:09
+ * @Last Modified time: 2020-04-30 12:08:44
  */
 
 /**
@@ -27,4 +27,4 @@ DC.ready = callback => {
   }
 }
 
-export default {}
+module.exports = {}
