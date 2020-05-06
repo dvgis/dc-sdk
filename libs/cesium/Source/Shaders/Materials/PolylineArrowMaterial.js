@@ -5,8 +5,6 @@ export default "#ifdef GL_OES_standard_derivatives\n\
 \n\
 uniform vec4 color;\n\
 \n\
-varying float v_width;\n\
-\n\
 float getPointOnLine(vec2 p0, vec2 p1, float x)\n\
 {\n\
     float slope = (p0.y - p1.y) / (p0.x - p1.x);\n\

@@ -22,7 +22,7 @@ czm_material czm_getMaterial(czm_materialInput materialInput)\n\
     float alpha = (distanceToContour < (czm_pixelRatio * width)) ? 1.0 : 0.0;\n\
 #endif\n\
 \n\
-    vec4 outColor = czm_gammaCorrect(vec4(color.rgb, alpha));\n\
+    vec4 outColor = czm_gammaCorrect(vec4(color.rgb, alpha * color.a));\n\
     material.diffuse = outColor.rgb;\n\
     material.alpha = outColor.a;\n\
 \n\

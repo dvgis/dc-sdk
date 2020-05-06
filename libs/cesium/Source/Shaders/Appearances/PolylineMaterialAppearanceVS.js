@@ -23,10 +23,13 @@ void main()\n\
     vec4 prev = czm_computePrevPosition();\n\
     vec4 next = czm_computeNextPosition();\n\
 \n\
-    v_width = width;\n\
-    v_st = st;\n\
-\n\
-    vec4 positionWC = getPolylineWindowCoordinates(p, prev, next, expandDir, width, usePrev, v_polylineAngle);\n\
+    float angle;\n\
+    vec4 positionWC = getPolylineWindowCoordinates(p, prev, next, expandDir, width, usePrev, angle);\n\
     gl_Position = czm_viewportOrthographic * positionWC;\n\
+\n\
+    v_width = width;\n\
+    v_st.s = st.s;\n\
+    v_st.t = czm_writeNonPerspective(st.t, gl_Position.w);\n\
+    v_polylineAngle = angle;\n\
 }\n\
 ";

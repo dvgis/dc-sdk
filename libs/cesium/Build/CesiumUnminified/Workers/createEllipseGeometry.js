@@ -21,18 +21,18 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-c2e8ef35', './Check-c4f3a3fc', './Math-a06249ed', './Cartesian2-a4e73c05', './Transforms-533d1994', './RuntimeError-6122571f', './WebGLConstants-4ae0db90', './ComponentDatatype-762ab5b7', './GeometryAttribute-47fb6f1a', './GeometryAttributes-57608efc', './AttributeCompression-6b12d004', './GeometryPipeline-7db33fea', './EncodedCartesian3-0e715517', './IndexDatatype-755cb3fd', './IntersectionTests-11682642', './Plane-beebe18b', './GeometryOffsetAttribute-bc682dfe', './VertexFormat-5ae20b72', './EllipseGeometryLibrary-8437edab', './GeometryInstance-81f6321c', './EllipseGeometry-7025ab8f'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, VertexFormat, EllipseGeometryLibrary, GeometryInstance, EllipseGeometry) { 'use strict';
+define(['./when-b43ff45e', './Check-d404a0fe', './Math-ff83510d', './Cartesian2-d59b2dc1', './Transforms-80c667c2', './RuntimeError-bf10f3d5', './WebGLConstants-56de22c0', './ComponentDatatype-560e725a', './GeometryAttribute-ea3e1579', './GeometryAttributes-fbf888b4', './AttributeCompression-43e9d5b6', './GeometryPipeline-43cf88e7', './EncodedCartesian3-b3206de4', './IndexDatatype-f0ba7ec6', './IntersectionTests-3c24f322', './Plane-d2fbaf25', './GeometryOffsetAttribute-48d2619e', './VertexFormat-0205f272', './EllipseGeometryLibrary-a1429cd9', './GeometryInstance-bd03ec3e', './EllipseGeometry-e39bbc98'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, AttributeCompression, GeometryPipeline, EncodedCartesian3, IndexDatatype, IntersectionTests, Plane, GeometryOffsetAttribute, VertexFormat, EllipseGeometryLibrary, GeometryInstance, EllipseGeometry) { 'use strict';
 
-    function createEllipseGeometry(ellipseGeometry, offset) {
-            if (when.defined(offset)) {
-                ellipseGeometry = EllipseGeometry.EllipseGeometry.unpack(ellipseGeometry, offset);
-            }
-            ellipseGeometry._center = Cartesian2.Cartesian3.clone(ellipseGeometry._center);
-            ellipseGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(ellipseGeometry._ellipsoid);
-            return EllipseGeometry.EllipseGeometry.createGeometry(ellipseGeometry);
-        }
+  function createEllipseGeometry(ellipseGeometry, offset) {
+    if (when.defined(offset)) {
+      ellipseGeometry = EllipseGeometry.EllipseGeometry.unpack(ellipseGeometry, offset);
+    }
+    ellipseGeometry._center = Cartesian2.Cartesian3.clone(ellipseGeometry._center);
+    ellipseGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(ellipseGeometry._ellipsoid);
+    return EllipseGeometry.EllipseGeometry.createGeometry(ellipseGeometry);
+  }
 
-    return createEllipseGeometry;
+  return createEllipseGeometry;
 
 });
 //# sourceMappingURL=createEllipseGeometry.js.map

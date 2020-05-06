@@ -3,8 +3,6 @@ export default "uniform vec4 color;\n\
 uniform float glowPower;\n\
 uniform float taperPower;\n\
 \n\
-varying float v_width;\n\
-\n\
 czm_material czm_getMaterial(czm_materialInput materialInput)\n\
 {\n\
     czm_material material = czm_getDefaultMaterial(materialInput);\n\

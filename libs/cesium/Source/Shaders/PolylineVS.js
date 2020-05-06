@@ -91,11 +91,15 @@ void main()\n\
         }\n\
     #endif\n\
 \n\
-    vec4 positionWC = getPolylineWindowCoordinates(p, prev, next, expandDir, width, usePrev, v_polylineAngle);\n\
+    float polylineAngle;\n\
+    vec4 positionWC = getPolylineWindowCoordinates(p, prev, next, expandDir, width, usePrev, polylineAngle);\n\
     gl_Position = czm_viewportOrthographic * positionWC * show;\n\
 \n\
-    v_st = vec2(texCoord, clamp(expandDir, 0.0, 1.0));\n\
+    v_st.s = texCoord;\n\
+    v_st.t = czm_writeNonPerspective(clamp(expandDir, 0.0, 1.0), gl_Position.w);\n\
+\n\
     v_width = width;\n\
     v_pickColor = pickColor;\n\
+    v_polylineAngle = polylineAngle;\n\
 }\n\
 ";

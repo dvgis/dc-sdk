@@ -21,18 +21,18 @@
  * See https://github.com/CesiumGS/cesium/blob/master/LICENSE.md for full licensing details.
  */
 
-define(['./when-c2e8ef35', './Check-c4f3a3fc', './Math-a06249ed', './Cartesian2-a4e73c05', './Transforms-533d1994', './RuntimeError-6122571f', './WebGLConstants-4ae0db90', './ComponentDatatype-762ab5b7', './GeometryAttribute-47fb6f1a', './GeometryAttributes-57608efc', './IndexDatatype-755cb3fd', './GeometryOffsetAttribute-bc682dfe', './EllipseGeometryLibrary-8437edab', './EllipseOutlineGeometry-fc4b485c'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipseGeometryLibrary, EllipseOutlineGeometry) { 'use strict';
+define(['./when-b43ff45e', './Check-d404a0fe', './Math-ff83510d', './Cartesian2-d59b2dc1', './Transforms-80c667c2', './RuntimeError-bf10f3d5', './WebGLConstants-56de22c0', './ComponentDatatype-560e725a', './GeometryAttribute-ea3e1579', './GeometryAttributes-fbf888b4', './IndexDatatype-f0ba7ec6', './GeometryOffsetAttribute-48d2619e', './EllipseGeometryLibrary-a1429cd9', './EllipseOutlineGeometry-bba61fb0'], function (when, Check, _Math, Cartesian2, Transforms, RuntimeError, WebGLConstants, ComponentDatatype, GeometryAttribute, GeometryAttributes, IndexDatatype, GeometryOffsetAttribute, EllipseGeometryLibrary, EllipseOutlineGeometry) { 'use strict';
 
-    function createEllipseOutlineGeometry(ellipseGeometry, offset) {
-            if (when.defined(offset)) {
-                ellipseGeometry = EllipseOutlineGeometry.EllipseOutlineGeometry.unpack(ellipseGeometry, offset);
-            }
-            ellipseGeometry._center = Cartesian2.Cartesian3.clone(ellipseGeometry._center);
-            ellipseGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(ellipseGeometry._ellipsoid);
-            return EllipseOutlineGeometry.EllipseOutlineGeometry.createGeometry(ellipseGeometry);
-        }
+  function createEllipseOutlineGeometry(ellipseGeometry, offset) {
+    if (when.defined(offset)) {
+      ellipseGeometry = EllipseOutlineGeometry.EllipseOutlineGeometry.unpack(ellipseGeometry, offset);
+    }
+    ellipseGeometry._center = Cartesian2.Cartesian3.clone(ellipseGeometry._center);
+    ellipseGeometry._ellipsoid = Cartesian2.Ellipsoid.clone(ellipseGeometry._ellipsoid);
+    return EllipseOutlineGeometry.EllipseOutlineGeometry.createGeometry(ellipseGeometry);
+  }
 
-    return createEllipseOutlineGeometry;
+  return createEllipseOutlineGeometry;
 
 });
 //# sourceMappingURL=createEllipseOutlineGeometry.js.map
