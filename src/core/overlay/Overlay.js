@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-29 21:05:30
+ * @Last Modified time: 2020-05-06 10:29:09
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -20,6 +20,10 @@ class Overlay {
     this.type = undefined
     this.on(DC.OverlayEventType.ADD, this._addHandler, this)
     this.on(DC.OverlayEventType.REMOVE, this._removeHandler, this)
+  }
+
+  get overlayId() {
+    return this._id
   }
 
   set id(id) {
@@ -85,6 +89,9 @@ class Overlay {
    * @param {*} layer
    */
   _addHandler(layer) {
+    if (!layer) {
+      return false
+    }
     this._layer = layer
     this._mountedHook && this._mountedHook()
     if (this._layer && this._layer.delegate && this._layer.delegate.entities) {

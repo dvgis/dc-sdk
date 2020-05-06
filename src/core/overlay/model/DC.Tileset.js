@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:28:45
+ * @Last Modified time: 2020-05-06 10:30:51
  */
 import Cesium from '@/namespace'
 import Overlay from '../Overlay'
@@ -37,10 +37,13 @@ DC.Tileset = class extends Overlay {
    * Overrides parent methods
    */
   _addHandler(layer) {
+    if (!layer) {
+      return false
+    }
     this._layer = layer
     this._delegate.readyPromise.then(tileset => {
       this._layer.delegate.add(tileset)
-      tileset.layer = this._layer
+      tileset.layer = layer
       tileset.overlayId = this._id
       this._state = DC.OverlayState.ADDED
     })
@@ -50,12 +53,13 @@ DC.Tileset = class extends Overlay {
    * Overrides parent methods
    */
   _removeHandler() {
-    if (this._layer) {
-      this._delegate.readyPromise.then(tileset => {
-        this._layer.delegate.remove(tileset)
-        this._state = DC.OverlayState.REMOVED
-      })
+    if (!this._layer) {
+      return false
     }
+    this._delegate.readyPromise.then(tileset => {
+      this._layer.delegate.remove(tileset)
+      this._state = DC.OverlayState.REMOVED
+    })
   }
   /**
    *
