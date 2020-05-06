@@ -2,13 +2,13 @@
  * @Author: Caven
  * @Date: 2020-02-12 18:53:12
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-08 19:44:14
+ * @Last Modified time: 2020-05-06 10:33:08
  */
 console.clear()
 console.log(
   `%c \n DC-SDK \n  %c \n 用数字描绘世界之美  %c \n
     版本:${DC.Version}
-    Cesium版本：1.68
+    Cesium版本：1.69
     作者:Caven Chen
     主页: http://dc.cavencj.com
     github: https://github.com/Digital-Visual

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-30 12:09:34
+ * @Last Modified time: 2020-05-06 10:32:57
  */
 ;(function() {
   let isCesiumLoaded = false
@@ -10,7 +10,7 @@
     Author: 'Caven Chen',
     GitHub: 'https://github.com/Digital-Visual',
     Home: 'https://www.dvgis.cn',
-    Version: '1.0.3',
+    Version: '1.0.4',
     Config: {},
     Namespace: {},
     Initialized: false
