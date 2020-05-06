@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 14:42:49
+ * @Last Modified time: 2020-05-06 13:06:11
  */
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
-const h337 = require('heatmap')
+const h337 = require('heatmap.js/build/heatmap.min')
 
 const DEF_OPTS = {
   maxOpacity: 0.8, // the maximum opacity used if not given in the heatmap options object

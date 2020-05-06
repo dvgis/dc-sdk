@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-03 09:54:54
+ * @Last Modified time: 2020-05-06 13:02:12
  */
 
 const path = require('path')
@@ -98,8 +98,7 @@ module.exports = env => {
       extensions: ['.js', '.json', '.css'],
       alias: {
         '@': resolve('src'),
-        entry: './src/plugins/DC.Pulgins.js',
-        heatmap: path.resolve(__dirname, './libs/heatmap/heatmap.min.js')
+        entry: './src/plugins/DC.Pulgins.js'
       }
     },
     plugins

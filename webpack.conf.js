@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-22 10:09:35
+ * @Last Modified time: 2020-05-06 13:01:32
  */
 
 const path = require('path')
@@ -10,9 +10,8 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopywebpackPlugin = require('copy-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-const cesiumBuild = './libs/cesium/Build/Cesium'
-const cesiumSource = './libs/cesium/Source'
+const cesiumBuild = 'node_modules/cesium/Build/Cesium'
+const cesiumSource = 'node_modules/cesium/Source'
 
 let cesiumCopyPlugin = [
   new CopywebpackPlugin([
