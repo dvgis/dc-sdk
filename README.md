@@ -31,8 +31,8 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 > NPM / YARN
 
 ```shell
-   yarn add @dvgis/sdk
-   npm install @dvgis/sdk
+   yarn add @dvgis/dc-sdk
+   npm install @dvgis/dc-sdk
 ```
 
 ```js
@@ -53,7 +53,7 @@ import 'dvgis/dc.core.min.css' // Main Style Sheet
 
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
-const dvgisDist = './node_modules/@dvgis/sdk/dist/dc-sdk'
+const dvgisDist = './node_modules/@dvgis/dc-sdk/dist/dc-sdk'
 
 module.exports = {
   // other settings

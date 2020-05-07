@@ -31,8 +31,8 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 > NPM / YARN
 
 ```shell
-   yarn add @dvgis/sdk
-   npm install @dvgis/sdk
+   yarn add @dvgis/dc-sdk
+   npm install @dvgis/dc-sdk
 ```
 
 ```js
@@ -53,7 +53,7 @@ import 'dvgis/dc.core.min.css' // 主要样式
 
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
-const dvgisDist = './node_modules/@dvgis/sdk/dist/dc-sdk'
+const dvgisDist = './node_modules/@dvgis/dc-sdk/dist/dc-sdk'
 
 module.exports = {
   // 其他配置
