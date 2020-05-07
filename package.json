@@ -1,6 +1,6 @@
 {
   "name": "@dvgis/sdk",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "main": "index.js",
   "repository": "https://github.com/Digital-Visual/dc-sdk.git",
   "homepage": "http://dc.dvgis.cn",
