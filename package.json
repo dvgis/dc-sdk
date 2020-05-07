@@ -5,7 +5,7 @@
   "repository": "https://github.com/Digital-Visual/dc-sdk.git",
   "homepage": "http://dc.dvgis.cn",
   "author": "Caven Chen",
-  "license": "MIT",
+  "license": "Apache 2.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "yarn run build:core && yarn run build:plugins && yarn run build:plot && yarn run build:overlay",
