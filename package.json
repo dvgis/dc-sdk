@@ -1,5 +1,5 @@
 {
-  "name": "dc-sdk.js",
+  "name": "@dvgis/sdk",
   "version": "1.4.0",
   "main": "index.js",
   "repository": "https://github.com/Digital-Visual/dc-sdk.git",
