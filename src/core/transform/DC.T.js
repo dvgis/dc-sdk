@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-29 20:50:55
+ * @Last Modified time: 2020-05-06 13:20:34
  */
 import Cesium from '@/namespace'
 
@@ -127,5 +127,19 @@ DC.T = class {
       cartesian = scene.camera.pickEllipsoid(position, Cesium.Ellipsoid.WGS84)
     }
     return DC.T.transformCartesianToWGS84(cartesian)
+  }
+
+  /**
+   *
+   * @param {*} position
+   * @param {*} viewer
+   */
+  static transformWGS84ToWindow(position, viewer) {
+    let scene = viewer.scene
+    let cartesian = SceneTransforms.wgs84ToWindowCoordinates(
+      scene,
+      DC.T.transformWGS84ToCartesian(position)
+    )
+    return cartesian
   }
 }

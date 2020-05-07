@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-26 23:05:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:33:43
+ * @Last Modified time: 2020-05-06 14:56:15
  */
 import Cesium from '@/namespace'
 import Effect from './Effect'
@@ -15,13 +15,11 @@ DC.FogEffect = class extends Effect {
     this._trength = trength || 1
     this._color = color || new Cesium.Color(0.8, 0.8, 0.8, 0.5)
     this._state = DC.EffectState.INITIALIZED
+    this._addable = true
     this.type = DC.EffectType.FOG
   }
 
-  /**
-   * 准备代理
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     let _this = this
     this._delegate = new Cesium.PostProcessStage({
       name: this._id,

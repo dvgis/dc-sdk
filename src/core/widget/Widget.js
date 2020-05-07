@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 13:24:04
+ * @Last Modified time: 2020-05-06 14:48:11
  */
 import Cesium from '@/namespace'
 
@@ -12,7 +12,7 @@ class Widget {
     this._position = undefined
     this._enable = false
     this._wrapper = undefined
-    this._positionChangeAble = false
+    this._positionChangeable = false
     this._state = DC.WidgetState.INSTALLED
     this.type = undefined
   }
@@ -66,7 +66,7 @@ class Widget {
     /**
      *  add postRender Listener
      */
-    if (this._viewer && this._wrapper && this._positionChangeAble) {
+    if (this._viewer && this._wrapper && this._positionChangeable) {
       let self = this
       let scene = this._viewer.scene
       scene.postRender.addEventListener(() => {

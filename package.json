@@ -1,9 +1,10 @@
 {
-  "name": "dc-sdk",
-  "version": "1.0.0",
+  "name": "dc-sdk.js",
+  "version": "1.4.0",
   "main": "index.js",
-  "repository": "https://github.com/caven-chen/dc-sdk.git",
-  "author": "Caven <374903123@qq.com>",
+  "repository": "https://github.com/Digital-Visual/dc-sdk.git",
+  "homepage": "http://dc.dvgis.cn",
+  "author": "Caven Chen",
   "license": "MIT",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

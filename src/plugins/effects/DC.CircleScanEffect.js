@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:15:59
+ * @Last Modified time: 2020-05-06 14:55:56
  */
 
 import Cesium from '@/namespace'
@@ -20,14 +20,12 @@ DC.CircleScanEffect = class extends Effect {
     this._radius = radius || 0
     this._color = Cesium.defaultValue(color, Cesium.Color.RED)
     this._duration = Cesium.defaultValue(duration, 1) * 1e3
+    this._addable = true
     this._state = DC.EffectState.INITIALIZED
     this.type = DC.EffectType.CIRCLE_SCAN
   }
 
-  /**
-   * 准备代理
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     let cartesian3Center = DC.T.transformWGS84ToCartesian(this._position)
     let cartesian4Center = new Cesium.Cartesian4(
       cartesian3Center.x,

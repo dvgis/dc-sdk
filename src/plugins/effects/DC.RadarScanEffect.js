@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-29 18:16:47
+ * @Last Modified time: 2020-05-06 14:56:20
  */
 
 import Cesium from '@/namespace'
@@ -21,13 +21,11 @@ DC.RadarScanEffect = class extends Effect {
     this._color = Cesium.defaultValue(color, Cesium.Color.RED)
     this._duration = Cesium.defaultValue(duration, 1) * 1e3
     this._state = DC.EffectState.INITIALIZED
+    this._addable = true
     this.type = DC.EffectType.RADAR_SCAN
   }
 
-  /**
-   * 准备代理
-   */
-  _prepareDelegate() {
+  _mountedHook() {
     let cartesian3Center = DC.T.transformWGS84ToCartesian(this._position)
     let cartesian4Center = new Cesium.Cartesian4(
       cartesian3Center.x,

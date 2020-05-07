@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-29 21:04:43
+ * @Last Modified time: 2020-05-06 14:56:57
  */
 
 import { EffectEvent } from '@/core/event'
@@ -13,6 +13,7 @@ class Effect {
     this._viewer = undefined
     this._delegate = undefined
     this._state = undefined
+    this._addable = false
     this._effectEvent = new EffectEvent()
     this.type = undefined
     this.on(DC.EffectEventType.ADD, this._addHandler, this)
@@ -28,9 +29,19 @@ class Effect {
   }
 
   /**
-   * 准备代理
+   * The hook for mounted
    */
-  _prepareDelegate() {}
+  _mountedHook() {}
+
+  /**
+   * The hook for added
+   */
+  _addedHook() {}
+
+  /**
+   * The hook for removed
+   */
+  _removedHook() {}
 
   /**
    *
@@ -39,10 +50,11 @@ class Effect {
    */
   _addHandler(viewer) {
     this._viewer = viewer
-    this._prepareDelegate()
-    if (this._delegate) {
+    this._mountedHook && this._mountedHook()
+    if (this._delegate && this._addable) {
       this._viewer.delegate.scene.postProcessStages.add(this._delegate)
     }
+    this._addedHook && this._addedHook()
     this._state = DC.EffectState.ADDED
   }
 
@@ -50,10 +62,11 @@ class Effect {
    * 效果添加的回调函数
    */
   _removeHandler() {
-    if ((this._viewer, this._delegate)) {
+    if (this._viewer && this._delegate && this._addable) {
       this._viewer.delegate.scene.postProcessStages.remove(this._delegate)
       this._delegate = undefined
     }
+    this._removedHook && this._removedHook()
     this._state = DC.EffectState.REMOVED
   }
 

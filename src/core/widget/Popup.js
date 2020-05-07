@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-10 13:23:33
+ * @Last Modified time: 2020-05-06 14:49:14
  */
 
 import Widget from './Widget'
@@ -12,7 +12,7 @@ class Popup extends Widget {
     super()
     this._wrapper = DC.DomUtil.create('div', 'dc-popup')
     this._config = undefined
-    this._positionChangeAble = true
+    this._positionChangeable = true
     this.type = DC.WidgetType.POPUP
   }
 
