@@ -15,17 +15,17 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 
 ```html
 <!--基础包-->
-<script src="/libs/dc-sdk/dc.base.min.js"></script>
+<script src="libs/dc-sdk/dc.base.min.js"></script>
 <!--核心包-->
-<script src="/libs/dc-sdk/dc.core.min.js"></script>
+<script src="libs/dc-sdk/dc.core.min.js"></script>
 <!--插件包-->
-<script src="/libs/dc-sdk/plugins/dc.plugins.min.js"></script>
+<script src="libs/dc-sdk/plugins/dc.plugins.min.js"></script>
 <!--标绘包-->
-<script src="/libs/dc-sdk/plot/dc.plot.min.js"></script>
+<script src="libs/dc-sdk/plot/dc.plot.min.js"></script>
 <!--覆盖物/要素包-->
-<script src="/libs/dc-sdk/overlay/dc.overlay.min.js"></script>
+<script src="libs/dc-sdk/overlay/dc.overlay.min.js"></script>
 <!--主要样式-->
-<link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
+<link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
 
 > NPM / YARN
@@ -35,19 +35,40 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
    npm install @dvgis/sdk
 ```
 
-> ES6
-
-```html
-<!--基础包-->
-<script src="/libs/dc-sdk/dc.base.min.js"></script>
+```js
+import 'dvgis/dc.base.min' //基础包
+import 'dvgis/dc.core.min' //核心包
+import 'dvgis/plugins/dc.plugins.min' //插件包
+import 'dvgis/plot/dc.plot.min' //标绘包
+import 'dvgis/overlay/dc.overlay.min' // 覆盖物/要素包
+import 'dvgis/dc.core.min.css' // 主要样式
 ```
 
+## 配置
+
+> Vue
+
 ```js
-import '/libs/dc-sdk/dc.core.min' //核心包
-import 'libs/dc-sdk/plugins/dc.plugins.min' //插件包
-import 'libs/dc-sdk/plot/dc.plot.min' //标绘包
-import 'libs/dc-sdk/overlay/dc.overlay.min' // 覆盖物/要素包
-import 'libs/dc-sdk/dc.core.min.css' // 主要样式
+// vue.config.js vue 文件
+
+const path = require('path')
+const CopywebpackPlugin = require('copy-webpack-plugin')
+const dvgisDist = './node_modules/@dvgis/sdk/dist/dc-sdk'
+
+module.exports = {
+  // 其他配置
+  chainWebpack: config => {
+    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+    config.plugin('copy').use(CopywebpackPlugin, [
+      [
+        {
+          from: path.join(dvgisDist, 'resources'),
+          to: 'libs/dc-sdk/resources'
+        }
+      ]
+    ])
+  }
+}
 ```
 
 ## 开始

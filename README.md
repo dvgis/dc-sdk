@@ -15,17 +15,17 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 
 ```html
 <!--Basic Package-->
-<script src="/libs/dc-sdk/dc.base.min.js"></script>
+<script src="libs/dc-sdk/dc.base.min.js"></script>
 <!--Core Package-->
-<script src="/libs/dc-sdk/dc.core.min.js"></script>
+<script src="libs/dc-sdk/dc.core.min.js"></script>
 <!--Plugins Package-->
-<script src="/libs/dc-sdk/plugins/dc.plugins.min.js"></script>
+<script src="libs/dc-sdk/plugins/dc.plugins.min.js"></script>
 <!--Plot Package-->
-<script src="/libs/dc-sdk/plot/dc.plot.min.js"></script>
+<script src="libs/dc-sdk/plot/dc.plot.min.js"></script>
 <!--Overlay Package-->
-<script src="/libs/dc-sdk/overlay/dc.overlay.min.js"></script>
+<script src="libs/dc-sdk/overlay/dc.overlay.min.js"></script>
 <!--Main Style Sheet -->
-<link href="/libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
+<link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
 
 > NPM / YARN
@@ -35,19 +35,40 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
    npm install @dvgis/sdk
 ```
 
-> ES6
-
-```html
-<!--Basic Package-->
-<script src="/libs/dc-sdk/dc.base.min.js"></script>
+```js
+import 'dvgis/dc.base.min' //Basic Package
+import 'dvgis/dc.core.min' //Core Package
+import 'dvgis/plugins/dc.plugins.min' //Plugins Package
+import 'dvgis/plot/dc.plot.min' //Plot Package
+import 'dvgis/overlay/dc.overlay.min' // Overlay Package
+import 'dvgis/dc.core.min.css' // Main Style Sheet
 ```
 
+## Setting
+
+> Vue
+
 ```js
-import '/libs/dc-sdk/dc.core.min' //Core Package
-import 'libs/dc-sdk/plugins/dc.plugins.min' //Plugins Package
-import 'libs/dc-sdk/plot/dc.plot.min' //Plot Package
-import 'libs/dc-sdk/overlay/dc.overlay.min' // Overlay Package
-import 'libs/dc-sdk/dc.core.min.css' // Main Style Sheet
+// vue.config.js
+
+const path = require('path')
+const CopywebpackPlugin = require('copy-webpack-plugin')
+const dvgisDist = './node_modules/@dvgis/sdk/dist/dc-sdk'
+
+module.exports = {
+  // other settings
+  chainWebpack: config => {
+    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+    config.plugin('copy').use(CopywebpackPlugin, [
+      [
+        {
+          from: path.join(dvgisDist, 'resources'),
+          to: 'libs/dc-sdk/resources'
+        }
+      ]
+    ])
+  }
+}
 ```
 
 ## Start
