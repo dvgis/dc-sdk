@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 18:53:12
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 10:33:08
+ * @Last Modified time: 2020-05-08 20:43:55
  */
 console.clear()
 console.log(
@@ -10,7 +10,7 @@ console.log(
     版本:${DC.Version}
     Cesium版本：1.69
     作者:Caven Chen
-    主页: http://dc.cavencj.com
+    主页: https://www.dvgis.com
     github: https://github.com/Digital-Visual
     版权声明:
     1.框架是一个基础平台，完全开源，任何个人和机构可以修改、重构，无需经过我方授权。

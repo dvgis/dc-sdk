@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-07 14:10:27
+ * @Last Modified time: 2020-05-08 20:27:59
  */
 ;(function() {
   let isCesiumLoaded = false
@@ -52,11 +52,6 @@
   DC.use = plugin => {
     plugin && plugin.install && plugin.install(DC)
   }
-
-  /**
-   *
-   */
-  DC.ready = callback => {}
 })()
 
 module.exports = DC
