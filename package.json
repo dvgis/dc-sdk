@@ -1,10 +1,19 @@
 {
   "name": "@dvgis/dc-sdk",
   "version": "1.4.2",
+  "description": " The SDK is a secondary development based on the open source project Cesium, which optimizes some operations of Cesium and enables developers to quickly develop 3D applications through the framework.",
   "main": "index.js",
   "repository": "https://github.com/Digital-Visual/dc-sdk.git",
   "homepage": "http://dc.dvgis.cn",
-  "author": "Caven Chen",
+  "keywords": [
+    "3D",
+    "webgl",
+    "map",
+    "globe",
+    "cesium",
+    "heatmap"
+  ],
+  "author": "Caven Chen <cavencj@gmail.com>",
   "license": "Apache 2.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
