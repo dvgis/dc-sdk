@@ -3,7 +3,7 @@
 [**🇨🇳 中文**](./) | [**🇬🇧English**](./README.md)
 
 > 该 SDK 是基于开源项目 Cesium 进行的二次开发，优化了 Cesium 一些操作，通过该框架开发者可以快速的开发 3D 应用。
-> [主页](http://dc.cavencj.cn)
+> [主页](http://dc.dvgis.cn)
 
 ```warning
 Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技术和 GIS 相关技术
@@ -83,7 +83,7 @@ DC.ready(() => {
 
 [Cesium-Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
-[DC-SDK-Api](http://dc.dvgis.cn/home/#/docs)
+[DC-SDK-Api](http://dc.dvgis.cn/#/docs)
 
 ## 示例
 

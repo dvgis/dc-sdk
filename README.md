@@ -83,7 +83,7 @@ DC.ready(() => {
 
 [Cesium-Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
-[DC-SDK-Api](http://dc.dvgis.cn/home/#/docs)
+[DC-SDK-Api](http://dc.dvgis.cn/#/docs)
 
 ## Demo
 
