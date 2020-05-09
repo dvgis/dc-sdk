@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 10:29:09
+ * @Last Modified time: 2020-05-09 12:46:01
  */
 import { OverlayEvent } from '@/core/event'
 
@@ -176,5 +176,7 @@ class Overlay {
     return this
   }
 }
+
+DC.Overlay = Overlay
 
 export default Overlay

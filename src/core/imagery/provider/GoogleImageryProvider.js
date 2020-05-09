@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 16:06:14
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-30 12:33:03
+ * @Last Modified time: 2020-05-09 12:53:27
  */
 
 import Cesium from '@/namespace'
@@ -30,5 +30,7 @@ class GoogleImageryProvider extends Cesium.UrlTemplateImageryProvider {
     super(options)
   }
 }
+
+DC.ImageryType.GOOGLE = 'google'
 
 export default GoogleImageryProvider

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-08 20:27:59
+ * @Last Modified time: 2020-05-09 13:10:37
  */
 ;(function() {
   let isCesiumLoaded = false
@@ -10,7 +10,7 @@
     Author: 'Caven Chen',
     GitHub: 'https://github.com/Digital-Visual',
     Home: 'https://www.dvgis.cn',
-    Version: '1.4.2',
+    Version: '1.5.0',
     Config: {},
     Namespace: {},
     Initialized: false
@@ -38,6 +38,17 @@
       requireCesium().then(Cesium => {
         DC.Namespace['Cesium'] = Cesium
         delete window.Cesium
+        DC.LayerType = {}
+        DC.OverlayType = {}
+        DC.EffectType = {}
+        DC.WidgetType = {}
+        DC.ImageryType = {
+          ARCGIS: 'arcgis',
+          SINGLE_TILE: 'single_tile',
+          WMTS: 'wmts',
+          XYZ: 'xyz',
+          COORD: 'Coord'
+        }
         isCesiumLoaded = true
         callback && callback()
       })

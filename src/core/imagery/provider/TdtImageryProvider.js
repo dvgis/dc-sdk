@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:31:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 02:05:03
+ * @Last Modified time: 2020-05-09 12:53:37
  */
 import Cesium from '@/namespace'
 
@@ -28,5 +28,7 @@ class TdtImageryProvider extends Cesium.WebMapTileServiceImageryProvider {
     })
   }
 }
+
+DC.ImageryType.TDT = 'tdt'
 
 export default TdtImageryProvider

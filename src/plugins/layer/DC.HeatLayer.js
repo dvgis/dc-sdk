@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 13:06:11
+ * @Last Modified time: 2020-05-09 10:49:51
  */
 import Cesium from '@/namespace'
 import Layer from '@/core/layer/Layer'
@@ -188,7 +188,6 @@ DC.HeatLayer = class extends Layer {
 
   _reDraw() {
     /** set bounds */
-
     if (!this._bounds) {
       return false
     }
@@ -204,7 +203,6 @@ DC.HeatLayer = class extends Layer {
       this._initCanvas()
     }
     let data = []
-
     this._positions.forEach(item => {
       let coord = this._transformWGS84ToHeatmap({
         lng: item.lng || item.x,
@@ -221,9 +219,8 @@ DC.HeatLayer = class extends Layer {
       max: 1,
       data
     })
-    if (!this._entity.rectangle) {
-      this._initEntity()
-    }
+    this._delegate.entities.remove(this._entity)
+    this._initEntity()
     let material = new Cesium.ImageMaterialProperty({
       image: this._heat._renderer.canvas,
       transparent: true

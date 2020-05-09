@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:27:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-02-12 02:28:29
+ * @Last Modified time: 2020-05-09 12:53:14
  */
 
 import Cesium from '@/namespace'
@@ -114,5 +114,7 @@ class BaiduImageryProvider {
     return Cesium.ImageryProvider.loadImage(this, url)
   }
 }
+
+DC.ImageryType.BAIDU = 'baidu'
 
 export default BaiduImageryProvider

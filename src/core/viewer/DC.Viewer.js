@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-29 21:04:33
+ * @Last Modified time: 2020-05-09 13:23:14
  */
 
 import Cesium from '@/namespace'
@@ -38,9 +38,14 @@ const DEF_OPTS = {
 
 DC.Viewer = class {
   constructor(id, options = {}) {
+    if (!DC.Initialized) {
+      throw new Error('The DC is not initialized')
+    }
+
     if (!id || !document.getElementById(id)) {
       throw new Error('DC.Viewer：the id is empty')
     }
+
     this._delegate = new Cesium.Viewer(id, {
       ...options,
       ...DEF_OPTS

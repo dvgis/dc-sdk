@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 10:09:57
+ * @Last Modified time: 2020-05-09 12:46:32
  */
 import Cesium from '@/namespace'
 import { LayerEvent } from '@/core/event'
@@ -274,5 +274,7 @@ class Layer {
    */
   setStyle(style) {}
 }
+
+DC.Layer = Layer
 
 export default Layer

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 14:56:57
+ * @Last Modified time: 2020-05-09 12:47:31
  */
 
 import { EffectEvent } from '@/core/event'
@@ -114,5 +114,7 @@ class Effect {
     return this
   }
 }
+
+DC.Effect = Effect
 
 export default Effect

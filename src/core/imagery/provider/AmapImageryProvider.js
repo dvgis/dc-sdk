@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:31:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-30 12:33:06
+ * @Last Modified time: 2020-05-09 12:52:46
  */
 
 import Cesium from '@/namespace'
@@ -22,4 +22,7 @@ class AmapImageryProvider extends Cesium.UrlTemplateImageryProvider {
     super(options)
   }
 }
+
+DC.ImageryType.AMAP = 'amap'
+
 export default AmapImageryProvider
