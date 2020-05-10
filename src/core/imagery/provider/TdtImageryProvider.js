@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:31:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 12:53:37
+ * @Last Modified time: 2020-05-10 08:18:02
  */
-import Cesium from '@/namespace'
+import { Cesium } from '../../../namespace'
+import ImageryType from '../ImageryType'
 
 const MAP_URL =
   'http://t{s}.tianditu.gov.cn/{layer}_c/wmts?service=WMTS&version=1.0.0&request=GetTile&tilematrix={TileMatrix}&layer={layer}&style={style}&tilerow={TileRow}&tilecol={TileCol}&tilematrixset={TileMatrixSet}&format=tiles&tk={key}'
@@ -29,6 +30,6 @@ class TdtImageryProvider extends Cesium.WebMapTileServiceImageryProvider {
   }
 }
 
-DC.ImageryType.TDT = 'tdt'
+ImageryType.TDT = 'tdt'
 
 export default TdtImageryProvider

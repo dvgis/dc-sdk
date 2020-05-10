@@ -2,17 +2,21 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-23 20:05:41
+ * @Last Modified time: 2020-05-10 10:33:32
  */
+
+import { DomUtil } from '../utils'
 import Widget from './Widget'
+import WidgetState from './WidgetState'
 
 class MapSwitch extends Widget {
   constructor() {
     super()
-    this._wrapper = DC.DomUtil.create('div', 'dc-map-switch')
+    this._wrapper = DomUtil.create('div', 'dc-map-switch')
     this._config = undefined
     this._cache = []
-    this.type = DC.WidgetType.MAPSWITCH
+    this.type = Widget.getWidgetType('map_switch')
+    this._state = WidgetState.INITIALIZED
   }
 
   /**
@@ -40,7 +44,7 @@ class MapSwitch extends Widget {
   }
 
   _addItem(map) {
-    let mapEl = DC.DomUtil.create('div', 'map-item', this._wrapper)
+    let mapEl = DomUtil.create('div', 'map-item', this._wrapper)
     let index = this._cache.length ? this._cache.length - 1 : 0
     mapEl.setAttribute('data-index', index)
     mapEl.onclick = e => {
@@ -60,7 +64,7 @@ class MapSwitch extends Widget {
        background:url(${map.iconUrl});
     `
     }
-    let span = DC.DomUtil.create('span', '', mapEl)
+    let span = DomUtil.create('span', '', mapEl)
     span.innerHTML = map.name || '地图'
   }
 
@@ -75,6 +79,6 @@ class MapSwitch extends Widget {
   }
 }
 
-DC.WidgetType.MAPSWITCH = 'mapswitch'
+Widget.registerType('mapswitch')
 
 export default MapSwitch

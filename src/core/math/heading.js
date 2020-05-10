@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-04-11 00:41:47
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 14:52:51
+ * @Last Modified time: 2020-05-09 21:50:32
  */
-import Cesium from '@/namespace'
+import { Cesium } from '../../namespace'
 
 export default function heading(startPosition, endPosition) {
   let heading = 0

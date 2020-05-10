@@ -2,18 +2,21 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 14:49:14
+ * @Last Modified time: 2020-05-10 10:35:02
  */
 
+import { DomUtil } from '../utils'
 import Widget from './Widget'
+import WidgetState from './WidgetState'
 
 class Popup extends Widget {
   constructor() {
     super()
-    this._wrapper = DC.DomUtil.create('div', 'dc-popup')
+    this._wrapper = DomUtil.create('div', 'dc-popup')
     this._config = undefined
     this._positionChangeable = true
-    this.type = DC.WidgetType.POPUP
+    this.type = Widget.getWidgetType('popup')
+    this._state = WidgetState.INITIALIZED
   }
 
   set config(config) {
@@ -41,7 +44,7 @@ class Popup extends Widget {
   }
 
   _setCustomClass() {
-    DC.DomUtil.setClass(this._wrapper, `dc-popup ${this._config.customClass}`)
+    DomUtil.setClass(this._wrapper, `dc-popup ${this._config.customClass}`)
   }
 
   /**
@@ -60,6 +63,6 @@ class Popup extends Widget {
   }
 }
 
-DC.WidgetType.POPUP = 'popup'
+Widget.registerType('popup')
 
 export default Popup

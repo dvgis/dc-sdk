@@ -2,16 +2,19 @@
  * @Author: Caven
  * @Date: 2020-02-01 12:07:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:27:27
+ * @Last Modified time: 2020-05-10 10:36:16
  */
 
+import { DomUtil } from '../utils'
 import Widget from './Widget'
+import WidgetState from './WidgetState'
 
 class Tooltip extends Widget {
   constructor() {
     super()
-    this._wrapper = DC.DomUtil.create('div', 'dc-tool-tip')
-    this.type = DC.WidgetType.TOOLTIP
+    this._wrapper = DomUtil.create('div', 'dc-tool-tip')
+    this.type = Widget.getWidgetType('tooltip')
+    this._state = WidgetState.INITIALIZED
   }
 
   /**
@@ -44,6 +47,6 @@ class Tooltip extends Widget {
   }
 }
 
-DC.WidgetType.TOOLTIP = 'tooltip'
+Widget.registerType('tooltip')
 
 export default Tooltip

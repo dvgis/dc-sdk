@@ -28,10 +28,10 @@
     "publish:plot": "yarn run clean:plot && webpack --config webpack.plot.conf --mode production --env.production",
     "publish:overlay": "yarn run clean:overlay && webpack --config webpack.overlay.conf --mode production --env.production",
     "clean": "rimraf dist/",
-    "clean:core": "rimraf dist/dc-sdk/resources dist/dc-sdk/dc.*.js dist/dc-sdk/dc.*.css",
-    "clean:plugins": "rimraf dist/dc-sdk/plugins",
-    "clean:plot": "rimraf dist/dc-sdk/plot",
-    "clean:overlay": "rimraf dist/dc-sdk/overlay"
+    "clean:core": "rimraf dist/resources dist/dc.*.js dist/dc.*.css",
+    "clean:plugins": "rimraf dist/plugins",
+    "clean:plot": "rimraf dist/plot",
+    "clean:overlay": "rimraf dist/overlay"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",

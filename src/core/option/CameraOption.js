@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:33:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-26 11:53:30
+ * @Last Modified time: 2020-05-09 21:06:59
  */
-import Cesium from '@/namespace'
+import { Cesium } from '../../namespace'
 
 class CameraOption {
   constructor(viewer) {

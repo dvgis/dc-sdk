@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-29 13:43:56
+ * @Last Modified time: 2020-05-09 21:07:05
  */
 
-import Cesium from '@/namespace'
+import { Cesium } from '../../namespace'
 
 class ViewerOption {
   constructor(viewer) {

@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-04-24 14:43:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 14:52:48
+ * @Last Modified time: 2020-05-09 21:50:19
  */
 
-import Cesium from '@/namespace'
+import { Cesium } from '../../namespace'
 
 export default function center(positions) {
   if (positions && Array.isArray(positions)) {

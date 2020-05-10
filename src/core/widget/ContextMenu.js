@@ -2,19 +2,24 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 14:48:36
+ * @Last Modified time: 2020-05-10 10:25:38
  */
-import Cesium from '@/namespace'
+
+import { Cesium } from '../../namespace'
+import { DomUtil } from '../utils'
+import { MouseEventType } from '../event/EventType'
 import Widget from './Widget'
+import WidgetState from './WidgetState'
 
 class ContextMenu extends Widget {
   constructor() {
     super()
-    this._wrapper = DC.DomUtil.create('div', 'dc-context-menu')
-    this._ulEl = DC.DomUtil.create('ul', 'menu-list', this._wrapper)
+    this._wrapper = DomUtil.create('div', 'dc-context-menu')
+    this._ulEl = DomUtil.create('ul', 'menu-list', this._wrapper)
     this._config = {}
     this._positionChangeable = true
-    this.type = DC.WidgetType.CONTEXT_MENU
+    this.type = Widget.getWidgetType('contextmenu')
+    this._state = WidgetState.INITIALIZED
   }
 
   set config(config) {
@@ -24,18 +29,14 @@ class ContextMenu extends Widget {
 
   _installHook() {
     if (this._viewer) {
-      this._viewer.on(
-        DC.MouseEventType.RIGHT_CLICK,
-        this._rightclickHandler,
-        this
-      )
-      this._viewer.on(DC.MouseEventType.CLICK, this._clickHandler, this)
+      this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightclickHandler, this)
+      this._viewer.on(MouseEventType.CLICK, this._clickHandler, this)
     }
     this._prepareDefaultMenu()
   }
 
   _prepareDefaultMenu() {
-    let homeMenu = DC.DomUtil.create('li', 'menu-item', this._ulEl)
+    let homeMenu = DomUtil.create('li', 'menu-item', this._ulEl)
     homeMenu.innerHTML = '飞到默认位置'
     let self = this
     homeMenu.onclick = () => {
@@ -70,7 +71,7 @@ class ContextMenu extends Widget {
   }
 
   _setCustomClass() {
-    DC.DomUtil.setClass(
+    DomUtil.setClass(
       this._wrapper,
       `dc-context-menu ${this._config.customClass}`
     )
@@ -86,7 +87,7 @@ class ContextMenu extends Widget {
     if (!label || !method) {
       return this
     }
-    let menu = DC.DomUtil.create('li', 'menu-item')
+    let menu = DomUtil.create('li', 'menu-item')
     let lastNode = this._ulEl.lastChild
     menu.innerHTML = label
     let self = this
@@ -101,6 +102,6 @@ class ContextMenu extends Widget {
   }
 }
 
-DC.WidgetType.CONTEXT_MENU = 'contextmenu'
+Widget.registerType('contextmenu')
 
 export default ContextMenu

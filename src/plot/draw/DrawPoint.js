@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 16:25:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 21:37:08
+ * @Last Modified time: 2020-05-10 10:57:47
  */
-import Cesium from '@/namespace'
+
 import Draw from './Draw'
+
+const { Cesium } = DC.NameSpace
 
 const DEF_STYLE = {
   pixelSize: 10,

@@ -2,10 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-21 16:06:14
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 12:53:27
+ * @Last Modified time: 2020-05-10 08:17:59
  */
 
-import Cesium from '@/namespace'
+import { Cesium } from '../../../namespace'
+import ImageryType from '../ImageryType'
 
 const ELEC_URL =
   'http://mt{s}.google.cn/vt/lyrs=m@207000000&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=Galile'
@@ -31,6 +32,6 @@ class GoogleImageryProvider extends Cesium.UrlTemplateImageryProvider {
   }
 }
 
-DC.ImageryType.GOOGLE = 'google'
+ImageryType.GOOGLE = 'google'
 
 export default GoogleImageryProvider

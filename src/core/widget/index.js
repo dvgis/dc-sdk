@@ -2,27 +2,15 @@
  * @Author: Caven
  * @Date: 2020-03-05 21:53:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-19 13:49:05
+ * @Last Modified time: 2020-05-09 22:34:56
  */
 
-import Attribution from './Attribution'
-import ContextMenu from './ContextMenu'
-import LocationBar from './LocationBar'
-import MapSplit from './MapSplit'
-import MapSwitch from './MapSwitch'
-import Popup from './Popup'
-import Tooltip from './Tooltip'
-import HawkeyeMap from './HawkeyeMap'
-import Compass from './Compass'
-
-export {
-  Attribution,
-  ContextMenu,
-  LocationBar,
-  MapSplit,
-  MapSwitch,
-  Popup,
-  Tooltip,
-  HawkeyeMap,
-  Compass
-}
+export { default as Attribution } from './Attribution'
+export { default as ContextMenu } from './ContextMenu'
+export { default as LocationBar } from './LocationBar'
+export { default as MapSplit } from './MapSplit'
+export { default as MapSwitch } from './MapSwitch'
+export { default as Popup } from './Popup'
+export { default as Tooltip } from './Tooltip'
+export { default as HawkeyeMap } from './HawkeyeMap'
+export { default as Compass } from './Compass'

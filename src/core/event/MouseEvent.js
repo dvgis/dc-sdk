@@ -2,10 +2,11 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-22 12:35:16
+ * @Last Modified time: 2020-05-10 08:13:16
  */
 
-import Cesium from '@/namespace'
+import { Cesium } from '../../namespace'
+import { MouseEventType } from './EventType'
 import Event from './Event'
 
 /**
@@ -16,10 +17,10 @@ class MouseEvent extends Event {
     super()
     this._viewer = viewer
     this._setInputAction()
-    this.on(DC.MouseEventType.CLICK, this._clickHandler, this)
-    this.on(DC.MouseEventType.DB_CLICK, this._dbClickHandler, this)
-    this.on(DC.MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
-    this.on(DC.MouseEventType.MOUSE_MOVE, this._mouseMoveHandler, this)
+    this.on(MouseEventType.CLICK, this._clickHandler, this)
+    this.on(MouseEventType.DB_CLICK, this._dbClickHandler, this)
+    this.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
+    this.on(MouseEventType.MOUSE_MOVE, this._mouseMoveHandler, this)
   }
 
   /**
@@ -52,7 +53,7 @@ class MouseEvent extends Event {
       cartesian = scene.pickPosition(position)
     }
     let surfaceCartesian = undefined
-    if (scene.mode === DC.SceneMode.SCENE3D) {
+    if (scene.mode === Cesium.SceneMode.SCENE3D) {
       let ray = scene.camera.getPickRay(position)
       surfaceCartesian = scene.globe.pick(ray, scene)
     } else {
@@ -142,7 +143,7 @@ class MouseEvent extends Event {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(DC.MouseEventType.CLICK, mouseInfo)
+    this._raiseEvent(MouseEventType.CLICK, mouseInfo)
   }
 
   /**
@@ -156,7 +157,7 @@ class MouseEvent extends Event {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(DC.MouseEventType.DB_CLICK, mouseInfo)
+    this._raiseEvent(MouseEventType.DB_CLICK, mouseInfo)
   }
 
   /**
@@ -170,7 +171,7 @@ class MouseEvent extends Event {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(DC.MouseEventType.RIGHT_CLICK, mouseInfo)
+    this._raiseEvent(MouseEventType.RIGHT_CLICK, mouseInfo)
   }
 
   /**
@@ -185,7 +186,7 @@ class MouseEvent extends Event {
     }
     let mouseInfo = this._getMouseInfo(movement.endPosition)
     this._viewer.canvas.style.cursor = mouseInfo.target ? 'pointer' : 'default'
-    this._raiseEvent(DC.MouseEventType.MOUSE_MOVE, mouseInfo)
+    this._raiseEvent(MouseEventType.MOUSE_MOVE, mouseInfo)
   }
 }
 

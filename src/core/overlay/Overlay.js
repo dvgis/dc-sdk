@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 12:46:01
+ * @Last Modified time: 2020-05-10 09:11:36
  */
-import { OverlayEvent } from '@/core/event'
+import { OverlayEvent } from '../event'
+import OverlayType from './OverlayType'
 
 class Overlay {
   constructor() {
@@ -174,6 +175,24 @@ class Overlay {
   fire(type, params) {
     this._overlayEvent.fire(type, params)
     return this
+  }
+
+  /**
+   *
+   * @param {*} type
+   */
+  static registerType(type) {
+    if (type) {
+      OverlayType[type.toLocaleUpperCase()] = type.toLocaleLowerCase()
+    }
+  }
+
+  /**
+   *
+   * @param {*} type
+   */
+  static getOverlayType(type) {
+    return OverlayType[type.toLocaleUpperCase()] || undefined
   }
 }
 

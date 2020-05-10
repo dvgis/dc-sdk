@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:45:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 21:37:43
+ * @Last Modified time: 2020-05-10 10:57:23
  */
-import Cesium from '@/namespace'
+
+const { Cesium } = DC.NameSpace
 
 class Draw {
   constructor(plotInfo) {

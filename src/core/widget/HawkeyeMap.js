@@ -2,10 +2,13 @@
  * @Author: Caven
  * @Date: 2020-03-15 17:47:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 14:48:39
+ * @Last Modified time: 2020-05-10 10:28:12
  */
-import Cesium from '@/namespace'
+
+import { Cesium } from '../../namespace'
+import { DomUtil, Util } from '../utils'
 import Widget from './Widget'
+import WidgetState from './WidgetState'
 
 const DEF_OPTS = {
   animation: false,
@@ -25,11 +28,12 @@ const DEF_OPTS = {
 class HawkeyeMap extends Widget {
   constructor() {
     super()
-    this._wrapper = DC.DomUtil.create('div', 'dc-hawkeye-map')
-    this._wrapper.setAttribute('id', DC.Util.uuid())
+    this._wrapper = DomUtil.create('div', 'dc-hawkeye-map')
+    this._wrapper.setAttribute('id', Util.uuid())
     this._baseLayer = undefined
     this._delegate = undefined
-    this.type = DC.WidgetType.HAWkEYEMAP
+    this.type = Widget.getWidgetType('hawkeye_map')
+    this._state = WidgetState.INITIALIZED
   }
 
   _prepareDelegate() {
@@ -93,6 +97,6 @@ class HawkeyeMap extends Widget {
   }
 }
 
-DC.WidgetType.HAWkEYEMAP = 'hawkeyeMap'
+Widget.registerType('hawkeye_map')
 
 export default HawkeyeMap

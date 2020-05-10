@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 12:47:31
+ * @Last Modified time: 2020-05-10 11:19:14
  */
 
-import { EffectEvent } from '@/core/event'
+import { EffectEvent } from '../../core/event'
+import { EffectEventType } from '../../core/event/EventType'
+import EffectType from './EffectType'
 
 class Effect {
   constructor(id) {
@@ -16,8 +18,8 @@ class Effect {
     this._addable = false
     this._effectEvent = new EffectEvent()
     this.type = undefined
-    this.on(DC.EffectEventType.ADD, this._addHandler, this)
-    this.on(DC.EffectEventType.REMOVE, this._removeHandler, this)
+    this.on(EffectEventType.ADD, this._addHandler, this)
+    this.on(EffectEventType.REMOVE, this._removeHandler, this)
   }
 
   get id() {
@@ -113,8 +115,24 @@ class Effect {
     this._effectEvent.fire(type, params)
     return this
   }
-}
 
-DC.Effect = Effect
+  /**
+   *
+   * @param {*} type
+   */
+  static registerType(type) {
+    if (type) {
+      EffectType[type.toLocaleUpperCase()] = type.toLocaleLowerCase()
+    }
+  }
+
+  /**
+   *
+   * @param {*} type
+   */
+  static getEffectType(type) {
+    return EffectType[type.toLocaleUpperCase()] || undefined
+  }
+}
 
 export default Effect

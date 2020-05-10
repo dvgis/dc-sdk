@@ -2,9 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-18 18:53:00
+ * @Last Modified time: 2020-05-10 08:14:19
  */
-import Cesium from '@/namespace'
+
+import { Cesium } from '../../namespace'
+import { MouseEventType, ViewerEventType } from './EventType'
 import Event from './Event'
 
 class ViewerEvent extends Event {
@@ -13,13 +15,13 @@ class ViewerEvent extends Event {
   }
 
   _registerEvent() {
-    Object.keys(DC.MouseEventType).forEach(key => {
-      let type = DC.MouseEventType[key]
+    Object.keys(MouseEventType).forEach(key => {
+      let type = MouseEventType[key]
       this._cache[type] = new Cesium.Event()
     })
 
-    Object.keys(DC.ViewerEventType).forEach(key => {
-      let type = DC.ViewerEventType[key]
+    Object.keys(ViewerEventType).forEach(key => {
+      let type = ViewerEventType[key]
       this._cache[type] = new Cesium.Event()
     })
   }

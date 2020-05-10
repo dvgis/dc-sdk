@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:59:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 21:37:06
+ * @Last Modified time: 2020-05-10 10:57:52
  */
-import Cesium from '@/namespace'
+
 import Draw from './Draw'
+
+const { Cesium } = DC.NameSpace
 
 const DEF_STYLE = {
   material: Cesium.Color.BLUE.withAlpha(0.6)

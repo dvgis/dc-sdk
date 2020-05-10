@@ -2,9 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 14:48:11
+ * @Last Modified time: 2020-05-10 10:20:27
  */
-import Cesium from '@/namespace'
+import { Cesium } from '../../namespace'
+import WidgetState from './WidgetState'
+import WidgetType from './WidgetType'
 
 class Widget {
   constructor() {
@@ -13,15 +15,13 @@ class Widget {
     this._enable = false
     this._wrapper = undefined
     this._positionChangeable = false
-    this._state = DC.WidgetState.INSTALLED
+
     this.type = undefined
   }
 
   set enable(enable) {
     this._enable = enable
-    this._state = this._enable
-      ? DC.WidgetState.ENABLED
-      : DC.WidgetState.DISABLED
+    this._state = this._enable ? WidgetState.ENABLED : WidgetState.DISABLED
     this._enableHook && this._enableHook()
   }
 
@@ -62,7 +62,7 @@ class Widget {
    */
   install(viewer) {
     this._viewer = viewer
-    this._state = DC.WidgetState.INSTALLED
+    this._state = WidgetState.INSTALLED
     /**
      *  add postRender Listener
      */
@@ -112,6 +112,24 @@ class Widget {
       (this._wrapper.style.cssText = `
     visibility:hidden;
     `)
+  }
+
+  /**
+   *
+   * @param {*} type
+   */
+  static registerType(type) {
+    if (type) {
+      WidgetType[type.toLocaleUpperCase()] = type.toLocaleLowerCase()
+    }
+  }
+
+  /**
+   *
+   * @param {*} type
+   */
+  static getWidgetType(type) {
+    return WidgetType[type.toLocaleUpperCase()] || undefined
   }
 }
 

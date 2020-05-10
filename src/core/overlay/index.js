@@ -2,15 +2,16 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:04:15
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:28:04
+ * @Last Modified time: 2020-05-10 10:40:15
  */
-
-import './base/DC.Point'
-import './base/DC.Polyline'
-import './base/DC.Polygon'
-import './base/DC.Billboard'
-import './base/DC.Cricle'
-import './base/DC.Label'
-import './base/DC.DivIcon'
-import './model/DC.Model'
-import './model/DC.Tileset'
+export { default as OverlayType } from './OverlayType'
+export { default as Overlay } from './Overlay'
+export { default as Billboard } from './base/Billboard'
+export { default as Cricle } from './base/Cricle'
+export { default as DivIcon } from './base/DivIcon'
+export { default as Label } from './base/Label'
+export { default as Point } from './base/Point'
+export { default as Polygon } from './base/Polygon'
+export { default as Polyline } from './base/Polyline'
+export { default as Model } from './model/Model'
+export { default as Tileset } from './model/Tileset'

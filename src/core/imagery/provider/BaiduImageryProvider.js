@@ -2,10 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:27:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 12:53:14
+ * @Last Modified time: 2020-05-10 08:17:55
  */
 
-import Cesium from '@/namespace'
+import { Cesium } from '../../../namespace'
+import ImageryType from '../ImageryType'
 
 const TEMP_MAP_URL =
   'http://api{s}.map.bdimg.com/customimage/tile?&x={x}&y={y}&z={z}&scale=1&customid={style}'
@@ -115,6 +116,6 @@ class BaiduImageryProvider {
   }
 }
 
-DC.ImageryType.BAIDU = 'baidu'
+ImageryType.BAIDU = 'baidu'
 
 export default BaiduImageryProvider

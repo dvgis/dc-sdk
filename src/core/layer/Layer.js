@@ -2,10 +2,15 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 12:46:32
+ * @Last Modified time: 2020-05-10 08:56:01
  */
-import Cesium from '@/namespace'
-import { LayerEvent } from '@/core/event'
+
+import { Cesium } from '../../namespace'
+import { LayerEvent } from '../event'
+import { LayerEventType, OverlayEventType } from '../event/EventType'
+import LayerState from './LayerState'
+import OverlayState from '../overlay/OverlayState'
+import LayerType from './LayerType'
 
 class Layer {
   constructor(id) {
@@ -18,8 +23,9 @@ class Layer {
     this._attr = {}
     this._style = {}
     this._layerEvent = new LayerEvent()
-    this._layerEvent.on(DC.LayerEventType.ADD, this._addHandler, this)
-    this._layerEvent.on(DC.LayerEventType.REMOVE, this._removeHandler, this)
+    this._layerEvent.on(LayerEventType.ADD, this._addHandler, this)
+    this._layerEvent.on(LayerEventType.REMOVE, this._removeHandler, this)
+    this._state = LayerState.INITIALIZED
     this.type = undefined
   }
 
@@ -81,7 +87,7 @@ class Layer {
       this._viewer.dataSources.add(this._delegate)
     }
     this._addedHook && this._addedHook()
-    this._state = DC.LayerState.ADDED
+    this._state = LayerState.ADDED
   }
 
   /**
@@ -107,7 +113,7 @@ class Layer {
         this._viewer.dataSources.remove(this._delegate)
       }
       this._removedHook && this._removedHook()
-      this._state = DC.LayerState.REMOVED
+      this._state = LayerState.REMOVED
     }
   }
 
@@ -121,12 +127,12 @@ class Layer {
     if (
       overlay &&
       overlay.overlayEvent &&
-      overlay.state !== DC.OverlayState.ADDED
+      overlay.state !== OverlayState.ADDED
     ) {
-      overlay.overlayEvent.fire(DC.OverlayEventType.ADD, this)
+      overlay.overlayEvent.fire(OverlayEventType.ADD, this)
       this._cache[overlay.overlayId] = overlay
-      if (this._state === DC.LayerState.CLEARED) {
-        this._state = DC.LayerState.ADDED
+      if (this._state === LayerState.CLEARED) {
+        this._state = LayerState.ADDED
       }
     }
   }
@@ -141,9 +147,9 @@ class Layer {
     if (
       overlay &&
       overlay.overlayEvent &&
-      overlay.state !== DC.OverlayState.REMOVED
+      overlay.state !== OverlayState.REMOVED
     ) {
-      overlay.overlayEvent.fire(DC.OverlayEventType.REMOVE, this)
+      overlay.overlayEvent.fire(OverlayEventType.REMOVE, this)
       delete this._cache[overlay.overlayId]
     }
   }
@@ -273,8 +279,24 @@ class Layer {
    * @param {*} style
    */
   setStyle(style) {}
-}
 
-DC.Layer = Layer
+  /**
+   *
+   * @param {*} type
+   */
+  static registerType(type) {
+    if (type) {
+      LayerType[type.toLocaleUpperCase()] = type.toLocaleLowerCase()
+    }
+  }
+
+  /**
+   *
+   * @param {*} type
+   */
+  static getLayerType(type) {
+    return LayerType[type.toLocaleUpperCase()] || undefined
+  }
+}
 
 export default Layer

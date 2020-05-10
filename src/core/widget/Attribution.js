@@ -2,14 +2,16 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-20 19:27:19
+ * @Last Modified time: 2020-05-10 10:21:31
  */
+import { DomUtil } from '../utils'
 import Widget from './Widget'
+import WidgetState from './WidgetState'
 
 class Attribution extends Widget {
   constructor() {
     super()
-    this._wrapper = DC.DomUtil.create('div', 'dc-attribution')
+    this._wrapper = DomUtil.create('div', 'dc-attribution')
     this._wrapper.style.cssText = `
       position: absolute;
       left: 2px;
@@ -23,14 +25,15 @@ class Attribution extends Widget {
       box-shadow: 2px 2px 3px #2b2b2b;
     `
     this._config = undefined
-    this.type = DC.WidgetType.ATTRIBUTION
+    this.type = Widget.getWidgetType('attribution')
+    this._state = WidgetState.INSTALLED
   }
 
   _installHook() {
-    let span = DC.DomUtil.create('span', '', this._wrapper)
+    let span = DomUtil.create('span', '', this._wrapper)
     span.innerHTML = '数字视觉'
     span.style.cssText = `margin-right:5px;`
-    let a = DC.DomUtil.create('a', '', this._wrapper)
+    let a = DomUtil.create('a', '', this._wrapper)
     a.innerHTML = 'Digital Visual'
     a.href = 'javascirpt:void(0)'
     a.onclick = () => {
@@ -41,6 +44,6 @@ class Attribution extends Widget {
   }
 }
 
-DC.WidgetType.ATTRIBUTION = 'attribution'
+Widget.registerType('attribution')
 
 export default Attribution

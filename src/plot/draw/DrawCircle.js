@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:44:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-09 19:21:49
+ * @Last Modified time: 2020-05-10 10:57:35
  */
-import Cesium from '@/namespace'
+
 import Draw from './Draw'
+
+const { Cesium } = DC.NameSpace
 
 const DEF_STYLE = {
   width: 3,

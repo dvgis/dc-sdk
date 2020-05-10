@@ -2,17 +2,22 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-21 11:29:16
+ * @Last Modified time: 2020-05-10 10:32:57
  */
-import Cesium from '@/namespace'
+
+import { Cesium } from '../../namespace'
+import { DomUtil } from '../utils'
 import Widget from './Widget'
+import WidgetState from './WidgetState'
 
 class MapSplit extends Widget {
   constructor() {
     super()
-    this._wrapper = DC.DomUtil.create('div', 'dc-slider')
+    this._wrapper = DomUtil.create('div', 'dc-slider')
     this._baseLayer = undefined
     this._moveActive = false
+    this.type = Widget.getWidgetType('map_split')
+    this._state = WidgetState.INITIALIZED
   }
 
   _installHook() {
@@ -72,6 +77,6 @@ class MapSplit extends Widget {
   }
 }
 
-DC.WidgetType.MAPSPLIT = 'mapsplit'
+Widget.registerType('map_split')
 
 export default MapSplit

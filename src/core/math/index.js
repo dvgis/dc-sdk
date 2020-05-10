@@ -2,19 +2,12 @@
  * @Author: Caven
  * @Date: 2020-03-31 20:57:36
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 14:55:54
+ * @Last Modified time: 2020-05-09 23:43:22
  */
 
-import area from './area'
-import bounds from './bounds'
-import center from './center'
-import distance from './distance'
-import heading from './heading'
-import isBetween from './isBetween'
-
-DC.Math.area = area
-DC.Math.bounds = bounds
-DC.Math.center = center
-DC.Math.distance = distance
-DC.Math.heading = heading
-DC.Math.isBetween = isBetween
+export { default as area } from './area'
+export { default as bounds } from './bounds'
+export { default as center } from './center'
+export { default as distance } from './distance'
+export { default as heading } from './heading'
+export { default as isBetween } from './isBetween'

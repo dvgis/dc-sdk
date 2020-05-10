@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-06 13:02:12
+ * @Last Modified time: 2020-05-10 10:54:31
  */
 
 const path = require('path')
@@ -34,7 +34,7 @@ module.exports = env => {
     devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
     output: {
       filename: IS_PROD ? '[name].min.js' : '[name].js',
-      path: path.resolve(__dirname, 'dist/dc-sdk/plugins'),
+      path: path.resolve(__dirname, 'dist/plugins'),
       publicPath: publicPath,
       sourcePrefix: ''
     },
@@ -98,7 +98,7 @@ module.exports = env => {
       extensions: ['.js', '.json', '.css'],
       alias: {
         '@': resolve('src'),
-        entry: './src/plugins/DC.Pulgins.js'
+        entry: './src/plugins/index.js'
       }
     },
     plugins
