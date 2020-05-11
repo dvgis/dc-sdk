@@ -2,10 +2,11 @@
  * @Author: Caven
  * @Date: 2020-02-20 13:26:49
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:16:13
+ * @Last Modified time: 2020-05-11 17:18:09
  */
 import Effect from './Effect'
-import EffectState from './EffectState'
+
+const State = DC.State
 
 class BloomEffect extends Effect {
   constructor(id) {
@@ -17,7 +18,7 @@ class BloomEffect extends Effect {
     this._sigma = 2
     this._stepSize = 1
     this.type = Effect.getEffectType('bloom')
-    this._state = EffectState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set contrast(contrast) {

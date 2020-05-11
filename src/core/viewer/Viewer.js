@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:15:27
+ * @Last Modified time: 2020-05-11 16:58:42
  */
 
 import { Cesium } from '../../namespace'
@@ -24,8 +24,6 @@ import {
 import { DomUtil } from '../utils'
 import Transform from '../transform/Transform'
 import Position from '../position/Position'
-import LayerState from '../layer/LayerState'
-import EffectState from '../effects/EffectState'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -171,43 +169,61 @@ class Viewer {
     return position
   }
 
+  /**
+   *
+   * @param {*} layer
+   */
   _addLayer(layer) {
-    if (layer && layer.layerEvent && layer.state !== LayerState.ADDED) {
+    if (layer && layer.layerEvent) {
       !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
-      layer.layerEvent.fire(LayerEventType.ADD, this)
-      this._layerCache[layer.type][layer.id] = layer
+      if (!Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
+        layer.layerEvent.fire(LayerEventType.ADD, this)
+        this._layerCache[layer.type][layer.id] = layer
+      }
     }
   }
 
+  /**
+   *
+   * @param {*} layer
+   */
   _removeLayer(layer) {
-    if (layer && layer.layerEvent && layer.state !== LayerState.REMOVED) {
+    if (
+      layer &&
+      layer.layerEvent &&
+      Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
+    ) {
       layer.layerEvent.fire(LayerEventType.REMOVE, this)
-      if (
-        this._layerCache[layer.type] &&
-        this._layerCache[layer.type][layer.id]
-      ) {
-        delete this._layerCache[layer.type][layer.id]
-      }
+      delete this._layerCache[layer.type][layer.id]
     }
   }
 
+  /**
+   *
+   * @param {*} effect
+   */
   _addEffect(effect) {
-    if (effect && effect.effectEvent && effect.state !== EffectState.ADDED) {
+    if (effect && effect.effectEvent) {
       !this._effectCache[effect.type] && (this._effectCache[effect.type] = {})
-      effect.effectEvent.fire(EffectEventType.ADD, this)
-      this._effectCache[effect.type][effect.id] = effect
+      if (!Object(this._effectCache[effect.type]).hasOwnProperty(effect.id)) {
+        effect.effectEvent.fire(EffectEventType.ADD, this)
+        this._effectCache[effect.type][effect.id] = effect
+      }
     }
   }
 
+  /**
+   *
+   * @param {*} effect
+   */
   _removeEffect(effect) {
-    if (effect && effect.effectEvent && effect.state !== EffectState.REMOVED) {
+    if (
+      effect &&
+      effect.effectEvent &&
+      Object(this._effectCache[effect.type]).hasOwnProperty(effect.id)
+    ) {
       effect.effectEvent.fire(EffectEventType.REMOVE, this)
-      if (
-        this._effectCache[effect.type] &&
-        this._effectCache[effect.type][effect.id]
-      ) {
-        delete this._effectCache[effect.type][effect.id]
-      }
+      delete this._effectCache[effect.type][effect.id]
     }
   }
 

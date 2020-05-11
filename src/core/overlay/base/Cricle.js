@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:31:39
+ * @Last Modified time: 2020-05-11 17:08:52
  */
 
 import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class Circle extends Overlay {
   constructor(center, radius) {
@@ -23,7 +23,7 @@ class Circle extends Overlay {
     this._rotateAmount = 0
     this._stRotation = 0
     this.type = Overlay.getOverlayType('circle')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set center(center) {

@@ -2,12 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:19:14
+ * @Last Modified time: 2020-05-11 17:19:17
  */
 
 import { EffectEvent } from '../../core/event'
 import { EffectEventType } from '../../core/event/EventType'
 import EffectType from './EffectType'
+
+const EffectEventType = DC.EffectEventType
 
 class Effect {
   constructor(id) {

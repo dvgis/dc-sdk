@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:22:10
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:54:57
+ * @Last Modified time: 2020-05-11 17:24:53
  */
 
 const install = function(DC) {
-  if (!DC) {
-    throw new Error('DC.Plugins: Missing DC Base SDK')
+  if (!DC || !DC.ready) {
+    throw new Error('Plugins: Missing DC Core ')
   }
   if (window.mapv) {
     DC.Namespace['mapv'] = window.mapv

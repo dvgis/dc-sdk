@@ -2,13 +2,13 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:35:11
+ * @Last Modified time: 2020-05-11 17:10:01
  */
 import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class Label extends Overlay {
   constructor(position, text) {
@@ -20,7 +20,7 @@ class Label extends Overlay {
     this._text = text
     this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('label')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set position(position) {

@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-03-30 17:14:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:00:11
+ * @Last Modified time: 2020-05-11 16:59:59
  */
 import { Cesium } from '../../namespace'
+import State from '../state/State'
 import Layer from './Layer'
-import LayerState from './LayerState'
 
 class LabelLayer extends Layer {
   constructor(id, url) {
@@ -18,7 +18,7 @@ class LabelLayer extends Layer {
     this._delegate = new Cesium.CustomDataSource(id)
     this._initLabel()
     this.type = Layer.registerType('label')
-    this._state = LayerState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _createLabel(entity) {

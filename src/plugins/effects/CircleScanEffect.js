@@ -2,13 +2,14 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:20:04
+ * @Last Modified time: 2020-05-11 17:18:29
  */
 
 import Effect from './Effect'
-import EffectState from './EffectState'
 
 const { Cesium } = DC.Namespace
+
+const State = DC.State
 
 const CircleScanShader = require('../shader/CircleScanShader.glsl')
 
@@ -24,7 +25,7 @@ class CircleScanEffect extends Effect {
     this._duration = Cesium.defaultValue(duration, 1) * 1e3
     this._addable = true
     this.type = Effect.getEffectType('circle_scan')
-    this._state = EffectState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _mountedHook() {

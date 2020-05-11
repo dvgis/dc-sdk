@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:33:35
+ * @Last Modified time: 2020-05-11 17:09:28
  */
 
 import { DomUtil, Util } from '../../utils'
 import { isBetween } from '../../math'
 import Transform from '../../transform/Transform'
+import State from '../State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class DivIcon extends Overlay {
   constructor(position, content) {
@@ -27,7 +27,7 @@ class DivIcon extends Overlay {
     })
     this.content = content
     this.type = Overlay.getOverlayType('div_icon')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set show(show) {
@@ -108,7 +108,7 @@ class DivIcon extends Overlay {
         position: Transform.transformWGS84ToCartesian(this._position)
       })
     })
-    this._state = OverlayState.ADDED
+    this._state = State.ADDED
   }
 
   /**
@@ -117,7 +117,7 @@ class DivIcon extends Overlay {
   _removeHandler() {
     if (this._layer) {
       this._layer.delegate.removeChild(this._delegate)
-      this._state = OverlayState.REMOVED
+      this._state = State.REMOVED
     }
   }
 

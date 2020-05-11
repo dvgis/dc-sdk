@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:40:07
+ * @Last Modified time: 2020-05-11 17:11:13
  */
 
 import { Cesium } from '../../../namespace'
@@ -10,8 +10,8 @@ import { Util } from '../../utils'
 import { center, distance } from '../../math'
 import Transform from '../../transform/Transform'
 import Parse from '../../parse/Parse'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class Polyline extends Overlay {
   constructor(positions) {
@@ -22,7 +22,7 @@ class Polyline extends Overlay {
     this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('polyline')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set positions(positions) {

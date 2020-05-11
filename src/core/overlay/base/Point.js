@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:39:09
+ * @Last Modified time: 2020-05-11 17:10:26
  */
 
 import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 const DEF_STYLE = {
   pixelSize: 8,
@@ -26,7 +26,7 @@ class Point extends Overlay {
     this._position = position
     this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('point')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set position(position) {

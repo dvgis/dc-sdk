@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:06:31
+ * @Last Modified time: 2020-05-11 17:05:49
  */
 
 import { Cesium } from '../../namespace'
+import State from '../state/State'
 import Layer from './Layer'
-import LayerState from './LayerState'
 
 /**
  * The vector layer is used to add various enitity, which is essentially a CustomDataSource
@@ -18,13 +18,13 @@ class VectorLayer extends Layer {
     super(id)
     this._delegate = new Cesium.CustomDataSource(id)
     this.type = Layer.getLayerType('vector')
-    this._state = LayerState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   clear() {
     this._delegate.entities && this._delegate.entities.removeAll()
     this._cache = {}
-    this._state = LayerState.CLEARED
+    this._state = State.CLEARED
     return this
   }
 }

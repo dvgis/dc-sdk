@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-03-22 01:12:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:02:45
+ * @Last Modified time: 2020-05-11 17:05:29
  */
 
 import GeoJsonLayer from './GeoJsonLayer'
-import LayerState from './LayerState'
+import State from '../state/State'
 
 class TopoJsonLayer extends GeoJsonLayer {
   constructor(id, url, options = {}) {
@@ -15,7 +15,7 @@ class TopoJsonLayer extends GeoJsonLayer {
     }
     super(id, url, options)
     this.type = GeoJsonLayer.getLayerType('topojson')
-    this._state = LayerState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 }
 

@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:59:25
+ * @Last Modified time: 2020-05-11 17:00:20
  */
 
 import { Cesium } from '../../namespace'
+import State from '../state/State'
 import Layer from './Layer'
-import LayerState from './LayerState'
 
 class HtmlLayer extends Layer {
   constructor(id) {
@@ -16,7 +16,7 @@ class HtmlLayer extends Layer {
     this._delegate.setAttribute('id', this._id)
     this._renderRemoveCallback = undefined
     this.type = Layer.getLayerType('html')
-    this._state = LayerState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set show(show) {
@@ -51,7 +51,7 @@ class HtmlLayer extends Layer {
         }
       })
     }, this)
-    this._state = LayerState.ADDED
+    this._state = State.ADDED
   }
 
   /**
@@ -61,7 +61,7 @@ class HtmlLayer extends Layer {
   _removeHandler() {
     this._renderRemoveCallback && this._renderRemoveCallback()
     this._viewer.dcContainer.removeChild(this._delegate)
-    this._state = LayerState.REMOVED
+    this._state = State.REMOVED
   }
 
   /**
@@ -73,7 +73,7 @@ class HtmlLayer extends Layer {
       this._delegate.removeChild(childs[i])
     }
     this._cache = {}
-    this._state = LayerState.CLEARED
+    this._state = State.CLEARED
     return this
   }
 }

@@ -2,14 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:56:01
+ * @Last Modified time: 2020-05-11 17:04:58
  */
 
 import { Cesium } from '../../namespace'
 import { LayerEvent } from '../event'
 import { LayerEventType, OverlayEventType } from '../event/EventType'
-import LayerState from './LayerState'
-import OverlayState from '../overlay/OverlayState'
+import State from '../state/State'
 import LayerType from './LayerType'
 
 class Layer {
@@ -25,7 +24,7 @@ class Layer {
     this._layerEvent = new LayerEvent()
     this._layerEvent.on(LayerEventType.ADD, this._addHandler, this)
     this._layerEvent.on(LayerEventType.REMOVE, this._removeHandler, this)
-    this._state = LayerState.INITIALIZED
+    this._state = undefined
     this.type = undefined
   }
 
@@ -87,7 +86,7 @@ class Layer {
       this._viewer.dataSources.add(this._delegate)
     }
     this._addedHook && this._addedHook()
-    this._state = LayerState.ADDED
+    this._state = State.ADDED
   }
 
   /**
@@ -113,7 +112,7 @@ class Layer {
         this._viewer.dataSources.remove(this._delegate)
       }
       this._removedHook && this._removedHook()
-      this._state = LayerState.REMOVED
+      this._state = State.REMOVED
     }
   }
 
@@ -127,12 +126,12 @@ class Layer {
     if (
       overlay &&
       overlay.overlayEvent &&
-      overlay.state !== OverlayState.ADDED
+      !this._cache.hasOwnProperty(overlay.overlayId)
     ) {
       overlay.overlayEvent.fire(OverlayEventType.ADD, this)
       this._cache[overlay.overlayId] = overlay
-      if (this._state === LayerState.CLEARED) {
-        this._state = LayerState.ADDED
+      if (this._state === State.CLEARED) {
+        this._state = State.ADDED
       }
     }
   }
@@ -147,7 +146,7 @@ class Layer {
     if (
       overlay &&
       overlay.overlayEvent &&
-      overlay.state !== OverlayState.REMOVED
+      this._cache.hasOwnProperty(overlay.overlayId)
     ) {
       overlay.overlayEvent.fire(OverlayEventType.REMOVE, this)
       delete this._cache[overlay.overlayId]
@@ -218,9 +217,9 @@ class Layer {
    */
   getOverlaysByAttr(atrrName, attrVal) {
     let result = []
-    Object.keys(this._cache).forEach(key => {
-      if (this._cache[key].attr[atrrName] === attrVal) {
-        result.push[this._cache[key]]
+    this.eachOverlay(item => {
+      if (item.attr[atrrName] === attrVal) {
+        result.push(item)
       }
     })
     return result

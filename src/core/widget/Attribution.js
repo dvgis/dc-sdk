@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:21:31
+ * @Last Modified time: 2020-05-11 17:13:48
  */
 import { DomUtil } from '../utils'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
 
 class Attribution extends Widget {
   constructor() {
@@ -26,7 +26,7 @@ class Attribution extends Widget {
     `
     this._config = undefined
     this.type = Widget.getWidgetType('attribution')
-    this._state = WidgetState.INSTALLED
+    this._state = State.INSTALLED
   }
 
   _installHook() {

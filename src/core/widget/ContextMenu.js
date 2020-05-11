@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:25:38
+ * @Last Modified time: 2020-05-11 17:14:23
  */
 
 import { Cesium } from '../../namespace'
 import { DomUtil } from '../utils'
 import { MouseEventType } from '../event/EventType'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
 
 class ContextMenu extends Widget {
   constructor() {
@@ -19,7 +19,7 @@ class ContextMenu extends Widget {
     this._config = {}
     this._positionChangeable = true
     this.type = Widget.getWidgetType('contextmenu')
-    this._state = WidgetState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set config(config) {

@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:08:07
+ * @Last Modified time: 2020-05-11 17:11:35
  */
 
 import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class Model extends Overlay {
   constructor(position, modelUrl) {
@@ -22,7 +22,7 @@ class Model extends Overlay {
     this._delegate = new Cesium.Entity()
     this._rotateAmount = 0
     this.type = Overlay.getOverlayType('model')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set position(position) {

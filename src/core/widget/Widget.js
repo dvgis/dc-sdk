@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:20:27
+ * @Last Modified time: 2020-05-11 17:13:28
  */
 import { Cesium } from '../../namespace'
-import WidgetState from './WidgetState'
+import State from '../state/State'
 import WidgetType from './WidgetType'
 
 class Widget {
@@ -21,7 +21,7 @@ class Widget {
 
   set enable(enable) {
     this._enable = enable
-    this._state = this._enable ? WidgetState.ENABLED : WidgetState.DISABLED
+    this._state = this._enable ? State.ENABLED : State.DISABLED
     this._enableHook && this._enableHook()
   }
 
@@ -62,7 +62,7 @@ class Widget {
    */
   install(viewer) {
     this._viewer = viewer
-    this._state = WidgetState.INSTALLED
+    this._state = State.INSTALLED
     /**
      *  add postRender Listener
      */

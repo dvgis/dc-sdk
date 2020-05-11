@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:19:13
+ * @Last Modified time: 2020-05-11 17:08:29
  */
 
 import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class Billboard extends Overlay {
   constructor(position, icon) {
@@ -22,7 +22,7 @@ class Billboard extends Overlay {
     this._size = [32, 32]
     this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('billboard')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set position(position) {

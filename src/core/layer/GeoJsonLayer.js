@@ -2,13 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:58:15
+ * @Last Modified time: 2020-05-11 17:00:13
  */
 
 import { Cesium } from '../../namespace'
 import { Billboard, Polyline, Polygon } from '../overlay'
+import State from '../state/State'
 import Layer from './Layer'
-import LayerState from './LayerState'
 
 class GeoJsonLayer extends Layer {
   constructor(id, url, options = {}) {
@@ -18,7 +18,7 @@ class GeoJsonLayer extends Layer {
     super(id)
     this._delegate = Cesium.GeoJsonDataSource.load(url, options)
     this.type = Layer.getLayerType('geojson')
-    this._state = LayerState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set show(show) {

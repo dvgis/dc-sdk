@@ -2,15 +2,15 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:40:38
+ * @Last Modified time: 2020-05-11 17:10:49
  */
 import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import { center, area } from '../../math'
 import Transform from '../../transform/Transform'
 import Parse from '../../parse/Parse'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class Polygon extends Overlay {
   constructor(positions) {
@@ -22,7 +22,7 @@ class Polygon extends Overlay {
     this._holes = []
     this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('polygon')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set positions(positions) {

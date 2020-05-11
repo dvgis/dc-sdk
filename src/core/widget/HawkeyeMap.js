@@ -2,13 +2,13 @@
  * @Author: Caven
  * @Date: 2020-03-15 17:47:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:28:12
+ * @Last Modified time: 2020-05-11 17:14:40
  */
 
 import { Cesium } from '../../namespace'
 import { DomUtil, Util } from '../utils'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
 
 const DEF_OPTS = {
   animation: false,
@@ -33,7 +33,7 @@ class HawkeyeMap extends Widget {
     this._baseLayer = undefined
     this._delegate = undefined
     this.type = Widget.getWidgetType('hawkeye_map')
-    this._state = WidgetState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _prepareDelegate() {

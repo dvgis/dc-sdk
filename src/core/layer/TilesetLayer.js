@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:16:27
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:01:06
+ * @Last Modified time: 2020-05-11 17:00:30
  */
 
 import { Cesium } from '../../namespace'
+import State from '../state/State'
 import Layer from './Layer'
-import LayerState from './LayerState'
 
 /**
  * TilesetLayer is used to add various tileset
@@ -17,13 +17,13 @@ class TilesetLayer extends Layer {
     super(id)
     this._delegate = new Cesium.PrimitiveCollection()
     this.type = Layer.getLayerType('tileset')
-    this._state = LayerState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   clear() {
     this._delegate.removeAll()
     this._cache = {}
-    this._state = LayerState.CLEARED
+    this._state = State.CLEARED
     return this
   }
 }

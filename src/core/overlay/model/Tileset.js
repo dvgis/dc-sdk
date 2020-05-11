@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:51:10
+ * @Last Modified time: 2020-05-11 17:12:18
  */
 import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
+import State from '../../state/State'
 import Overlay from '../Overlay'
-import OverlayState from '../OverlayState'
 
 class Tileset extends Overlay {
   constructor(url, options = {}) {
@@ -23,7 +23,7 @@ class Tileset extends Overlay {
     this._duration = undefined
     this._center = undefined
     this.type = Overlay.getOverlayType('tileset')
-    this._state = OverlayState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   /**
@@ -47,7 +47,7 @@ class Tileset extends Overlay {
       this._layer.delegate.add(tileset)
       tileset.layer = layer
       tileset.overlayId = this._id
-      this._state = OverlayState.ADDED
+      this._state = State.ADDED
     })
   }
 
@@ -60,7 +60,7 @@ class Tileset extends Overlay {
     }
     this._delegate.readyPromise.then(tileset => {
       this._layer.delegate.remove(tileset)
-      this._state = OverlayState.REMOVED
+      this._state = State.REMOVED
     })
   }
   /**

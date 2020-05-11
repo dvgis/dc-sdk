@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:25:35
+ * @Last Modified time: 2020-05-11 16:34:47
  */
 import { Cesium } from '../../namespace'
 import Position from '../position/Position'
@@ -121,6 +121,7 @@ class Transform {
    */
   static transformWindowToWGS84(position, viewer) {
     let scene = viewer.scene
+    let cartesian = undefined
     if (scene.mode === Cesium.SceneMode.SCENE3D) {
       let ray = scene.camera.getPickRay(position)
       cartesian = scene.globe.pick(ray, scene)
