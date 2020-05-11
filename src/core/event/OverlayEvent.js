@@ -2,12 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:13:32
+ * @Last Modified time: 2020-05-11 23:57:41
  */
 
-import { Cesium } from '../../namespace'
 import { MouseEventType, OverlayEventType } from './EventType'
 import Event from './Event'
+
+const { Cesium } = DC.Namespace
 
 class OverlayEvent extends Event {
   constructor() {

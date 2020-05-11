@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-21 16:06:14
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:17:59
+ * @Last Modified time: 2020-05-11 22:04:47
  */
 
-import { Cesium } from '../../../namespace'
 import ImageryType from '../ImageryType'
+
+const { Cesium } = DC.Namespace
 
 const ELEC_URL =
   'http://mt{s}.google.cn/vt/lyrs=m@207000000&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=Galile'

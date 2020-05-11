@@ -1,12 +1,13 @@
 /*
  * @Author: Caven
- * @Date: 2020-03-06 17:56:39
+ * @Date: 2020-02-24 13:09:09
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-14 21:43:39
+ * @Last Modified time: 2020-05-12 00:33:41
  */
-import Cesium from '@/namespace'
 
-DC.CircleWaveMaterialProperty = class {
+const { Cesium } = DC.Namespace
+
+class PolylineTrailMaterialProperty {
   constructor(options) {
     options = options || {}
     this._definitionChanged = new Cesium.Event()
@@ -19,13 +20,6 @@ DC.CircleWaveMaterialProperty = class {
       Cesium.Color.fromBytes(0, 255, 255, 255)
     )
     this.duration = Cesium.defaultValue(options.duration, 45)
-    this.count = Math.max(Cesium.defaultValue(options.count, 2), 1)
-    this.gradient = Cesium.defaultValue(options.gradient, 0.1)
-    if (this.gradient < 0) {
-      this.gradient = 0
-    } else if (this.gradient > 1) {
-      this.gradient = 1
-    }
   }
 
   get isConstant() {
@@ -37,30 +31,35 @@ DC.CircleWaveMaterialProperty = class {
   }
 
   getType(time) {
-    return Cesium.Material.CircleWaveType
+    return Cesium.Material.PolylineTrailType
   }
 
   getValue(time, result) {
     if (!result) {
       result = {}
     }
-    result.color = Cesium.Property.getValueOrUndefined(this._color, time)
+    result.color = Cesium.Property.getValueOrClonedDefault(
+      this._color,
+      time,
+      Cesium.Color.WHITE,
+      result.color
+    )
     result.duration = this._duration
-    result.count = this.count
-    result.gradient = this.gradient
     return result
   }
 
   equals(other) {
     return (
       this === other ||
-      (other instanceof DC.CircleWaveMaterialProperty &&
+      (other instanceof PolylineTrailMaterialProperty &&
         Cesium.Property.equals(this._color, other._color))
     )
   }
 }
 
-Object.defineProperties(DC.CircleWaveMaterialProperty.prototype, {
+Object.defineProperties(PolylineTrailMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
 })
+
+export default PolylineTrailMaterialProperty

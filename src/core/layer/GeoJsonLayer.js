@@ -2,13 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:00:13
+ * @Last Modified time: 2020-05-11 22:37:07
  */
 
-import { Cesium } from '../../namespace'
+import { Layer, VectorLayer } from './index'
 import { Billboard, Polyline, Polygon } from '../overlay'
 import State from '../state/State'
-import Layer from './Layer'
+
+const { Cesium } = DC.Namespace
 
 class GeoJsonLayer extends Layer {
   constructor(id, url, options = {}) {
@@ -72,7 +73,7 @@ class GeoJsonLayer extends Layer {
    *
    */
   toVectorLayer() {
-    let layer = new DC.VectorLayer(this._id)
+    let layer = new VectorLayer(this._id)
     let self = this
     this.eachOverlay(item => {
       if (item.billboard) {

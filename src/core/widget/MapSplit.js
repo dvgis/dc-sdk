@@ -2,13 +2,14 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:32:57
+ * @Last Modified time: 2020-05-11 23:34:20
  */
 
-import { Cesium } from '../../namespace'
 import { DomUtil } from '../utils'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
+
+const { Cesium } = DC.Namespace
 
 class MapSplit extends Widget {
   constructor() {
@@ -17,7 +18,7 @@ class MapSplit extends Widget {
     this._baseLayer = undefined
     this._moveActive = false
     this.type = Widget.getWidgetType('map_split')
-    this._state = WidgetState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _installHook() {

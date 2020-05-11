@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:18:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:57:58
+ * @Last Modified time: 2020-05-11 23:10:21
  */
 
 import Draw from './Draw'
+
+const { OverlayType, Transform } = DC
 
 const { Cesium } = DC.NameSpace
 
@@ -44,8 +46,8 @@ class DrawPolyline extends Draw {
   _mouseRightClickHandler(e) {
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
-      type: DC.OverlayType.POLYLINE,
-      points: DC.T.transformCartesianArrayToWGS84Array(this._positions)
+      type: OverlayType.POLYLINE,
+      points: Transform.transformCartesianArrayToWGS84Array(this._positions)
     })
   }
 

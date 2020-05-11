@@ -2,14 +2,15 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:10:26
+ * @Last Modified time: 2020-05-11 22:07:14
  */
 
-import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
 import State from '../../state/State'
 import Overlay from '../Overlay'
+
+const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   pixelSize: 8,

@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:33:32
+ * @Last Modified time: 2020-05-11 23:34:34
  */
 
 import { DomUtil } from '../utils'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
 
 class MapSwitch extends Widget {
   constructor() {
@@ -16,7 +16,7 @@ class MapSwitch extends Widget {
     this._config = undefined
     this._cache = []
     this.type = Widget.getWidgetType('map_switch')
-    this._state = WidgetState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   /**

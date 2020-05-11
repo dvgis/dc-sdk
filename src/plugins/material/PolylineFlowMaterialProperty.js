@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-24 13:53:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 15:39:25
+ * @Last Modified time: 2020-05-11 23:06:27
  */
 
-import Cesium from '@/namespace'
+const { Cesium } = DC.Namespace
 
-DC.PolylineFlowMaterialProperty = class {
+class PolylineFlowMaterialProperty {
   constructor(options) {
     options = options || {}
     this._definitionChanged = new Cesium.Event()
@@ -51,13 +51,15 @@ DC.PolylineFlowMaterialProperty = class {
   equals(other) {
     return (
       this === other ||
-      (other instanceof DC.PolylineFlowMaterialProperty &&
+      (other instanceof PolylineFlowMaterialProperty &&
         Cesium.Property.equals(this._color, other._color))
     )
   }
 }
 
-Object.defineProperties(DC.PolylineFlowMaterialProperty.prototype, {
+Object.defineProperties(PolylineFlowMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
 })
+
+export default PolylineFlowMaterialProperty

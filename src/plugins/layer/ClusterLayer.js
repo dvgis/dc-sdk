@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-02-10 10:05:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:34:38
+ * @Last Modified time: 2020-05-11 21:37:57
  */
-import LayerState from './LayerState'
+
+const { State, Layer } = DC
 
 const { Cesium } = DC.Namespace
 
@@ -21,7 +22,7 @@ const DEF_OPT = {
   fontColor: Cesium.Color.BLACK
 }
 
-class ClusterLayer extends DC.Layer {
+class ClusterLayer extends Layer {
   constructor(id, options = {}) {
     super(id)
     this._delegate = new Cesium.CustomDataSource(id)
@@ -36,8 +37,8 @@ class ClusterLayer extends DC.Layer {
     )
     this._circleCache = {}
     this._delegate.clustering.pixelRange = this._options.pixelRange
-    this.type = DC.Layer.getLayerType('cluster')
-    this._state = LayerState.INITIALIZED
+    this.type = Layer.getLayerType('cluster')
+    this._state = State.INITIALIZED
   }
 
   set enableCluster(enableCluster) {
@@ -110,11 +111,11 @@ class ClusterLayer extends DC.Layer {
   clear() {
     this._delegate.entities.removeAll()
     this._cache = {}
-    this._state = LayerState.CLEARED
+    this._state = State.CLEARED
     return this
   }
 }
 
-DC.Layer.registerType('cluster')
+Layer.registerType('cluster')
 
 export default ClusterLayer

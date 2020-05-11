@@ -2,15 +2,16 @@
  * @Author: Caven
  * @Date: 2020-02-26 23:05:44
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:21:48
+ * @Last Modified time: 2020-05-12 00:26:00
  */
 
-import Effect from './Effect'
-import EffectState from './EffectState'
+import Effect from '../Effect'
+
+const { State } = DC
 
 const { Cesium } = DC.Namespace
 
-const FogShader = require('../shader/FogShader.glsl')
+const FogShader = require('../../shader/FogShader.glsl')
 
 class FogEffect extends Effect {
   constructor(id, color, trength = 1) {
@@ -19,7 +20,7 @@ class FogEffect extends Effect {
     this._color = color || new Cesium.Color(0.8, 0.8, 0.8, 0.5)
     this._addable = true
     this.type = Effect.getEffectType('fog')
-    this._state = EffectState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _mountedHook() {

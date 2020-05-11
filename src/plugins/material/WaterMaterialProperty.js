@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-25 21:16:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 17:55:55
+ * @Last Modified time: 2020-05-11 23:16:17
  */
-import Cesium from '@/namespace'
 
-DC.WaterMaterialProperty = class {
+const { Cesium } = DC.Namespace
+
+class WaterMaterialProperty {
   constructor(options) {
     options = options || {}
     this._definitionChanged = new Cesium.Event()
@@ -84,15 +85,17 @@ DC.WaterMaterialProperty = class {
   equals(other) {
     return (
       this === other ||
-      (other instanceof DC.WaterMaterialProperty &&
+      (other instanceof WaterMaterialProperty &&
         Cesium.Property.equals(this._baseWaterColor, other._baseWaterColor))
     )
   }
 }
 
-Object.defineProperties(DC.WaterMaterialProperty.prototype, {
+Object.defineProperties(WaterMaterialProperty.prototype, {
   baseWaterColor: Cesium.createPropertyDescriptor('baseWaterColor'),
   blendColor: Cesium.createPropertyDescriptor('blendColor'),
   specularMap: Cesium.createPropertyDescriptor('specularMap'),
   normalMap: Cesium.createPropertyDescriptor('normalMap')
 })
+
+export default WaterMaterialProperty

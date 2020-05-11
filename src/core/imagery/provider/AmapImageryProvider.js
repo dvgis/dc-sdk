@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:31:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:17:34
+ * @Last Modified time: 2020-05-11 22:03:22
  */
 
-import { Cesium } from '../../../namespace'
 import ImageryType from '../ImageryType'
+
+const { Cesium } = DC.Namespace
 
 const IMG_URL =
   'https://webst{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}'

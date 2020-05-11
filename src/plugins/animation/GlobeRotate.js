@@ -5,7 +5,7 @@
  * @Last Modified time: 2020-05-10 10:52:03
  */
 
-const { Cesium } = DC.namespace
+const { Cesium } = DC.Namespace
 
 class GlobeRotate {
   constructor(viewer, time = 5, callback, context) {

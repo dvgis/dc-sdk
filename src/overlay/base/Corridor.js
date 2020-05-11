@@ -2,29 +2,30 @@
  * @Author: Caven
  * @Date: 2020-04-11 12:58:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:29:06
+ * @Last Modified time: 2020-05-11 22:19:49
  */
 
-import Cesium from '@/namespace'
-import Overlay from '@/core/overlay/Overlay'
+const { Overlay, Util, State, Transform, Parse } = DC
 
-DC.Corridor = class extends Overlay {
+const { Cesium } = DC.Namespace
+
+class Corridor extends Overlay {
   constructor(positions) {
-    if (!DC.Util.checkPositions(positions)) {
-      throw new Error('DC.Corridor: the positions invalid')
+    if (!Util.checkPositions(positions)) {
+      throw new Error('Corridor: the positions invalid')
     }
     super()
-    this._positions = DC.P.parsePositions(positions)
+    this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.Entity()
-    this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.CORRIDOR
+    this.type = Overlay.getOverlayType('corridor')
+    this._state = State.INITIALIZED
   }
 
   set positions(positions) {
-    if (!DC.Util.checkPositions(positions)) {
-      throw new Error('DC.Corridor: the positions invalid')
+    if (!Util.checkPositions(positions)) {
+      throw new Error('Corridor: the positions invalid')
     }
-    this._positions = DC.P.parsePositions(positions)
+    this._positions = Parse.parsePositions(positions)
   }
 
   get positions() {
@@ -38,7 +39,7 @@ DC.Corridor = class extends Overlay {
     this._delegate.corridor = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {
-        return DC.T.transformWGS84ArrayToCartesianArray(this._positions)
+        return Transform.transformWGS84ArrayToCartesianArray(this._positions)
       })
     }
   }
@@ -52,10 +53,11 @@ DC.Corridor = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.corridor &&
-      DC.Util.merge(this._delegate.corridor, this._style)
+    this._delegate.corridor && Util.merge(this._delegate.corridor, this._style)
     return this
   }
 }
 
-DC.OverlayType.CORRIDOR = 'corridor'
+Overlay.registerType('corridor')
+
+export default Corridor

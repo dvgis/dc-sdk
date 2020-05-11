@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-04-10 17:02:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:20:33
+ * @Last Modified time: 2020-05-11 23:20:10
  */
 
-import { Cesium } from '../../namespace'
+const { Cesium } = DC.Namespace
 
 const baseEventType = {
   ADD: 'add',
@@ -47,22 +47,10 @@ const OverlayEventType = {
   ...baseEventType
 }
 
-const EffectEventType = {
-  ...baseEventType
-}
-
-const RoamingEventType = {
-  ...baseEventType,
-  TICK: 'tick',
-  ACTIVE: 'active'
-}
-
 export {
   MouseEventType,
   ViewerEventType,
   SceneEventType,
   LayerEventType,
-  OverlayEventType,
-  EffectEventType,
-  RoamingEventType
+  OverlayEventType
 }

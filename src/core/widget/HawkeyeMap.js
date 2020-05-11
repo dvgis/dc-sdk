@@ -2,13 +2,14 @@
  * @Author: Caven
  * @Date: 2020-03-15 17:47:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:14:40
+ * @Last Modified time: 2020-05-11 22:09:11
  */
 
-import { Cesium } from '../../namespace'
 import { DomUtil, Util } from '../utils'
 import State from '../state/State'
 import Widget from './Widget'
+
+const { Cesium } = DC.Namespace
 
 const DEF_OPTS = {
   animation: false,

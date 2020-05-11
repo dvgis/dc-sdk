@@ -2,17 +2,21 @@
  * @Author: Caven
  * @Date: 2020-04-11 00:41:47
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 21:50:32
+ * @Last Modified time: 2020-05-12 00:39:20
  */
-import { Cesium } from '../../namespace'
+
+import Transform from '../transform/Transform'
+import Position from '../position/Position'
+
+const { Cesium } = DC.Namespace
 
 export default function heading(startPosition, endPosition) {
   let heading = 0
-  if (startPosition instanceof DC.Position) {
-    startPosition = DC.T.transformWGS84ToCartesian(startPosition)
+  if (startPosition instanceof Position) {
+    startPosition = Transform.transformWGS84ToCartesian(startPosition)
   }
-  if (endPosition instanceof DC.Position) {
-    endPosition = DC.T.transformWGS84ToCartesian(endPosition)
+  if (endPosition instanceof Position) {
+    endPosition = Transform.transformWGS84ToCartesian(endPosition)
   }
   let v = Cesium.Cartesian3.subtract(
     endPosition,

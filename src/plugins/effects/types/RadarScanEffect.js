@@ -2,19 +2,20 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:24:19
+ * @Last Modified time: 2020-05-12 00:26:05
  */
 
-import Effect from './Effect'
-import EffectState from './EffectState'
+import Effect from '../Effect'
+
+const { Util, State, Transform, Position } = DC
 
 const { Cesium } = DC.Namespace
 
-const RadarScanShader = require('../shader/RadarScanShader.glsl')
+const RadarScanShader = require('../../shader/RadarScanShader.glsl')
 
 class RadarScanEffect extends Effect {
   constructor(id, position, radius, color, duration) {
-    if (!position || !(position instanceof DC.Position)) {
+    if (!Util.checkPosition(position)) {
       throw new Error('the position invalid')
     }
     super(id)
@@ -24,19 +25,19 @@ class RadarScanEffect extends Effect {
     this._duration = Cesium.defaultValue(duration, 1) * 1e3
     this._addable = true
     this.type = Effect.getEffectType('radar_scan')
-    this._state = EffectState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _mountedHook() {
-    let cartesian3Center = DC.T.transformWGS84ToCartesian(this._position)
+    let cartesian3Center = Transform.transformWGS84ToCartesian(this._position)
     let cartesian4Center = new Cesium.Cartesian4(
       cartesian3Center.x,
       cartesian3Center.y,
       cartesian3Center.z,
       1
     )
-    let cartesian3Center1 = DC.T.transformWGS84ToCartesian(
-      new DC.Position(
+    let cartesian3Center1 = Transform.transformWGS84ToCartesian(
+      new Position(
         this._position.lng,
         this._position.lat,
         this._position.alt + 500
@@ -49,8 +50,8 @@ class RadarScanEffect extends Effect {
       1
     )
 
-    let cartesian3Center2 = DC.T.transformWGS84ToCartesian(
-      new DC.Position(
+    let cartesian3Center2 = Transform.transformWGS84ToCartesian(
+      new Position(
         this._position.lng + 0.001,
         this._position.lat,
         this._position.alt

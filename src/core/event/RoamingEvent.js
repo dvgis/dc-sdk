@@ -2,12 +2,13 @@
  * @Author: Caven
  * @Date: 2020-04-10 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:13:53
+ * @Last Modified time: 2020-05-12 00:00:07
  */
 
-import { Cesium } from '../../namespace'
 import { RoamingEventType } from './EventType'
 import Event from './Event'
+
+const { Cesium } = DC.Namespace
 
 class RoamingEvent extends Event {
   constructor() {

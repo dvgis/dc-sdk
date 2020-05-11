@@ -2,18 +2,18 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:33:33
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:19:17
+ * @Last Modified time: 2020-05-11 22:52:06
  */
 
-import { EffectEvent } from '../../core/event'
-import { EffectEventType } from '../../core/event/EventType'
+import EffectEventType from './EffectEventType'
+import EffectEvent from './EffectEvent'
 import EffectType from './EffectType'
 
-const EffectEventType = DC.EffectEventType
+const { Util, State } = DC
 
 class Effect {
   constructor(id) {
-    this._id = id || DC.Util.uuid()
+    this._id = id || Util.uuid()
     this._viewer = undefined
     this._delegate = undefined
     this._state = undefined
@@ -59,7 +59,7 @@ class Effect {
       this._viewer.delegate.scene.postProcessStages.add(this._delegate)
     }
     this._addedHook && this._addedHook()
-    this._state = DC.EffectState.ADDED
+    this._state = State.ADDED
   }
 
   /**
@@ -71,7 +71,7 @@ class Effect {
       this._delegate = undefined
     }
     this._removedHook && this._removedHook()
-    this._state = DC.EffectState.REMOVED
+    this._state = State.REMOVED
   }
 
   /**

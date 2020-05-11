@@ -2,14 +2,15 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:08:52
+ * @Last Modified time: 2020-05-11 21:54:41
  */
 
-import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
 import State from '../../state/State'
 import Overlay from '../Overlay'
+
+const { Cesium } = DC.Namespace
 
 class Circle extends Overlay {
   constructor(center, radius) {
@@ -28,7 +29,7 @@ class Circle extends Overlay {
 
   set center(center) {
     if (!Util.checkPosition(center)) {
-      throw new Error('DC.Circle: the center invalid')
+      throw new Error('Circle: the center invalid')
     }
     this._center = center
   }

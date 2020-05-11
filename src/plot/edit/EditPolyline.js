@@ -2,9 +2,12 @@
  * @Author: Caven
  * @Date: 2020-03-17 21:59:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:53:10
+ * @Last Modified time: 2020-05-11 23:14:46
  */
+
 import Edit from './Edit'
+
+const { Transform, MouseEventType, Point } = DC
 
 class EditPolyline extends Edit {
   constructor(plotInfo) {
@@ -14,7 +17,9 @@ class EditPolyline extends Edit {
 
   _mouseMoveHandler(e) {
     if (this._currentMarker) {
-      this._currentMarker.position = DC.T.transformCartesianToWGS84(e.position)
+      this._currentMarker.position = Transform.transformCartesianToWGS84(
+        e.position
+      )
       this._overlay.positions = this._markers.map(item => item.position)
     }
   }
@@ -25,8 +30,8 @@ class EditPolyline extends Edit {
 
   _prepareMarkers() {
     this._positions.forEach(item => {
-      let marker = new DC.Point(item)
-      marker.on(DC.MouseEventType.CLICK, this._markerClickHandler, this)
+      let marker = new Point(item)
+      marker.on(MouseEventType.CLICK, this._markerClickHandler, this)
       this._layer.addOverlay(marker)
       this._markers.push(marker)
     })

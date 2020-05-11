@@ -2,16 +2,17 @@
  * @Author: Caven
  * @Date: 2020-02-18 16:08:26
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:29:24
+ * @Last Modified time: 2020-05-11 22:28:49
  */
 
-import Cesium from '@/namespace'
-import Overlay from '@/core/overlay/Overlay'
+const { Overlay, Util, State, Transform } = DC
 
-DC.Plane = class extends Overlay {
+const { Cesium } = DC.Namespace
+
+class Plane extends Overlay {
   constructor(position, width, height, direction) {
-    if (!DC.Util.checkPosition(position)) {
-      throw new Error('DC.Plane: the position invalid')
+    if (!Util.checkPosition(position)) {
+      throw new Error('Plane: the position invalid')
     }
     super()
     this._position = position
@@ -19,13 +20,13 @@ DC.Plane = class extends Overlay {
     this._height = height
     this._plane = new Cesium.Plane(Cesium.Cartesian3.clone(direction), 0.0)
     this._delegate = new Cesium.Entity()
-    this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.PLANE
+    this.type = Overlay.getOverlayType('plane')
+    this._state = State.INITIALIZED
   }
 
   set position(position) {
-    if (!DC.Util.checkPosition(position)) {
-      throw new Error('DC.Plane: the position invalid')
+    if (!Util.checkPosition(position)) {
+      throw new Error('Plane: the position invalid')
     }
     this._position = position
   }
@@ -59,7 +60,7 @@ DC.Plane = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWGS84ToCartesian(this._position)
+      return Transform.transformWGS84ToCartesian(this._position)
     })
 
     /**
@@ -67,7 +68,7 @@ DC.Plane = class extends Overlay {
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWGS84ToCartesian(this._center),
+        Transform.transformWGS84ToCartesian(this._center),
         new Cesium.HeadingPitchRoll(
           Cesium.Math.toRadians(this._position.heading),
           Cesium.Math.toRadians(this._position.pitch),
@@ -98,9 +99,11 @@ DC.Plane = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.plane && DC.Util.merge(this._delegate.plane, this._style)
+    this._delegate.plane && Util.merge(this._delegate.plane, this._style)
     return this
   }
 }
 
-DC.OverlayType.PLANE = 'plane'
+Overlay.registerType('plane')
+
+export default Plane

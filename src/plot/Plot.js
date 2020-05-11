@@ -2,9 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-31 15:51:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:35:53
+ * @Last Modified time: 2020-05-11 23:08:29
  */
-import Cesium from '@/namespace'
+
 import DrawPoint from './draw/DrawPoint'
 import DrawPolyline from './draw/DrawPolyline'
 import DrawPolygon from './draw/DrawPolygon'
@@ -13,7 +13,11 @@ import DrawRect from './draw/DrawRect'
 import EditPoint from './edit/EditPoint'
 import EditPolyline from './edit/EditPolyline'
 
-DC.Plot = class {
+const { VectorLayer, OverlayType } = DC
+
+const { Cesium } = DC.Namespace
+
+class Plot {
   constructor(viewer) {
     this._viewer = viewer
     this._plotEvent = new Cesium.Event()
@@ -22,7 +26,7 @@ DC.Plot = class {
     this._editWorker = undefined
     this._drawLayer = new Cesium.CustomDataSource('plot-draw-layer')
     this._viewer.delegate.dataSources.add(this._drawLayer)
-    this._markerLayer = new DC.VectorLayer('plot-marker-layer')
+    this._markerLayer = new VectorLayer('plot-marker-layer')
     this._viewer.addLayer(this._markerLayer)
     this._state = undefined
   }
@@ -51,19 +55,19 @@ DC.Plot = class {
       layer: this._drawLayer
     }
     switch (type) {
-      case DC.OverlayType.POINT:
+      case OverlayType.POINT:
         this._drawWorker = new DrawPoint(info, style)
         break
-      case DC.OverlayType.POLYLINE:
+      case OverlayType.POLYLINE:
         this._drawWorker = new DrawPolyline(info, style)
         break
-      case DC.OverlayType.POLYGON:
+      case OverlayType.POLYGON:
         this._drawWorker = new DrawPolygon(info, style)
         break
-      case DC.OverlayType.CIRCLE:
+      case OverlayType.CIRCLE:
         this._drawWorker = new DrawCircle(info, style)
         break
-      case DC.OverlayType.RECT:
+      case OverlayType.RECT:
         this._drawWorker = new DrawRect(info, style)
         break
       default:
@@ -79,19 +83,19 @@ DC.Plot = class {
       overlay: overlay
     }
     switch (overlay.type) {
-      case DC.OverlayType.POINT:
+      case OverlayType.POINT:
         this._editWorker = new EditPoint(info)
         break
-      case DC.OverlayType.POLYLINE:
+      case OverlayType.POLYLINE:
         this._editWorker = new EditPolyline(info)
         break
-      case DC.OverlayType.POLYGON:
+      case OverlayType.POLYGON:
         this._drawWorker = new DrawPolygon(info)
         break
-      case DC.OverlayType.CIRCLE:
+      case OverlayType.CIRCLE:
         this._drawWorker = new DrawCircle(info)
         break
-      case DC.OverlayType.RECT:
+      case OverlayType.RECT:
         this._drawWorker = new DrawRect(info)
         break
       default:
@@ -115,3 +119,5 @@ DC.Plot = class {
     this._editWorker && this._editWorker.start()
   }
 }
+
+export default Plot

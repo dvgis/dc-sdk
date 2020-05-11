@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-02-27 00:35:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:39:30
+ * @Last Modified time: 2020-05-11 23:30:35
  */
-import LayerState from './LayerState'
+
+const { State, Layer, SceneEventType, Transform, Position, DomUtil, Util } = DC
 
 const { Cesium } = DC.Namespace
 
@@ -25,7 +26,7 @@ const DEF_OPTS = {
   }
 }
 
-class HeatLayer extends DC.Layer {
+class HeatLayer extends Layer {
   constructor(id, options) {
     super(id)
     this._options = {
@@ -40,8 +41,8 @@ class HeatLayer extends DC.Layer {
     this._options.spacing = this._options.radius * 1.5
     this._delegate = new Cesium.CustomDataSource(id)
     this._entity = new Cesium.Entity()
-    this.type = DC.Layer.getLayerType('heat')
-    this._state = LayerState.INITIALIZED
+    this.type = Layer.getLayerType('heat')
+    this._state = State.INITIALIZED
   }
 
   get options() {
@@ -53,14 +54,14 @@ class HeatLayer extends DC.Layer {
    */
   _addedHook() {
     this._reDraw()
-    this._viewer.on(DC.SceneEventType.CAMERA_MOVE_END, this._reset, this)
+    this._viewer.on(SceneEventType.CAMERA_MOVE_END, this._reset, this)
   }
 
   /**
    * The hook for removed
    */
   _removedHook() {
-    this._viewer.off(DC.SceneEventType.CAMERA_MOVE_END, this._reset, this)
+    this._viewer.off(SceneEventType.CAMERA_MOVE_END, this._reset, this)
   }
 
   /**
@@ -73,7 +74,7 @@ class HeatLayer extends DC.Layer {
    * @param {*} position
    */
   _transformWGS84ToHeatmap(position) {
-    position = DC.T.transformWGS84ToMercator(position)
+    position = Transform.transformWGS84ToMercator(position)
     let coord = {}
     coord.x = Math.round(
       (position.lng - this._mBounds.west) / this._scale + this._options.spacing
@@ -90,11 +91,11 @@ class HeatLayer extends DC.Layer {
    * @param {*} bounds
    */
   _getMBounds() {
-    let mWestSouth = DC.T.transformWGS84ToMercator(
-      new DC.Position(this._bounds.west, this._bounds.south)
+    let mWestSouth = Transform.transformWGS84ToMercator(
+      new Position(this._bounds.west, this._bounds.south)
     )
-    let mEastNorth = DC.T.transformWGS84ToMercator(
-      new DC.Position(this._bounds.east, this._bounds.north)
+    let mEastNorth = Transform.transformWGS84ToMercator(
+      new Position(this._bounds.east, this._bounds.north)
     )
     return {
       west: mWestSouth.lng,
@@ -123,7 +124,7 @@ class HeatLayer extends DC.Layer {
     }
     this._scale = scale
     if (!this._options.container) {
-      this._options.container = DC.DomUtil.create(
+      this._options.container = DomUtil.create(
         'div',
         'heat-map',
         document.getElementsByClassName('dc-container')[0]
@@ -150,11 +151,11 @@ class HeatLayer extends DC.Layer {
     this._mBounds.south -= offset
     this._mBounds.east += offset
     this._mBounds.north += offset
-    let westSouth = DC.T.transformMercatorToWGS84({
+    let westSouth = Transform.transformMercatorToWGS84({
       lng: this._mBounds.west,
       lat: this._mBounds.south
     })
-    let eastNorth = DC.T.transformMercatorToWGS84({
+    let eastNorth = Transform.transformMercatorToWGS84({
       lng: this._mBounds.east,
       lat: this._mBounds.north
     })
@@ -228,7 +229,7 @@ class HeatLayer extends DC.Layer {
       image: this._heat._renderer.canvas,
       transparent: true
     })
-    DC.Util.merge(this._entity.rectangle, {
+    Util.merge(this._entity.rectangle, {
       fill: true,
       material: material
     })
@@ -244,7 +245,7 @@ class HeatLayer extends DC.Layer {
       return this
     }
     this._positions = positions
-    this._bounds = DC.Math.bounds(this._positions)
+    this._bounds = Cesium.bounds(this._positions)
     this._reDraw()
     return this
   }
@@ -255,7 +256,7 @@ class HeatLayer extends DC.Layer {
    */
   addPosition(position) {
     this._positions.push(position)
-    this._bounds = DC.Math.bounds(this._positions)
+    this._bounds = Cesium.bounds(this._positions)
     this._reDraw()
     return this
   }
@@ -265,7 +266,7 @@ class HeatLayer extends DC.Layer {
    * @param {*} options
    */
   setOptions(options) {
-    DC.Util.merge(this._options, options)
+    Util.merge(this._options, options)
     if (this._heat) {
       this._options.spacing = this._options.radius * 1.5
       this._heat.configure(this._options)
@@ -274,6 +275,6 @@ class HeatLayer extends DC.Layer {
   }
 }
 
-DC.Layer.registerType('heat')
+Layer.registerType('heat')
 
 export default HeatLayer

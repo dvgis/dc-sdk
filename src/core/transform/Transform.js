@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 16:34:47
+ * @Last Modified time: 2020-05-11 22:38:44
  */
-import { Cesium } from '../../namespace'
+
 import Position from '../position/Position'
+
+const { Cesium } = DC.Namespace
 
 const WMP = new Cesium.WebMercatorProjection()
 
@@ -95,7 +97,7 @@ class Transform {
     let mp = WMP.project(
       Cesium.Cartographic.fromDegrees(position.lng, position.lat, position.alt)
     )
-    return new DC.Position(mp.x, mp.y, mp.z)
+    return new Position(mp.x, mp.y, mp.z)
   }
 
   /**
@@ -107,7 +109,7 @@ class Transform {
     let mp = WMP.unproject(
       new Cesium.Cartesian3(position.lng, position.lat, position.alt)
     )
-    return new DC.Position(
+    return new Position(
       Cesium.Math.toDegrees(mp.longitude),
       Cesium.Math.toDegrees(mp.latitude),
       mp.height

@@ -2,29 +2,30 @@
  * @Author: Caven
  * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:29:27
+ * @Last Modified time: 2020-05-11 23:37:38
  */
-import Cesium from '@/namespace'
-import Overlay from '@/core/overlay/Overlay'
+const { Overlay, Util, State, Transform, Parse } = DC
 
-DC.PolylineVolume = class extends Overlay {
+const { Cesium } = DC.Namespace
+
+class PolylineVolume extends Overlay {
   constructor(positions, shape) {
-    if (!DC.Util.checkPositions(positions)) {
-      throw new Error('DC.PolylineVolume: the positions invalid')
+    if (!Util.checkPositions(positions)) {
+      throw new Error('PolylineVolume: the positions invalid')
     }
     super()
-    this._positions = DC.P.parsePositions(positions)
+    this._positions = Parse.parsePositions(positions)
     this._shape = shape
     this._delegate = new Cesium.Entity()
-    this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.POLYLINE_VOLUME
+    this.type = Overlay.getOverlayType('polyline_volume')
+    this._state = State.INITIALIZED
   }
 
   set positions(positions) {
-    if (!DC.Util.checkPositions(positions)) {
-      throw new Error('DC.PolylineVolume: the positions invalid')
+    if (!Util.checkPositions(positions)) {
+      throw new Error('PolylineVolume: the positions invalid')
     }
-    this._positions = DC.P.parsePositions(positions)
+    this._positions = Parse.parsePositions(positions)
   }
 
   get positions() {
@@ -33,7 +34,7 @@ DC.PolylineVolume = class extends Overlay {
 
   set shape(shape) {
     if (!shape || !Array.isArray(shape)) {
-      throw new Error('DC.PolylineVolume: the shape invalid')
+      throw new Error('PolylineVolume: the shape invalid')
     }
     this._shape = shape
   }
@@ -49,7 +50,7 @@ DC.PolylineVolume = class extends Overlay {
     this._delegate.polylineVolume = {
       ...this._style,
       positions: new Cesium.CallbackProperty(time => {
-        return DC.T.transformWGS84ArrayToCartesianArray(this._positions)
+        return Transform.transformWGS84ArrayToCartesianArray(this._positions)
       }),
       shape: new Cesium.CallbackProperty(time => {
         return this._shape
@@ -67,9 +68,11 @@ DC.PolylineVolume = class extends Overlay {
     }
     this._style = style
     this._delegate.polylineVolume &&
-      DC.Util.merge(this._delegate.polylineVolume, this._style)
+      Util.merge(this._delegate.polylineVolume, this._style)
     return this
   }
 }
 
-DC.OverlayType.POLYLINE_VOLUME = 'polylineVolume'
+Overlay.registerType('polyline_volume')
+
+export default PolylineVolume

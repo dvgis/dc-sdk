@@ -2,8 +2,9 @@
  * @Author: Caven
  * @Date: 2020-05-06 13:25:36
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:15:05
+ * @Last Modified time: 2020-05-11 22:40:00
  */
+
 import Widget from './Widget'
 
 class ZoomController extends Widget {

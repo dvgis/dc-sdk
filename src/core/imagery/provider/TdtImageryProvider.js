@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:31:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:18:02
+ * @Last Modified time: 2020-05-11 22:03:41
  */
-import { Cesium } from '../../../namespace'
+
 import ImageryType from '../ImageryType'
+
+const { Cesium } = DC.Namespace
 
 const MAP_URL =
   'http://t{s}.tianditu.gov.cn/{layer}_c/wmts?service=WMTS&version=1.0.0&request=GetTile&tilematrix={TileMatrix}&layer={layer}&style={style}&tilerow={TileRow}&tilecol={TileCol}&tilematrixset={TileMatrixSet}&format=tiles&tk={key}'

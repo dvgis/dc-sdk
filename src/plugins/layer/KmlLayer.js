@@ -2,21 +2,22 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:03:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-09 21:28:59
+ * @Last Modified time: 2020-05-11 22:58:25
  */
 
-import Cesium from '@/namespace'
-import Layer from '@/core/layer/Layer'
+const { Layer, State } = DC
 
-DC.KmlLayer = class extends Layer {
+const { Cesium } = DC.Namespace
+
+class KmlLayer extends Layer {
   constructor(id, url, options = {}) {
     if (!url) {
       throw new Error('the url is empty')
     }
     super(id)
     this._delegate = Cesium.KmlDataSource.load(url, options)
-    this._state = DC.LayerState.INITIALIZED
-    this.type = DC.LayerType.KML
+    this.type = Layer.getOverlayType('kml')
+    this._state = State.INITIALIZED
   }
 
   set show(show) {
@@ -44,4 +45,6 @@ DC.KmlLayer = class extends Layer {
   }
 }
 
-DC.LayerType.KML = 'kml'
+Layer.registerType('kml')
+
+export default KmlLayer

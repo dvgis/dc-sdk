@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:35:02
+ * @Last Modified time: 2020-05-11 23:33:26
  */
 
 import { DomUtil } from '../utils'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
 
 class Popup extends Widget {
   constructor() {
@@ -16,7 +16,7 @@ class Popup extends Widget {
     this._config = undefined
     this._positionChangeable = true
     this.type = Widget.getWidgetType('popup')
-    this._state = WidgetState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   set config(config) {

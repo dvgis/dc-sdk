@@ -2,14 +2,21 @@
  * @Author: Caven
  * @Date: 2020-04-03 10:13:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:56:45
+ * @Last Modified time: 2020-05-11 23:52:18
  */
 
 const install = function(DC) {
-  if (!DC) {
-    throw new Error('DC.Plot: Missing DC Base SDK')
+  if (!DC || !DC.init) {
+    throw new Error('Plot: Missing DC Base')
   }
-  require('./Plot')
+
+  if (!DC.ready) {
+    throw new Error('Plot: Missing DC Core')
+  }
+
+  DC.init(() => {
+    require('./Plot')
+  })
 }
 
 /* istanbul ignore if */

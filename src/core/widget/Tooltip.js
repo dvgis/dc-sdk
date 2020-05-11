@@ -2,19 +2,19 @@
  * @Author: Caven
  * @Date: 2020-02-01 12:07:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:36:16
+ * @Last Modified time: 2020-05-11 23:34:58
  */
 
 import { DomUtil } from '../utils'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
 
 class Tooltip extends Widget {
   constructor() {
     super()
     this._wrapper = DomUtil.create('div', 'dc-tool-tip')
     this.type = Widget.getWidgetType('tooltip')
-    this._state = WidgetState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   /**

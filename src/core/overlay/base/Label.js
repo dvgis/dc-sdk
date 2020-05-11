@@ -2,18 +2,20 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:10:01
+ * @Last Modified time: 2020-05-11 22:38:18
  */
-import { Cesium } from '../../../namespace'
+
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
 import State from '../../state/State'
 import Overlay from '../Overlay'
 
+const { Cesium } = DC.Namespace
+
 class Label extends Overlay {
   constructor(position, text) {
     if (!Util.checkPosition(position)) {
-      throw new Error('DC.Label: the position invalid')
+      throw new Error('Label: the position invalid')
     }
     super()
     this._position = position
@@ -25,7 +27,7 @@ class Label extends Overlay {
 
   set position(position) {
     if (!Util.checkPosition(position)) {
-      throw new Error('DC.Label: the position invalid')
+      throw new Error('Label: the position invalid')
     }
     this._position = position
   }

@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-03-06 17:56:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-06 18:02:44
+ * @Last Modified time: 2020-05-11 23:04:24
  */
-import Cesium from '@/namespace'
 
-DC.CircleFadeMaterialProperty = class {
+const { Cesium } = DC.Namespace
+
+class CircleFadeMaterialProperty {
   constructor(options) {
     options = options || {}
     this._definitionChanged = new Cesium.Event()
@@ -45,13 +46,15 @@ DC.CircleFadeMaterialProperty = class {
   equals(other) {
     return (
       this === other ||
-      (other instanceof DC.CircleFadeMaterialProperty &&
+      (other instanceof CircleFadeMaterialProperty &&
         Cesium.Property.equals(this._color, other._color))
     )
   }
 }
 
-Object.defineProperties(DC.CircleFadeMaterialProperty.prototype, {
+Object.defineProperties(CircleFadeMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
 })
+
+export default CircleFadeMaterialProperty

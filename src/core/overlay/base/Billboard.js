@@ -2,14 +2,15 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:08:29
+ * @Last Modified time: 2020-05-11 22:06:59
  */
 
-import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
 import State from '../../state/State'
 import Overlay from '../Overlay'
+
+const { Cesium } = DC.Namespace
 
 class Billboard extends Overlay {
   constructor(position, icon) {

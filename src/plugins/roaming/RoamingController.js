@@ -2,12 +2,16 @@
  * @Author: Caven
  * @Date: 2020-04-01 10:36:36
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-15 13:11:13
+ * @Last Modified time: 2020-05-11 23:29:53
  */
 
-import Cesium from '@/namespace'
+import RoamingEventType from './RoamingEventType'
 
-DC.RoamingController = class {
+const { SceneEventType, State } = DC
+
+const { Cesium } = DC.Namespace
+
+class RoamingController {
   constructor(viewer) {
     this._viewer = viewer
     this._clockTickRemoveCallback = undefined
@@ -23,7 +27,7 @@ DC.RoamingController = class {
       let path = this._cache(key)
       path.roamingEvent &&
         path.roamingEvent.fire(
-          DC.RoamingEventType.TICK,
+          RoamingEventType.TICK,
           this._viewer.clock.currentTime,
           this._viewMode,
           this._viewOption
@@ -45,7 +49,7 @@ DC.RoamingController = class {
       !(endTime instanceof Date) ||
       startTime > endTime
     ) {
-      throw new Error('DC.RoamingController: the time range invalid ')
+      throw new Error('RoamingController: the time range invalid ')
     }
     this._startTime = Cesium.JulianDate.fromDate(startTime)
     let endTime = Cesium.JulianDate.fromDate(endTime)
@@ -64,7 +68,7 @@ DC.RoamingController = class {
    */
   setTimeDuration(startTime, duration) {
     if (!startTime || !(startTime instanceof Date)) {
-      throw new Error('DC.RoamingController: the time invalid ')
+      throw new Error('RoamingController: the time invalid ')
     }
     this._startTime = Cesium.JulianDate.fromDate(startTime)
     this._duration = duration
@@ -76,13 +80,13 @@ DC.RoamingController = class {
    */
   play() {
     if (!this._startTime && !(this._startTime instanceof Cesium.JulianDate)) {
-      throw new Error('DC.RoamingController: time not set ')
+      throw new Error('RoamingController: time not set ')
     }
     this._viewer.clock.shouldAnimate = false
     this._viewer.clock.currentTime = this._startTime
     this._clockTickRemoveCallback && this._clockTickRemoveCallback()
     this._clockTickRemoveCallback = this._viewer.on(
-      DC.SceneEventType.CLOCK_TICK,
+      SceneEventType.CLOCK_TICK,
       this._clockTickHandler,
       this
     )
@@ -119,8 +123,8 @@ DC.RoamingController = class {
    * @param {*} path
    */
   addPath(path) {
-    if (path && path.roamingEvent && path.state !== DC.RoamingState.ADDED) {
-      path.roamingEvent.fire(DC.RoamingEventType.ADD, this)
+    if (path && path.roamingEvent && path.state !== State.ADDED) {
+      path.roamingEvent.fire(RoamingEventType.ADD, this)
       this._cache[path.id] = path
     }
     return this
@@ -131,8 +135,8 @@ DC.RoamingController = class {
    * @param {*} path
    */
   removePath(path) {
-    if (path && path.roamingEvent && path.state !== DC.RoamingState.REMOVED) {
-      path.roamingEvent.fire(DC.RoamingEventType.REMOVE)
+    if (path && path.roamingEvent && path.state !== State.REMOVED) {
+      path.roamingEvent.fire(RoamingEventType.REMOVE)
       delete this._cache[path.id]
     }
     return this
@@ -157,12 +161,14 @@ DC.RoamingController = class {
    */
   trackedPath(path, viewMode, viewOption = {}) {
     if (!this._cache[path.id]) {
-      throw new Error('DC.RoamingController: path does not add ')
+      throw new Error('RoamingController: path does not add ')
     }
     this._viewMode = viewMode
     this._viewOption = viewOption
     path.roamingEvent &&
-      path.roamingEvent.fire(DC.RoamingEventType.ACTIVE, path.id)
+      path.roamingEvent.fire(RoamingEventType.ACTIVE, path.id)
     return this
   }
 }
+
+export default RoamingController

@@ -2,11 +2,14 @@
  * @Author: Caven
  * @Date: 2020-03-30 17:14:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 16:59:59
+ * @Last Modified time: 2020-05-11 22:37:12
  */
-import { Cesium } from '../../namespace'
+
 import State from '../state/State'
 import Layer from './Layer'
+import { Label } from '../overlay'
+
+const { Cesium } = DC.Namespace
 
 class LabelLayer extends Layer {
   constructor(id, url) {
@@ -23,7 +26,7 @@ class LabelLayer extends Layer {
 
   _createLabel(entity) {
     if (entity.position && item.name) {
-      return DC.Label.fromEntity(entity)
+      return Label.fromEntity(entity)
     }
   }
 

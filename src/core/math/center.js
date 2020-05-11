@@ -2,18 +2,21 @@
  * @Author: Caven
  * @Date: 2020-04-24 14:43:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 21:50:19
+ * @Last Modified time: 2020-05-12 00:42:28
  */
 
-import { Cesium } from '../../namespace'
+import Transform from '../transform/Transform'
+import Position from '../position/Position'
+
+const { Cesium } = DC.Namespace
 
 export default function center(positions) {
   if (positions && Array.isArray(positions)) {
     let boundingSphere = Cesium.BoundingSphere.fromPoints(
-      DC.T.transformWGS84ArrayToCartesianArray(positions)
+      Transform.transformWGS84ArrayToCartesianArray(positions)
     )
-    return DC.T.transformCartesianToWGS84(boundingSphere.center)
+    return Transform.transformCartesianToWGS84(boundingSphere.center)
   }
 
-  return new DC.Position()
+  return new Position()
 }

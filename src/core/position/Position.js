@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:35:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:25:22
+ * @Last Modified time: 2020-05-11 22:11:25
  */
 
-import { Cesium } from '../../namespace'
 import Transform from '../transform/Transform'
+
+const { Cesium } = DC.Namespace
 
 class Position {
   constructor(lng, lat, alt, heading, pitch, roll) {

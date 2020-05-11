@@ -2,13 +2,13 @@
  * @Author: Caven
  * @Date: 2020-03-04 18:02:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:30:18
+ * @Last Modified time: 2020-05-11 23:34:03
  */
 
-import { MouseEventType, SceneEventType } from '../event/EventType'
+import { MouseEventType, SceneEventType } from '../event'
 import { DomUtil } from '../utils'
+import State from '../state/State'
 import Widget from './Widget'
-import WidgetState from './WidgetState'
 
 class LocationBar extends Widget {
   constructor() {
@@ -17,7 +17,7 @@ class LocationBar extends Widget {
     this._mouseEl = DomUtil.create('div', 'mouse-location', this._wrapper)
     this._cameraEl = DomUtil.create('div', 'camera-location', this._wrapper)
     this.type = Widget.getWidgetType('location_bar')
-    this._state = WidgetState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _installHook() {

@@ -2,12 +2,13 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:13:16
+ * @Last Modified time: 2020-05-11 22:35:29
  */
 
-import { Cesium } from '../../namespace'
 import { MouseEventType } from './EventType'
 import Event from './Event'
+
+const { Cesium } = DC.Namespace
 
 /**
  * Mouse events in 3D scene, optimized Cesium event model

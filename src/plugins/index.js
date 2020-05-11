@@ -2,18 +2,26 @@
  * @Author: Caven
  * @Date: 2020-01-14 18:22:10
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:24:53
+ * @Last Modified time: 2020-05-12 00:00:16
  */
 
 const install = function(DC) {
-  if (!DC || !DC.ready) {
-    throw new Error('Plugins: Missing DC Core ')
+  if (!DC || !DC.init) {
+    throw new Error('Plot: Missing DC Base')
   }
+
+  if (!DC.ready) {
+    throw new Error('Plot: Missing DC Core')
+  }
+
   if (window.mapv) {
     DC.Namespace['mapv'] = window.mapv
     delete window.mapv
   }
-  require('./Pulgins.Loader')
+
+  DC.init(() => {
+    require('./Pulgins.Loader')
+  })
 }
 
 /* istanbul ignore if */

@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:33:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 21:06:59
+ * @Last Modified time: 2020-05-11 22:06:42
  */
-import { Cesium } from '../../namespace'
+
+const { Cesium } = DC.Namespace
 
 class CameraOption {
   constructor(viewer) {

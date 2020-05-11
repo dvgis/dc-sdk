@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 20:52:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:58:05
+ * @Last Modified time: 2020-05-11 23:10:46
  */
 
 import Draw from './Draw'
+
+const { OverlayType, Transform } = DC
 
 const { Cesium } = DC.NameSpace
 
@@ -35,8 +37,8 @@ class DrawRect extends Draw {
         )
         this._unbindEnvet()
         this._plotEvent.raiseEvent({
-          type: DC.OverlayType.RECT,
-          points: DC.T.transformCartesianArrayToWGS84Array(this._positions)
+          type: OverlayType.RECT,
+          points: Transform.transformCartesianArrayToWGS84Array(this._positions)
         })
       }
     }

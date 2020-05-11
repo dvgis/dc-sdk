@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:59:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:57:52
+ * @Last Modified time: 2020-05-11 23:09:41
  */
 
 import Draw from './Draw'
+
+const { OverlayType, Transform } = DC
 
 const { Cesium } = DC.NameSpace
 
@@ -48,8 +50,8 @@ class DrawPolygon extends Draw {
   _mouseRightClickHandler(e) {
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
-      type: DC.OverlayType.POLYGON,
-      points: DC.T.transformCartesianArrayToWGS84Array(this._positions)
+      type: OverlayType.POLYGON,
+      points: Transform.transformCartesianArrayToWGS84Array(this._positions)
     })
   }
 

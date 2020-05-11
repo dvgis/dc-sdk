@@ -2,15 +2,17 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:10:49
+ * @Last Modified time: 2020-05-11 22:07:22
  */
-import { Cesium } from '../../../namespace'
+
 import { Util } from '../../utils'
 import { center, area } from '../../math'
 import Transform from '../../transform/Transform'
 import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
+
+const { Cesium } = DC.Namespace
 
 class Polygon extends Overlay {
   constructor(positions) {

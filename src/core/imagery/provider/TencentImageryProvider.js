@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-21 16:10:47
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:18:37
+ * @Last Modified time: 2020-05-11 22:04:41
  */
-import { Cesium } from '../../../namespace'
+
 import ImageryType from '../ImageryType'
+
+const { Cesium } = DC.Namespace
 
 const ELEC_URL =
   'https://rt{s}.map.gtimg.com/tile?z={z}&x={x}&y={reverseY}&styleid=1000&scene=0&version=347'

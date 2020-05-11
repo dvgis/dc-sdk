@@ -2,14 +2,20 @@
  * @Author: Caven
  * @Date: 2020-03-02 22:38:10
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:51:04
+ * @Last Modified time: 2020-05-11 21:39:33
  */
 
-const { Cesium } = DC.namespace
+const { Viewer, SceneEventType, Position, Transfrom } = DC
+
+const { Cesium } = DC.Namespace
 
 class AroundPoint {
   constructor(viewer, position, options = {}) {
-    if (!position || !(position instanceof DC.Position)) {
+    if (
+      !position ||
+      !(viewer instanceof Viewer) ||
+      !(position instanceof Position)
+    ) {
       throw new Error('the position invalid')
     }
     this._viewer = viewer
@@ -26,7 +32,7 @@ class AroundPoint {
 
   _start() {
     this._viewer.clock.currentTime = this._startTime.clone()
-    this._viewer.on(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
+    this._viewer.on(SceneEventType.CLOCK_TICK, this._onTickHandler, this)
   }
 
   _onTickHandler() {
@@ -37,7 +43,7 @@ class AroundPoint {
     let duration = this._options.duration || 10
     let heading = Cesium.Math.toRadians(diff * (360 / duration)) + this._heading
     this._viewer.scene.camera.setView({
-      destination: DC.T.transformWGS84ToCartesian(this._position),
+      destination: Transfrom.transformWGS84ToCartesian(this._position),
       orientation: {
         heading: heading,
         pitch: Cesium.Math.toRadians(this._options.pitch || 0)
@@ -51,7 +57,7 @@ class AroundPoint {
         this._stopTime
       ) >= 0
     ) {
-      this._viewer.off(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
+      this._viewer.off(SceneEventType.CLOCK_TICK, this._onTickHandler, this)
       this._options.callback &&
         this._options.callback.call(this._options.context || this)
     }

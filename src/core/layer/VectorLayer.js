@@ -2,10 +2,9 @@
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:05:49
+ * @Last Modified time: 2020-05-11 22:06:23
  */
 
-import { Cesium } from '../../namespace'
 import State from '../state/State'
 import Layer from './Layer'
 

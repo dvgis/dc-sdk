@@ -2,12 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:12:18
+ * @Last Modified time: 2020-05-11 22:07:45
  */
-import { Cesium } from '../../../namespace'
+
 import { Util } from '../../utils'
 import State from '../../state/State'
 import Overlay from '../Overlay'
+
+const { Cesium } = DC.Namespace
 
 class Tileset extends Overlay {
   constructor(url, options = {}) {

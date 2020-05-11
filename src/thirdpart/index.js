@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:35:51
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:59:05
+ * @Last Modified time: 2020-05-12 00:40:52
  */
-import { Cesium } from '../namespace'
+
+const { Cesium } = DC.Namespace
 
 DC.Cartesian2 = Cesium.Cartesian2
 DC.Cartesian3 = Cesium.Cartesian3
@@ -12,7 +13,6 @@ DC.SceneMode = Cesium.SceneMode
 DC.TilesetStyle = Cesium.Cesium3DTileStyle
 DC.CallbackProperty = Cesium.CallbackProperty
 DC.JulianDate = Cesium.JulianDate
-DC.Math = Cesium.Math
 DC.ClassificationType = Cesium.ClassificationType
 DC.Color = Cesium.Color
 DC.ColorMaterialProperty = Cesium.ColorMaterialProperty

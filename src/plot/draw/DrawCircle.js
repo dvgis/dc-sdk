@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:44:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:57:35
+ * @Last Modified time: 2020-05-11 22:31:32
  */
 
 import Draw from './Draw'
+
+const { OverlayType, Transform } = DC
 
 const { Cesium } = DC.NameSpace
 
@@ -33,8 +35,8 @@ class DrawClicle extends Draw {
       this._computeRadius(this._center, position)
       this._unbindEnvet()
       this._plotEvent.raiseEvent({
-        type: DC.OverlayType.CIRCLE,
-        points: [DC.T.transformCartesianToWGS84(this._center)],
+        type: OverlayType.CIRCLE,
+        points: [Transform.transformCartesianToWGS84(this._center)],
         radius: this._radius
       })
     }

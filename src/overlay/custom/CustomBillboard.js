@@ -2,16 +2,18 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:44:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-14 19:05:37
+ * @Last Modified time: 2020-05-12 00:18:04
  */
-import Cesium from '@/namespace'
-import '@/core/overlay/base/DC.Billboard'
 
-DC.CustomBillboard = class extends DC.Billboard {
+const { Billboard, Position, State, Transform } = DC
+
+const { Cesium } = DC.Namespace
+
+class CustomBillboard extends Billboard {
   constructor(position, icon) {
     super(position, icon)
-    this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.CUSTOM_BILLBOARD
+    this._state = State.INITIALIZED
+    this.type = Overlay.getOverlayType('custom_billboard')
   }
 
   /**
@@ -20,14 +22,14 @@ DC.CustomBillboard = class extends DC.Billboard {
    */
   setVLine(style) {
     if (this._position.alt > 0 && !this._delegate.polyline) {
-      let position = new DC.Position()
+      let position = new Position()
       this._delegate.polyline = {
         ...style,
         positions: new Cesium.CallbackProperty(time => {
           position.lng = this._position.lng
           position.lat = this._position.lat
           position.alt = 0
-          return DC.T.transformWGS84ArrayToCartesianArray([
+          return Transform.transformWGS84ArrayToCartesianArray([
             position,
             this._position
           ])
@@ -64,4 +66,6 @@ DC.CustomBillboard = class extends DC.Billboard {
   }
 }
 
-DC.OverlayType.CUSTOM_BILLBOARD = 'customBillboard'
+Overlay.registerType('custom_billboard')
+
+export default CustomBillboard

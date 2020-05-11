@@ -2,10 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-19 11:21:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 14:43:15
+ * @Last Modified time: 2020-05-11 23:30:00
  */
-import Cesium from '@/namespace'
-import { RoamingEvent } from '@/core/event'
+
+import RoamingEventType from './RoamingEventType'
+import RoamingEvent from './RoamingEvent'
+
+const { Util, State, Transform, Parse } = DC
+const { Cesium } = DC.Namespace
 
 const DEF_OPTS = {
   showPath: false,
@@ -14,9 +18,9 @@ const DEF_OPTS = {
   pathLeadTime: 1
 }
 
-DC.RoamingPath = class {
+class RoamingPath {
   constructor(id, tickCallback, options) {
-    this._id = id || DC.Util.uuid()
+    this._id = id || Util.uuid()
     this._startTime = undefined
     this._controller = undefined
     this._duration = 0
@@ -33,11 +37,11 @@ DC.RoamingPath = class {
     this._timeLine = []
     this._sampledPositions = undefined
     this._roamingEvent = new RoamingEvent()
-    this._roamingEvent.on(DC.RoamingEventType.TICK, this._tickHandler, this)
-    this._roamingEvent.on(DC.RoamingEventType.ADD, this._addHandler, this)
-    this._roamingEvent.on(DC.RoamingEventType.REMOVE, this._removeHandler, this)
-    this._roamingEvent.on(DC.RoamingEventType.ACTIVE, this._activeHandler, this)
-    this._state = DC.RoamingState.INITIALIZED
+    this._roamingEvent.on(RoamingEventType.TICK, this._tickHandler, this)
+    this._roamingEvent.on(RoamingEventType.ADD, this._addHandler, this)
+    this._roamingEvent.on(RoamingEventType.REMOVE, this._removeHandler, this)
+    this._roamingEvent.on(RoamingEventType.ACTIVE, this._activeHandler, this)
+    this._state = State.INITIALIZED
   }
 
   set startTime(startTime) {
@@ -60,13 +64,13 @@ DC.RoamingPath = class {
     this._controller = controller
     this._mountedHook && this._mountedHook()
     this._controller._viewer.delegate.entities.add(this._delegate)
-    this._state = DC.RoamingState.ADDED
+    this._state = State.ADDED
   }
 
   _removeHandler() {
     if (this._controller) {
       this._controller._viewer.delegate.entities.remove(this._delegate)
-      this.state = DC.RoamingState.REMOVED
+      this.state = State.REMOVED
     }
   }
 
@@ -84,11 +88,13 @@ DC.RoamingPath = class {
       if (viewMode === 0) {
         viewer.trackedEntity = this._delegate
       } else if (viewMode === 1) {
-        let heading = DC.Math.heading(tickPosition, nextTickPosition)
-        let WGS84TickPosition = DC.T.transformCartesianToWGS84(tickPosition)
+        let heading = Cesium.Math.heading(tickPosition, nextTickPosition)
+        let WGS84TickPosition = Transform.transformCartesianToWGS84(
+          tickPosition
+        )
         WGS84TickPosition.alt = viewOption.alt || 5
         camera.lookAt(
-          DC.T.transformWGS84ToCartesian(WGS84TickPosition),
+          Transform.transformWGS84ToCartesian(WGS84TickPosition),
           new Cesium.HeadingPitchRange(
             heading,
             Cesium.Math.toRadians(viewOption.pitch || 0),
@@ -136,10 +142,10 @@ DC.RoamingPath = class {
   _mountedPosition() {
     let interval = 0
     if (this._mode === 'speed') {
-      let v = DC.Math.distance(this._positions) / this._duration
+      let v = Cesium.Math.distance(this._positions) / this._duration
       this._timeLine = this._positions.map((item, index, arr) => {
         if (index !== 0) {
-          interval += DC.Math.distance([arr[index - 1], item]) / v
+          interval += Cesium.Math.distance([arr[index - 1], item]) / v
         }
         return Cesium.JulianDate.addSeconds(
           this._startTime,
@@ -161,7 +167,7 @@ DC.RoamingPath = class {
     this._sampledPosition = new Cesium.SampledPositionProperty()
     this._sampledPosition.addSamples(
       this._timeLine,
-      DC.T.transformWGS84ArrayToCartesianArray(this._positions)
+      Transform.transformWGS84ArrayToCartesianArray(this._positions)
     )
   }
 
@@ -174,7 +180,7 @@ DC.RoamingPath = class {
   }
 
   setPositions(positions) {
-    this._positions = DC.P.parsePositions(positions)
+    this._positions = Parse.parsePositions(positions)
     this._mountedPosition()
     return this
   }
@@ -203,3 +209,5 @@ DC.RoamingPath = class {
     return this
   }
 }
+
+export default RoamingPath

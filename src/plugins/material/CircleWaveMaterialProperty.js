@@ -1,13 +1,13 @@
 /*
  * @Author: Caven
- * @Date: 2020-02-24 13:09:09
+ * @Date: 2020-03-06 17:56:39
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 15:38:43
+ * @Last Modified time: 2020-05-12 00:32:33
  */
 
-import Cesium from '@/namespace'
+const { Cesium } = DC.Namespace
 
-DC.PolylineTrailMaterialProperty = class {
+class CircleWaveMaterialProperty {
   constructor(options) {
     options = options || {}
     this._definitionChanged = new Cesium.Event()
@@ -20,6 +20,13 @@ DC.PolylineTrailMaterialProperty = class {
       Cesium.Color.fromBytes(0, 255, 255, 255)
     )
     this.duration = Cesium.defaultValue(options.duration, 45)
+    this.count = Math.max(Cesium.defaultValue(options.count, 2), 1)
+    this.gradient = Cesium.defaultValue(options.gradient, 0.1)
+    if (this.gradient < 0) {
+      this.gradient = 0
+    } else if (this.gradient > 1) {
+      this.gradient = 1
+    }
   }
 
   get isConstant() {
@@ -31,33 +38,32 @@ DC.PolylineTrailMaterialProperty = class {
   }
 
   getType(time) {
-    return Cesium.Material.PolylineTrailType
+    return Cesium.Material.CircleWaveType
   }
 
   getValue(time, result) {
     if (!result) {
       result = {}
     }
-    result.color = Cesium.Property.getValueOrClonedDefault(
-      this._color,
-      time,
-      Cesium.Color.WHITE,
-      result.color
-    )
+    result.color = Cesium.Property.getValueOrUndefined(this._color, time)
     result.duration = this._duration
+    result.count = this.count
+    result.gradient = this.gradient
     return result
   }
 
   equals(other) {
     return (
       this === other ||
-      (other instanceof DC.PolylineTrailMaterialProperty &&
+      (other instanceof CircleWaveMaterialProperty &&
         Cesium.Property.equals(this._color, other._color))
     )
   }
 }
 
-Object.defineProperties(DC.PolylineTrailMaterialProperty.prototype, {
+Object.defineProperties(CircleWaveMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   duration: Cesium.createPropertyDescriptor('duration')
 })
+
+export default CircleWaveMaterialProperty

@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 16:25:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:57:47
+ * @Last Modified time: 2020-05-11 23:09:24
  */
 
 import Draw from './Draw'
+
+const { OverlayType, Transform } = DC
 
 const { Cesium } = DC.NameSpace
 
@@ -29,8 +31,8 @@ class DrawPoint extends Draw {
     this._position = e.target ? e.position : e.surfacePosition
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
-      type: DC.OverlayType.POINT,
-      points: [DC.T.transformCartesianToWGS84(this._position)]
+      type: OverlayType.POINT,
+      points: [Transform.transformCartesianToWGS84(this._position)]
     })
   }
 

@@ -2,22 +2,23 @@
  * @Author: Caven
  * @Date: 2020-01-15 20:23:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:25:59
+ * @Last Modified time: 2020-05-12 00:26:13
  */
 
-import Effect from './Effect'
-import EffectState from './EffectState'
+import Effect from '../Effect'
+
+const { State } = DC
 
 const { Cesium } = DC.Namespace
 
-const RainShader = require('../shader/RainShader.glsl')
+const RainShader = require('../../shader/RainShader.glsl')
 
 class RainEffect extends Effect {
   constructor(id) {
     super(id)
     this._addable = true
     this.type = Effect.getEffectType('rain')
-    this._state = EffectState.INITIALIZED
+    this._state = State.INITIALIZED
   }
 
   _mountedHook() {

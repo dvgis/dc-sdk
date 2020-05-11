@@ -2,25 +2,27 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 09:11:36
+ * @Last Modified time: 2020-05-11 22:11:10
  */
-import { OverlayEvent } from '../event'
+import { Util } from '../utils'
+import { OverlayEventType, OverlayEvent } from '../event'
+import State from '../state/State'
 import OverlayType from './OverlayType'
 
 class Overlay {
   constructor() {
-    this._id = DC.Util.uuid()
+    this._id = Util.uuid()
     this._layer = undefined
     this._state = undefined
     this._delegate = undefined
-    this._bid = DC.Util.uuid() // Business id
+    this._bid = Util.uuid() // Business id
     this._show = true
     this._style = {}
     this._attr = {}
     this._overlayEvent = new OverlayEvent()
     this.type = undefined
-    this.on(DC.OverlayEventType.ADD, this._addHandler, this)
-    this.on(DC.OverlayEventType.REMOVE, this._removeHandler, this)
+    this.on(OverlayEventType.ADD, this._addHandler, this)
+    this.on(OverlayEventType.REMOVE, this._removeHandler, this)
   }
 
   get overlayId() {
@@ -98,7 +100,7 @@ class Overlay {
     if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
       this._layer.delegate.entities.add(this._delegate)
       this._addedHook && this._addedHook()
-      this._state = DC.OverlayState.ADDED
+      this._state = State.ADDED
     }
   }
 
@@ -109,7 +111,7 @@ class Overlay {
     if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
       this._layer.delegate.entities.remove(this._delegate)
       this._removedHook && this._removedHook()
-      this._state = DC.OverlayState.REMOVED
+      this._state = State.REMOVED
     }
   }
 
@@ -195,7 +197,5 @@ class Overlay {
     return OverlayType[type.toLocaleUpperCase()] || undefined
   }
 }
-
-DC.Overlay = Overlay
 
 export default Overlay

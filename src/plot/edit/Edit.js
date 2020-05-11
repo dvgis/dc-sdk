@@ -2,8 +2,10 @@
  * @Author: Caven
  * @Date: 2020-03-17 16:19:15
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:58:10
+ * @Last Modified time: 2020-05-11 23:11:18
  */
+
+const { OverlayType, Transform } = DC
 
 const { Cesium } = DC.NameSpace
 
@@ -23,8 +25,8 @@ class Edit {
     this._unbindEnvet()
     this._layer.clear()
     this._plotEvent.raiseEvent({
-      type: DC.OverlayType.POLYLINE,
-      points: DC.T.transformCartesianArrayToWGS84Array(this._positions)
+      type: OverlayType.POLYLINE,
+      points: Transform.transformCartesianArrayToWGS84Array(this._positions)
     })
   }
 

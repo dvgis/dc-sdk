@@ -2,15 +2,16 @@
  * @Author: Caven
  * @Date: 2020-02-13 20:19:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:11:52
+ * @Last Modified time: 2020-05-11 23:54:13
  */
-import Layer from '@/core/layer/Layer'
 
-const mapv = DC.Namespace.mapv
+const { Layer, State } = DC
 
-DC.MapvDataSet = mapv ? mapv.DataSet : undefined
+const { mapv } = DC.Namespace
 
-DC.MapvLayer = class extends Layer {
+const MapvDataSet = mapv ? mapv.DataSet : undefined
+
+class MapvLayer extends Layer {
   constructor(id, option = {}) {
     if (!mapv) {
       throw new Error('miss mapv lib')
@@ -19,7 +20,7 @@ DC.MapvLayer = class extends Layer {
     this._option = option
     this._dataSet = undefined
     this._delegate = undefined
-    this.type = DC.LayerType.MAPV
+    this.type = Layer.getOverlayType('mapv')
   }
 
   set show(show) {
@@ -44,11 +45,11 @@ DC.MapvLayer = class extends Layer {
     this._viewer = viewer
     this._delegate = new mapv.cesiumMapLayer(
       this._viewer.delegate,
-      this._dataSet || new DC.MapvDataSet([]),
+      this._dataSet || new MapvDataSet([]),
       this._option
     )
     viewer.delegate.scene.canvas.setAttribute('tabIndex', 0)
-    this._state = DC.LayerState.ADDED
+    this._state = State.ADDED
   }
 
   /**
@@ -57,7 +58,7 @@ DC.MapvLayer = class extends Layer {
    */
   _removeHandler() {
     this._delegate && this._delegate.remove()
-    this._state = DC.LayerState.REMOVED
+    this._state = State.REMOVED
   }
 
   /**
@@ -71,4 +72,6 @@ DC.MapvLayer = class extends Layer {
   }
 }
 
-DC.LayerType.MAPV = 'mapv'
+Layer.registerType('mapv')
+
+export default MapvLayer

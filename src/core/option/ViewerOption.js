@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 21:07:05
+ * @Last Modified time: 2020-05-11 22:06:50
  */
 
-import { Cesium } from '../../namespace'
+const { Cesium } = DC.Namespace
 
 class ViewerOption {
   constructor(viewer) {

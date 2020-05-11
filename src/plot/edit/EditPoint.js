@@ -2,9 +2,12 @@
  * @Author: Caven
  * @Date: 2020-03-17 17:52:29
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:33:06
+ * @Last Modified time: 2020-05-11 23:13:57
  */
+
 import Edit from './Edit'
+
+const { OverlayType, Transform } = DC
 
 class EditPoint extends Edit {
   constructor(plotInfo) {
@@ -16,8 +19,8 @@ class EditPoint extends Edit {
     this._position = e.target ? e.position : e.surfacePosition
     this._unbindEnvet()
     this._plotEvent.raiseEvent({
-      type: DC.OverlayType.POINT,
-      points: [DC.T.transformCartesianToWGS84(this._position)]
+      type: OverlayType.POINT,
+      points: [Transform.transformCartesianToWGS84(this._position)]
     })
   }
 

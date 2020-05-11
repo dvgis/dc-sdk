@@ -2,21 +2,21 @@
  * @Author: Caven
  * @Date: 2020-02-24 14:11:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:18:29
+ * @Last Modified time: 2020-05-12 00:29:34
  */
 
-import Effect from './Effect'
+import Effect from '../Effect'
+
+const { State, Util, Transform, Position } = DC
 
 const { Cesium } = DC.Namespace
 
-const State = DC.State
-
-const CircleScanShader = require('../shader/CircleScanShader.glsl')
+const CircleScanShader = require('../../shader/CircleScanShader.glsl')
 
 class CircleScanEffect extends Effect {
   constructor(id, position, radius, color, duration) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('the position invalid')
+    if (!Util.checkPosition(position)) {
+      throw new Error('CircleScanEffect: the position invalid')
     }
     super(id)
     this._position = position
@@ -29,15 +29,15 @@ class CircleScanEffect extends Effect {
   }
 
   _mountedHook() {
-    let cartesian3Center = DC.T.transformWGS84ToCartesian(this._position)
+    let cartesian3Center = Transform.transformWGS84ToCartesian(this._position)
     let cartesian4Center = new Cesium.Cartesian4(
       cartesian3Center.x,
       cartesian3Center.y,
       cartesian3Center.z,
       1
     )
-    let cartesian3Center1 = DC.T.transformWGS84ToCartesian(
-      new DC.Position(
+    let cartesian3Center1 = Transform.transformWGS84ToCartesian(
+      new Position(
         this._position.lng,
         this._position.lat,
         this._position.alt + 500
@@ -96,4 +96,5 @@ class CircleScanEffect extends Effect {
 }
 
 Effect.registerType('circle_scan')
+
 export default CircleScanEffect

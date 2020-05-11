@@ -2,9 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-21 15:54:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:25:30
+ * @Last Modified time: 2020-05-11 22:07:56
  */
-import { Cesium } from '../../namespace'
+
+const { Cesium } = DC.Namespace
 
 class TerrainFactory {
   /**

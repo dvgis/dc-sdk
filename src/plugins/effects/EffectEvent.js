@@ -2,12 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:38:18
+ * @Last Modified time: 2020-05-12 00:28:18
  */
+import EffectEventType from './EffectEventType'
 
-import { Cesium } from '../../namespace'
-import { EffectEventType } from './EventType'
-import Event from './Event'
+const { Event } = DC
+
+const { Cesium } = DC.Namespace
 
 class EffectEvent extends Event {
   constructor() {

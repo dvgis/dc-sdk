@@ -2,14 +2,19 @@
  * @Author: Caven
  * @Date: 2020-03-31 20:58:06
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 14:50:54
+ * @Last Modified time: 2020-05-11 21:48:23
  */
+
+import Transform from '../transform/Transform'
+
 export default function distance(positions) {
   let distance = 0
   if (positions && Array.isArray(positions)) {
     for (let i = 0; i < positions.length - 1; i++) {
-      let point1cartographic = DC.T.transformWGS84ToCartographic(positions[i])
-      let point2cartographic = DC.T.transformWGS84ToCartographic(
+      let point1cartographic = Transform.transformWGS84ToCartographic(
+        positions[i]
+      )
+      let point2cartographic = Transform.transformWGS84ToCartographic(
         positions[i + 1]
       )
       let geodesic = new Cesium.EllipsoidGeodesic()

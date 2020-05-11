@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:38:53
+ * @Last Modified time: 2020-05-11 23:50:56
  */
 
 const install = function(DC) {
@@ -10,7 +10,9 @@ const install = function(DC) {
     throw new Error('Missing Base SDK')
   }
 
-  require('./Loader.Base')
+  DC.init(() => {
+    require('./Loader.Base')
+  })
 
   /**
    * 框架开始

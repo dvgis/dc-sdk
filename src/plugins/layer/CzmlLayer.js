@@ -2,22 +2,22 @@
  * @Author: Caven
  * @Date: 2020-01-19 13:38:48
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 11:36:25
+ * @Last Modified time: 2020-05-11 21:38:21
  */
 
-import LayerState from './LayerState'
+const { State, Layer } = DC
 
 const { Cesium } = DC.Namespace
 
-class CzmlLayer extends DC.Layer {
+class CzmlLayer extends Layer {
   constructor(id, url, options = {}) {
     if (!url) {
       throw new Error('the url is empty')
     }
     super(id)
     this._delegate = Cesium.CzmlDataSource.load(url, options)
-    this.type = DC.Layer.getLayerType('czml')
-    this._state = LayerState.INITIALIZED
+    this.type = Layer.getLayerType('czml')
+    this._state = State.INITIALIZED
   }
 
   set show(show) {
@@ -45,6 +45,6 @@ class CzmlLayer extends DC.Layer {
   }
 }
 
-DC.Layer.registerType('czml')
+Layer.registerType('czml')
 
 export default CzmlLayer

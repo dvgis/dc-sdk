@@ -2,15 +2,16 @@
  * @Author: Caven
  * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:29:10
+ * @Last Modified time: 2020-05-11 22:22:10
  */
-import Cesium from '@/namespace'
-import Overlay from '@/core/overlay/Overlay'
+const { Overlay, Util, State, Transform } = DC
 
-DC.Cylinder = class extends Overlay {
+const { Cesium } = DC.Namespace
+
+class Cylinder extends Overlay {
   constructor(position, length, topRadius, bottomRadius) {
-    if (!DC.Util.checkPosition(position)) {
-      throw new Error('DC.Cylinder: the position invalid')
+    if (!Util.checkPosition(position)) {
+      throw new Error('Cylinder: the position invalid')
     }
     super()
     this._position = position
@@ -18,13 +19,13 @@ DC.Cylinder = class extends Overlay {
     this._topRadius = topRadius
     this._bottomRadius = bottomRadius
     this._delegate = new Cesium.Entity()
-    this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.CYLINDER
+    this.type = Overlay.getOverlayType('cylinder')
+    this._state = State.INITIALIZED
   }
 
   set position(position) {
-    if (!DC.Util.checkPosition(position)) {
-      throw new Error('DC.Cylinder: the position invalid')
+    if (!Util.checkPosition(position)) {
+      throw new Error('Cylinder: the position invalid')
     }
     this._position = position
   }
@@ -62,14 +63,14 @@ DC.Cylinder = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWGS84ToCartesian(this._position)
+      return Transform.transformWGS84ToCartesian(this._position)
     })
     /**
      * set the orientation
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWGS84ToCartesian(this._position),
+        Transform.transformWGS84ToCartesian(this._position),
         new Cesium.HeadingPitchRoll(
           Cesium.Math.toRadians(this._position.heading),
           Cesium.Math.toRadians(this._position.pitch),
@@ -103,10 +104,11 @@ DC.Cylinder = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.cylinder &&
-      DC.Util.merge(this._delegate.cylinder, this._style)
+    this._delegate.cylinder && Util.merge(this._delegate.cylinder, this._style)
     return this
   }
 }
 
-DC.OverlayType.CYLINDER = 'cylinder'
+Overlay.registerType('cylinder')
+
+export default Cylinder

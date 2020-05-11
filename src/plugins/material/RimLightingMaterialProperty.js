@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-25 22:49:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-03-05 15:41:23
+ * @Last Modified time: 2020-05-11 23:15:54
  */
 
-import Cesium from '@/namespace'
+const { Cesium } = DC.Namespace
 
-DC.RimLightingMaterialProperty = class {
+class RimLightingMaterialProperty {
   constructor(options) {
     options = options || {}
     this._definitionChanged = new Cesium.Event()
@@ -53,14 +53,16 @@ DC.RimLightingMaterialProperty = class {
   equals(other) {
     return (
       this === other ||
-      (other instanceof DC.RimLightingMaterialProperty &&
+      (other instanceof RimLightingMaterialProperty &&
         Cesium.Property.equals(this._color, other._color))
     )
   }
 }
 
-Object.defineProperties(DC.RimLightingMaterialProperty.prototype, {
+Object.defineProperties(RimLightingMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   rimColor: Cesium.createPropertyDescriptor('rimColor'),
   width: Cesium.createPropertyDescriptor('width')
 })
+
+export default RimLightingMaterialProperty

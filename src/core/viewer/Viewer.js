@@ -2,13 +2,11 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 16:58:42
+ * @Last Modified time: 2020-05-11 23:32:52
  */
 
-import { Cesium } from '../../namespace'
+import { LayerEventType, MouseEvent, ViewerEvent, SceneEvent } from '../event'
 import { ViewerOption, CameraOption } from '../option'
-import { MouseEvent, ViewerEvent, SceneEvent } from '../event'
-import { LayerEventType, EffectEventType } from '../event/EventType'
 import {
   Attribution,
   ContextMenu,
@@ -20,10 +18,11 @@ import {
   HawkeyeMap,
   Compass
 } from '../widget'
-
 import { DomUtil } from '../utils'
 import Transform from '../transform/Transform'
 import Position from '../position/Position'
+
+const { Cesium } = DC.Namespace
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter

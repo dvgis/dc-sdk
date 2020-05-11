@@ -2,28 +2,29 @@
  * @Author: Caven
  * @Date: 2020-04-14 11:10:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-16 20:29:17
+ * @Last Modified time: 2020-05-11 22:24:34
  */
-import Cesium from '@/namespace'
-import Overlay from '@/core/overlay/Overlay'
+const { Overlay, Util, State, Transform } = DC
 
-DC.Ellipse = class extends Overlay {
+const { Cesium } = DC.Namespace
+
+class Ellipse extends Overlay {
   constructor(position, semiMajorAxis, semiMinorAxis) {
-    if (!DC.Util.checkPosition(position)) {
-      throw new Error('DC.Ellipse: the position invalid')
+    if (!Util.checkPosition(position)) {
+      throw new Error('Ellipse: the position invalid')
     }
     super()
     this._position = position
     this._semiMajorAxis = semiMajorAxis || 0
     this._semiMinorAxis = semiMinorAxis || 0
     this._delegate = new Cesium.Entity()
-    this._state = DC.OverlayState.INITIALIZED
-    this.type = DC.OverlayType.ELLIPSE
+    this.type = Overlay.getOverlayType('ellipse')
+    this._state = State.INITIALIZED
   }
 
   set position(position) {
-    if (!position || !(position instanceof DC.Position)) {
-      throw new Error('DC.Ellipse: the position invalid')
+    if (!Util.checkPosition(position)) {
+      throw new Error('Ellipse: the position invalid')
     }
     this._position = position
   }
@@ -53,14 +54,14 @@ DC.Ellipse = class extends Overlay {
      * set the location
      */
     this._delegate.position = new Cesium.CallbackProperty(time => {
-      return DC.T.transformWGS84ToCartesian(this._position)
+      return Transform.transformWGS84ToCartesian(this._position)
     })
     /**
      * set the orientation
      */
     this._delegate.orientation = new Cesium.CallbackProperty(time => {
       return Cesium.Transforms.headingPitchRollQuaternion(
-        DC.T.transformWGS84ToCartesian(this._position),
+        Transform.transformWGS84ToCartesian(this._position),
         new Cesium.HeadingPitchRoll(
           Cesium.Math.toRadians(this._position.heading),
           Cesium.Math.toRadians(this._position.pitch),
@@ -91,9 +92,11 @@ DC.Ellipse = class extends Overlay {
       return this
     }
     this._style = style
-    this._delegate.ellipse && DC.Util.merge(this._delegate.ellipse, this._style)
+    this._delegate.ellipse && Util.merge(this._delegate.ellipse, this._style)
     return this
   }
 }
 
-DC.OverlayType.ELLIPSE = 'ellipse'
+Overlay.registerType('ellipse')
+
+export default Ellipse

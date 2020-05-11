@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-31 20:58:06
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-24 14:41:15
+ * @Last Modified time: 2020-05-12 00:39:22
  */
 
 export default function isBetween(value, min, max) {

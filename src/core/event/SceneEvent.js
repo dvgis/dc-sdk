@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-03-02 21:32:43
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 08:14:10
+ * @Last Modified time: 2020-05-11 22:36:08
  */
 
-import Event from './Event'
 import { SceneEventType } from './EventType'
+import Event from './Event'
 
 class SceneEvent extends Event {
   constructor(viewer) {

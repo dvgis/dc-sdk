@@ -2,9 +2,11 @@
  * @Author: Caven
  * @Date: 2020-03-17 18:23:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-04-04 20:34:14
+ * @Last Modified time: 2020-05-11 23:13:36
  */
 import Edit from './Edit'
+
+const { OverlayType, Transform } = DC
 
 class EditCircle extends Edit {
   constructor(plotInfo) {
@@ -26,12 +28,12 @@ class EditCircle extends Edit {
   }
 
   _prepareMarkers() {
-    let rectangle = Cesium.EllipseGeometry.computeRectangle({
-      center: DC.T.this._center,
-      semiMajorAxis: this._radius,
-      semiMinorAxis: this._radius
-    })
-    let positions = [this._center]
+    // let rectangle = Cesium.EllipseGeometry.computeRectangle({
+    //   center: Transform.this._center,
+    //   semiMajorAxis: this._radius,
+    //   semiMinorAxis: this._radius
+    // })
+    //let positions = [this._center]
   }
 }
 

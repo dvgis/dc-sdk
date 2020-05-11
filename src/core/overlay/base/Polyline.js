@@ -2,16 +2,17 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:11:13
+ * @Last Modified time: 2020-05-11 22:07:32
  */
 
-import { Cesium } from '../../../namespace'
 import { Util } from '../../utils'
 import { center, distance } from '../../math'
 import Transform from '../../transform/Transform'
 import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
+
+const { Cesium } = DC.Namespace
 
 class Polyline extends Overlay {
   constructor(positions) {

@@ -2,14 +2,15 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:14:23
+ * @Last Modified time: 2020-05-11 22:08:55
  */
 
-import { Cesium } from '../../namespace'
 import { DomUtil } from '../utils'
-import { MouseEventType } from '../event/EventType'
+import { MouseEventType } from '../event'
 import State from '../state/State'
 import Widget from './Widget'
+
+const { Cesium } = DC.Namespace
 
 class ContextMenu extends Widget {
   constructor() {

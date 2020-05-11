@@ -2,18 +2,19 @@
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:04:58
+ * @Last Modified time: 2020-05-11 21:53:16
  */
 
-import { Cesium } from '../../namespace'
-import { LayerEvent } from '../event'
-import { LayerEventType, OverlayEventType } from '../event/EventType'
+import { Util } from '../utils'
+import { LayerEventType, OverlayEventType, LayerEvent } from '../event'
 import State from '../state/State'
 import LayerType from './LayerType'
 
+const { Cesium } = DC.Namespace
+
 class Layer {
   constructor(id) {
-    this._id = id || DC.Util.uuid()
+    this._id = id || Util.uuid()
     this._delegate = undefined
     this._viewer = undefined
     this._state = undefined

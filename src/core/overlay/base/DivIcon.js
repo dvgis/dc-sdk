@@ -2,13 +2,13 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:09:28
+ * @Last Modified time: 2020-05-11 23:35:31
  */
 
 import { DomUtil, Util } from '../../utils'
 import { isBetween } from '../../math'
 import Transform from '../../transform/Transform'
-import State from '../State'
+import State from '../../state/State'
 import Overlay from '../Overlay'
 
 class DivIcon extends Overlay {

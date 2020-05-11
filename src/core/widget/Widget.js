@@ -2,11 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 17:13:28
+ * @Last Modified time: 2020-05-11 22:12:02
  */
-import { Cesium } from '../../namespace'
+
 import State from '../state/State'
 import WidgetType from './WidgetType'
+
+const { Cesium } = DC.Namespace
 
 class Widget {
   constructor() {

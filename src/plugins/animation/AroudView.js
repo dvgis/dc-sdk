@@ -2,14 +2,16 @@
  * @Author: Caven
  * @Date: 2020-03-02 23:14:20
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:51:28
+ * @Last Modified time: 2020-05-11 22:17:25
  */
 
-const { Cesium } = DC.namespace
+const { Viewer, SceneEventType } = DC
+
+const { Cesium } = DC.Namespace
 
 class AroundView {
   constructor(viewer, options = {}) {
-    if (!viewer || !(viewer instanceof DC.Viewer)) {
+    if (!viewer || !(viewer instanceof Viewer)) {
       throw new Error('the viewer invalid')
     }
     this._viewer = viewer
@@ -25,7 +27,7 @@ class AroundView {
 
   _start() {
     this._viewer.clock.currentTime = this._startTime.clone()
-    this._viewer.on(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
+    this._viewer.on(SceneEventType.CLOCK_TICK, this._onTickHandler, this)
   }
 
   _onTickHandler() {
@@ -46,7 +48,7 @@ class AroundView {
         this._stopTime
       ) >= 0
     ) {
-      this._viewer.off(DC.SceneEventType.CLOCK_TICK, this._onTickHandler, this)
+      this._viewer.off(SceneEventType.CLOCK_TICK, this._onTickHandler, this)
       this._options.callback &&
         this._options.callback.call(this._options.context || this)
     }
