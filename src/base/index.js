@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:50:26
+ * @Last Modified time: 2020-05-12 19:58:35
  */
 
 import { initMixin, initUse } from './global-api'
@@ -11,7 +11,7 @@ let DC = {
   Author: 'Caven Chen',
   GitHub: 'https://github.com/Digital-Visual',
   Home: 'https://www.dvgis.cn',
-  Version: '1.5.0',
+  Version: '1.5.1',
   Namespace: {},
   Initialized: false
 }

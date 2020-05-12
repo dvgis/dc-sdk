@@ -18,12 +18,6 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 <script src="libs/dc-sdk/dc.base.min.js"></script>
 <!--核心包-->
 <script src="libs/dc-sdk/dc.core.min.js"></script>
-<!--插件包-->
-<script src="libs/dc-sdk/plugins/dc.plugins.min.js"></script>
-<!--标绘包-->
-<script src="libs/dc-sdk/plot/dc.plot.min.js"></script>
-<!--覆盖物/要素包-->
-<script src="libs/dc-sdk/overlay/dc.overlay.min.js"></script>
 <!--主要样式-->
 <link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
@@ -36,12 +30,9 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 ```
 
 ```js
-import 'dvgis/dc.base.min' //基础包
-import 'dvgis/dc.core.min' //核心包
-import 'dvgis/plugins/dc.plugins.min' //插件包
-import 'dvgis/plot/dc.plot.min' //标绘包
-import 'dvgis/overlay/dc.overlay.min' // 覆盖物/要素包
-import 'dvgis/dc.core.min.css' // 主要样式
+import 'dvgis/dc-sdk/dist/dc.base.min' //基础包
+import 'dvgis/dc-sdk/dist/dc.core.min' //核心包
+import 'dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
 ```
 
 ## 配置
@@ -53,7 +44,7 @@ import 'dvgis/dc.core.min.css' // 主要样式
 
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
-const dvgisDist = './node_modules/@dvgis/dc-sdk/dist'
+const dvgis = './node_modules/@dvgis'
 
 module.exports = {
   // 其他配置
@@ -62,7 +53,7 @@ module.exports = {
     config.plugin('copy').use(CopywebpackPlugin, [
       [
         {
-          from: path.join(dvgisDist, 'resources'),
+          from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
           to: 'libs/dc-sdk/resources'
         }
       ]

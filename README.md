@@ -18,12 +18,6 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 <script src="libs/dc-sdk/dc.base.min.js"></script>
 <!--Core Package-->
 <script src="libs/dc-sdk/dc.core.min.js"></script>
-<!--Plugins Package-->
-<script src="libs/dc-sdk/plugins/dc.plugins.min.js"></script>
-<!--Plot Package-->
-<script src="libs/dc-sdk/plot/dc.plot.min.js"></script>
-<!--Overlay Package-->
-<script src="libs/dc-sdk/overlay/dc.overlay.min.js"></script>
 <!--Main Style Sheet -->
 <link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
@@ -36,12 +30,9 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 ```
 
 ```js
-import 'dvgis/dc.base.min' //Basic Package
-import 'dvgis/dc.core.min' //Core Package
-import 'dvgis/plugins/dc.plugins.min' //Plugins Package
-import 'dvgis/plot/dc.plot.min' //Plot Package
-import 'dvgis/overlay/dc.overlay.min' // Overlay Package
-import 'dvgis/dc.core.min.css' // Main Style Sheet
+import 'dvgis/dc-sdk/dist/dc.base.min' //Basic Package
+import 'dvgis/dc-sdk/dist/dc.core.min' //Core Package
+import 'dvgis/dc-sdk/dist/dc.core.min.css' // Main Style Sheet
 ```
 
 ## Setting
@@ -53,7 +44,7 @@ import 'dvgis/dc.core.min.css' // Main Style Sheet
 
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
-const dvgisDist = './node_modules/@dvgis/dc-sdk/dist'
+const dvgis = './node_modules/@dvgis'
 
 module.exports = {
   // other settings
@@ -62,7 +53,7 @@ module.exports = {
     config.plugin('copy').use(CopywebpackPlugin, [
       [
         {
-          from: path.join(dvgisDist, 'resources'),
+          from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
           to: 'libs/dc-sdk/resources'
         }
       ]
