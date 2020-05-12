@@ -2,11 +2,13 @@
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:06:23
+ * @Last Modified time: 2020-05-12 10:44:45
  */
 
 import State from '../state/State'
 import Layer from './Layer'
+
+const { Cesium } = DC.Namespace
 
 /**
  * The vector layer is used to add various enitity, which is essentially a CustomDataSource

@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-03-30 17:14:00
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:37:12
+ * @Last Modified time: 2020-05-12 10:42:03
  */
 
+import { Label } from '../overlay'
 import State from '../state/State'
 import Layer from './Layer'
-import { Label } from '../overlay'
 
 const { Cesium } = DC.Namespace
 

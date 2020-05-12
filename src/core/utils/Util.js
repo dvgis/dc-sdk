@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:58:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 09:53:43
+ * @Last Modified time: 2020-05-12 10:49:58
  */
 
 const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
@@ -99,9 +99,9 @@ class Util {
   static checkPosition(position) {
     return (
       position &&
-      position.hasOwnProperty('lng') &&
-      position.hasOwnProperty('lat') &&
-      position.hasOwnProperty('alt')
+      position.hasOwnProperty('_lng') &&
+      position.hasOwnProperty('_lat') &&
+      position.hasOwnProperty('_alt')
     )
   }
 

@@ -53,7 +53,7 @@ import 'dvgis/dc.core.min.css' // Main Style Sheet
 
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
-const dvgisDist = './node_modules/@dvgis/dc-sdk/dist/dc-sdk'
+const dvgisDist = './node_modules/@dvgis/dc-sdk/dist'
 
 module.exports = {
   // other settings
