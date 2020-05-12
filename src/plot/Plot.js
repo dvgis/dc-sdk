@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 15:51:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:08:29
+ * @Last Modified time: 2020-05-12 10:00:09
  */
 
 import DrawPoint from './draw/DrawPoint'
@@ -13,12 +13,15 @@ import DrawRect from './draw/DrawRect'
 import EditPoint from './edit/EditPoint'
 import EditPolyline from './edit/EditPolyline'
 
-const { VectorLayer, OverlayType } = DC
+const { OverlayType, Util } = DC
 
 const { Cesium } = DC.Namespace
 
 class Plot {
   constructor(viewer) {
+    if (!Util.checkViewer(viewer)) {
+      throw new Error('Plot: the viewer invalid')
+    }
     this._viewer = viewer
     this._plotEvent = new Cesium.Event()
     this._callback = undefined
@@ -26,7 +29,7 @@ class Plot {
     this._editWorker = undefined
     this._drawLayer = new Cesium.CustomDataSource('plot-draw-layer')
     this._viewer.delegate.dataSources.add(this._drawLayer)
-    this._markerLayer = new VectorLayer('plot-marker-layer')
+    this._markerLayer = new DC.VectorLayer('plot-marker-layer')
     this._viewer.addLayer(this._markerLayer)
     this._state = undefined
   }

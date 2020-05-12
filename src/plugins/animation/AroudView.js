@@ -2,17 +2,17 @@
  * @Author: Caven
  * @Date: 2020-03-02 23:14:20
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:17:25
+ * @Last Modified time: 2020-05-12 09:56:16
  */
 
-const { Viewer, SceneEventType } = DC
+const { SceneEventType, Util } = DC
 
 const { Cesium } = DC.Namespace
 
 class AroundView {
   constructor(viewer, options = {}) {
-    if (!viewer || !(viewer instanceof Viewer)) {
-      throw new Error('the viewer invalid')
+    if (!Util.checkViewer(viewer)) {
+      throw new Error('AroundView: the viewer invalid')
     }
     this._viewer = viewer
     this._options = options

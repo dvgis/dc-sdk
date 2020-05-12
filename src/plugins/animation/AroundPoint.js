@@ -2,21 +2,20 @@
  * @Author: Caven
  * @Date: 2020-03-02 22:38:10
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 21:39:33
+ * @Last Modified time: 2020-05-12 09:57:49
  */
 
-const { Viewer, SceneEventType, Position, Transfrom } = DC
+const { Util, SceneEventType, Transfrom } = DC
 
 const { Cesium } = DC.Namespace
 
 class AroundPoint {
   constructor(viewer, position, options = {}) {
-    if (
-      !position ||
-      !(viewer instanceof Viewer) ||
-      !(position instanceof Position)
-    ) {
-      throw new Error('the position invalid')
+    if (!Util.checkViewer(viewer)) {
+      throw new Error('AroundPoint：the viewer invalid')
+    }
+    if (!Util.checkPosition(position)) {
+      throw new Error('AroundPoint：the position invalid')
     }
     this._viewer = viewer
     this._position = position

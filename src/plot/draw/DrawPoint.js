@@ -9,7 +9,7 @@ import Draw from './Draw'
 
 const { OverlayType, Transform } = DC
 
-const { Cesium } = DC.NameSpace
+const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   pixelSize: 10,

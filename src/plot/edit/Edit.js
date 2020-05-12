@@ -7,7 +7,7 @@
 
 const { OverlayType, Transform } = DC
 
-const { Cesium } = DC.NameSpace
+const { Cesium } = DC.Namespace
 
 class Edit {
   constructor(plotInfo) {

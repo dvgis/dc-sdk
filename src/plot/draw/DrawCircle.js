@@ -2,14 +2,14 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:44:41
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:31:32
+ * @Last Modified time: 2020-05-12 09:34:37
  */
 
 import Draw from './Draw'
 
 const { OverlayType, Transform } = DC
 
-const { Cesium } = DC.NameSpace
+const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   width: 3,

@@ -2,10 +2,8 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:58:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:38:51
+ * @Last Modified time: 2020-05-12 09:53:43
  */
-
-import Position from '../position/Position'
 
 const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
   ''
@@ -99,7 +97,12 @@ class Util {
    * @param {*} position
    */
   static checkPosition(position) {
-    return position && position instanceof Position
+    return (
+      position &&
+      position.hasOwnProperty('lng') &&
+      position.hasOwnProperty('lat') &&
+      position.hasOwnProperty('alt')
+    )
   }
 
   /**
@@ -111,6 +114,15 @@ class Util {
     return (
       positions && (typeof positions === 'string' || Array.isArray(positions))
     )
+  }
+
+  /**
+   * @function checkViewer(viewer: Object): Boolean
+   * Check viewer for validity
+   * @param {*} position
+   */
+  static checkViewer(viewer) {
+    return viewer && viewer.delegate && viewer.canvas
   }
 }
 

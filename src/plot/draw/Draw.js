@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:45:32
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:57:23
+ * @Last Modified time: 2020-05-12 09:39:12
  */
 
-const { Cesium } = DC.NameSpace
+const { Cesium } = DC.Namespace
 
 class Draw {
   constructor(plotInfo) {
