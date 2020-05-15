@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-15 14:16:56
+ * @Last Modified time: 2020-05-15 19:38:39
  */
 
 import { MouseEventType } from './EventType'
@@ -141,7 +141,7 @@ class MouseEvent extends Event {
    * @param {*} mouseInfo
    *
    */
-  _raiseEvent(type, mouseInfo = {}, callback) {
+  _raiseEvent(type, mouseInfo = {}) {
     let event = undefined
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo.overlay
@@ -156,7 +156,6 @@ class MouseEvent extends Event {
         ...targetInfo,
         ...mouseInfo
       })
-    callback && callback()
   }
 
   /**
@@ -222,9 +221,8 @@ class MouseEvent extends Event {
         this._getOverlayId(mouseInfo.target)
     ) {
       this._raiseEvent(MouseEventType.MOUSE_OUT, this._selected)
-      this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo, () => {
-        this._selected = mouseInfo
-      })
+      this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo)
+      this._selected = mouseInfo
     }
   }
 }
