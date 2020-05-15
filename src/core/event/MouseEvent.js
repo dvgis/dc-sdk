@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:35:29
+ * @Last Modified time: 2020-05-15 14:16:56
  */
 
 import { MouseEventType } from './EventType'
@@ -17,6 +17,7 @@ class MouseEvent extends Event {
   constructor(viewer) {
     super()
     this._viewer = viewer
+    this._selected = undefined
     this._setInputAction()
     this.on(MouseEventType.CLICK, this._clickHandler, this)
     this.on(MouseEventType.DB_CLICK, this._dbClickHandler, this)
@@ -72,6 +73,30 @@ class MouseEvent extends Event {
   }
 
   /**
+   * Gets the Overlay id
+   * @param {*} target
+   */
+  _getOverlayId(target) {
+    let overlayId = undefined
+
+    /**
+     * Entity
+     */
+    if (target && target.id && target.id instanceof Cesium.Entity) {
+      overlayId = target.id.overlayId
+    }
+
+    /**
+     * Cesium3DTileFeature
+     */
+    if (target && target instanceof Cesium.Cesium3DTileFeature) {
+      overlayId = target.tileset.overlayId
+    }
+
+    return overlayId
+  }
+
+  /**
    *
    * Gets the target information for the mouse event
    * @param {*} target
@@ -116,21 +141,22 @@ class MouseEvent extends Event {
    * @param {*} mouseInfo
    *
    */
-  _raiseEvent(type, mouseInfo = {}) {
+  _raiseEvent(type, mouseInfo = {}, callback) {
     let event = undefined
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo.overlay
     if (overlay && overlay.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
-    } else {
-      event = this._viewer.viewerEvent.getEvent(type)
     }
+    // stopPropagation
+    !event && (event = this._viewer.viewerEvent.getEvent(type))
     event &&
       event.numberOfListeners > 0 &&
       event.raiseEvent({
         ...targetInfo,
         ...mouseInfo
       })
+    callback && callback()
   }
 
   /**
@@ -188,6 +214,18 @@ class MouseEvent extends Event {
     let mouseInfo = this._getMouseInfo(movement.endPosition)
     this._viewer.canvas.style.cursor = mouseInfo.target ? 'pointer' : 'default'
     this._raiseEvent(MouseEventType.MOUSE_MOVE, mouseInfo)
+
+    // add event for overlay
+    if (
+      !this._selected ||
+      this._getOverlayId(this._selected.target) !==
+        this._getOverlayId(mouseInfo.target)
+    ) {
+      this._raiseEvent(MouseEventType.MOUSE_OUT, this._selected)
+      this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo, () => {
+        this._selected = mouseInfo
+      })
+    }
   }
 }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-05-09 13:19:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 09:27:35
+ * @Last Modified time: 2020-05-15 09:00:29
  */
 
 import { DomUtil, Util } from './utils'
@@ -10,12 +10,13 @@ import { MouseEventType, SceneEventType, Event } from './event'
 import { Layer, LayerType } from './layer'
 import { Overlay, OverlayType } from './overlay'
 import ImageryType from './imagery/ImageryType'
+import WidgetType from './widget/WidgetType'
 import State from './state/State'
 import Position from './position/Position'
 import Transform from './transform/Transform'
 import Parse from './parse/Parse'
 
-DC.mixin({
+const base = {
   DomUtil,
   Util,
   State,
@@ -25,6 +26,7 @@ DC.mixin({
   OverlayType,
   MouseEventType,
   SceneEventType,
+  WidgetType,
   Layer,
   Overlay,
   Position,
@@ -32,4 +34,6 @@ DC.mixin({
   T: Transform,
   Parse,
   P: Parse
-})
+}
+
+DC.mixin(base)

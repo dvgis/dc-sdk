@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:18:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 00:45:45
+ * @Last Modified time: 2020-05-15 09:01:23
  */
 
 import ImageryLayerFactory from './imagery/ImageryLayerFactory'
@@ -40,10 +40,11 @@ Cesium.Math.distance = distance
 Cesium.Math.heading = heading
 Cesium.Math.isBetween = isBetween
 
-DC.mixin({
+const core = {
   ImageryLayerFactory,
   TerrainFactory,
   Viewer,
+  World: Viewer,
   GeoJsonLayer,
   HtmlLayer,
   LabelLayer,
@@ -58,7 +59,8 @@ DC.mixin({
   Polyline,
   Polygon,
   Model,
-  Tileset
-})
+  Tileset,
+  Math: Cesium.Math
+}
 
-DC.Math = Cesium.Math
+DC.mixin(core)

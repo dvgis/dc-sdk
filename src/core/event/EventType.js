@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-10 17:02:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:20:10
+ * @Last Modified time: 2020-05-15 13:46:18
  */
 
 const { Cesium } = DC.Namespace
@@ -19,14 +19,23 @@ const MouseEventType = {
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
   WHEEL: Cesium.ScreenSpaceEventType.WHEEL,
   MOUSE_OVER: 'mouseover',
-  MOUSE_OUT: 'mouseout'
+  MOUSE_OUT: 'mouseout',
+  DRAG_START: 'dragStart',
+  DRAG_END: 'dragEnd',
+  EDIT_START: 'editStart',
+  EDIT_END: 'editEnd'
 }
 
 const ViewerEventType = {
   ADD_LAYER: 'addLayer',
   REMOVE_LAYER: 'removeLayer',
   ADD_EFFECT: 'addEffect',
-  REMOVE_EFFECT: 'removeEffect'
+  REMOVE_EFFECT: 'removeEffect',
+  CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
+  DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+  MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
+  WHEEL: Cesium.ScreenSpaceEventType.WHEEL
 }
 
 const SceneEventType = {
@@ -44,7 +53,16 @@ const LayerEventType = {
 }
 
 const OverlayEventType = {
-  ...baseEventType
+  ...baseEventType,
+  CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
+  DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+  MOUSE_OVER: 'mouseover',
+  MOUSE_OUT: 'mouseout',
+  DRAG_START: 'dragStart',
+  DRAG_END: 'dragEnd',
+  EDIT_START: 'editStart',
+  EDIT_END: 'editEnd'
 }
 
 export {
