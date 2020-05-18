@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-04-10 17:02:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-15 13:46:18
+ * @Last Modified time: 2020-05-18 13:12:38
  */
 
 const { Cesium } = DC.Namespace
@@ -52,6 +52,10 @@ const LayerEventType = {
   CLEAR: 'clear'
 }
 
+const EffectEventType = {
+  ...baseEventType
+}
+
 const OverlayEventType = {
   ...baseEventType,
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
@@ -70,5 +74,6 @@ export {
   ViewerEventType,
   SceneEventType,
   LayerEventType,
+  EffectEventType,
   OverlayEventType
 }

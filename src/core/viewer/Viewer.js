@@ -2,10 +2,16 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:32:52
+ * @Last Modified time: 2020-05-18 13:12:54
  */
 
-import { LayerEventType, MouseEvent, ViewerEvent, SceneEvent } from '../event'
+import {
+  LayerEventType,
+  EffectEventType,
+  MouseEvent,
+  ViewerEvent,
+  SceneEvent
+} from '../event'
 import { ViewerOption, CameraOption } from '../option'
 import {
   Attribution,
