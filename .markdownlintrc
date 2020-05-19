@@ -1,0 +1,11 @@
+{
+  "default": true,
+  "colors": true,
+  "header-increment": false,
+  "line-length": false,
+  "no-trailing-punctuation": { "punctuation": ".,;:" },
+  "no-duplicate-header": false,
+  "no-inline-html": false,
+  "no-hard-tabs": false,
+  "whitespace": false
+}
