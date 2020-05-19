@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-15 19:38:39
+ * @Last Modified time: 2020-05-19 19:08:26
  */
 
 import { MouseEventType } from './EventType'
@@ -125,10 +125,12 @@ class MouseEvent extends Event {
       feature = target
       if (layer && layer.getOverlay) {
         overlay = layer.getOverlay(target.tileset.overlayId)
-        let propertyNames = feature.getPropertyNames()
-        propertyNames.forEach(item => {
-          overlay.attr[item] = feature.getProperty(item)
-        })
+        if (feature && feature.getPropertyNames) {
+          let propertyNames = feature.getPropertyNames()
+          propertyNames.forEach(item => {
+            overlay.attr[item] = feature.getProperty(item)
+          })
+        }
       }
     }
 
