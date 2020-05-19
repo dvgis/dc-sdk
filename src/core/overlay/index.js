@@ -2,12 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:04:15
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-10 10:40:15
+ * @Last Modified time: 2020-05-19 22:05:56
  */
 export { default as OverlayType } from './OverlayType'
 export { default as Overlay } from './Overlay'
 export { default as Billboard } from './base/Billboard'
-export { default as Cricle } from './base/Cricle'
+export { default as Circle } from './base/Circle'
 export { default as DivIcon } from './base/DivIcon'
 export { default as Label } from './base/Label'
 export { default as Point } from './base/Point'

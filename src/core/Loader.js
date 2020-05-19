@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:18:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-15 09:01:23
+ * @Last Modified time: 2020-05-19 22:05:23
  */
 
 import ImageryLayerFactory from './imagery/ImageryLayerFactory'
@@ -19,7 +19,7 @@ import {
 
 import {
   Billboard,
-  Cricle,
+  Circle,
   DivIcon,
   Label,
   Point,
@@ -52,7 +52,7 @@ const core = {
   TopoJsonLayer,
   VectorLayer,
   Billboard,
-  Cricle,
+  Circle,
   DivIcon,
   Label,
   Point,
