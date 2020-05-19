@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:06:50
+ * @Last Modified time: 2020-05-19 21:57:48
  */
 
 const { Cesium } = DC.Namespace
@@ -33,7 +33,7 @@ class ViewerOption {
   }
 
   _setCanvasOption() {
-    options.tabIndex &&
+    this._options.tabIndex &&
       this._viewer.scene.canvas.setAttribute('tabIndex', this._options.tabIndex)
     return this
   }
