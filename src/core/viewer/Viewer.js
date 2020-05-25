@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-18 13:12:54
+ * @Last Modified time: 2020-05-25 08:55:28
  */
 
 import {
@@ -407,7 +407,7 @@ class Viewer {
    *
    */
   getLayer(id) {
-    let filters = this.getLayers().filter(item.id === id)
+    let filters = this.getLayers().filter(item => item.id === id)
     return filters && filters.length ? filters[0] : undefined
   }
 
