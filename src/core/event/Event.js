@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:34:56
+ * @Last Modified time: 2020-05-27 12:50:32
  */
 
 class Event {
@@ -28,7 +28,7 @@ class Event {
   _on(type, callback, context) {
     let event = this.getEvent(type)
     let removeCallback = undefined
-    if (callback && event) {
+    if (event && callback) {
       removeCallback = event.addEventListener(callback, context || this)
     }
     return removeCallback

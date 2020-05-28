@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 14:35:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:11:25
+ * @Last Modified time: 2020-05-27 08:51:54
  */
 
 import Transform from '../transform/Transform'
@@ -20,7 +20,7 @@ class Position {
   }
 
   set lng(lng) {
-    this._lng = lng
+    this._lng = +lng
   }
 
   get lng() {
@@ -28,7 +28,7 @@ class Position {
   }
 
   set lat(lat) {
-    this._lat = lat
+    this._lat = +lat
   }
 
   get lat() {
@@ -36,7 +36,7 @@ class Position {
   }
 
   set alt(alt) {
-    this._alt = alt
+    this._alt = +alt
   }
 
   get alt() {
@@ -44,7 +44,7 @@ class Position {
   }
 
   set heading(heading) {
-    this._heading = heading
+    this._heading = +heading
   }
 
   get heading() {
@@ -52,7 +52,7 @@ class Position {
   }
 
   set pitch(pitch) {
-    this._pitch = pitch
+    this._pitch = +pitch
   }
 
   get pitch() {
@@ -60,7 +60,7 @@ class Position {
   }
 
   set roll(roll) {
-    this._roll = roll
+    this._roll = +roll
   }
 
   get roll() {

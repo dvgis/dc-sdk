@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-22 00:10:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:11:23
+ * @Last Modified time: 2020-05-28 15:33:20
  */
 
 import Position from '../position/Position'
@@ -18,8 +18,8 @@ class Parse {
       result = Position.fromCoordString(position)
     } else if (Array.isArray(position)) {
       result = Position.fromCoordArray(position)
-    } else if (item instanceof Position) {
-      result = item
+    } else if (position instanceof Position) {
+      result = position
     }
     return result
   }
@@ -45,6 +45,41 @@ class Parse {
         return Position.fromCoordString(item)
       }
     })
+  }
+
+  /**
+   *
+   * @param {*} position
+   */
+  static parsePointCoordToArray(position) {
+    position = this.parsePosition(position)
+    return [position.lng, position.lat]
+  }
+
+  /**
+   *
+   * @param {*} positions
+   */
+  static parsePolylineCoordToArray(positions) {
+    let result = []
+    positions = this.parsePositions(positions)
+    positions.forEach(item => {
+      result.push([item.lng, item.lat])
+    })
+    return result
+  }
+
+  /**
+   *
+   * @param {*} positions
+   */
+  static parsePolygonCoordToArray(positions) {
+    let result = []
+    positions = this.parsePositions(positions)
+    positions.forEach(item => {
+      result.push([item.lng, item.lat])
+    })
+    return [result]
   }
 }
 

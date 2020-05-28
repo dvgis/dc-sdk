@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:11:10
+ * @Last Modified time: 2020-05-27 08:50:09
  */
 import { Util } from '../utils'
 import { OverlayEventType, OverlayEvent } from '../event'
@@ -97,7 +97,7 @@ class Overlay {
     }
     this._layer = layer
     this._mountedHook && this._mountedHook()
-    if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
+    if (this._layer?.delegate?.entities) {
       this._layer.delegate.entities.add(this._delegate)
       this._addedHook && this._addedHook()
       this._state = State.ADDED
@@ -108,7 +108,7 @@ class Overlay {
    *
    */
   _removeHandler() {
-    if (this._layer && this._layer.delegate && this._layer.delegate.entities) {
+    if (this._layer?.delegate?.entities) {
       this._layer.delegate.entities.remove(this._delegate)
       this._removedHook && this._removedHook()
       this._state = State.REMOVED
