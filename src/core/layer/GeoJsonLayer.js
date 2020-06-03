@@ -2,11 +2,11 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 10:42:21
+ * @Last Modified time: 2020-06-03 14:21:04
  */
 
 import { Layer, VectorLayer } from './index'
-import { Billboard, Polyline, Polygon } from '../overlay'
+import { Billboard, Polyline, Polygon, Model } from '../overlay'
 import State from '../state/State'
 
 const { Cesium } = DC.Namespace
@@ -52,6 +52,12 @@ class GeoJsonLayer extends Layer {
     }
   }
 
+  _ceateModel(entity, modelUrl) {
+    if (entity) {
+      return Model.fromEntity(entity, modelUrl)
+    }
+  }
+
   /**
    *
    * @param {*} method
@@ -74,15 +80,25 @@ class GeoJsonLayer extends Layer {
    */
   toVectorLayer() {
     let layer = new VectorLayer(this._id)
-    let self = this
     this.eachOverlay(item => {
       if (item.billboard) {
-        layer.addOverlay(self._createBillboard(item))
+        layer.addOverlay(this._createBillboard(item))
       } else if (item.polyline) {
-        layer.addOverlay(self._createPolyline(item))
+        layer.addOverlay(this._createPolyline(item))
       } else if (item.polygon) {
-        layer.addOverlay(self._createPolygon(item))
+        layer.addOverlay(this._createPolygon(item))
       }
+    })
+    return layer
+  }
+
+  /**
+   *
+   */
+  toModelLayer() {
+    let layer = new VectorLayer(this._id)
+    this.eachOverlay(item => {
+      layer.addOverlay(this._ceateModel(item))
     })
     return layer
   }

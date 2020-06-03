@@ -2,8 +2,10 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-19 22:03:12
+ * @Last Modified time: 2020-06-03 13:15:29
  */
+
+import { Util } from '../utils'
 
 const { Cesium } = DC.Namespace
 
@@ -19,16 +21,15 @@ class ViewerOption {
     this._viewer.delegate.cesiumWidget.screenSpaceEventHandler.removeInputAction(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
     )
+
     this._viewer.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
     this._viewer.scene.backgroundColor = Cesium.Color.TRANSPARENT
     this._viewer.delegate.imageryLayers.removeAll()
   }
 
   _setViewerOption() {
-    this._viewer.delegate.shadows = Cesium.defaultValue(
-      this._options.shadows,
-      false
-    )
+    this._viewer.delegate.shadows = this._options.shadows ?? false
+
     return this
   }
 
@@ -40,78 +41,60 @@ class ViewerOption {
 
   _setSceneOption() {
     let scene = this._viewer.scene
-    scene.skyAtmosphere.show = Cesium.defaultValue(
-      this._options.showAtmosphere,
-      true
-    )
-    scene.sun.show = Cesium.defaultValue(this._options.showSun, true)
 
-    scene.moon.show = Cesium.defaultValue(this._options.showMoon, true)
+    scene.skyAtmosphere.show = this._options.showAtmosphere ?? true
 
-    scene.skyBox.show = Cesium.defaultValue(this._options.showSkyBox, true)
+    scene.sun.show = this._options.showSun ?? true
 
-    scene.postProcessStages.fxaa.enabled = Cesium.defaultValue(
-      this._options.enableFxaa,
-      false
-    )
+    scene.moon.show = this._options.showMoon ?? true
 
-    scene.screenSpaceCameraController.enableRotate = Cesium.defaultValue(
-      this._options.enableRotate,
-      true
-    )
+    scene.skyBox.show = this._options.showSkyBox ?? true
 
-    scene.screenSpaceCameraController.enableTilt = Cesium.defaultValue(
-      this._options.enableTilt,
-      true
-    )
+    scene.postProcessStages.fxaa.enabled = this._options.enableFxaa ?? false
 
-    scene.screenSpaceCameraController.enableTranslate = Cesium.defaultValue(
-      this._options.enableTranslate,
-      true
-    )
+    let cameraController = this._options.cameraController
 
-    scene.screenSpaceCameraController.enableZoom = Cesium.defaultValue(
-      this._options.enableZoom,
-      true
-    )
+    Util.merge(scene.screenSpaceCameraController, {
+      enableRotate: cameraController?.enableRotat ?? true,
+      enableTilt: cameraController?.enableTilt ?? true,
+      enableTranslate: cameraController?.enableTranslate ?? true,
+      enableZoom: cameraController?.enableZoom ?? true,
+      enableCollisionDetection:
+        cameraController?.enableCollisionDetection ?? true,
+      minimumZoomDistance: +cameraController?.minimumZoomDistance || 1.0,
+      maximumZoomDistance: +cameraController?.maximumZoomDistance || 40489014.0
+    })
 
-    scene.screenSpaceCameraController.minimumZoomDistance = Cesium.defaultValue(
-      this._options.distanceRange[0],
-      1.0
-    )
-
-    scene.screenSpaceCameraController.maximumZoomDistance = Cesium.defaultValue(
-      this._options.distanceRange[1],
-      40489014.0
-    )
     return this
   }
 
   _setGlobeOption() {
     let globe = this._viewer.scene.globe
+    let globeOption = this._options.globe
 
-    globe.show = Cesium.defaultValue(this._options.showGlobe, true)
+    Util.merge(globe, {
+      show: globeOption?.show ?? true,
+      enableLighting: globeOption?.enableLighting ?? false,
+      depthTestAgainstTerrain: globeOption?.undergroundMode ?? false,
+      tileCacheSize: +globeOption?.tileCacheSize || 100
+    })
 
-    globe.enableLighting = Cesium.defaultValue(
-      this._options.enableLighting,
-      false
-    )
-
-    globe.depthTestAgainstTerrain = Cesium.defaultValue(
-      this._options.undergroundMode,
-      false
-    )
-
-    globe.tileCacheSize = Cesium.defaultValue(this._options.tileCacheSize, 100)
+    Util.merge(globe.translucency, {
+      enabled: globeOption?.translucency?.enabled ?? false,
+      backFaceAlpha: +globeOption?.translucency?.backFaceAlpha || 1,
+      backFaceAlphaByDistance:
+        globeOption?.translucency?.backFaceAlphaByDistance,
+      frontFaceAlpha: +globeOption?.translucency?.frontFaceAlpha || 1,
+      frontFaceAlphaByDistance:
+        globeOption?.translucency?.frontFaceAlphaByDistance
+    })
 
     return this
   }
 
   _setClockOption() {
-    this._viewer.clock.shouldAnimate = Cesium.defaultValue(
-      this._options.shouldAnimate,
-      true
-    )
+    this._viewer.clock.shouldAnimate = this._options.shouldAnimate ?? true
+
     return this
   }
 
@@ -120,7 +103,6 @@ class ViewerOption {
       return this
     }
     this._options = {
-      distanceRange: [1.0, 40489014.0],
       ...this._options,
       ...options
     }

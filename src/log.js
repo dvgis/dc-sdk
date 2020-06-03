@@ -2,16 +2,16 @@
  * @Author: Caven
  * @Date: 2020-02-12 18:53:12
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-08 20:43:55
+ * @Last Modified time: 2020-06-02 09:03:59
  */
 console.clear()
 console.log(
   `%c \n DC-SDK \n  %c \n 用数字描绘世界之美  %c \n
     版本:${DC.Version}
-    Cesium版本：1.69
+    Cesium版本：1.70
     作者:Caven Chen
-    主页: https://www.dvgis.com
-    github: https://github.com/Digital-Visual
+    主页: ${DC.Home}
+    github:${DC.GitHub}
     版权声明:
     1.框架是一个基础平台，完全开源，任何个人和机构可以修改、重构，无需经过我方授权。
     2.后期会添加一些针对性的插件和工具，代码会适量的开源。

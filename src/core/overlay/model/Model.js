@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:07:38
+ * @Last Modified time: 2020-06-03 13:52:52
  */
 
 import { Util } from '../../utils'
@@ -114,6 +114,22 @@ class Model extends Overlay {
     this._style = style
     this._delegate.model && Util.merge(this._delegate.model, this._style)
     return this
+  }
+
+  /**
+   *
+   * @param {*} entity
+   */
+  static fromEntity(entity, modelUrl) {
+    let now = Cesium.JulianDate.now()
+    let position = Transform.transformCartesianToWGS84(
+      entity.position.getValue(now)
+    )
+    let model = new Model(position, modelUrl)
+    model.attr = {
+      ...entity.properties.getValue(now)
+    }
+    return model
   }
 }
 

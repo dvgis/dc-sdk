@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-21 16:10:47
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-18 10:15:44
+ * @Last Modified time: 2020-06-03 10:28:30
  */
 
 import ImageryType from '../ImageryType'
@@ -22,6 +22,6 @@ class TencentImageryProvider extends Cesium.UrlTemplateImageryProvider {
   }
 }
 
-ImageryType.TENCENT = 'tdt'
+ImageryType.TENCENT = 'tencent'
 
 export default TencentImageryProvider

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-25 08:55:28
+ * @Last Modified time: 2020-06-03 14:12:30
  */
 
 import {
@@ -279,7 +279,7 @@ class Viewer {
 
   /**
    *
-   * 修改场景的模式，2：2D，2.5：2.5D，3：3D
+   * Change Scene Mode，2：2D，2.5：2.5D，3：3D
    * @param {*} sceneMode
    * @param {*} duration
    *
@@ -292,6 +292,15 @@ class Viewer {
     } else if (sceneMode === 2.5) {
       this._delegate.scene.morphToColumbusView(duration)
     }
+    return this
+  }
+
+  /**
+   * Change Mouse Mode，0：Default，1: Change the tiltEventTypes to CameraEventType.RIGHT_DRAG
+   * @param {*} mouseMode
+   */
+  changeMouseMode(mouseMode) {
+    this._cameraOption.changeMouseMode(mouseMode)
     return this
   }
 
@@ -402,6 +411,18 @@ class Viewer {
 
   /**
    *
+   * @param {*} layer
+   */
+  hasLayer(layer) {
+    return (
+      layer &&
+      layer.layerEvent &&
+      Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
+    )
+  }
+
+  /**
+   *
    * @param {*} id
    * Get the layer by id
    *
@@ -466,7 +487,7 @@ class Viewer {
    *
    */
   flyTo(target) {
-    this._delegate.flyTo(target.delegate || target)
+    this._delegate.flyTo(target?.delegate || target)
     return this
   }
 
@@ -476,7 +497,7 @@ class Viewer {
    *
    */
   zoomTo(target) {
-    this._delegate.zoomTo(target.delegate || target)
+    this._delegate.zoomTo(target?.delegate || target)
     return this
   }
 

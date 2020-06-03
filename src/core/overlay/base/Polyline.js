@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:07:32
+ * @Last Modified time: 2020-06-03 13:52:44
  */
 
 import { Util } from '../../utils'
@@ -76,13 +76,14 @@ class Polyline extends Overlay {
    */
   static fromEntity(entity) {
     let polyline = undefined
+    let now = Cesium.JulianDate.now()
     if (entity.polyline) {
       let positions = Transform.transformCartesianArrayToWGS84Array(
-        entity.polyline.positions.getValue(Cesium.JulianDate.now())
+        entity.polyline.positions.getValue(now)
       )
       polyline = new Polyline(positions)
       polyline.attr = {
-        ...entity.properties.getValue(Cesium.JulianDate.now())
+        ...entity.properties.getValue(now)
       }
     }
     return polyline

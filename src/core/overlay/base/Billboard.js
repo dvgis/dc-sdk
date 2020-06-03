@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:06:59
+ * @Last Modified time: 2020-06-03 13:52:37
  */
 
 import { Util } from '../../utils'
@@ -112,14 +112,15 @@ class Billboard extends Overlay {
    * @param {*} entity
    */
   static fromEntity(entity) {
-    let position = Transform.transformCartesianToWGS84(
-      entity.position.getValue(Cesium.JulianDate.now())
-    )
     let billboard = undefined
+    let now = Cesium.JulianDate.now()
+    let position = Transform.transformCartesianToWGS84(
+      entity.position.getValue(now)
+    )
     if (entity.billboard) {
-      billboard = new Billboard(position, entity.billboard.image)
+      billboard = new Billboard(position, entity.billboard.image.getValue(now))
       billboard.attr = {
-        ...entity.properties.getValue(Cesium.JulianDate.now())
+        ...entity.properties.getValue(now)
       }
     }
     return billboard
