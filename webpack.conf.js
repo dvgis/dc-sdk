@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 19:56:04
+ * @Last Modified time: 2020-06-04 09:42:54
  */
 
 const path = require('path')
@@ -11,17 +11,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopywebpackPlugin = require('copy-webpack-plugin')
 const cesiumBuild = 'node_modules/cesium/Build/Cesium'
-const cesiumSource = 'node_modules/cesium/Source'
 
 let cesiumCopyPlugin = [
-  new CopywebpackPlugin([
-    { from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' }
-  ]),
   new CopywebpackPlugin([
     { from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' }
   ]),
   new CopywebpackPlugin([
-    { from: path.join(cesiumBuild, 'Widgets'), to: 'resources/Widgets' }
+    { from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' }
   ]),
   new CopywebpackPlugin([
     { from: path.join(cesiumBuild, 'ThirdParty'), to: 'resources/ThirdParty' }
@@ -72,25 +68,11 @@ module.exports = env => {
       rules: [
         {
           test: /\.js$/,
-          enforce: 'pre',
-          include: path.resolve(__dirname, cesiumSource),
-          use: [
-            {
-              loader: 'strip-pragma-loader',
-              options: {
-                pragmas: {
-                  debug: false
-                }
-              }
-            }
-          ]
-        },
-        {
-          test: /\.js$/,
           exclude: /node_modules/,
           loader: 'babel-loader',
-          query: {
+          options: {
             presets: ['@babel/preset-env'],
+            plugins: ['@babel/transform-runtime'],
             compact: false,
             ignore: ['checkTree']
           }
@@ -139,7 +121,7 @@ module.exports = env => {
         base: './src/base/index.js',
         entry: './src/core/index.js',
         theme: './src/themes/index.js',
-        cesium: path.resolve(__dirname, cesiumSource)
+        cesium: path.resolve(__dirname, cesiumBuild)
       }
     },
     plugins
