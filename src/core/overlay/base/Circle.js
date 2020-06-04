@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-19 22:05:48
+ * @Last Modified time: 2020-06-04 22:37:13
  */
 
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
 
@@ -14,13 +15,10 @@ const { Cesium } = DC.Namespace
 
 class Circle extends Overlay {
   constructor(center, radius) {
-    if (!Util.checkPosition(center)) {
-      throw new Error('Circle: the center invalid')
-    }
     super()
-    this._center = center
-    this._radius = radius || 0
-    this._delegate = new Cesium.Entity()
+    this._delegate = new Cesium.Entity({ ellipse: {} })
+    this._center = Parse.parsePosition(center)
+    this._radius = +radius || 0
     this._rotateAmount = 0
     this._stRotation = 0
     this.type = Overlay.getOverlayType('circle')
@@ -28,10 +26,9 @@ class Circle extends Overlay {
   }
 
   set center(center) {
-    if (!Util.checkPosition(center)) {
-      throw new Error('Circle: the center invalid')
-    }
-    this._center = center
+    this._center = Parse.parsePosition(center)
+    this._delegate.position = Transform.transformWGS84ToCartesian(this._center)
+    return this
   }
 
   get center() {
@@ -39,7 +36,10 @@ class Circle extends Overlay {
   }
 
   set radius(radius) {
-    this._radius = radius
+    this._radius = +radius
+    this._delegate.ellipse.semiMajorAxis = this._radius
+    this._delegate.ellipse.semiMinorAxis = this._radius
+    return this
   }
 
   get radius() {
@@ -47,7 +47,19 @@ class Circle extends Overlay {
   }
 
   set rotateAmount(amount) {
-    this._rotateAmount = amount
+    this._rotateAmount = +amount
+    if (this._rotateAmount > 0) {
+      this._delegate.ellipse.stRotation = new Cesium.CallbackProperty(time => {
+        if (this._rotateAmount > 0) {
+          this._stRotation += this._rotateAmount
+          if (this._stRotation >= 360) {
+            this._stRotation = 0
+          }
+        }
+        return this._stRotation
+      })
+    }
+    return this
   }
 
   get rotateAmount() {
@@ -58,44 +70,12 @@ class Circle extends Overlay {
     /**
      * set the location
      */
-    this._delegate.position = new Cesium.CallbackProperty(time => {
-      return Transform.transformWGS84ToCartesian(this._center)
-    })
-    /**
-     * set the orientation
-     */
-    this._delegate.orientation = new Cesium.CallbackProperty(time => {
-      return Cesium.Transforms.headingPitchRollQuaternion(
-        Transform.transformWGS84ToCartesian(this._center),
-        new Cesium.HeadingPitchRoll(
-          Cesium.Math.toRadians(this._center.heading),
-          Cesium.Math.toRadians(this._center.pitch),
-          Cesium.Math.toRadians(this._center.roll)
-        )
-      )
-    })
+    this.center = this._center
 
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.ellipse = {
-      ...this._style,
-      semiMajorAxis: new Cesium.CallbackProperty(time => {
-        return this._radius
-      }),
-      semiMinorAxis: new Cesium.CallbackProperty(time => {
-        return this._radius
-      }),
-      stRotation: new Cesium.CallbackProperty(time => {
-        if (this._rotateAmount > 0) {
-          this._stRotation += this._rotateAmount
-          if (this._stRotation >= 360) {
-            this._stRotation = 0
-          }
-        }
-        return this._stRotation
-      })
-    }
+    this.radius = this._radius
   }
 
   /**
@@ -116,11 +96,12 @@ class Circle extends Overlay {
    * @param {*} style
    */
   setStyle(style) {
-    if (Object.keys(style).length === 0) {
+    if (!style || Object.keys(style).length === 0) {
       return this
     }
+    delete style['semiMajorAxis'] && delete style['semiMinorAxis']
     this._style = style
-    this._delegate.ellipse && Util.merge(this._delegate.ellipse, this._style)
+    Util.merge(this._delegate.ellipse, this._style)
     return this
   }
 }

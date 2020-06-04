@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-03 13:52:37
+ * @Last Modified time: 2020-06-04 22:04:16
  */
 
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
 
@@ -14,23 +15,21 @@ const { Cesium } = DC.Namespace
 
 class Billboard extends Overlay {
   constructor(position, icon) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('Billboard: the position invalid')
-    }
     super()
-    this._position = position
+    this._delegate = new Cesium.Entity({ billboard: {} })
+    this._position = Parse.parsePosition(position)
     this._icon = icon
     this._size = [32, 32]
-    this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('billboard')
     this._state = State.INITIALIZED
   }
 
   set position(position) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('Billboard: the position invalid')
-    }
-    this._position = position
+    this._position = Parse.parsePosition(position)
+    this._delegate.position = Transform.transformWGS84ToCartesian(
+      this._position
+    )
+    return this
   }
 
   get position() {
@@ -39,6 +38,8 @@ class Billboard extends Overlay {
 
   set icon(icon) {
     this._icon = icon
+    this._delegate.billboard.image = this._icon
+    return this
   }
 
   get icon() {
@@ -50,6 +51,9 @@ class Billboard extends Overlay {
       throw new Error('Billboard: the size invalid')
     }
     this._size = size
+    this._delegate.billboard.width = this._size[0] || 32
+    this._delegate.billboard.height = this._size[0] || 32
+    return this
   }
 
   get size() {
@@ -60,24 +64,15 @@ class Billboard extends Overlay {
     /**
      * set the location
      */
-    this._delegate.position = new Cesium.CallbackProperty(time => {
-      return Transform.transformWGS84ToCartesian(this._position)
-    })
+    this.position = this._position
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.billboard = {
-      ...this._style,
-      image: new Cesium.CallbackProperty(time => {
-        return this._icon
-      }),
-      width: new Cesium.CallbackProperty(time => {
-        return this._size[0] || 32
-      }),
-      height: new Cesium.CallbackProperty(time => {
-        return this._size[1] || 32
-      })
-    }
+    Util.merge(this._delegate.billboard, {
+      image: this._icon,
+      width: this._size[0] || 32,
+      height: this._size[1] || 32
+    })
   }
 
   /**
@@ -98,12 +93,12 @@ class Billboard extends Overlay {
    * @param {*} style
    */
   setStyle(style) {
-    if (Object.keys(style).length === 0) {
+    if (!style || Object.keys(style).length === 0) {
       return this
     }
+    delete style['image'] && delete style['width'] && delete style['height']
     this._style = style
-    this._delegate.billboard &&
-      Util.merge(this._delegate.billboard, this._style)
+    Util.merge(this._delegate.billboard, this._style)
     return this
   }
 

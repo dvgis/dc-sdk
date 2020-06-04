@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:38:18
+ * @Last Modified time: 2020-06-04 21:53:38
  */
 
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
 
@@ -14,22 +15,20 @@ const { Cesium } = DC.Namespace
 
 class Label extends Overlay {
   constructor(position, text) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('Label: the position invalid')
-    }
     super()
-    this._position = position
+    this._delegate = new Cesium.Entity({ label: {} })
+    this._position = Parse.parsePosition(position)
     this._text = text
-    this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('label')
     this._state = State.INITIALIZED
   }
 
   set position(position) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('Label: the position invalid')
-    }
-    this._position = position
+    this._position = Parse.parsePosition(position)
+    this._delegate.position = Transform.transformWGS84ToCartesian(
+      this._position
+    )
+    return this
   }
 
   get position() {
@@ -38,6 +37,8 @@ class Label extends Overlay {
 
   set text(text) {
     this._text = text
+    this._delegate.label.text = this._text
+    return this
   }
 
   get text() {
@@ -48,19 +49,12 @@ class Label extends Overlay {
     /**
      * set the location
      */
-    this._delegate.position = new Cesium.CallbackProperty(time => {
-      return Transform.transformWGS84ToCartesian(this._position)
-    })
+    this.position = this._position
 
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.label = {
-      ...this._style,
-      text: new Cesium.CallbackProperty(time => {
-        return this._text
-      })
-    }
+    this.text = this._text
   }
 
   /**
@@ -68,11 +62,12 @@ class Label extends Overlay {
    * @param {*} style
    */
   setStyle(style) {
-    if (Object.keys(style).length === 0) {
+    if (!style || Object.keys(style).length === 0) {
       return this
     }
+    delete style['text']
     this._style = style
-    this._delegate.label && Util.merge(this._delegate.label, this._style)
+    Util.merge(this._delegate.label, this._style)
     return this
   }
 

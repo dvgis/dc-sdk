@@ -2,10 +2,10 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:07:45
+ * @Last Modified time: 2020-06-04 22:00:12
  */
 
-import { Util } from '../../utils'
+import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
 
@@ -145,9 +145,7 @@ class Tileset extends Overlay {
    * @param {*} position
    */
   setPosition(position) {
-    if (!Util.checkPosition(position)) {
-      return this
-    }
+    position = Parse.parsePosition(position)
     this._delegate.readyPromise.then(tileset => {
       let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
         Cesium.Cartesian3.fromDegrees(position.lng, position.lat, position.alt)
@@ -215,7 +213,7 @@ class Tileset extends Overlay {
   setStyle(style) {
     if (style && style instanceof Cesium.Cesium3DTileStyle) {
       this._style = style
-      this._delegate && (this._delegate.style = this._style)
+      this._delegate.style = this._style
     }
     return this
   }

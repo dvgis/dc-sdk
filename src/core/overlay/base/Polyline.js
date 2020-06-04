@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-03 13:52:44
+ * @Last Modified time: 2020-06-04 22:05:39
  */
 
 import { Util } from '../../utils'
@@ -16,21 +16,19 @@ const { Cesium } = DC.Namespace
 
 class Polyline extends Overlay {
   constructor(positions) {
-    if (!Util.checkPositions(positions)) {
-      throw new Error('Polyline: the positions invalid')
-    }
     super()
     this._positions = Parse.parsePositions(positions)
-    this._delegate = new Cesium.Entity()
+    this._delegate = new Cesium.Entity({ polyline: {} })
     this.type = Overlay.getOverlayType('polyline')
     this._state = State.INITIALIZED
   }
 
   set positions(positions) {
-    if (!Util.checkPositions(positions)) {
-      throw new Error('Polyline: the positions invalid')
-    }
     this._positions = Parse.parsePositions(positions)
+    this._delegate.polyline.positions = Transform.transformWGS84ArrayToCartesianArray(
+      this._positions
+    )
+    return this
   }
 
   get positions() {
@@ -49,12 +47,7 @@ class Polyline extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.polyline = {
-      ...this._style,
-      positions: new Cesium.CallbackProperty(time => {
-        return Transform.transformWGS84ArrayToCartesianArray(this._positions)
-      })
-    }
+    this.positions = this._positions
   }
 
   /**
@@ -62,11 +55,12 @@ class Polyline extends Overlay {
    * @param {*} style
    */
   setStyle(style) {
-    if (Object.keys(style).length == 0) {
+    if (!style || Object.keys(style).length === 0) {
       return this
     }
+    delete style['positions']
     this._style = style
-    this._delegate.polyline && Util.merge(this._delegate.polyline, this._style)
+    Util.merge(this._delegate.polyline, this._style)
     return this
   }
 

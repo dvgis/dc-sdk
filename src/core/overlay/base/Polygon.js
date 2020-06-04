@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-03 13:52:31
+ * @Last Modified time: 2020-06-04 22:05:41
  */
 
 import { Util } from '../../utils'
@@ -16,22 +16,18 @@ const { Cesium } = DC.Namespace
 
 class Polygon extends Overlay {
   constructor(positions) {
-    if (!Util.checkPositions(positions)) {
-      throw new Error('Polygon: the positions invalid')
-    }
     super()
+    this._delegate = new Cesium.Entity({ polygon: {} })
     this._positions = Parse.parsePositions(positions)
     this._holes = []
-    this._delegate = new Cesium.Entity()
     this.type = Overlay.getOverlayType('polygon')
     this._state = State.INITIALIZED
   }
 
   set positions(positions) {
-    if (!Util.checkPositions(positions)) {
-      throw new Error('Polygon: the positions invalid')
-    }
     this._positions = Parse.parsePositions(positions)
+    this._delegate.polygon.hierarchy = this._prepareHierarchy()
+    return this
   }
 
   get positions() {
@@ -41,7 +37,9 @@ class Polygon extends Overlay {
   set holes(holes) {
     if (holes && holes.length) {
       this._holes = holes.map(item => Parse.parsePositions(item))
+      this._delegate.polygon.hierarchy = this._prepareHierarchy()
     }
+    return this
   }
 
   get holes() {
@@ -77,12 +75,7 @@ class Polygon extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.polygon = {
-      ...this._style,
-      hierarchy: new Cesium.CallbackProperty(time => {
-        return this._prepareHierarchy()
-      })
-    }
+    this.positions = this._positions
   }
 
   /**
@@ -93,8 +86,9 @@ class Polygon extends Overlay {
     if (!style || Object.keys(style).length === 0) {
       return this
     }
+    delete style['positions']
     this._style = style
-    this._delegate.polygon && Util.merge(this._delegate.polygon, this._style)
+    Util.merge(this._delegate.polygon, this._style)
     return this
   }
 
@@ -114,7 +108,6 @@ class Polygon extends Overlay {
         ...entity.properties.getValue(now)
       }
     }
-
     return polygon
   }
 }

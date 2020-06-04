@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:07:14
+ * @Last Modified time: 2020-06-04 21:53:31
  */
 
 import { Util } from '../../utils'
 import Transform from '../../transform/Transform'
+import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
 
@@ -20,12 +21,9 @@ const DEF_STYLE = {
 
 class Point extends Overlay {
   constructor(position) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('Point: the position invalid')
-    }
     super()
-    this._position = position
-    this._delegate = new Cesium.Entity()
+    this._delegate = new Cesium.Entity({ point: {} })
+    this._position = Parse.parsePosition(position)
     this.type = Overlay.getOverlayType('point')
     this._state = State.INITIALIZED
   }
@@ -34,7 +32,11 @@ class Point extends Overlay {
     if (!Util.checkPosition(position)) {
       throw new Error('Point: the position invalid')
     }
-    this._position = position
+    this._position = Parse.parsePosition(position)
+    this._delegate.position = Transform.transformWGS84ToCartesian(
+      this._position
+    )
+    return this
   }
 
   get position() {
@@ -45,17 +47,12 @@ class Point extends Overlay {
     /**
      * set the location
      */
-    this._delegate.position = new Cesium.CallbackProperty(time => {
-      return Transform.transformWGS84ToCartesian(this._position)
-    })
+    this.position = this._position
 
     /**
      *  initialize the Overlay parameter
      */
-    this._delegate.point = {
-      ...DEF_STYLE,
-      ...this._style
-    }
+    Util.merge(this._delegate.point, DEF_STYLE, this._style)
   }
 
   /**
@@ -63,12 +60,12 @@ class Point extends Overlay {
    * @param {*} style
    */
   setStyle(style) {
-    if (Object.keys(style).length === 0) {
+    if (!style || Object.keys(style).length === 0) {
       return this
     }
+    delete style['position']
     this._style = style
-    this._delegate.point &&
-      Util.merge(this._delegate.point, DEF_STYLE, this._style)
+    Util.merge(this._delegate.point, DEF_STYLE, this._style)
     return this
   }
 }

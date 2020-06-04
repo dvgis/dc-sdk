@@ -2,23 +2,21 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:35:31
+ * @Last Modified time: 2020-06-04 21:50:47
  */
 
 import { DomUtil, Util } from '../../utils'
 import { isBetween } from '../../math'
 import Transform from '../../transform/Transform'
+import Parse from '../../parse/Parse'
 import State from '../../state/State'
 import Overlay from '../Overlay'
 
 class DivIcon extends Overlay {
   constructor(position, content) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('DivIcon: the position invalid')
-    }
     super()
-    this._position = position
     this._delegate = DomUtil.create('div', 'div-icon')
+    this._position = Parse.parsePosition(position)
     this._delegate.setAttribute('id', this._id)
     Util.merge(this._delegate.style, {
       position: 'absolute',
@@ -33,6 +31,7 @@ class DivIcon extends Overlay {
   set show(show) {
     this._show = show
     this._delegate.style.visibility = this._show ? 'visible' : 'hidden'
+    return this
   }
 
   get show() {
@@ -40,10 +39,8 @@ class DivIcon extends Overlay {
   }
 
   set position(position) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('DivIcon: the position invalid')
-    }
-    this._position = position
+    this._position = Parse.parsePosition(position)
+    return this
   }
 
   get position() {
@@ -56,6 +53,7 @@ class DivIcon extends Overlay {
     } else if (content && content instanceof Element) {
       this._delegate.appendChild(content)
     }
+    return this
   }
 
   _updateStyle(style, distance) {
@@ -126,7 +124,7 @@ class DivIcon extends Overlay {
    * @param {*} name
    */
   setStyle(style) {
-    if (Object.keys(style).length === 0) {
+    if (!style || Object.keys(style).length === 0) {
       return this
     }
     this._style = style

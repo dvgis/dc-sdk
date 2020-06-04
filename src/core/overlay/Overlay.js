@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-27 08:50:09
+ * @Last Modified time: 2020-06-04 22:01:03
  */
 import { Util } from '../utils'
 import { OverlayEventType, OverlayEvent } from '../event'
@@ -12,10 +12,10 @@ import OverlayType from './OverlayType'
 class Overlay {
   constructor() {
     this._id = Util.uuid()
+    this._bid = Util.uuid() // Business id
+    this._delegate = undefined
     this._layer = undefined
     this._state = undefined
-    this._delegate = undefined
-    this._bid = Util.uuid() // Business id
     this._show = true
     this._style = {}
     this._attr = {}
@@ -31,6 +31,7 @@ class Overlay {
 
   set id(id) {
     this._bid = id
+    return this
   }
 
   get id() {
@@ -40,6 +41,7 @@ class Overlay {
   set show(show) {
     this._show = show
     this._delegate && (this._delegate.show = this._show)
+    return this
   }
 
   get show() {
@@ -48,6 +50,7 @@ class Overlay {
 
   set attr(attr) {
     this._attr = attr
+    return this
   }
 
   get attr() {
