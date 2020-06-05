@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 22:04:16
+ * @Last Modified time: 2020-06-05 09:13:09
  */
 
 import { Util } from '../../utils'
@@ -68,11 +68,8 @@ class Billboard extends Overlay {
     /**
      *  initialize the Overlay parameter
      */
-    Util.merge(this._delegate.billboard, {
-      image: this._icon,
-      width: this._size[0] || 32,
-      height: this._size[1] || 32
-    })
+    this.icon = this._icon
+    this.size = this._size
   }
 
   /**
