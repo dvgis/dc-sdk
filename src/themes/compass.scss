@@ -1,65 +1,53 @@
 .dc-compass {
-  overflow: hidden;
-  pointer-events: auto;
-  user-select: none;
+  position: absolute;
   top: 20px;
   right: 20px;
-  .svg-path {
+  cursor: default;
+  pointer-events: auto;
+  user-select: none;
+  width: 55px;
+  height: 55px;
+
+  .out-ring {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-  }
-  .out-ring-bg {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    width: 44px;
-    height: 44px;
-    border-radius: 44px;
-    border: 12px solid rgba(47, 43, 60, 0.8);
-    box-sizing: content-box;
-  }
-
-  .out-ring {
-    top: 0;
-    fill: rgba(255, 255, 255, 0.5);
-  }
-
-  .gyro-bg {
-    position: absolute;
-    top: 30px;
-    left: 30px;
-    width: 33px;
-    height: 33px;
-    border-radius: 33px;
-    background: rgba(47, 43, 60, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-sizing: content-box;
+    height: 55px;
+    width: 55px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    fill: #3f4854;
+    border-radius: 50%;
+    svg {
+      height: 55px;
+      width: 55px;
+    }
   }
 
   .gyro {
-    position: absolute;
-    top: 0;
-    width: 95px;
-    height: 95px;
-    fill: #ccc;
-    pointer-events: none;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 25px;
+    width: 25px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+    padding: 4px;
+    box-sizing: border-box;
+    background: #ffffff;
   }
 
   .rotation_marker {
-    top: 0%;
-    fill: #68adfe;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    height: 51px;
+    width: 51px;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
   }
-}
-.dc-compass,
-.dc-compass .out-ring,
-.dc-compass .rotation_marker {
-  position: absolute;
-  width: 95px;
-  height: 95px;
 }
 
 .dc-compass .gyro-active,

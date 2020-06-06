@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-03 14:12:30
+ * @Last Modified time: 2020-06-05 13:18:10
  */
 
 import {
@@ -26,7 +26,7 @@ import {
 } from '../widget'
 import { DomUtil } from '../utils'
 import Transform from '../transform/Transform'
-import Position from '../position/Position'
+import Parse from '../parse/Parse'
 
 const { Cesium } = DC.Namespace
 
@@ -508,18 +508,17 @@ class Viewer {
    *
    */
   flyToPosition(position, completeCallback, duration) {
-    if (position instanceof Position) {
-      this._delegate.camera.flyTo({
-        destination: Transform.transformWGS84ToCartesian(position),
-        orientation: {
-          heading: Cesium.Math.toRadians(position.heading),
-          pitch: Cesium.Math.toRadians(position.pitch),
-          roll: Cesium.Math.toRadians(position.roll)
-        },
-        complete: completeCallback,
-        duration: duration
-      })
-    }
+    position = Parse.parsePosition(position)
+    this.camera.flyTo({
+      destination: Transform.transformWGS84ToCartesian(position),
+      orientation: {
+        heading: Cesium.Math.toRadians(position.heading),
+        pitch: Cesium.Math.toRadians(position.pitch),
+        roll: Cesium.Math.toRadians(position.roll)
+      },
+      complete: completeCallback,
+      duration: duration
+    })
     return this
   }
 
@@ -530,18 +529,17 @@ class Viewer {
    *
    */
   zoomToPosition(position, completeCallback) {
-    if (position instanceof Position) {
-      this._delegate.camera.flyTo({
-        destination: Transform.transformWGS84ToCartesian(position),
-        orientation: {
-          heading: Cesium.Math.toRadians(position.heading),
-          pitch: Cesium.Math.toRadians(position.pitch),
-          roll: Cesium.Math.toRadians(position.roll)
-        },
-        complete: completeCallback,
-        duration: 0
-      })
-    }
+    position = Parse.parsePosition(position)
+    this.camera.flyTo({
+      destination: Transform.transformWGS84ToCartesian(position),
+      orientation: {
+        heading: Cesium.Math.toRadians(position.heading),
+        pitch: Cesium.Math.toRadians(position.pitch),
+        roll: Cesium.Math.toRadians(position.roll)
+      },
+      complete: completeCallback,
+      duration: 0
+    })
     return this
   }
 

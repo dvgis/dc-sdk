@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-03 14:21:04
+ * @Last Modified time: 2020-06-05 13:19:15
  */
 
 import { Layer, VectorLayer } from './index'
@@ -95,10 +95,10 @@ class GeoJsonLayer extends Layer {
   /**
    *
    */
-  toModelLayer() {
+  toModelLayer(modelUrl) {
     let layer = new VectorLayer(this._id)
     this.eachOverlay(item => {
-      layer.addOverlay(this._ceateModel(item))
+      layer.addOverlay(this._ceateModel(item, modelUrl))
     })
     return layer
   }

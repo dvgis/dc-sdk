@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:50:13
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 21:18:27
+ * @Last Modified time: 2020-06-06 14:52:28
  */
 
 import Util from './Util'
@@ -182,6 +182,19 @@ class DomUtil {
       container.appendChild(svg)
     }
     return svg
+  }
+
+  /**
+   *
+   * @param {*} domStr
+   * @param {*} withWrapper
+   */
+  static parseDom(domStr, withWrapper, className) {
+    withWrapper = withWrapper ?? false
+    let el = document.createElement('div')
+    el.className = className || ''
+    el.innerHTML = domStr
+    return withWrapper ? el : el.childNodes
   }
 }
 

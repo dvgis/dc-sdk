@@ -2,22 +2,26 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:35:51
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 12:18:21
+ * @Last Modified time: 2020-06-06 14:36:11
  */
 
 const { Cesium } = DC.Namespace
 
-DC.Cartesian2 = Cesium.Cartesian2
-DC.Cartesian3 = Cesium.Cartesian3
-DC.SceneMode = Cesium.SceneMode
-DC.TilesetStyle = Cesium.Cesium3DTileStyle
-DC.CallbackProperty = Cesium.CallbackProperty
-DC.JulianDate = Cesium.JulianDate
-DC.ClassificationType = Cesium.ClassificationType
-DC.Color = Cesium.Color
-DC.ColorMaterialProperty = Cesium.ColorMaterialProperty
-DC.ImageMaterialProperty = Cesium.ImageMaterialProperty
-DC.PolylineDashMaterialProperty = Cesium.PolylineDashMaterialProperty
-DC.PolylineGlowMaterialProperty = Cesium.PolylineGlowMaterialProperty
-DC.PolylineOutlineMaterialProperty = Cesium.PolylineOutlineMaterialProperty
-DC.PolylineArrowMaterialProperty = Cesium.PolylineArrowMaterialProperty
+const thirdPart = {
+  Cartesian2: Cesium.Cartesian2,
+  Cartesian3: Cesium.Cartesian3,
+  SceneMode: Cesium.SceneMode,
+  TilesetStyle: Cesium.Cesium3DTileStyle,
+  CallbackProperty: Cesium.CallbackProperty,
+  JulianDate: Cesium.JulianDate,
+  ClassificationType: Cesium.ClassificationType,
+  Color: Cesium.Color,
+  ColorMaterialProperty: Cesium.ColorMaterialProperty,
+  ImageMaterialProperty: Cesium.ImageMaterialProperty,
+  PolylineDashMaterialProperty: Cesium.PolylineDashMaterialProperty,
+  PolylineGlowMaterialProperty: Cesium.PolylineGlowMaterialProperty,
+  PolylineOutlineMaterialProperty: Cesium.PolylineOutlineMaterialProperty,
+  PolylineArrowMaterialProperty: Cesium.PolylineArrowMaterialProperty
+}
+
+DC.mixin(thirdPart)
