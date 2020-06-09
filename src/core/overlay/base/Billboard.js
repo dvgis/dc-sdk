@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-05 09:13:09
+ * @Last Modified time: 2020-06-09 17:17:22
  */
 
 import { Util } from '../../utils'
@@ -52,7 +52,7 @@ class Billboard extends Overlay {
     }
     this._size = size
     this._delegate.billboard.width = this._size[0] || 32
-    this._delegate.billboard.height = this._size[0] || 32
+    this._delegate.billboard.height = this._size[1] || 32
     return this
   }
 
