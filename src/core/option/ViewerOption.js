@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-03 13:15:29
+ * @Last Modified time: 2020-06-09 09:57:50
  */
 
 import { Util } from '../utils'
@@ -55,7 +55,7 @@ class ViewerOption {
     let cameraController = this._options.cameraController
 
     Util.merge(scene.screenSpaceCameraController, {
-      enableRotate: cameraController?.enableRotat ?? true,
+      enableRotate: cameraController?.enableRotate ?? true,
       enableTilt: cameraController?.enableTilt ?? true,
       enableTranslate: cameraController?.enableTranslate ?? true,
       enableZoom: cameraController?.enableZoom ?? true,
