@@ -2,10 +2,12 @@
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-09 17:18:05
+ * @Last Modified time: 2020-06-11 10:56:30
  */
 
 import { initMixin, initUse } from './global-api'
+
+delete window.DC
 
 let DC = {
   Author: 'Caven Chen',
@@ -15,7 +17,7 @@ let DC = {
   Namespace: {},
   Initialized: false
 }
-delete window.DC
+
 window.DC = DC
 ;(function() {
   require('../log')

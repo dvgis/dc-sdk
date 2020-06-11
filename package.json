@@ -17,8 +17,8 @@
   "license": "Apache 2.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn run clean && webpack --config webpack.conf --mode development",
-    "publish": "yarn run clean && webpack --config webpack.conf --mode production --env.production",
+    "build": "yarn run clean && webpack  --mode development",
+    "publish": "yarn run clean && webpack --mode production --env.production",
     "clean": "rimraf dist/"
   },
   "devDependencies": {
