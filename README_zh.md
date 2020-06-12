@@ -1,5 +1,10 @@
 # DC-SDK
 
+<p>
+<img src="https://img.shields.io/badge/license-Apache%202-blue"/>
+<img src="https://img.shields.io/npm/dw/@dvgis/dc-sdk"/>
+</p>
+
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
 
 > 该 SDK 是基于开源项目 Cesium 进行的二次开发，优化了 Cesium 一些操作，通过该框架开发者可以快速的开发 3D 应用。
