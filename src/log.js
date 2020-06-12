@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 18:53:12
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-11 17:18:44
+ * @Last Modified time: 2020-06-12 22:15:01
  */
 console.clear()
 console.log(
@@ -12,6 +12,8 @@ console.log(
     作者:Caven Chen
     主页: ${DC.Home}
     github:${DC.GitHub}
+    授权信息：授权-永久使用此软件当前版本。 \n
+
     版权声明:
     1.框架是一个基础平台，完全开源，任何个人和机构可以修改、重构，无需经过我方授权。
     2.后期会添加一些针对性的插件和工具，代码会适量的开源。
@@ -21,5 +23,5 @@ console.log(
     我方保留对此版权信息的最终解释权。`,
   'font-size:20px;padding-left:70px;color:#EEB422',
   'font-size:14px;padding-left:50px;color:#EEB422;font-style:oblique',
-  'font-size:14px;color:#0865ba'
+  'font-size:12px;color:#0865ba'
 )
