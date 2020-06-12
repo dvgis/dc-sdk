@@ -2,8 +2,8 @@
 
 <p>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
-<img src="https://img.shields.io/github/v/release/Digital-Visual/dc-sdk" />
-<img src="https://img.shields.io/npm/dw/@dvgis/dc-sdk"/>
+<img src="https://img.shields.io/github/package-json/v/Digital-Visual/dc-sdk?color=orange&logo=github" />
+<img src="https://img.shields.io/npm/dw/@dvgis/dc-sdk?logo=npm"/>
 </p>
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
