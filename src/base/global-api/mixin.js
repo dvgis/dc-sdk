@@ -2,12 +2,15 @@
  * @Author: Caven
  * @Date: 2020-05-09 23:00:54
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-17 17:30:58
+ * @Last Modified time: 2020-06-24 16:45:46
  */
 export function initMixin(DC) {
   DC.mixin = function(mixin) {
-    for (let i in mixin) {
-      DC[i] = mixin[i]
+    for (let key in mixin) {
+      if (key === 'ready' || key === 'use' || key === 'mixin') {
+        continue
+      }
+      DC[key] = mixin[key]
     }
     return this
   }

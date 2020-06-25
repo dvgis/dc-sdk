@@ -79,9 +79,9 @@ DC.ready(() => {
 
 ## Documentation
 
-[Cesium-Api](https://cesium.com/docs/cesiumjs-ref-doc/)
+[Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
-[DC-SDK-Api](http://resource.dvgis.cn/dc-api/api/)
+[DC-SDK Api](http://resource.dvgis.cn/dc-api)
 
 ## Demo
 
