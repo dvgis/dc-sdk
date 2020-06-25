@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 21:53:38
+ * @Last Modified time: 2020-06-25 08:55:22
  */
 
 import { Util } from '../../utils'
@@ -55,6 +55,15 @@ class Label extends Overlay {
      *  initialize the Overlay parameter
      */
     this.text = this._text
+  }
+
+  /**
+   *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
+    return this
   }
 
   /**

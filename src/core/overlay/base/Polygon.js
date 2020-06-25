@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 22:05:41
+ * @Last Modified time: 2020-06-25 08:59:51
  */
 
 import { Util } from '../../utils'
@@ -76,6 +76,20 @@ class Polygon extends Overlay {
      *  initialize the Overlay parameter
      */
     this.positions = this._positions
+  }
+
+  /**
+   *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
+    this._delegate.position = Transform.transformWGS84ToCartesian(this.center)
+    this._delegate.label = {
+      text: text,
+      ...textStyle
+    }
+    return this
   }
 
   /**

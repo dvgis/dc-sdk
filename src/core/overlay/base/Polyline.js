@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 22:05:39
+ * @Last Modified time: 2020-06-25 09:00:56
  */
 
 import { Util } from '../../utils'
@@ -48,6 +48,20 @@ class Polyline extends Overlay {
      *  initialize the Overlay parameter
      */
     this.positions = this._positions
+  }
+
+  /**
+   *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
+    this._delegate.position = Transform.transformWGS84ToCartesian(this.center)
+    this._delegate.label = {
+      text: text,
+      ...textStyle
+    }
+    return this
   }
 
   /**

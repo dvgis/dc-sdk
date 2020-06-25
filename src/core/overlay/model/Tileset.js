@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 22:00:12
+ * @Last Modified time: 2020-06-25 09:02:40
  */
 
 import Parse from '../../parse/Parse'
@@ -156,6 +156,15 @@ class Tileset extends Overlay {
       Cesium.Matrix4.multiply(modelMatrix, rotationX, modelMatrix)
       tileset.root.transform = modelMatrix
     })
+    return this
+  }
+
+  /**
+   *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
     return this
   }
 

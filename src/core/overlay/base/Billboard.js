@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-19 10:18:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-09 17:17:22
+ * @Last Modified time: 2020-06-25 08:54:07
  */
 
 import { Util } from '../../utils'
@@ -70,19 +70,6 @@ class Billboard extends Overlay {
      */
     this.icon = this._icon
     this.size = this._size
-  }
-
-  /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  setLabel(text, textStyle) {
-    this._delegate.label = {
-      ...textStyle,
-      text: text
-    }
-    return this
   }
 
   /**

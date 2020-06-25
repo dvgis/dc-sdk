@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 21:50:47
+ * @Last Modified time: 2020-06-25 09:04:04
  */
 
 import { DomUtil, Util } from '../../utils'
@@ -121,6 +121,15 @@ class DivIcon extends Overlay {
 
   /**
    *
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
+    return this
+  }
+
+  /**
+   *
    * @param {*} name
    */
   setStyle(style) {
@@ -128,7 +137,8 @@ class DivIcon extends Overlay {
       return this
     }
     this._style = style
-    style.className && DomUtil.addClass(this._delegate, style.className)
+    this._style.className &&
+      DomUtil.addClass(this._delegate, this._style.className)
     return this
   }
 }

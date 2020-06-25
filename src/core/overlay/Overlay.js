@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 22:01:03
+ * @Last Modified time: 2020-06-25 09:07:16
  */
 import { Util } from '../utils'
 import { OverlayEventType, OverlayEvent } from '../event'
@@ -116,6 +116,20 @@ class Overlay {
       this._removedHook && this._removedHook()
       this._state = State.REMOVED
     }
+  }
+
+  /**
+   * set overlay label
+   * @param {*} text
+   * @param {*} textStyle
+   */
+  setLabel(text, textStyle) {
+    this._delegate &&
+      (this._delegate.label = {
+        ...textStyle,
+        text: text
+      })
+    return this
   }
 
   /**

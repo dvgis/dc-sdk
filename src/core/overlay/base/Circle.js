@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 18:57:02
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 22:37:13
+ * @Last Modified time: 2020-06-25 08:52:43
  */
 
 import { Util } from '../../utils'
@@ -76,19 +76,6 @@ class Circle extends Overlay {
      *  initialize the Overlay parameter
      */
     this.radius = this._radius
-  }
-
-  /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  setLabel(text, textStyle) {
-    this._delegate.label = {
-      text: text,
-      ...textStyle
-    }
-    return this
   }
 
   /**

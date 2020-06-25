@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-04 22:37:20
+ * @Last Modified time: 2020-06-25 09:08:04
  */
 
 import { Util } from '../../utils'
@@ -94,25 +94,13 @@ class Model extends Overlay {
 
   /**
    *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  setLabel(text, textStyle) {
-    this._delegate.label = {
-      ...textStyle,
-      text: text
-    }
-    return this
-  }
-
-  /**
-   *
    * @param {*} style
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
       return this
     }
+    delete style['uri']
     this._style = style
     Util.merge(this._delegate.model, this._style)
     return this
