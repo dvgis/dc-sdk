@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:08:55
+ * @Last Modified time: 2020-06-28 10:13:51
  */
 
 import { DomUtil } from '../utils'
@@ -26,6 +26,7 @@ class ContextMenu extends Widget {
   set config(config) {
     this._config = config
     config.customClass && this._setCustomClass()
+    return this
   }
 
   _installHook() {
@@ -47,13 +48,8 @@ class ContextMenu extends Widget {
   }
 
   _rightclickHandler(e) {
-    if (e && e.position && this._enable && this._updateWindowCoord) {
-      this._updateWindowCoord(
-        Cesium.SceneTransforms.wgs84ToWindowCoordinates(
-          this._viewer.delegate.scene,
-          e.position
-        )
-      )
+    if (e && e.windowPosition && this._enable) {
+      this._updateWindowCoord(e.windowPosition)
     }
   }
 

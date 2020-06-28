@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-19 19:08:26
+ * @Last Modified time: 2020-06-28 10:12:52
  */
 
 import { MouseEventType } from './EventType'
@@ -147,11 +147,14 @@ class MouseEvent extends Event {
     let event = undefined
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo.overlay
+    // get Ovelay Event
     if (overlay && overlay.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
     }
-    // stopPropagation
-    !event && (event = this._viewer.viewerEvent.getEvent(type))
+    // get Viewer Event
+    if (!event || event.numberOfListeners === 0) {
+      event = this._viewer.viewerEvent.getEvent(type)
+    }
     event &&
       event.numberOfListeners > 0 &&
       event.raiseEvent({

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-05 13:18:10
+ * @Last Modified time: 2020-06-28 10:14:50
  */
 
 import {
@@ -62,7 +62,7 @@ class Viewer {
      */
     new MouseEvent(this) // Register global mouse events
     this._viewerEvent = new ViewerEvent() // Register viewer events
-    this._sceneEvent = new SceneEvent(this) // Register viewer events
+    this._sceneEvent = new SceneEvent(this) // Register scene events
 
     this._viewerOption = new ViewerOption(this) // Initialize the viewer option
     this._cameraOption = new CameraOption(this) // Initialize the camera option

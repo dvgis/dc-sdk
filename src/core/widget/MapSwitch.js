@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:34:34
+ * @Last Modified time: 2020-06-28 10:23:45
  */
 
 import { DomUtil } from '../utils'
@@ -46,6 +46,7 @@ class MapSwitch extends Widget {
   _addItem(map) {
     let mapEl = DomUtil.create('div', 'map-item', this._wrapper)
     let index = this._cache.length ? this._cache.length - 1 : 0
+    index === 0 && DomUtil.addClass(mapEl, 'active')
     mapEl.setAttribute('data-index', index)
     mapEl.onclick = e => {
       let old = document.getElementsByClassName('map-item active')
@@ -54,9 +55,7 @@ class MapSwitch extends Widget {
       }
       if (this._viewer) {
         e.target.className = 'map-item active'
-        this._viewer.changeBaseLayer(
-          Number(e.target.getAttribute('data-index') || 0)
-        )
+        this._viewer.changeBaseLayer(+e.target.getAttribute('data-index') || 0)
       }
     }
     if (map.iconUrl) {
