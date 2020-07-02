@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-25 09:02:40
+ * @Last Modified time: 2020-07-02 13:22:14
  */
 
 import Parse from '../../parse/Parse'
@@ -18,7 +18,7 @@ class Tileset extends Overlay {
       ...options,
       url: url
     })
-    this._delegate.tileVisible.addEventListener(this._tileVisibleHandler, this)
+    this._tileVisibleCallback = undefined
     this._height = undefined
     this._properties = undefined
     this._stopTime = undefined
@@ -71,7 +71,6 @@ class Tileset extends Overlay {
    */
   _tileVisibleHandler(tile) {
     this._updateProperties(tile)
-    this._updateHeight(tile)
   }
 
   /**
@@ -91,26 +90,6 @@ class Tileset extends Overlay {
             feature.setProperty(property.propertyName, property.propertyValue)
           }
         })
-      }
-    }
-  }
-  /**
-   *
-   * @param {*} height
-   */
-  _updateHeight(tile) {
-    if (this._duration) {
-      let rate = this._height / this._duration
-      let now = Cesium.JulianDate.now()
-      if (
-        this._stopTime &&
-        Cesium.JulianDate.greaterThan(this._stopTime, now)
-      ) {
-        this._setHeight(
-          (this._duration -
-            Cesium.JulianDate.secondsDifference(this._stopTime, now)) *
-            rate
-        )
       }
     }
   }
@@ -172,22 +151,13 @@ class Tileset extends Overlay {
    *
    * @param {*} height
    */
-  setHeight(height, duration) {
+  setHeight(height) {
     this._height = height
     this._delegate.readyPromise.then(tileset => {
       this._center = Cesium.Cartographic.fromCartesian(
         tileset.boundingSphere.center
       )
-      if (duration) {
-        this._duration = duration
-        this._stopTime = Cesium.JulianDate.addSeconds(
-          Cesium.JulianDate.now(),
-          duration,
-          new Cesium.JulianDate()
-        )
-      } else {
-        this._setHeight(this._height)
-      }
+      this._setHeight(this._height)
     })
     return this
   }
@@ -212,6 +182,11 @@ class Tileset extends Overlay {
    */
   setFeatureProperty(properties) {
     this._properties = properties
+    !this._tileVisibleCallback &&
+      (this._tileVisibleCallback = this._delegate.tileVisible.addEventListener(
+        this._tileVisibleHandler,
+        this
+      ))
     return this
   }
 
