@@ -107,9 +107,9 @@ DC.ready(() => {
 
 <p>
 
-<img src="https://raw.githubusercontent.com/Digital-Visual/dc-sdk-examples/master/images/base/q1.png"  style="width:60px" title="Cesium*融合"/>
+<img src="https://raw.githubusercontent.com/Digital-Visual/dc-sdk-examples/master/images/base/q1.png"  style="width:60px;height:60px" title="Cesium*融合"/>
 
-<img src="https://raw.githubusercontent.com/Digital-Visual/dc-sdk-examples/master/images/base/q2.png" style="width:60px" title="Cesium开心农场"/>
+<img src="https://raw.githubusercontent.com/Digital-Visual/dc-sdk-examples/master/images/base/q2.png" style="width:60px;height:60px" title="Cesium开心农场"/>
 
 </p>
 
