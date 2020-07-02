@@ -104,4 +104,14 @@ DC.ready(() => {
 We reserve the right of final interpretation of this copyright information.
 ```
 
+## QQ Group
+
+<p>
+
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=22f99629ab54ef76eb4ee606efbe399a227ad18c288c156c159d12631416032d"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Cesium*融合" title="Cesium*融合"></a>
+
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=926d55fc409fbc5a2904ebdc6326f45cc008cc07204fd6c49771f8302e18d759"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="Cesium开心农场" title="Cesium开心农场"></a>
+
+</p>
+
 ## Thanks
