@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-06 15:03:25
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-25 08:55:35
+ * @Last Modified time: 2020-07-06 17:49:30
  */
 
 import { Util } from '../../utils'
@@ -29,9 +29,6 @@ class Point extends Overlay {
   }
 
   set position(position) {
-    if (!Util.checkPosition(position)) {
-      throw new Error('Point: the position invalid')
-    }
     this._position = Parse.parsePosition(position)
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
