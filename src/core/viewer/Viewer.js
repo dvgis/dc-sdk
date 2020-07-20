@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-28 10:14:50
+ * @Last Modified time: 2020-07-20 09:41:26
  */
 
 import {
@@ -577,6 +577,14 @@ class Viewer {
   off(type, callback, context) {
     this._viewerEvent.off(type, callback, context || this)
     this._sceneEvent.off(type, callback, context || this)
+    return this
+  }
+
+  /**
+   * destroys the viewer.
+   */
+  destroy() {
+    this._delegate.destroy()
     return this
   }
 

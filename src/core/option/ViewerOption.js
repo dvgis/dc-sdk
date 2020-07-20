@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-09 09:57:50
+ * @Last Modified time: 2020-07-20 10:15:24
  */
 
 import { Util } from '../utils'
@@ -29,6 +29,7 @@ class ViewerOption {
 
   _setViewerOption() {
     this._viewer.delegate.shadows = this._options.shadows ?? false
+    this._viewer.delegate.resolutionScale = this._options.resolutionScale || 1.0
 
     return this
   }
@@ -76,7 +77,8 @@ class ViewerOption {
       show: globeOption?.show ?? true,
       enableLighting: globeOption?.enableLighting ?? false,
       depthTestAgainstTerrain: globeOption?.undergroundMode ?? false,
-      tileCacheSize: +globeOption?.tileCacheSize || 100
+      tileCacheSize: +globeOption?.tileCacheSize || 100,
+      baseColor: globeOption?.baseColor || new Cesium.Color(0, 0, 0.5, 1)
     })
 
     Util.merge(globe.translucency, {
