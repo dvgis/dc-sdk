@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  * @Last Modified by: Caven
- * @Last Modified time: 2020-07-20 09:41:26
+ * @Last Modified time: 2020-07-23 09:47:24
  */
 
 import {
@@ -251,7 +251,7 @@ class Viewer {
    *
    */
   setPitchRange(min = -90, max = -20) {
-    this._cameraOption.setPichRange(min, max)
+    this._cameraOption.setPitchRange(min, max)
     return this
   }
 
