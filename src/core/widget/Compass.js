@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-19 13:11:12
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-06 14:52:15
+ * @Last Modified time: 2020-07-24 12:40:52
  */
 
 import { DomUtil } from '../utils'
@@ -33,14 +33,7 @@ class Compass extends Widget {
     this._state = State.INITIALIZED
   }
 
-  _installHook() {
-    this._createCompassDom()
-    this._wrapper.onmousedown = e => {
-      this._handleMouseDown(e)
-    }
-    this._wrapper.ondblclick = e => {
-      this._handleDoubleClick(e)
-    }
+  _bindEvent() {
     this._removeSubscription = this._viewer.scene.postRender.addEventListener(
       () => {
         let heading = this._viewer.camera.heading
@@ -51,6 +44,20 @@ class Compass extends Widget {
       },
       this
     )
+  }
+
+  _unbindEvent() {
+    this._removeSubscription()
+  }
+
+  _installHook() {
+    this._createCompassDom()
+    this._wrapper.onmousedown = e => {
+      this._handleMouseDown(e)
+    }
+    this._wrapper.ondblclick = e => {
+      this._handleDoubleClick(e)
+    }
   }
 
   _createCompassDom() {

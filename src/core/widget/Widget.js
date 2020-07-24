@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:12:02
+ * @Last Modified time: 2020-07-24 12:37:39
  */
 
 import State from '../state/State'
@@ -17,7 +17,6 @@ class Widget {
     this._enable = false
     this._wrapper = undefined
     this._positionChangeable = false
-
     this.type = undefined
   }
 
@@ -36,14 +35,25 @@ class Widget {
   }
 
   /**
+   * bind Event
+   */
+  _bindEvent() {}
+
+  /**
+   * unbind Event
+   */
+  _unbindEvent() {}
+
+  /**
    * When enable modifies the hook executed, the subclass copies it as required
    */
   _enableHook() {
-    if (!this._wrapper.parentNode && this._viewer) {
-      this._wrapper && this._viewer.dcContainer.appendChild(this._wrapper)
-    }
+    !this._wrapper.parentNode &&
+      this._viewer &&
+      this._viewer.dcContainer.appendChild(this._wrapper)
     this._wrapper &&
       (this._wrapper.style.visibility = this._enable ? 'visible' : 'hidden')
+    this._enable ? this._bindEvent() : this._unbindEvent()
   }
 
   /**

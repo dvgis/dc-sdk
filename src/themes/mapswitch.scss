@@ -36,5 +36,8 @@
         background-color: rgba(8, 101, 186, 0.8);
       }
     }
+    &:last-child {
+      margin-right: 0px !important;
+    }
   }
 }

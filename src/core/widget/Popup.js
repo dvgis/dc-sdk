@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-15 19:16:45
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:33:26
+ * @Last Modified time: 2020-07-24 10:14:43
  */
 
 import { DomUtil } from '../utils'
@@ -59,6 +59,16 @@ class Popup extends Widget {
       (this._wrapper.style.cssText = `
     visibility:visible;
     `)
+    return this
+  }
+
+  /**
+   *
+   * @param {*} position
+   * @param {*} content
+   */
+  showAt(position, content) {
+    this.setPosition(position).setContent(content)
     return this
   }
 }

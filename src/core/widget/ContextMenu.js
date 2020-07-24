@@ -2,15 +2,13 @@
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-28 10:13:51
+ * @Last Modified time: 2020-07-24 12:40:29
  */
 
 import { DomUtil } from '../utils'
 import { MouseEventType } from '../event'
 import State from '../state/State'
 import Widget from './Widget'
-
-const { Cesium } = DC.Namespace
 
 class ContextMenu extends Widget {
   constructor() {
@@ -29,11 +27,17 @@ class ContextMenu extends Widget {
     return this
   }
 
+  _bindEvent() {
+    this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightclickHandler, this)
+    this._viewer.on(MouseEventType.CLICK, this._clickHandler, this)
+  }
+
+  _unbindEvent() {
+    this._viewer.off(MouseEventType.RIGHT_CLICK, this._rightclickHandler, this)
+    this._viewer.off(MouseEventType.CLICK, this._clickHandler, this)
+  }
+
   _installHook() {
-    if (this._viewer) {
-      this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightclickHandler, this)
-      this._viewer.on(MouseEventType.CLICK, this._clickHandler, this)
-    }
     this._prepareDefaultMenu()
   }
 

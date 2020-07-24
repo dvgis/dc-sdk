@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-15 17:47:42
  * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:09:11
+ * @Last Modified time: 2020-07-24 12:42:20
  */
 
 import { DomUtil, Util } from '../utils'
@@ -57,9 +57,16 @@ class HawkeyeMap extends Widget {
     this._delegate.imageryLayers.removeAll()
   }
 
+  _bindEvent() {
+    this._viewer.camera.changed.addEventListener(this._sync2DView, this)
+  }
+
+  _unbindEvent() {
+    this._viewer.camera.changed.removeEventListener(this._sync2DView, this)
+  }
+
   _installHook() {
     this._prepareDelegate()
-    this._viewer.camera.changed.addEventListener(this._sync2DView, this)
     this._viewer.camera.percentageChanged = 0.01
   }
 

@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 18:34:46
  * @Last Modified by: Caven
- * @Last Modified time: 2020-06-28 10:23:45
+ * @Last Modified time: 2020-07-24 12:45:08
  */
 
 import { DomUtil } from '../utils'
@@ -23,9 +23,9 @@ class MapSwitch extends Widget {
    * 当enable修改后执行的钩子，子类根据需求复写
    */
   _enableHook() {
-    if (!this._wrapper.parentNode && this._viewer) {
-      this._wrapper && this._viewer.dcContainer.appendChild(this._wrapper)
-    }
+    !this._wrapper.parentNode &&
+      this._viewer &&
+      this._viewer.dcContainer.appendChild(this._wrapper)
   }
 
   _installHook() {
@@ -34,7 +34,7 @@ class MapSwitch extends Widget {
     this._wrapper.onmouseover = () => {
       let width = 80
       if (self._cache.length > 0) {
-        width = self._cache.length * 85.7
+        width = self._cache.length * 85
       }
       this._wrapper.style.width = `${width}px`
     }
