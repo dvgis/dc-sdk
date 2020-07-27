@@ -2,7 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
  * @Last Modified by: Caven
- * @Last Modified time: 2020-07-24 14:08:07
+ * @Last Modified time: 2020-07-27 16:32:23
  */
 
 import { DomUtil } from '../utils'
@@ -37,7 +37,7 @@ class Attribution extends Widget {
     a.innerHTML = 'Digital Visual'
     a.href = 'javascirpt:void(0)'
     a.onclick = () => {
-      window.open('http://www.dvgis.cn')
+      window.open('https://www.dvgis.cn')
     }
     a.style.cssText = `color:#0078A8;font-size:12px`
     this.enable = true
