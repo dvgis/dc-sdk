@@ -2,11 +2,12 @@
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
  * @Last Modified by: Caven
- * @Last Modified time: 2020-07-27 10:39:55
+ * @Last Modified time: 2020-07-30 13:28:46
  */
 
 const path = require('path')
 const webpack = require('webpack')
+const packageInfo = require('./package.json')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const CopywebpackPlugin = require('copy-webpack-plugin')
@@ -30,6 +31,12 @@ function resolve(dir) {
   return path.join(__dirname, '.', dir)
 }
 
+function getTime() {
+  let now = new Date()
+  return `${now.getFullYear()}-${now.getMonth() +
+    1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`
+}
+
 module.exports = env => {
   const IS_PROD = (env && env.production) || false
   const publicPath = IS_PROD ? '/' : '/'
@@ -40,7 +47,9 @@ module.exports = env => {
       allChunks: true
     }),
     new webpack.DefinePlugin({
-      CESIUM_BASE_URL: JSON.stringify('./libs/dc-sdk/resources/')
+      CESIUM_BASE_URL: JSON.stringify('./libs/dc-sdk/resources/'),
+      'build.version': JSON.stringify(packageInfo.version),
+      'build.time': JSON.stringify(getTime())
     })
   ]
   if (IS_PROD) {

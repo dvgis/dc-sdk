@@ -2,10 +2,11 @@
  * @Author: Caven
  * @Date: 2020-03-04 15:38:40
  * @Last Modified by: Caven
- * @Last Modified time: 2020-07-24 12:43:25
+ * @Last Modified time: 2020-07-30 14:08:07
  */
 
 import { DomUtil } from '../utils'
+import Icon from '../icon'
 import State from '../state/State'
 import Widget from './Widget'
 
@@ -22,7 +23,9 @@ class MapSplit extends Widget {
   }
 
   _installHook() {
-    let handler = new Cesium.ScreenSpaceEventHandler(this._wrapper)
+    let splitter = DomUtil.parseDom(Icon.splitter, true, 'splitter')
+    this._wrapper.appendChild(splitter)
+    let handler = new Cesium.ScreenSpaceEventHandler(splitter)
     let self = this
     handler.setInputAction(() => {
       self._moveActive = true
