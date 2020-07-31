@@ -14,8 +14,7 @@
   "globals": {
     "DC": false,
     "build": false,
-    "Cesium": false,
-    "GSpace": false
+    "Cesium": false
   },
   "rules": {
     "global-require": 0,
