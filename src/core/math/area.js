@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-04-24 14:49:37
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-15 08:58:33
  */
 
 import Transform from '../transform/Transform'

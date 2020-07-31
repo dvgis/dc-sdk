@@ -1,10 +1,12 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-02-12 18:53:12
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-30 13:30:42
  */
+
+// eslint-disable-next-line no-console
 console.clear()
+
+// eslint-disable-next-line no-console
 console.log(
   `%c \n DC-SDK \n  %c \n 用数字描绘世界之美  %c \n
     版本:${DC.Version}

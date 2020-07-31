@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-03 09:38:21
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 21:53:16
  */
 
 import { Util } from '../utils'
@@ -76,7 +74,7 @@ class Layer {
    *
    * The layer added callback function
    * Subclasses need to be overridden
-   * @param {*} veiwer
+   * @param {*} viewer
    *
    */
   _addHandler(viewer) {
@@ -174,7 +172,7 @@ class Layer {
   addOverlays(overlays) {
     if (Array.isArray(overlays)) {
       overlays.forEach(item => {
-        this._addOverlay(overlay)
+        this._addOverlay(item)
       })
     }
     return this

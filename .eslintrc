@@ -12,6 +12,8 @@
   "plugins": ["html", "prettier"],
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "globals": {
+    "DC": false,
+    "build": false,
     "Cesium": false,
     "GSpace": false
   },

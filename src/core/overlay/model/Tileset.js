@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-07 08:51:56
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-02 13:22:14
  */
 
 import Parse from '../../parse/Parse'

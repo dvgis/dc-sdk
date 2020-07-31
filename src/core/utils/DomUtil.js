@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-31 17:50:13
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-06 14:52:28
  */
 
 import Util from './Util'
@@ -31,10 +29,10 @@ class DomUtil {
    * @param {*} style
    */
   static getStyle(el, style) {
-    var value = el.style[style] || (el.currentStyle && el.currentStyle[style])
+    let value = el.style[style] || (el.currentStyle && el.currentStyle[style])
 
     if ((!value || value === 'auto') && document.defaultView) {
-      var css = document.defaultView.getComputedStyle(el, null)
+      let css = document.defaultView.getComputedStyle(el, null)
       value = css ? css[style] : null
     }
     return value === 'auto' ? null : value
@@ -47,8 +45,8 @@ class DomUtil {
    * @param {*} container
    *  Creates an HTML element with `tagName`, sets its class to `className`, and optionally appends it to `container` element.
    */
-  static create(tagName, className, container) {
-    var el = document.createElement(tagName)
+  static create(tagName, className, container = null) {
+    let el = document.createElement(tagName)
     el.className = className || ''
     if (container) {
       container.appendChild(el)
@@ -62,7 +60,7 @@ class DomUtil {
    * Removes `el` from its parent element
    */
   static remove(el) {
-    var parent = el.parentNode
+    let parent = el.parentNode
     if (parent) {
       parent.removeChild(el)
     }
@@ -85,11 +83,11 @@ class DomUtil {
    * @param {*} el
    * @param {*} name
    */
-  hasClass(el, name) {
+  static hasClass(el, name) {
     if (el.classList !== undefined) {
       return el.classList.contains(name)
     }
-    var className = getClass(el)
+    let className = this.getClass(el)
     return (
       className.length > 0 &&
       new RegExp('(^|\\s)' + name + '(\\s|$)').test(className)

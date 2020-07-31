@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-05-09 23:01:21
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-17 17:41:24
  */
 
 export function initUse(DC) {

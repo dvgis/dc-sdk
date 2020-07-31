@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-07 09:00:32
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:38:44
  */
 
 import Position from '../position/Position'
@@ -123,7 +121,7 @@ class Transform {
    */
   static transformWindowToWGS84(position, viewer) {
     let scene = viewer.scene
-    let cartesian = undefined
+    let cartesian
     if (scene.mode === Cesium.SceneMode.SCENE3D) {
       let ray = scene.camera.getPickRay(position)
       cartesian = scene.globe.pick(ray, scene)
@@ -140,11 +138,10 @@ class Transform {
    */
   static transformWGS84ToWindow(position, viewer) {
     let scene = viewer.scene
-    let cartesian = SceneTransforms.wgs84ToWindowCoordinates(
+    return Cesium.SceneTransforms.wgs84ToWindowCoordinates(
       scene,
       this.transformWGS84ToCartesian(position)
     )
-    return cartesian
   }
 }
 

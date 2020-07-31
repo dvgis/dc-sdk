@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-09 09:10:37
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-25 08:59:51
  */
 
 import { Util } from '../../utils'
@@ -114,8 +112,8 @@ class Polygon extends Overlay {
     let polygon = undefined
     let now = Cesium.JulianDate.now()
     if (entity.polygon) {
-      let positions = T.transformCartesianArrayToWGS84Array(
-        item.polygon.hierarchy.getValue(now).positions
+      let positions = Transform.transformCartesianArrayToWGS84Array(
+        entity.polygon.hierarchy.getValue(now).positions
       )
       polygon = new Polygon(positions)
       polygon.attr = {

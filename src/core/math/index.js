@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-03-31 20:57:36
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-28 10:27:54
  */
 
 export { default as area } from './area'

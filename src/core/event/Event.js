@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-02 15:24:38
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-27 12:50:32
  */
 
 class Event {

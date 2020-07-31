@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-02-11 21:08:01
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-27 16:32:23
  */
 
 import { DomUtil } from '../utils'
@@ -35,7 +33,7 @@ class Attribution extends Widget {
     span.style.cssText = `margin-right:5px;`
     let a = DomUtil.create('a', '', this._wrapper)
     a.innerHTML = 'Digital Visual'
-    a.href = 'javascirpt:void(0)'
+    a.href = 'javascript:void(0)'
     a.onclick = () => {
       window.open('https://www.dvgis.cn')
     }

@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-27 14:35:02
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-27 08:51:54
  */
 
 import Transform from '../transform/Transform'
@@ -93,20 +91,14 @@ class Position {
     )
   }
 
-  /**
-   *
-   * @param {*} src
-   */
-  static copy(src) {
+  copy() {
     let position = new Position()
-    if (src) {
-      position.lng = src.lng || 0
-      position.lat = src.lat || 0
-      position.alt = src.alt || 0
-      position.heading = src.heading || 0
-      position.pitch = src.pitch || 0
-      position.roll = src.roll || 0
-    }
+    position.lng = this.lng || 0
+    position.lat = this.lat || 0
+    position.alt = this.alt || 0
+    position.heading = this.heading || 0
+    position.pitch = this.pitch || 0
+    position.roll = this.roll || 0
     return position
   }
 

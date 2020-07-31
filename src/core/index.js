@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-27 14:29:05
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 23:50:56
  */
 
 const install = function(DC) {
@@ -27,6 +25,7 @@ const install = function(DC) {
       callback && callback()
     } catch (e) {
       delete window.DC
+      // eslint-disable-next-line no-console
       console.error(e)
     }
   }

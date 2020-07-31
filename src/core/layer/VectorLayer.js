@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-02 16:42:03
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 10:44:45
  */
 
 import State from '../state/State'

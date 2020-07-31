@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-03-05 21:53:35
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-09 22:34:56
  */
 
 export { default as Attribution } from './Attribution'

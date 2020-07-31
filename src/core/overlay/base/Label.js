@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-02-01 11:59:28
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-25 08:55:22
  */
 
 import { Util } from '../../utils'
@@ -90,7 +88,7 @@ class Label extends Overlay {
     )
     let label = undefined
     if (entity.billboard) {
-      label = new Label(position, item.name)
+      label = new Label(position, entity.name)
       label.attr = {
         ...entity.properties.getValue(Cesium.JulianDate.now())
       }

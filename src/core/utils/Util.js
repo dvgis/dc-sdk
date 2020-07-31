@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-31 17:58:01
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 10:49:58
  */
 
 const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
@@ -28,7 +26,7 @@ class Util {
     for (let i = 0; i < 36; i++) {
       if (!uuid[i]) {
         r = 0 | (Math.random() * 16)
-        uuid[i] = CHARS[i == 19 ? (r & 0x3) | 0x8 : r]
+        uuid[i] = CHARS[i === 19 ? (r & 0x3) | 0x8 : r]
       }
     }
     return prefix + '-' + uuid.join('')
@@ -67,25 +65,22 @@ class Util {
    * @function splitWords(str: String): String[]
    * Trims and splits the string on whitespace and returns the array of parts.
    * @param {*} str
-   *
    */
   static splitWords(str) {
     return this.trim(str).split(/\s+/)
   }
 
   /**
-   *
    * @function setOptions(obj: Object, options: Object): Object
    * Merges the given properties to the `options` of the `obj` object, returning the resulting options. See `Class options`.
    * @param {*} obj
    * @param {*} options
-   *
    */
   static setOptions(obj, options) {
     if (!obj.hasOwnProperty('options')) {
-      obj.options = obj.options ? create(obj.options) : {}
+      obj.options = obj.options ? Object.create(obj.options) : {}
     }
-    for (var i in options) {
+    for (let i in options) {
       obj.options[i] = options[i]
     }
     return obj.options
@@ -108,7 +103,7 @@ class Util {
   /**
    * @function checkPositions(positions: Object): Boolean
    * Check positions for validity
-   * @param {*} position
+   * @param {*} positions
    */
   static checkPositions(positions) {
     return (
@@ -119,7 +114,7 @@ class Util {
   /**
    * @function checkViewer(viewer: Object): Boolean
    * Check viewer for validity
-   * @param {*} position
+   * @param {*} viewer
    */
   static checkViewer(viewer) {
     return viewer && viewer.delegate && viewer.canvas

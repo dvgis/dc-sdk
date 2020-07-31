@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-03-15 17:47:42
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-24 12:42:20
  */
 
 import { DomUtil, Util } from '../utils'
@@ -29,7 +27,7 @@ const DEF_OPTS = {
 class HawkeyeMap extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-hawkeye-map')
+    this._wrapper = DomUtil.create('div', 'dc-hawkeye-map', null)
     this._wrapper.setAttribute('id', Util.uuid())
     this._baseLayer = undefined
     this._delegate = undefined

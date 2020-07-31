@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-21 15:54:56
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:10:48
  */
 
 import ImageryType from './ImageryType'

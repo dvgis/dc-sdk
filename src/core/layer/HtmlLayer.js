@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 10:44:26
  */
 
 import { DomUtil } from '../utils'
@@ -15,7 +13,7 @@ const { Cesium } = DC.Namespace
 class HtmlLayer extends Layer {
   constructor(id) {
     super(id)
-    this._delegate = DomUtil.create('div', 'html-layer')
+    this._delegate = DomUtil.create('div', 'html-layer', undefined)
     this._delegate.setAttribute('id', this._id)
     this._renderRemoveCallback = undefined
     this.type = Layer.getLayerType('html')
@@ -30,9 +28,10 @@ class HtmlLayer extends Layer {
   get show() {
     return this._show
   }
+
   /**
    *
-   * @param {*} veiwer
+   * @param {*} viewer
    * the layer added handler function
    * subclasses need to be overridden
    */

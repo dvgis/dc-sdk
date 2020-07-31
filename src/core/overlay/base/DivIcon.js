@@ -1,11 +1,10 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-02-12 21:46:22
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-25 09:04:04
  */
 
 import { DomUtil, Util } from '../../utils'
+import { MouseEventType } from '../../event'
 import { isBetween } from '../../math'
 import Transform from '../../transform/Transform'
 import Parse from '../../parse/Parse'

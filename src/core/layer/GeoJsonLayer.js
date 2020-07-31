@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-13 10:13:53
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-05 13:19:15
  */
 
 import { Layer, VectorLayer } from './index'
@@ -59,7 +57,6 @@ class GeoJsonLayer extends Layer {
   }
 
   /**
-   *
    * @param {*} method
    * @param {*} context
    */

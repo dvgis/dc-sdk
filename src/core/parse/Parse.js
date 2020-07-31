@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-03-22 00:10:25
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-28 15:33:20
  */
 
 import Position from '../position/Position'

@@ -1,9 +1,8 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-05-28 10:24:38
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-28 14:33:28
  */
+
 import { Util } from '../utils'
 
 export default function parabola(

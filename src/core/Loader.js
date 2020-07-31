@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-27 17:18:52
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-28 14:35:10
  */
 
 import ImageryLayerFactory from './imagery/ImageryLayerFactory'

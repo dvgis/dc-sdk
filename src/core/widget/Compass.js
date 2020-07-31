@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-03-19 13:11:12
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-24 12:40:52
  */
 
 import { DomUtil } from '../utils'

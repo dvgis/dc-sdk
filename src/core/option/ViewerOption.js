@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-30 09:24:37
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-20 10:15:24
  */
 
 import { Util } from '../utils'

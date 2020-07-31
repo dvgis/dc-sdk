@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-31 17:32:01
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-24 12:40:29
  */
 
 import { DomUtil } from '../utils'
@@ -88,7 +86,7 @@ class ContextMenu extends Widget {
     if (!label || !method) {
       return this
     }
-    let menu = DomUtil.create('li', 'menu-item')
+    let menu = DomUtil.create('li', 'menu-item', null)
     let lastNode = this._ulEl.lastChild
     menu.innerHTML = label
     let self = this

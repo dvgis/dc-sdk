@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-03-30 17:14:00
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-12 10:42:03
  */
 
 import { Label } from '../overlay'
@@ -25,7 +23,7 @@ class LabelLayer extends Layer {
   }
 
   _createLabel(entity) {
-    if (entity.position && item.name) {
+    if (entity.position && entity.name) {
       return Label.fromEntity(entity)
     }
   }

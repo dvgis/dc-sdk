@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-15 19:17:52
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-24 12:37:39
  */
 
 import State from '../state/State'
@@ -57,7 +55,7 @@ class Widget {
   }
 
   /**
-   * updating the Widge location requires subclass overrides
+   * updating the Widget location requires subclass overrides
    * @param {*} windowCoord
    */
   _updateWindowCoord(windowCoord) {}
