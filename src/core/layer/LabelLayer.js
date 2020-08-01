@@ -32,8 +32,8 @@ class LabelLayer extends Layer {
     this._dataSource.then(dataSource => {
       let entities = dataSource.entities.values
       entities.forEach(item => {
-        let lable = this._createLabel(item)
-        this.addOverlay(lable)
+        let label = this._createLabel(item)
+        this.addOverlay(label)
       })
     })
   }

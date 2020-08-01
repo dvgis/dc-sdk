@@ -107,6 +107,7 @@ class Model extends Overlay {
   /**
    *
    * @param {*} entity
+   * @param {*} modelUrl
    */
   static fromEntity(entity, modelUrl) {
     let now = Cesium.JulianDate.now()

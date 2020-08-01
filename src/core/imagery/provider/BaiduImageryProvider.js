@@ -24,6 +24,7 @@ class BaiduImageryProvider {
     })
     this._rectangle = this._tilingScheme.rectangle
     this._credit = undefined
+    this._token = undefined
     this._style = options.style || 'normal'
   }
 

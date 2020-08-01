@@ -51,7 +51,7 @@ class HtmlLayer extends Layer {
           let distance = Cesium.Cartesian3.distance(position, cameraPosition)
           item._updateStyle({ transform: windowCoord }, distance)
         }
-      })
+      }, this)
     }, this)
     this._state = State.ADDED
   }
@@ -70,9 +70,9 @@ class HtmlLayer extends Layer {
    *
    */
   clear() {
-    let childs = this._delegate.childNodes
-    for (let i = childs.length - 1; i >= 0; i--) {
-      this._delegate.removeChild(childs[i])
+    let childNodes = this._delegate.childNodes
+    for (let i = childNodes.length - 1; i >= 0; i--) {
+      this._delegate.removeChild(childNodes[i])
     }
     this._cache = {}
     this._state = State.CLEARED

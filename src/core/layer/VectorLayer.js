@@ -9,7 +9,7 @@ import Layer from './Layer'
 const { Cesium } = DC.Namespace
 
 /**
- * The vector layer is used to add various enitity, which is essentially a CustomDataSource
+ * The vector layer is used to add various entity, which is essentially a CustomDataSource
  * that is used to place entities of the same class or business attribute into the same layer
  */
 class VectorLayer extends Layer {

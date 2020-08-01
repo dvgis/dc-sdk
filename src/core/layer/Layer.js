@@ -211,16 +211,16 @@ class Layer {
 
   /**
    *
-   * @param {*} atrrName
+   * @param {*} attrName
    * @param {*} attrVal
    */
-  getOverlaysByAttr(atrrName, attrVal) {
+  getOverlaysByAttr(attrName, attrVal) {
     let result = []
     this.eachOverlay(item => {
-      if (item.attr[atrrName] === attrVal) {
+      if (item.attr[attrName] === attrVal) {
         result.push(item)
       }
-    })
+    }, this)
     return result
   }
 
@@ -231,7 +231,7 @@ class Layer {
    */
   eachOverlay(method, context) {
     Object.keys(this._cache).forEach(key => {
-      method && method.call(context, this._cache[key])
+      method && method.call(context || this, this._cache[key])
     })
     return this
   }

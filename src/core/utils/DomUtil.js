@@ -166,6 +166,7 @@ class DomUtil {
    * @param {*} path
    * @param {*} width
    * @param {*} height
+   * @param {*} container
    */
   static createSvg(width, height, path, container) {
     let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg:svg')
@@ -186,6 +187,7 @@ class DomUtil {
    *
    * @param {*} domStr
    * @param {*} withWrapper
+   * @param {*} className
    */
   static parseDom(domStr, withWrapper, className) {
     withWrapper = withWrapper ?? false

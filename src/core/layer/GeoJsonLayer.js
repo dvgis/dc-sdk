@@ -50,7 +50,7 @@ class GeoJsonLayer extends Layer {
     }
   }
 
-  _ceateModel(entity, modelUrl) {
+  _createModel(entity, modelUrl) {
     if (entity) {
       return Model.fromEntity(entity, modelUrl)
     }
@@ -85,7 +85,7 @@ class GeoJsonLayer extends Layer {
       } else if (item.polygon) {
         layer.addOverlay(this._createPolygon(item))
       }
-    })
+    }, this)
     return layer
   }
 
@@ -95,8 +95,8 @@ class GeoJsonLayer extends Layer {
   toModelLayer(modelUrl) {
     let layer = new VectorLayer(this._id)
     this.eachOverlay(item => {
-      layer.addOverlay(this._ceateModel(item, modelUrl))
-    })
+      layer.addOverlay(this._createModel(item, modelUrl))
+    }, this)
     return layer
   }
 }

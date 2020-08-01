@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-31 16:58:31
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-24 11:02:15
  */
 
 import { MouseEventType } from './EventType'
@@ -147,7 +145,7 @@ class MouseEvent extends Event {
     let event = undefined
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo.overlay
-    // get Ovelay Event
+    // get Overlay Event
     if (overlay && overlay.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
     }
@@ -193,7 +191,7 @@ class MouseEvent extends Event {
 
   /**
    *
-   * Default rightclick event handler
+   * Default rightClick event handler
    * @param {*} movement
    *
    */

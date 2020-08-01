@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-03 11:06:26
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:37:09
  */
 
 export { default as LayerType } from './LayerType'

@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-23 09:47:24
  */
 
 import {
@@ -306,11 +304,11 @@ class Viewer {
 
   /**
    *
-   * Add the baselayer to the viewer.
-   * The baselayer can be a single or an array,
-   * and when the baselayer is an array, the baselayer will be loaded together
+   * Add the baseLayer to the viewer.
+   * The baseLayer can be a single or an array,
+   * and when the baseLayer is an array, the baseLayer will be loaded together
    * @param {*} baseLayers
-   *
+   * @param {*} options
    */
   addBaseLayer(baseLayers, options = {}) {
     if (!baseLayers) {
@@ -335,7 +333,7 @@ class Viewer {
 
   /**
    *
-   * Change the current globe display of the baselayer
+   * Change the current globe display of the baseLayer
    * @param {*} index
    *
    */

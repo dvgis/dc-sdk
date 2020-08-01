@@ -47,7 +47,7 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create tecent image layer
+   * Create tencent image layer
    */
   static createTencentImageryLayer(options) {
     return new TencentImageryProvider(options)
@@ -62,7 +62,7 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create singel tile image layer
+   * Create single tile image layer
    * @param {*} options
    *
    */
@@ -71,7 +71,7 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create wmts image layer
+   * Create WMTS image layer
    * @param {*} options
    *
    */

@@ -83,9 +83,12 @@ class Tileset extends Overlay {
         this._properties.forEach(property => {
           if (
             feature.hasProperty(property.key) &&
-            feature.getProperty(property.key) === property.keyValue
+            feature.getProperty(property.key) === property['keyValue']
           ) {
-            feature.setProperty(property.propertyName, property.propertyValue)
+            feature.setProperty(
+              property['propertyName'],
+              property['propertyValue']
+            )
           }
         })
       }
