@@ -3,6 +3,11 @@
  * @Date: 2020-05-09 23:01:21
  */
 
+/**
+ * Using other custom plug-ins in DC
+ * @param DC
+ * @returns this
+ */
 export function initUse(DC) {
   DC.use = function(plugin) {
     const installedPlugins =

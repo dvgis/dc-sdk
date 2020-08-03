@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:35:05
  */
 
 import { LayerEventType } from './EventType'
@@ -15,6 +13,10 @@ class LayerEvent extends Event {
     super()
   }
 
+  /**
+   * Register event for layer
+   * @private
+   */
   _registerEvent() {
     Object.keys(LayerEventType).forEach(key => {
       let type = LayerEventType[key]

@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-02 14:26:35
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-15 10:05:01
  */
 
 import { OverlayEventType } from './EventType'
@@ -15,6 +13,10 @@ class OverlayEvent extends Event {
     super()
   }
 
+  /**
+   * Register event for overlay
+   * @private
+   */
   _registerEvent() {
     Object.keys(OverlayEventType).forEach(key => {
       let type = OverlayEventType[key]

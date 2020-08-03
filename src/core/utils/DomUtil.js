@@ -6,27 +6,27 @@
 import Util from './Util'
 
 /**
- * Dom工具类
- * 部分代码借鉴leaflet
+ * Dom Utils
+ * some code reference leaflet
  * https://github.com/Leaflet/Leaflet/tree/master/src/core
  */
 class DomUtil {
   /**
-   * @function get(id: String|HTMLElement): HTMLElement
    * Returns an element given its DOM id, or returns the element itself
    *  if it was passed directly.
-   * @param {*} id
+   * @param id
+   * @returns {HTMLElement|*}
    */
   static get(id) {
     return typeof id === 'string' ? document.getElementById(id) : id
   }
 
   /**
-   * @function getStyle(el: HTMLElement, styleAttrib: String): String
    * Returns the value for a certain style attribute on an element,
    * including computed values or values set through CSS.
-   * @param {*} el
-   * @param {*} style
+   * @param el
+   * @param style
+   * @returns {null|*}
    */
   static getStyle(el, style) {
     let value = el.style[style] || (el.currentStyle && el.currentStyle[style])
@@ -39,11 +39,11 @@ class DomUtil {
   }
 
   /**
-   *
-   * @param {*} tagName
-   * @param {*} className
-   * @param {*} container
-   *  Creates an HTML element with `tagName`, sets its class to `className`, and optionally appends it to `container` element.
+   * Creates an HTML element with `tagName`, sets its class to `className`, and optionally appends it to `container` element.
+   * @param tagName
+   * @param className
+   * @param container
+   * @returns {HTMLElement}
    */
   static create(tagName, className, container = null) {
     let el = document.createElement(tagName)
@@ -55,9 +55,8 @@ class DomUtil {
   }
 
   /**
-   *t
-   * @param {*} el
    * Removes `el` from its parent element
+   * @param {*} el
    */
   static remove(el) {
     let parent = el.parentNode
@@ -67,9 +66,8 @@ class DomUtil {
   }
 
   /**
-   *
-   * @param {*} el
    * Removes all of `el`'s children elements from `el`
+   * @param {*} el
    */
   static empty(el) {
     while (el.firstChild) {
@@ -78,7 +76,6 @@ class DomUtil {
   }
 
   /**
-   * @function hasClass(el: HTMLElement, name: String): Boolean
    * Returns `true` if the element's class attribute contains `name`.
    * @param {*} el
    * @param {*} name
@@ -95,10 +92,9 @@ class DomUtil {
   }
 
   /**
-   *
+   * @function Adds `name` to the element's class attribute.
    * @param {*} el
    * @param {*} name
-   * Adds `name` to the element's class attribute.
    */
   static addClass(el, name) {
     if (el.classList !== undefined) {
@@ -113,10 +109,9 @@ class DomUtil {
   }
 
   /**
-   *
+   * @function Removes `name` from the element's class attribute.
    * @param {*} el
    * @param {*} name
-   * Removes `name` from the element's class attribute.
    */
   static removeClass(el, name) {
     if (el.classList !== undefined) {
@@ -132,10 +127,9 @@ class DomUtil {
   }
 
   /**
-   *
+   * Sets the element's class.
    * @param {*} el
    * @param {*} name
-   *  Sets the element's class.
    */
   static setClass(el, name) {
     if (el.className.baseVal === undefined) {
@@ -147,8 +141,8 @@ class DomUtil {
   }
 
   /**
+   * @function Returns the element's class.
    * @param {*} el
-   * Returns the element's class.
    */
   static getClass(el) {
     // Check if the element is an SVGElementInstance and use the correspondingElement instead
@@ -162,11 +156,12 @@ class DomUtil {
   }
 
   /**
-   *
-   * @param {*} path
-   * @param {*} width
-   * @param {*} height
-   * @param {*} container
+   * Creates svg
+   * @param width
+   * @param height
+   * @param path
+   * @param container
+   * @returns {SVGElement}
    */
   static createSvg(width, height, path, container) {
     let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg:svg')
@@ -184,10 +179,11 @@ class DomUtil {
   }
 
   /**
-   *
-   * @param {*} domStr
-   * @param {*} withWrapper
-   * @param {*} className
+   * Parses string to Dom
+   * @param domStr
+   * @param withWrapper
+   * @param className
+   * @returns {HTMLDivElement|NodeListOf<ChildNode>}
    */
   static parseDom(domStr, withWrapper, className) {
     withWrapper = withWrapper ?? false

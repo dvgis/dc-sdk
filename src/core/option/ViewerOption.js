@@ -14,6 +14,10 @@ class ViewerOption {
     this._init()
   }
 
+  /**
+   * Init viewer
+   * @private
+   */
   _init() {
     this._viewer.delegate.cesiumWidget._creditContainer.style.display = 'none'
     this._viewer.delegate.cesiumWidget.screenSpaceEventHandler.removeInputAction(
@@ -25,6 +29,11 @@ class ViewerOption {
     this._viewer.delegate.imageryLayers.removeAll()
   }
 
+  /**
+   * Sets viewer option
+   * @returns {ViewerOption}
+   * @private
+   */
   _setViewerOption() {
     this._viewer.delegate.shadows = this._options.shadows ?? false
     this._viewer.delegate.resolutionScale = this._options.resolutionScale || 1.0
@@ -32,12 +41,22 @@ class ViewerOption {
     return this
   }
 
+  /**
+   * sets canvas option
+   * @returns {ViewerOption}
+   * @private
+   */
   _setCanvasOption() {
     this._options.tabIndex &&
       this._viewer.scene.canvas.setAttribute('tabIndex', this._options.tabIndex)
     return this
   }
 
+  /**
+   * Sets scene option
+   * @returns {ViewerOption}
+   * @private
+   */
   _setSceneOption() {
     let scene = this._viewer.scene
 
@@ -67,6 +86,11 @@ class ViewerOption {
     return this
   }
 
+  /**
+   * Sets globe option
+   * @returns {ViewerOption}
+   * @private
+   */
   _setGlobeOption() {
     let globe = this._viewer.scene.globe
     let globeOption = this._options.globe
@@ -92,12 +116,22 @@ class ViewerOption {
     return this
   }
 
+  /**
+   * Set clock option
+   * @returns {ViewerOption}
+   * @private
+   */
   _setClockOption() {
     this._viewer.clock.shouldAnimate = this._options.shouldAnimate ?? true
 
     return this
   }
 
+  /**
+   * Sets options
+   * @param options
+   * @returns {ViewerOption}
+   */
   setOptions(options) {
     if (Object.keys(options).length === 0) {
       return this

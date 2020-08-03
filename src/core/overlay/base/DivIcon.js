@@ -55,6 +55,12 @@ class DivIcon extends Overlay {
     return this
   }
 
+  /**
+   * Updates style
+   * @param style
+   * @param distance
+   * @private
+   */
   _updateStyle(style, distance) {
     let translate3d = 'translate3d(0,0,0)'
     if (style.transform) {
@@ -92,8 +98,9 @@ class DivIcon extends Overlay {
 
   /**
    *
-   * @param {*} layer
-   * Overrides parent methods
+   * @param layer
+   * @returns {boolean}
+   * @private
    */
   _addHandler(layer) {
     this._layer = layer
@@ -109,7 +116,8 @@ class DivIcon extends Overlay {
   }
 
   /**
-   * Overrides parent methods
+   *
+   * @private
    */
   _removeHandler() {
     if (this._layer) {
@@ -119,17 +127,19 @@ class DivIcon extends Overlay {
   }
 
   /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
+   * Sets text
+   * @param text
+   * @param textStyle
+   * @returns {DivIcon}
    */
   setLabel(text, textStyle) {
     return this
   }
 
   /**
-   *
-   * @param {*} name
+   * Sets style
+   * @param style
+   * @returns {DivIcon}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {

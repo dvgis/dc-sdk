@@ -15,8 +15,8 @@ const { Cesium } = DC.Namespace
 class ImageryLayerFactory {
   /**
    * Create amap image layer
-   * @param {*} options
-   *
+   * @param options
+   * @returns {AmapImageryProvider}
    */
   static createAmapImageryLayer(options) {
     return new AmapImageryProvider(options)
@@ -24,7 +24,8 @@ class ImageryLayerFactory {
 
   /**
    * Create baidu image layer
-   * @param {*} options
+   * @param options
+   * @returns {BaiduImageryProvider}
    */
   static createBaiduImageryLayer(options) {
     return new BaiduImageryProvider(options)
@@ -32,15 +33,17 @@ class ImageryLayerFactory {
 
   /**
    * Create google image layer
-   * @param {*} options
+   * @param options
+   * @returns {GoogleImageryProvider}
    */
   static createGoogleImageryLayer(options) {
     return new GoogleImageryProvider(options)
   }
 
   /**
-   *  Create tdt image layer
-   *  @param {*} options
+   * Create tdt image layer
+   * @param options
+   * @returns {TdtImageryProvider}
    */
   static createTdtImageryLayer(options) {
     return new TdtImageryProvider(options)
@@ -48,6 +51,8 @@ class ImageryLayerFactory {
 
   /**
    * Create tencent image layer
+   * @param options
+   * @returns {TencentImageryProvider}
    */
   static createTencentImageryLayer(options) {
     return new TencentImageryProvider(options)
@@ -55,7 +60,8 @@ class ImageryLayerFactory {
 
   /**
    * Create arcgis image layer
-   * @param {*} options
+   * @param options
+   * @returns {module:cesium.ArcGisMapServerImageryProvider}
    */
   static createArcGisImageryLayer(options) {
     return new Cesium.ArcGisMapServerImageryProvider(options)
@@ -63,8 +69,8 @@ class ImageryLayerFactory {
 
   /**
    * Create single tile image layer
-   * @param {*} options
-   *
+   * @param options
+   * @returns {module:cesium.SingleTileImageryProvider}
    */
   static createSingleTileImageryLayer(options) {
     return new Cesium.SingleTileImageryProvider(options)
@@ -72,8 +78,8 @@ class ImageryLayerFactory {
 
   /**
    * Create WMTS image layer
-   * @param {*} options
-   *
+   * @param options
+   * @returns {module:cesium.WebMapTileServiceImageryProvider}
    */
   static createWMTSImageryLayer(options) {
     return new Cesium.WebMapTileServiceImageryProvider(options)
@@ -81,26 +87,27 @@ class ImageryLayerFactory {
 
   /**
    * Create xyz image layer
-   *  @param {*} options
-   *
+   * @param options
+   * @returns {module:cesium.UrlTemplateImageryProvider}
    */
   static createXYZImageryLayer(options) {
     return new Cesium.UrlTemplateImageryProvider(options)
   }
 
   /**
-   *  Create coord image layer
-   *  @param {*} options
-   *
+   * Create coord image layer
+   * @param options
+   * @returns {module:cesium.TileCoordinatesImageryProvider}
    */
   static createCoordImageryLayer(options) {
     return new Cesium.TileCoordinatesImageryProvider(options)
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} options
+   * Create Imagery Layer
+   * @param type
+   * @param options
+   * @returns {any}
    */
   static createImageryLayer(type, options) {
     let imageryLayer = undefined

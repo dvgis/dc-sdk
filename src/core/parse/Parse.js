@@ -7,8 +7,9 @@ import Position from '../position/Position'
 
 class Parse {
   /**
-   *
-   * @param {*} position
+   * Parses all kinds of coordinates to position
+   * @param position
+   * @returns {Position}
    */
   static parsePosition(position) {
     let result = new Position()
@@ -23,9 +24,9 @@ class Parse {
   }
 
   /**
-   *
-   * @param {*} positions
-   *
+   * Parses all kinds of coordinates array to position array
+   * @param positions
+   * @returns {unknown[]}
    */
   static parsePositions(positions) {
     if (typeof positions === 'string') {
@@ -46,8 +47,9 @@ class Parse {
   }
 
   /**
-   *
-   * @param {*} position
+   * Parses point position to array
+   * @param position
+   * @returns {*[]}
    */
   static parsePointCoordToArray(position) {
     position = this.parsePosition(position)
@@ -55,8 +57,9 @@ class Parse {
   }
 
   /**
-   *
-   * @param {*} positions
+   * Parses polyline positions to array
+   * @param positions
+   * @returns {[]}
    */
   static parsePolylineCoordToArray(positions) {
     let result = []
@@ -68,8 +71,9 @@ class Parse {
   }
 
   /**
-   *
-   * @param {*} positions
+   * Parses polygon positions to array
+   * @param positions
+   * @returns {[][]}
    */
   static parsePolygonCoordToArray(positions) {
     let result = []

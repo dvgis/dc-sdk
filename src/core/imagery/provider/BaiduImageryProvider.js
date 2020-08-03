@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-15 20:27:27
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:03:27
  */
 
 import ImageryType from '../ImageryType'
@@ -100,6 +98,13 @@ class BaiduImageryProvider {
 
   getTileCredits(x, y, level) {}
 
+  /**
+   * Request Image
+   * @param x
+   * @param y
+   * @param level
+   * @returns {Promise<HTMLImageElement | HTMLCanvasElement>}
+   */
   requestImage(x, y, level) {
     if (!this.ready) {
       throw new Cesium.DeveloperError(

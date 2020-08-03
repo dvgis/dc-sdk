@@ -24,9 +24,8 @@ class MouseEvent extends Event {
   }
 
   /**
-   *
    * Register Cesium mouse events
-   *
+   * @private
    */
   _setInputAction() {
     let handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
@@ -42,7 +41,8 @@ class MouseEvent extends Event {
   /**
    *
    * Gets the mouse information for the mouse event
-   * @param {*} position
+   * @param position
+   * @private
    *
    */
   _getMouseInfo(position) {
@@ -71,22 +71,20 @@ class MouseEvent extends Event {
   }
 
   /**
-   * Gets the Overlay id
-   * @param {*} target
+   * Return the Overlay id
+   * @param target
+   * @returns {any}
+   * @private
    */
   _getOverlayId(target) {
     let overlayId = undefined
 
-    /**
-     * Entity
-     */
+    // for Entity
     if (target && target.id && target.id instanceof Cesium.Entity) {
       overlayId = target.id.overlayId
     }
 
-    /**
-     * Cesium3DTileFeature
-     */
+    // for Cesium3DTileFeature
     if (target && target instanceof Cesium.Cesium3DTileFeature) {
       overlayId = target.tileset.overlayId
     }
@@ -95,19 +93,17 @@ class MouseEvent extends Event {
   }
 
   /**
-   *
-   * Gets the target information for the mouse event
-   * @param {*} target
-   *
+   * Returns the target information for the mouse event
+   * @param target
+   * @returns {{overlay: any, feature: any, layer: any}}
+   * @private
    */
   _getTargetInfo(target) {
     let overlay = undefined
     let layer = undefined
     let feature = undefined
 
-    /**
-     * Entity
-     */
+    // for Entity
     if (target && target.id && target.id instanceof Cesium.Entity) {
       layer = target.id.layer
       if (layer && layer.getOverlay) {
@@ -115,9 +111,7 @@ class MouseEvent extends Event {
       }
     }
 
-    /**
-     * Cesium3DTileFeature
-     */
+    // for Cesium3DTileFeature
     if (target && target instanceof Cesium.Cesium3DTileFeature) {
       layer = target.tileset.layer
       feature = target
@@ -136,10 +130,10 @@ class MouseEvent extends Event {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} mouseInfo
-   *
+   * Trigger subscription event
+   * @param type
+   * @param mouseInfo
+   * @private
    */
   _raiseEvent(type, mouseInfo = {}) {
     let event = undefined
@@ -162,10 +156,10 @@ class MouseEvent extends Event {
   }
 
   /**
-   *
    * Default click event handler
-   * @param {*} movement
-   *
+   * @param movement
+   * @returns {boolean}
+   * @private
    */
   _clickHandler(movement) {
     if (!movement || !movement.position) {
@@ -176,10 +170,10 @@ class MouseEvent extends Event {
   }
 
   /**
-   *
    * Default dbClick event handler
-   * @param {*} movement
-   *
+   * @param movement
+   * @returns {boolean}
+   * @private
    */
   _dbClickHandler(movement) {
     if (!movement || !movement.position) {
@@ -190,10 +184,10 @@ class MouseEvent extends Event {
   }
 
   /**
-   *
    * Default rightClick event handler
-   * @param {*} movement
-   *
+   * @param movement
+   * @returns {boolean}
+   * @private
    */
   _rightClickHandler(movement) {
     if (!movement || !movement.position) {
@@ -204,10 +198,10 @@ class MouseEvent extends Event {
   }
 
   /**
-   *
    * Default mousemove event handler
-   * @param {*} movement
-   *
+   * @param movement
+   * @returns {boolean}
+   * @private
    */
   _mouseMoveHandler(movement) {
     if (!movement || !movement.endPosition) {

@@ -38,28 +38,43 @@ class GeoJsonLayer extends Layer {
     }
   }
 
+  /**
+   * Returns polyline Entity
+   * @param entity
+   * @returns {any}
+   * @private
+   */
   _createPolyline(entity) {
     if (entity.polyline) {
       return Polyline.fromEntity(entity)
     }
   }
 
+  /**
+   * Returns polygon Entity
+   * @param entity
+   * @returns {any}
+   * @private
+   */
   _createPolygon(entity) {
     if (entity.polygon) {
       return Polygon.fromEntity(entity)
     }
   }
 
+  /**
+   * Returns model Entity
+   * @param entity
+   * @param modelUrl
+   * @returns {Model}
+   * @private
+   */
   _createModel(entity, modelUrl) {
     if (entity) {
       return Model.fromEntity(entity, modelUrl)
     }
   }
 
-  /**
-   * @param {*} method
-   * @param {*} context
-   */
   eachOverlay(method, context) {
     if (this._delegate) {
       this._delegate.then(dataSource => {
@@ -73,7 +88,8 @@ class GeoJsonLayer extends Layer {
   }
 
   /**
-   *
+   * Converts to VectorLayer
+   * @returns {VectorLayer}
    */
   toVectorLayer() {
     let layer = new VectorLayer(this._id)
@@ -90,7 +106,9 @@ class GeoJsonLayer extends Layer {
   }
 
   /**
-   *
+   * Converts to VectorLayer
+   * @param modelUrl
+   * @returns {VectorLayer}
    */
   toModelLayer(modelUrl) {
     let layer = new VectorLayer(this._id)

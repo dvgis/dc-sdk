@@ -23,7 +23,7 @@ export default function parabola(
   let L = Math.max(diffLng, diffLat)
   let dlt = L / count
   if (diffLng > diffLat) {
-    //以lng为基准
+    //base on lng
     let delLat = (endPosition.lat - startPosition.lat) / count
     if (startPosition.lng - endPosition.lng > 0) {
       dlt = -dlt
@@ -38,6 +38,7 @@ export default function parabola(
       result.push([lng, lat, h])
     }
   } else {
+    //base on lat
     let delLng = (endPosition.lng - startPosition.lng) / count
     if (startPosition.lat - endPosition.lat > 0) {
       dlt = -dlt

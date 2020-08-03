@@ -41,7 +41,7 @@ class Circle extends Overlay {
   }
 
   get radius() {
-    return this._redius
+    return this._radius
   }
 
   set rotateAmount(amount) {
@@ -78,7 +78,8 @@ class Circle extends Overlay {
 
   /**
    *
-   * @param {*} style
+   * @param style
+   * @returns {Circle}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {

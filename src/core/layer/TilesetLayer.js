@@ -19,6 +19,10 @@ class TilesetLayer extends Layer {
     this._state = State.INITIALIZED
   }
 
+  /**
+   * Clear all tileset
+   * @returns {TilesetLayer}
+   */
   clear() {
     this._delegate.removeAll()
     this._cache = {}

@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-04-22 09:44:30
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-30 13:29:05
  */
 
 import { initMixin, initUse } from './global-api'

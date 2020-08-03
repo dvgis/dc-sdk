@@ -1,9 +1,8 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-06-06 14:05:25
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-06 14:06:48
  */
+
 const compass_inner = `
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="17px" height="17px" viewBox="0 0 17 17" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

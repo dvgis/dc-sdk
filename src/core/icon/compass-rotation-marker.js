@@ -1,9 +1,8 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-06-06 14:11:56
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-06 14:14:35
  */
+
 const compass_rotation_marker = `
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg width="53px" height="53px" viewBox="0 0 53 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">

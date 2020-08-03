@@ -63,17 +63,20 @@ class Tileset extends Overlay {
       this._state = State.REMOVED
     })
   }
+
   /**
    *
-   * @param {*} tile
+   * @param tile
+   * @private
    */
   _tileVisibleHandler(tile) {
     this._updateProperties(tile)
   }
 
   /**
-   *
-   * @param {*} tile
+   * Updates properties
+   * @param tile
+   * @private
    */
   _updateProperties(tile) {
     if (this._properties && this._properties.length) {
@@ -97,7 +100,8 @@ class Tileset extends Overlay {
 
   /**
    *
-   * @param {*} height
+   * @param height
+   * @private
    */
   _setHeight(height) {
     this._delegate.readyPromise.then(tileset => {
@@ -121,8 +125,9 @@ class Tileset extends Overlay {
   }
 
   /**
-   *
-   * @param {*} position
+   * Sets position
+   * @param position
+   * @returns {Tileset}
    */
   setPosition(position) {
     position = Parse.parsePosition(position)
@@ -149,8 +154,9 @@ class Tileset extends Overlay {
   }
 
   /**
-   *
-   * @param {*} height
+   * Sets height
+   * @param height
+   * @returns {Tileset}
    */
   setHeight(height) {
     this._height = height
@@ -164,8 +170,9 @@ class Tileset extends Overlay {
   }
 
   /**
-   *
-   * @param {*} scale
+   * Sets scale
+   * @param scale
+   * @returns {Tileset}
    */
   setScale(scale) {
     this._delegate.readyPromise.then(tileset => {
@@ -179,7 +186,9 @@ class Tileset extends Overlay {
   }
 
   /**
-   *
+   * Sets feature property
+   * @param properties
+   * @returns {Tileset}
    */
   setFeatureProperty(properties) {
     this._properties = properties
@@ -192,8 +201,9 @@ class Tileset extends Overlay {
   }
 
   /**
-   *
-   * @param {*} style
+   * Sets style
+   * @param style
+   * @returns {Tileset}
    */
   setStyle(style) {
     if (style && style instanceof Cesium.Cesium3DTileStyle) {

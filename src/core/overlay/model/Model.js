@@ -91,8 +91,9 @@ class Model extends Overlay {
   }
 
   /**
-   *
-   * @param {*} style
+   * Sets style
+   * @param style
+   * @returns {Model}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
@@ -105,9 +106,10 @@ class Model extends Overlay {
   }
 
   /**
-   *
-   * @param {*} entity
-   * @param {*} modelUrl
+   * Parse from entity
+   * @param entity
+   * @param modelUrl
+   * @returns {Model}
    */
   static fromEntity(entity, modelUrl) {
     let now = Cesium.JulianDate.now()

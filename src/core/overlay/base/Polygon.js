@@ -77,9 +77,10 @@ class Polygon extends Overlay {
   }
 
   /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
+   * Sets text
+   * @param text
+   * @param textStyle
+   * @returns {Polygon}
    */
   setLabel(text, textStyle) {
     this._delegate.position = Transform.transformWGS84ToCartesian(this.center)
@@ -91,8 +92,9 @@ class Polygon extends Overlay {
   }
 
   /**
-   *
-   * @param {*} style
+   * Sets style
+   * @param style
+   * @returns {Polygon}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
@@ -105,8 +107,9 @@ class Polygon extends Overlay {
   }
 
   /**
-   *
-   * @param {*} entity
+   * Parse from entity
+   * @param entity
+   * @returns {any}
    */
   static fromEntity(entity) {
     let polygon = undefined

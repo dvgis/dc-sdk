@@ -49,9 +49,10 @@ class Polyline extends Overlay {
   }
 
   /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
+   * Sets Text
+   * @param text
+   * @param textStyle
+   * @returns {Polyline}
    */
   setLabel(text, textStyle) {
     this._delegate.position = Transform.transformWGS84ToCartesian(this.center)
@@ -63,8 +64,9 @@ class Polyline extends Overlay {
   }
 
   /**
-   *
-   * @param {*} style
+   * Sets style
+   * @param style
+   * @returns {Polyline}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
@@ -77,8 +79,9 @@ class Polyline extends Overlay {
   }
 
   /**
-   *
-   * @param {*} entity
+   * Parse from entity
+   * @param entity
+   * @returns {Polyline}
    */
   static fromEntity(entity) {
     let polyline = undefined

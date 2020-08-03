@@ -62,20 +62,21 @@ class Layer {
 
   /**
    * The hook for added
+   * @private
    */
   _addedHook() {}
 
   /**
    * The hook for removed
+   * @private
    */
   _removedHook() {}
 
   /**
-   *
    * The layer added callback function
    * Subclasses need to be overridden
-   * @param {*} viewer
-   *
+   * @param viewer
+   * @private
    */
   _addHandler(viewer) {
     this._viewer = viewer
@@ -89,8 +90,10 @@ class Layer {
   }
 
   /**
-   * The layer removed callback function
+   * The layer added callback function
    * Subclasses need to be overridden
+   * @returns {boolean}
+   * @private
    */
   _removeHandler() {
     if (!this._delegate) {
@@ -116,10 +119,9 @@ class Layer {
   }
 
   /**
-   *
-   * The layer add overlay function
-   * @param {*} overlay
-   *
+   * The layer add overlay
+   * @param overlay
+   * @private
    */
   _addOverlay(overlay) {
     if (
@@ -136,10 +138,9 @@ class Layer {
   }
 
   /**
-   *
-   * The layer remove overlay function
-   * @param {*} overlay
-   *
+   * The layer remove overlay
+   * @param overlay
+   * @private
    */
   _removeOverlay(overlay) {
     if (
@@ -153,10 +154,9 @@ class Layer {
   }
 
   /**
-   *
    * Add overlay
-   * @param {*} overlay
-   *
+   * @param overlay
+   * @returns {Layer}
    */
   addOverlay(overlay) {
     this._addOverlay(overlay)
@@ -164,10 +164,9 @@ class Layer {
   }
 
   /**
-   *
    * Add overlays
-   * @param {*} overlays
-   *
+   * @param overlays
+   * @returns {Layer}
    */
   addOverlays(overlays) {
     if (Array.isArray(overlays)) {
@@ -180,7 +179,8 @@ class Layer {
 
   /**
    * Remove overlay
-   * @param {*} overlay
+   * @param overlay
+   * @returns {Layer}
    */
   removeOverlay(overlay) {
     this._removeOverlay(overlay)
@@ -188,16 +188,18 @@ class Layer {
   }
 
   /**
-   *
-   * @param {*} overlayId
+   * Returns the overlay by overlayId
+   * @param overlayId
+   * @returns {*|undefined}
    */
   getOverlay(overlayId) {
     return this._cache[overlayId] || undefined
   }
 
   /**
-   *
-   * @param {*} id
+   * Returns the overlay by bid
+   * @param id
+   * @returns {any}
    */
   getOverlayById(id) {
     let overlay = undefined
@@ -210,9 +212,10 @@ class Layer {
   }
 
   /**
-   *
-   * @param {*} attrName
-   * @param {*} attrVal
+   * Returns the overlays by attrName and AttrVal
+   * @param attrName
+   * @param attrVal
+   * @returns {[]}
    */
   getOverlaysByAttr(attrName, attrVal) {
     let result = []
@@ -225,9 +228,10 @@ class Layer {
   }
 
   /**
-   *
-   * @param {*} method
-   * @param {*} context
+   * Iterate through each overlay and pass it as an argument to the callback function
+   * @param method
+   * @param context
+   * @returns {Layer}
    */
   eachOverlay(method, context) {
     Object.keys(this._cache).forEach(key => {
@@ -237,7 +241,8 @@ class Layer {
   }
 
   /**
-   * Get all Overlays
+   * Returns all overlays
+   * @returns {[]}
    */
   getOverlays() {
     let result = []
@@ -248,12 +253,13 @@ class Layer {
   }
 
   /**
-   *
+   * Clears all overlays
+   * Subclasses need to be overridden
    */
   clear() {}
 
   /**
-   *
+   * Removes from the viewer
    */
   remove() {
     if (this._viewer) {
@@ -262,8 +268,9 @@ class Layer {
   }
 
   /**
-   *
-   * @param {*} viewer
+   * Adds to the viewer
+   * @param viewer
+   * @returns {Layer}
    */
   addTo(viewer) {
     if (viewer && viewer.addLayer) {
@@ -273,14 +280,15 @@ class Layer {
   }
 
   /**
-   *
-   * @param {*} style
+   * sets the style, the style will apply to every overlay of the layer
+   * Subclasses need to be overridden
+   * @param style
    */
   setStyle(style) {}
 
   /**
-   *
-   * @param {*} type
+   * Registers Type
+   * @param type
    */
   static registerType(type) {
     if (type) {
@@ -289,8 +297,9 @@ class Layer {
   }
 
   /**
-   *
-   * @param {*} type
+   * Returns type
+   * @param type
+   * @returns {*|undefined}
    */
   static getLayerType(type) {
     return LayerType[type.toLocaleUpperCase()] || undefined

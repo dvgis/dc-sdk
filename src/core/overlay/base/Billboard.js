@@ -72,7 +72,8 @@ class Billboard extends Overlay {
 
   /**
    *
-   * @param {*} style
+   * @param style
+   * @returns {Billboard}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
@@ -85,8 +86,9 @@ class Billboard extends Overlay {
   }
 
   /**
-   *
-   * @param {*} entity
+   * Parse from entity
+   * @param entity
+   * @returns {any}
    */
   static fromEntity(entity) {
     let billboard = undefined

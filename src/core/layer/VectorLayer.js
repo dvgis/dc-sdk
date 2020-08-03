@@ -20,6 +20,10 @@ class VectorLayer extends Layer {
     this._state = State.INITIALIZED
   }
 
+  /**
+   * Clears all entities
+   * @returns {VectorLayer}
+   */
   clear() {
     this._delegate.entities && this._delegate.entities.removeAll()
     this._cache = {}

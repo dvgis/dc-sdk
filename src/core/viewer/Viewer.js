@@ -56,7 +56,7 @@ class Viewer {
     }) // Initialize the viewer
 
     /**
-     *  Register events
+     *  Registers events
      */
     new MouseEvent(this) // Register global mouse events
     this._viewerEvent = new ViewerEvent() // Register viewer events
@@ -79,7 +79,7 @@ class Viewer {
     this._effectCache = {}
 
     /**
-     * Add default components
+     * Adds default components
      */
     this._comps = {
       popup: new Popup(),
@@ -173,8 +173,8 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} layer
+   * @param layer
+   * @private
    */
   _addLayer(layer) {
     if (layer && layer.layerEvent) {
@@ -187,8 +187,8 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} layer
+   * @param layer
+   * @private
    */
   _removeLayer(layer) {
     if (
@@ -202,8 +202,8 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} effect
+   * @param effect
+   * @private
    */
   _addEffect(effect) {
     if (effect && effect.effectEvent) {
@@ -216,8 +216,8 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} effect
+   * @param effect
+   * @private
    */
   _removeEffect(effect) {
     if (
@@ -231,10 +231,9 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} options
-   * Set viewer options
-   *
+   * Sets viewer options
+   * @param options
+   * @returns {Viewer}
    */
   setOptions(options) {
     this._viewerOption.setOptions(options)
@@ -242,11 +241,10 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} min
-   * @param {*} max
-   * Set camera pitch range
-   *
+   * Sets camera pitch range
+   * @param min
+   * @param max
+   * @returns {Viewer}
    */
   setPitchRange(min = -90, max = -20) {
     this._cameraOption.setPitchRange(min, max)
@@ -254,9 +252,8 @@ class Viewer {
   }
 
   /**
-   *
    * Restrict camera access underground
-   *
+   * @returns {Viewer}
    */
   limitCameraToGround() {
     this._cameraOption.limitCameraToGround()
@@ -264,11 +261,11 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} west
-   * @param {*} south
-   * @param {*} east
-   * @param {*} north
+   * @param west
+   * @param south
+   * @param east
+   * @param north
+   * @returns {Viewer}
    */
   setBounds(west, south, east, north) {
     this._cameraOption.setBounds(west, south, east, north)
@@ -276,11 +273,10 @@ class Viewer {
   }
 
   /**
-   *
-   * Change Scene Mode，2：2D，2.5：2.5D，3：3D
-   * @param {*} sceneMode
-   * @param {*} duration
-   *
+   * Changes Scene Mode，2：2D，2.5：2.5D，3：3D
+   * @param sceneMode
+   * @param duration
+   * @returns {Viewer}
    */
   changeSceneMode(sceneMode, duration = 0) {
     if (sceneMode === 2) {
@@ -294,8 +290,9 @@ class Viewer {
   }
 
   /**
-   * Change Mouse Mode，0：Default，1: Change the tiltEventTypes to CameraEventType.RIGHT_DRAG
-   * @param {*} mouseMode
+   * Changes Mouse Mode，0：Default，1: Change the tiltEventTypes to CameraEventType.RIGHT_DRAG
+   * @param mouseMode
+   * @returns {Viewer}
    */
   changeMouseMode(mouseMode) {
     this._cameraOption.changeMouseMode(mouseMode)
@@ -303,12 +300,12 @@ class Viewer {
   }
 
   /**
-   *
-   * Add the baseLayer to the viewer.
+   * Adds the baseLayer .
    * The baseLayer can be a single or an array,
    * and when the baseLayer is an array, the baseLayer will be loaded together
-   * @param {*} baseLayers
-   * @param {*} options
+   * @param baseLayers
+   * @param options
+   * @returns {Viewer}
    */
   addBaseLayer(baseLayers, options = {}) {
     if (!baseLayers) {
@@ -332,10 +329,9 @@ class Viewer {
   }
 
   /**
-   *
-   * Change the current globe display of the baseLayer
-   * @param {*} index
-   *
+   * Changes the current globe display of the baseLayer
+   * @param index
+   * @returns {Viewer}
    */
   changeBaseLayer(index) {
     if (this._baseLayerPicker && index >= 0) {
@@ -347,10 +343,9 @@ class Viewer {
   }
 
   /**
-   *
-   * Add the terrain to the viewer.
-   * @param {*} terrain
-   *
+   * Adds the terrain
+   * @param terrain
+   * @returns {Viewer}
    */
   addTerrain(terrain) {
     if (!terrain) {
@@ -371,10 +366,9 @@ class Viewer {
   }
 
   /**
-   *
-   * Change the current globe display of the terrain
-   * @param {*} index
-   *
+   * Changes the current globe display of the terrain
+   * @param index
+   * @returns {Viewer}
    */
   changeTerrain(index) {
     if (this._baseLayerPicker && index >= 0) {
@@ -386,10 +380,9 @@ class Viewer {
   }
 
   /**
-   *
-   * Add a layer to the viewer
-   * @param {*} layer
-   *
+   * add a layer
+   * @param layer
+   * @returns {Viewer}
    */
   addLayer(layer) {
     this._addLayer(layer)
@@ -397,10 +390,9 @@ class Viewer {
   }
 
   /**
-   *
-   * Remove a layer from the viewer
-   * @param {*} layer
-   *
+   * Removes a layer
+   * @param layer
+   * @returns {Viewer}
    */
   removeLayer(layer) {
     this._removeLayer(layer)
@@ -408,8 +400,9 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} layer
+   * Checks to see if the layer is included
+   * @param layer
+   * @returns {boolean}
    */
   hasLayer(layer) {
     return (
@@ -420,10 +413,9 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} id
-   * Get the layer by id
-   *
+   * Returns a layer by id
+   * @param id
+   * @returns {*|undefined}
    */
   getLayer(id) {
     let filters = this.getLayers().filter(item => item.id === id)
@@ -431,7 +423,8 @@ class Viewer {
   }
 
   /**
-   *  Get all layers
+   * Returns all layers
+   * @returns {[]}
    */
   getLayers() {
     let result = []
@@ -445,11 +438,10 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} method
-   * @param {*} context
-   * loop through each layer
-   *
+   * Iterate through each layer and pass it as an argument to the callback function
+   * @param method
+   * @param context
+   * @returns {Viewer}
    */
   eachLayer(method, context) {
     Object.keys(this._layerCache).forEach(type => {
@@ -462,8 +454,9 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} effect
+   * adds an effect
+   * @param effect
+   * @returns {Viewer}
    */
   addEffect(effect) {
     this._addEffect(effect)
@@ -471,8 +464,9 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} effect
+   * removes an effect
+   * @param effect
+   * @returns {Viewer}
    */
   removeEffect(effect) {
     this._removeEffect(effect)
@@ -480,9 +474,8 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} target
-   *
+   * @param target
+   * @returns {Viewer}
    */
   flyTo(target) {
     this._delegate.flyTo(target?.delegate || target)
@@ -490,9 +483,8 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} target
-   *
+   * @param target
+   * @returns {Viewer}
    */
   zoomTo(target) {
     this._delegate.zoomTo(target?.delegate || target)
@@ -500,10 +492,11 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} position
-   * @param {*} completeCallback
-   *
+   * Camera fly to a position
+   * @param position
+   * @param completeCallback
+   * @param duration
+   * @returns {Viewer}
    */
   flyToPosition(position, completeCallback, duration) {
     position = Parse.parsePosition(position)
@@ -521,10 +514,10 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} position
-   * @param {*} completeCallback
-   *
+   * Camera zoom to a position
+   * @param position
+   * @param completeCallback
+   * @returns {Viewer}
    */
   zoomToPosition(position, completeCallback) {
     position = Parse.parsePosition(position)
@@ -543,10 +536,10 @@ class Viewer {
 
   /**
    *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
-   *
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Viewer}
    */
   on(type, callback, context) {
     this._viewerEvent.on(type, callback, context || this)
@@ -556,9 +549,10 @@ class Viewer {
 
   /**
    *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Viewer}
    */
   once(type, callback, context) {
     this._viewerEvent.once(type, callback, context || this)
@@ -567,10 +561,10 @@ class Viewer {
 
   /**
    *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
-   *
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Viewer}
    */
   off(type, callback, context) {
     this._viewerEvent.off(type, callback, context || this)
@@ -579,7 +573,7 @@ class Viewer {
   }
 
   /**
-   * destroys the viewer.
+   * Destroys the viewer.
    */
   destroy() {
     this._delegate.destroy()
@@ -587,9 +581,9 @@ class Viewer {
   }
 
   /**
-   *
-   * @param {*} plugin
-   *
+   * adds a plugin
+   * @param plugin
+   * @returns {Viewer}
    */
   use(plugin) {
     if (plugin && plugin.install) {

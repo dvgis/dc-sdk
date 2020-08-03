@@ -30,10 +30,9 @@ class HtmlLayer extends Layer {
   }
 
   /**
-   *
-   * @param {*} viewer
-   * the layer added handler function
-   * subclasses need to be overridden
+   * add handler
+   * @param viewer
+   * @private
    */
   _addHandler(viewer) {
     this._viewer = viewer
@@ -57,8 +56,9 @@ class HtmlLayer extends Layer {
   }
 
   /**
-   * the layer removed handler function
-   * subclasses need to be overridden
+   * remove handler
+   * @returns {boolean}
+   * @private
    */
   _removeHandler() {
     this._renderRemoveCallback && this._renderRemoveCallback()
@@ -67,7 +67,8 @@ class HtmlLayer extends Layer {
   }
 
   /**
-   *
+   * Clears all divIcons
+   * @returns {HtmlLayer}
    */
   clear() {
     let childNodes = this._delegate.childNodes

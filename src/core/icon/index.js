@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-06-05 16:35:22
- * @Last Modified by: Caven
- * @Last Modified time: 2020-06-06 14:31:30
  */
 
 import compass_outer from './compass-outer'

@@ -51,8 +51,9 @@ class Point extends Overlay {
   }
 
   /**
-   *
-   * @param {*} style
+   * Set style
+   * @param style
+   * @returns {Point}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
@@ -62,6 +63,24 @@ class Point extends Overlay {
     this._style = style
     Util.merge(this._delegate.point, DEF_STYLE, this._style)
     return this
+  }
+
+  /**
+   * Parse from entity
+   * @param entity
+   * @returns {any}
+   */
+  static fromEntity(entity) {
+    let point = undefined
+    let now = Cesium.JulianDate.now()
+    let position = Transform.transformCartesianToWGS84(
+      entity.position.getValue(now)
+    )
+    point = new Point(position)
+    point.attr = {
+      ...entity.properties.getValue(now)
+    }
+    return point
   }
 }
 

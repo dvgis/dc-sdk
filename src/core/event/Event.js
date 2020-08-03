@@ -10,18 +10,18 @@ class Event {
   }
 
   /**
-   *
    * Event registration
    * Subclasses need to override
-   *
+   * @private
    */
   _registerEvent() {}
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {any}
+   * @private
    */
   _on(type, callback, context) {
     let event = this.getEvent(type)
@@ -33,10 +33,11 @@ class Event {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {boolean}
+   * @private
    */
   _off(type, callback, context) {
     let event = this.getEvent(type)
@@ -48,9 +49,9 @@ class Event {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} params
+   * @param type
+   * @param params
+   * @private
    */
   _fire(type, params) {
     let event = this.getEvent(type)
@@ -60,20 +61,21 @@ class Event {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * Subscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns remove callback function
    */
   on(type, callback, context) {
     return this._on(type, callback, context)
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * Subscribe once event
+   * @param type
+   * @param callback
+   * @param context
    */
   once(type, callback, context) {
     let removeCallback = this._on(type, callback, context)
@@ -81,27 +83,29 @@ class Event {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * Unsubscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns Boolean
    */
   off(type, callback, context) {
     return this._off(type, callback, context)
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} params
+   * Trigger subscription event
+   * @param type
+   * @param params
    */
   fire(type, params) {
     this._fire(type, params)
   }
 
   /**
-   * Gets events by type
-   * @param {*} type
+   * Returns events by type
+   * @param type
+   * @returns Event
    */
   getEvent(type) {
     return this._cache[type] || undefined

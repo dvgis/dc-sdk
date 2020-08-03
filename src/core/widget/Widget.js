@@ -33,17 +33,20 @@ class Widget {
   }
 
   /**
-   * bind Event
+   * binds event
+   * @private
    */
   _bindEvent() {}
 
   /**
-   * unbind Event
+   * Unbinds event
+   * @private
    */
   _unbindEvent() {}
 
   /**
    * When enable modifies the hook executed, the subclass copies it as required
+   * @private
    */
   _enableHook() {
     !this._wrapper.parentNode &&
@@ -55,20 +58,21 @@ class Widget {
   }
 
   /**
-   * updating the Widget location requires subclass overrides
-   * @param {*} windowCoord
+   * Updating the Widget location requires subclass overrides
+   * @param windowCoord
+   * @private
    */
   _updateWindowCoord(windowCoord) {}
 
   /**
-   *
+   * Hook for installed
+   * @private
    */
   _installHook() {}
 
   /**
-   *
-   * @param {*} viewer
-   *
+   * Installs to viewer
+   * @param viewer
    */
   install(viewer) {
     this._viewer = viewer
@@ -96,14 +100,15 @@ class Widget {
     }
 
     /**
-     * excute installHook
+     * do installHook
      */
     this._installHook && this._installHook()
   }
 
   /**
    * Setting widget content
-   * @param {*} content
+   * @param content
+   * @returns {Widget}
    */
   setContent(content) {
     if (content && typeof content === 'string') {
@@ -125,8 +130,8 @@ class Widget {
   }
 
   /**
-   *
-   * @param {*} type
+   * Registers type
+   * @param type
    */
   static registerType(type) {
     if (type) {
@@ -136,7 +141,7 @@ class Widget {
 
   /**
    *
-   * @param {*} type
+   * @param type
    */
   static getWidgetType(type) {
     return WidgetType[type.toLocaleUpperCase()] || undefined

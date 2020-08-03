@@ -12,9 +12,8 @@ class CameraOption {
   }
 
   /**
-   *
-   * @param {*} min
-   * @param {*} max
+   * @param min
+   * @param max
    */
   setPitchRange(min, max) {
     let handler = new Cesium.ScreenSpaceEventHandler(this._viewer.scene.canvas)
@@ -56,6 +55,9 @@ class CameraOption {
     }
   }
 
+  /**
+   *
+   */
   limitCameraToGround() {
     this._viewer.camera.changed.addEventListener(framestate => {
       if (
@@ -69,17 +71,16 @@ class CameraOption {
   }
 
   /**
-   *
-   * @param {*} west
-   * @param {*} south
-   * @param {*} east
-   * @param {*} north
+   * @param west
+   * @param south
+   * @param east
+   * @param north
    */
   setBounds(west, south, east, north) {}
 
   /**
    *
-   * @param {*} mouseMode
+   * @param mouseMode
    */
   changeMouseMode(mouseMode) {
     this._mouseMode = mouseMode || 0

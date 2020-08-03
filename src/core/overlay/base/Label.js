@@ -65,8 +65,9 @@ class Label extends Overlay {
   }
 
   /**
-   *
-   * @param {*} style
+   * Sets Style
+   * @param style
+   * @returns {Label}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
@@ -79,8 +80,9 @@ class Label extends Overlay {
   }
 
   /**
-   *
-   * @param {*} entity
+   * Parse from entity
+   * @param entity
+   * @returns {any}
    */
   static fromEntity(entity) {
     let position = Transform.transformCartesianToWGS84(

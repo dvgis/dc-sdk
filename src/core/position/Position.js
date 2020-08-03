@@ -78,8 +78,9 @@ class Position {
   }
 
   /**
-   *
-   * @param {*} target
+   * Calculate the distance between two positions
+   * @param target
+   * @returns {number}
    */
   distance(target) {
     if (!target || !(target instanceof Position)) {
@@ -91,6 +92,10 @@ class Position {
     )
   }
 
+  /**
+   *
+   * @returns {Position}
+   */
   copy() {
     let position = new Position()
     position.lng = this.lng || 0
@@ -103,9 +108,9 @@ class Position {
   }
 
   /**
-   *
-   * @param {*} valStr
-   * 反序列化
+   * Deserialize
+   * @param valStr
+   * @returns {Position}
    */
   static deserialize(valStr) {
     let position = new Position()
@@ -122,8 +127,9 @@ class Position {
   }
 
   /**
-   *
-   * @param {*} str
+   *  Returns position from coord String
+   * @param str
+   * @returns {Position}
    */
   static fromCoordString(str) {
     let position = new Position()
@@ -134,8 +140,9 @@ class Position {
   }
 
   /**
-   *
-   * @param {*} arr
+   * Returns position from coord array
+   * @param arr
+   * @returns {Position}
    */
   static fromCoordArray(arr) {
     let position = new Position()

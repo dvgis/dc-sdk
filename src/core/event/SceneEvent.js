@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-03-02 21:32:43
- * @Last Modified by: Caven
- * @Last Modified time: 2020-05-11 22:36:08
  */
 
 import { SceneEventType } from './EventType'
@@ -17,10 +15,11 @@ class SceneEvent extends Event {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * Subscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {any}
    */
   on(type, callback, context) {
     let removeCallback = undefined
@@ -68,10 +67,11 @@ class SceneEvent extends Event {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * Unsubscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {boolean}
    */
   off(type, callback, context) {
     let removed = false

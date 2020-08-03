@@ -14,9 +14,9 @@ const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.s
  */
 class Util {
   /**
-   * generate uuid
-   * @param {*} prefix
-   *
+   * Generates uuid
+   * @param prefix
+   * @returns {string}
    */
   static uuid(prefix = 'D') {
     let uuid = []
@@ -33,11 +33,11 @@ class Util {
   }
 
   /**
-   *
+
    * Merges the properties of the `src` object (or multiple objects) into `dest` object and returns the latter.
-   * @param {*} dest
-   * @param {*} sources
-   *
+   * @param dest
+   * @param sources
+   * @returns {*}
    */
   static merge(dest, ...sources) {
     let i, j, len, src
@@ -101,9 +101,9 @@ class Util {
   }
 
   /**
-   * @function checkPositions(positions: Object): Boolean
-   * Check positions for validity
-   * @param {*} positions
+   * Checks positions for validity
+   * @param positions
+   * @returns {Boolean}
    */
   static checkPositions(positions) {
     return (
@@ -112,9 +112,9 @@ class Util {
   }
 
   /**
-   * @function checkViewer(viewer: Object): Boolean
-   * Check viewer for validity
-   * @param {*} viewer
+   * Checks viewer for validity
+   * @param viewer
+   * @returns {Boolean}
    */
   static checkViewer(viewer) {
     return viewer && viewer.delegate && viewer.canvas

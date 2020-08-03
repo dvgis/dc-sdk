@@ -11,10 +11,9 @@ const WMP = new Cesium.WebMercatorProjection()
 
 class Transform {
   /**
-   *
-   *卡迪尔坐标转84坐标
-   * @param {*} cartesian
-   *
+   * Transforms Cartesian To WGS84
+   * @param cartesian
+   * @returns {Position}
    */
   static transformCartesianToWGS84(cartesian) {
     if (cartesian) {
@@ -30,10 +29,9 @@ class Transform {
   }
 
   /**
-   *
-   * 84坐标转卡迪尔坐标
-   * @param {*} position
-   *
+   * Transforms WGS84 To Cartesian
+   * @param position
+   * @returns {Cartesian3}
    */
   static transformWGS84ToCartesian(position) {
     return position
@@ -47,10 +45,9 @@ class Transform {
   }
 
   /**
-   *
-   * 84坐标转制图坐标
-   * @param {*} position
-   *
+   * Transforms WGS84 To Cartographic
+   * @param position
+   * @returns {Cartographic}
    */
   static transformWGS84ToCartographic(position) {
     return position
@@ -63,10 +60,9 @@ class Transform {
   }
 
   /**
-   *
-   * 卡迪尔坐标数组转84坐标数组
-   * @param {*} cartesianArr
-   *
+   * Transforms Cartesian Array To WGS84 Array
+   * @param cartesianArr
+   * @returns {*|*[]}
    */
   static transformCartesianArrayToWGS84Array(cartesianArr) {
     return cartesianArr
@@ -75,10 +71,9 @@ class Transform {
   }
 
   /**
-   *
-   * 84坐标数组转卡迪尔坐标数组
-   * @param {*} WGS84Arr
-   *
+   * Transforms WGS84 Array To Cartesian Array
+   * @param WGS84Arr
+   * @returns {*|*[]}
    */
   static transformWGS84ArrayToCartesianArray(WGS84Arr) {
     return WGS84Arr
@@ -87,9 +82,9 @@ class Transform {
   }
 
   /**
-   *
-   * @param {*} position
-   *
+   * Transforms WGS84 To Mercator
+   * @param position
+   * @returns {Position}
    */
   static transformWGS84ToMercator(position) {
     let mp = WMP.project(
@@ -99,9 +94,9 @@ class Transform {
   }
 
   /**
-   *
-   * @param {*} position
-   *
+   * Transforms Mercator To WGS84
+   * @param position
+   * @returns {Position}
    */
   static transformMercatorToWGS84(position) {
     let mp = WMP.unproject(
@@ -115,9 +110,10 @@ class Transform {
   }
 
   /**
-   *
-   * @param {*} position
-   * @param {*} viewer
+   * Transforms Window To WGS84
+   * @param position
+   * @param viewer
+   * @returns {Position}
    */
   static transformWindowToWGS84(position, viewer) {
     let scene = viewer.scene
@@ -132,9 +128,10 @@ class Transform {
   }
 
   /**
-   *
-   * @param {*} position
-   * @param {*} viewer
+   * Transforms WGS84 To Window
+   * @param position
+   * @param viewer
+   * @returns {Cartesian2}
    */
   static transformWGS84ToWindow(position, viewer) {
     let scene = viewer.scene

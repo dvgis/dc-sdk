@@ -16,6 +16,11 @@ const ignores = [
   'Home'
 ]
 
+/**
+ * Mix other plug-in attributes to DC
+ * @param DC
+ * @returns this
+ */
 export function initMixin(DC) {
   DC.mixin = function(mixin) {
     for (let key in mixin) {

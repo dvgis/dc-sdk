@@ -69,6 +69,8 @@ class Overlay {
 
   /**
    * The hook for added
+   * @returns {boolean}
+   * @private
    */
   _addedHook() {
     if (!this._delegate) {
@@ -78,19 +80,25 @@ class Overlay {
     this._delegate.overlayId = this._id
   }
 
-  /***
+  /**
    * The hook for mounted
+   * Subclasses need to be overridden
+   * @private
    */
   _mountedHook() {}
 
   /**
    * The hook for removed
+   * Subclasses need to be overridden
+   * @private
    */
   _removedHook() {}
 
   /**
-   *
-   * @param {*} layer
+   * Add handler
+   * @param layer
+   * @returns {boolean}
+   * @private
    */
   _addHandler(layer) {
     if (!layer) {
@@ -106,7 +114,8 @@ class Overlay {
   }
 
   /**
-   *
+   * Remove handler
+   * @private
    */
   _removeHandler() {
     if (this._layer?.delegate?.entities) {
@@ -117,9 +126,10 @@ class Overlay {
   }
 
   /**
-   * set overlay label
-   * @param {*} text
-   * @param {*} textStyle
+   * Sets Text with Style
+   * @param text
+   * @param textStyle
+   * @returns {Overlay}
    */
   setLabel(text, textStyle) {
     this._delegate &&
@@ -131,16 +141,17 @@ class Overlay {
   }
 
   /**
-   *
-   * @param {*} style
-   * set overlay style
+   * Sets style
+   * @param style
+   * @returns {Overlay}
    */
   setStyle(style) {
     return this
   }
 
   /**
-   * Overlay remove
+   * Removes from layer
+   * @returns {Overlay}
    */
   remove() {
     if (this._layer) {
@@ -150,10 +161,9 @@ class Overlay {
   }
 
   /**
-   *
-   * Overlay add to layer
-   * @param {*} layer
-   *
+   * adds to layer
+   * @param layer
+   * @returns {Overlay}
    */
   addTo(layer) {
     if (layer && layer.addOverlay) {
@@ -163,10 +173,11 @@ class Overlay {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * Subscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Overlay}
    */
   on(type, callback, context) {
     this._overlayEvent.on(type, callback, context || this)
@@ -174,10 +185,11 @@ class Overlay {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} callback
-   * @param {*} context
+   * Unsubscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Overlay}
    */
   off(type, callback, context) {
     this._overlayEvent.off(type, callback, context || this)
@@ -185,9 +197,10 @@ class Overlay {
   }
 
   /**
-   *
-   * @param {*} type
-   * @param {*} param
+   * Trigger subscription event
+   * @param type
+   * @param params
+   * @returns {Overlay}
    */
   fire(type, params) {
     this._overlayEvent.fire(type, params)
@@ -196,7 +209,7 @@ class Overlay {
 
   /**
    *
-   * @param {*} type
+   * @param type
    */
   static registerType(type) {
     if (type) {
@@ -206,7 +219,8 @@ class Overlay {
 
   /**
    *
-   * @param {*} type
+   * @param type
+   * @returns {*|undefined}
    */
   static getOverlayType(type) {
     return OverlayType[type.toLocaleUpperCase()] || undefined
