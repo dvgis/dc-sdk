@@ -3,7 +3,7 @@
   "version": "1.9.0",
   "description": " The SDK is a secondary development based on the open source project Cesium, which optimizes some operations of Cesium and enables developers to quickly develop 3D applications through the framework.",
   "main": "index.js",
-  "repository": "https://github.com/Digital-Visual/dc-sdk.git",
+  "repository": "https://github.com/dvgis/dc-sdk.git",
   "homepage": "http://dc.dvgis.cn",
   "keywords": [
     "3D",
