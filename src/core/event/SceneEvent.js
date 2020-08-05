@@ -36,6 +36,18 @@ class SceneEvent extends Event {
           context || this
         )
         break
+      case SceneEventType.PRE_UPDATE:
+        removeCallback = this._scene.preUpdate.addEventListener(
+          callback,
+          context || this
+        )
+        break
+      case SceneEventType.POST_UPDATE:
+        removeCallback = this._scene.postUpdate.addEventListener(
+          callback,
+          context || this
+        )
+        break
       case SceneEventType.PRE_RENDER:
         removeCallback = this._scene.preRender.addEventListener(
           callback,
@@ -84,6 +96,18 @@ class SceneEvent extends Event {
         break
       case SceneEventType.CAMERA_CHANGED:
         removed = this._camera.changed.removeEventListener(
+          callback,
+          context || this
+        )
+        break
+      case SceneEventType.PRE_UPDATE:
+        removed = this._scene.preUpdate.removeEventListener(
+          callback,
+          context || this
+        )
+        break
+      case SceneEventType.POST_UPDATE:
+        removed = this._scene.postUpdate.removeEventListener(
           callback,
           context || this
         )

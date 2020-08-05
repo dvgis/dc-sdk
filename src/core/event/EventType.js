@@ -41,6 +41,8 @@ const SceneEventType = {
   CAMERA_CHANGED: 'cameraChanged',
   PRE_RENDER: 'preRender',
   POST_RENDER: 'postRender',
+  PRE_UPDATE: 'preUpdate',
+  POST_UPDATE: 'postUpdate',
   MORPH_COMPLETE: 'morphComplete',
   CLOCK_TICK: 'clockTick'
 }
