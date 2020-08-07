@@ -39,10 +39,10 @@ const ViewerEventType = {
 const SceneEventType = {
   CAMERA_MOVE_END: 'cameraMoveEnd',
   CAMERA_CHANGED: 'cameraChanged',
-  PRE_RENDER: 'preRender',
-  POST_RENDER: 'postRender',
   PRE_UPDATE: 'preUpdate',
   POST_UPDATE: 'postUpdate',
+  PRE_RENDER: 'preRender',
+  POST_RENDER: 'postRender',
   MORPH_COMPLETE: 'morphComplete',
   CLOCK_TICK: 'clockTick'
 }

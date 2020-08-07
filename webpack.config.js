@@ -1,8 +1,6 @@
-/*
+/**
  * @Author: Caven
  * @Date: 2020-01-18 18:22:23
- * @Last Modified by: Caven
- * @Last Modified time: 2020-07-30 13:28:46
  */
 
 const path = require('path')
@@ -10,19 +8,19 @@ const webpack = require('webpack')
 const packageInfo = require('./package.json')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const CopywebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const JavaScriptObfuscator = require('webpack-obfuscator')
 
 const cesiumBuild = 'node_modules/cesium/Build/Cesium'
 
 let cesiumCopyPlugin = [
-  new CopywebpackPlugin([
+  new CopyWebpackPlugin([
     { from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' }
   ]),
-  new CopywebpackPlugin([
+  new CopyWebpackPlugin([
     { from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' }
   ]),
-  new CopywebpackPlugin([
+  new CopyWebpackPlugin([
     { from: path.join(cesiumBuild, 'ThirdParty'), to: 'resources/ThirdParty' }
   ])
 ]
