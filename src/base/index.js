@@ -1,6 +1,6 @@
 /**
  * @Author: Caven
- * @Date: 2020-04-22 09:44:30
+ * @Date: 2020-04-22 19:44:30
  */
 
 import { initMixin, initUse } from './global-api'
@@ -9,7 +9,7 @@ delete window.DC
 
 let DC = {
   Author: 'Caven Chen <cavencj@gmail.com>',
-  GitHub: 'https://github.com/Digital-Visual',
+  GitHub: 'https://github.com/dvgis',
   Home: 'https://www.dvgis.cn',
   Version: build.version,
   Namespace: {},
