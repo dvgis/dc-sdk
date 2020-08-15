@@ -2,6 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-03 12:18:17
  */
+
 import { Util } from '../utils'
 import { OverlayEventType, OverlayEvent } from '../event'
 import State from '../state/State'
@@ -68,6 +69,13 @@ class Overlay {
   }
 
   /**
+   * The hook for mount layer
+   * Subclasses need to be overridden
+   * @private
+   */
+  _mountedHook() {}
+
+  /**
    * The hook for added
    * @returns {boolean}
    * @private
@@ -79,13 +87,6 @@ class Overlay {
     this._delegate.layer = this._layer
     this._delegate.overlayId = this._id
   }
-
-  /**
-   * The hook for mounted
-   * Subclasses need to be overridden
-   * @private
-   */
-  _mountedHook() {}
 
   /**
    * The hook for removed

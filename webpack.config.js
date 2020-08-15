@@ -1,6 +1,6 @@
 /**
  * @Author: Caven
- * @Date: 2020-01-18 18:22:23
+ * @Date: 2020-01-18 19:22:23
  */
 
 const path = require('path')
@@ -31,8 +31,17 @@ function resolve(dir) {
 
 function getTime() {
   let now = new Date()
-  return `${now.getFullYear()}-${now.getMonth() +
-    1}-${now.getDate()} ${now.getHours()}:${now.getMinutes()}`
+  let m = now.getMonth() + 1
+  m = m < 10 ? '0' + m : m
+  let d = now.getDate()
+  d = d < 10 ? '0' + d : d
+  let h = now.getHours()
+  h = h < 10 ? '0' + h : h
+  let min = now.getMinutes()
+  min = min < 10 ? '0' + min : min
+  let s = now.getSeconds()
+  s = s < 10 ? '0' + s : s
+  return `${now.getFullYear()}-${m}-${d} ${h}:${min}:${s}`
 }
 
 module.exports = env => {

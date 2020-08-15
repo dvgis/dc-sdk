@@ -9,7 +9,7 @@ delete window.DC
 
 let DC = {
   Author: 'Caven Chen <cavencj@gmail.com>',
-  GitHub: 'https://github.com/dvgis',
+  GitHub: 'https://github.com/dvgis/dc-sdk',
   Home: 'https://www.dvgis.cn',
   Version: build.version,
   Namespace: {},
