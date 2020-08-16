@@ -59,7 +59,7 @@ class CameraOption {
    *
    */
   limitCameraToGround() {
-    this._viewer.camera.changed.addEventListener(framestate => {
+    this._viewer.camera.changed.addEventListener(frameState => {
       if (
         this._viewer.camera._suspendTerrainAdjustment &&
         this._viewer.scene.mode === Cesium.SceneMode.SCENE3D

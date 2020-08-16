@@ -8,8 +8,7 @@ const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.s
 )
 
 /**
- *  工具类
- *  部分代码借鉴leaflet
+ *  Some of the code borrows from leaflet
  * https://github.com/Leaflet/Leaflet/tree/master/src/core
  */
 class Util {

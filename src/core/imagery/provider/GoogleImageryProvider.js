@@ -24,9 +24,7 @@ class GoogleImageryProvider extends Cesium.UrlTemplateImageryProvider {
         : options.style === 'ter'
         ? TER_URL
         : ELEC_URL
-    if (!options.subdomains || !options.subdomains.length) {
-      options['subdomains'] = ['1', '2', '3']
-    }
+    options['subdomains'] = options.subdomains || ['1', '2', '3']
     super(options)
   }
 }

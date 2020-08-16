@@ -16,9 +16,7 @@ const ELEC_URL =
 class AmapImageryProvider extends Cesium.UrlTemplateImageryProvider {
   constructor(options = {}) {
     options['url'] = options.style === 'img' ? IMG_URL : ELEC_URL
-    if (!options.subdomains || !options.subdomains.length) {
-      options['subdomains'] = ['01', '02', '03', '04']
-    }
+    options['subdomains'] = options.subdomains || ['01', '02', '03', '04']
     super(options)
   }
 }
