@@ -110,7 +110,7 @@ DC.ready(() => {
 
 <p>
 
-<img src="http://dc.dvgis.cn/examples/images/base/q1.png"  style="width:60px;height:60px" title="Cesium*融合"/>
+<img src="http://dc.dvgis.cn/examples/images/base/q1.png"  style="width:60px;height:60px" title="数字视觉"/>
 
 <img src="http://dc.dvgis.cn/examples/images/base/q2.png" style="width:60px;height:60px" title="Cesium开心农场"/>
 
