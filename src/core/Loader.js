@@ -34,7 +34,8 @@ import {
   distance,
   heading,
   isBetween,
-  parabola
+  parabola,
+  curve
 } from './math'
 
 const { Cesium } = DC.Namespace
@@ -46,6 +47,7 @@ Cesium.Math.distance = distance
 Cesium.Math.heading = heading
 Cesium.Math.isBetween = isBetween
 Cesium.Math.parabola = parabola
+Cesium.Math.curve = curve
 
 const core = {
   ImageryLayerFactory,

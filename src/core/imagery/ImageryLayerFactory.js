@@ -77,6 +77,15 @@ class ImageryLayerFactory {
   }
 
   /**
+   * Create WMS image layer
+   * @param options
+   * @returns {module:cesium.WebMapServiceImageryProvider}
+   */
+  static createWMSImageryLayer(options) {
+    return new Cesium.WebMapServiceImageryProvider(options)
+  }
+
+  /**
    * Create WMTS image layer
    * @param options
    * @returns {module:cesium.WebMapTileServiceImageryProvider}
@@ -132,6 +141,9 @@ class ImageryLayerFactory {
         break
       case ImageryType.SINGLE_TILE:
         imageryLayer = this.createSingleTileImageryLayer(options)
+        break
+      case ImageryType.WMS:
+        imageryLayer = this.createWMSImageryLayer(options)
         break
       case ImageryType.WMTS:
         imageryLayer = this.createWMTSImageryLayer(options)
