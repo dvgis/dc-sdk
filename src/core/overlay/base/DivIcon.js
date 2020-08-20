@@ -157,7 +157,7 @@ class DivIcon extends Overlay {
    * @param content
    * @returns {DivIcon}
    */
-  fromEntity(entity, content) {
+  static fromEntity(entity, content) {
     let divIcon = undefined
     let now = Cesium.JulianDate.now()
     let position = Transform.transformCartesianToWGS84(
