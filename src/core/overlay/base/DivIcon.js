@@ -150,6 +150,27 @@ class DivIcon extends Overlay {
       DomUtil.addClass(this._delegate, this._style.className)
     return this
   }
+
+  /**
+   * Parse from entity
+   * @param entity
+   * @param content
+   * @returns {DivIcon}
+   */
+  fromEntity(entity, content) {
+    let divIcon = undefined
+    let now = Cesium.JulianDate.now()
+    let position = Transform.transformCartesianToWGS84(
+      entity.position.getValue(now)
+    )
+    divIcon = new DC.DivIcon(position, content)
+    if (entity.billboard) {
+      divIcon.attr = {
+        ...entity.properties.getValue(now)
+      }
+    }
+    return divIcon
+  }
 }
 
 Overlay.registerType('div_icon')
