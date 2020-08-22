@@ -85,14 +85,15 @@ class Label extends Overlay {
    * @returns {any}
    */
   static fromEntity(entity) {
+    let now = Cesium.JulianDate.now()
     let position = Transform.transformCartesianToWGS84(
-      entity.position.getValue(Cesium.JulianDate.now())
+      entity.position.getValue(now)
     )
     let label = undefined
     if (entity.billboard) {
       label = new Label(position, entity.name)
       label.attr = {
-        ...entity.properties.getValue(Cesium.JulianDate.now())
+        ...entity?.properties?.getValue(now)
       }
     }
     return label

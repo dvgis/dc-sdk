@@ -78,7 +78,7 @@ class Point extends Overlay {
     )
     point = new Point(position)
     point.attr = {
-      ...entity.properties.getValue(now)
+      ...entity?.properties?.getValue(now)
     }
     return point
   }

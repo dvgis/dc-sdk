@@ -120,7 +120,7 @@ class Polygon extends Overlay {
       )
       polygon = new Polygon(positions)
       polygon.attr = {
-        ...entity.properties.getValue(now)
+        ...entity?.properties?.getValue(now)
       }
     }
     return polygon

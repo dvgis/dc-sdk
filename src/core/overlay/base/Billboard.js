@@ -99,7 +99,7 @@ class Billboard extends Overlay {
     if (entity.billboard) {
       billboard = new Billboard(position, entity.billboard.image.getValue(now))
       billboard.attr = {
-        ...entity.properties.getValue(now)
+        ...entity?.properties?.getValue(now)
       }
     }
     return billboard

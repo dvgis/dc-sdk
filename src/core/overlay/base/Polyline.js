@@ -92,7 +92,7 @@ class Polyline extends Overlay {
       )
       polyline = new Polyline(positions)
       polyline.attr = {
-        ...entity.properties.getValue(now)
+        ...entity?.properties?.getValue(now)
       }
     }
     return polyline

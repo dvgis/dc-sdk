@@ -166,7 +166,7 @@ class DivIcon extends Overlay {
     divIcon = new DC.DivIcon(position, content)
     if (entity.billboard) {
       divIcon.attr = {
-        ...entity.properties.getValue(now)
+        ...entity?.properties?.getValue(now)
       }
     }
     return divIcon
