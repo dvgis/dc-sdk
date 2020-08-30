@@ -42,6 +42,16 @@ import {
 
 const { Cesium } = DC.Namespace
 
+Cesium.Math.area = area
+Cesium.Math.bounds = bounds
+Cesium.Math.mid = mid
+Cesium.Math.center = center
+Cesium.Math.distance = distance
+Cesium.Math.heading = heading
+Cesium.Math.isBetween = isBetween
+Cesium.Math.parabola = parabola
+Cesium.Math.curve = curve
+
 const core = {
   ImageryLayerFactory,
   TerrainFactory,
@@ -63,18 +73,7 @@ const core = {
   Polygon,
   Model,
   Tileset,
-  Math: {
-    ...Cesium.Math,
-    area,
-    bounds,
-    mid,
-    center,
-    distance,
-    heading,
-    isBetween,
-    parabola,
-    curve
-  }
+  Math: Cesium.Math
 }
 
 DC.mixin(core)
