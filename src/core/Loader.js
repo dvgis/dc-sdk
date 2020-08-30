@@ -7,6 +7,7 @@ import ImageryLayerFactory from './imagery/ImageryLayerFactory'
 import TerrainFactory from './terrain/TerrainFactory'
 import Viewer from './viewer/Viewer'
 import {
+  LayerGroup,
   GeoJsonLayer,
   HtmlLayer,
   LabelLayer,
@@ -46,6 +47,7 @@ const core = {
   TerrainFactory,
   Viewer,
   World: Viewer,
+  LayerGroup,
   GeoJsonLayer,
   HtmlLayer,
   LabelLayer,

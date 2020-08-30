@@ -47,6 +47,10 @@ const SceneEventType = {
   CLOCK_TICK: 'clockTick'
 }
 
+const LayerGroupEventType = {
+  ...baseEventType
+}
+
 const LayerEventType = {
   ...baseEventType,
   CLEAR: 'clear'
@@ -73,6 +77,7 @@ export {
   MouseEventType,
   ViewerEventType,
   SceneEventType,
+  LayerGroupEventType,
   LayerEventType,
   EffectEventType,
   OverlayEventType

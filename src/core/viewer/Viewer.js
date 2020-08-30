@@ -122,6 +122,10 @@ class Viewer {
     return this._delegate.dataSources
   }
 
+  get entities() {
+    return this._delegate.entities
+  }
+
   get clock() {
     return this._delegate.clock
   }
