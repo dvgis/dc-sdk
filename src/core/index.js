@@ -13,7 +13,7 @@ const install = function(DC) {
   })
 
   /**
-   * 框架开始
+   * start
    */
   DC.ready = callback => {
     try {

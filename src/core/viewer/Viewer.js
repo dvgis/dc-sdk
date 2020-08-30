@@ -122,6 +122,10 @@ class Viewer {
     return this._delegate.dataSources
   }
 
+  get entities() {
+    return this._delegate.entities
+  }
+
   get clock() {
     return this._delegate.clock
   }
@@ -475,10 +479,13 @@ class Viewer {
 
   /**
    * @param target
+   * @param duration
    * @returns {Viewer}
    */
-  flyTo(target) {
-    this._delegate.flyTo(target?.delegate || target)
+  flyTo(target, duration) {
+    this._delegate.flyTo(target?.delegate || target, {
+      duration
+    })
     return this
   }
 

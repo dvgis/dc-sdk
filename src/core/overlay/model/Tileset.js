@@ -20,7 +20,6 @@ class Tileset extends Overlay {
     this._height = undefined
     this._properties = undefined
     this._stopTime = undefined
-    this._duration = undefined
     this._center = undefined
     this.type = Overlay.getOverlayType('tileset')
     this._state = State.INITIALIZED

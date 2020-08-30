@@ -3,9 +3,9 @@
  * @Date: 2020-05-09 13:19:53
  */
 
-import { DomUtil, Util } from './utils'
+import { Util, DomUtil, PlotUtil } from './utils'
 import { MouseEventType, SceneEventType, Event } from './event'
-import { Layer, LayerType } from './layer'
+import { LayerType, Layer } from './layer'
 import { Overlay, OverlayType } from './overlay'
 import ImageryType from './imagery/ImageryType'
 import WidgetType from './widget/WidgetType'
@@ -15,8 +15,9 @@ import Transform from './transform/Transform'
 import Parse from './parse/Parse'
 
 const base = {
-  DomUtil,
   Util,
+  DomUtil,
+  PlotUtil,
   State,
   Event,
   ImageryType,

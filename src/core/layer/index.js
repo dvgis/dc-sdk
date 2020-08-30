@@ -5,6 +5,7 @@
 
 export { default as LayerType } from './LayerType'
 export { default as Layer } from './Layer'
+export { default as LayerGroup } from './LayerGroup'
 export { default as GeoJsonLayer } from './GeoJsonLayer'
 export { default as HtmlLayer } from './HtmlLayer'
 export { default as LabelLayer } from './LabelLayer'
