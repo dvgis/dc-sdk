@@ -4,6 +4,7 @@
  */
 
 import {
+  LayerGroupEventType,
   LayerEventType,
   EffectEventType,
   MouseEvent,
@@ -75,6 +76,7 @@ class Viewer {
       globe: this._delegate.scene.globe
     })
 
+    this._layerGroupCache = {}
     this._layerCache = {}
     this._effectCache = {}
 
@@ -176,6 +178,38 @@ class Viewer {
     return position
   }
 
+  /***
+   *
+   * @param layerGroup
+   * @private
+   */
+  _addLayerGroup(layerGroup) {
+    if (
+      layerGroup &&
+      layerGroup.layerGroupEvent &&
+      !Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
+    ) {
+      layerGroup.layerGroupEvent.fire(LayerGroupEventType.ADD, this)
+      this._layerGroupCache[layerGroup.id] = layerGroup
+    }
+  }
+
+  /**
+   *
+   * @param layerGroup
+   * @private
+   */
+  _removeLayerGroup(layerGroup) {
+    if (
+      layerGroup &&
+      layerGroup.layerGroupEvent &&
+      Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
+    ) {
+      layerGroup.layerGroupEvent.fire(LayerGroupEventType.REMOVE, this)
+      delete this._layerGroupCache[layerGroup.id]
+    }
+  }
+
   /**
    * @param layer
    * @private
@@ -210,12 +244,13 @@ class Viewer {
    * @private
    */
   _addEffect(effect) {
-    if (effect && effect.effectEvent) {
-      !this._effectCache[effect.type] && (this._effectCache[effect.type] = {})
-      if (!Object(this._effectCache[effect.type]).hasOwnProperty(effect.id)) {
-        effect.effectEvent.fire(EffectEventType.ADD, this)
-        this._effectCache[effect.type][effect.id] = effect
-      }
+    if (
+      effect &&
+      effect.effectEvent &&
+      !Object(this._effectCache).hasOwnProperty(effect.id)
+    ) {
+      effect.effectEvent.fire(EffectEventType.ADD, this)
+      this._effectCache[effect.id] = effect
     }
   }
 
@@ -227,10 +262,10 @@ class Viewer {
     if (
       effect &&
       effect.effectEvent &&
-      Object(this._effectCache[effect.type]).hasOwnProperty(effect.id)
+      Object(this._effectCache).hasOwnProperty(effect.id)
     ) {
       effect.effectEvent.fire(EffectEventType.REMOVE, this)
-      delete this._effectCache[effect.type][effect.id]
+      delete this._effectCache[effect.id]
     }
   }
 
@@ -380,6 +415,26 @@ class Viewer {
         index
       ]
     }
+    return this
+  }
+
+  /**
+   *
+   * @param layerGroup
+   * @returns {Viewer}
+   */
+  addLayerGroup(layerGroup) {
+    this._addLayerGroup(layerGroup)
+    return this
+  }
+
+  /**
+   *
+   * @param layerGroup
+   * @returns {Viewer}
+   */
+  removeLayerGroup(layerGroup) {
+    this._removeLayerGroup(layerGroup)
     return this
   }
 

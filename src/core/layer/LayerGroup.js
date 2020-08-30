@@ -14,10 +14,14 @@ class LayerGroup {
     this._cache = {}
     this._show = true
     this._viewer = undefined
-    this._layerEvent = new LayerGroupEvent()
-    this._layerEvent.on(LayerGroupEventType.ADD, this._addHandler, this)
-    this._layerEvent.on(LayerGroupEventType.REMOVE, this._removeHandler, this)
-    this.type = Layer.registerType('layer-group')
+    this._layerGroupEvent = new LayerGroupEvent()
+    this._layerGroupEvent.on(LayerGroupEventType.ADD, this._addHandler, this)
+    this._layerGroupEvent.on(
+      LayerGroupEventType.REMOVE,
+      this._removeHandler,
+      this
+    )
+    this.type = Layer.getLayerType('layer-group')
     this._state = State.INITIALIZED
   }
 
@@ -36,8 +40,8 @@ class LayerGroup {
     return this._show
   }
 
-  get layerEvent() {
-    return this._layerEvent
+  get layerGroupEvent() {
+    return this._layerGroupEvent
   }
 
   get state() {
