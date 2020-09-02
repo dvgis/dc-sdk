@@ -192,6 +192,40 @@ class DomUtil {
     el.innerHTML = domStr
     return withWrapper ? el : el.childNodes
   }
+
+  /**
+   *
+   * @param el
+   */
+  static fullScreen(el) {
+    if (!el) {
+      return
+    }
+    if (el.requestFullscreen) {
+      el.requestFullscreen()
+    } else if (el.msRequestFullscreen) {
+      el.msRequestFullscreen()
+    } else if (el.mozRequestFullScreen) {
+      el.mozRequestFullScreen()
+    } else if (el.webkitRequestFullscreen) {
+      el.webkitRequestFullscreen()
+    }
+  }
+
+  /**
+   *
+   */
+  static exitFullscreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen()
+    } else if (document.msExitFullscreen) {
+      document.msExitFullscreen()
+    } else if (document.mozCancelFullScreen) {
+      document.mozCancelFullScreen()
+    } else if (document.webkitExitFullscreen) {
+      document.webkitExitFullscreen()
+    }
+  }
 }
 
 export default DomUtil

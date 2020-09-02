@@ -16,6 +16,9 @@ const VEC_URL =
 const CUSTOM_URL =
   'http://api{s}.map.bdimg.com/customimage/tile?&x={x}&y={y}&z={z}&scale=1&customid={style}'
 
+const TRAFFIC_URL =
+  'http://its.map.baidu.com:8002/traffic/TrafficTileService?time={time}&label={labelStyle}&v=016&level={z}&x={x}&y={y}&scaler=2'
+
 class BaiduImageryProvider {
   constructor(options = {}) {
     this._url =
@@ -23,7 +26,10 @@ class BaiduImageryProvider {
         ? IMG_URL
         : options.style === 'vec'
         ? VEC_URL
+        : options.style === 'traffic'
+        ? TRAFFIC_URL
         : CUSTOM_URL
+    this._labelStyle = options.labelStyle || 'web2D'
     this._tileWidth = 256
     this._tileHeight = 256
     this._maximumLevel = 18
@@ -129,11 +135,13 @@ class BaiduImageryProvider {
     let xTiles = this._tilingScheme.getNumberOfXTilesAtLevel(level)
     let yTiles = this._tilingScheme.getNumberOfYTilesAtLevel(level)
     let url = this._url
-      .replace('{x}', x - xTiles / 2)
-      .replace('{y}', yTiles / 2 - y - 1)
+      .replace('{x}', String(x - xTiles / 2))
+      .replace('{y}', String(yTiles / 2 - y - 1))
       .replace('{z}', level)
-      .replace('{s}', 1)
+      .replace('{s}', String(1))
       .replace('{style}', this._style)
+      .replace('{labelStyle}', this._labelStyle)
+      .replace('{time}', String(new Date().getTime()))
     return Cesium.ImageryProvider.loadImage(this, url)
   }
 }
