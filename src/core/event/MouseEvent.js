@@ -21,6 +21,7 @@ class MouseEvent extends Event {
     this.on(MouseEventType.DB_CLICK, this._dbClickHandler, this)
     this.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this.on(MouseEventType.MOUSE_MOVE, this._mouseMoveHandler, this)
+    this.on(MouseEventType.WHEEL, this._mouseWheelHandler, this)
   }
 
   /**
@@ -138,7 +139,7 @@ class MouseEvent extends Event {
   _raiseEvent(type, mouseInfo = {}) {
     let event = undefined
     let targetInfo = this._getTargetInfo(mouseInfo.target)
-    let overlay = targetInfo.overlay
+    let overlay = targetInfo?.overlay
     // get Overlay Event
     if (overlay && overlay.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
@@ -221,6 +222,15 @@ class MouseEvent extends Event {
       this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo)
       this._selected = mouseInfo
     }
+  }
+
+  /**
+   * Default mouse wheel event handler
+   * @param movement
+   * @private
+   */
+  _mouseWheelHandler(movement) {
+    this._raiseEvent(MouseEventType.WHEEL, { movement })
   }
 }
 

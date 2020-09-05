@@ -197,7 +197,7 @@ class DomUtil {
    *
    * @param el
    */
-  static fullScreen(el) {
+  static fullscreen(el) {
     if (!el) {
       return
     }
