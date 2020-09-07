@@ -8,7 +8,7 @@
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
 
-> The SDK is a secondary development based on the open source project Cesium, which optimizes some operations of Cesium and enables developers to quickly develop 3D applications through the framework.
+> DC-SDK is a 2D and 3D integrated WebGis application framework based on the secondary development of Cesium. This framework optimizes the usage mode of Cesium and adds some additional functions, aiming to build WebGis applications for developers quickly.
 
 > [Home Page](http://dc.dvgis.cn)
 
