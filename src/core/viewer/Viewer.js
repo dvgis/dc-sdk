@@ -124,6 +124,10 @@ class Viewer {
     return this._delegate.dataSources
   }
 
+  get imageryLayers() {
+    return this._delegate.imageryLayers
+  }
+
   get entities() {
     return this._delegate.entities
   }
@@ -361,9 +365,7 @@ class Viewer {
     if (!this._baseLayerPicker.selectedImagery) {
       this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
     }
-
     this._comps.mapSwitch.addMap(options)
-
     return this
   }
 

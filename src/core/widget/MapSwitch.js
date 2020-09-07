@@ -45,7 +45,7 @@ class MapSwitch extends Widget {
     let mapEl = DomUtil.create('div', 'map-item', this._wrapper)
     let index = this._cache.length ? this._cache.length - 1 : 0
     index === 0 && DomUtil.addClass(mapEl, 'active')
-    mapEl.setAttribute('data-index', index)
+    mapEl.setAttribute('data-index', String(index))
     mapEl.onclick = e => {
       let old = document.getElementsByClassName('map-item active')
       if (old && old.length) {
@@ -76,6 +76,6 @@ class MapSwitch extends Widget {
   }
 }
 
-Widget.registerType('mapswitch')
+Widget.registerType('map_switch')
 
 export default MapSwitch

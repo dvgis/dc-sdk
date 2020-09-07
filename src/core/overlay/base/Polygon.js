@@ -24,7 +24,7 @@ class Polygon extends Overlay {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    this._delegate.polygon.hierarchy = this._prepareHierarchy()
+    this._delegate.polygon.hierarchy = this._computeHierarchy()
     return this
   }
 
@@ -35,7 +35,7 @@ class Polygon extends Overlay {
   set holes(holes) {
     if (holes && holes.length) {
       this._holes = holes.map(item => Parse.parsePositions(item))
-      this._delegate.polygon.hierarchy = this._prepareHierarchy()
+      this._delegate.polygon.hierarchy = this._computeHierarchy()
     }
     return this
   }
@@ -54,8 +54,9 @@ class Polygon extends Overlay {
 
   /**
    *
+   * @private
    */
-  _prepareHierarchy() {
+  _computeHierarchy() {
     let result = new Cesium.PolygonHierarchy()
     result.positions = Transform.transformWGS84ArrayToCartesianArray(
       this._positions

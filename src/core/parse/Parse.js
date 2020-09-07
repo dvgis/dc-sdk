@@ -36,11 +36,11 @@ class Parse {
       positions = positions.split(';')
     }
     return positions.map(item => {
-      if (Array.isArray(item)) {
+      if (Array.isArray(item) && item.length) {
         return Position.fromCoordArray(item)
       } else if (item instanceof Position) {
         return item
-      } else {
+      } else if (typeof item === 'string' && item) {
         return Position.fromCoordString(item)
       }
     })

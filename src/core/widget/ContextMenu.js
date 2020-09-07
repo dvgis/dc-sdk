@@ -26,12 +26,12 @@ class ContextMenu extends Widget {
   }
 
   _bindEvent() {
-    this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightclickHandler, this)
+    this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this._viewer.on(MouseEventType.CLICK, this._clickHandler, this)
   }
 
   _unbindEvent() {
-    this._viewer.off(MouseEventType.RIGHT_CLICK, this._rightclickHandler, this)
+    this._viewer.off(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this._viewer.off(MouseEventType.CLICK, this._clickHandler, this)
   }
 
@@ -49,7 +49,7 @@ class ContextMenu extends Widget {
     }
   }
 
-  _rightclickHandler(e) {
+  _rightClickHandler(e) {
     if (e && e.windowPosition && this._enable) {
       this._updateWindowCoord(e.windowPosition)
     }

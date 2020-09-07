@@ -46,7 +46,7 @@ class LocationBar extends Widget {
       <span>海拔：${alt.toFixed(2)} 米</span>`
   }
 
-  _cameraHandler(e) {
+  _cameraHandler() {
     let cameraPosition = this._viewer.cameraPosition
     this._cameraEl.innerHTML = `
       <span>视角：${(+cameraPosition.pitch).toFixed(2)}</span>

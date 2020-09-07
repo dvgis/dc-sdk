@@ -11,20 +11,13 @@ export default function distance(positions) {
   let distance = 0
   if (positions && Array.isArray(positions)) {
     for (let i = 0; i < positions.length - 1; i++) {
-      let point1cartographic = Transform.transformWGS84ToCartographic(
-        positions[i]
-      )
-      let point2cartographic = Transform.transformWGS84ToCartographic(
-        positions[i + 1]
-      )
+      let c1 = Transform.transformWGS84ToCartographic(positions[i])
+      let c2 = Transform.transformWGS84ToCartographic(positions[i + 1])
       let geodesic = new Cesium.EllipsoidGeodesic()
-      geodesic.setEndPoints(point1cartographic, point2cartographic)
+      geodesic.setEndPoints(c1, c2)
       let s = geodesic.surfaceDistance
-      s = Math.sqrt(
-        Math.pow(s, 2) +
-          Math.pow(point2cartographic.height - point1cartographic.height, 2)
-      )
-      distance = distance + s
+      s = Math.sqrt(Math.pow(s, 2) + Math.pow(c2.height - c1.height, 2))
+      distance += s
     }
   }
 

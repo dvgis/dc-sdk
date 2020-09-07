@@ -22,7 +22,7 @@ class DivIcon extends Overlay {
       top: '0',
       left: '0'
     })
-    this.content = content
+    this._content = content
     this.type = Overlay.getOverlayType('div_icon')
     this._state = State.INITIALIZED
   }
@@ -47,6 +47,7 @@ class DivIcon extends Overlay {
   }
 
   set content(content) {
+    this._content = content
     if (content && typeof content === 'string') {
       this._delegate.innerHTML = content
     } else if (content && content instanceof Element) {
