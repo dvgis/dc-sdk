@@ -46,6 +46,18 @@ class Popup extends Widget {
   }
 
   /**
+   * Setting custom wrapper
+   * @param wrapper
+   * @returns {Popup}
+   */
+  setCustomWrapper(wrapper) {
+    if (wrapper && wrapper instanceof Element) {
+      this._wrapper = wrapper
+    }
+    return this
+  }
+
+  /**
    *
    * Setting widget position
    * @param {*} position
