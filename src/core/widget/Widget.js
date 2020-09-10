@@ -106,6 +106,15 @@ class Widget {
   }
 
   /**
+   * Setting  wrapper
+   * @param wrapper
+   * @returns {Widget}
+   */
+  setWrapper(wrapper) {
+    return this
+  }
+
+  /**
    * Setting widget content
    * @param content
    * @returns {Widget}

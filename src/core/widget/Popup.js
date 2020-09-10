@@ -46,13 +46,14 @@ class Popup extends Widget {
   }
 
   /**
-   * Setting custom wrapper
+   * Setting  wrapper
    * @param wrapper
-   * @returns {Popup}
+   * @returns {Widget}
    */
-  setCustomWrapper(wrapper) {
+  setWrapper(wrapper) {
     if (wrapper && wrapper instanceof Element) {
       this._wrapper = wrapper
+      DomUtil.addClass(this._wrapper, 'dc-popup')
     }
     return this
   }
