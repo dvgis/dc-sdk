@@ -75,6 +75,12 @@ class GeoJsonLayer extends Layer {
     }
   }
 
+  /**
+   *
+   * @param method
+   * @param context
+   * @returns {GeoJsonLayer}
+   */
   eachOverlay(method, context) {
     if (this._delegate) {
       this._delegate.then(dataSource => {

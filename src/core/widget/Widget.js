@@ -123,6 +123,9 @@ class Widget {
     if (content && typeof content === 'string') {
       this._wrapper.innerHTML = content
     } else if (content && content instanceof Element) {
+      while (this._wrapper.hasChildNodes()) {
+        this._wrapper.removeChild(this._wrapper.firstChild)
+      }
       this._wrapper.appendChild(content)
     }
     return this

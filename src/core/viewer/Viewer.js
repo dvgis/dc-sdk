@@ -421,6 +421,15 @@ class Viewer {
   }
 
   /**
+   * Removes terrain
+   * @returns {Viewer}
+   */
+  removeTerrain() {
+    this._delegate.terrainProvider = new Cesium.EllipsoidTerrainProvider()
+    return this
+  }
+
+  /**
    *
    * @param layerGroup
    * @returns {Viewer}
@@ -641,6 +650,7 @@ class Viewer {
    */
   destroy() {
     this._delegate.destroy()
+    this._delegate = undefined
     return this
   }
 

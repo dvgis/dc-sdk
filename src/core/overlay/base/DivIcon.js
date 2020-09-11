@@ -51,9 +51,16 @@ class DivIcon extends Overlay {
     if (content && typeof content === 'string') {
       this._delegate.innerHTML = content
     } else if (content && content instanceof Element) {
+      while (this._delegate.hasChildNodes()) {
+        this._delegate.removeChild(this._delegate.firstChild)
+      }
       this._delegate.appendChild(content)
     }
     return this
+  }
+
+  get content() {
+    return this._content
   }
 
   /**
