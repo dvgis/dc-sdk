@@ -17,8 +17,9 @@ class Transform {
    */
   static transformCartesianToWGS84(cartesian) {
     if (cartesian) {
-      let ellipsoid = Cesium.Ellipsoid.WGS84
-      let cartographic = ellipsoid.cartesianToCartographic(cartesian)
+      let cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(
+        cartesian
+      )
       return new Position(
         Cesium.Math.toDegrees(cartographic.longitude),
         Cesium.Math.toDegrees(cartographic.latitude),

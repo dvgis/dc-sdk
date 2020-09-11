@@ -29,46 +29,50 @@ class HawkeyeMap extends Widget {
     super()
     this._wrapper = DomUtil.create('div', 'dc-hawkeye-map', null)
     this._wrapper.setAttribute('id', Util.uuid())
-    this._baseLayer = undefined
-    this._delegate = undefined
+    this._baseLayers = []
+    this._map = undefined
     this.type = Widget.getWidgetType('hawkeye_map')
     this._state = State.INITIALIZED
   }
 
-  _prepareDelegate() {
-    this._delegate = new Cesium.Viewer(this._wrapper, {
+  get baseLayers() {
+    return this._baseLayers
+  }
+
+  _mountMap() {
+    let viewer = new Cesium.Viewer(this._wrapper, {
       ...DEF_OPTS,
       sceneMode: Cesium.SceneMode.SCENE2D
     })
-    this._delegate.scene.screenSpaceCameraController.enableRotate = false
-    this._delegate.scene.screenSpaceCameraController.enableTranslate = false
-    this._delegate.scene.screenSpaceCameraController.enableZoom = false
-    this._delegate.scene.screenSpaceCameraController.enableTilt = false
-    this._delegate.scene.screenSpaceCameraController.enableLook = false
-    this._delegate.cesiumWidget._creditContainer.style.display = 'none'
-    this._delegate.cesiumWidget.screenSpaceEventHandler.removeInputAction(
+    viewer.scene.screenSpaceCameraController.enableRotate = false
+    viewer.scene.screenSpaceCameraController.enableTranslate = false
+    viewer.scene.screenSpaceCameraController.enableZoom = false
+    viewer.scene.screenSpaceCameraController.enableTilt = false
+    viewer.scene.screenSpaceCameraController.enableLook = false
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
+    viewer.scene.backgroundColor = Cesium.Color.TRANSPARENT
+    viewer.cesiumWidget._creditContainer.style.display = 'none'
+    viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
     )
-    this._delegate.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
-    this._delegate.scene.backgroundColor = Cesium.Color.TRANSPARENT
-    this._delegate.scene.postProcessStages.fxaa.enabled = true
-    this._delegate.imageryLayers.removeAll()
+    viewer.imageryLayers.removeAll()
+    this._map = viewer
   }
 
   _bindEvent() {
-    this._viewer.camera.changed.addEventListener(this._sync2DView, this)
+    this._viewer.camera.changed.addEventListener(this._syncMap, this)
   }
 
   _unbindEvent() {
-    this._viewer.camera.changed.removeEventListener(this._sync2DView, this)
+    this._viewer.camera.changed.removeEventListener(this._syncMap, this)
   }
 
   _installHook() {
-    this._prepareDelegate()
+    this._mountMap()
     this._viewer.camera.percentageChanged = 0.01
   }
 
-  _sync2DView() {
+  _syncMap() {
     let viewCenter = new Cesium.Cartesian2(
       Math.floor(this._viewer.canvas.clientWidth / 2),
       Math.floor(this._viewer.canvas.clientHeight / 2)
@@ -79,25 +83,33 @@ class HawkeyeMap extends Widget {
     }
     let distance = Cesium.Cartesian3.distance(
       worldPosition,
-      this._viewer.scene.camera.positionWC
+      this._delegate.scene.camera.positionWC
     )
-    this._delegate.scene.camera.lookAt(
+    this._map.scene.camera.lookAt(
       worldPosition,
       new Cesium.Cartesian3(0.0, 0.0, distance)
     )
   }
 
+  /**
+   *
+   * @param baseLayer
+   * @returns {HawkeyeMap}
+   */
   addBaseLayer(baseLayer) {
-    if (!this._delegate || !this._enable) {
+    if (!this._map || !this._enable) {
       return this
     }
     if (baseLayer) {
-      if (this._baseLayer) {
-        this._delegate.imageryLayers.remove(this._baseLayer)
+      if (this._baseLayers && this._baseLayers.length) {
+        this._map.imageryLayers.removeAll()
       }
-      this._baseLayer = this._delegate.imageryLayers.addImageryProvider(
-        baseLayer
-      )
+      if (!Array.isArray(baseLayer)) {
+        baseLayer = [baseLayer]
+      }
+      baseLayer.forEach(item => {
+        this._baseLayers.push(this._map.imageryLayers.addImageryProvider(item))
+      })
     }
     return this
   }

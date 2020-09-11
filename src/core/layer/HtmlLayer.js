@@ -71,9 +71,8 @@ class HtmlLayer extends Layer {
    * @returns {HtmlLayer}
    */
   clear() {
-    let childNodes = this._delegate.childNodes
-    for (let i = childNodes.length - 1; i >= 0; i--) {
-      this._delegate.removeChild(childNodes[i])
+    while (this._delegate.hasChildNodes()) {
+      this._delegate.removeChild(this._delegate.firstChild)
     }
     this._cache = {}
     this._state = State.CLEARED
