@@ -22,7 +22,7 @@ class DivIcon extends Overlay {
       top: '0',
       left: '0'
     })
-    this._content = content
+    this.content = content
     this.type = Overlay.getOverlayType('div_icon')
     this._state = State.INITIALIZED
   }
@@ -47,7 +47,6 @@ class DivIcon extends Overlay {
   }
 
   set content(content) {
-    this._content = content
     if (content && typeof content === 'string') {
       this._delegate.innerHTML = content
     } else if (content && content instanceof Element) {
@@ -60,7 +59,7 @@ class DivIcon extends Overlay {
   }
 
   get content() {
-    return this._content
+    return this._delegate.childNodes || []
   }
 
   /**
@@ -113,7 +112,7 @@ class DivIcon extends Overlay {
   _addHandler(layer) {
     this._layer = layer
     this._layer.delegate.appendChild(this._delegate)
-    this._delegate.addEventListener('click', e => {
+    this._delegate.addEventListener('click', () => {
       this._overlayEvent.fire(MouseEventType.CLICK, {
         layer: layer,
         overlay: this,
@@ -166,7 +165,7 @@ class DivIcon extends Overlay {
    * @returns {DivIcon}
    */
   static fromEntity(entity, content) {
-    let divIcon = undefined
+    let divIcon
     let now = Cesium.JulianDate.now()
     let position = Transform.transformCartesianToWGS84(
       entity.position.getValue(now)

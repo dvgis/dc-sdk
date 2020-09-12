@@ -4,6 +4,7 @@
  */
 
 import { DomUtil, Util } from '../utils'
+import { SceneEventType } from '../event'
 import State from '../state/State'
 import Widget from './Widget'
 
@@ -40,31 +41,33 @@ class HawkeyeMap extends Widget {
   }
 
   _mountMap() {
-    let viewer = new Cesium.Viewer(this._wrapper, {
+    let map = new Cesium.Viewer(this._wrapper, {
       ...DEF_OPTS,
       sceneMode: Cesium.SceneMode.SCENE2D
     })
-    viewer.scene.screenSpaceCameraController.enableRotate = false
-    viewer.scene.screenSpaceCameraController.enableTranslate = false
-    viewer.scene.screenSpaceCameraController.enableZoom = false
-    viewer.scene.screenSpaceCameraController.enableTilt = false
-    viewer.scene.screenSpaceCameraController.enableLook = false
-    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
-    viewer.scene.backgroundColor = Cesium.Color.TRANSPARENT
-    viewer.cesiumWidget._creditContainer.style.display = 'none'
-    viewer.cesiumWidget.screenSpaceEventHandler.removeInputAction(
+    map.imageryLayers.removeAll()
+    map.cesiumWidget._creditContainer.style.display = 'none'
+    map.cesiumWidget.screenSpaceEventHandler.removeInputAction(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
     )
-    viewer.imageryLayers.removeAll()
-    this._map = viewer
+    map.scene.backgroundColor = Cesium.Color.TRANSPARENT
+    Util.merge(map.scene.screenSpaceCameraController, {
+      enableRotate: false,
+      enableTranslate: false,
+      enableZoom: false,
+      enableTilt: false,
+      enableLook: false,
+      maximumZoomDistance: 40489014.0
+    })
+    this._map = map
   }
 
   _bindEvent() {
-    this._viewer.camera.changed.addEventListener(this._syncMap, this)
+    this._viewer.on(SceneEventType.CAMERA_CHANGED, this._syncMap, this)
   }
 
   _unbindEvent() {
-    this._viewer.camera.changed.removeEventListener(this._syncMap, this)
+    this._viewer.off(SceneEventType.CAMERA_CHANGED, this._syncMap, this)
   }
 
   _installHook() {
@@ -83,7 +86,7 @@ class HawkeyeMap extends Widget {
     }
     let distance = Cesium.Cartesian3.distance(
       worldPosition,
-      this._delegate.scene.camera.positionWC
+      this._viewer.scene.camera.positionWC
     )
     this._map.scene.camera.lookAt(
       worldPosition,

@@ -81,20 +81,20 @@ class Widget {
      *  add postRender Listener
      */
     if (this._viewer && this._wrapper && this._positionChangeable) {
-      let self = this
+      let _this = this
       let scene = this._viewer.scene
       scene.postRender.addEventListener(() => {
         if (
-          self._position &&
-          self._enable &&
-          self._updateWindowCoord &&
-          self._wrapper.style.visibility === 'visible'
+          _this._position &&
+          _this._enable &&
+          _this._updateWindowCoord &&
+          _this._wrapper.style.visibility === 'visible'
         ) {
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
             scene,
-            self._position
+            _this._position
           )
-          windowCoord && self._updateWindowCoord(windowCoord)
+          windowCoord && _this._updateWindowCoord(windowCoord)
         }
       })
     }

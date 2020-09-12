@@ -23,7 +23,6 @@ class ViewerOption {
     this._viewer.delegate.cesiumWidget.screenSpaceEventHandler.removeInputAction(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
     )
-
     this._viewer.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
     this._viewer.scene.backgroundColor = Cesium.Color.TRANSPARENT
     this._viewer.delegate.imageryLayers.removeAll()
@@ -37,7 +36,6 @@ class ViewerOption {
   _setViewerOption() {
     this._viewer.delegate.shadows = this._options.shadows ?? false
     this._viewer.delegate.resolutionScale = this._options.resolutionScale || 1.0
-
     return this
   }
 
@@ -71,7 +69,6 @@ class ViewerOption {
     scene.postProcessStages.fxaa.enabled = this._options.enableFxaa ?? false
 
     let cameraController = this._options.cameraController
-
     Util.merge(scene.screenSpaceCameraController, {
       enableRotate: cameraController?.enableRotate ?? true,
       enableTilt: cameraController?.enableTilt ?? true,

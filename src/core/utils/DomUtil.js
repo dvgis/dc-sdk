@@ -194,10 +194,10 @@ class DomUtil {
   }
 
   /**
-   *
+   * enter full screen
    * @param el
    */
-  static fullscreen(el) {
+  static enterFullscreen(el) {
     if (!el) {
       return
     }
@@ -213,7 +213,7 @@ class DomUtil {
   }
 
   /**
-   *
+   * exit full screen
    */
   static exitFullscreen() {
     if (document.exitFullscreen) {
