@@ -24,7 +24,6 @@ const install = function(DC) {
       }
       callback && callback()
     } catch (e) {
-      delete window.DC
       // eslint-disable-next-line no-console
       console.error(e)
     }
@@ -32,7 +31,6 @@ const install = function(DC) {
 }
 
 /* istanbul ignore if */
-
 if (typeof window !== 'undefined' && window.DC) {
   install(window.DC)
 }

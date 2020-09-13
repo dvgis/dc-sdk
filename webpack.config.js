@@ -5,58 +5,22 @@
 
 const path = require('path')
 const webpack = require('webpack')
-const packageInfo = require('./package.json')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const JavaScriptObfuscator = require('webpack-obfuscator')
-
 const cesiumBuild = 'node_modules/cesium/Build/Cesium'
-
-let cesiumCopyPlugin = [
-  new CopyWebpackPlugin([
-    { from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' }
-  ]),
-  new CopyWebpackPlugin([
-    { from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' }
-  ]),
-  new CopyWebpackPlugin([
-    { from: path.join(cesiumBuild, 'ThirdParty'), to: 'resources/ThirdParty' }
-  ])
-]
 
 function resolve(dir) {
   return path.join(__dirname, '.', dir)
-}
-
-function getTime() {
-  let now = new Date()
-  let m = now.getMonth() + 1
-  m = m < 10 ? '0' + m : m
-  let d = now.getDate()
-  d = d < 10 ? '0' + d : d
-  let h = now.getHours()
-  h = h < 10 ? '0' + h : h
-  let min = now.getMinutes()
-  min = min < 10 ? '0' + min : min
-  let s = now.getSeconds()
-  s = s < 10 ? '0' + s : s
-  return `${now.getFullYear()}-${m}-${d} ${h}:${min}:${s}`
 }
 
 module.exports = env => {
   const IS_PROD = (env && env.production) || false
   const publicPath = IS_PROD ? '/' : '/'
   let plugins = [
-    ...cesiumCopyPlugin,
     new MiniCssExtractPlugin({
       filename: IS_PROD ? '[name].min.css' : '[name].css',
       allChunks: true
-    }),
-    new webpack.DefinePlugin({
-      CESIUM_BASE_URL: JSON.stringify('./libs/dc-sdk/resources/'),
-      'build.version': JSON.stringify(packageInfo.version),
-      'build.time': JSON.stringify(getTime())
     })
   ]
   if (IS_PROD) {
@@ -67,27 +31,22 @@ module.exports = env => {
         {
           rotateStringArray: true
         },
-        ['dc.base.min.js']
+        []
       )
     )
   }
   return {
     entry: {
-      'dc.base': ['base'],
-      'dc.core': ['entry', 'theme']
+      'dc.core': ['theme', 'entry']
     },
-    devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
+    devtool: IS_PROD ? false : 'source-map',
     output: {
       filename: IS_PROD ? '[name].min.js' : '[name].js',
       path: path.resolve(__dirname, 'dist'),
       publicPath: publicPath,
-      sourcePrefix: ''
-    },
-    amd: {
-      toUrlUndefined: true
-    },
-    node: {
-      fs: 'empty'
+      library: 'DcCore',
+      libraryTarget: 'umd',
+      umdNamedDefine: true
     },
     module: {
       unknownContextCritical: false,
@@ -144,7 +103,6 @@ module.exports = env => {
       extensions: ['.js', '.json', '.css'],
       alias: {
         '@': resolve('src'),
-        base: './src/base/index.js',
         entry: './src/core/index.js',
         theme: './src/themes/index.js',
         cesium: path.resolve(__dirname, cesiumBuild)

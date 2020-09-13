@@ -5,38 +5,35 @@
 
 import { initMixin, initUse } from './global-api'
 
-delete window.DC
-
 let DC = {
-  Author: 'Caven Chen <cavencj@gmail.com>',
-  GitHub: 'https://github.com/dvgis/dc-sdk',
-  Home: 'https://www.dvgis.cn',
+  Author: build.author,
+  GitHub: build.repository,
+  Home: build.homepage,
   Version: build.version,
   Namespace: {},
   Initialized: false
 }
 
-window.DC = DC
-;(function() {
-  require('../log')
-  initMixin(window.DC)
-  initUse(window.DC)
-  let cesiumLoaded = false
-  DC.init = callback => {
-    if (!cesiumLoaded) {
-      new Promise((resolve, reject) => {
-        let Cesium = require('cesium/Cesium')
-        resolve(Cesium)
-      }).then(Cesium => {
-        DC.Namespace['Cesium'] = Cesium
-        cesiumLoaded = true
-        delete window.Cesium
-        callback && callback()
-      })
-    } else {
+initMixin(DC)
+initUse(DC)
+
+let cesiumLoaded = false
+DC.init = callback => {
+  if (!cesiumLoaded) {
+    new Promise((resolve, reject) => {
+      let Cesium = require('cesium/Cesium')
+      resolve(Cesium)
+    }).then(Cesium => {
+      DC.Namespace['Cesium'] = Cesium
+      cesiumLoaded = true
+      delete window.Cesium
       callback && callback()
-    }
+    })
+  } else {
+    callback && callback()
   }
-})()
+}
+
+require('../log')
 
 export default DC

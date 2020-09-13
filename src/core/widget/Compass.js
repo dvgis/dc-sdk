@@ -4,6 +4,7 @@
  */
 
 import { DomUtil } from '../utils'
+import { SceneEventType } from '../event'
 import Icon from '../icon'
 import State from '../state/State'
 import Widget from './Widget'
@@ -32,20 +33,11 @@ class Compass extends Widget {
   }
 
   _bindEvent() {
-    this._removeSubscription = this._viewer.scene.postRender.addEventListener(
-      () => {
-        let heading = this._viewer.camera.heading
-        this._outRing.style.cssText = `
-      transform : rotate(-${heading}rad);
-      -webkit-transform : rotate(-${heading}rad);
-      `
-      },
-      this
-    )
+    this._viewer.on(SceneEventType.POST_RENDER, this._postRenderHandler, this)
   }
 
   _unbindEvent() {
-    this._removeSubscription()
+    this._viewer.off(SceneEventType.POST_RENDER, this._postRenderHandler, this)
   }
 
   _installHook() {
@@ -56,6 +48,15 @@ class Compass extends Widget {
     this._wrapper.ondblclick = e => {
       this._handleDoubleClick(e)
     }
+  }
+
+  _postRenderHandler() {
+    let heading = this._viewer.camera.heading
+    this._outRing &&
+      (this._outRing.style.cssText = `
+      transform : rotate(-${heading}rad);
+      -webkit-transform : rotate(-${heading}rad);
+      `)
   }
 
   _createCompassDom() {

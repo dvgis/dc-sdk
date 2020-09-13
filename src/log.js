@@ -9,12 +9,12 @@ console.clear()
 // eslint-disable-next-line no-console
 console.log(
   `%c \n DC-SDK \n  %c \n 用数字描绘世界之美  %c \n
-    版本:${DC.Version}
+    版本:${build.version}
     编译日期:${build.time}
     Cesium版本：1.73
-    作者:${DC.Author}
-    主页: ${DC.Home}
-    github:${DC.GitHub}
+    作者:${build.author}
+    主页: ${build.homepage}
+    github:${build.repository}
     授权信息：授权-永久使用此软件当前版本。 \n
 
     版权声明:
