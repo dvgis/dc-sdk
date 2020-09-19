@@ -4,9 +4,9 @@
  */
 
 import { Util } from '../../utils'
+import State from '../../state/State'
 import Transform from '../../transform/Transform'
 import Parse from '../../parse/Parse'
-import State from '../../state/State'
 import Overlay from '../Overlay'
 
 const { Cesium } = DC.Namespace

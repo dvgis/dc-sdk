@@ -37,14 +37,14 @@ class Tileset extends Overlay {
    * @param {*} layer
    * Overrides parent methods
    */
-  _addHandler(layer) {
+  _onAdd(layer) {
     if (!layer) {
       return false
     }
     this._layer = layer
     this._delegate.readyPromise.then(tileset => {
       this._layer.delegate.add(tileset)
-      tileset.layer = layer
+      tileset.layerId = layer?.layerId
       tileset.overlayId = this._id
       this._state = State.ADDED
     })
@@ -53,7 +53,7 @@ class Tileset extends Overlay {
   /**
    * Overrides parent methods
    */
-  _removeHandler() {
+  _onRemove() {
     if (!this._layer) {
       return false
     }

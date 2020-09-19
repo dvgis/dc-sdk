@@ -39,7 +39,7 @@ module.exports = env => {
     entry: {
       'dc.core': ['theme', 'entry']
     },
-    devtool: IS_PROD ? false : 'source-map',
+    devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
     output: {
       filename: IS_PROD ? '[name].min.js' : '[name].js',
       path: path.resolve(__dirname, 'dist'),

@@ -3,17 +3,14 @@
  * @Date: 2020-03-30 17:14:00
  */
 
-import { Label } from '../overlay'
 import State from '../state/State'
+import { Label } from '../overlay'
 import Layer from './Layer'
 
 const { Cesium } = DC.Namespace
 
 class LabelLayer extends Layer {
-  constructor(id, url) {
-    if (!url) {
-      throw new Error('LabelLayer：the url invalid')
-    }
+  constructor(id, url = '') {
     super(id)
     this._dataSource = Cesium.GeoJsonDataSource.load(url)
     this._delegate = new Cesium.CustomDataSource(id)

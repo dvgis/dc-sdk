@@ -10,7 +10,10 @@ const State = {
   CLEARED: 'cleared',
   INSTALLED: 'installed',
   ENABLED: 'enabled',
-  DISABLED: 'disabled'
+  DISABLED: 'disabled',
+  PLAY: 'play',
+  PAUSE: 'pause',
+  RESTORE: 'restore'
 }
 
 export default State

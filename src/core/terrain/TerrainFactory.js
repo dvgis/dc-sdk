@@ -3,6 +3,8 @@
  * @Date: 2020-01-21 15:54:56
  */
 
+import TerrainType from './TerrainType'
+
 const { Cesium } = DC.Namespace
 
 class TerrainFactory {
@@ -49,6 +51,36 @@ class TerrainFactory {
    */
   static createVRTerrain(options) {
     return new Cesium.VRTheWorldTerrainProvider(options)
+  }
+
+  /**
+   * Create Terrain
+   * @param type
+   * @param options
+   * @returns {any}
+   */
+  static createTerrain(type, options) {
+    let terrain = undefined
+    switch (type) {
+      case TerrainType.NONE:
+        terrain = this.createEllipsoidTerrain(options)
+        break
+      case TerrainType.XYZ:
+        terrain = this.createUrlTerrain(options)
+        break
+      case TerrainType.GOOGLE:
+        terrain = this.createGoogleTerrain(options)
+        break
+      case TerrainType.ARCGIS:
+        terrain = this.createArcgisTerrain(options)
+        break
+      case TerrainType.VR:
+        terrain = this.createVRTerrain(options)
+        break
+      default:
+        break
+    }
+    return terrain
   }
 }
 

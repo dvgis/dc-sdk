@@ -3,9 +3,10 @@
  * @Date: 2020-01-13 10:13:53
  */
 
-import { Layer, VectorLayer } from './index'
-import { Billboard, Polyline, Polygon, Model } from '../overlay'
 import State from '../state/State'
+import Layer from './Layer'
+import VectorLayer from './VectorLayer'
+import { Billboard, Polyline, Polygon, Model } from '../overlay'
 
 const { Cesium } = DC.Namespace
 

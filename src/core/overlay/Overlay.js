@@ -20,8 +20,8 @@ class Overlay {
     this._attr = {}
     this._overlayEvent = new OverlayEvent()
     this.type = undefined
-    this.on(OverlayEventType.ADD, this._addHandler, this)
-    this.on(OverlayEventType.REMOVE, this._removeHandler, this)
+    this.on(OverlayEventType.ADD, this._onAdd, this)
+    this.on(OverlayEventType.REMOVE, this._onRemove, this)
   }
 
   get overlayId() {
@@ -84,7 +84,7 @@ class Overlay {
     if (!this._delegate) {
       return false
     }
-    this._delegate.layer = this._layer
+    this._delegate.layerId = this._layer?.layerId
     this._delegate.overlayId = this._id
   }
 
@@ -101,7 +101,7 @@ class Overlay {
    * @returns {boolean}
    * @private
    */
-  _addHandler(layer) {
+  _onAdd(layer) {
     if (!layer) {
       return false
     }
@@ -118,7 +118,7 @@ class Overlay {
    * Remove handler
    * @private
    */
-  _removeHandler() {
+  _onRemove() {
     if (this._layer?.delegate?.entities) {
       this._layer.delegate.entities.remove(this._delegate)
       this._removedHook && this._removedHook()

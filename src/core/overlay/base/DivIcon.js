@@ -94,11 +94,13 @@ class DivIcon extends Overlay {
 
     let distanceDisplayCondition = this._style.distanceDisplayCondition
     if (distance && distanceDisplayCondition) {
-      this.show = isBetween(
-        distance,
-        distanceDisplayCondition.near,
-        distanceDisplayCondition.far
-      )
+      this.show =
+        this._show &&
+        isBetween(
+          distance,
+          distanceDisplayCondition.near,
+          distanceDisplayCondition.far
+        )
     }
     this._delegate.style.transform = `${translate3d} ${scale3d}`
   }
@@ -109,7 +111,7 @@ class DivIcon extends Overlay {
    * @returns {boolean}
    * @private
    */
-  _addHandler(layer) {
+  _onAdd(layer) {
     this._layer = layer
     this._layer.delegate.appendChild(this._delegate)
     this._delegate.addEventListener('click', () => {
@@ -126,7 +128,7 @@ class DivIcon extends Overlay {
    *
    * @private
    */
-  _removeHandler() {
+  _onRemove() {
     if (this._layer) {
       this._layer.delegate.removeChild(this._delegate)
       this._state = State.REMOVED

@@ -12,19 +12,31 @@ const { Cesium } = DC.Namespace
 
 class Layer {
   constructor(id) {
-    this._id = id || Util.uuid()
+    this._id = Util.uuid()
+    this._bid = id || Util.uuid()
     this._delegate = undefined
     this._viewer = undefined
     this._state = undefined
     this._show = true
     this._cache = {}
     this._attr = {}
-    this._style = {}
     this._layerEvent = new LayerEvent()
-    this._layerEvent.on(LayerEventType.ADD, this._addHandler, this)
-    this._layerEvent.on(LayerEventType.REMOVE, this._removeHandler, this)
+    this._layerEvent.on(LayerEventType.ADD, this._onAdd, this)
+    this._layerEvent.on(LayerEventType.REMOVE, this._onRemove, this)
     this._state = undefined
     this.type = undefined
+  }
+
+  get layerId() {
+    return this._id
+  }
+
+  get id() {
+    return this._bid
+  }
+
+  get delegate() {
+    return this._delegate
   }
 
   set show(show) {
@@ -46,14 +58,6 @@ class Layer {
 
   get attr() {
     return this._attr
-  }
-
-  get id() {
-    return this._id
-  }
-
-  get delegate() {
-    return this._delegate
   }
 
   get state() {
@@ -78,7 +82,7 @@ class Layer {
    * @param viewer
    * @private
    */
-  _addHandler(viewer) {
+  _onAdd(viewer) {
     this._viewer = viewer
     if (this._delegate instanceof Cesium.PrimitiveCollection) {
       this._viewer.scene.primitives.add(this._delegate)
@@ -95,7 +99,7 @@ class Layer {
    * @returns {boolean}
    * @private
    */
-  _removeHandler() {
+  _onRemove() {
     if (!this._delegate) {
       return false
     }

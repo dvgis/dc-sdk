@@ -106,7 +106,9 @@ class MouseEvent extends Event {
 
     // for Entity
     if (target && target.id && target.id instanceof Cesium.Entity) {
-      layer = target.id.layer
+      layer = this._viewer
+        .getLayers()
+        .filter(item => item.layerId === target.id.layerId)[0]
       if (layer && layer.getOverlay) {
         overlay = layer.getOverlay(target.id.overlayId)
       }
@@ -114,7 +116,9 @@ class MouseEvent extends Event {
 
     // for Cesium3DTileFeature
     if (target && target instanceof Cesium.Cesium3DTileFeature) {
-      layer = target.tileset.layer
+      layer = this._viewer
+        .getLayers()
+        .filter(item => item.layerId === target.tileset.layerId)[0]
       feature = target
       if (layer && layer.getOverlay) {
         overlay = layer.getOverlay(target.tileset.overlayId)

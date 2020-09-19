@@ -4,9 +4,9 @@
  */
 
 import { DomUtil } from '../utils'
-import Layer from './Layer'
 import State from '../state/State'
 import Transform from '../transform/Transform'
+import Layer from './Layer'
 
 const { Cesium } = DC.Namespace
 
@@ -34,7 +34,7 @@ class HtmlLayer extends Layer {
    * @param viewer
    * @private
    */
-  _addHandler(viewer) {
+  _onAdd(viewer) {
     this._viewer = viewer
     this._viewer.dcContainer.appendChild(this._delegate)
     let scene = this._viewer.scene
@@ -42,6 +42,7 @@ class HtmlLayer extends Layer {
       let cameraPosition = this._viewer.camera.positionWC
       this.eachOverlay(item => {
         if (item && item.position) {
+          item.show = this.show
           let position = Transform.transformWGS84ToCartesian(item.position)
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
             scene,
@@ -60,7 +61,7 @@ class HtmlLayer extends Layer {
    * @returns {boolean}
    * @private
    */
-  _removeHandler() {
+  _onRemove() {
     this._renderRemoveCallback && this._renderRemoveCallback()
     this._viewer.dcContainer.removeChild(this._delegate)
     this._state = State.REMOVED

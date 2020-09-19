@@ -3,10 +3,10 @@
  * @Date: 2020-08-27 19:50:32
  */
 
-import Util from '../../core/utils/Util'
+import { Util } from '../../core/utils'
 import State from '../state/State'
-import Layer from './Layer'
 import { LayerGroupEventType, LayerGroupEvent } from '../event'
+import Layer from './Layer'
 
 class LayerGroup {
   constructor(id) {
@@ -15,12 +15,8 @@ class LayerGroup {
     this._show = true
     this._viewer = undefined
     this._layerGroupEvent = new LayerGroupEvent()
-    this._layerGroupEvent.on(LayerGroupEventType.ADD, this._addHandler, this)
-    this._layerGroupEvent.on(
-      LayerGroupEventType.REMOVE,
-      this._removeHandler,
-      this
-    )
+    this._layerGroupEvent.on(LayerGroupEventType.ADD, this._onAdd, this)
+    this._layerGroupEvent.on(LayerGroupEventType.REMOVE, this._onRemove, this)
     this.type = Layer.getLayerType('layer-group')
     this._state = State.INITIALIZED
   }
@@ -53,7 +49,7 @@ class LayerGroup {
    * @param viewer
    * @private
    */
-  _addHandler(viewer) {
+  _onAdd(viewer) {
     this._viewer = viewer
     Object.keys(this._cache).forEach(key => {
       this._viewer.addLayer(this._cache[key])
@@ -65,7 +61,7 @@ class LayerGroup {
    *
    * @private
    */
-  _removeHandler() {
+  _onRemove() {
     Object.keys(this._cache).forEach(key => {
       this._viewer && this._viewer.remove(this._cache[key])
     })
@@ -74,7 +70,7 @@ class LayerGroup {
   }
 
   /**
-   *
+   * Adds a layer
    * @param layer
    * @returns {LayerGroup}
    */
@@ -87,7 +83,7 @@ class LayerGroup {
   }
 
   /**
-   *
+   * Removes a layer
    * @param layer
    * @returns {LayerGroup}
    */
@@ -100,7 +96,7 @@ class LayerGroup {
   }
 
   /**
-   *
+   * Returns a layer by id
    * @param id
    * @returns {*|undefined}
    */
@@ -109,7 +105,7 @@ class LayerGroup {
   }
 
   /**
-   *
+   * Returns all layers
    * @returns {[]}
    */
   getLayers() {
@@ -121,11 +117,23 @@ class LayerGroup {
   }
 
   /**
+   * Adds to the viewer
+   * @param viewer
+   * @returns {LayerGroup}
+   */
+  addTo(viewer) {
+    if (viewer && viewer.addLayerGroup) {
+      viewer.addLayerGroup(this)
+    }
+    return this
+  }
+
+  /**
    *
    * @returns {LayerGroup}
    */
   remove() {
-    this._viewer && this._viewer.removeLayer(this)
+    this._viewer && this._viewer.removeLayerGroup(this)
     return this
   }
 }

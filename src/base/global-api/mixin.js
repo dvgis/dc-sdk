@@ -4,16 +4,15 @@
  */
 
 const ignores = [
+  'version',
+  'author',
+  'home_page',
   'init',
   'ready',
   'use',
   'mixin',
   'Namespace',
-  'Initialized',
-  'Version',
-  'Author',
-  'GitHub',
-  'Home'
+  'Initialized'
 ]
 
 /**

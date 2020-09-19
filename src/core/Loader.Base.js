@@ -6,8 +6,9 @@
 import { Util, DomUtil, PlotUtil } from './utils'
 import { MouseEventType, SceneEventType, Event } from './event'
 import { LayerType, Layer } from './layer'
-import { Overlay, OverlayType } from './overlay'
+import { OverlayType, Overlay } from './overlay'
 import ImageryType from './imagery/ImageryType'
+import TerrainType from './terrain/TerrainType'
 import WidgetType from './widget/WidgetType'
 import State from './state/State'
 import Position from './position/Position'
@@ -21,6 +22,7 @@ const base = {
   State,
   Event,
   ImageryType,
+  TerrainType,
   LayerType,
   OverlayType,
   MouseEventType,

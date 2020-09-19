@@ -50,17 +50,6 @@ class Util {
   }
 
   /**
-   *
-   * @function trim(str: String): String
-   * Compatibility polyfill for [String.prototype.trim](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
-   * @param {*} str
-   *
-   */
-  static trim(str) {
-    return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '')
-  }
-
-  /**
    * @function splitWords(str: String): String[]
    * Trims and splits the string on whitespace and returns the array of parts.
    * @param {*} str
@@ -86,6 +75,39 @@ class Util {
   }
 
   /**
+   *  @function formatNum(num: Number, digits?: Number): Number
+   *  Returns the number `num` rounded to `digits` decimals, or to 6 decimals by default.
+   * @param num
+   * @param digits
+   * @returns {number}
+   */
+  static formatNum(num, digits) {
+    let pow = Math.pow(10, digits === undefined ? 6 : digits)
+    return Math.round(num * pow) / pow
+  }
+
+  /**
+   * @function trim(str: String): String
+   * Compatibility polyfill for [String.prototype.trim](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/Trim)
+   * @param {*} str
+   */
+  static trim(str) {
+    return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, '')
+  }
+
+  /**
+   *  Data URI string containing a base64-encoded empty GIF image.
+   * Used as a hack to free memory from unused images on WebKit-powered
+   * mobile devices (by setting image `src` to this string).
+   * @returns {string}
+   */
+  static emptyImageUrl() {
+    return (function() {
+      return 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
+    })()
+  }
+
+  /**
    * @function checkPosition(position: Object): Boolean
    * Check position for validity
    * @param {*} position
@@ -97,26 +119,6 @@ class Util {
       position.hasOwnProperty('_lat') &&
       position.hasOwnProperty('_alt')
     )
-  }
-
-  /**
-   * Checks positions for validity
-   * @param positions
-   * @returns {Boolean}
-   */
-  static checkPositions(positions) {
-    return (
-      positions && (typeof positions === 'string' || Array.isArray(positions))
-    )
-  }
-
-  /**
-   * Checks viewer for validity
-   * @param viewer
-   * @returns {Boolean}
-   */
-  static checkViewer(viewer) {
-    return viewer && viewer.delegate && viewer.canvas
   }
 }
 

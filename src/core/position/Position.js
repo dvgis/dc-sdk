@@ -109,10 +109,36 @@ class Position {
 
   /**
    *
+   * @returns {*[]}
+   */
+  toArray() {
+    return [this.lng, this.lat, this.alt, this.heading, this.pitch, this.roll]
+  }
+
+  /**
+   *
    * @returns {string}
    */
   toString() {
     return `${this.lng},${this.lat},${this.alt},${this.heading},${this.pitch},${this.roll}`
+  }
+
+  /**
+   *
+   * @param arr
+   * @returns {Position}
+   */
+  static fromArray(arr) {
+    let position = new Position()
+    if (Array.isArray(arr)) {
+      position.lng = arr[0] || 0
+      position.lat = arr[1] || 0
+      position.alt = arr[2] || 0
+      position.heading = arr[3] || 0
+      position.pitch = arr[4] || 0
+      position.roll = arr[5] || 0
+    }
+    return position
   }
 
   /**
@@ -124,12 +150,7 @@ class Position {
     let position = new Position()
     if (str && typeof str === 'string') {
       let arr = str.split(',')
-      position.lng = arr[0] || 0
-      position.lat = arr[1] || 0
-      position.alt = arr[2] || 0
-      position.heading = arr[3] || 0
-      position.pitch = arr[4] || 0
-      position.roll = arr[5] || 0
+      position = this.fromArray(arr)
     }
     return position
   }

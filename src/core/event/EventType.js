@@ -5,7 +5,7 @@
 
 const { Cesium } = DC.Namespace
 
-const baseEventType = {
+const BaseEventType = {
   ADD: 'add',
   REMOVE: 'remove'
 }
@@ -17,11 +17,7 @@ const MouseEventType = {
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
   WHEEL: Cesium.ScreenSpaceEventType.WHEEL,
   MOUSE_OVER: 'mouseover',
-  MOUSE_OUT: 'mouseout',
-  DRAG_START: 'dragStart',
-  DRAG_END: 'dragEnd',
-  EDIT_START: 'editStart',
-  EDIT_END: 'editEnd'
+  MOUSE_OUT: 'mouseout'
 }
 
 const ViewerEventType = {
@@ -47,31 +43,20 @@ const SceneEventType = {
   CLOCK_TICK: 'clockTick'
 }
 
-const LayerGroupEventType = {
-  ...baseEventType
-}
-
-const LayerEventType = {
-  ...baseEventType,
-  CLEAR: 'clear'
-}
-
-const EffectEventType = {
-  ...baseEventType
-}
-
 const OverlayEventType = {
-  ...baseEventType,
+  ...BaseEventType,
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_OVER: 'mouseover',
-  MOUSE_OUT: 'mouseout',
-  DRAG_START: 'dragStart',
-  DRAG_END: 'dragEnd',
-  EDIT_START: 'editStart',
-  EDIT_END: 'editEnd'
+  MOUSE_OUT: 'mouseout'
 }
+
+const LayerGroupEventType = BaseEventType
+
+const LayerEventType = BaseEventType
+
+const EffectEventType = BaseEventType
 
 export {
   MouseEventType,
@@ -79,6 +64,6 @@ export {
   SceneEventType,
   LayerGroupEventType,
   LayerEventType,
-  EffectEventType,
-  OverlayEventType
+  OverlayEventType,
+  EffectEventType
 }

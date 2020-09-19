@@ -47,11 +47,11 @@ module.exports = env => {
     ...cesiumCopyPlugin,
     new webpack.DefinePlugin({
       CESIUM_BASE_URL: JSON.stringify('./libs/dc-sdk/resources/'),
-      'build.version': JSON.stringify(packageInfo.version),
-      'build.time': JSON.stringify(getTime()),
-      'build.author': JSON.stringify(packageInfo.author),
-      'build.repository': JSON.stringify(packageInfo.repository),
-      'build.homepage': JSON.stringify(packageInfo.homepage)
+      __VERSION__: JSON.stringify(packageInfo.version),
+      __TIME__: JSON.stringify(getTime()),
+      __AUTHOR__: JSON.stringify(packageInfo.author),
+      __REPOSITORY__: JSON.stringify(packageInfo.repository),
+      __HOME_PAGE__: JSON.stringify(packageInfo.homepage)
     })
   ]
   if (IS_PROD) {
@@ -61,7 +61,7 @@ module.exports = env => {
     entry: {
       'dc.base': ['base']
     },
-    devtool: IS_PROD ? false : 'source-map',
+    devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
     output: {
       filename: IS_PROD ? '[name].min.js' : '[name].js',
       path: path.resolve(__dirname, 'dist'),
