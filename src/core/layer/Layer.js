@@ -84,6 +84,9 @@ class Layer {
    */
   _onAdd(viewer) {
     this._viewer = viewer
+    if (!this._delegate) {
+      return
+    }
     if (this._delegate instanceof Cesium.PrimitiveCollection) {
       this._viewer.scene.primitives.add(this._delegate)
     } else {
@@ -96,12 +99,11 @@ class Layer {
   /**
    * The layer added callback function
    * Subclasses need to be overridden
-   * @returns {boolean}
    * @private
    */
   _onRemove() {
     if (!this._delegate) {
-      return false
+      return
     }
     if (this._viewer) {
       this._cache = {}
