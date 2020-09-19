@@ -68,7 +68,8 @@ module.exports = env => {
       publicPath: publicPath,
       library: 'DC',
       libraryExport: 'default',
-      libraryTarget: 'umd'
+      libraryTarget: 'umd',
+      umdNamedDefine: true
     },
     amd: {
       toUrlUndefined: true
