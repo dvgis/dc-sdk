@@ -37,9 +37,11 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 ```
 
 ```js
-import 'dvgis/dc-sdk/dist/dc.base.min' //基础包
-import 'dvgis/dc-sdk/dist/dc.core.min' //核心包
+import DC from 'dvgis/dc-sdk/dist/dc.base.min' //基础包
+import DcCore from  'dvgis/dc-sdk/dist/dc.core.min' //核心包
 import 'dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
+
+DC.use(DcCore)
 ```
 
 ## 配置
