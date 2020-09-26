@@ -18,11 +18,9 @@ const install = function(DC) {
   DC.ready = callback => {
     try {
       if (!DC.Initialized) {
-        new Promise((resolve, reject) => {
+        DC.init(() => {
           require('../thirdpart')
           require('./Loader')
-          resolve()
-        }).then(() => {
           DC.Initialized = true
           callback && callback()
         })
