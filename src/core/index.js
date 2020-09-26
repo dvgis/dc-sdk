@@ -18,11 +18,17 @@ const install = function(DC) {
   DC.ready = callback => {
     try {
       if (!DC.Initialized) {
-        require('../thirdpart')
-        require('./Loader')
-        DC.Initialized = true
+        new Promise((resolve, reject) => {
+          require('../thirdpart')
+          require('./Loader')
+          resolve()
+        }).then(() => {
+          DC.Initialized = true
+          callback && callback()
+        })
+      } else {
+        callback && callback()
       }
-      callback && callback()
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
