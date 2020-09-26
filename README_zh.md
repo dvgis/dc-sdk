@@ -1,9 +1,10 @@
 # DC-SDK
 
 <p>
+<img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/publish"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
-<img src="https://img.shields.io/github/package-json/v/dvgis/dc-sdk?color=orange&logo=github" />
-<img src="https://img.shields.io/npm/dw/@dvgis/dc-sdk?logo=npm"/>
+<img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
+<img src="https://img.shields.io/npm/dm/@dvgis/dc-sdk?logo=npm"/>
 </p>
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
@@ -72,6 +73,7 @@ module.exports = {
 ## 开始
 
 ```js
+global.DC = DC
 DC.use(DcCore)
 DC.ready(() => {
   let viewer = new DC.Viewer(divId) // divId 为一个div节点的Id属性值，如果不传入，会无法初始化3D场景
