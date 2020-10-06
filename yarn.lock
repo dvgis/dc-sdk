@@ -1658,10 +1658,10 @@ caseless@~0.12.0:
   resolved "https://registry.yarnpkg.com/caseless/-/caseless-0.12.0.tgz#1b681c21ff84033c826543090689420d187151dc"
   integrity sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=
 
-cesium@^1.73.0:
-  version "1.73.0"
-  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.73.0.tgz#49f49363c7a669d75810d4ea66e7a87423884978"
-  integrity sha512-HqvxPbCEsE1Szdm5qPIrBNjHG2cJ9Xk5uYMELmG0GuBL/sYaQ/0IMton43LUBY4E/wblRivNo1Vz7tIQweraFw==
+cesium@^1.74.0:
+  version "1.74.0"
+  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.74.0.tgz#79038abd40eb3e3a3223162d0984daf6d09496fb"
+  integrity sha512-PwHOz4nF9SUYrEo3Bcz0V7ebsB1XWqRkBkMWkn4BduBxNEzH8QdJ7ipuuNu8KZHfy3a1H2cOrwD8y8TikYmO8Q==
 
 chalk@4.1.0:
   version "4.1.0"

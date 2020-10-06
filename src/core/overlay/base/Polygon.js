@@ -45,7 +45,7 @@ class Polygon extends Overlay {
   }
 
   get center() {
-    return center(this._positions)
+    return center([...this._positions, this._positions[0]])
   }
 
   get area() {

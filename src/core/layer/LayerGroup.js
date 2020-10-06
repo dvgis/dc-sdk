@@ -17,7 +17,7 @@ class LayerGroup {
     this._layerGroupEvent = new LayerGroupEvent()
     this._layerGroupEvent.on(LayerGroupEventType.ADD, this._onAdd, this)
     this._layerGroupEvent.on(LayerGroupEventType.REMOVE, this._onRemove, this)
-    this.type = Layer.getLayerType('layer-group')
+    this.type = Layer.getLayerType('layer_group')
     this._state = State.INITIALIZED
   }
 
@@ -138,6 +138,6 @@ class LayerGroup {
   }
 }
 
-Layer.registerType('layer-group')
+Layer.registerType('layer_group')
 
 export default LayerGroup
