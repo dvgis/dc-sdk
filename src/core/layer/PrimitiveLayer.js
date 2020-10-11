@@ -5,7 +5,6 @@
 
 import State from '../state/State'
 import Layer from './Layer'
-import GeoJsonLayer from '@/core/layer/GeoJsonLayer'
 
 const { Cesium } = DC.Namespace
 
