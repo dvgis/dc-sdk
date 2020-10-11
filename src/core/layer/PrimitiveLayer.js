@@ -17,7 +17,7 @@ class PrimitiveLayer extends Layer {
   }
 
   /**
-   * Clears all entities
+   * Clears all primitives
    * @returns {PrimitiveLayer}
    */
   clear() {
