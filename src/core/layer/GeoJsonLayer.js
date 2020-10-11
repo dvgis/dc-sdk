@@ -99,7 +99,7 @@ class GeoJsonLayer extends Layer {
    * @returns {VectorLayer}
    */
   toVectorLayer() {
-    let layer = new VectorLayer(this._id)
+    let layer = new VectorLayer(this.id)
     this.eachOverlay(item => {
       if (item.billboard) {
         layer.addOverlay(this._createBillboard(item))
@@ -118,7 +118,7 @@ class GeoJsonLayer extends Layer {
    * @returns {VectorLayer}
    */
   toModelLayer(modelUrl) {
-    let layer = new VectorLayer(this._id)
+    let layer = new VectorLayer(this.id)
     this.eachOverlay(item => {
       layer.addOverlay(this._createModel(item, modelUrl))
     }, this)

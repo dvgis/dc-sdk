@@ -11,6 +11,7 @@ import {
   GeoJsonLayer,
   HtmlLayer,
   LabelLayer,
+  PrimitiveLayer,
   TilesetLayer,
   TopoJsonLayer,
   VectorLayer
@@ -61,6 +62,7 @@ const core = {
   GeoJsonLayer,
   HtmlLayer,
   LabelLayer,
+  PrimitiveLayer,
   TilesetLayer,
   TopoJsonLayer,
   VectorLayer,
