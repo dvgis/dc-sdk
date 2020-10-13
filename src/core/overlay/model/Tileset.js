@@ -44,7 +44,7 @@ class Tileset extends Overlay {
     this._layer = layer
     this._delegate.readyPromise.then(tileset => {
       this._layer.delegate.add(tileset)
-      tileset.layerId = layer?.layerId
+      tileset.layerId = layer.layerId
       tileset.overlayId = this._id
       this._state = State.ADDED
     })
@@ -98,32 +98,6 @@ class Tileset extends Overlay {
   }
 
   /**
-   *
-   * @param height
-   * @private
-   */
-  _setHeight(height) {
-    this._delegate.readyPromise.then(tileset => {
-      let surface = Cesium.Cartesian3.fromRadians(
-        this._center.longitude,
-        this._center.latitude,
-        this._center.height
-      )
-      let offset = Cesium.Cartesian3.fromRadians(
-        this._center.longitude,
-        this._center.latitude,
-        this._center.height + height
-      )
-      let translation = Cesium.Cartesian3.subtract(
-        offset,
-        surface,
-        new Cesium.Cartesian3()
-      )
-      tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
-    })
-  }
-
-  /**
    * Sets position
    * @param position
    * @returns {Tileset}
@@ -153,6 +127,37 @@ class Tileset extends Overlay {
   }
 
   /**
+   * Clamps To Ground
+   * @returns {Tileset}
+   */
+  clampToGround() {
+    this._delegate.readyPromise.then(tileset => {
+      if (!this._center) {
+        this._center = Cesium.Cartographic.fromCartesian(
+          tileset.boundingSphere.center
+        )
+      }
+      let surface = Cesium.Cartesian3.fromRadians(
+        this._center.longitude,
+        this._center.latitude,
+        this._center.height
+      )
+      let offset = Cesium.Cartesian3.fromRadians(
+        this._center.longitude,
+        this._center.latitude,
+        0
+      )
+      let translation = Cesium.Cartesian3.subtract(
+        offset,
+        surface,
+        new Cesium.Cartesian3()
+      )
+      tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
+    })
+    return this
+  }
+
+  /**
    * Sets height
    * @param height
    * @returns {Tileset}
@@ -160,10 +165,27 @@ class Tileset extends Overlay {
   setHeight(height) {
     this._height = height
     this._delegate.readyPromise.then(tileset => {
-      this._center = Cesium.Cartographic.fromCartesian(
-        tileset.boundingSphere.center
+      if (!this._center) {
+        this._center = Cesium.Cartographic.fromCartesian(
+          tileset.boundingSphere.center
+        )
+      }
+      let surface = Cesium.Cartesian3.fromRadians(
+        this._center.longitude,
+        this._center.latitude,
+        this._center.height
       )
-      this._setHeight(this._height)
+      let offset = Cesium.Cartesian3.fromRadians(
+        this._center.longitude,
+        this._center.latitude,
+        this._center.height + this._height
+      )
+      let translation = Cesium.Cartesian3.subtract(
+        offset,
+        surface,
+        new Cesium.Cartesian3()
+      )
+      tileset.modelMatrix = Cesium.Matrix4.fromTranslation(translation)
     })
     return this
   }

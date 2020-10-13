@@ -172,7 +172,7 @@ class DivIcon extends Overlay {
     let position = Transform.transformCartesianToWGS84(
       entity.position.getValue(now)
     )
-    divIcon = new DC.DivIcon(position, content)
+    divIcon = new DivIcon(position, content)
     if (entity.billboard) {
       divIcon.attr = {
         ...entity?.properties?.getValue(now)
