@@ -8,23 +8,17 @@ import ImageryType from '../ImageryType'
 const { Cesium } = DC.Namespace
 
 const MAP_URL =
-  'http://t{s}.tianditu.gov.cn/{layer}_c/wmts?service=WMTS&version=1.0.0&request=GetTile&tilematrix={TileMatrix}&layer={layer}&style={style}&tilerow={TileRow}&tilecol={TileCol}&tilematrixset={TileMatrixSet}&format=tiles&tk={key}'
+  'https://t{s}.tianditu.gov.cn/DataServer?T={style}_w&x={x}&y={y}&l={z}&tk={key}'
 
-class TdtImageryProvider extends Cesium.WebMapTileServiceImageryProvider {
+class TdtImageryProvider extends Cesium.UrlTemplateImageryProvider {
   constructor(options = {}) {
     super({
-      url: MAP_URL.replace(/\{layer\}/g, options.style || 'vec').replace(
+      url: MAP_URL.replace(/\{style\}/g, options.style || 'vec').replace(
         /\{key\}/g,
         options.key || ''
       ),
-      style: 'default',
-      format: 'tiles',
-      tileMatrixSetID: 'c',
-      subdomains: [...Array(6).keys()].map(item => (item + 1).toString()),
-      tileMatrixLabels: [...Array(18).keys()].map(item =>
-        (item + 1).toString()
-      ),
-      tilingScheme: new Cesium.GeographicTilingScheme(),
+      subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
+      tilingScheme: new Cesium.WebMercatorTilingScheme(),
       maximumLevel: 18
     })
   }
