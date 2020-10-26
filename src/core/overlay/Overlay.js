@@ -8,6 +8,8 @@ import { OverlayEventType, OverlayEvent } from '../event'
 import State from '../state/State'
 import OverlayType from './OverlayType'
 
+const { Cesium } = DC.Namespace
+
 class Overlay {
   constructor() {
     this._id = Util.uuid()
@@ -98,20 +100,26 @@ class Overlay {
   /**
    * Add handler
    * @param layer
-   * @returns {boolean}
    * @private
    */
   _onAdd(layer) {
-    if (!layer) {
-      return false
+    if (!layer || !this._delegate) {
+      return
     }
     this._layer = layer
     this._mountedHook && this._mountedHook()
-    if (this._layer?.delegate?.entities) {
+    // for Entity
+    if (
+      this._delegate instanceof Cesium.Entity &&
+      this._layer?.delegate?.entities
+    ) {
       this._layer.delegate.entities.add(this._delegate)
-      this._addedHook && this._addedHook()
-      this._state = State.ADDED
+    } else {
+      // for Primitive
+      this._layer.delegate.add(this._delegate)
     }
+    this._addedHook && this._addedHook()
+    this._state = State.ADDED
   }
 
   /**
@@ -119,11 +127,21 @@ class Overlay {
    * @private
    */
   _onRemove() {
-    if (this._layer?.delegate?.entities) {
-      this._layer.delegate.entities.remove(this._delegate)
-      this._removedHook && this._removedHook()
-      this._state = State.REMOVED
+    // for Entity
+    if (!this._layer || !this._delegate) {
+      return
     }
+    if (
+      this._delegate instanceof Cesium.Entity &&
+      this._layer?.delegate?.entities
+    ) {
+      this._layer.delegate.entities.remove(this._delegate)
+    } else {
+      // for Primitive
+      this._layer.delegate.remove(this._delegate)
+    }
+    this._removedHook && this._removedHook()
+    this._state = State.REMOVED
   }
 
   /**

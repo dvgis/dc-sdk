@@ -34,37 +34,6 @@ class Tileset extends Overlay {
 
   /**
    *
-   * @param {*} layer
-   * Overrides parent methods
-   */
-  _onAdd(layer) {
-    if (!layer) {
-      return false
-    }
-    this._layer = layer
-    this._delegate.readyPromise.then(tileset => {
-      this._layer.delegate.add(tileset)
-      tileset.layerId = layer.layerId
-      tileset.overlayId = this._id
-      this._state = State.ADDED
-    })
-  }
-
-  /**
-   * Overrides parent methods
-   */
-  _onRemove() {
-    if (!this._layer) {
-      return false
-    }
-    this._delegate.readyPromise.then(tileset => {
-      this._layer.delegate.remove(tileset)
-      this._state = State.REMOVED
-    })
-  }
-
-  /**
-   *
    * @param tile
    * @private
    */
