@@ -8,8 +8,6 @@ import { OverlayEventType, OverlayEvent } from '../event'
 import State from '../state/State'
 import OverlayType from './OverlayType'
 
-const { Cesium } = DC.Namespace
-
 class Overlay {
   constructor() {
     this._id = Util.uuid()
@@ -109,12 +107,9 @@ class Overlay {
     this._layer = layer
     this._mountedHook && this._mountedHook()
     // for Entity
-    if (
-      this._delegate instanceof Cesium.Entity &&
-      this._layer?.delegate?.entities
-    ) {
+    if (this._layer?.delegate?.entities) {
       this._layer.delegate.entities.add(this._delegate)
-    } else {
+    } else if (this._layer?.delegate?.add) {
       // for Primitive
       this._layer.delegate.add(this._delegate)
     }
@@ -127,16 +122,13 @@ class Overlay {
    * @private
    */
   _onRemove() {
-    // for Entity
     if (!this._layer || !this._delegate) {
       return
     }
-    if (
-      this._delegate instanceof Cesium.Entity &&
-      this._layer?.delegate?.entities
-    ) {
+    // for Entity
+    if (this._layer?.delegate?.entities) {
       this._layer.delegate.entities.remove(this._delegate)
-    } else {
+    } else if (this._layer?.delegate?.remove) {
       // for Primitive
       this._layer.delegate.remove(this._delegate)
     }
