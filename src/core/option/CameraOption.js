@@ -3,6 +3,8 @@
  * @Date: 2020-01-21 15:33:52
  */
 
+import MouseMode from './MouseMode'
+
 const { Cesium } = DC.Namespace
 
 class CameraOption {
@@ -39,7 +41,7 @@ class CameraOption {
             this._viewer.scene.screenSpaceCameraController.enableTilt = enableTilt
           }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
         },
-        this._mouseMode === 0
+        this._mouseMode === MouseMode.LEFT_MIDDLE
           ? Cesium.ScreenSpaceEventType.MIDDLE_DOWN
           : Cesium.ScreenSpaceEventType.RIGHT_DOWN
       )
@@ -48,7 +50,7 @@ class CameraOption {
           this._viewer.scene.screenSpaceCameraController.enableTilt = true
           handler.removeInputAction(Cesium.ScreenSpaceEventType.MOUSE_MOVE)
         },
-        this._mouseMode === 0
+        this._mouseMode === MouseMode.LEFT_MIDDLE
           ? Cesium.ScreenSpaceEventType.MIDDLE_UP
           : Cesium.ScreenSpaceEventType.RIGHT_UP
       )
@@ -83,8 +85,8 @@ class CameraOption {
    * @param mouseMode
    */
   changeMouseMode(mouseMode) {
-    this._mouseMode = mouseMode || 0
-    if (mouseMode === 0) {
+    this._mouseMode = mouseMode || MouseMode.LEFT_MIDDLE
+    if (mouseMode === MouseMode.LEFT_MIDDLE) {
       this._viewer.scene.screenSpaceCameraController.tiltEventTypes = [
         Cesium.CameraEventType.MIDDLE_DRAG,
         Cesium.CameraEventType.PINCH,
@@ -102,7 +104,7 @@ class CameraOption {
         Cesium.CameraEventType.WHEEL,
         Cesium.CameraEventType.PINCH
       ]
-    } else if (mouseMode === 1) {
+    } else if (mouseMode === MouseMode.LEFT_RIGHT) {
       this._viewer.scene.screenSpaceCameraController.tiltEventTypes = [
         Cesium.CameraEventType.RIGHT_DRAG,
         Cesium.CameraEventType.PINCH,

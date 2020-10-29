@@ -17,44 +17,45 @@ class Tileset extends Overlay {
       url: url
     })
     this._tileVisibleCallback = undefined
-    this._height = undefined
     this._properties = undefined
-    this._stopTime = undefined
-    this._center = undefined
+    this._customShader = undefined
     this.type = Overlay.getOverlayType('tileset')
     this._state = State.INITIALIZED
   }
 
-  /**
-   *
-   */
   get readyPromise() {
     return this._delegate.readyPromise
   }
 
   /**
    *
-   * @param tile
    * @private
    */
-  _tileVisibleHandler(tile) {
-    this._updateProperties(tile)
+  _initVisibleEvent() {
+    if (!this._tileVisibleCallback) {
+      this._tileVisibleCallback = this._delegate.tileVisible.addEventListener(
+        this._updateTile,
+        this
+      )
+    }
   }
 
   /**
-   * Updates properties
+   * Updates tile
    * @param tile
    * @private
    */
-  _updateProperties(tile) {
-    if (this._properties && this._properties.length) {
-      let content = tile.content
-      for (let i = 0; i < content.featuresLength; i++) {
-        let feature = content.getFeature(i)
+  _updateTile(tile) {
+    let content = tile.content
+    for (let i = 0; i < content.featuresLength; i++) {
+      let feature = content.getFeature(i)
+      let model = feature.content._model
+      // sets properties
+      if (this._properties && this._properties.length) {
         this._properties.forEach(property => {
           if (
-            feature.hasProperty(property.key) &&
-            feature.getProperty(property.key) === property['keyValue']
+            feature.hasProperty(property['key']) &&
+            feature.getProperty(property['key']) === property['keyValue']
           ) {
             feature.setProperty(
               property['propertyName'],
@@ -62,6 +63,21 @@ class Tileset extends Overlay {
             )
           }
         })
+      }
+      // sets customShader
+      if (
+        this._customShader &&
+        model &&
+        model._sourcePrograms &&
+        model._rendererResources
+      ) {
+        Object.keys(model._sourcePrograms).forEach(key => {
+          let program = model._sourcePrograms[key]
+          model._rendererResources.sourceShaders[
+            program.fragmentShader
+          ] = this._customShader
+        })
+        model._shouldRegenerateShaders = true
       }
     }
   }
@@ -73,7 +89,7 @@ class Tileset extends Overlay {
    */
   setPosition(position) {
     position = Parse.parsePosition(position)
-    this._delegate.readyPromise.then(tileset => {
+    this.readyPromise.then(tileset => {
       let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
         Cesium.Cartesian3.fromDegrees(position.lng, position.lat, position.alt)
       )
@@ -100,20 +116,18 @@ class Tileset extends Overlay {
    * @returns {Tileset}
    */
   clampToGround() {
-    this._delegate.readyPromise.then(tileset => {
-      if (!this._center) {
-        this._center = Cesium.Cartographic.fromCartesian(
-          tileset.boundingSphere.center
-        )
-      }
+    this.readyPromise.then(tileset => {
+      let center = Cesium.Cartographic.fromCartesian(
+        tileset.boundingSphere.center
+      )
       let surface = Cesium.Cartesian3.fromRadians(
-        this._center.longitude,
-        this._center.latitude,
-        this._center.height
+        center.longitude,
+        center.latitude,
+        center.height
       )
       let offset = Cesium.Cartesian3.fromRadians(
-        this._center.longitude,
-        this._center.latitude,
+        center.longitude,
+        center.latitude,
         0
       )
       let translation = Cesium.Cartesian3.subtract(
@@ -132,22 +146,19 @@ class Tileset extends Overlay {
    * @returns {Tileset}
    */
   setHeight(height) {
-    this._height = height
-    this._delegate.readyPromise.then(tileset => {
-      if (!this._center) {
-        this._center = Cesium.Cartographic.fromCartesian(
-          tileset.boundingSphere.center
-        )
-      }
+    this.readyPromise.then(tileset => {
+      let center = Cesium.Cartographic.fromCartesian(
+        tileset.boundingSphere.center
+      )
       let surface = Cesium.Cartesian3.fromRadians(
-        this._center.longitude,
-        this._center.latitude,
-        this._center.height
+        center.longitude,
+        center.latitude,
+        center.height
       )
       let offset = Cesium.Cartesian3.fromRadians(
-        this._center.longitude,
-        this._center.latitude,
-        this._center.height + this._height
+        center.longitude,
+        center.latitude,
+        center.height + height
       )
       let translation = Cesium.Cartesian3.subtract(
         offset,
@@ -165,7 +176,7 @@ class Tileset extends Overlay {
    * @returns {Tileset}
    */
   setScale(scale) {
-    this._delegate.readyPromise.then(tileset => {
+    this.readyPromise.then(tileset => {
       let modelMatrix = tileset.root.transform
       if (scale > 0 && scale !== 1) {
         Cesium.Matrix4.multiplyByUniformScale(modelMatrix, scale, modelMatrix)
@@ -180,13 +191,20 @@ class Tileset extends Overlay {
    * @param properties
    * @returns {Tileset}
    */
-  setFeatureProperty(properties) {
+  setProperties(properties) {
     this._properties = properties
-    !this._tileVisibleCallback &&
-      (this._tileVisibleCallback = this._delegate.tileVisible.addEventListener(
-        this._tileVisibleHandler,
-        this
-      ))
+    this._initVisibleEvent()
+    return this
+  }
+
+  /**
+   * Sets feature FS
+   * @param customShader
+   * @returns {Tileset}
+   */
+  setCustomShader(customShader) {
+    this._customShader = customShader
+    this._initVisibleEvent()
     return this
   }
 

@@ -6,6 +6,7 @@
 import ImageryLayerFactory from './imagery/ImageryLayerFactory'
 import TerrainFactory from './terrain/TerrainFactory'
 import Viewer from './viewer/Viewer'
+import { MouseMode } from './option'
 import {
   LayerGroup,
   GeoJsonLayer,
@@ -58,6 +59,7 @@ const core = {
   TerrainFactory,
   Viewer,
   World: Viewer,
+  MouseMode,
   LayerGroup,
   GeoJsonLayer,
   HtmlLayer,
