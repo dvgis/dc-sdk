@@ -65,6 +65,10 @@ class MapSwitch extends Widget {
     span.innerHTML = map.name || '地图'
   }
 
+  /**
+   * add map
+   * @param map
+   */
   addMap(map = {}) {
     if (this._enable) {
       this._cache.push(map)
