@@ -86,15 +86,12 @@ DC.ready(() => {
 
 [Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
-
-
 ## 示例
 
-|  ![picture](http://dc.dvgis.cn/examples/images/model/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/info/coord.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tencent.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png) |
+|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/google.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png) |
 |  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
-|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/amap.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png) | ![picture](http://dc.dvgis.cn/examples/images/layer/vector.png?v=2)  |  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif)      |
-|  ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/tileset.png) | ![picture](http://dc.dvgis.cn/examples/images/layer/html.png?v=3) |   ![picture](http://dc.dvgis.cn/examples/images/overlay/point_icon.png)   |
-|  ![picture](http://dc.dvgis.cn/examples/images/overlay/point_base.png) | ![picture](http://dc.dvgis.cn/examples/images/overlay/polygon_height.png) | ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_material.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
+|  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
+|  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png)   |
 
 [更多>>](http://dc.dvgis.cn/#/examples)
 
@@ -109,15 +106,29 @@ DC.ready(() => {
 我方保留对此版权信息的最终解释权。
 ```
 
+## 生态
+
+|  模块名称 | 状态 | 描述 | 
+|  :---- | :------: | :------ | 
+|  dc-plugins | <img src="https://img.shields.io/npm/v/@dvgis/dc-plugins?logo=npm" /> | DC插件模块，包括场景动画、漫游以及一些额外的材质 | 
+|  dc-overlay | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | DC要素模块，包括球体、柱体、军标、水面等 | 
+|  dc-plot | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | DC标绘模块，用于要素的标绘和编辑 | 
+|  dc-chart | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | DC图表模块，用于在三维场景中添加echarts功能 | 
+|  dc-mapv | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | DC大数据模块，用于在三维场景中添加mapv功能 | 
+|  dc-ui | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | DC组件开发框架，将DC功能Vue模块化| 
+
 ## QQ 群
 
 <p>
-
-<img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2"  style="width:60px;height:60px" title="数字视觉"/>
-
+<img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2" style="width:60px;height:60px" title="数字视觉"/>
 <img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=3" style="width:60px;height:60px" title="Cesium开心农场"/>
-
 </p>
 
+## 支持
 
-## 感谢
+> 如果dc-sdk能够给您带来效益，请支持一下呗~
+<p>
+<img src="http://dc.dvgis.cn/examples/images/base/sponsor.jpg?v=2" style="width:60px;height:60px" title="数字视觉"/>
+</p>
+
+## 谢谢

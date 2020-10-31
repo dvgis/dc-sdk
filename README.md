@@ -88,11 +88,10 @@ DC.ready(() => {
 
 ## Demo
 
-|  ![picture](http://dc.dvgis.cn/examples/images/model/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/info/coord.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tencent.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png) |
+|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/google.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png) |
 |  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
-|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/amap.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png) | ![picture](http://dc.dvgis.cn/examples/images/layer/vector.png?v=3)  |  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif)      |
-|  ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/tileset.png) | ![picture](http://dc.dvgis.cn/examples/images/layer/html.png?v=2) |   ![picture](http://dc.dvgis.cn/examples/images/overlay/point_icon.png)   |
-|  ![picture](http://dc.dvgis.cn/examples/images/overlay/point_base.png) | ![picture](http://dc.dvgis.cn/examples/images/overlay/polygon_height.png) | ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_material.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
+|  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
+|  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png)   |
 
 [More>>](http://dc.dvgis.cn/#/examples)
 
@@ -107,14 +106,29 @@ DC.ready(() => {
 We reserve the right of final interpretation of this copyright information.
 ```
 
+## 生态
+
+|  Module | Status | Description | 
+|  :---- | :------: | :------ | 
+|  dc-plugins | <img src="https://img.shields.io/npm/v/@dvgis/dc-plugins?logo=npm" /> | dc plug-in module, including scene animation, roaming, and some additional materials | 
+|  dc-overlay | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | dc overlay module, including ellipsoid, cylinder, corridor, water surface, etc | 
+|  dc-plot | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | dc plotting module for plotting and editing overlay | 
+|  dc-chart | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | dc chart module for adding ECharts functionality in 3d scenes | 
+|  dc-mapv | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | dc big-data module for adding MAPV functions in 3d scenes | 
+|  dc-ui | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | dc components for Vue | 
+
 ## QQ Group
 
 <p>
-
 <img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2"  style="width:60px;height:60px" title="数字视觉"/>
-
 <img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=3" style="width:60px;height:60px" title="Cesium开心农场"/>
+</p>
 
+## Support
+
+> if dc-sdk can bring benefits to you, please support it ~
+<p>
+<img src="http://dc.dvgis.cn/examples/images/base/sponsor.jpg?v=2" style="width:60px;height:60px" title="数字视觉"/>
 </p>
 
 ## Thanks

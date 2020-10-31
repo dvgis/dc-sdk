@@ -10,6 +10,7 @@ import { OverlayType, Overlay } from './overlay'
 import ImageryType from './imagery/ImageryType'
 import TerrainType from './terrain/TerrainType'
 import WidgetType from './widget/WidgetType'
+import MouseMode from './option/MouseMode'
 import State from './state/State'
 import Position from './position/Position'
 import Transform from './transform/Transform'
@@ -28,6 +29,7 @@ const base = {
   MouseEventType,
   SceneEventType,
   WidgetType,
+  MouseMode,
   Layer,
   Overlay,
   Position,
