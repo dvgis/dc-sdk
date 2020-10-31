@@ -90,7 +90,7 @@ DC.ready(() => {
 
 |  ![picture](http://dc.dvgis.cn/examples/images/model/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/info/coord.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tencent.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png) |
 |  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
-|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/amap.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png) | ![picture](http://dc.dvgis.cn/examples/images/layer/vector.png?v=2)  |  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif)      |
+|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/amap.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png) | ![picture](http://dc.dvgis.cn/examples/images/layer/vector.png?v=3)  |  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif)      |
 |  ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/tileset.png) | ![picture](http://dc.dvgis.cn/examples/images/layer/html.png?v=2) |   ![picture](http://dc.dvgis.cn/examples/images/overlay/point_icon.png)   |
 |  ![picture](http://dc.dvgis.cn/examples/images/overlay/point_base.png) | ![picture](http://dc.dvgis.cn/examples/images/overlay/polygon_height.png) | ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_material.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
 
