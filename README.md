@@ -95,18 +95,7 @@ DC.ready(() => {
 
 [More>>](http://dc.dvgis.cn/#/examples)
 
-## Copyright statement
-
-```warning
-1. The framework is a basic platform, completely open source, which can be modified and reconstructed by any individual or institution without our authorization.
-2. A series of targeted plug-ins and tools will be added later, and an appropriate amount of open source.
-3. Free and permanent use by any person or institution subject to the following conditions:
-  1) complete package reference;
-  2) reserve this copyright information in the console output
-We reserve the right of final interpretation of this copyright information.
-```
-
-## 生态
+## Ecosystem
 
 |  Module | Status | Description | 
 |  :---- | :------: | :------ | 
@@ -130,5 +119,17 @@ We reserve the right of final interpretation of this copyright information.
 <p>
 <img src="http://dc.dvgis.cn/examples/images/base/sponsor.jpg?v=2" style="width:60px;height:60px" title="数字视觉"/>
 </p>
+
+## Copyright
+
+```warning
+1. The framework is a basic platform, completely open source, which can be modified and reconstructed by any individual or institution without our authorization.
+2. We are not responsible for any problems arising from the modification of the framework by individuals and organizations.
+2. Some industrial plug-ins and tools will be added in the later stage, and the code will be open source appropriately.
+3. The package released by us may be used permanently and free of charge by any person or organization subject to:
+  1) complete package reference;
+  2) reserve this copyright information in the console output
+We reserve the right of final interpretation of this copyright information.
+```
 
 ## Thanks
