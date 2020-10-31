@@ -38,7 +38,7 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 ```
 
 ```js
-import DC from  'dvgis/dc-sdk/dist/dc.base.min' //Basic Package
+import DC from 'dvgis/dc-sdk/dist/dc.base.min' //Basic Package
 import DcCore from 'dvgis/dc-sdk/dist/dc.core.min' //Core Package
 import 'dvgis/dc-sdk/dist/dc.core.min.css' // Main Style Sheet
 ```
@@ -98,13 +98,13 @@ DC.ready(() => {
 ## Ecosystem
 
 |  Module | Status | Description | 
-|  :---- | :------: | :------ | 
-|  dc-plugins | <img src="https://img.shields.io/npm/v/@dvgis/dc-plugins?logo=npm" /> | dc plug-in module, including scene animation, roaming, and some additional materials | 
-|  dc-overlay | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | dc overlay module, including ellipsoid, cylinder, corridor, water surface, etc | 
-|  dc-plot | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | dc plotting module for plotting and editing overlay | 
-|  dc-chart | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | dc chart module for adding ECharts functionality in 3d scenes | 
-|  dc-mapv | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | dc big-data module for adding MAPV functions in 3d scenes | 
-|  dc-ui | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | dc components for Vue | 
+|  :------ | :------: | :------ | 
+|  [dc-plugins](https://github.com/dvgis/dc-plugins) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plugins?logo=npm" /> | dc plug-in module, including scene animation, roaming, and some additional materials | 
+|  [dc-overlay](https://github.com/dvgis/dc-overlay) | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | dc overlay module, including ellipsoid, cylinder, corridor, water surface, etc | 
+|  [dc-plot](https://github.com/dvgis/dc-plot) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | dc plotting module for plotting and editing overlay | 
+|  [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | dc chart module for adding ECharts functionality in 3d scenes | 
+|  [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | dc big-data module for adding MAPV functions in 3d scenes | 
+|  [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | dc components for Vue | 
 
 ## QQ Group
 
