@@ -72,6 +72,24 @@ class MouseEvent extends Event {
   }
 
   /**
+   * Gets the drill pick overlays for the mouse event
+   * @param position
+   * @returns {[]}
+   * @private
+   */
+  _getDrillInfos(position) {
+    let drillInfos = []
+    let scene = this._viewer.scene
+    let targets = scene.drillPick(position)
+    if (targets && targets.length) {
+      targets.forEach(target => {
+        drillInfos.push(this._getTargetInfo(target))
+      })
+    }
+    return drillInfos
+  }
+
+  /**
    * Return the Overlay id
    * @param target
    * @returns {any}
@@ -148,6 +166,7 @@ class MouseEvent extends Event {
     if (overlay && overlay.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
     }
+
     // get Viewer Event
     if (!event || event.numberOfListeners === 0) {
       event = this._viewer.viewerEvent.getEvent(type)
@@ -158,6 +177,26 @@ class MouseEvent extends Event {
         ...targetInfo,
         ...mouseInfo
       })
+
+    // get Drill Pick Event
+    if (overlay && overlay.allowDrillPick) {
+      let drillInfos = this._getDrillInfos(mouseInfo.windowPosition)
+      drillInfos.forEach(drillInfo => {
+        let dillOverlay = drillInfo?.overlay
+        if (
+          dillOverlay?.overlayId !== overlay.overlayId &&
+          dillOverlay?.overlayEvent
+        ) {
+          event = dillOverlay.overlayEvent.getEvent(type)
+          event &&
+            event.numberOfListeners > 0 &&
+            event.raiseEvent({
+              ...drillInfo,
+              ...mouseInfo
+            })
+        }
+      })
+    }
   }
 
   /**

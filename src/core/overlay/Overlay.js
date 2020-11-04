@@ -18,6 +18,7 @@ class Overlay {
     this._show = true
     this._style = {}
     this._attr = {}
+    this._allowDrillPick = false
     this._overlayEvent = new OverlayEvent()
     this.type = undefined
     this.on(OverlayEventType.ADD, this._onAdd, this)
@@ -54,6 +55,15 @@ class Overlay {
 
   get attr() {
     return this._attr
+  }
+
+  set allowDrillPick(allowDrillPick) {
+    this._allowDrillPick = allowDrillPick
+    return this
+  }
+
+  get allowDrillPick() {
+    return this._allowDrillPick
   }
 
   get overlayEvent() {
