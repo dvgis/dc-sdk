@@ -19,7 +19,7 @@ class ViewerOption {
    * @private
    */
   _init() {
-    this._viewer.delegate.cesiumWidget._creditContainer.style.display = 'none'
+    this._viewer.delegate.cesiumWidget.creditContainer.style.display = 'none'
     this._viewer.delegate.cesiumWidget.screenSpaceEventHandler.removeInputAction(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
     )

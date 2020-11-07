@@ -179,7 +179,7 @@ class MouseEvent extends Event {
       })
 
     // get Drill Pick Event
-    if (overlay && overlay.allowDrillPick) {
+    if (overlay && overlay.allowDrillPicking) {
       let drillInfos = this._getDrillInfos(mouseInfo.windowPosition)
       drillInfos.forEach(drillInfo => {
         let dillOverlay = drillInfo?.overlay
