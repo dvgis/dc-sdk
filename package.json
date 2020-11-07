@@ -1,6 +1,6 @@
 {
   "name": "@dvgis/dc-sdk",
-  "version": "1.11.2",
+  "version": "1.12.0",
   "description": " The SDK is a secondary development based on the open source project Cesium, which optimizes some operations of Cesium and enables developers to quickly develop 3D applications through the framework.",
   "main": "index.js",
   "repository": "https://github.com/dvgis/dc-sdk.git",
