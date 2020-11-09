@@ -23,7 +23,7 @@ const ignores = [
 export function initMixin(DC) {
   DC.mixin = function(mixin) {
     for (let key in mixin) {
-      !ignores.includes(key) && (DC[key] = mixin[key])
+      ignores.indexOf(key) < 0 && (DC[key] = mixin[key])
     }
     return this
   }
