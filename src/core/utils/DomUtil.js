@@ -226,6 +226,22 @@ class DomUtil {
       document.webkitExitFullscreen()
     }
   }
+
+  /**
+   * Creates video
+   * @param url
+   * @param type
+   * @param className
+   * @param container
+   * @returns {HTMLElement}
+   */
+  static createVideo(url, type, className, container = null) {
+    let videoEl = this.create('video', className, container)
+    let source = this.create('source', '', videoEl)
+    source.setAttribute('src', url)
+    source.setAttribute('type', `video/${type}`)
+    return videoEl
+  }
 }
 
 export default DomUtil
