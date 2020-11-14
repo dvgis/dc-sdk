@@ -16,6 +16,7 @@ const thirdPart = {
   CallbackProperty: Cesium.CallbackProperty,
   JulianDate: Cesium.JulianDate,
   Color: Cesium.Color,
+  Rect: Cesium.Rectangle,
   ColorMaterialProperty: Cesium.ColorMaterialProperty,
   ImageMaterialProperty: Cesium.ImageMaterialProperty,
   PolylineDashMaterialProperty: Cesium.PolylineDashMaterialProperty,
