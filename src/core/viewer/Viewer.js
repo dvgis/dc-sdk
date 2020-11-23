@@ -52,8 +52,8 @@ class Viewer {
     }
 
     this._delegate = new Cesium.Viewer(id, {
-      ...options,
-      ...DEF_OPTS
+      ...DEF_OPTS,
+      ...options
     }) // Initialize the viewer
 
     /**

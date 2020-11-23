@@ -34,8 +34,9 @@ class ViewerOption {
    * @private
    */
   _setViewerOption() {
-    this._viewer.delegate.shadows = this._options.shadows ?? false
-    this._viewer.delegate.resolutionScale = this._options.resolutionScale || 1.0
+    this._viewer.delegate.shadows = this._options?.shadows ?? false
+    this._viewer.delegate.resolutionScale =
+      this._options?.resolutionScale || 1.0
     return this
   }
 
@@ -94,8 +95,9 @@ class ViewerOption {
 
     Util.merge(globe, {
       show: globeOption?.show ?? true,
+      showGroundAtmosphere: globeOption?.showGroundAtmosphere ?? true,
       enableLighting: globeOption?.enableLighting ?? false,
-      depthTestAgainstTerrain: globeOption?.undergroundMode ?? false,
+      depthTestAgainstTerrain: globeOption?.depthTestAgainstTerrain ?? false,
       tileCacheSize: +globeOption?.tileCacheSize || 100,
       baseColor: globeOption?.baseColor || new Cesium.Color(0, 0, 0.5, 1)
     })
@@ -109,17 +111,6 @@ class ViewerOption {
       frontFaceAlphaByDistance:
         globeOption?.translucency?.frontFaceAlphaByDistance
     })
-
-    return this
-  }
-
-  /**
-   * Set clock option
-   * @returns {ViewerOption}
-   * @private
-   */
-  _setClockOption() {
-    this._viewer.clock.shouldAnimate = this._options.shouldAnimate ?? true
 
     return this
   }
@@ -141,7 +132,6 @@ class ViewerOption {
       ._setCanvasOption()
       ._setSceneOption()
       ._setGlobeOption()
-      ._setClockOption()
     return this
   }
 }
