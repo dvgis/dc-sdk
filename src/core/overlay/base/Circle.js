@@ -45,17 +45,13 @@ class Circle extends Overlay {
 
   set rotateAmount(amount) {
     this._rotateAmount = +amount
-    if (this._rotateAmount > 0) {
-      this._delegate.polygon.stRotation = new Cesium.CallbackProperty(time => {
-        if (this._rotateAmount > 0) {
-          this._stRotation += this._rotateAmount
-          if (this._stRotation >= 360) {
-            this._stRotation = 0
-          }
-        }
-        return this._stRotation
-      })
-    }
+    this._delegate.polygon.stRotation = new Cesium.CallbackProperty(time => {
+      this._stRotation += this._rotateAmount
+      if (this._stRotation >= 360 || this._stRotation <= -360) {
+        this._stRotation = 0
+      }
+      return Cesium.Math.toRadians(this._stRotation)
+    })
     return this
   }
 

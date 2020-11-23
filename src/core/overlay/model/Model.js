@@ -56,22 +56,20 @@ class Model extends Overlay {
 
   set rotateAmount(amount) {
     this._rotateAmount = +amount
-    if (this._rotateAmount > 0) {
-      this._delegate.orientation = new Cesium.CallbackProperty(time => {
-        this._position.heading += this._rotateAmount
-        if (this._position.heading === 360) {
-          this._position.heading = 0
-        }
-        return Cesium.Transforms.headingPitchRollQuaternion(
-          Transform.transformWGS84ToCartesian(this._position),
-          new Cesium.HeadingPitchRoll(
-            Cesium.Math.toRadians(this._position.heading),
-            Cesium.Math.toRadians(this._position.pitch),
-            Cesium.Math.toRadians(this._position.roll)
-          )
+    this._delegate.orientation = new Cesium.CallbackProperty(time => {
+      this._position.heading += this._rotateAmount
+      if (this._position.heading >= 360 || this._position.heading <= -360) {
+        this._position.heading = 0
+      }
+      return Cesium.Transforms.headingPitchRollQuaternion(
+        Transform.transformWGS84ToCartesian(this._position),
+        new Cesium.HeadingPitchRoll(
+          Cesium.Math.toRadians(this._position.heading),
+          Cesium.Math.toRadians(this._position.pitch),
+          Cesium.Math.toRadians(this._position.roll)
         )
-      })
-    }
+      )
+    })
     return this
   }
 
