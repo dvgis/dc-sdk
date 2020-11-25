@@ -32,16 +32,11 @@ class Compass extends Widget {
     this._state = State.INITIALIZED
   }
 
-  _bindEvent() {
-    this._viewer.on(SceneEventType.POST_RENDER, this._postRenderHandler, this)
-  }
-
-  _unbindEvent() {
-    this._viewer.off(SceneEventType.POST_RENDER, this._postRenderHandler, this)
-  }
-
+  /**
+   *
+   * @private
+   */
   _installHook() {
-    this._createCompassDom()
     this._wrapper.onmousedown = e => {
       this._handleMouseDown(e)
     }
@@ -50,6 +45,26 @@ class Compass extends Widget {
     }
   }
 
+  /**
+   *
+   * @private
+   */
+  _bindEvent() {
+    this._viewer.on(SceneEventType.POST_RENDER, this._postRenderHandler, this)
+  }
+
+  /**
+   *
+   * @private
+   */
+  _unbindEvent() {
+    this._viewer.off(SceneEventType.POST_RENDER, this._postRenderHandler, this)
+  }
+
+  /**
+   *
+   * @private
+   */
   _postRenderHandler() {
     let heading = this._viewer.camera.heading
     this._outRing &&
@@ -59,7 +74,11 @@ class Compass extends Widget {
       `)
   }
 
-  _createCompassDom() {
+  /**
+   *
+   * @private
+   */
+  _mountContent() {
     DomUtil.create('div', 'out-ring-bg', this._wrapper)
     this._outRing = DomUtil.parseDom(Icon.compass_outer, true, 'out-ring')
     this._wrapper.appendChild(this._outRing)
@@ -72,6 +91,7 @@ class Compass extends Widget {
     )
     this._wrapper.appendChild(this._rotation_marker)
     this._rotation_marker.style.visibility = 'hidden'
+    this._ready = true
   }
 
   _handleMouseDown(e) {

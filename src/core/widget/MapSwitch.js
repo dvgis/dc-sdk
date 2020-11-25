@@ -18,7 +18,8 @@ class MapSwitch extends Widget {
   }
 
   /**
-   * 当enable修改后执行的钩子，子类根据需求复写
+   * Override the superclass function
+   * @private
    */
   _enableHook() {
     !this._wrapper.parentNode &&
@@ -26,6 +27,10 @@ class MapSwitch extends Widget {
       this._viewer.dcContainer.appendChild(this._wrapper)
   }
 
+  /**
+   *
+   * @private
+   */
   _installHook() {
     this.enable = true
     let self = this

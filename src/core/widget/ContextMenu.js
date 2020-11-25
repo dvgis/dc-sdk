@@ -14,7 +14,7 @@ class ContextMenu extends Widget {
     this._wrapper = DomUtil.create('div', 'dc-context-menu')
     this._ulEl = DomUtil.create('ul', 'menu-list', this._wrapper)
     this._config = {}
-    this._positionChangeable = true
+    this._positionChangeable = false
     this.type = Widget.getWidgetType('contextmenu')
     this._state = State.INITIALIZED
   }
@@ -25,21 +25,29 @@ class ContextMenu extends Widget {
     return this
   }
 
+  /**
+   *
+   * @private
+   */
   _bindEvent() {
     this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this._viewer.on(MouseEventType.CLICK, this._clickHandler, this)
   }
 
+  /**
+   *
+   * @private
+   */
   _unbindEvent() {
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this._viewer.off(MouseEventType.CLICK, this._clickHandler, this)
   }
 
-  _installHook() {
-    this._prepareDefaultMenu()
-  }
-
-  _prepareDefaultMenu() {
+  /**
+   *
+   * @private
+   */
+  _mountContent() {
     let homeMenu = DomUtil.create('li', 'menu-item', this._ulEl)
     homeMenu.innerHTML = '飞到默认位置'
     let self = this
@@ -47,18 +55,34 @@ class ContextMenu extends Widget {
       self._viewer.delegate.camera.flyHome(0)
       self.hide()
     }
+    this._ready = true
   }
 
+  /**
+   *
+   * @param e
+   * @private
+   */
   _rightClickHandler(e) {
     if (e && e.windowPosition && this._enable) {
       this._updateWindowCoord(e.windowPosition)
     }
   }
 
+  /**
+   *
+   * @param e
+   * @private
+   */
   _clickHandler(e) {
     this.hide()
   }
 
+  /**
+   *
+   * @param windowCoord
+   * @private
+   */
   _updateWindowCoord(windowCoord) {
     this._wrapper.style.cssText = `
     visibility:visible;
@@ -69,6 +93,10 @@ class ContextMenu extends Widget {
     `
   }
 
+  /**
+   *
+   * @private
+   */
   _setCustomClass() {
     DomUtil.setClass(
       this._wrapper,

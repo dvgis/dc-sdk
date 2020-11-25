@@ -15,6 +15,7 @@ class Widget {
     this._enable = false
     this._wrapper = undefined
     this._positionChangeable = false
+    this._ready = false
     this.type = undefined
   }
 
@@ -31,6 +32,12 @@ class Widget {
   get state() {
     return this._state
   }
+
+  /**
+   * mount content
+   * @private
+   */
+  _mountContent() {}
 
   /**
    * binds event
@@ -54,6 +61,7 @@ class Widget {
       this._viewer.dcContainer.appendChild(this._wrapper)
     this._wrapper &&
       (this._wrapper.style.visibility = this._enable ? 'visible' : 'hidden')
+    !this._ready && this._mountContent()
     this._enable ? this._bindEvent() : this._unbindEvent()
   }
 

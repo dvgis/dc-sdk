@@ -41,13 +41,17 @@ class HawkeyeMap extends Widget {
     return this._baseLayers
   }
 
-  _mountMap() {
+  /**
+   *
+   * @private
+   */
+  _mountContent() {
     let map = new Cesium.Viewer(this._wrapper, {
       ...DEF_OPTS,
       sceneMode: Cesium.SceneMode.SCENE2D
     })
     map.imageryLayers.removeAll()
-    map.cesiumWidget._creditContainer.style.display = 'none'
+    map.cesiumWidget.creditContainer.style.display = 'none'
     map.cesiumWidget.screenSpaceEventHandler.removeInputAction(
       Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
     )
@@ -61,6 +65,8 @@ class HawkeyeMap extends Widget {
       maximumZoomDistance: 40489014.0
     })
     this._map = map
+
+    this._ready = true
   }
 
   _bindEvent() {
@@ -72,7 +78,6 @@ class HawkeyeMap extends Widget {
   }
 
   _installHook() {
-    this._mountMap()
     this._viewer.camera.percentageChanged = 0.01
   }
 

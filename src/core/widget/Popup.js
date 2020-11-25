@@ -22,6 +22,20 @@ class Popup extends Widget {
     config.customClass && this._setCustomClass()
   }
 
+  /**
+   * Override the superclass function
+   * @private
+   */
+  _enableHook() {
+    !this._wrapper.parentNode &&
+      this._viewer &&
+      this._viewer.dcContainer.appendChild(this._wrapper)
+  }
+
+  /**
+   *
+   * @private
+   */
   _installHook() {
     this.enable = true
   }

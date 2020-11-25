@@ -20,7 +20,11 @@ class MapSplit extends Widget {
     this._state = State.INITIALIZED
   }
 
-  _installHook() {
+  /**
+   *
+   * @private
+   */
+  _mountContent() {
     let splitter = DomUtil.parseDom(Icon.splitter, true, 'splitter')
     this._wrapper.appendChild(splitter)
     let handler = new Cesium.ScreenSpaceEventHandler(splitter)
@@ -46,6 +50,7 @@ class MapSplit extends Widget {
     handler.setInputAction(() => {
       self._moveActive = false
     }, Cesium.ScreenSpaceEventType.PINCH_END)
+    this._ready = true
   }
 
   _moveHandler(movement) {
