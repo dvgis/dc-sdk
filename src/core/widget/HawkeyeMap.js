@@ -13,6 +13,7 @@ const { Cesium } = DC.Namespace
 const DEF_OPTS = {
   animation: false,
   baseLayerPicker: false,
+  imageryProvider: false,
   fullscreenButton: false,
   geocoder: false,
   homeButton: false,
