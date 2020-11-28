@@ -16,8 +16,8 @@ export default function parabola(
   if (!Util.checkPosition(startPosition) || !Util.checkPosition(endPosition)) {
     return result
   }
-  height = Math.min(+height, 5000)
-  count = Math.min(+count, 50)
+  height = Math.max(+height, 100)
+  count = Math.max(+count, 50)
   let diffLng = Math.abs(startPosition.lng - endPosition.lng)
   let diffLat = Math.abs(startPosition.lat - endPosition.lat)
   let L = Math.max(diffLng, diffLat)

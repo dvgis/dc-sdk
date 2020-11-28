@@ -99,6 +99,7 @@ class ViewerOption {
       enableLighting: globeOption?.enableLighting ?? false,
       depthTestAgainstTerrain: globeOption?.depthTestAgainstTerrain ?? false,
       tileCacheSize: +globeOption?.tileCacheSize || 100,
+      preloadSiblings: globeOption?.enableLighting ?? false,
       baseColor: globeOption?.baseColor || new Cesium.Color(0, 0, 0.5, 1)
     })
 
