@@ -56,14 +56,11 @@ const LayerGroupEventType = BaseEventType
 
 const LayerEventType = BaseEventType
 
-const EffectEventType = BaseEventType
-
 export {
   MouseEventType,
   ViewerEventType,
   SceneEventType,
   LayerGroupEventType,
   LayerEventType,
-  OverlayEventType,
-  EffectEventType
+  OverlayEventType
 }

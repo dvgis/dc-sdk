@@ -6,7 +6,6 @@
 import {
   LayerGroupEventType,
   LayerEventType,
-  EffectEventType,
   MouseEvent,
   ViewerEvent,
   SceneEvent
@@ -79,7 +78,6 @@ class Viewer {
 
     this._layerGroupCache = {}
     this._layerCache = {}
-    this._effectCache = {}
 
     /**
      * Adds default components
@@ -245,36 +243,6 @@ class Viewer {
   }
 
   /**
-   * @param effect
-   * @private
-   */
-  _addEffect(effect) {
-    if (
-      effect &&
-      effect.effectEvent &&
-      !Object(this._effectCache).hasOwnProperty(effect.id)
-    ) {
-      effect.effectEvent.fire(EffectEventType.ADD, this)
-      this._effectCache[effect.id] = effect
-    }
-  }
-
-  /**
-   * @param effect
-   * @private
-   */
-  _removeEffect(effect) {
-    if (
-      effect &&
-      effect.effectEvent &&
-      Object(this._effectCache).hasOwnProperty(effect.id)
-    ) {
-      effect.effectEvent.fire(EffectEventType.REMOVE, this)
-      delete this._effectCache[effect.id]
-    }
-  }
-
-  /**
    * Sets viewer options
    * @param options
    * @returns {Viewer}
@@ -292,15 +260,6 @@ class Viewer {
    */
   setPitchRange(min = -90, max = -20) {
     this._cameraOption.setPitchRange(min, max)
-    return this
-  }
-
-  /**
-   * Restrict camera access underground
-   * @returns {Viewer}
-   */
-  limitCameraToGround() {
-    this._cameraOption.limitCameraToGround()
     return this
   }
 
@@ -426,6 +385,8 @@ class Viewer {
    * @returns {Viewer}
    */
   removeTerrain() {
+    this._baseLayerPicker.terrainProviderViewModels = []
+    this._baseLayerPicker.selectedTerrain = undefined
     this._delegate.terrainProvider = new Cesium.EllipsoidTerrainProvider()
     return this
   }
@@ -521,26 +482,6 @@ class Viewer {
         method.call(context, cache[layerId])
       })
     })
-    return this
-  }
-
-  /**
-   * adds an effect
-   * @param effect
-   * @returns {Viewer}
-   */
-  addEffect(effect) {
-    this._addEffect(effect)
-    return this
-  }
-
-  /**
-   * removes an effect
-   * @param effect
-   * @returns {Viewer}
-   */
-  removeEffect(effect) {
-    this._removeEffect(effect)
     return this
   }
 
