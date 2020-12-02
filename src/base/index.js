@@ -8,6 +8,7 @@ import { initMixin, initUse } from './global-api'
 // global namespace
 let DC = {
   version: __VERSION__,
+  accessToken: '',
   author: __AUTHOR__,
   home_page: __HOME_PAGE__,
   Namespace: {},

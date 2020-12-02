@@ -3,6 +3,7 @@
  * @Date: 2020-06-05 16:35:22
  */
 
+import logo from './logo'
 import compass_outer from './compass-outer'
 import compass_inner from './compass-inner'
 import compass_rotation_marker from './compass-rotation-marker'
@@ -12,6 +13,7 @@ import refresh from './refresh'
 import splitter from './splitter'
 
 const Icon = {
+  logo,
   compass_outer,
   compass_inner,
   compass_rotation_marker,

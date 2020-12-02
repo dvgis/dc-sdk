@@ -6,6 +6,7 @@
 import { DomUtil } from '../utils'
 import State from '../state/State'
 import Widget from './Widget'
+import Icon from '../icon'
 
 class Attribution extends Widget {
   constructor() {
@@ -16,11 +17,11 @@ class Attribution extends Widget {
       left: 2px;
       bottom: 2px;
       font-size: 14px;
-      color: rgb(255, 255, 255);
-      background: rgba(0,0,0,0.6);
+      color: #a7a7a7;
       padding: 2px 5px;
       border-radius: 2px;
       user-select: none;
+      display:flex;
     `
     this._config = undefined
     this.type = Widget.getWidgetType('attribution')
@@ -28,16 +29,15 @@ class Attribution extends Widget {
   }
 
   _installHook() {
-    let span = DomUtil.create('span', '', this._wrapper)
-    span.innerHTML = '数字视觉'
-    span.style.cssText = `margin-right:5px;`
+    let logo = DomUtil.create('img', '', this._wrapper)
+    logo.src = Icon.logo
     let a = DomUtil.create('a', '', this._wrapper)
-    a.innerHTML = 'Digital Visual'
+    a.innerHTML = '数字视觉'
     a.href = 'javascript:void(0)'
     a.onclick = () => {
       window.open('https://www.dvgis.cn')
     }
-    a.style.cssText = `color:#0078A8;font-size:12px`
+    a.style.cssText = `color:#a7a7a7;font-size:14px`
     this.enable = true
   }
 }

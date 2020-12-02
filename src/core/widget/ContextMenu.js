@@ -49,9 +49,11 @@ class ContextMenu extends Widget {
    */
   _mountContent() {
     let homeMenu = DomUtil.create('li', 'menu-item', this._ulEl)
-    homeMenu.innerHTML = '飞到默认位置'
+    let a = DomUtil.create('a', '', homeMenu)
+    a.innerHTML = '飞到默认位置'
+    a.href = 'javascript:void(0)'
     let self = this
-    homeMenu.onclick = () => {
+    a.onclick = () => {
       self._viewer.delegate.camera.flyHome(0)
       self.hide()
     }
@@ -115,16 +117,17 @@ class ContextMenu extends Widget {
       return this
     }
     let menu = DomUtil.create('li', 'menu-item', null)
-    let lastNode = this._ulEl.lastChild
-    menu.innerHTML = label
+    let a = DomUtil.create('a', '', menu)
+    a.innerHTML = label
+    a.href = 'javascript:void(0)'
     let self = this
     if (method) {
-      menu.onclick = () => {
+      a.onclick = () => {
         method.call(context)
         self.hide()
       }
     }
-    this._ulEl.insertBefore(menu, lastNode)
+    this._ulEl.insertBefore(menu, this._ulEl.lastChild)
     return this
   }
 }
