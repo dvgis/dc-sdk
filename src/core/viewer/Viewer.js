@@ -14,7 +14,7 @@ import { ViewerOption, CameraOption } from '../option'
 import { DomUtil } from '../utils'
 import Transform from '../transform/Transform'
 import Parse from '../parse/Parse'
-import widget from '../widget'
+import Widget from '../widget'
 
 const { Cesium } = DC.Namespace
 
@@ -72,8 +72,8 @@ class Viewer {
     /**
      * Adds default widgets
      */
-    Object.keys(widget).forEach(key => {
-      this.use(widget[key])
+    Object.keys(Widget).forEach(key => {
+      this.use(Widget[key])
     })
   }
 
