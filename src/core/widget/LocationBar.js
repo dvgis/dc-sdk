@@ -24,6 +24,17 @@ class LocationBar extends Widget {
    *
    * @private
    */
+  _installHook() {
+    Object.defineProperty(this._viewer, 'locationBar', {
+      value: this,
+      writable: false
+    })
+  }
+
+  /**
+   *
+   * @private
+   */
   _bindEvent() {
     this._viewer.on(MouseEventType.MOUSE_MOVE, this._moveHandler, this)
     this._viewer.on(SceneEventType.CAMERA_CHANGED, this._cameraHandler, this)

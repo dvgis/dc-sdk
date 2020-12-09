@@ -29,6 +29,17 @@ class ContextMenu extends Widget {
    *
    * @private
    */
+  _installHook() {
+    Object.defineProperty(this._viewer, 'contextMenu', {
+      value: this,
+      writable: false
+    })
+  }
+
+  /**
+   *
+   * @private
+   */
   _bindEvent() {
     this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this._viewer.on(MouseEventType.CLICK, this._clickHandler, this)

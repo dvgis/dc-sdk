@@ -18,6 +18,17 @@ class Tooltip extends Widget {
 
   /**
    *
+   * @private
+   */
+  _installHook() {
+    Object.defineProperty(this._viewer, 'tooltip', {
+      value: this,
+      writable: false
+    })
+  }
+
+  /**
+   *
    * @param {*} windowCoord
    *
    */

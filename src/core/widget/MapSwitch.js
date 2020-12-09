@@ -32,6 +32,10 @@ class MapSwitch extends Widget {
    * @private
    */
   _installHook() {
+    Object.defineProperty(this._viewer, 'mapSwitch', {
+      value: this,
+      writable: false
+    })
     this.enable = true
     let self = this
     this._wrapper.onmouseover = () => {

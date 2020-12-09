@@ -11,20 +11,10 @@ import {
   SceneEvent
 } from '../event'
 import { ViewerOption, CameraOption } from '../option'
-import {
-  Attribution,
-  ContextMenu,
-  LocationBar,
-  MapSplit,
-  MapSwitch,
-  Popup,
-  Tooltip,
-  HawkeyeMap,
-  Compass
-} from '../widget'
 import { DomUtil } from '../utils'
 import Transform from '../transform/Transform'
 import Parse from '../parse/Parse'
+import widget from '../widget'
 
 const { Cesium } = DC.Namespace
 
@@ -80,22 +70,10 @@ class Viewer {
     this._layerCache = {}
 
     /**
-     * Adds default components
+     * Adds default widgets
      */
-    this._comps = {
-      popup: new Popup(),
-      contextMenu: new ContextMenu(),
-      tooltip: new Tooltip(),
-      mapSwitch: new MapSwitch(),
-      mapSplit: new MapSplit(),
-      locationBar: new LocationBar(),
-      hawkeyeMap: new HawkeyeMap(),
-      compass: new Compass(),
-      attribution: new Attribution()
-    }
-
-    Object.keys(this._comps).forEach(key => {
-      this.use(this._comps[key])
+    Object.keys(widget).forEach(key => {
+      this.use(widget[key])
     })
   }
 
@@ -137,38 +115,6 @@ class Viewer {
 
   get viewerEvent() {
     return this._viewerEvent
-  }
-
-  get popup() {
-    return this._comps.popup
-  }
-
-  get contextMenu() {
-    return this._comps.contextMenu
-  }
-
-  get tooltip() {
-    return this._comps.tooltip
-  }
-
-  get mapSplit() {
-    return this._comps.mapSplit
-  }
-
-  get mapSwitch() {
-    return this._comps.mapSwitch
-  }
-
-  get locationBar() {
-    return this._comps.locationBar
-  }
-
-  get hawkeyeMap() {
-    return this._comps.hawkeyeMap
-  }
-
-  get compass() {
-    return this._comps.compass
   }
 
   get cameraPosition() {
@@ -325,7 +271,7 @@ class Viewer {
     if (!this._baseLayerPicker.selectedImagery) {
       this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
     }
-    this._comps.mapSwitch.addMap(options)
+    this.mapSwitch.addMap(options)
     return this
   }
 

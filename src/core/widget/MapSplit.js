@@ -24,6 +24,17 @@ class MapSplit extends Widget {
    *
    * @private
    */
+  _installHook() {
+    Object.defineProperty(this._viewer, 'mapSplit', {
+      value: this,
+      writable: false
+    })
+  }
+
+  /**
+   *
+   * @private
+   */
   _mountContent() {
     let splitter = DomUtil.parseDom(Icon.splitter, true, 'splitter')
     this._wrapper.appendChild(splitter)

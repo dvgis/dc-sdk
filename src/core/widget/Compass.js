@@ -37,6 +37,10 @@ class Compass extends Widget {
    * @private
    */
   _installHook() {
+    Object.defineProperty(this._viewer, 'compass', {
+      value: this,
+      writable: false
+    })
     this._wrapper.onmousedown = e => {
       this._handleMouseDown(e)
     }

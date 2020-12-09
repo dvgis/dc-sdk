@@ -69,18 +69,39 @@ class HawkeyeMap extends Widget {
     this._ready = true
   }
 
+  /**
+   *
+   * @private
+   */
   _bindEvent() {
     this._viewer.on(SceneEventType.CAMERA_CHANGED, this._syncMap, this)
   }
 
+  /**
+   *
+   * @private
+   */
   _unbindEvent() {
     this._viewer.off(SceneEventType.CAMERA_CHANGED, this._syncMap, this)
   }
 
+  /**
+   *
+   * @private
+   */
   _installHook() {
+    Object.defineProperty(this._viewer, 'hawkeyeMap', {
+      value: this,
+      writable: false
+    })
     this._viewer.camera.percentageChanged = 0.01
   }
 
+  /**
+   *
+   * @returns {boolean}
+   * @private
+   */
   _syncMap() {
     let viewCenter = new Cesium.Cartesian2(
       Math.floor(this._viewer.canvas.clientWidth / 2),

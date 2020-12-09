@@ -3,12 +3,26 @@
  * @Date: 2020-03-05 21:53:35
  */
 
-export { default as Attribution } from './Attribution'
-export { default as ContextMenu } from './ContextMenu'
-export { default as LocationBar } from './LocationBar'
-export { default as MapSplit } from './MapSplit'
-export { default as MapSwitch } from './MapSwitch'
-export { default as Popup } from './Popup'
-export { default as Tooltip } from './Tooltip'
-export { default as HawkeyeMap } from './HawkeyeMap'
-export { default as Compass } from './Compass'
+import Attribution from './Attribution'
+import ContextMenu from './ContextMenu'
+import LocationBar from './LocationBar'
+import MapSplit from './MapSplit'
+import MapSwitch from './MapSwitch'
+import Popup from './Popup'
+import Tooltip from './Tooltip'
+import HawkeyeMap from './HawkeyeMap'
+import Compass from './Compass'
+import DistanceLegend from './DistanceLegend'
+
+export default {
+  attribution: new Attribution(),
+  popup: new Popup(),
+  contextMenu: new ContextMenu(),
+  tooltip: new Tooltip(),
+  mapSwitch: new MapSwitch(),
+  mapSplit: new MapSplit(),
+  locationBar: new LocationBar(),
+  hawkeyeMap: new HawkeyeMap(),
+  compass: new Compass(),
+  distanceLegend: new DistanceLegend()
+}

@@ -38,6 +38,10 @@ class Popup extends Widget {
    */
   _installHook() {
     this.enable = true
+    Object.defineProperty(this._viewer, 'popup', {
+      value: this,
+      writable: false
+    })
   }
 
   _updateWindowCoord(windowCoord) {
