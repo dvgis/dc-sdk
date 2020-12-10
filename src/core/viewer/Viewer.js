@@ -14,7 +14,7 @@ import { ViewerOption, CameraOption } from '../option'
 import { DomUtil } from '../utils'
 import Transform from '../transform/Transform'
 import Parse from '../parse/Parse'
-import Widget from '../widget'
+import Widgets from '../widget'
 
 const { Cesium } = DC.Namespace
 
@@ -64,16 +64,16 @@ class Viewer {
 
     this._baseLayerPicker = new Cesium.BaseLayerPickerViewModel({
       globe: this._delegate.scene.globe
-    })
+    }) //Initialize the baseLayer picker
 
     this._layerGroupCache = {}
     this._layerCache = {}
 
     /**
-     * Adds default widgets
+     * Registers default widgets
      */
-    Object.keys(Widget).forEach(key => {
-      this.use(Widget[key])
+    Object.keys(Widgets).forEach(key => {
+      this.use(Widgets[key])
     })
   }
 

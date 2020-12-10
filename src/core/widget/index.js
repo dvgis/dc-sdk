@@ -14,7 +14,7 @@ import HawkeyeMap from './HawkeyeMap'
 import Compass from './Compass'
 import DistanceLegend from './DistanceLegend'
 
-export default {
+const Widgets = {
   attribution: new Attribution(),
   popup: new Popup(),
   contextMenu: new ContextMenu(),
@@ -26,3 +26,5 @@ export default {
   compass: new Compass(),
   distanceLegend: new DistanceLegend()
 }
+
+export default Widgets
