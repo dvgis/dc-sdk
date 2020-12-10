@@ -29,7 +29,7 @@ class DistanceLegend extends Widget {
     super()
     this._wrapper = DomUtil.create('div', 'dc-distance-legend')
     this._labelEl = undefined
-    this._scaleBar = undefined
+    this._scaleBarEl = undefined
     this._lastUpdate = Cesium.getTimestamp()
     this.type = Widget.getWidgetType('distance_legend')
     this._state = State.INITIALIZED
@@ -51,11 +51,7 @@ class DistanceLegend extends Widget {
    * @private
    */
   _bindEvent() {
-    this._viewer.on(
-      SceneEventType.POST_RENDER,
-      this._updateDistanceLegend,
-      this
-    )
+    this._viewer.on(SceneEventType.POST_RENDER, this._updateContent, this)
   }
 
   /**
@@ -63,11 +59,7 @@ class DistanceLegend extends Widget {
    * @private
    */
   _unbindEvent() {
-    this._viewer.off(
-      SceneEventType.POST_RENDER,
-      this._updateDistanceLegend,
-      this
-    )
+    this._viewer.off(SceneEventType.POST_RENDER, this._updateContent, this)
   }
 
   /**
@@ -77,12 +69,12 @@ class DistanceLegend extends Widget {
    * @returns
    * @private
    */
-  _updateDistanceLegend(scene, time) {
+  _updateContent(scene, time) {
     let now = Cesium.getTimestamp()
     if (now < this._lastUpdate + 250) {
       return
     }
-    if (!this._labelEl || !this._scaleBar) {
+    if (!this._labelEl || !this._scaleBarEl) {
       return
     }
     this._lastUpdate = now
@@ -116,12 +108,12 @@ class DistanceLegend extends Widget {
       this._labelEl.innerHTML =
         distance >= 1000 ? `${distance / 1000} km` : `${distance} m`
       let barWidth = (distance / pixelDistance) | 0
-      this._scaleBar.style.cssText = `width: ${barWidth}px; left: ${(125 -
+      this._scaleBarEl.style.cssText = `width: ${barWidth}px; left: ${(125 -
         barWidth) /
         2}px;`
     } else {
       this._labelEl.style.cssText = 'display:none'
-      this._scaleBar.style.cssText = 'display:none'
+      this._scaleBarEl.style.cssText = 'display:none'
     }
   }
 
@@ -131,7 +123,7 @@ class DistanceLegend extends Widget {
    */
   _mountContent() {
     this._labelEl = DomUtil.create('div', 'label', this._wrapper)
-    this._scaleBar = DomUtil.create('div', 'scale-bar', this._wrapper)
+    this._scaleBarEl = DomUtil.create('div', 'scale-bar', this._wrapper)
     this._ready = true
   }
 }

@@ -105,6 +105,10 @@ class Viewer {
     return this._delegate.imageryLayers
   }
 
+  get terrainProvider() {
+    return this._delegate.terrainProvider
+  }
+
   get entities() {
     return this._delegate.entities
   }
@@ -271,7 +275,7 @@ class Viewer {
     if (!this._baseLayerPicker.selectedImagery) {
       this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
     }
-    this.mapSwitch.addMap(options)
+    this.mapSwitch && this.mapSwitch.addMap(options)
     return this
   }
 

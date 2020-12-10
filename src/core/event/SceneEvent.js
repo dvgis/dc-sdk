@@ -9,9 +9,9 @@ import Event from './Event'
 class SceneEvent extends Event {
   constructor(viewer) {
     super()
-    this._camera = viewer.delegate.camera
-    this._scene = viewer.delegate.scene
-    this._clock = viewer.delegate.clock
+    this._camera = viewer.camera
+    this._scene = viewer.scene
+    this._clock = viewer.clock
   }
 
   /**
