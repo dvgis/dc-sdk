@@ -19,6 +19,7 @@ class Overlay {
     this._style = {}
     this._attr = {}
     this._allowDrillPicking = false
+    this._contextMenu = []
     this._overlayEvent = new OverlayEvent()
     this.type = undefined
     this.on(OverlayEventType.ADD, this._onAdd, this)
@@ -76,6 +77,15 @@ class Overlay {
 
   get state() {
     return this._state
+  }
+
+  set contextMenu(menus) {
+    this._contextMenu = menus
+    return this
+  }
+
+  get contextMenu() {
+    return this._contextMenu
   }
 
   /**

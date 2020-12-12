@@ -7,12 +7,14 @@ import { DomUtil } from '../utils'
 import State from '../state/State'
 import Widget from './Widget'
 
+const { Cesium } = DC.Namespace
+
 class Popup extends Widget {
   constructor() {
     super()
     this._wrapper = DomUtil.create('div', 'dc-popup')
     this._config = { customClass: '' }
-    this._positionChangeable = true
+    this._position = undefined
     this.type = Widget.getWidgetType('popup')
     this._state = State.INITIALIZED
   }
@@ -23,13 +25,36 @@ class Popup extends Widget {
   }
 
   /**
-   * Override the superclass function
+   * binds event
    * @private
    */
-  _enableHook() {
-    !this._wrapper.parentNode &&
-      this._viewer &&
-      this._viewer.dcContainer.appendChild(this._wrapper)
+  _bindEvent() {
+    if (this._viewer && this._wrapper) {
+      let self = this
+      let scene = this._viewer.scene
+      scene.postRender.addEventListener(() => {
+        if (
+          self._position &&
+          self._enable &&
+          self._updateWindowCoord &&
+          self._wrapper.style.visibility === 'visible'
+        ) {
+          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+            scene,
+            self._position
+          )
+          windowCoord && self._updateWindowCoord(windowCoord)
+        }
+      })
+    }
+  }
+
+  /**
+   *
+   * @private
+   */
+  _mountContent() {
+    this._wrapper.style.visibility = 'hidden'
   }
 
   /**
@@ -38,12 +63,18 @@ class Popup extends Widget {
    */
   _installHook() {
     this.enable = true
+    this._bindEvent()
     Object.defineProperty(this._viewer, 'popup', {
       value: this,
       writable: false
     })
   }
 
+  /**
+   *
+   * @param windowCoord
+   * @private
+   */
   _updateWindowCoord(windowCoord) {
     let x = windowCoord.x - this._wrapper.offsetWidth / 2
     let y = windowCoord.y - this._wrapper.offsetHeight
@@ -59,6 +90,10 @@ class Popup extends Widget {
     `
   }
 
+  /**
+   *
+   * @private
+   */
   _setCustomClass() {
     DomUtil.setClass(this._wrapper, `dc-popup ${this._config.customClass}`)
   }

@@ -105,15 +105,13 @@ class DistanceLegend extends Widget {
       }
     }
     if (distance) {
+      this._wrapper.style.visibility = 'visible'
       this._labelEl.innerHTML =
         distance >= 1000 ? `${distance / 1000} km` : `${distance} m`
       let barWidth = (distance / pixelDistance) | 0
       this._scaleBarEl.style.cssText = `width: ${barWidth}px; left: ${(125 -
         barWidth) /
         2}px;`
-    } else {
-      this._labelEl.style.cssText = 'display:none'
-      this._scaleBarEl.style.cssText = 'display:none'
     }
   }
 
@@ -124,6 +122,7 @@ class DistanceLegend extends Widget {
   _mountContent() {
     this._labelEl = DomUtil.create('div', 'label', this._wrapper)
     this._scaleBarEl = DomUtil.create('div', 'scale-bar', this._wrapper)
+    this._wrapper.style.visibility = 'hidden'
     this._ready = true
   }
 }

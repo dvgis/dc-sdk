@@ -6,15 +6,11 @@
 import State from '../state/State'
 import WidgetType from './WidgetType'
 
-const { Cesium } = DC.Namespace
-
 class Widget {
   constructor() {
     this._viewer = undefined
-    this._position = undefined
     this._enable = false
     this._wrapper = undefined
-    this._positionChangeable = false
     this._ready = false
     this.type = undefined
   }
@@ -85,28 +81,6 @@ class Widget {
   install(viewer) {
     this._viewer = viewer
     this._state = State.INSTALLED
-    /**
-     *  add postRender Listener
-     */
-    if (this._viewer && this._wrapper && this._positionChangeable) {
-      let _this = this
-      let scene = this._viewer.scene
-      scene.postRender.addEventListener(() => {
-        if (
-          _this._position &&
-          _this._enable &&
-          _this._updateWindowCoord &&
-          _this._wrapper.style.visibility === 'visible'
-        ) {
-          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
-            scene,
-            _this._position
-          )
-          windowCoord && _this._updateWindowCoord(windowCoord)
-        }
-      })
-    }
-
     /**
      * do installHook
      */

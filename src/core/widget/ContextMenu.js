@@ -4,24 +4,53 @@
  */
 
 import { DomUtil } from '../utils'
-import { MouseEventType } from '../event'
 import State from '../state/State'
 import Widget from './Widget'
+
+const { Cesium } = DC.Namespace
 
 class ContextMenu extends Widget {
   constructor() {
     super()
     this._wrapper = DomUtil.create('div', 'dc-context-menu')
-    this._ulEl = DomUtil.create('ul', 'menu-list', this._wrapper)
+    this._ulEl = undefined
+    this._handler = undefined
+    this._overlay = undefined
     this._config = {}
-    this._positionChangeable = false
+    this._defaultMenu = [
+      {
+        label: '飞到默认位置',
+        callback: viewer => {
+          viewer.camera.flyHome(0)
+        },
+        context: this
+      },
+      {
+        label: '取消飞行',
+        callback: viewer => {
+          viewer.camera.cancelFlight()
+        },
+        context: this
+      }
+    ]
+    this._overlayMenu = []
     this.type = Widget.getWidgetType('contextmenu')
     this._state = State.INITIALIZED
+  }
+
+  set DEFAULT_MENU(menus) {
+    this._defaultMenu = menus
+    return this
   }
 
   set config(config) {
     this._config = config
     config.customClass && this._setCustomClass()
+    return this
+  }
+
+  set overlayMenu(menus) {
+    this._overlayMenu = menus
     return this
   }
 
@@ -34,6 +63,7 @@ class ContextMenu extends Widget {
       value: this,
       writable: false
     })
+    this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
   }
 
   /**
@@ -41,8 +71,13 @@ class ContextMenu extends Widget {
    * @private
    */
   _bindEvent() {
-    this._viewer.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
-    this._viewer.on(MouseEventType.CLICK, this._clickHandler, this)
+    this._handler.setInputAction(movement => {
+      this._onRightClick(movement)
+    }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
+
+    this._handler.setInputAction(movement => {
+      this._onClick(movement)
+    }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   }
 
   /**
@@ -50,8 +85,8 @@ class ContextMenu extends Widget {
    * @private
    */
   _unbindEvent() {
-    this._viewer.off(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
-    this._viewer.off(MouseEventType.CLICK, this._clickHandler, this)
+    this._handler.removeInputAction(Cesium.ScreenSpaceEventType.RIGHT_CLICK)
+    this._handler.removeInputAction(Cesium.ScreenSpaceEventType.LEFT_CLICK)
   }
 
   /**
@@ -59,35 +94,68 @@ class ContextMenu extends Widget {
    * @private
    */
   _mountContent() {
-    let homeMenu = DomUtil.create('li', 'menu-item', this._ulEl)
-    let a = DomUtil.create('a', '', homeMenu)
-    a.innerHTML = '飞到默认位置'
-    a.href = 'javascript:void(0)'
-    let self = this
-    a.onclick = () => {
-      self._viewer.delegate.camera.flyHome(0)
-      self.hide()
-    }
+    this._ulEl = DomUtil.create('ul', 'menu-list', this._wrapper)
     this._ready = true
   }
 
   /**
    *
-   * @param e
    * @private
    */
-  _rightClickHandler(e) {
-    if (e && e.windowPosition && this._enable) {
-      this._updateWindowCoord(e.windowPosition)
+  _mountMenu() {
+    while (this._ulEl.hasChildNodes()) {
+      this._ulEl.removeChild(this._ulEl.firstChild)
+    }
+    // Add menu item
+    if (this._overlayMenu && this._overlayMenu.length) {
+      this._overlayMenu.forEach(item => {
+        this._addMenuItem(item.label, item.callback, item.context || this)
+      })
+    }
+
+    if (this._defaultMenu && this._defaultMenu.length) {
+      this._defaultMenu.forEach(item => {
+        this._addMenuItem(item.label, item.callback, item.context || this)
+      })
     }
   }
 
   /**
    *
-   * @param e
+   * @param movement
    * @private
    */
-  _clickHandler(e) {
+  _onRightClick(movement) {
+    this._enable && this._updateWindowCoord(movement.position)
+    this._overlay = undefined
+    let target = this._viewer.scene.pick(movement.position)
+    // for Entity
+    if (target && target.id && target.id instanceof Cesium.Entity) {
+      let layer = this._viewer
+        .getLayers()
+        .filter(item => item.layerId === target.id.layerId)[0]
+      if (layer && layer.getOverlay) {
+        this._overlay = layer.getOverlay(target.id.overlayId)
+      }
+    }
+    // for Cesium3DTileFeature
+    if (target && target instanceof Cesium.Cesium3DTileFeature) {
+      let layer = this._viewer
+        .getLayers()
+        .filter(item => item.layerId === target.tileset.layerId)[0]
+      if (layer && layer.getOverlay) {
+        this._overlay = layer.getOverlay(target.tileset.overlayId)
+      }
+    }
+    this.overlayMenu = this._overlay?.contextMenu || []
+    this._mountMenu()
+  }
+  /**
+   *
+   * @param movement
+   * @private
+   */
+  _onClick(movement) {
     this.hide()
   }
 
@@ -119,11 +187,13 @@ class ContextMenu extends Widget {
 
   /**
    *
-   * @param {*} label
-   * @param {*} method
-   * @param {*} context
+   * @param label
+   * @param method
+   * @param context
+   * @returns {ContextMenu}
+   * @private
    */
-  addMenuItem(label, method, context) {
+  _addMenuItem(label, method, context) {
     if (!label || !method) {
       return this
     }
@@ -134,11 +204,11 @@ class ContextMenu extends Widget {
     let self = this
     if (method) {
       a.onclick = () => {
-        method.call(context)
+        method.call(context, self._viewer, self._overlay)
         self.hide()
       }
     }
-    this._ulEl.insertBefore(menu, this._ulEl.lastChild)
+    this._ulEl.appendChild(menu)
     return this
   }
 }
