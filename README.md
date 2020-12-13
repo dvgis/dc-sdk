@@ -88,7 +88,7 @@ DC.ready(() => {
 
 ## Demo
 
-|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/google.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png) |
+|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/google.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png) |
 |  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
 |  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
 |  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png)   |
@@ -110,7 +110,7 @@ DC.ready(() => {
 
 <p>
 <img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2"  style="width:60px;height:60px" title="数字视觉"/>
-<img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=3" style="width:60px;height:60px" title="Cesium开心农场"/>
+<img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=4" style="width:60px;height:60px" title="Cesium开心农场"/>
 </p>
 
 ## Support
