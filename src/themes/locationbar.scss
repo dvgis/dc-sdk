@@ -11,5 +11,12 @@
   display: flex;
   span {
     margin: 0 8px;
+    display: inline-block;
   }
+  .mouse-location{
+    span{
+      min-width: 125px;
+    }
+  }
+
 }
