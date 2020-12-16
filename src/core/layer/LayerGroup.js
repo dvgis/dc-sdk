@@ -63,7 +63,7 @@ class LayerGroup {
    */
   _onRemove() {
     Object.keys(this._cache).forEach(key => {
-      this._viewer && this._viewer.remove(this._cache[key])
+      this._viewer && this._viewer.removeLayer(this._cache[key])
     })
     this._cache = {}
     this._state = State.REMOVED

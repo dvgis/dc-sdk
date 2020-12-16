@@ -121,15 +121,15 @@ class Overlay {
    * @private
    */
   _onAdd(layer) {
-    if (!layer || !this._delegate) {
+    if (!layer) {
       return
     }
     this._layer = layer
     this._mountedHook && this._mountedHook()
     // for Entity
-    if (this._layer?.delegate?.entities) {
+    if (this._layer?.delegate?.entities && this._delegate) {
       this._layer.delegate.entities.add(this._delegate)
-    } else if (this._layer?.delegate?.add) {
+    } else if (this._layer?.delegate?.add && this._delegate) {
       // for Primitive
       this._layer.delegate.add(this._delegate)
     }

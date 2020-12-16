@@ -4,7 +4,13 @@
  */
 
 import { Util, DomUtil, PlotUtil } from './utils'
-import { MouseEventType, SceneEventType, Event } from './event'
+import {
+  MouseEventType,
+  SceneEventType,
+  LayerEventType,
+  OverlayEventType,
+  Event
+} from './event'
 import { LayerType, Layer } from './layer'
 import { OverlayType, Overlay } from './overlay'
 import ImageryType from './imagery/ImageryType'
@@ -28,6 +34,8 @@ const base = {
   OverlayType,
   MouseEventType,
   SceneEventType,
+  LayerEventType,
+  OverlayEventType,
   WidgetType,
   MouseMode,
   Layer,
