@@ -9,12 +9,12 @@ const { Cesium } = DC.Namespace
 
 class Position {
   constructor(lng, lat, alt, heading, pitch, roll) {
-    this._lng = lng || 0
-    this._lat = lat || 0
-    this._alt = alt || 0
-    this._heading = heading || 0
-    this._pitch = pitch || 0
-    this._roll = roll || 0
+    this._lng = +lng || 0
+    this._lat = +lat || 0
+    this._alt = +alt || 0
+    this._heading = +heading || 0
+    this._pitch = +pitch || 0
+    this._roll = +roll || 0
   }
 
   set lng(lng) {
@@ -195,9 +195,7 @@ class Position {
   static fromCoordArray(arr) {
     let position = new Position()
     if (Array.isArray(arr)) {
-      position.lng = arr[0] || 0
-      position.lat = arr[1] || 0
-      position.alt = arr[2] || 0
+      position = this.fromArray(arr)
     }
     return position
   }
