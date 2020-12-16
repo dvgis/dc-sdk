@@ -31,13 +31,12 @@ class Tileset extends Overlay {
    *
    * @private
    */
-  _initVisibleEvent() {
-    if (!this._tileVisibleCallback) {
-      this._tileVisibleCallback = this._delegate.tileVisible.addEventListener(
-        this._updateTile,
-        this
-      )
-    }
+  _bindVisibleEvent() {
+    this._tileVisibleCallback && this._tileVisibleCallback()
+    this._tileVisibleCallback = this._delegate.tileVisible.addEventListener(
+      this._updateTile,
+      this
+    )
   }
 
   /**
@@ -143,9 +142,10 @@ class Tileset extends Overlay {
   /**
    * Sets height
    * @param height
+   * @param isAbsolute
    * @returns {Tileset}
    */
-  setHeight(height) {
+  setHeight(height, isAbsolute = false) {
     this.readyPromise.then(tileset => {
       let center = Cesium.Cartographic.fromCartesian(
         tileset.boundingSphere.center
@@ -158,7 +158,7 @@ class Tileset extends Overlay {
       let offset = Cesium.Cartesian3.fromRadians(
         center.longitude,
         center.latitude,
-        center.height + height
+        isAbsolute ? height : center.height + height
       )
       let translation = Cesium.Cartesian3.subtract(
         offset,
@@ -193,7 +193,7 @@ class Tileset extends Overlay {
    */
   setProperties(properties) {
     this._properties = properties
-    this._initVisibleEvent()
+    this._bindVisibleEvent()
     return this
   }
 
@@ -204,7 +204,7 @@ class Tileset extends Overlay {
    */
   setCustomShader(customShader) {
     this._customShader = customShader
-    this._initVisibleEvent()
+    this._bindVisibleEvent()
     return this
   }
 

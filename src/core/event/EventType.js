@@ -48,6 +48,7 @@ const OverlayEventType = {
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
+  MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
   MOUSE_OVER: 'mouseover',
   MOUSE_OUT: 'mouseout'
 }
