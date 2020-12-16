@@ -19,7 +19,7 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 
 ## 安装
 
-> CDN
+`CDN`
 
 ```html
 <!--基础包-->
@@ -29,8 +29,8 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 <!--主要样式-->
 <link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
-
-> NPM / YARN
+ 
+`NPM / YARN`
 
 ```shell
    yarn add @dvgis/dc-sdk
@@ -45,10 +45,10 @@ import 'dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
 
 ## 配置
 
-> Vue
+`Vue2.x`
 
 ```js
-// vue.config.js vue 文件
+// vue.config.js
 
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
@@ -65,6 +65,33 @@ module.exports = {
           to: 'libs/dc-sdk/resources'
         }
       ]
+    ])
+  }
+}
+```
+
+`Vue3.x`
+
+```js
+// vue.config.js
+
+const path = require('path')
+const CopywebpackPlugin = require('copy-webpack-plugin')
+const dvgisDist = './node_modules/@dvgis'
+
+module.exports = {
+  // 其他配置
+  chainWebpack: config => {
+    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+    config.plugin('copy').use(CopywebpackPlugin, [
+      {
+        patterns: [
+          {
+            from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
+            to: path.join(__dirname, 'dist', 'libs/dc-sdk/resources'),
+          },
+        ],
+      }
     ])
   }
 }
@@ -98,13 +125,15 @@ DC.ready(() => {
 ## 生态
 
 |  模块名称 | 状态 | 描述 | 
-|  :---- | :------: | :------ | 
+|  :------ | :------: | :------ | 
 | [dc-plugins](https://github.com/dvgis/dc-plugins) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plugins?logo=npm" /> | DC插件模块，包括场景动画、漫游以及一些额外的材质 | 
 | [dc-overlay](https://github.com/dvgis/dc-overlay) | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | DC要素模块，包括球体、柱体、军标、水面等 | 
 | [dc-plot](https://github.com/dvgis/dc-plot) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | DC标绘模块，用于要素的标绘和编辑 | 
-| [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | DC图表模块，用于在三维场景中添加echarts功能 | 
-| [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | DC大数据模块，用于在三维场景中添加mapv功能 | 
-| [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | DC组件开发框架，将DC功能Vue模块化| 
+| [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | DC图表模块，用于在三维场景中添加Echarts功能 | 
+| [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | DC大数据模块，用于在三维场景中添加Mapv功能 | 
+| [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | DC基于Vue2.x组件开发框架，将DC功能Vue模块化 | 
+|  dc-analysis | <img src="https://img.shields.io/npm/v/@dvgis/dc-analysis?logo=npm" /> |  DC分析模块，包括视频融合，位置编辑、测量等 |
+|  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | DC基于Vue3.x组件开发框架，将DC功能Vue模块化 |
 
 ## QQ 群
 

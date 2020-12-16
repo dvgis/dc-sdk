@@ -19,7 +19,7 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 
 ## Installation
 
-> CDN
+`CDN`
 
 ```html
 <!--Basic Package-->
@@ -30,7 +30,7 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 <link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
 
-> NPM / YARN
+`NPM / YARN`
 
 ```shell
    yarn add @dvgis/dc-sdk
@@ -45,7 +45,7 @@ import 'dvgis/dc-sdk/dist/dc.core.min.css' // Main Style Sheet
 
 ## Setting
 
-> Vue
+`Vue2.x`
 
 ```js
 // vue.config.js
@@ -65,6 +65,33 @@ module.exports = {
           to: 'libs/dc-sdk/resources'
         }
       ]
+    ])
+  }
+}
+```
+
+`Vue3.x`
+
+```js
+// vue.config.js
+
+const path = require('path')
+const CopywebpackPlugin = require('copy-webpack-plugin')
+const dvgisDist = './node_modules/@dvgis'
+
+module.exports = {
+  // other settings
+  chainWebpack: config => {
+    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+    config.plugin('copy').use(CopywebpackPlugin, [
+      {
+        patterns: [
+          {
+            from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
+            to: path.join(__dirname, 'dist', 'libs/dc-sdk/resources'),
+          },
+        ],
+      }
     ])
   }
 }
@@ -103,8 +130,10 @@ DC.ready(() => {
 |  [dc-overlay](https://github.com/dvgis/dc-overlay) | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | dc overlay module, including ellipsoid, cylinder, corridor, water surface, etc | 
 |  [dc-plot](https://github.com/dvgis/dc-plot) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | dc plotting module for plotting and editing overlay | 
 |  [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | dc chart module for adding ECharts functionality in 3d scenes | 
-|  [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | dc big-data module for adding MAPV functions in 3d scenes | 
-|  [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | dc components for Vue | 
+|  [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | dc big-data module for adding MAPV functions in 3d scenes |  
+|  [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | dc components for Vue2.x | 
+|  dc-analysis | <img src="https://img.shields.io/npm/v/@dvgis/dc-analysis?logo=npm" /> | dc analysis module, including camera-video, position-editor, measure, etc |
+|  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | dc components for Vue3.x |
 
 ## QQ Group
 
