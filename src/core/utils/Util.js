@@ -120,6 +120,40 @@ class Util {
       position.hasOwnProperty('_alt')
     )
   }
+
+  /**
+   * Creates a debounced function that delays invoking `fn` until after `delay`
+   * @param fn
+   * @param delay
+   * @returns {function(): void}
+   */
+  static debounce(fn, delay) {
+    let timer = null
+    return function() {
+      timer && clearTimeout(timer)
+      timer = setTimeout(fn, delay)
+    }
+  }
+
+  /**
+   * Creates a throttled function that only invokes `fn` at most once per
+   * @param fn
+   * @param delay
+   * @returns {function(): void}
+   */
+  static throttle(fn, delay) {
+    let valid = true
+    return function() {
+      if (!valid) {
+        return false
+      }
+      valid = false
+      setTimeout(() => {
+        fn()
+        valid = true
+      }, delay)
+    }
+  }
 }
 
 export default Util
