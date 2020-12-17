@@ -16,6 +16,9 @@ class ContextMenu extends Widget {
     this._ulEl = undefined
     this._handler = undefined
     this._overlay = undefined
+    this._position = undefined
+    this._surfacePosition = undefined
+    this._windowPosition = undefined
     this._config = {}
     this._defaultMenu = [
       {
@@ -126,9 +129,25 @@ class ContextMenu extends Widget {
    * @private
    */
   _onRightClick(movement) {
-    this._enable && this._updateWindowCoord(movement.position)
-    this._overlay = undefined
-    let target = this._viewer.scene.pick(movement.position)
+    if (!this._enable) {
+      return
+    }
+    let scene = this._viewer.scene
+    this._windowPosition = movement.position
+    this._updateWindowCoord(movement.position)
+    let target = scene.pick(movement.position)
+    if (scene.pickPositionSupported) {
+      this._position = scene.pickPosition(movement.position)
+    }
+    if (scene.mode === Cesium.SceneMode.SCENE3D) {
+      let ray = scene.camera.getPickRay(movement.position)
+      this._surfacePosition = scene.globe.pick(ray, scene)
+    } else {
+      this._surfacePosition = scene.camera.pickEllipsoid(
+        movement.position,
+        Cesium.Ellipsoid.WGS84
+      )
+    }
     // for Entity
     if (target && target.id && target.id instanceof Cesium.Entity) {
       let layer = this._viewer
@@ -204,7 +223,12 @@ class ContextMenu extends Widget {
     let self = this
     if (method) {
       a.onclick = () => {
-        method.call(context, self._viewer, self._overlay)
+        method.call(context, {
+          position: self._position,
+          windowPosition: self._windowPosition,
+          surfacePosition: self._surfacePosition,
+          overlay: self._overlay
+        })
         self.hide()
       }
     }

@@ -11,12 +11,8 @@ const cesiumBuild = 'node_modules/cesium/Build/Cesium'
 
 let cesiumCopyPlugin = [
   new CopyWebpackPlugin([
-    { from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' }
-  ]),
-  new CopyWebpackPlugin([
-    { from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' }
-  ]),
-  new CopyWebpackPlugin([
+    { from: path.join(cesiumBuild, 'Assets'), to: 'resources/Assets' },
+    { from: path.join(cesiumBuild, 'Workers'), to: 'resources/Workers' },
     { from: path.join(cesiumBuild, 'ThirdParty'), to: 'resources/ThirdParty' }
   ])
 ]

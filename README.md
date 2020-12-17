@@ -45,6 +45,33 @@ import 'dvgis/dc-sdk/dist/dc.core.min.css' // Main Style Sheet
 
 ## Setting
 
+`Webpack`
+
+```js
+ // webpack.config.js
+
+const path = require('path')
+const CopywebpackPlugin = require('copy-webpack-plugin')
+const dvgisDist = './node_modules/@dvgis'
+
+module.exports = {
+  // other settings
+  resolve: {
+    alias: {
+      dvgis: path.resolve(__dirname, dvgisDist)
+    }
+  },
+  plugins:[
+    new CopyWebpackPlugin([
+      {  
+        from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
+        to: 'libs/dc-sdk/resources' 
+      }
+    ])
+  ]
+}
+```
+
 `Vue2.x`
 
 ```js
