@@ -13,6 +13,7 @@ import Tooltip from './Tooltip'
 import HawkeyeMap from './HawkeyeMap'
 import Compass from './Compass'
 import DistanceLegend from './DistanceLegend'
+import ZoomController from './ZoomController'
 
 const Widgets = {
   attribution: new Attribution(),
@@ -24,7 +25,8 @@ const Widgets = {
   locationBar: new LocationBar(),
   hawkeyeMap: new HawkeyeMap(),
   compass: new Compass(),
-  distanceLegend: new DistanceLegend()
+  distanceLegend: new DistanceLegend(),
+  zoomController: new ZoomController()
 }
 
 export default Widgets
