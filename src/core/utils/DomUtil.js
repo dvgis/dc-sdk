@@ -230,16 +230,18 @@ class DomUtil {
   /**
    * Creates video
    * @param url
-   * @param type
    * @param className
    * @param container
    * @returns {HTMLElement}
    */
-  static createVideo(url, type, className, container = null) {
+  static createVideo(url, className, container = null) {
     let videoEl = this.create('video', className, container)
-    let source = this.create('source', '', videoEl)
-    source.setAttribute('src', url)
-    source.setAttribute('type', `video/${type}`)
+    let map4 = this.create('source', '', videoEl)
+    map4.setAttribute('src', url)
+    map4.setAttribute('type', 'video/map4')
+    let mov = this.create('source', '', videoEl)
+    mov.setAttribute('src', url)
+    mov.setAttribute('type', 'video/quicktime')
     return videoEl
   }
 }

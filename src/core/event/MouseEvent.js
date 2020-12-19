@@ -54,7 +54,10 @@ class MouseEvent extends Event {
       cartesian = scene.pickPosition(position)
     }
     let surfaceCartesian
-    if (scene.mode === Cesium.SceneMode.SCENE3D) {
+    if (
+      scene.mode === Cesium.SceneMode.SCENE3D &&
+      !(this._viewer.terrainProvider instanceof Cesium.EllipsoidTerrainProvider)
+    ) {
       let ray = scene.camera.getPickRay(position)
       surfaceCartesian = scene.globe.pick(ray, scene)
     } else {

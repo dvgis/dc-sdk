@@ -23,15 +23,15 @@ class ContextMenu extends Widget {
     this._defaultMenu = [
       {
         label: '飞到默认位置',
-        callback: viewer => {
-          viewer.camera.flyHome(0)
+        callback: e => {
+          this._viewer.camera.flyHome(0)
         },
         context: this
       },
       {
         label: '取消飞行',
-        callback: viewer => {
-          viewer.camera.cancelFlight()
+        callback: e => {
+          this._viewer.camera.cancelFlight()
         },
         context: this
       }
