@@ -6,6 +6,7 @@
 import Widget from './Widget'
 import { DomUtil } from '../utils'
 import Icon from '../icon'
+import State from '@/core/state/State'
 
 const { Cesium } = DC.Namespace
 
@@ -16,6 +17,8 @@ class ZoomController extends Widget {
     this._zoomInEl = undefined
     this._zoomOutEl = undefined
     this._refreshEl = undefined
+    this.type = Widget.getWidgetType('zoom_controller')
+    this._state = State.INITIALIZED
   }
 
   /**
@@ -180,5 +183,7 @@ class ZoomController extends Widget {
     this._ready = true
   }
 }
+
+Widget.registerType('zoom_controller')
 
 export default ZoomController
