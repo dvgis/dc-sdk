@@ -26,7 +26,7 @@ class ContextMenu extends Widget {
       {
         label: '飞到默认位置',
         callback: e => {
-          this._viewer.camera.flyHome(0)
+          this._viewer.camera.flyHome(1.5)
         },
         context: this
       },
