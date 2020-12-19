@@ -125,6 +125,21 @@ class Position {
 
   /**
    *
+   * @returns {{lng, heading, alt, roll, pitch, lat}}
+   */
+  toObject() {
+    return {
+      lng: this.lng,
+      lat: this.lat,
+      alt: this.alt,
+      heading: this.heading,
+      pitch: this.pitch,
+      roll: this.roll
+    }
+  }
+
+  /**
+   *
    * @param arr
    * @returns {Position}
    */
@@ -156,6 +171,22 @@ class Position {
   }
 
   /**
+   *
+   * @param obj
+   * @returns {Position}
+   */
+  static fromObject(obj) {
+    return new Position(
+      obj.lng,
+      obj.lat,
+      obj.alt,
+      obj.heading,
+      obj.pitch,
+      obj.roll
+    )
+  }
+
+  /**
    * Deserialize
    * @param valStr
    * @returns {Position}
@@ -182,7 +213,7 @@ class Position {
   static fromCoordString(str) {
     let position = new Position()
     if (str && typeof str === 'string') {
-      position = this.fromCoordArray(str.split(','))
+      position = this.fromArray(str.split(','))
     }
     return position
   }

@@ -50,10 +50,22 @@ class MouseEvent extends Event {
     let scene = this._viewer.scene
     let target = scene.pick(position)
     let cartesian = undefined
+    let surfaceCartesian = undefined
+    let wgs84Position = undefined
+    let wgs84SurfacePosition = undefined
     if (scene.pickPositionSupported) {
       cartesian = scene.pickPosition(position)
     }
-    let surfaceCartesian
+    if (cartesian) {
+      let c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian)
+      if (c) {
+        wgs84Position = {
+          lng: Cesium.Math.toDegrees(c.longitude),
+          lat: Cesium.Math.toDegrees(c.latitude),
+          alt: c.height
+        }
+      }
+    }
     if (
       scene.mode === Cesium.SceneMode.SCENE3D &&
       !(this._viewer.terrainProvider instanceof Cesium.EllipsoidTerrainProvider)
@@ -66,11 +78,24 @@ class MouseEvent extends Event {
         Cesium.Ellipsoid.WGS84
       )
     }
+    if (surfaceCartesian) {
+      let c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(surfaceCartesian)
+      if (c) {
+        wgs84SurfacePosition = {
+          lng: Cesium.Math.toDegrees(c.longitude),
+          lat: Cesium.Math.toDegrees(c.latitude),
+          alt: c.height
+        }
+      }
+    }
+
     return {
       target: target,
       windowPosition: position,
       position: cartesian,
-      surfacePosition: surfaceCartesian
+      wgs84Position: wgs84Position,
+      surfacePosition: surfaceCartesian,
+      wgs84SurfacePosition: wgs84SurfacePosition
     }
   }
 

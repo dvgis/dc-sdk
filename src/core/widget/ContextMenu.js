@@ -17,7 +17,9 @@ class ContextMenu extends Widget {
     this._handler = undefined
     this._overlay = undefined
     this._position = undefined
+    this._wgs84Position = undefined
     this._surfacePosition = undefined
+    this._wgs84SurfacePosition = undefined
     this._windowPosition = undefined
     this._config = {}
     this._defaultMenu = [
@@ -139,6 +141,16 @@ class ContextMenu extends Widget {
     if (scene.pickPositionSupported) {
       this._position = scene.pickPosition(movement.position)
     }
+    if (this._position) {
+      let c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(this._position)
+      if (c) {
+        this._wgs84Position = {
+          lng: Cesium.Math.toDegrees(c.longitude),
+          lat: Cesium.Math.toDegrees(c.latitude),
+          alt: c.height
+        }
+      }
+    }
     if (scene.mode === Cesium.SceneMode.SCENE3D) {
       let ray = scene.camera.getPickRay(movement.position)
       this._surfacePosition = scene.globe.pick(ray, scene)
@@ -147,6 +159,19 @@ class ContextMenu extends Widget {
         movement.position,
         Cesium.Ellipsoid.WGS84
       )
+    }
+
+    if (this._surfacePosition) {
+      let c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(
+        this._surfacePosition
+      )
+      if (c) {
+        this._wgs84SurfacePosition = {
+          lng: Cesium.Math.toDegrees(c.longitude),
+          lat: Cesium.Math.toDegrees(c.latitude),
+          alt: c.height
+        }
+      }
     }
     // for Entity
     if (target && target.id && target.id instanceof Cesium.Entity) {
@@ -224,9 +249,11 @@ class ContextMenu extends Widget {
     if (method) {
       a.onclick = () => {
         method.call(context, {
-          position: self._position,
           windowPosition: self._windowPosition,
+          position: self._position,
+          wgs84Position: self._wgs84Position,
           surfacePosition: self._surfacePosition,
+          wgs84SurfacePosition: self._wgs84SurfacePosition,
           overlay: self._overlay
         })
         self.hide()

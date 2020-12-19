@@ -13,11 +13,20 @@ class Parse {
    */
   static parsePosition(position) {
     let result = new Position()
+    if (!position) {
+      return result
+    }
     if (typeof position === 'string') {
-      result = Position.fromCoordString(position)
+      result = Position.fromString(position)
     } else if (Array.isArray(position)) {
-      result = Position.fromCoordArray(position)
-    } else if (position instanceof Position) {
+      result = Position.fromArray(position)
+    } else if (
+      !(Object(position) instanceof Position) &&
+      Object(position).hasOwnProperty('lng') &&
+      Object(position).hasOwnProperty('lat')
+    ) {
+      result = Position.fromObject(position)
+    } else if (Object(position) instanceof Position) {
       result = position
     }
     return result
@@ -36,12 +45,18 @@ class Parse {
       positions = positions.split(';')
     }
     return positions.map(item => {
-      if (Array.isArray(item) && item.length) {
-        return Position.fromCoordArray(item)
-      } else if (item instanceof Position) {
+      if (typeof item === 'string') {
+        return Position.fromString(item)
+      } else if (Array.isArray(item)) {
+        return Position.fromArray(item)
+      } else if (
+        !(Object(item) instanceof Position) &&
+        Object(item).hasOwnProperty('lng') &&
+        Object(item).hasOwnProperty('lat')
+      ) {
+        return Position.fromObject(item)
+      } else if (Object(item) instanceof Position) {
         return item
-      } else if (typeof item === 'string' && item) {
-        return Position.fromCoordString(item)
       }
     })
   }
