@@ -54,11 +54,6 @@ class ContextMenu extends Widget {
     return this
   }
 
-  set overlayMenu(menus) {
-    this._overlayMenu = menus
-    return this
-  }
-
   /**
    *
    * @private
@@ -134,6 +129,7 @@ class ContextMenu extends Widget {
     if (!this._enable) {
       return
     }
+    this._overlay = undefined
     let scene = this._viewer.scene
     this._windowPosition = movement.position
     this._updateWindowCoord(movement.position)
@@ -191,7 +187,7 @@ class ContextMenu extends Widget {
         this._overlay = layer.getOverlay(target.tileset.overlayId)
       }
     }
-    this.overlayMenu = this._overlay?.contextMenu || []
+    this._overlayMenu = this._overlay?.contextMenu || []
     this._mountMenu()
   }
   /**
