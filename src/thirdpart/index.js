@@ -22,7 +22,8 @@ const thirdPart = {
   PolylineDashMaterialProperty: Cesium.PolylineDashMaterialProperty,
   PolylineGlowMaterialProperty: Cesium.PolylineGlowMaterialProperty,
   PolylineOutlineMaterialProperty: Cesium.PolylineOutlineMaterialProperty,
-  PolylineArrowMaterialProperty: Cesium.PolylineArrowMaterialProperty
+  PolylineArrowMaterialProperty: Cesium.PolylineArrowMaterialProperty,
+  writeTextToCanvas: Cesium.writeTextToCanvas
 }
 
 DC.mixin(thirdPart)
