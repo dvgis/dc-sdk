@@ -3,8 +3,6 @@
  * @Date: 2020-05-28 10:24:38
  */
 
-import { Util } from '../utils'
-
 export default function parabola(
   startPosition,
   endPosition,
@@ -13,9 +11,6 @@ export default function parabola(
 ) {
   //方程 y=-(4h/L^2)*x^2+h h:顶点高度 L：横纵间距较大者
   let result = []
-  if (!Util.checkPosition(startPosition) || !Util.checkPosition(endPosition)) {
-    return result
-  }
   height = Math.max(+height, 100)
   count = Math.max(+count, 50)
   let diffLng = Math.abs(startPosition.lng - endPosition.lng)
