@@ -16,9 +16,13 @@ class Widget {
   }
 
   set enable(enable) {
+    if (this._enable === enable) {
+      return this
+    }
     this._enable = enable
     this._state = this._enable ? State.ENABLED : State.DISABLED
     this._enableHook && this._enableHook()
+    return this
   }
 
   get enable() {
@@ -52,13 +56,16 @@ class Widget {
    * @private
    */
   _enableHook() {
-    !this._wrapper.parentNode &&
-      this._viewer &&
-      this._viewer.dcContainer.appendChild(this._wrapper)
-    this._wrapper &&
-      (this._wrapper.style.visibility = this._enable ? 'visible' : 'hidden')
     !this._ready && this._mountContent()
-    this._enable ? this._bindEvent() : this._unbindEvent()
+    if (this._enable) {
+      !this._wrapper.parentNode &&
+        this._viewer.dcContainer.appendChild(this._wrapper)
+      this._bindEvent()
+    } else {
+      this._unbindEvent()
+      this._wrapper.parentNode &&
+        this._viewer.dcContainer.removeChild(this._wrapper)
+    }
   }
 
   /**

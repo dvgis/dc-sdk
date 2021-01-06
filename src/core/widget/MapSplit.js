@@ -35,6 +35,28 @@ class MapSplit extends Widget {
    *
    * @private
    */
+  _bindEvent() {
+    this._viewer.scene.imagerySplitPosition = 0.5
+    this._wrapper.style.left = '50%'
+  }
+
+  /**
+   *
+   * @private
+   */
+  _unbindEvent() {
+    if (this._baseLayer) {
+      this._viewer.scene.imagerySplitPosition =
+        this._baseLayer.splitDirection > 0 ? 1 : 0
+    } else {
+      this._viewer.scene.imagerySplitPosition = 0
+    }
+  }
+
+  /**
+   *
+   * @private
+   */
   _mountContent() {
     let splitter = DomUtil.parseDom(Icon.splitter, true, 'splitter')
     this._wrapper.appendChild(splitter)
@@ -64,6 +86,11 @@ class MapSplit extends Widget {
     this._ready = true
   }
 
+  /**
+   *
+   * @param movement
+   * @private
+   */
   _moveHandler(movement) {
     if (!this._moveActive || !this._enable) {
       return
@@ -76,17 +103,19 @@ class MapSplit extends Widget {
     this._viewer.scene.imagerySplitPosition = splitPosition
   }
 
-  addBaseLayer(baseLayer, splitDirection) {
+  /**
+   *
+   * @param baseLayer
+   * @param splitDirection
+   * @returns {MapSplit}
+   */
+  addBaseLayer(baseLayer, splitDirection = 1) {
     if (!this._viewer || !this._enable) {
       return this
     }
     if (baseLayer) {
-      if (this._baseLayer) {
-        this._viewer.delegate.imageryLayers.remove(this._baseLayer)
-      }
-      this._baseLayer = this._viewer.delegate.imageryLayers.addImageryProvider(
-        baseLayer
-      )
+      this._baseLayer && this._viewer.imageryLayers.remove(this._baseLayer)
+      this._baseLayer = this._viewer.imageryLayers.addImageryProvider(baseLayer)
       this._baseLayer.splitDirection = splitDirection || 0
       this._viewer.scene.imagerySplitPosition =
         this._wrapper.offsetLeft / this._wrapper.parentElement.offsetWidth

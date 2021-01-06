@@ -49,9 +49,11 @@ class Tooltip extends Widget {
    *
    */
   showAt(position, content) {
-    if (position) {
-      this._updateWindowCoord(position)
+    if (!this._enable) {
+      return this
     }
+
+    position && this._updateWindowCoord(position)
     this.setContent(content)
     return this
   }
