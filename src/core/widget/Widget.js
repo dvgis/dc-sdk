@@ -87,11 +87,11 @@ class Widget {
    */
   install(viewer) {
     this._viewer = viewer
-    this._state = State.INSTALLED
     /**
      * do installHook
      */
     this._installHook && this._installHook()
+    this._state = State.INSTALLED
   }
 
   /**
