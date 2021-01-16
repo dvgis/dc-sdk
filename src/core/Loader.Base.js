@@ -4,6 +4,7 @@
  */
 
 import { Util, DomUtil, PlotUtil } from './utils'
+
 import {
   MouseEventType,
   SceneEventType,
@@ -11,6 +12,7 @@ import {
   OverlayEventType,
   Event
 } from './event'
+
 import { LayerType, Layer } from './layer'
 import { OverlayType, Overlay } from './overlay'
 import ImageryType from './imagery/ImageryType'

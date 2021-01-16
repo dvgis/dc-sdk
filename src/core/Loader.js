@@ -6,6 +6,7 @@
 import ImageryLayerFactory from './imagery/ImageryLayerFactory'
 import TerrainFactory from './terrain/TerrainFactory'
 import Viewer from './viewer/Viewer'
+
 import {
   LayerGroup,
   GeoJsonLayer,
@@ -14,7 +15,9 @@ import {
   PrimitiveLayer,
   TilesetLayer,
   TopoJsonLayer,
-  VectorLayer
+  VectorLayer,
+  CzmlLayer,
+  KmlLayer
 } from './layer'
 
 import {
@@ -32,13 +35,13 @@ import {
 import {
   area,
   bounds,
-  mid,
   center,
+  curve,
   distance,
   heading,
   isBetween,
-  parabola,
-  curve
+  mid,
+  parabola
 } from './math'
 
 const { Cesium } = DC.Namespace
@@ -66,6 +69,8 @@ const core = {
   TilesetLayer,
   TopoJsonLayer,
   VectorLayer,
+  CzmlLayer,
+  KmlLayer,
   Billboard,
   Circle,
   DivIcon,
