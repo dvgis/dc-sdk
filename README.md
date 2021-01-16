@@ -11,7 +11,9 @@
 
 > DC-SDK is a 2D and 3D integrated WebGis application framework based on the secondary development of Cesium. This framework optimizes the usage mode of Cesium and adds some additional functions, aiming to build WebGis applications for developers quickly.
 
-> [Home Page](http://dc.dvgis.cn)
+## Home
+
+> http://dc.dvgis.cn
 
 ```warningH
 Tips：This SDK is JS+GIS framework package. Developers need to have some front-end technology and GIS related technology
@@ -33,8 +35,8 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 `NPM / YARN`
 
 ```shell
-   yarn add @dvgis/dc-sdk
-   npm install @dvgis/dc-sdk
+yarn add @dvgis/dc-sdk
+npm install @dvgis/dc-sdk
 ```
 
 ```js
@@ -128,7 +130,7 @@ module.exports = {
 
 ```js
 global.DC = DC
-DC.use(DcCore)
+DC.use(DcCore) // node
 DC.ready(() => {
   let viewer = new DC.Viewer(divId) // divId is the Id attribute value of a div node. If it is not passed in, the 3D scene cannot be initialized
 })
@@ -136,15 +138,15 @@ DC.ready(() => {
 
 ## Documentation
 
-[DC Api](https://resource.dvgis.cn/dc-api)
+[DC Sdk Api](https://resource.dvgis.cn/dc-api)
 
 [Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
 ## Demo
 
-|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/google.png) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png) |
+|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/china.gif) |
 |  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
-|  ![picture](http://dc.dvgis.cn/examples/images/scene/globe_rotate.gif) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
+|  ![picture](http://dc.dvgis.cn/examples/images/mini-scene/dfmz.gif) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/factory.gif) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
 |  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png)   |
 
 [More>>](http://dc.dvgis.cn/#/examples)
