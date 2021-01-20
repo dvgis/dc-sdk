@@ -1,6 +1,6 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-05 21:53:35
+ * @Author:Caven
+ * @Date:2020-03-05 21:53:35
  */
 
 import Attribution from './Attribution'
@@ -15,18 +15,18 @@ import Compass from './Compass'
 import DistanceLegend from './DistanceLegend'
 import ZoomController from './ZoomController'
 
-const Widgets = {
-  attribution: new Attribution(),
-  popup: new Popup(),
-  contextMenu: new ContextMenu(),
-  tooltip: new Tooltip(),
-  mapSwitch: new MapSwitch(),
-  mapSplit: new MapSplit(),
-  locationBar: new LocationBar(),
-  hawkeyeMap: new HawkeyeMap(),
-  compass: new Compass(),
-  distanceLegend: new DistanceLegend(),
-  zoomController: new ZoomController()
+export default function createWidgets() {
+  return {
+    attribution: new Attribution(),
+    popup: new Popup(),
+    contextMenu: new ContextMenu(),
+    tooltip: new Tooltip(),
+    mapSwitch: new MapSwitch(),
+    mapSplit: new MapSplit(),
+    locationBar: new LocationBar(),
+    hawkeyeMap: new HawkeyeMap(),
+    compass: new Compass(),
+    distanceLegend: new DistanceLegend(),
+    zoomController: new ZoomController()
+  }
 }
-
-export default Widgets
