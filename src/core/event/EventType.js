@@ -50,7 +50,8 @@ const OverlayEventType = {
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
   MOUSE_OVER: 'mouseover',
-  MOUSE_OUT: 'mouseout'
+  MOUSE_OUT: 'mouseout',
+  POSITION_UPDATE: 'positionUpdate'
 }
 
 const LayerGroupEventType = BaseEventType
