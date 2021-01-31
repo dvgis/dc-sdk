@@ -5,6 +5,8 @@
 
 import ImageryType from '../ImageryType'
 
+import BaiduMercatorTilingScheme from '../tiling-scheme/BaiduMercatorTilingScheme'
+
 const { Cesium } = DC.Namespace
 
 const IMG_URL =
@@ -33,9 +35,21 @@ class BaiduImageryProvider {
     this._tileWidth = 256
     this._tileHeight = 256
     this._maximumLevel = 18
-    this._tilingScheme = new Cesium.WebMercatorTilingScheme({
-      rectangleSouthwestInMeters: new Cesium.Cartesian2(-33554054, -33746824),
-      rectangleNortheastInMeters: new Cesium.Cartesian2(33554054, 33746824)
+    let resolutions = []
+    for (let i = 0; i < 19; i++) {
+      resolutions[i] = 256 * Math.pow(2, 18 - i)
+    }
+    this._tilingScheme = new BaiduMercatorTilingScheme({
+      rectangleSouthwestInMeters: new Cesium.Cartesian2(
+        -20037726.37,
+        -12474104.17
+      ),
+      rectangleNortheastInMeters: new Cesium.Cartesian2(
+        20037726.37,
+        12474104.17
+      ),
+      resolutions,
+      crs: options.crs || ''
     })
     this._rectangle = this._tilingScheme.rectangle
     this._credit = undefined
@@ -132,11 +146,9 @@ class BaiduImageryProvider {
         'requestImage must not be called before the imagery provider is ready.'
       )
     }
-    let xTiles = this._tilingScheme.getNumberOfXTilesAtLevel(level)
-    let yTiles = this._tilingScheme.getNumberOfYTilesAtLevel(level)
     let url = this._url
-      .replace('{x}', String(x - xTiles / 2))
-      .replace('{y}', String(yTiles / 2 - y - 1))
+      .replace('{x}', String(x))
+      .replace('{y}', String(-y))
       .replace('{z}', level)
       .replace('{s}', String(1))
       .replace('{style}', this._style)
