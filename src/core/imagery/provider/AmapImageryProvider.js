@@ -4,6 +4,7 @@
  */
 
 import ImageryType from '../ImageryType'
+import AmapMercatorTilingScheme from '../tiling-scheme/AmapMercatorTilingScheme'
 
 const { Cesium } = DC.Namespace
 
@@ -17,6 +18,9 @@ class AmapImageryProvider extends Cesium.UrlTemplateImageryProvider {
   constructor(options = {}) {
     options['url'] = options.style === 'img' ? IMG_URL : ELEC_URL
     options['subdomains'] = options.subdomains || ['01', '02', '03', '04']
+    if (options.crs === 'WGS84') {
+      options['tilingScheme'] = new AmapMercatorTilingScheme()
+    }
     super(options)
   }
 }
