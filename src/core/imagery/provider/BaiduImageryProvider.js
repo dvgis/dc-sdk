@@ -4,7 +4,6 @@
  */
 
 import ImageryType from '../ImageryType'
-
 import BaiduMercatorTilingScheme from '../tiling-scheme/BaiduMercatorTilingScheme'
 
 const { Cesium } = DC.Namespace
