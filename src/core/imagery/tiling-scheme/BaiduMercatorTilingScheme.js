@@ -4,8 +4,9 @@
  */
 
 import BaiduMercatorProjection from '../projection/BaiduMercatorProjection'
-
 import CoordTransform from '../../transform/CoordTransform'
+
+const { Cesium } = DC.Namespace
 
 class BaiduMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
   constructor(options) {
