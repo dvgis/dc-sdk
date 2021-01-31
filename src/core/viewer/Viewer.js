@@ -114,6 +114,10 @@ class Viewer {
     return this._delegate.entities
   }
 
+  get postProcessStages() {
+    return this._delegate.postProcessStages
+  }
+
   get clock() {
     return this._delegate.clock
   }
