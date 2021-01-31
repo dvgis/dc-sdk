@@ -5,6 +5,8 @@
 
 import CoordTransform from '../../transform/CoordTransform'
 
+const { Cesium } = DC.Namespace
+
 class AmapMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
   constructor(options) {
     super(options)
