@@ -10,7 +10,7 @@ const EE = 0.00669342162296594323
 
 class CoordTransform {
   /**
-   * 百度坐标系 (BD-09) 与 火星坐标系 (GCJ-02) 的转换
+   * BD-09 To GCJ-02
    * @param lng
    * @param lat
    * @returns {number[]}
@@ -26,7 +26,7 @@ class CoordTransform {
   }
 
   /**
-   * 火星坐标系 (GCJ-02) 与百度坐标系 (BD-09) 的转换
+   * GCJ-02 To BD-09
    * @param lng
    * @param lat
    * @returns {number[]}
@@ -44,7 +44,7 @@ class CoordTransform {
   }
 
   /**
-   * WGS-84 转 GCJ-02
+   * WGS-84 To GCJ-02
    * @param lng
    * @param lat
    * @returns {number[]}
@@ -61,7 +61,7 @@ class CoordTransform {
   }
 
   /**
-   * GCJ-02 转换为 WGS-84
+   * GCJ-02 To WGS-84
    * @param lng
    * @param lat
    * @returns {number[]}
