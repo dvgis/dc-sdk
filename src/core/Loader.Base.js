@@ -21,7 +21,7 @@ import WidgetType from './widget/WidgetType'
 import MouseMode from './option/MouseMode'
 import State from './state/State'
 import Position from './position/Position'
-import Transform from './transform/Transform'
+import { Transform, CoordTransform } from './transform'
 import Parse from './parse/Parse'
 
 const base = {
@@ -45,6 +45,7 @@ const base = {
   Position,
   Transform,
   T: Transform,
+  CoordTransform,
   Parse,
   P: Parse
 }
