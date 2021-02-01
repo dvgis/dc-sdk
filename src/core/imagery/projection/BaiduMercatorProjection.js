@@ -160,6 +160,12 @@ class BaiduMercatorProjection {
     this.isWgs84 = false
   }
 
+  /**
+   *
+   * @param point1
+   * @param point2
+   * @returns {number}
+   */
   getDistanceByMC(point1, point2) {
     if (!point1 || !point2) {
       return 0
@@ -180,10 +186,10 @@ class BaiduMercatorProjection {
   }
 
   /**
-   * 根据经纬度坐标计算两点间距离;
+   * Calculate the distance between two points according to the latitude and longitude coordinates
    * @param point1
    * @param point2
-   * @returns {number|*} 返回两点间的距离
+   * @returns {number|*}
    */
   getDistanceByLL(point1, point2) {
     if (!point1 || !point2) {
@@ -201,7 +207,7 @@ class BaiduMercatorProjection {
   }
 
   /**
-   * 平面直角坐标转换成经纬度坐标;
+   * The plane cartesian coordinates are converted to latitude and longitude coordinates
    * @param point
    * @returns {Point|{lng: number, lat: number}}
    */
@@ -242,8 +248,8 @@ class BaiduMercatorProjection {
   }
 
   /**
-   * 经纬度坐标转换成平面直角坐标;
-   * @param point 经纬度坐标
+   * The latitude and longitude coordinates are converted to plane cartesian coordinates
+   * @param point
    * @returns {{lng: number, lat: number}|*}
    */
   convertLL2MC(point) {
@@ -419,18 +425,18 @@ class BaiduMercatorProjection {
   }
 
   /**
-   * 墨卡托变换至经纬度
-   * @param point 墨卡托
-   * @returns Point 经纬度
+   * WebMercator transforms to latitude and longitude
+   * @param point
+   * @returns {Point|{lng: number, lat: number}}
    */
   mercatorToLngLat(point) {
     return this.convertMC2LL(point)
   }
 
   /**
-   * 平面到球面坐标
-   * @param point 平面坐标
-   * @returns Point 球面坐标
+   *
+   * @param point
+   * @returns {Point|{lng: number, lat: number}}
    */
   pointToLngLat(point) {
     let mercator = { lng: point.x, lat: point.y }
@@ -438,15 +444,16 @@ class BaiduMercatorProjection {
   }
 
   /**
-   * 地理坐标转换至像素坐标
-   * @param point 地理坐标
-   * @param zoom 级别
-   * @param mapCenter 地图中心点，注意为了保证没有误差，这里需要传递墨卡托坐标
-   * @param mapSize 地图容器大小
+   * Latitude and longitude coordinates  transforms to  pixel coordinates
+   * @param point
+   * @param zoom
+   * @param mapCenter
+   * @param mapSize
+   * @returns {{x: number, y: number}}
    */
   pointToPixel(point, zoom, mapCenter, mapSize) {
     if (!point) {
-      return
+      return { x: 0, y: 0 }
     }
     point = this.lngLatToMercator(point)
     let zoomUnits = this.getZoomUnits(zoom)
@@ -460,15 +467,16 @@ class BaiduMercatorProjection {
   }
 
   /**
-   * 像素坐标转换至地理坐标
-   * @param pixel 像素坐标
-   * @param zoom 级别
-   * @param mapCenter 地图中心点，注意为了保证没有误差，这里需要传递墨卡托坐标
-   * @param mapSize 地图容器大小
+   * Pixel coordinates transforms to latitude and longitude coordinates
+   * @param pixel
+   * @param zoom
+   * @param mapCenter
+   * @param mapSize
+   * @returns {Point|{lng: number, lat: number}}
    */
   pixelToPoint(pixel, zoom, mapCenter, mapSize) {
     if (!pixel) {
-      return
+      return { lng: 0, lat: 0 }
     }
     let zoomUnits = this.getZoomUnits(zoom)
     let lng = mapCenter['lng'] + zoomUnits * (pixel.x - mapSize.width / 2)

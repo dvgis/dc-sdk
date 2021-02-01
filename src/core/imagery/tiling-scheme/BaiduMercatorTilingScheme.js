@@ -14,18 +14,11 @@ class BaiduMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
     let projection = new BaiduMercatorProjection()
     this._projection.project = function(cartographic, result) {
       result = result || {}
-      if (options?.crs === 'WGS84') {
-        result = CoordTransform.WGS84ToGCJ02(
-          Cesium.Math.toDegrees(cartographic.longitude),
-          Cesium.Math.toDegrees(cartographic.latitude)
-        )
-        result = CoordTransform.GCJ02ToBD09(result[0], result[1])
-      } else {
-        result = CoordTransform.GCJ02ToBD09(
-          Cesium.Math.toDegrees(cartographic.longitude),
-          Cesium.Math.toDegrees(cartographic.latitude)
-        )
-      }
+      result = CoordTransform.WGS84ToGCJ02(
+        Cesium.Math.toDegrees(cartographic.longitude),
+        Cesium.Math.toDegrees(cartographic.latitude)
+      )
+      result = CoordTransform.GCJ02ToBD09(result[0], result[1])
       result[0] = Math.min(result[0], 180)
       result[0] = Math.max(result[0], -180)
       result[1] = Math.min(result[1], 74.000022)
@@ -36,20 +29,14 @@ class BaiduMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
       })
       return new Cesium.Cartesian2(result.x, result.y)
     }
-
     this._projection.unproject = function(cartesian, result) {
       result = result || {}
       result = projection.mercatorToLngLat({
         lng: cartesian.x,
         lat: cartesian.y
       })
-      result[0] = ((result[0] + 180) % 360) - 180
-      if (options?.crs === 'WGS84') {
-        result = CoordTransform.BD09ToGCJ02(result.lng, result.lat)
-        result = CoordTransform.GCJ02ToWGS84(result[0], result[1])
-      } else {
-        result = CoordTransform.BD09ToGCJ02(result.lng, result.lat)
-      }
+      result = CoordTransform.BD09ToGCJ02(result.lng, result.lat)
+      result = CoordTransform.GCJ02ToWGS84(result[0], result[1])
       return new Cesium.Cartographic(
         Cesium.Math.toRadians(result[0]),
         Cesium.Math.toRadians(result[1])
