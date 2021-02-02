@@ -9,7 +9,7 @@
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
 
-> DC-SDK is a 2D and 3D integrated WebGis application framework based on the secondary development of Cesium. This framework optimizes the usage mode of Cesium and adds some additional functions, aiming to build WebGis applications for developers quickly.
+> DC-SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.
 
 ## Home
 
