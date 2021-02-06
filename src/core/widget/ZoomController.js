@@ -6,7 +6,7 @@
 import Widget from './Widget'
 import { DomUtil } from '../utils'
 import Icon from '../icon'
-import State from '@/core/state/State'
+import State from '../state/State'
 
 const { Cesium } = DC.Namespace
 
