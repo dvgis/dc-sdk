@@ -65,22 +65,27 @@ class ViewerOption {
 
     scene.moon.show = this._options.showMoon ?? true
 
-    scene.skyBox.show = this._options.showSkyBox ?? true
-
     scene.postProcessStages.fxaa.enabled = this._options.enableFxaa ?? false
 
-    let cameraController = this._options.cameraController
-    Util.merge(scene.screenSpaceCameraController, {
-      enableRotate: cameraController?.enableRotate ?? true,
-      enableTilt: cameraController?.enableTilt ?? true,
-      enableTranslate: cameraController?.enableTranslate ?? true,
-      enableZoom: cameraController?.enableZoom ?? true,
-      enableCollisionDetection:
-        cameraController?.enableCollisionDetection ?? true,
-      minimumZoomDistance: +cameraController?.minimumZoomDistance || 1.0,
-      maximumZoomDistance: +cameraController?.maximumZoomDistance || 40489014.0
-    })
+    return this
+  }
 
+  /**
+   *
+   * @returns {ViewerOption}
+   * @private
+   */
+  _setSkyBoxOption() {
+    if (!this._options.skyBox) {
+      return this
+    }
+    let skyBox = this._viewer.scene.skyBox
+    let skyBoxOption = this._options.skyBox
+    skyBox.show = skyBoxOption.show ?? true
+    skyBox.offsetAngle = skyBoxOption.offsetAngle || 0
+    if (skyBoxOption.sources) {
+      skyBox.sources = skyBoxOption?.sources
+    }
     return this
   }
 
@@ -90,6 +95,10 @@ class ViewerOption {
    * @private
    */
   _setGlobeOption() {
+    if (!this._options.globe) {
+      return this
+    }
+
     let globe = this._viewer.scene.globe
     let globeOption = this._options.globe
 
@@ -117,6 +126,33 @@ class ViewerOption {
   }
 
   /**
+   *
+   * @returns {ViewerOption}
+   * @private
+   */
+  _setCameraController() {
+    if (!this._options?.cameraController) {
+      return this
+    }
+
+    let sscc = this._viewer.scene.screenSpaceCameraController
+    let cameraController = this._options.cameraController
+
+    Util.merge(sscc, {
+      enableInputs: cameraController?.enableInputs ?? true,
+      enableRotate: cameraController?.enableRotate ?? true,
+      enableTilt: cameraController?.enableTilt ?? true,
+      enableTranslate: cameraController?.enableTranslate ?? true,
+      enableZoom: cameraController?.enableZoom ?? true,
+      enableCollisionDetection:
+        cameraController?.enableCollisionDetection ?? true,
+      minimumZoomDistance: +cameraController?.minimumZoomDistance || 1.0,
+      maximumZoomDistance: +cameraController?.maximumZoomDistance || 40489014.0
+    })
+    return this
+  }
+
+  /**
    * Sets options
    * @param options
    * @returns {ViewerOption}
@@ -125,14 +161,18 @@ class ViewerOption {
     if (Object.keys(options).length === 0) {
       return this
     }
+
     this._options = {
       ...this._options,
       ...options
     }
+
     this._setViewerOption()
       ._setCanvasOption()
       ._setSceneOption()
+      ._setSkyBoxOption()
       ._setGlobeOption()
+      ._setCameraController()
     return this
   }
 }
