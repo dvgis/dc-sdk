@@ -44,6 +44,8 @@ import {
   parabola
 } from './math'
 
+import { SkyBox } from './exts'
+
 const { Cesium } = DC.Namespace
 
 Cesium.Math.area = area
@@ -80,7 +82,8 @@ const core = {
   Polygon,
   Model,
   Tileset,
-  Math: Cesium.Math
+  Math: Cesium.Math,
+  SkyBox
 }
 
 DC.mixin(core)
