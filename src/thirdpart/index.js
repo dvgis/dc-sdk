@@ -10,6 +10,8 @@ const thirdPart = {
   Cartesian3: Cesium.Cartesian3,
   SceneMode: Cesium.SceneMode,
   HeightReference: Cesium.HeightReference,
+  HorizontalOrigin: Cesium.HorizontalOrigin,
+  VerticalOrigin: Cesium.VerticalOrigin,
   ClassificationType: Cesium.ClassificationType,
   ShadowMode: Cesium.ShadowMode,
   TilesetStyle: Cesium.Cesium3DTileStyle,
