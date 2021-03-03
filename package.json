@@ -1,7 +1,7 @@
 {
   "name": "@dvgis/dc-sdk",
-  "version": "1.15.2",
-  "description": " The SDK is a secondary development based on the open source project Cesium, which optimizes some operations of Cesium and enables developers to quickly develop 3D applications through the framework.",
+  "version": "1.16.0",
+  "description": "The SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.",
   "main": "index.js",
   "repository": "https://github.com/dvgis/dc-sdk.git",
   "homepage": "https://www.dvgis.cn",
@@ -53,6 +53,6 @@
     "webpack-obfuscator": "^1.8.0"
   },
   "dependencies": {
-    "cesium": "^1.78.0"
+    "cesium": "^1.79.1"
   }
 }
