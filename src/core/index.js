@@ -5,7 +5,7 @@
 
 const install = function(DC) {
   if (!DC) {
-    throw new Error('Missing Base SDK')
+    throw new Error('Missing DC Base Package')
   }
 
   DC.init(() => {

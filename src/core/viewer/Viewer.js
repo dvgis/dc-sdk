@@ -11,7 +11,7 @@ import {
   SceneEvent
 } from '../event'
 import { ViewerOption, CameraOption } from '../option'
-import { DomUtil } from '../utils'
+import { Util, DomUtil } from '../utils'
 import Transform from '../transform/Transform'
 import Parse from '../parse/Parse'
 import createWidgets from '../widget'
@@ -490,17 +490,7 @@ class Viewer {
    * @returns {Viewer}
    */
   zoomToPosition(position, completeCallback) {
-    position = Parse.parsePosition(position)
-    this.camera.flyTo({
-      destination: Transform.transformWGS84ToCartesian(position),
-      orientation: {
-        heading: Cesium.Math.toRadians(position.heading),
-        pitch: Cesium.Math.toRadians(position.pitch),
-        roll: Cesium.Math.toRadians(position.roll)
-      },
-      complete: completeCallback,
-      duration: 0
-    })
+    this.flyToPosition(position, completeCallback, 0)
     return this
   }
 
@@ -552,7 +542,26 @@ class Viewer {
   }
 
   /**
-   * adds a plugin
+   * Export scene to image
+   * @param name
+   * @returns {Viewer}
+   */
+  exportScene(name) {
+    let canvas = this.canvas
+    let image = canvas
+      .toDataURL('image/png')
+      .replace('image/png', 'image/octet-stream')
+    let link = document.createElement('a')
+    let blob = Util.dataURLtoBlob(image)
+    let objUrl = URL.createObjectURL(blob)
+    link.download = `${name || 'scene'}.png`
+    link.href = objUrl
+    link.click()
+    return this
+  }
+
+  /**
+   * Adds a plugin
    * @param plugin
    * @returns {Viewer}
    */

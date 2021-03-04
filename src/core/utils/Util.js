@@ -154,6 +154,23 @@ class Util {
       }, delay)
     }
   }
+
+  /**
+   *
+   * @param dataUrl
+   * @returns {Blob}
+   */
+  static dataURLtoBlob(dataUrl) {
+    let arr = dataUrl.split(',')
+    let mime = arr[0].match(/:(.*?);/)[1]
+    let bStr = atob(arr[1])
+    let len = bStr.length
+    let u8Arr = new Uint8Array(len)
+    while (len--) {
+      u8Arr[len] = bStr.charCodeAt(len)
+    }
+    return new Blob([u8Arr], { type: mime })
+  }
 }
 
 export default Util
