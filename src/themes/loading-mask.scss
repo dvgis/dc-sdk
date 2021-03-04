@@ -1,4 +1,4 @@
-.loading-container {
+.dc-loading-container {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -8,8 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: hidden;
-  background: rgba(181, 181, 181, 0.6);
+  background: rgba(0,0,0,0.6);
 
   .loading {
     width: 150px;
@@ -28,7 +27,7 @@
   }
 
   .loading span:last-child {
-    margin-right: 0px;
+    margin-right: 0;
   }
 
   @-webkit-keyframes load {

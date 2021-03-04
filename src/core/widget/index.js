@@ -29,6 +29,6 @@ export default function createWidgets() {
     compass: new Compass(),
     distanceLegend: new DistanceLegend(),
     zoomController: new ZoomController(),
-    loadlingMask: new LoadingMask()
+    loadingMask: new LoadingMask()
   }
 }
