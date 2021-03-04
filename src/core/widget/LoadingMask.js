@@ -10,7 +10,7 @@ import Widget from './Widget'
 class LoadingMask extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-loading-container')
+    this._wrapper = DomUtil.create('div', 'dc-loading-mask')
     this.type = Widget.getWidgetType('loading_mask')
     this._state = State.INITIALIZED
   }

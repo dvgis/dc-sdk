@@ -86,6 +86,10 @@ class LocationBar extends Widget {
       <span>海拔：${alt.toFixed(2)} 米</span>`
   }
 
+  /**
+   *
+   * @private
+   */
   _cameraHandler() {
     let now = Cesium.getTimestamp()
     if (now < this._lastUpdate + 300) {
