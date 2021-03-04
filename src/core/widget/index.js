@@ -14,6 +14,7 @@ import HawkeyeMap from './HawkeyeMap'
 import Compass from './Compass'
 import DistanceLegend from './DistanceLegend'
 import ZoomController from './ZoomController'
+import LoadingMask from './LoadingMask'
 
 export default function createWidgets() {
   return {
@@ -27,6 +28,7 @@ export default function createWidgets() {
     hawkeyeMap: new HawkeyeMap(),
     compass: new Compass(),
     distanceLegend: new DistanceLegend(),
-    zoomController: new ZoomController()
+    zoomController: new ZoomController(),
+    loadlingMask: new LoadingMask()
   }
 }
