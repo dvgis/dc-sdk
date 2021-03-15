@@ -3,12 +3,11 @@
  * @Date: 2020-08-30 17:22:21
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { GatheringPlace } from '@dc-modules/overlay'
 import Draw from './Draw'
-import GatheringPlaceGraphics from '@dc-modules/overlay/graphics/GatheringPlaceGraphics'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
+import GatheringPlaceGraphics from '../graphics/GatheringPlaceGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -58,7 +57,7 @@ class DrawGatheringPlace extends Draw {
     if (len > 2) {
       this._positions.pop()
       this.unbindEvent()
-      let gatheringPlace = new DC.GatheringPlace(
+      let gatheringPlace = new GatheringPlace(
         Transform.transformCartesianArrayToWGS84Array(this._positions)
       )
       gatheringPlace.setStyle(this._style)

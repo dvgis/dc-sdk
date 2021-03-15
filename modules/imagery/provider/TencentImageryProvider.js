@@ -3,9 +3,8 @@
  * @Date: 2020-01-21 18:10:47
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import ImageryType from '../ImageryType'
-
-const { Cesium } = DC.Namespace
 
 const IMG_URL =
   'https://p{s}.map.gtimg.com/sateTiles/{z}/{sx}/{sy}/{x}_{reverseY}.jpg?version=400'

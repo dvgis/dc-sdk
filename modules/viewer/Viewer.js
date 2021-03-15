@@ -3,6 +3,7 @@
  * @Date: 2019-12-27 17:13:24
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import Parse from '@dc-modules/parse/Parse'
 import {
   LayerGroupEventType,
@@ -15,8 +16,6 @@ import { ViewerOption, CameraOption } from '@dc-modules/option'
 import { Util, DomUtil } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import createWidgets from '@dc-modules/widget'
-
-const { Cesium } = DC.Namespace
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter

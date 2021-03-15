@@ -3,9 +3,8 @@
  * @Date: 2020-01-15 20:31:46
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import ImageryType from '../ImageryType'
-
-const { Cesium } = DC.Namespace
 
 const MAP_URL =
   'https://t{s}.tianditu.gov.cn/DataServer?T={style}_w&x={x}&y={y}&l={z}&tk={key}'

@@ -3,9 +3,8 @@
  * @Date: 2020-01-21 16:06:14
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import ImageryType from '../ImageryType'
-
-const { Cesium } = DC.Namespace
 
 const ELEC_URL =
   'http://mt{s}.google.cn/vt/lyrs=m@207000000&hl=zh-CN&gl=CN&src=app&x={x}&y={y}&z={z}&s=Galile'

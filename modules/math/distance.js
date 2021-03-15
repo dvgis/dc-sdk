@@ -3,9 +3,8 @@
  * @Date: 2020-03-31 20:58:06
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
-
-const { Cesium } = DC.Namespace
 
 export default function distance(positions) {
   let distance = 0

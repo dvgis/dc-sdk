@@ -3,13 +3,12 @@
  * @Date: 2020-08-29 23:00:27
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { Util, PlotUtil } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
-
-const { Cesium } = DC.Namespace
 
 const HALF_PI = Math.PI / 2
 

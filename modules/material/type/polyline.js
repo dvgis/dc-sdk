@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 23:23:12
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const LineFlickerMaterial = require('../shader/polyline/PolylineFlickerMaterial.glsl')
 const LineFlowMaterial = require('../shader/polyline/PolylineFlowMaterial.glsl')

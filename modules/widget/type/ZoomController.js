@@ -3,12 +3,11 @@
  * @Date: 2020-05-06 13:25:36
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Icons from '@dc-modules/icons'
 import { DomUtil } from '@dc-modules/utils'
 import Widget from '../Widget'
-
-const { Cesium } = DC.Namespace
 
 class ZoomController extends Widget {
   constructor() {

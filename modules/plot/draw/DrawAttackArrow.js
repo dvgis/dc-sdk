@@ -3,12 +3,11 @@
  * @Date: 2020-08-30 16:43:12
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { AttackArrow } from '@dc-modules/overlay'
 import Draw from './Draw'
-import AttackArrowGraphics from '@dc-modules/overlay/graphics/AttackArrowGraphics'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
+import AttackArrowGraphics from '../graphics/AttackArrowGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -58,7 +57,7 @@ class DrawAttackArrow extends Draw {
     if (len > 2) {
       this._positions.pop()
       this.unbindEvent()
-      let attackArrow = new DC.AttackArrow(
+      let attackArrow = new AttackArrow(
         Transform.transformCartesianArrayToWGS84Array(this._positions)
       )
       attackArrow.setStyle(this._style)

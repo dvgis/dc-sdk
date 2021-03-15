@@ -3,11 +3,10 @@
  * @Date: 2020-08-29 21:24:55
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { Circle } from '@dc-modules/overlay'
 import Draw from './Draw'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -76,7 +75,7 @@ class DrawCircle extends Draw {
     if (len > 1) {
       this._positions.pop()
       this.unbindEvent()
-      let circle = new DC.Circle(
+      let circle = new Circle(
         Transform.transformCartesianToWGS84(this._positions[0]),
         this._radius
       )

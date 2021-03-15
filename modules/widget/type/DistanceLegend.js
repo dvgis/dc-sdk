@@ -3,12 +3,11 @@
  * @Date: 2020-12-09 20:54:06
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { DomUtil } from '@dc-modules/utils'
 import { SceneEventType } from '@dc-modules/event'
 import Widget from '../Widget'
-
-const { Cesium } = DC.Namespace
 
 const geodesic = new Cesium.EllipsoidGeodesic()
 

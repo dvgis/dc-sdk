@@ -3,11 +3,10 @@
  * @Date: 2020-01-15 19:16:45
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { DomUtil } from '@dc-modules/utils'
 import Widget from '../Widget'
-
-const { Cesium } = DC.Namespace
 
 class Popup extends Widget {
   constructor() {

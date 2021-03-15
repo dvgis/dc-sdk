@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 22:49:41
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const CircleBlurMaterial = require('../shader/circle/CircleBlurMaterial.glsl')
 const CircleDiffuseMaterial = require('../shader/circle/CircleDiffuseMaterial.glsl')

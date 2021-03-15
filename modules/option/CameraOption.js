@@ -3,9 +3,8 @@
  * @Date: 2020-01-21 15:33:52
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import MouseMode from './MouseMode'
-
-const { Cesium } = DC.Namespace
 
 class CameraOption {
   constructor(viewer) {

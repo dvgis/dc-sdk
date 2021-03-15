@@ -3,11 +3,9 @@
  * @Date: 2021-02-24 13:54:09
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import MaterialProperty from '../../MaterialProperty'
-
 const IMG = require('@dc-modules/images/space_line.png')
-
-const { Cesium } = DC.Namespace
 
 class WallLineTrailMaterialProperty extends MaterialProperty {
   constructor(options = {}) {

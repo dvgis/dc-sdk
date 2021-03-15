@@ -3,9 +3,8 @@
  * @Date: 2019-12-30 09:24:37
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { Util } from '@dc-modules/utils'
-
-const { Cesium } = DC.Namespace
 
 class ViewerOption {
   constructor(viewer) {

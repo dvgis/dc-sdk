@@ -3,6 +3,9 @@
  * @Date: 2020-08-29 19:26:06
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { OverlayType } from '@dc-modules/overlay'
+
 import DrawPoint from './draw/DrawPoint'
 import DrawPolyline from './draw/DrawPolyline'
 import DrawPolygon from './draw/DrawPolygon'
@@ -14,6 +17,7 @@ import DrawDoubleArrow from './draw/DrawDoubleArrow'
 import DrawFineArrow from './draw/DrawFineArrow'
 import DrawGatheringPlace from './draw/DrawGatheringPlace'
 import DrawTailedAttackArrow from './draw/DrawTailedAttackArrow'
+
 import EditPoint from './edit/EditPoint'
 import EditPolyline from './edit/EditPolyline'
 import EditPolygon from './edit/EditPolygon'
@@ -26,15 +30,11 @@ import EditFineArrow from './edit/EditFineArrow'
 import EditGatheringPlace from './edit/EditGatheringPlace'
 import EditTailedAttackArrow from './edit/EditTailedAttackArrow'
 
-const IMG_CIRCLE_RED = require('../images/circle_red.png')
+const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
 
 const IMG_CIRCLE_BLUE = require('../images/circle_blue.png')
 
 const IMG_CIRCLE_YELLOW = require('../images/circle_yellow.png')
-
-const { OverlayType } = DC
-
-const { Cesium } = DC.Namespace
 
 const DEF_OPTS = {
   icon_center: IMG_CIRCLE_YELLOW,

@@ -3,11 +3,9 @@
  * @Date: 2020-08-30 23:12:09
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
 import Edit from './Edit'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
 
 class EditPolygon extends Edit {
   constructor(overlay) {

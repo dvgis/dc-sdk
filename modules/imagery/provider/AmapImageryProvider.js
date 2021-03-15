@@ -3,10 +3,9 @@
  * @Date: 2020-01-15 20:31:28
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import ImageryType from '../ImageryType'
 import AmapMercatorTilingScheme from '../tiling-scheme/AmapMercatorTilingScheme'
-
-const { Cesium } = DC.Namespace
 
 const IMG_URL =
   'https://webst{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}'

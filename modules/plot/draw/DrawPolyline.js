@@ -3,11 +3,10 @@
  * @Date: 2020-08-29 20:54:37
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { Polyline } from '@dc-modules/overlay'
 import Draw from './Draw'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   width: 3,
@@ -60,7 +59,7 @@ class DrawPolyline extends Draw {
 
   _onRightClick(e) {
     this.unbindEvent()
-    let polyline = new DC.Polyline(
+    let polyline = new Polyline(
       Transform.transformCartesianArrayToWGS84Array(this._positions)
     )
     polyline.setStyle(this._style)

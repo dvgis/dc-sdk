@@ -3,9 +3,9 @@
  * @Date: 2020-01-15 20:23:42
  */
 
-const { State, Util } = DC
-
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
+import State from '@dc-modules/state/State'
+import { Util } from '@dc-modules/utils'
 
 const RainShader = require('@dc-modules/material/shader/weather/RainShader.glsl')
 

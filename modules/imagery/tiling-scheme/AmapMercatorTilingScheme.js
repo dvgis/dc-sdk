@@ -3,9 +3,8 @@
  * @Date: 2021-01-31 22:07:05
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { CoordTransform } from '@dc-modules/transform'
-
-const { Cesium } = DC.Namespace
 
 class AmapMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
   constructor(options) {

@@ -3,9 +3,8 @@
  * @Date: 2020-01-30 20:47:25
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import Animation from '../Animation'
-
-const { Cesium } = DC.Namespace
 
 class GlobeRotate extends Animation {
   constructor(viewer, options = {}) {

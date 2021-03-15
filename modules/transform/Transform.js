@@ -3,9 +3,8 @@
  * @Date: 2020-01-07 09:00:32
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import Position from '@dc-modules/position/Position'
-
-const { Cesium } = DC.Namespace
 
 const WMP = new Cesium.WebMercatorProjection()
 

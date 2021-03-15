@@ -3,12 +3,13 @@
  * @Date: 2020-01-19 11:21:48
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { RoamingEvent, RoamingEventType } from '@dc-modules/event'
+import State from '@dc-modules/state/State'
+import Parse from '@dc-modules/parse/Parse'
+import { Util } from '@dc-modules/utils'
+import { Transform } from '@dc-modules/transform'
 import RoamingViewMode from './RoamingViewMode'
-
-const { Util, State, Transform, Parse } = DC
-
-const { Cesium } = DC.Namespace
 
 const DEF_OPTS = {
   showPath: false,

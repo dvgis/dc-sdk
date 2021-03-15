@@ -3,10 +3,9 @@
  * @Date: 2019-12-31 16:58:31
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { MouseEventType } from '../EventType'
 import Event from '../Event'
-
-const { Cesium } = DC.Namespace
 
 /**
  * Mouse events in 3D scene, optimized Cesium event model

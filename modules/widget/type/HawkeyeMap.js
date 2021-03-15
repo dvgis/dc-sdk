@@ -3,12 +3,11 @@
  * @Date: 2020-03-15 17:47:42
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { Util, DomUtil } from '@dc-modules/utils'
 import { SceneEventType } from '@dc-modules/event'
 import Widget from '../Widget'
-
-const { Cesium } = DC.Namespace
 
 const DEF_OPTS = {
   animation: false,

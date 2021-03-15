@@ -3,12 +3,11 @@
  * @Date: 2020-08-30 16:43:12
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { FineArrow } from '@dc-modules/overlay'
 import Draw from './Draw'
-import FineArrowGraphics from '@dc-modules/overlay/graphics/FineArrowGraphics'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
+import FineArrowGraphics from '../graphics/FineArrowGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -58,7 +57,7 @@ class DrawFineArrow extends Draw {
     if (len > 1) {
       this._positions.pop()
       this.unbindEvent()
-      let fineArrow = new DC.FineArrow(
+      let fineArrow = new FineArrow(
         Transform.transformCartesianArrayToWGS84Array(this._positions)
       )
       fineArrow.setStyle(this._style)

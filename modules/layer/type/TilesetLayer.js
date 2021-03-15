@@ -3,10 +3,9 @@
  * @Date: 2020-01-09 09:16:27
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 /**
  * TilesetLayer is used to add various tileset

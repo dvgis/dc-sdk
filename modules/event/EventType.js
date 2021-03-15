@@ -3,7 +3,7 @@
  * @Date: 2020-04-10 17:02:28
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const BaseEventType = {
   ADD: 'add',

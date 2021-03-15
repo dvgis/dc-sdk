@@ -3,12 +3,11 @@
  * @Date: 2020-08-30 16:43:12
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { TailedAttackArrow } from '@dc-modules/overlay'
 import Draw from './Draw'
-import TailedAttackArrowGraphics from '@dc-modules/overlay/graphics/TailedAttackArrowGraphics'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
+import TailedAttackArrowGraphics from '../graphics/TailedAttackArrowGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -58,7 +57,7 @@ class DrawTailedAttackArrow extends Draw {
     if (len > 2) {
       this._positions.pop()
       this.unbindEvent()
-      let tailedAttackArrow = new DC.TailedAttackArrow(
+      let tailedAttackArrow = new TailedAttackArrow(
         Transform.transformCartesianArrayToWGS84Array(this._positions)
       )
       tailedAttackArrow.setStyle(this._style)

@@ -3,14 +3,13 @@
  * @Date: 2020-02-27 00:35:35
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { SceneEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import Position from '@dc-modules/position/Position'
 import { DomUtil, Util } from '@dc-modules/utils'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 const h337 = require('heatmap.js/build/heatmap.min')
 

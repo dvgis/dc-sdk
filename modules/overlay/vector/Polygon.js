@@ -3,14 +3,13 @@
  * @Date: 2020-01-09 09:10:37
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { Util } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import { center, area } from '@dc-modules/math'
 import Overlay from '../Overlay'
-
-const { Cesium } = DC.Namespace
 
 class Polygon extends Overlay {
   constructor(positions) {

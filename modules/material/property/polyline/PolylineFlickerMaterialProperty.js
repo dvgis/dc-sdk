@@ -3,9 +3,8 @@
  * @Date: 2021-01-11 21:08:02
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import MaterialProperty from '../../MaterialProperty'
-
-const { Cesium } = DC.Namespace
 
 class PolylineFlickerMaterialProperty extends MaterialProperty {
   constructor(options = {}) {

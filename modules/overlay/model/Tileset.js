@@ -3,11 +3,10 @@
  * @Date: 2020-01-07 20:51:56
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import Overlay from '../Overlay'
-
-const { Cesium } = DC.Namespace
 
 class Tileset extends Overlay {
   constructor(url, options = {}) {

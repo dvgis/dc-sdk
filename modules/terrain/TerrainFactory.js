@@ -3,9 +3,8 @@
  * @Date: 2020-01-21 15:54:56
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import TerrainType from './TerrainType'
-
-const { Cesium } = DC.Namespace
 
 class TerrainFactory {
   /**

@@ -3,7 +3,7 @@
  * @Date: 2019-12-30 09:35:51
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const thirdPart = {
   Cartesian2: Cesium.Cartesian2,
@@ -28,4 +28,4 @@ const thirdPart = {
   writeTextToCanvas: Cesium.writeTextToCanvas
 }
 
-DC.mixin(thirdPart)
+export default thirdPart

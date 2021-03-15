@@ -5,8 +5,6 @@
 
 import { Transform } from '@dc-modules/transform'
 
-const { Cesium } = DC.Namespace
-
 class Position {
   constructor(lng, lat, alt, heading, pitch, roll) {
     this._lng = +lng || 0

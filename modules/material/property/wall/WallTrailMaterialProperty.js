@@ -3,11 +3,10 @@
  * @Date: 2020-06-22 16:46:14
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import MaterialProperty from '../../MaterialProperty'
 
 const IMG = require('@dc-modules/images/fence.png')
-
-const { Cesium } = DC.Namespace
 
 class WallTrailMaterialProperty extends MaterialProperty {
   constructor(options = {}) {

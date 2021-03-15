@@ -3,9 +3,9 @@
  * @Date: 2020-01-03 12:18:17
  */
 
-import { Util } from '../utils'
-import { OverlayEventType, OverlayEvent } from '../event'
-import State from '../state/State'
+import State from '@dc-modules/state/State'
+import { Util } from '@dc-modules/utils'
+import { OverlayEventType, OverlayEvent } from '@dc-modules/event'
 import OverlayType from './OverlayType'
 
 class Overlay {

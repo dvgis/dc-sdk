@@ -3,12 +3,11 @@
  * @Date: 2020-03-02 22:38:10
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
 import Parse from '@dc-modules/parse/Parse'
 
 import Animation from '../Animation'
-
-const { Cesium } = DC.Namespace
 
 class AroundPoint extends Animation {
   constructor(viewer, position, options = {}) {

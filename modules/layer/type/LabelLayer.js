@@ -3,11 +3,10 @@
  * @Date: 2020-03-30 17:14:00
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { Label } from '@dc-modules/overlay'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 class LabelLayer extends Layer {
   constructor(id, url = '') {

@@ -3,7 +3,7 @@
  * @Date: 2021-03-13 17:17:19
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 /**
  * base
@@ -148,6 +148,11 @@ import {
  */
 import Weather from '@dc-modules/weather/Weather'
 
+/**
+ * thirdPart
+ */
+import thirdPart from '@dc-modules/thirdpart'
+
 Cesium.Math.area = area
 Cesium.Math.bounds = bounds
 Cesium.Math.mid = mid
@@ -280,7 +285,11 @@ const components = {
   /**
    * weather
    */
-  Weather
+  Weather,
+  /**
+   * thirdPart
+   */
+  ...thirdPart
 }
 
 export default components

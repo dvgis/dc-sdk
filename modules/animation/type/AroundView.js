@@ -3,9 +3,8 @@
  * @Date: 2020-03-02 23:14:20
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import Animation from '../Animation'
-
-const { Cesium } = DC.Namespace
 
 class AroundView extends Animation {
   constructor(viewer, options = {}) {

@@ -3,10 +3,9 @@
  * @Date: 2020-02-10 10:05:41
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 const DEF_OPT = {
   size: 18,

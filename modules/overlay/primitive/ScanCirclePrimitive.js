@@ -3,12 +3,11 @@
  * @Date: 2020-12-31 11:05:32
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
-
-const { Cesium } = DC.Namespace
 
 class ScanCirclePrimitive extends Overlay {
   constructor(position, radius) {

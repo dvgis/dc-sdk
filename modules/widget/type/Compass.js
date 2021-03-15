@@ -3,13 +3,12 @@
  * @Date: 2020-03-19 13:11:12
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Icons from '@dc-modules/icons'
 import { DomUtil } from '@dc-modules/utils'
 import { SceneEventType } from '@dc-modules/event'
 import Widget from '../Widget'
-
-const { Cesium } = DC.Namespace
 
 class Compass extends Widget {
   constructor() {

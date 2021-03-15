@@ -3,10 +3,9 @@
  * @Date: 2020-01-02 16:42:03
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 /**
  * The vector layer is used to add various entity, which is essentially a CustomDataSource

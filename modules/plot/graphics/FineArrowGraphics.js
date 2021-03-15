@@ -3,9 +3,11 @@
  * @Date: 2020-08-30 17:10:33
  */
 
-const { Transform, Parse, PlotUtil } = DC
+import { Transform } from '@dc-modules/transform'
+import { Parse } from '@dc-modules/parse/Parse'
+import { PlotUtil } from '@dc-modules/utils'
 
-const { Cesium } = DC.Namespace
+
 
 const HALF_PI = Math.PI / 2
 

@@ -2,13 +2,11 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  */
-
-import { DomUtil } from '@dc-modules/utils'
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
+import { DomUtil } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 class HtmlLayer extends Layer {
   constructor(id) {

@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 23:20:11
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const EllipsoidElectricMaterial = require('../shader/ellipsoid/EllipsoidElectricMaterial.glsl')
 const EllipsoidTrailMaterial = require('../shader/ellipsoid/EllipsoidTrailMaterial.glsl')

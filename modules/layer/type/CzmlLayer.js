@@ -3,10 +3,9 @@
  * @Date: 2020-01-19 13:38:48
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 class CzmlLayer extends Layer {
   constructor(id, url = '', options = {}) {

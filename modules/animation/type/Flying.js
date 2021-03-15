@@ -3,11 +3,10 @@
  * @Date: 2021-01-09 20:21:33
  */
 
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '@dc-modules/namespace'
 import Parse from '@dc-modules/parse/Parse'
+import { Transform } from '@dc-modules/transform'
 import Animation from '../Animation'
-
-const { Cesium } = DC.Namespace
 
 class Flying extends Animation {
   constructor(viewer, options = {}) {

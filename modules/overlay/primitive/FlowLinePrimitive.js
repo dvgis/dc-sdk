@@ -3,12 +3,11 @@
  * @Date: 2021-01-05 20:18:34
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
-
-const { Cesium } = DC.Namespace
 
 class FlowLinePrimitive extends Overlay {
   constructor(positions, width = 1) {

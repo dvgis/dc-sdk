@@ -3,6 +3,7 @@
  * @Date: 2020-02-12 21:46:22
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { DomUtil, Util } from '@dc-modules/utils'

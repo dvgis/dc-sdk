@@ -3,11 +3,10 @@
  * @Date: 2020-08-29 21:30:41
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { Rectangle } from '@dc-modules/overlay'
 import Draw from './Draw'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6)
@@ -52,7 +51,7 @@ class DrawRectangle extends Draw {
     if (len > 1) {
       this._positions.pop()
       this.unbindEvent()
-      let rectangle = new DC.Rectangle(
+      let rectangle = new Rectangle(
         Transform.transformCartesianArrayToWGS84Array(this._positions)
       )
       rectangle.setStyle(this._style)

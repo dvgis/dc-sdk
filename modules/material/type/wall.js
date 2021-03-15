@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 23:30:43
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const WallImageTrailMaterial = require('../shader/wall/WallImageTrailMaterial.glsl')
 const WallLineTrailMaterial = require('../shader/wall/WallLineTrailMaterial.glsl')

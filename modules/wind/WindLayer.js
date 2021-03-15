@@ -3,6 +3,7 @@
  * @Date: 2021-01-18 20:13:30
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { Layer } from '@dc-modules/layer'
 import Field from './Field'
@@ -19,8 +20,6 @@ const DEF_OPTS = {
   useCoordsDraw: true,
   gpet: true
 }
-
-const { Cesium } = DC.Namespace
 
 class WindLayer extends Layer {
   constructor(id, options = {}) {

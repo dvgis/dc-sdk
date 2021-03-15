@@ -3,11 +3,9 @@
  * @Date: 2020-08-30 22:04:36
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
 import Edit from './Edit'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
 
 class EditBillboard extends Edit {
   constructor(overlay) {

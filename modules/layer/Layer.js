@@ -3,12 +3,11 @@
  * @Date: 2020-01-03 09:38:21
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { Util } from '@dc-modules/utils'
 import State from '@dc-modules/state/State'
 import { LayerEventType, OverlayEventType, LayerEvent } from '@dc-modules/event'
 import LayerType from './LayerType'
-
-const { Cesium } = DC.Namespace
 
 class Layer {
   constructor(id) {

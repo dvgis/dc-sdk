@@ -3,10 +3,9 @@
  * @Date: 2020-04-11 00:41:47
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
 import Parse from '@dc-modules/parse/Parse'
-
-const { Cesium } = DC.Namespace
 
 export default function heading(start, end) {
   let heading = 0

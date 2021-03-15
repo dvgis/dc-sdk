@@ -3,9 +3,8 @@
  * @Date: 2021-01-09 20:23:53
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import MaterialProperty from '../../MaterialProperty'
-
-const { Cesium } = DC.Namespace
 
 class CircleSpiralMaterialProperty extends MaterialProperty {
   constructor(options = {}) {

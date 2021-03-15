@@ -3,13 +3,12 @@
  * @Date: 2020-01-06 15:03:25
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { Util } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
-
-const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   pixelSize: 8,

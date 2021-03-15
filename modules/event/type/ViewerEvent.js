@@ -3,10 +3,9 @@
  * @Date: 2020-01-02 14:26:35
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { ViewerEventType } from '../EventType'
 import Event from '../Event'
-
-const { Cesium } = DC.Namespace
 
 class ViewerEvent extends Event {
   constructor() {

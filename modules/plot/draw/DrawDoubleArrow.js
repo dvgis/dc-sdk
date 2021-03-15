@@ -3,12 +3,11 @@
  * @Date: 2020-08-30 16:43:12
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { DoubleArrow } from '@dc-modules/overlay'
 import Draw from './Draw'
-import DoubleArrowGraphics from '@dc-modules/overlay/graphics/DoubleArrowGraphics'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
+import DoubleArrowGraphics from '../graphics/DoubleArrowGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -58,7 +57,7 @@ class DrawDoubleArrow extends Draw {
     if (len > 3) {
       this._positions.pop()
       this.unbindEvent()
-      let doubleArrow = new DC.DoubleArrow(
+      let doubleArrow = new DoubleArrow(
         Transform.transformCartesianArrayToWGS84Array(this._positions)
       )
       doubleArrow.setStyle(this._style)

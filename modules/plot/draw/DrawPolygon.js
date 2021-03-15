@@ -3,11 +3,10 @@
  * @Date: 2020-08-29 20:55:14
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { Polygon } from '@dc-modules/overlay'
 import Draw from './Draw'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -64,7 +63,7 @@ class DrawPolygon extends Draw {
 
   _onRightClick(e) {
     this.unbindEvent()
-    let polygon = new DC.Polygon(
+    let polygon = new Polygon(
       Transform.transformCartesianArrayToWGS84Array(this._positions)
     )
     polygon.setStyle(this._style)

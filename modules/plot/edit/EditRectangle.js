@@ -3,11 +3,9 @@
  * @Date: 2020-08-30 23:41:34
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
 import Edit from './Edit'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
 
 class EditRectangle extends Edit {
   constructor(overlay) {

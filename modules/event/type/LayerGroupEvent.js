@@ -3,10 +3,9 @@
  * @Date: 2020-08-28 20:18:04
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { LayerGroupEventType } from '../EventType'
 import Event from '../Event'
-
-const { Cesium } = DC.Namespace
 
 class LayerGroupEvent extends Event {
   constructor() {

@@ -3,10 +3,9 @@
  * @Date: 2021-01-31 19:22:04
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { CoordTransform } from '@dc-modules/transform'
 import BaiduMercatorProjection from '../projection/BaiduMercatorProjection'
-
-const { Cesium } = DC.Namespace
 
 class BaiduMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
   constructor(options) {

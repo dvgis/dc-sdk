@@ -3,9 +3,8 @@
  * @Date: 2020-08-14 23:51:47
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
-
-const { Cesium } = DC.Namespace
 
 class DepthOfField {
   constructor() {

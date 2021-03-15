@@ -3,9 +3,8 @@
  * @Date: 2020-02-24 13:09:09
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import MaterialProperty from '../../MaterialProperty'
-
-const { Cesium } = DC.Namespace
 
 class PolylineTrailMaterialProperty extends MaterialProperty {
   constructor(options = {}) {

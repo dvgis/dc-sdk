@@ -3,11 +3,10 @@
  * @Date: 2019-12-31 17:32:01
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { DomUtil } from '@dc-modules/utils'
 import Widget from '../Widget'
-
-const { Cesium } = DC.Namespace
 
 class ContextMenu extends Widget {
   constructor() {

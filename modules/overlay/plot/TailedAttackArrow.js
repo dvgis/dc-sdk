@@ -3,14 +3,13 @@
  * @Date: 2020-08-29 22:51:36
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { PlotUtil } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
 import AttackArrow from './AttackArrow'
-
-const { Cesium } = DC.Namespace
 
 class TailedAttackArrow extends AttackArrow {
   constructor(positions) {

@@ -3,9 +3,9 @@
  * @Date: 2020-02-26 23:05:44
  */
 
-const { State, Util } = DC
-
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
+import State from '@dc-modules/state/State'
+import { Util } from '@dc-modules/utils'
 
 const FogShader = require('@dc-modules/material/shader/weather/FogShader.glsl')
 

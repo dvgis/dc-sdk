@@ -7,7 +7,7 @@ import AttackArrowGraphics from './AttackArrowGraphics'
 
 const { Transform, Parse, PlotUtil } = DC
 
-const { Cesium } = DC.Namespace
+
 
 class TailedAttackArrowGraphics extends AttackArrowGraphics {
   constructor(options) {

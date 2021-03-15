@@ -3,12 +3,11 @@
  * @Date: 2020-10-11 18:24:37
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
-
-const { Cesium } = DC.Namespace
 
 class WaterPrimitive extends Overlay {
   constructor(positions) {

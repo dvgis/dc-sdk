@@ -3,15 +3,14 @@
  * @Date: 2020-08-29 20:29:59
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
+import { Billboard } from '@dc-modules/overlay'
 import Draw from './Draw'
 
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
+const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
 
 const DEF_STYLE = {}
-
-const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
 
 class DrawPoint extends Draw {
   constructor(style) {
@@ -39,7 +38,7 @@ class DrawPoint extends Draw {
   _onClick(e) {
     this._position = this._clampToGround ? e.surfacePosition : e.position
     this.unbindEvent()
-    let billboard = new DC.Billboard(
+    let billboard = new Billboard(
       Transform.transformCartesianToWGS84(this._position),
       this._style.image
     )

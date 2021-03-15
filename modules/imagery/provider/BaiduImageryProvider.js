@@ -3,10 +3,9 @@
  * @Date: 2020-01-15 20:27:27
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import ImageryType from '../ImageryType'
 import BaiduMercatorTilingScheme from '../tiling-scheme/BaiduMercatorTilingScheme'
-
-const { Cesium } = DC.Namespace
 
 const IMG_URL =
   'http://shangetu{s}.map.bdimg.com/it/u=x={x};y={y};z={z};v=009;type=sate&fm=46'

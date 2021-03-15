@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 22:52:23
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const czm_cellular = require('../shader/thirdpart/cellular.glsl')
 const czm_snoise = require('../shader/thirdpart/snoise.glsl')

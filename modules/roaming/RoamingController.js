@@ -3,9 +3,8 @@
  * @Date: 2020-04-01 10:36:36
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { RoamingEventType } from '@dc-modules/event'
-
-const { Cesium } = DC.Namespace
 
 class RoamingController {
   constructor(viewer) {

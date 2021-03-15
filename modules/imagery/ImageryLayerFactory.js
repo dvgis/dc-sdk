@@ -3,14 +3,13 @@
  * @Date: 2020-01-21 15:54:56
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import ImageryType from './ImageryType'
 import AmapImageryProvider from './provider/AmapImageryProvider'
 import BaiduImageryProvider from './provider/BaiduImageryProvider'
 import GoogleImageryProvider from './provider/GoogleImageryProvider'
 import TdtImageryProvider from './provider/TdtImageryProvider'
 import TencentImageryProvider from './provider/TencentImageryProvider'
-
-const { Cesium } = DC.Namespace
 
 class ImageryLayerFactory {
   /**

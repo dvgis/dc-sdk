@@ -3,12 +3,11 @@
  * @Date: 2020-03-04 18:02:32
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { DomUtil } from '@dc-modules/utils'
 import { MouseEventType, SceneEventType } from '@dc-modules/event'
 import Widget from '../Widget'
-
-const { Cesium } = DC.Namespace
 
 class LocationBar extends Widget {
   constructor() {

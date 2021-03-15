@@ -3,7 +3,7 @@
  * @Date: 2021-02-21 17:50:31
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const {
   BoxGeometry,

@@ -3,10 +3,9 @@
  * @Date: 2020-05-11 23:28:13
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { RoamingEventType } from '../EventType'
 import Event from '../Event'
-
-const { Cesium } = DC.Namespace
 
 class RoamingEvent extends Event {
   constructor() {

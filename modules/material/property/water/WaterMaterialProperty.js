@@ -3,7 +3,7 @@
  * @Date: 2020-02-25 21:16:00
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 class WaterMaterialProperty {
   constructor(options) {

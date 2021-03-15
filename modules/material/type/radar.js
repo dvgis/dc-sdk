@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 23:22:38
  */
 
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
 
 const RadarLineMaterial = require('../shader/radar/RadarLineMaterial.glsl')
 const RadarSweepMaterial = require('../shader/radar/RadarSweepMaterial.glsl')

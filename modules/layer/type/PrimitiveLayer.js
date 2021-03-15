@@ -3,10 +3,9 @@
  * @Date: 2020-10-11 18:16:47
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Layer from '../Layer'
-
-const { Cesium } = DC.Namespace
 
 class PrimitiveLayer extends Layer {
   constructor(id) {

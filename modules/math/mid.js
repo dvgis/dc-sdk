@@ -3,11 +3,10 @@
  * @Date: 2020-08-21 18:16:52
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
 import Parse from '@dc-modules/parse/Parse'
 import Position from '@dc-modules/position/Position'
-
-const { Cesium } = DC.Namespace
 
 export default function mid(start, end) {
   let startPosition = Parse.parsePosition(start)

@@ -3,9 +3,9 @@
  * @Date: 2020-11-30 20:19:19
  */
 
-const { State, Util } = DC
-
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
+import State from '@dc-modules/state/State'
+import { Util } from '@dc-modules/utils'
 
 const IMG = require('@dc-modules/images/cloud.jpg')
 

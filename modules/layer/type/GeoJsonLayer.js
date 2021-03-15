@@ -3,12 +3,11 @@
  * @Date: 2020-01-13 10:13:53
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { Billboard, Polyline, Polygon, Model } from '@dc-modules/overlay'
 import Layer from '../Layer'
 import VectorLayer from './VectorLayer'
-
-const { Cesium } = DC.Namespace
 
 class GeoJsonLayer extends Layer {
   constructor(id, url, options = {}) {

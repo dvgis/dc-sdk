@@ -3,12 +3,10 @@
  * @Date: 2020-08-30 23:46:07
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import { Transform } from '@dc-modules/transform'
 import Edit from './Edit'
-import DoubleArrowGraphics from '@dc-modules/overlay/graphics/DoubleArrowGraphics'
-
-const { Transform } = DC
-
-const { Cesium } = DC.Namespace
+import DoubleArrowGraphics from '../graphics/DoubleArrowGraphics'
 
 class EditDoubleArrow extends Edit {
   constructor(overlay) {

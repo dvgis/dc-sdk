@@ -32,7 +32,7 @@ DC.init = callback => {
       .then(Cesium => {
         DC.Namespace['Cesium'] = Cesium
         cesiumLoaded = true
-        delete window.Cesium
+        delete window['Cesium']
         callback && callback()
       })
       .catch(e => {})

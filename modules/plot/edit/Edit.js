@@ -3,9 +3,8 @@
  * @Date: 2020-08-30 23:50:53
  */
 
-const { MouseEventType } = DC
-
-const { Cesium } = DC.Namespace
+import { Cesium } from '@dc-modules/namespace'
+import { MouseEventType } from '@dc-modules/event'
 
 class Edit {
   constructor() {
