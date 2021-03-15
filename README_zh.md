@@ -9,29 +9,29 @@
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
 
-> DC-SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.
+> DC-SDK 是基于 Cesium 进行二次开发的2、3D一体 WebGis 应用框架,该框架优化了 Cesium 的使用方式和增添了一些额外功能，旨在为开发者快速构建 WebGis 应用。
 
-## Home
+##主页
 
 > http://dc.dvgis.cn
 
-```warningH
-Tips：This SDK is JS+GIS framework package. Developers need to have some front-end technology and GIS related technology
+```warning
+Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技术和 GIS 相关技术
 ```
 
-## Installation
+## 安装
 
 `CDN`
 
 ```html
-<!--Basic Package-->
+<!--基础包-->
 <script src="libs/dc-sdk/dc.base.min.js"></script>
-<!--Core Package-->
+<!--核心包-->
 <script src="libs/dc-sdk/dc.core.min.js"></script>
-<!--Main Style Sheet -->
+<!--主要样式-->
 <link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
 ```
-
+ 
 `NPM / YARN`
 
 ```shell
@@ -40,12 +40,12 @@ npm install @dvgis/dc-sdk
 ```
 
 ```js
-import DC from '@dvgis/dc-base' //Basic Package
-import DcCore from '@dvgis/dc-core' //Core Package
-import '@dvgis/dc-core/dist/dc.core.min.css' // Main Style Sheet
+import DC from 'dvgis/dc-sdk/dist/dc.base.min' //基础包
+import DcCore from  'dvgis/dc-sdk/dist/dc.core.min' //核心包
+import 'dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
 ```
 
-## Setting
+## 配置
 
 `Webpack`
 
@@ -57,7 +57,12 @@ const CopywebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
-  // other settings
+  // 其他配置
+  resolve: {
+    alias: {
+      dvgis: path.resolve(__dirname, dvgisDist)
+    }
+  },
   plugins:[
     new CopyWebpackPlugin([
       {  
@@ -79,7 +84,7 @@ const CopywebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
-  // other settings
+  // 其他配置
   chainWebpack: config => {
     config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
     config.plugin('copy').use(CopywebpackPlugin, [
@@ -104,7 +109,7 @@ const CopywebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
-  // other settings
+  // 其他配置
   chainWebpack: config => {
     config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
     config.plugin('copy').use(CopywebpackPlugin, [
@@ -121,66 +126,68 @@ module.exports = {
 }
 ```
 
-## Start
+## 开始
 
 ```js
 global.DC = DC
-DC.use(DcCore) // node
+DC.use(DcCore) // Node 方式
 DC.ready(() => {
-  let viewer = new DC.Viewer(divId) // divId is the Id attribute value of a div node. If it is not passed in, the 3D scene cannot be initialized
+  let viewer = new DC.Viewer(divId) // divId 为一个div节点的Id属性值，如果不传入，会无法初始化3D场景
 })
 ```
 
-## Documentation
+## 文档
 
-[DC Sdk Api](https://resource.dvgis.cn/dc-api/v2.x)
+[DC Sdk  Api](https://resource.dvgis.cn/dc-api)
 
 [Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
-## Demo
+## 示例
 
 |  ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/china.gif) |
 |  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
 |  ![picture](http://dc.dvgis.cn/examples/images/mini-scene/dfmz.gif) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/factory.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
 |  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif?v=2)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png)   |
 
-[More>>](http://dc.dvgis.cn/#/examples)
+[更多>>](http://dc.dvgis.cn/#/examples)
 
-## Ecosystem
+## 生态
 
-|  Module | Status | Description | 
-|  :------ | :------: | :------ |
-|  [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | dc chart module for adding ECharts functionality in 3d scenes | 
-|  [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | dc big-data module for adding MAPV functions in 3d scenes |  
-|  [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | dc components for Vue2.x | 
-|  dc-analysis | <img src="https://img.shields.io/npm/v/@dvgis/dc-analysis?logo=npm" /> | dc analysis module, including camera-video, position-editor, measure, etc |
-|  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | dc components for Vue3.x |
+|  模块名称 | 状态 | 描述 | 
+|  :------ | :------: | :------ | 
+| [dc-plugins](https://github.com/dvgis/dc-plugins) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plugins?logo=npm" /> | DC插件模块，包括场景动画、漫游以及一些额外的材质 | 
+| [dc-overlay](https://github.com/dvgis/dc-overlay) | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | DC要素模块，包括球体、柱体、军标、水面等 | 
+| [dc-plot](https://github.com/dvgis/dc-plot) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | DC标绘模块，用于要素的标绘和编辑 | 
+| [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | DC图表模块，用于在三维场景中添加Echarts功能 | 
+| [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | DC大数据模块，用于在三维场景中添加Mapv功能 | 
+| [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | DC基于Vue2.x组件开发框架，将DC功能Vue模块化 | 
+|  dc-analysis | <img src="https://img.shields.io/npm/v/@dvgis/dc-analysis?logo=npm" /> |  DC分析模块，包括视频融合，位置编辑、测量等 |
+|  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | DC基于Vue3.x组件开发框架，将DC功能Vue模块化 |
 
-## QQ Group
+## QQ 群
 
 <p>
-<img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2"  style="width:60px;height:60px" title="数字视觉"/>
+<img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2" style="width:60px;height:60px" title="数字视觉"/>
 <img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=6" style="width:60px;height:60px" title="Cesium开心农场"/>
 </p>
 
+## 支持
 
-## Copyright
-
-```warning
-1. The framework is a basic platform, completely open source, which can be modified and reconstructed by any individual or institution without our authorization.
-2. We are not responsible for any problems arising from the modification of the framework by individuals and organizations.
-3. Some industrial plug-ins and tools will be added in the later stage, and the code will be open source appropriately.
-4. The package released by us may be used permanently and free of charge by any person or organization subject to:
-  1) complete package reference;
-  2) reserve this copyright information in the console output
-We reserve the right of final interpretation of this copyright information.
-```
-
-## Support
-
-> if dc-sdk can bring benefits to you, please support it ~
+> 如果dc-sdk能够给您带来效益，请支持一下呗~
 <p>
 <img src="http://dc.dvgis.cn/examples/images/base/sponsor.jpg?v=2" style="width:60px;height:60px" title="数字视觉"/>
 </p>
 
-## Thanks
+## 版权声明
+
+```warning
+1.框架作为一个基础平台，代码开源，任何个人和机构可以修改、重构，无需经过我方授权。
+2.任何个人和机构修改框架出现的问题，我方无需负责。
+3.后期会添加一些行业性的插件和工具，代码会适量开源。
+4.对于我方发布的程序包，任何个人和机构在遵守下列条件的前提下可以永久免费使用:
+   1)程序包完整引用；
+   2)保留此版权信息在控制台输出
+我方保留对此版权信息的最终解释权。
+```
+
+## 谢谢
