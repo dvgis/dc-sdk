@@ -1,0 +1,20 @@
+{
+	"name": "@dvgis/dc-sdk",
+	"version": "0.0.7",
+	"description": "The SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.",
+	"repository": "https://github.com/dvgis/dc-next.git",
+	"homepage": "https://www.dvgis.cn",
+	"keywords": [
+		"3D",
+		"webgl",
+		"map",
+		"globe",
+		"cesium",
+		"heatmap"
+	],
+	"author": "Caven Chen <cavencj@gmail.com>",
+	"license": "Apache 2.0",
+	"files": [
+		"dist"
+	]
+}
