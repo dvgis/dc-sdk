@@ -6,7 +6,7 @@
 import { Util } from '@dc-modules/utils'
 import State from '@dc-modules/state/State'
 import { LayerGroupEventType, LayerGroupEvent } from '@dc-modules/event'
-import Layer from '../Layer'
+import Layer from './Layer'
 
 class LayerGroup {
   constructor(id) {

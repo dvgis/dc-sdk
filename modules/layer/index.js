@@ -5,6 +5,7 @@
 
 export { default as LayerType } from './LayerType'
 export { default as Layer } from './Layer'
+export { default as LayerGroup } from './LayerGroup'
 
 /**
  * types
@@ -16,7 +17,6 @@ export { default as HeatLayer } from './type/HeatLayer'
 export { default as HtmlLayer } from './type/HtmlLayer'
 export { default as KmlLayer } from './type/KmlLayer'
 export { default as LabelLayer } from './type/LabelLayer'
-export { default as LayerGroup } from './type/LayerGroup'
 export { default as PrimitiveLayer } from './type/PrimitiveLayer'
 export { default as TilesetLayer } from './type/TilesetLayer'
 export { default as TopoJsonLayer } from './type/TopoJsonLayer'

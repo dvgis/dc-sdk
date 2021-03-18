@@ -134,8 +134,8 @@ class Layer {
       overlay.overlayEvent &&
       !this._cache.hasOwnProperty(overlay.overlayId)
     ) {
-      overlay.overlayEvent.fire(OverlayEventType.ADD, this)
       this._cache[overlay.overlayId] = overlay
+      this.delegate && overlay.overlayEvent.fire(OverlayEventType.ADD, this)
       if (this._state === State.CLEARED) {
         this._state = State.ADDED
       }
@@ -153,7 +153,7 @@ class Layer {
       overlay.overlayEvent &&
       this._cache.hasOwnProperty(overlay.overlayId)
     ) {
-      overlay.overlayEvent.fire(OverlayEventType.REMOVE, this)
+      this._delegate && overlay.overlayEvent.fire(OverlayEventType.REMOVE, this)
       delete this._cache[overlay.overlayId]
     }
   }
