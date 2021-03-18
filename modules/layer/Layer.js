@@ -135,7 +135,7 @@ class Layer {
       !this._cache.hasOwnProperty(overlay.overlayId)
     ) {
       this._cache[overlay.overlayId] = overlay
-      this.delegate && overlay.overlayEvent.fire(OverlayEventType.ADD, this)
+      this._delegate && overlay.overlayEvent.fire(OverlayEventType.ADD, this)
       if (this._state === State.CLEARED) {
         this._state = State.ADDED
       }
