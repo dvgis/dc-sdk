@@ -3,11 +3,11 @@
  * @Date: 2020-08-30 17:26:34
  */
 
+import { Cesium } from '@dc-modules/namespace'
+import Parse from '@dc-modules/parse/Parse'
+import { Transform } from '@dc-modules/transform'
+import { PlotUtil } from '@dc-modules/utils'
 import AttackArrowGraphics from './AttackArrowGraphics'
-
-const { Transform, Parse, PlotUtil } = DC
-
-
 
 class TailedAttackArrowGraphics extends AttackArrowGraphics {
   constructor(options) {

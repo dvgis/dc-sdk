@@ -32,9 +32,9 @@ import EditTailedAttackArrow from './edit/EditTailedAttackArrow'
 
 const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
 
-const IMG_CIRCLE_BLUE = require('../images/circle_blue.png')
+const IMG_CIRCLE_BLUE = require('@dc-modules/images/circle_blue.png')
 
-const IMG_CIRCLE_YELLOW = require('../images/circle_yellow.png')
+const IMG_CIRCLE_YELLOW = require('@dc-modules/images/circle_yellow.png')
 
 const DEF_OPTS = {
   icon_center: IMG_CIRCLE_YELLOW,
