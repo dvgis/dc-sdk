@@ -144,6 +144,16 @@ import {
 
 /**
  *
+ * roaming
+ */
+import {
+  RoamingViewMode,
+  RoamingPath,
+  RoamingController
+} from '@dc-modules/roaming'
+
+/**
+ *
  * weather
  */
 import Weather from '@dc-modules/weather/Weather'
@@ -299,6 +309,13 @@ const components = {
   Flying,
   GlobeRotate,
   RadarScan,
+  /**
+   *
+   * roaming
+   */
+  RoamingViewMode,
+  RoamingPath,
+  RoamingController,
   /**
    * weather
    */

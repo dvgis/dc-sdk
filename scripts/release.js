@@ -13,7 +13,7 @@ const version = pkgInfo.version
 
 shell.echo(chalk.green('release packages start'))
 
-const pkgs = ['base', 'core']
+const pkgs = ['base', 'core', 'chart', 'mapv', 'sdk']
 const count = pkgs.length
 
 pkgs.forEach((item, index) => {
