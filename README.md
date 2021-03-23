@@ -170,7 +170,7 @@ DC.ready(() => {
 
 ## Documentation
 
-[DC Sdk Api](https://resource.dvgis.cn/dc-doc/v2.x)
+[DC Sdk Api](https://resource.dvgis.cn/dc-docs/v2.x)
 
 [Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
