@@ -4,7 +4,7 @@
 <img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/publish"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
 <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
-<img src="https://img.shields.io/npm/dm/@dvgis/dc-sdk?logo=npm"/>
+<img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
 </p>
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
@@ -21,61 +21,104 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 
 ## 安装
 
-`CDN`
+`NPM / YARN` **_`(推荐使用)`_**
 
-```html
-<!--基础包-->
-<script src="libs/dc-sdk/dc.base.min.js"></script>
-<!--核心包-->
-<script src="libs/dc-sdk/dc.core.min.js"></script>
-<!--主要样式-->
-<link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
-```
- 
-`NPM / YARN`
+NPM / YARN 的方式安装，它能更好地和 `webpack` 打包工具配合使用。
 
-```shell
+```node
 yarn add @dvgis/dc-sdk
+-------------------------
 npm install @dvgis/dc-sdk
 ```
 
 ```js
-import DC from 'dvgis/dc-sdk/dist/dc.base.min' //基础包
-import DcCore from  'dvgis/dc-sdk/dist/dc.core.min' //核心包
-import 'dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
+import DC from '@dvgis/dc-sdk/dist/dc.base.min' //基础包
+import DcCore from '@dvgis/dc-sdk/dist/dc.core.min' //核心包
+import DcChart from '@dvgis/dc-sdk/dist/dc.chart.min' //chart包
+import DcMapv from '@dvgis/dc-sdk/dist/dc.mapv.min' //mapv包
+import '@dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
+```
+
+`NPM / YARN` **_`(按需安装)`_**
+
+```node
+yarn add @dvgis/dc-base
+yarn add @dvgis/dc-core
+yarn add @dvgis/dc-chart
+yarn add @dvgis/dc-mapv
+-------------------------
+npm install @dvgis/dc-base
+npm install @dvgis/dc-core
+npm install @dvgis/dc-chart
+npm install @dvgis/dc-mapv
+```
+
+```js
+import DC from '@dvgis/dc-base' //基础包
+import DcCore from '@dvgis/dc-core' //核心包
+import DcChart from '@dvgis/dc-chart' //chart包
+import DcMapv from '@dvgis/dc-mapv' //mapv包
+import '@dvgis/dc-core/dist/dc.core.min.css' // 主要样式
+```
+
+`CDN`
+
+[Resources 下载链接](https://github.com/dvgis/dc-sdk/releases)
+
+```html
+<!--基础包-->
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.base.min.js"></script>
+<!--核心包-->
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.js"></script>
+<!--chart包-->
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.chart.min.js"></script>
+<!--mapv包-->
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.mapv.min.js"></script>
+<!--主要样式-->
+<link
+  href="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+```
+
+```
+请将 resources 放置工程根目录 libs/dc-sdk 下，如果放置到其他目录下，框架将无法正常运行
 ```
 
 ## 配置
 
+> 配置主要用于 `NPM / YARN` 的方式
+
+由于 DC 框架中将 `CESIUM_BASE_URL` 设置为 `JSON.stringify('./libs/dc-sdk/resources/')`，这样需将 `Cesium` 相关的静态资源文件: `Assets`、`Workers` 、`ThirdParty` 复制到工程的 `libs/dc-sdk/resources` 目录下以保证三维场景能够正常呈现
+
 `Webpack`
 
+[工程模板](https://github.com/cavencj/dc-vue-app)
+
 ```js
- // webpack.config.js
+// webpack.config.js
 
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
-  // 其他配置
-  resolve: {
-    alias: {
-      dvgis: path.resolve(__dirname, dvgisDist)
-    }
-  },
-  plugins:[
+  plugins: [
     new CopyWebpackPlugin([
-      {  
+      {
         from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
-        to: 'libs/dc-sdk/resources' 
-      }
-    ])
-  ]
+        to: 'libs/dc-sdk/resources',
+      },
+    ]),
+  ],
 }
 ```
 
 `Vue2.x`
 
+[工程模板](https://github.com/dvgis/dc-vue)
+
 ```js
 // vue.config.js
 
@@ -85,22 +128,23 @@ const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
   // 其他配置
-  chainWebpack: config => {
-    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+  chainWebpack: (config) => {
     config.plugin('copy').use(CopywebpackPlugin, [
       [
         {
           from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
-          to: 'libs/dc-sdk/resources'
-        }
-      ]
+          to: 'libs/dc-sdk/resources',
+        },
+      ],
     ])
-  }
+  },
 }
 ```
 
 `Vue3.x`
 
+[工程模板](https://github.com/dvgis/dc-vue-next)
+
 ```js
 // vue.config.js
 
@@ -110,8 +154,7 @@ const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
   // 其他配置
-  chainWebpack: config => {
-    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+  chainWebpack: (config) => {
     config.plugin('copy').use(CopywebpackPlugin, [
       {
         patterns: [
@@ -120,11 +163,12 @@ module.exports = {
             to: path.join(__dirname, 'dist', 'libs/dc-sdk/resources'),
           },
         ],
-      }
+      },
     ])
-  }
+  },
 }
 ```
+
 
 ## 开始
 
@@ -138,7 +182,7 @@ DC.ready(() => {
 
 ## 文档
 
-[DC Sdk  Api](https://resource.dvgis.cn/dc-api)
+[DC Sdk  Api](https://resource.dvgis.cn/dc-docs/v2.x/zh)
 
 [Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
@@ -155,13 +199,9 @@ DC.ready(() => {
 
 |  模块名称 | 状态 | 描述 | 
 |  :------ | :------: | :------ | 
-| [dc-plugins](https://github.com/dvgis/dc-plugins) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plugins?logo=npm" /> | DC插件模块，包括场景动画、漫游以及一些额外的材质 | 
-| [dc-overlay](https://github.com/dvgis/dc-overlay) | <img src="https://img.shields.io/npm/v/@dvgis/dc-overlay?logo=npm" /> | DC要素模块，包括球体、柱体、军标、水面等 | 
-| [dc-plot](https://github.com/dvgis/dc-plot) | <img src="https://img.shields.io/npm/v/@dvgis/dc-plot?logo=npm" /> | DC标绘模块，用于要素的标绘和编辑 | 
 | [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | DC图表模块，用于在三维场景中添加Echarts功能 | 
 | [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | DC大数据模块，用于在三维场景中添加Mapv功能 | 
 | [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | DC基于Vue2.x组件开发框架，将DC功能Vue模块化 | 
-|  dc-analysis | <img src="https://img.shields.io/npm/v/@dvgis/dc-analysis?logo=npm" /> |  DC分析模块，包括视频融合，位置编辑、测量等 |
 |  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | DC基于Vue3.x组件开发框架，将DC功能Vue模块化 |
 
 ## QQ 群

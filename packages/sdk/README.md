@@ -4,109 +4,143 @@
 <img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/publish"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
 <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
-<img src="https://img.shields.io/npm/dm/@dvgis/dc-sdk?logo=npm"/>
+<img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
 </p>
 
-[**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
-
-> DC-SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.
+**_`DC-SDK`_** is based on the open source project **_`Cesium`_** for the second development of two three-dimensional **_`WebGis`_** application framework , the framework optimizes the use of **_`Cesium`_** and adds some additional features , designed for developers to quickly build **_`WebGis`_** application.
 
 ## Home
 
 > http://dc.dvgis.cn
 
-```warningH
+```warning
 Tips：This SDK is JS+GIS framework package. Developers need to have some front-end technology and GIS related technology
 ```
 
 ## Installation
 
-`CDN`
+`NPM / YARN` **_`(Recommend)`_**
 
-```html
-<!--Basic Package-->
-<script src="libs/dc-sdk/dc.base.min.js"></script>
-<!--Core Package-->
-<script src="libs/dc-sdk/dc.core.min.js"></script>
-<!--Main Style Sheet -->
-<link href="libs/dc-sdk/dc.core.min.css" rel="stylesheet" type="text/css" />
-```
+Installing with NPM or YARN is recommended and it works seamlessly with webpack.
 
-`NPM / YARN`
-
-```shell
+```node
 yarn add @dvgis/dc-sdk
+-------------------------
 npm install @dvgis/dc-sdk
 ```
 
 ```js
-import DC from '@dvgis/dc-base' //Basic Package
-import DcCore from '@dvgis/dc-core' //Core Package
-import '@dvgis/dc-core/dist/dc.core.min.css' // Main Style Sheet
+import DC from '@dvgis/dc-sdk/dist/dc.base.min'
+import DcCore from '@dvgis/dc-sdk/dist/dc.core.min'
+import DcChart from '@dvgis/dc-sdk/dist/dc.chart.min'
+import DcMapv from '@dvgis/dc-sdk/dist/dc.mapv.min'
+import '@dvgis/dc-sdk/dist/dc.core.min.css'
 ```
 
-## Setting
+`NPM / YARN` **_`(On-demand)`_**
+
+```node
+yarn add @dvgis/dc-base
+yarn add @dvgis/dc-core
+yarn add @dvgis/dc-chart
+yarn add @dvgis/dc-mapv
+-------------------------
+npm install @dvgis/dc-base
+npm install @dvgis/dc-core
+npm install @dvgis/dc-chart
+npm install @dvgis/dc-mapv
+```
+
+```js
+import DC from '@dvgis/dc-base'
+import DcCore from '@dvgis/dc-core'
+import DcChart from '@dvgis/dc-chart'
+import DcMapv from '@dvgis/dc-mapv'
+import '@dvgis/dc-core/dist/dc.core.min.css'
+```
+
+`CDN`
+
+[Resources](https://github.com/dvgis/dc-sdk/releases)
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.base.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.mapv.min.js"></script>
+<link
+  href="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.css"
+  rel="stylesheet"
+  type="text/css"
+/>
+```
+
+```
+Please put the resources in the project root directory libs/dc-sdk, if you put it in other directory, the framework will not run properly.
+```
+
+## Configuration
+
+> The configuration is mainly used in the `NPM / YARN` way
+
+Since the DC framework sets `CESIUM_BASE_URL` to `JSON.stringify('. /libs/dc-sdk/resources/')`, you need to copy `Cesium` static resource files: `Assets`, `Workers`, `ThirdParty` to the `libs/dc-sdk/resources` directory of the project to ensure that the 3D scene can be rendered properly.
 
 `Webpack`
 
-```js
- // webpack.config.js
+[Project Template](https://github.com/cavencj/dc-vue-app)
 
+```js
+// webpack.config.js
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
-  // other settings
-  plugins:[
+  plugins: [
     new CopyWebpackPlugin([
-      {  
+      {
         from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
-        to: 'libs/dc-sdk/resources' 
-      }
-    ])
-  ]
+        to: 'libs/dc-sdk/resources',
+      },
+    ]),
+  ],
 }
 ```
 
 `Vue2.x`
 
+[Project Template](https://github.com/dvgis/dc-vue)
+
 ```js
 // vue.config.js
-
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
-
 module.exports = {
-  // other settings
-  chainWebpack: config => {
-    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+  chainWebpack: (config) => {
     config.plugin('copy').use(CopywebpackPlugin, [
       [
         {
           from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
-          to: 'libs/dc-sdk/resources'
-        }
-      ]
+          to: 'libs/dc-sdk/resources',
+        },
+      ],
     ])
-  }
+  },
 }
 ```
 
 `Vue3.x`
 
+[Project Template](https://github.com/dvgis/dc-vue-next)
+
 ```js
 // vue.config.js
-
 const path = require('path')
 const CopywebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
-
 module.exports = {
-  // other settings
-  chainWebpack: config => {
-    config.resolve.alias.set('dvgis', path.resolve(__dirname, dvgisDist))
+  chainWebpack: (config) => {
     config.plugin('copy').use(CopywebpackPlugin, [
       {
         patterns: [
@@ -115,11 +149,12 @@ module.exports = {
             to: path.join(__dirname, 'dist', 'libs/dc-sdk/resources'),
           },
         ],
-      }
+      },
     ])
-  }
+  },
 }
 ```
+
 
 ## Start
 
@@ -162,7 +197,6 @@ DC.ready(() => {
 <img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2"  style="width:60px;height:60px" title="数字视觉"/>
 <img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=6" style="width:60px;height:60px" title="Cesium开心农场"/>
 </p>
-
 
 ## Copyright
 
