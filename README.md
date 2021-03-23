@@ -170,7 +170,7 @@ DC.ready(() => {
 
 ## Documentation
 
-[DC Sdk Api](https://resource.dvgis.cn/dc-api/v2.x)
+[DC Sdk Api](https://resource.dvgis.cn/dc-doc/v2.x)
 
 [Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
@@ -193,12 +193,6 @@ DC.ready(() => {
 |  dc-analysis | <img src="https://img.shields.io/npm/v/@dvgis/dc-analysis?logo=npm" /> | dc analysis module, including camera-video, position-editor, measure, etc |
 |  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | dc components for Vue3.x |
 
-## QQ Group
-
-<p>
-<img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2"  style="width:60px;height:60px" title="数字视觉"/>
-<img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=6" style="width:60px;height:60px" title="Cesium开心农场"/>
-</p>
 
 ## Copyright
 
@@ -215,8 +209,12 @@ We reserve the right of final interpretation of this copyright information.
 ## Support
 
 > if dc-sdk can bring benefits to you, please support it ~
+
 <p>
-<img src="http://dc.dvgis.cn/examples/images/base/sponsor.jpg?v=2" style="width:60px;height:60px" title="数字视觉"/>
+<a href="https://www.paypal.com/paypalme/cavencj">
+<img src="https://www.paypalobjects.com/images/shared/paypal-logo-129x32.svg" style="margin-top:10px" />
+</a>
 </p>
+
 
 ## Thanks
