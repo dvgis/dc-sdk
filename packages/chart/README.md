@@ -23,7 +23,7 @@ Tips：This SDK is JS+GIS framework package. Developers need to have some front-
 
 Installing with NPM or YARN is recommended and it works seamlessly with webpack.
 
-```node
+```shell
 yarn add @dvgis/dc-sdk
 -------------------------
 npm install @dvgis/dc-sdk
@@ -39,7 +39,7 @@ import '@dvgis/dc-sdk/dist/dc.core.min.css'
 
 `NPM / YARN` **_`(On-demand)`_**
 
-```node
+```shell
 yarn add @dvgis/dc-base
 yarn add @dvgis/dc-core
 yarn add @dvgis/dc-chart

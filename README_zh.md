@@ -25,7 +25,7 @@ Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技�
 
 NPM / YARN 的方式安装，它能更好地和 `webpack` 打包工具配合使用。
 
-```node
+```shell
 yarn add @dvgis/dc-sdk
 -------------------------
 npm install @dvgis/dc-sdk
@@ -41,7 +41,7 @@ import '@dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
 
 `NPM / YARN` **_`(按需安装)`_**
 
-```node
+```shell
 yarn add @dvgis/dc-base
 yarn add @dvgis/dc-core
 yarn add @dvgis/dc-chart
