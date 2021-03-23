@@ -203,7 +203,11 @@ class RoamingPath {
       } else if (viewMode === RoamingViewMode.TP) {
         camera.lookAt(
           tickPosition,
-          new Cesium.HeadingPitchRange(0, -90, viewOption.range || 1000)
+          new Cesium.HeadingPitchRange(
+            0,
+            Cesium.Math.toRadians(viewOption.pitch || -90),
+            viewOption.range || 1000
+          )
         )
       }
     } else {
