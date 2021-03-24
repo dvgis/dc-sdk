@@ -1,7 +1,7 @@
 # DC-SDK
 
 <p>
-<img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/publish"/>
+<img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/build"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
 <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
 <img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
