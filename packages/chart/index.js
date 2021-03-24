@@ -14,8 +14,7 @@ const install = function(DC) {
 
   DC.init(() => {
     try {
-      const components = require('./src/components.js').default
-      DC.mixin(components)
+      DC.mixin(require('./src/components.js').default)
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)

@@ -16,8 +16,7 @@ const install = function(DC) {
       if (!DC.Initialized) {
         DC.init(() => {
           try {
-            const components = require('./src/components.js').default
-            DC.mixin(components)
+            DC.mixin(require('./src/components.js').default)
             DC.Initialized = true
             callback && callback()
           } catch (e) {

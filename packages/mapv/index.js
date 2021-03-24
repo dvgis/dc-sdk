@@ -12,8 +12,7 @@ const install = function(DC) {
     try {
       let mapv = require('mapv-lib')
       DC.Namespace['mapv'] = mapv
-      const components = require('./src/components.js').default
-      DC.mixin(components)
+      DC.mixin(require('./src/components.js').default)
       DC.mixin({
         MapvDataSet: mapv?.DataSet
       })
