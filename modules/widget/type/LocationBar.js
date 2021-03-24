@@ -17,7 +17,8 @@ class LocationBar extends Widget {
     this._cameraEl = undefined
     this.type = Widget.getWidgetType('location_bar')
     this._state = State.INITIALIZED
-    this._lastUpdate = Cesium.getTimestamp()
+    this._lastMouseUpdate = Cesium.getTimestamp()
+    this._lastCameraUpdate = Cesium.getTimestamp()
   }
 
   /**
@@ -66,10 +67,10 @@ class LocationBar extends Widget {
    */
   _moveHandler(e) {
     let now = Cesium.getTimestamp()
-    if (now < this._lastUpdate + 300) {
+    if (now < this._lastMouseUpdate + 300) {
       return
     }
-    this._lastUpdate = now
+    this._lastMouseUpdate = now
     let ellipsoid = Cesium.Ellipsoid.WGS84
     let cartographic = e.surfacePosition
       ? ellipsoid.cartesianToCartographic(e.surfacePosition)
@@ -91,10 +92,10 @@ class LocationBar extends Widget {
    */
   _cameraHandler() {
     let now = Cesium.getTimestamp()
-    if (now < this._lastUpdate + 300) {
+    if (now < this._lastCameraUpdate + 300) {
       return
     }
-    this._lastUpdate = now
+    this._lastCameraUpdate = now
     let cameraPosition = this._viewer.cameraPosition
     this._cameraEl.innerHTML = `
       <span>视角：${(+cameraPosition.pitch).toFixed(2)}</span>
