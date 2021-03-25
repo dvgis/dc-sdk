@@ -43,6 +43,7 @@
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/polyfill": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
+    "@turf/turf": "^6.3.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "cesium": "^1.79.1",

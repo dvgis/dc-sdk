@@ -3,6 +3,8 @@
  * @Date: 2021-03-13 13:15:38
  */
 
+import * as turf from '@turf/turf'
+
 const install = function(DC) {
   if (!DC) {
     throw new Error('Missing DC Base Package')
@@ -16,6 +18,7 @@ const install = function(DC) {
       if (!DC.Initialized) {
         DC.init(() => {
           try {
+            DC.Namespace['turf'] = turf
             DC.mixin(require('./src/components.js').default)
             DC.Initialized = true
             callback && callback()
