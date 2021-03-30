@@ -2,6 +2,7 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:43:33
  */
+
 import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { DomUtil } from '@dc-modules/utils'
@@ -21,7 +22,7 @@ class HtmlLayer extends Layer {
   set show(show) {
     this._show = show
     this._delegate.style.visibility = this._show ? 'visible' : 'hidden'
-    this._cache.keys().forEach(key => {
+    Object.keys(this._cache).forEach(key => {
       this._cache[key].show = show
     })
     return this
