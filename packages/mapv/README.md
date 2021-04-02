@@ -3,15 +3,21 @@
 <p>
 <img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/build"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
-<img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
-<img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
+<a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
+ <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
+</a>
+<a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
+ <img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
+</a>
+<a href="https://resource.dvgis.cn/dc-docs/v2.x" target="_blank">
+ <img src="https://img.shields.io/badge/docs-online-yellow.svg"/>
+</a>
+<a href="http://dc.dvgis.cn" target="_blank">
+ <img src="https://img.shields.io/badge/demo-online-red.svg"/>
+</a>
 </p>
 
 **_`DC-SDK`_** is based on the open source project **_`Cesium`_** for the second development of two three-dimensional **_`WebGis`_** application framework , the framework optimizes the use of **_`Cesium`_** and adds some additional features , designed for developers to quickly build **_`WebGis`_** application.
-
-## Home
-
-> http://dc.dvgis.cn
 
 ```warning
 Tips：This SDK is JS+GIS framework package. Developers need to have some front-end technology and GIS related technology
@@ -165,12 +171,6 @@ DC.ready(() => {
   let viewer = new DC.Viewer(divId) // divId is the Id attribute value of a div node. If it is not passed in, the 3D scene cannot be initialized
 })
 ```
-
-## Documentation
-
-[DC Sdk Api](https://resource.dvgis.cn/dc-docs/v2.x)
-
-[Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
 ## Demo
 

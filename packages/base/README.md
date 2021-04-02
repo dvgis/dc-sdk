@@ -3,15 +3,21 @@
 <p>
 <img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/build"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
-<img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
-<img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
+<a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
+ <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
+</a>
+<a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
+ <img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
+</a>
+<a href="https://resource.dvgis.cn/dc-docs/v2.x" target="_blank">
+ <img src="https://img.shields.io/badge/docs-online-yellow.svg"/>
+</a>
+<a href="http://dc.dvgis.cn" target="_blank">
+ <img src="https://img.shields.io/badge/demo-online-red.svg"/>
+</a>
 </p>
 
 **_`DC-SDK`_** is based on the open source project **_`Cesium`_** for the second development of two three-dimensional **_`WebGis`_** application framework , the framework optimizes the use of **_`Cesium`_** and adds some additional features , designed for developers to quickly build **_`WebGis`_** application.
-
-## Home
-
-> http://dc.dvgis.cn
 
 ```warning
 Tips：This SDK is JS+GIS framework package. Developers need to have some front-end technology and GIS related technology
@@ -166,12 +172,6 @@ DC.ready(() => {
 })
 ```
 
-## Documentation
-
-[DC Sdk Api](https://resource.dvgis.cn/dc-docs/v2.x)
-
-[Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
-
 ## Demo
 
 |  ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/china.gif) |
@@ -208,7 +208,7 @@ We reserve the right of final interpretation of this copyright information.
 
 <p>
 <a href="https://www.paypal.com/paypalme/cavencj" target="_blank">
-<img src="https://www.paypalobjects.com/images/shared/paypal-logo-129x32.svg" style="margin-top:10px" />
+ <img src="https://www.paypalobjects.com/images/shared/paypal-logo-129x32.svg" style="margin-top:10px" />
 </a>
 </p>
 

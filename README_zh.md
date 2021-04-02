@@ -3,17 +3,23 @@
 <p>
 <img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/build"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
-<img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
-<img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
+<a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
+ <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
+</a>
+<a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
+ <img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
+</a>
+<a href="https://resource.dvgis.cn/dc-docs/v2.x/zh" target="_blank">
+ <img src="https://img.shields.io/badge/docs-online-yellow.svg"/>
+</a>
+<a href="http://dc.dvgis.cn" target="_blank">
+ <img src="https://img.shields.io/badge/demo-online-red.svg"/>
+</a>
 </p>
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
 
 > DC-SDK 是基于 Cesium 进行二次开发的2、3D一体 WebGis 应用框架,该框架优化了 Cesium 的使用方式和增添了一些额外功能，旨在为开发者快速构建 WebGis 应用。
-
-##主页
-
-> http://dc.dvgis.cn
 
 ```warning
 Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技术和 GIS 相关技术
@@ -179,12 +185,6 @@ DC.ready(() => {
   let viewer = new DC.Viewer(divId) // divId 为一个div节点的Id属性值，如果不传入，会无法初始化3D场景
 })
 ```
-
-## 文档
-
-[DC Sdk  Api](https://resource.dvgis.cn/dc-docs/v2.x/zh)
-
-[Cesium Api](https://cesium.com/docs/cesiumjs-ref-doc/)
 
 ## 示例
 
