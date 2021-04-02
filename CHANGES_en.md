@@ -1,5 +1,20 @@
 # Change Log
 
+### 2.1.0 - 2021-04-03
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.80.0
+
+#### Additions 🎉
+
+- Add GeoTools class, mainly using Turf for overlay related calculations
+
+#### Fixes 🔧
+
+- Modify the HtmlLayer set show error problem
+- Improve the authentication rules of accessToken
+
 ### 2.0.0 - 2021-03-27
 
 #### Breaking Changes 📣
