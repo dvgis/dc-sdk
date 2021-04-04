@@ -69,7 +69,7 @@ import '@dvgis/dc-core/dist/dc.core.min.css'
 
 `CDN`
 
-[Resources 下载链接](https://github.com/dvgis/dc-sdk/tree/master/dist)
+[Resources](https://github.com/dvgis/dc-sdk/releases)
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.base.min.js"></script>
