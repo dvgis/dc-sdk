@@ -1,5 +1,11 @@
 # Change Log
 
+### 2.1.1 - 2021-04-06
+
+#### Fixes 🔧
+
+- Repair the problem that some modules version numbers are not uniform
+
 ### 2.1.0 - 2021-04-03
 
 #### Breaking Changes 📣
