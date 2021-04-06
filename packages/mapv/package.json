@@ -1,6 +1,6 @@
 {
 	"name": "@dvgis/dc-mapv",
-	"version": "2.0.0",
+	"version": "2.1.0",
 	"description": "The SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.",
 	"repository": "https://github.com/dvgis/dc-sdk.git",
 	"homepage": "https://www.dvgis.cn",
@@ -16,7 +16,7 @@
 	"license": "Apache 2.0",
 	"main": "dist/dc.mapv.js",
 	"peerDependencies": {
-		"@dvgis/dc-base": "^2.0.0"
+		"@dvgis/dc-base": "^2.1.0"
 	},
 	"files": [
 		"dist"
