@@ -18,6 +18,7 @@ class Animation {
    * @returns {Animation}
    */
   start() {
+    this._unbindEvent()
     if (this._options.duration) {
       let timer = setTimeout(() => {
         this._unbindEvent()
