@@ -135,6 +135,45 @@ class Viewer {
     return position
   }
 
+  get resolution() {
+    let width = this.scene.canvas.width
+    let height = this.scene.canvas.height
+    let min = Transform.transformWindowToWGS84(
+      new Cesium.Cartesian2((width / 2) | 0, height - 1),
+      this
+    )
+    let max = Transform.transformWindowToWGS84(
+      new Cesium.Cartesian2((1 + width / 2) | 0, height - 1),
+      this
+    )
+    if (!min || !max) {
+      return undefined
+    }
+    return Math.abs(min.lng - max.lng)
+  }
+
+  get viewBounds() {
+    let width = this.scene.canvas.width
+    let height = this.scene.canvas.height
+    let min = Transform.transformWindowToWGS84(
+      new Cesium.Cartesian2(0, height),
+      this
+    )
+    let max = Transform.transformWindowToWGS84(
+      new Cesium.Cartesian2(width, 0),
+      this
+    )
+    if (!min || !max) {
+      return undefined
+    }
+    return {
+      minX: min.lng,
+      minY: min.lat,
+      maxX: max.lng,
+      maxY: max.lat
+    }
+  }
+
   /***
    *
    * @param layerGroup
