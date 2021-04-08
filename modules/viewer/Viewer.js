@@ -167,10 +167,10 @@ class Viewer {
       return undefined
     }
     return {
-      minX: min.lng,
-      minY: min.lat,
-      maxX: max.lng,
-      maxY: max.lat
+      west: min.lng,
+      south: min.lat,
+      east: max.lng,
+      north: max.lat
     }
   }
 
