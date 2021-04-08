@@ -115,13 +115,23 @@ class DivIcon extends Overlay {
   _onAdd(layer) {
     this._layer = layer
     this._layer.delegate.appendChild(this._delegate)
+    let params = {
+      layer: layer,
+      overlay: this,
+      position: Transform.transformWGS84ToCartesian(this._position)
+    }
     this._delegate.addEventListener('click', () => {
-      this._overlayEvent.fire(MouseEventType.CLICK, {
-        layer: layer,
-        overlay: this,
-        position: Transform.transformWGS84ToCartesian(this._position)
-      })
+      this._overlayEvent.fire(MouseEventType.CLICK, params)
     })
+
+    this._delegate.addEventListener('mouseover', () => {
+      this._overlayEvent.fire(MouseEventType.MOUSE_OVER, params)
+    })
+
+    this._delegate.addEventListener('mouseout', () => {
+      this._overlayEvent.fire(MouseEventType.MOUSE_OUT, params)
+    })
+
     this._state = State.ADDED
   }
 
