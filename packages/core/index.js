@@ -16,6 +16,7 @@ const install = function(DC) {
   DC.ready = callback => {
     try {
       if (!DC.Initialized) {
+        // load components
         DC.init(() => {
           try {
             DC.Namespace['turf'] = turf

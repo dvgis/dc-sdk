@@ -18,9 +18,6 @@ let DC = {
 initMixin(DC)
 initUse(DC)
 
-// add copy-right
-require('@dc-modules/copy-right')
-
 // load Cesium
 let cesiumLoaded = false
 DC.init = callback => {
