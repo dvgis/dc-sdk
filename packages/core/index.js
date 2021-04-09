@@ -21,6 +21,7 @@ const install = function(DC) {
           try {
             DC.Namespace['turf'] = turf
             DC.mixin(require('./src/components.js').default)
+            require('@dc-modules/copy-right')
             DC.Initialized = true
             callback && callback()
           } catch (e) {
