@@ -9,8 +9,8 @@
 
 #### Fixes 🔧
 
-- Fix the problem that AroundPoint and  AroundView will be accelerated by multiple starts(#22)
-- Fix the problem that mouse events do not work when the overlay is OSGB(#23)
+- Fix the problem that AroundPoint and  AroundView will be accelerated by multiple starts[#22](https://github.com/dvgis/dc-sdk/issues/22)
+- Fix the problem that mouse events do not work when the overlay is OSGB[#23](https://github.com/dvgis/dc-sdk/issues/23)
 
 ### 2.1.1 - 2021-04-06
 
