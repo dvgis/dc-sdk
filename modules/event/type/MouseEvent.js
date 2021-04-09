@@ -176,6 +176,20 @@ class MouseEvent extends Event {
       }
     }
 
+    // for Cesium3DTileset
+    if (
+      target &&
+      target?.primitive &&
+      target?.primitive instanceof Cesium.Cesium3DTileset
+    ) {
+      layer = this._viewer
+        .getLayers()
+        .filter(item => item.layerId === target.primitive.layerId)[0]
+      if (layer && layer.getOverlay) {
+        overlay = layer.getOverlay(target.primitive.overlayId)
+      }
+    }
+
     return { layer: layer, overlay: overlay, feature: feature }
   }
 
