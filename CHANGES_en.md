@@ -1,5 +1,17 @@
 # Change Log
 
+### 2.1.2 - 2021-04-10
+
+#### Additions 🎉
+
+- Add DivIcon mouse-over and mouse-out functions
+- Add resolution and viewBounds properties
+
+#### Fixes 🔧
+
+- Fix the problem that AroundPoint and  AroundView will be accelerated by multiple starts(#22)
+- Fix the problem that mouse events do not work when the overlay is OSGB(#23)
+
 ### 2.1.1 - 2021-04-06
 
 #### Fixes 🔧
