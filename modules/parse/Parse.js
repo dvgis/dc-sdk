@@ -88,14 +88,18 @@ class Parse {
   /**
    * Parses polygon positions to array
    * @param positions
+   * @param loop
    * @returns {[][]}
    */
-  static parsePolygonCoordToArray(positions) {
+  static parsePolygonCoordToArray(positions, loop = false) {
     let result = []
     positions = this.parsePositions(positions)
     positions.forEach(item => {
       result.push([item.lng, item.lat])
     })
+    if (loop && result.length > 0) {
+      result.push(result[0])
+    }
     return [result]
   }
 }
