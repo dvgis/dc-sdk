@@ -9,7 +9,6 @@ import * as turf from '@turf/turf'
 let DC = {
   version: __VERSION__,
   accessToken: '',
-  certified: false,
   author: __AUTHOR__,
   home_page: __HOME_PAGE__,
   Namespace: {},
