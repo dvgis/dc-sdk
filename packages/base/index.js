@@ -4,6 +4,7 @@
  */
 
 import { initMixin, initUse } from '@dc-modules/global-api'
+import * as turf from '@turf/turf'
 
 let DC = {
   version: __VERSION__,
@@ -28,9 +29,12 @@ DC.init = callback => {
       resolve(Cesium)
     })
       .then(Cesium => {
+        // set Cesium to Namespace
         DC.Namespace['Cesium'] = Cesium
         cesiumLoaded = true
         delete window['Cesium']
+        // set turf to Namespace
+        DC.Namespace['turf'] = turf
         callback && callback()
       })
       .catch(e => {})
