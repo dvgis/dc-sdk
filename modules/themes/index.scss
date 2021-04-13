@@ -10,20 +10,6 @@
   display: block;
 }
 
-.dc-attribution {
-  img{
-    width: 20px;
-    height: 20px;
-    margin-right: 3px;
-  }
-  a {
-    text-decoration: none;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
-
 .div-icon {
   user-select: none;
   background-color: #fff;
