@@ -5,12 +5,14 @@
 	"repository": "https://github.com/dvgis/dc-sdk.git",
 	"homepage": "https://www.dvgis.cn",
 	"keywords": [
-		"3D",
-		"webgl",
-		"map",
-		"globe",
-		"cesium",
-		"heatmap"
+    "3D",
+    "webGL",
+    "map",
+    "globe",
+    "cesium",
+    "heatmap",
+    "turf",
+    "mapv"
 	],
 	"author": "Caven Chen <cavencj@gmail.com>",
 	"license": "Apache 2.0",
