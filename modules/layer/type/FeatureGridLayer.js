@@ -40,6 +40,7 @@ class FeatureGridLayer extends Layer {
       this._levelLayers[String(i)] = new VectorLayer(id + '-grid-' + i)
     }
     this._viewer = undefined
+    this._imageryLayer = undefined
     this._imagery = document.createElement('canvas')
     this._imagery.width = this._tileWidth
     this._imagery.height = this._tileHeight
@@ -127,7 +128,7 @@ class FeatureGridLayer extends Layer {
    */
   _onAdd(viewer) {
     this._viewer = viewer
-    this._viewer.imageryLayers.addImageryProvider(this)
+    this._imageryLayer = this._viewer.imageryLayers.addImageryProvider(this)
     Object.keys(this._levelLayers).forEach(key => {
       this._viewer.addLayer(this._levelLayers[key])
     })
@@ -135,7 +136,7 @@ class FeatureGridLayer extends Layer {
   }
 
   _onRemove() {
-    this._viewer.imageryLayers.remove(this)
+    this._imageryLayer && this._viewer.imageryLayers.remove(this._imageryLayer)
     Object.keys(this._levelLayers).forEach(key => {
       this._viewer.removeLayer(this._levelLayers[key])
     })

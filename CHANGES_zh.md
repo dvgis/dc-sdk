@@ -4,23 +4,24 @@
 
 #### Additions 🎉
 
-- 开放部分Cesium内部函数
+- 开放部分 Cesium 内部函数
+- 添加 FeatureGridLayer
 
 #### Fixes 🔧
 
 - 部分军标无法使用[#24](https://github.com/dvgis/dc-sdk/issues/24)
-- 重写logo的实现方式
+- 重写 logo 的实现方式
 
 #### Additions 🎉
 
-- 添加DivIcon鼠标移入和移出功能
+- 添加 DivIcon 鼠标移入和移出功能
 - 添加地图当前分辨率和视野范围属性
 
 ### 2.1.2 - 2021-04-10
 
 #### Additions 🎉
 
-- 添加DivIcon鼠标移入和移出功能
+- 添加 DivIcon 鼠标移入和移出功能
 - 添加地图当前分辨率和视野范围属性
 
 #### Fixes 🔧
@@ -38,16 +39,16 @@
 
 #### Breaking Changes 📣
 
-- 升级Cesium到1.80.0版本
+- 升级 Cesium 到 1.80.0 版本
 
 #### Additions 🎉
 
-- 添加GeoTools工具类，主要利用Turf进行覆盖物的相关计算
+- 添加 GeoTools 工具类，主要利用 Turf 进行覆盖物的相关计算
 
 #### Fixes 🔧
 
-- 修改HtmlLayer设置show的错误问题
-- 完善accessToken的认证规则
+- 修改 HtmlLayer 设置 show 的错误问题
+- 完善 accessToken 的认证规则
 
 ### 2.0.0 - 2021-03-27
 
@@ -55,14 +56,14 @@
 
 - 重构整个框架代码，将代码模块化处理
 - 整合之前分散的模块
-- 重构了各个模块包中对DC的依赖
+- 重构了各个模块包中对 DC 的依赖
 - 重新开发了用户手册
-- 支持自定安装和整体安装的方式引入DC
+- 支持自定安装和整体安装的方式引入 DC
 
 #### Additions 🎉
 
-- 添加token认证功能。认证通过可以使用一些分析、点位编辑功能
-- 添加turf模块的支持，可以通过 `const {turf} = DC.Namespace` 获取 turf
+- 添加 token 认证功能。认证通过可以使用一些分析、点位编辑功能
+- 添加 turf 模块的支持，可以通过 `const {turf} = DC.Namespace` 获取 turf
 
 #### Fixes 🔧
 
