@@ -1,5 +1,21 @@
 # Change Log
 
+### 2.1.3 - 2021-04-17
+
+#### Additions 🎉
+
+- 开放部分Cesium内部函数
+
+#### Fixes 🔧
+
+- 部分军标无法使用[#24](https://github.com/dvgis/dc-sdk/issues/24)
+- 重写logo的实现方式
+
+#### Additions 🎉
+
+- 添加DivIcon鼠标移入和移出功能
+- 添加地图当前分辨率和视野范围属性
+
 ### 2.1.2 - 2021-04-10
 
 #### Additions 🎉
