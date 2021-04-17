@@ -147,7 +147,7 @@ class Viewer {
       this
     )
     if (!min || !max) {
-      return undefined
+      return 1
     }
     return Math.abs(min.lng - max.lng)
   }
@@ -164,14 +164,9 @@ class Viewer {
       this
     )
     if (!min || !max) {
-      return undefined
+      return Cesium.Rectangle.MAX_VALUE
     }
-    return {
-      west: min.lng,
-      south: min.lat,
-      east: max.lng,
-      north: max.lat
-    }
+    return Cesium.Rectangle.fromDegrees(min.lng, min.lat, max.lng, max.lat)
   }
 
   /***
