@@ -12,6 +12,7 @@ export { default as LayerGroup } from './LayerGroup'
  */
 export { default as ClusterLayer } from './type/ClusterLayer'
 export { default as CzmlLayer } from './type/CzmlLayer'
+export { default as FeatureGridLayer } from './type/FeatureGridLayer'
 export { default as GeoJsonLayer } from './type/GeoJsonLayer'
 export { default as HeatLayer } from './type/HeatLayer'
 export { default as HtmlLayer } from './type/HtmlLayer'
