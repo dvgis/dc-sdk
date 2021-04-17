@@ -19,6 +19,8 @@ const thirdPart = {
   JulianDate: Cesium.JulianDate,
   Color: Cesium.Color,
   Rect: Cesium.Rectangle,
+  GeographicTilingScheme: Cesium.GeographicTilingScheme,
+  WebMercatorTilingScheme: Cesium.WebMercatorTilingScheme,
   ColorMaterialProperty: Cesium.ColorMaterialProperty,
   ImageMaterialProperty: Cesium.ImageMaterialProperty,
   PolylineDashMaterialProperty: Cesium.PolylineDashMaterialProperty,
