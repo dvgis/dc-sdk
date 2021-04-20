@@ -51,6 +51,18 @@ class FeatureGridLayer extends Layer {
     return this._url
   }
 
+  set show(show) {
+    this._show = show
+    Object.keys(this._levelLayers).forEach(key => {
+      this._levelLayers[key].show = show
+    })
+    return this
+  }
+
+  get show() {
+    return this._show
+  }
+
   get token() {
     return this._token
   }
@@ -150,8 +162,10 @@ class FeatureGridLayer extends Layer {
    * @param {*} x
    * @param {*} y
    * @param {*} level
+   * @param {*} request
+   * @returns
    */
-  requestImage(x, y, level) {
+  requestImage(x, y, level, request) {
     let layer = this._levelLayers[String(level)]
     let rectangle = this._tilingScheme.tileXYToRectangle(x, y, level)
     if (
@@ -188,6 +202,9 @@ class FeatureGridLayer extends Layer {
     return this._imagery
   }
 
+  /**
+   *
+   */
   clear() {
     Object.keys(this._levelLayers).forEach(key => {
       this._levelLayers[key].clear()
