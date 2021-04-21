@@ -15,7 +15,6 @@ const DEF_STYLE = {
 class DrawRectangle extends Draw {
   constructor(style) {
     super()
-    this._positions = []
     this._style = {
       ...DEF_STYLE,
       ...style
@@ -40,6 +39,9 @@ class DrawRectangle extends Draw {
 
   _onClick(e) {
     let position = this._clampToGround ? e.surfacePosition : e.position
+    if (!position) {
+      return false
+    }
     let len = this._positions.length
     if (len === 0) {
       this._positions.push(position)
@@ -56,16 +58,6 @@ class DrawRectangle extends Draw {
       )
       rectangle.setStyle(this._style)
       this._plotEvent.raiseEvent(rectangle)
-    }
-  }
-
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '左击选择点位')
-    if (this._floatingAnchor) {
-      let position = this._clampToGround ? e.surfacePosition : e.position
-      this._floatingAnchor.position.setValue(position)
-      this._positions.pop()
-      this._positions.push(position)
     }
   }
 }

@@ -13,16 +13,29 @@ class Draw {
     this._floatingAnchor = undefined
     this._clampToGround = true
     this._tooltip = undefined
+    this._tooltipMess = '单击选择点位'
     this._layer = undefined
     this._plotEvent = undefined
     this._options = {}
+    this._positions = []
   }
 
   _mountEntity() {}
 
   _onClick(e) {}
 
-  _onMouseMove(e) {}
+  _onMouseMove(e) {
+    this._tooltip.showAt(e.windowPosition, this._tooltipMess)
+    if (this._floatingAnchor) {
+      let position = this._clampToGround ? e.surfacePosition : e.position
+      if (!position) {
+        return false
+      }
+      this._floatingAnchor.position.setValue(position)
+      this._positions.pop()
+      this._positions.push(position)
+    }
+  }
 
   _onRightClick(e) {}
 

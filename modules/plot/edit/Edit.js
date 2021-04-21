@@ -16,11 +16,13 @@ class Edit {
     this._isMoving = false
     this._clampToGround = true
     this._tooltip = undefined
+    this._tooltipMess = '点击锚点移动,右击结束编辑'
     this._layer = undefined
     this._anchorLayer = undefined
     this._layer = undefined
     this._plotEvent = undefined
     this._options = {}
+    this._positions = []
   }
 
   _mountEntity() {}
@@ -29,7 +31,23 @@ class Edit {
 
   _onClick(e) {}
 
-  _onMouseMove(e) {}
+  _onMouseMove(e) {
+    this._tooltip.showAt(e.windowPosition, this._tooltipMess)
+    if (!this._isMoving) {
+      return false
+    }
+    if (this._pickedAnchor && this._pickedAnchor.position) {
+      let properties = this._pickedAnchor.properties.getValue(
+        Cesium.JulianDate.now()
+      )
+      let position = this._clampToGround ? e.surfacePosition : e.position
+      if (!position) {
+        return false
+      }
+      this._pickedAnchor.position.setValue(position)
+      this._positions[properties.index] = position
+    }
+  }
 
   _onRightClick(e) {}
 

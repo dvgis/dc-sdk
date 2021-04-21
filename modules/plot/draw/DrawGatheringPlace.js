@@ -17,7 +17,6 @@ const DEF_STYLE = {
 class DrawGatheringPlace extends Draw {
   constructor(style) {
     super()
-    this._positions = []
     this._floatingAnchor = undefined
     this._style = {
       ...DEF_STYLE,
@@ -62,16 +61,6 @@ class DrawGatheringPlace extends Draw {
       )
       gatheringPlace.setStyle(this._style)
       this._plotEvent.raiseEvent(gatheringPlace)
-    }
-  }
-
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '单击选择点位')
-    if (this._floatingAnchor) {
-      let position = this._clampToGround ? e.surfacePosition : e.position
-      this._floatingAnchor.position.setValue(position)
-      this._positions.pop()
-      this._positions.push(position)
     }
   }
 }

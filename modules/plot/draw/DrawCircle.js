@@ -16,7 +16,6 @@ const DEF_STYLE = {
 class DrawCircle extends Draw {
   constructor(style) {
     super()
-    this._positions = []
     this._radius = 0
     this._style = {
       ...DEF_STYLE,
@@ -63,6 +62,9 @@ class DrawCircle extends Draw {
   _onClick(e) {
     let len = this._positions.length
     let position = this._clampToGround ? e.surfacePosition : e.position
+    if (!position) {
+      return false
+    }
     if (len === 0) {
       this._positions.push(position)
       this.createAnchor(position, true)
@@ -81,16 +83,6 @@ class DrawCircle extends Draw {
       )
       circle.setStyle(this._style)
       this._plotEvent.raiseEvent(circle)
-    }
-  }
-
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '单击选择点位')
-    if (this._floatingAnchor) {
-      let position = this._clampToGround ? e.surfacePosition : e.position
-      this._floatingAnchor.position.setValue(position)
-      this._positions.pop()
-      this._positions.push(position)
     }
   }
 }

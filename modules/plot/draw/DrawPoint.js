@@ -45,7 +45,7 @@ class DrawPoint extends Draw {
   }
 
   _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '单击选择点位')
+    this._tooltip.showAt(e.windowPosition, this._tooltipMess)
     this._position = this._clampToGround ? e.surfacePosition : e.position
   }
 }

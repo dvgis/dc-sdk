@@ -49,6 +49,9 @@ class EditPolygon extends Edit {
       this._isMoving = false
       if (this._pickedAnchor && this._pickedAnchor.position) {
         let position = this._clampToGround ? e.surfacePosition : e.position
+        if (!position) {
+          return false
+        }
         this._pickedAnchor.position.setValue(position)
         let properties = this._pickedAnchor.properties.getValue(
           Cesium.JulianDate.now()
@@ -103,13 +106,16 @@ class EditPolygon extends Edit {
   _onMouseMove(e) {
     this._tooltip.showAt(e.windowPosition, '点击锚点移动,右击结束编辑')
     if (!this._isMoving) {
-      return
+      return false
     }
     if (this._pickedAnchor && this._pickedAnchor.position) {
       let properties = this._pickedAnchor.properties.getValue(
         Cesium.JulianDate.now()
       )
       let position = this._clampToGround ? e.surfacePosition : e.position
+      if (!position) {
+        return false
+      }
       let currentIndex = properties.index
       this._pickedAnchor.position.setValue(position)
       this._positions[currentIndex] = position

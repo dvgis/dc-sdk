@@ -12,6 +12,7 @@ class EditBillboard extends Edit {
     super()
     this._overlay = overlay
     this._position = undefined
+    this._tooltipMess = '右击结束编辑'
   }
 
   _mountEntity() {
@@ -26,7 +27,7 @@ class EditBillboard extends Edit {
   }
 
   _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '右击结束编辑')
+    this._tooltip.showAt(e.windowPosition, this._tooltipMess)
     this._position = this._clampToGround ? e.surfacePosition : e.position
   }
 

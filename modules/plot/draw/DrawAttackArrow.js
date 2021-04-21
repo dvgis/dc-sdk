@@ -17,7 +17,6 @@ const DEF_STYLE = {
 class DrawAttackArrow extends Draw {
   constructor(style) {
     super()
-    this._positions = []
     this._floatingAnchor = undefined
     this._style = {
       ...DEF_STYLE,
@@ -46,6 +45,9 @@ class DrawAttackArrow extends Draw {
   _onClick(e) {
     let len = this._positions.length
     let position = this._clampToGround ? e.surfacePosition : e.position
+    if (!position) {
+      return false
+    }
     if (len === 0) {
       this._positions.push(position)
       this.createAnchor(position)
@@ -62,16 +64,6 @@ class DrawAttackArrow extends Draw {
       )
       attackArrow.setStyle(this._style)
       this._plotEvent.raiseEvent(attackArrow)
-    }
-  }
-
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '单击选择点位')
-    if (this._floatingAnchor) {
-      let position = this._clampToGround ? e.surfacePosition : e.position
-      this._floatingAnchor.position.setValue(position)
-      this._positions.pop()
-      this._positions.push(position)
     }
   }
 }

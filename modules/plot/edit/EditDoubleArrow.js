@@ -12,7 +12,6 @@ class EditDoubleArrow extends Edit {
   constructor(overlay) {
     super()
     this._overlay = overlay
-    this._positions = []
     this._graphics = new DoubleArrowGraphics()
   }
 
@@ -57,21 +56,6 @@ class EditDoubleArrow extends Edit {
         return false
       }
       this._pickedAnchor = e.target.id
-    }
-  }
-
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '点击锚点移动,右击结束编辑')
-    if (!this._isMoving) {
-      return
-    }
-    if (this._pickedAnchor && this._pickedAnchor.position) {
-      let properties = this._pickedAnchor.properties.getValue(
-        Cesium.JulianDate.now()
-      )
-      let position = this._clampToGround ? e.surfacePosition : e.position
-      this._pickedAnchor.position.setValue(position)
-      this._positions[properties.index] = position
     }
   }
 
