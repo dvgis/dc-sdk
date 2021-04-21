@@ -9,7 +9,11 @@ let ImageryType = {
   WMS: 'wms',
   WMTS: 'wmts',
   XYZ: 'xyz',
-  COORD: 'coord'
+  COORD: 'coord',
+  GRID: 'grid',
+  MAPBOX: 'mapbox',
+  MAPBOX_STYLE: 'mapbox_style',
+  TMS: 'tms'
 }
 
 export default ImageryType

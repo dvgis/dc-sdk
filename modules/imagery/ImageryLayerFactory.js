@@ -112,6 +112,42 @@ class ImageryLayerFactory {
   }
 
   /**
+   * Create grid image layer
+   * @param options
+   * @returns {module:cesium.GridImageryProvider}
+   */
+  static createGridImageryLayer(options) {
+    return new Cesium.GridImageryProvider(options)
+  }
+
+  /**
+   * Create mapbox image layer
+   * @param options
+   * @returns {module:cesium.MapboxImageryProvider}
+   */
+  static createMapboxImageryLayer(options) {
+    return new Cesium.MapboxImageryProvider(options)
+  }
+
+  /**
+   * Create mapbox style image layer
+   * @param options
+   * @returns {module:cesium.MapboxStyleImageryProvider}
+   */
+  static createMapboxStyleImageryLayer(options) {
+    return new Cesium.MapboxStyleImageryProvider(options)
+  }
+
+  /**
+   * Create TMS image layer
+   * @param options
+   * @returns {module:cesium.TileMapServiceImageryProvider}
+   */
+  static createTMSImageryLayer(options) {
+    return new Cesium.TileMapServiceImageryProvider(options)
+  }
+
+  /**
    * Create Imagery Layer
    * @param type
    * @param options
@@ -152,6 +188,18 @@ class ImageryLayerFactory {
         break
       case ImageryType.COORD:
         imageryLayer = this.createCoordImageryLayer(options)
+        break
+      case ImageryType.GRID:
+        imageryLayer = this.createGridImageryLayer(options)
+        break
+      case ImageryType.MAPBOX:
+        imageryLayer = this.createMapboxImageryLayer(options)
+        break
+      case ImageryType.MAPBOX_STYLE:
+        imageryLayer = this.createMapboxStyleImageryLayer(options)
+        break
+      case ImageryType.TMS:
+        imageryLayer = this.createTMSImageryLayer(options)
         break
       default:
         break
