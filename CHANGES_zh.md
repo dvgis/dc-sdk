@@ -1,5 +1,16 @@
 # Change Log
 
+### 2.1.4 - 2021-04-24
+
+#### Additions 🎉
+
+- 添加创建TMS、Grid、Mapbox、MapboxStyle的地图函数
+- 添加剖切分析模块，包括：地球裁剪、地形裁剪、模型裁剪、Tiles裁剪
+
+#### Fixes 🔧
+
+- 完善标绘功能和解决issue[#26](https://github.com/dvgis/dc-sdk/issues/26)
+
 ### 2.1.3 - 2021-04-17
 
 #### Additions 🎉
