@@ -48,10 +48,10 @@ const SkyBoxVS = `
   }
 `
 
-class SkyBox extends Cesium.SkyBox {
+class GroundSkyBox extends Cesium.SkyBox {
   constructor(options = {}) {
     super(options)
-    this.offsetAngle = options?.offsetAngle || 90
+    this.offsetAngle = options?.offsetAngle
   }
 
   update(frameState, useHdr) {
@@ -187,4 +187,4 @@ class SkyBox extends Cesium.SkyBox {
   }
 }
 
-export default SkyBox
+export default GroundSkyBox

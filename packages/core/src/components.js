@@ -174,7 +174,7 @@ import WindLayer from '@dc-modules/wind/WindLayer'
 /**
  * exts
  */
-import { SkyBox } from '@dc-modules/exts'
+import { GroundSkyBox } from '@dc-modules/exts'
 
 /**
  * thirdPart
@@ -333,7 +333,7 @@ const components = {
   /**
    * exts
    */
-  SkyBox,
+  GroundSkyBox,
   /**
    * thirdPart
    */
