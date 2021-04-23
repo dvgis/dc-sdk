@@ -78,7 +78,19 @@ class ViewerOption {
     if (!this._options.skyBox) {
       return this
     }
-    this._viewer.scene.skyBox = this._options.skyBox
+    let skyBoxOption = this._options.skyBox
+    if (skyBoxOption instanceof Cesium.SkyBox) {
+      this._viewer.scene.skyBox = skyBoxOption
+    } else {
+      let skyBox = this._viewer.scene.skyBox
+      skyBox.show = skyBoxOption.show ?? true
+      if (skyBoxOption.offsetAngle) {
+        skyBox.offsetAngle = skyBoxOption.offsetAngle
+      }
+      if (skyBoxOption?.sources) {
+        skyBox.sources = skyBoxOption.sources
+      }
+    }
     return this
   }
 
