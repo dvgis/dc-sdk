@@ -78,13 +78,7 @@ class ViewerOption {
     if (!this._options.skyBox) {
       return this
     }
-    let skyBox = this._viewer.scene.skyBox
-    let skyBoxOption = this._options.skyBox
-    skyBox.show = skyBoxOption.show ?? true
-    skyBox.offsetAngle = skyBoxOption.offsetAngle || 0
-    if (skyBoxOption.sources) {
-      skyBox.sources = skyBoxOption?.sources
-    }
+    this._viewer.scene.skyBox = this._options.skyBox
     return this
   }
 
