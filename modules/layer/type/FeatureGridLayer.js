@@ -35,7 +35,7 @@ class FeatureGridLayer extends Layer {
     this._rectangle = this._tilingScheme.rectangle
     this._credit = undefined
     this._token = undefined
-    this.type = Layer.getLayerType('feature-grid')
+    this.type = Layer.getLayerType('feature_grid')
     for (let i = 0; i < this.maximumLevel; i++) {
       this._levelLayers[String(i)] = new VectorLayer(id + '-grid-' + i)
     }
@@ -213,6 +213,6 @@ class FeatureGridLayer extends Layer {
   }
 }
 
-Layer.registerType('feature-grid')
+Layer.registerType('feature_grid')
 
 export default FeatureGridLayer
