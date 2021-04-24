@@ -209,6 +209,7 @@ class Position {
 
   /**
    *  Returns position from coord String
+   * @deprecated
    * @param str
    * @returns {Position}
    */
@@ -222,6 +223,7 @@ class Position {
 
   /**
    * Returns position from coord array
+   * @deprecated
    * @param arr
    * @returns {Position}
    */
