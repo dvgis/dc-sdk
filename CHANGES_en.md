@@ -1,5 +1,19 @@
 # Change Log
 
+### 2.1.4 - 2021-04-24
+
+#### Additions 🎉
+
+- Add map functions for creating TMS, Grid, Mapbox, MapboxStyle
+- Add clipping module, including: globe clipping, terrain clipping
+- Add GroundSkyBox
+
+#### Fixes 🔧
+
+- Improve the plot module and fix the issue[#26](https://github.com/dvgis/dc-sdk/issues/26)
+- Improve the position editor module
+- Fix the FeatureGridLayer show and hide issue
+
 ### 2.1.3 - 2021-04-17
 
 #### Additions 🎉

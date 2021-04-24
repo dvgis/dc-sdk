@@ -5,11 +5,14 @@
 #### Additions 🎉
 
 - 添加创建TMS、Grid、Mapbox、MapboxStyle的地图函数
-- 添加剖切分析模块，包括：地球裁剪、地形裁剪、模型裁剪、Tiles裁剪
+- 添加剖切分析模块，包括：地球裁剪、地形裁剪
+- 添加近地天地盒
 
 #### Fixes 🔧
 
 - 完善标绘功能和解决issue[#26](https://github.com/dvgis/dc-sdk/issues/26)
+- 完善模型位置编辑工具
+- 解决FeatureGridLayer显示和隐藏问题
 
 ### 2.1.3 - 2021-04-17
 
