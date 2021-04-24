@@ -23,7 +23,7 @@
 
 #### Fixes 🔧
 
-- 部分军标无法使用[#24](https://github.com/dvgis/dc-sdk/issues/24)
+- 修复部分军标无法使用的问题[#24](https://github.com/dvgis/dc-sdk/issues/24)
 - 重写 logo 的实现方式
 
 #### Additions 🎉
