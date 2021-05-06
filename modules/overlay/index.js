@@ -13,6 +13,11 @@ export { default as CustomBillboard } from './custom/CustomBillboard'
 export { default as CustomLabel } from './custom/CustomLabel'
 
 /**
+ * dynamic
+ */
+export { default as DynamicModel } from './dynamic/DynamicModel'
+
+/**
  * model
  */
 export { default as Model } from './model/Model'
