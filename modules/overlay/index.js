@@ -18,6 +18,11 @@ export { default as CustomLabel } from './custom/CustomLabel'
 export { default as DynamicModel } from './dynamic/DynamicModel'
 
 /**
+ * html
+ */
+export { default as DivIcon } from './html/DivIcon'
+
+/**
  * model
  */
 export { default as Model } from './model/Model'
@@ -50,7 +55,6 @@ export { default as Box } from './vector/Box'
 export { default as Circle } from './vector/Circle'
 export { default as Corridor } from './vector/Corridor'
 export { default as Cylinder } from './vector/Cylinder'
-export { default as DivIcon } from './vector/DivIcon'
 export { default as Ellipse } from './vector/Ellipse'
 export { default as Ellipsoid } from './vector/Ellipsoid'
 export { default as Label } from './vector/Label'
