@@ -1,5 +1,17 @@
 # Change Log
 
+### 2.2.0 - 2021-05-09
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.81.0
+
+#### Additions 🎉
+
+- Add dynamic layer
+- Add dynamic model and dynamic billbard
+- Add model management functions for model expansion and merging
+
 ### 2.1.4 - 2021-04-24
 
 #### Additions 🎉
@@ -23,8 +35,8 @@
 
 #### Fixes 🔧
 
-- fix the plot bugs[#24](https://github.com/dvgis/dc-sdk/issues/24)
-- rewritten logo
+- Fix the plot bugs[#24](https://github.com/dvgis/dc-sdk/issues/24)
+- Rewritten logo
 
 ### 2.1.2 - 2021-04-10
 
