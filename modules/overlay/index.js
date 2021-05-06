@@ -15,6 +15,7 @@ export { default as CustomLabel } from './custom/CustomLabel'
 /**
  * dynamic
  */
+export { default as DynamicBillboard } from './dynamic/DynamicBillboard'
 export { default as DynamicModel } from './dynamic/DynamicModel'
 
 /**

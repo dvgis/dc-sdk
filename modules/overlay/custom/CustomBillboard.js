@@ -45,7 +45,7 @@ class CustomBillboard extends Overlay {
 
   set size(size) {
     if (!Array.isArray(size)) {
-      throw new Error('Billboard: the size invalid')
+      throw new Error('CustomBillboard: the size invalid')
     }
     this._size = size
     this._delegate.billboard.width = this._size[0] || 32

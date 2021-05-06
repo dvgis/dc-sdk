@@ -11,24 +11,38 @@ import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
 import DynamicOverlay from './DynamicOverlay'
 
-class DynamicModel extends DynamicOverlay {
-  constructor(position, modelUrl) {
+class DynamicBillboard extends DynamicOverlay {
+  constructor(position, icon) {
     super()
     this._posistion = Parse.parsePosition(position)
-    this._modelUrl = modelUrl
-    this._delegate = new Cesium.Entity({ model: {} })
-    this.type = Overlay.getOverlayType('dynamic-model')
+    this._icon = icon
+    this._delegate = new Cesium.Entity({ billboard: {} })
+    this.type = Overlay.getOverlayType('dynamic-billboard')
     this._state = State.INITIALIZED
   }
 
-  set modelUrl(modelUrl) {
-    this._modelUrl = modelUrl
-    this._delegate.model.uri = this._modelUrl
+  set icon(icon) {
+    this._icon = icon
+    this._delegate.billboard.image = this._icon
     return this
   }
 
-  get modelUrl() {
-    return this._modelUrl
+  get icon() {
+    return this._icon
+  }
+
+  set size(size) {
+    if (!Array.isArray(size)) {
+      throw new Error('DynamicBillboard: the size invalid')
+    }
+    this._size = size
+    this._delegate.billboard.width = this._size[0] || 32
+    this._delegate.billboard.height = this._size[1] || 32
+    return this
+  }
+
+  get size() {
+    return this._size
   }
 
   _mountedHook() {
@@ -43,32 +57,30 @@ class DynamicModel extends DynamicOverlay {
       Transform.transformWGS84ToCartesian(this._posistion)
     )
     this._delegate.position = this._samplePosition
-    this._delegate.orientation = new Cesium.VelocityOrientationProperty(
-      this._samplePosition
-    )
     this._cache.push(this._startTime)
     /**
      *  initialize the Overlay parameter
      */
-    this.modelUrl = this._modelUrl
+    this.icon = this._icon
+    this.size = this._size
   }
 
   /**
-   * Sets style
+   *
    * @param style
-   * @returns {DynamicModel}
+   * @returns {DynamicBillboard}
    */
   setStyle(style) {
     if (!style || Object.keys(style).length === 0) {
       return this
     }
-    delete style['uri']
+    delete style['image'] && delete style['width'] && delete style['height']
     this._style = style
-    Util.merge(this._delegate.model, this._style)
+    Util.merge(this._delegate.billboard, this._style)
     return this
   }
 }
 
-Overlay.registerType('dynamic-model')
+Overlay.registerType('dynamic-billboard')
 
-export default DynamicModel
+export default DynamicBillboard
