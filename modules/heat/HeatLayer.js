@@ -52,7 +52,7 @@ class HeatLayer extends Layer {
       width:${this._viewer.canvas.width}px;
       height:${this._viewer.canvas.height}px;
     `
-    document.body.appendChild(this._canvas)
+    this._viewer.dcContainer.appendChild(this._canvas)
   }
 
   /**
