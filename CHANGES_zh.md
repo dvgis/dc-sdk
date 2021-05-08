@@ -5,12 +5,14 @@
 #### Breaking Changes 📣
 
 - 升级 Cesium 到 1.81.0 版本
+- 重写 HeatLayer 的实现方式
 
 #### Additions 🎉
 
 - 添加动态图层
-- 添加动态模型和动态图覆盖物
+- 添加动态模型和动态图表覆盖物
 - 添加模型管理功能，用于模型的展开、合并
+- 添加日照分析
 
 ### 2.1.4 - 2021-04-24
 
@@ -33,15 +35,15 @@
 - 开放部分 Cesium 内部函数
 - 添加 FeatureGridLayer
 
-#### Fixes 🔧
-
-- 修复部分军标无法使用的问题[#24](https://github.com/dvgis/dc-sdk/issues/24)
-- 重写 logo 的实现方式
-
 #### Additions 🎉
 
 - 添加 DivIcon 鼠标移入和移出功能
 - 添加地图当前分辨率和视野范围属性
+
+#### Fixes 🔧
+
+- 修复部分军标无法使用的问题[#24](https://github.com/dvgis/dc-sdk/issues/24)
+- 重写 logo 的实现方式
 
 ### 2.1.2 - 2021-04-10
 

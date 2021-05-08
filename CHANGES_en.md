@@ -5,12 +5,14 @@
 #### Breaking Changes 📣
 
 - Upgrade Cesium to version 1.81.0
+- Rewrite the HeatLayer
 
 #### Additions 🎉
 
 - Add dynamic layer
 - Add dynamic model and dynamic billbard
 - Add model management functions for model expansion and merging
+- Add shadows analysis
 
 ### 2.1.4 - 2021-04-24
 
