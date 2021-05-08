@@ -47,7 +47,6 @@ import {
   DynamicLayer,
   FeatureGridLayer,
   GeoJsonLayer,
-  HeatLayer,
   HtmlLayer,
   KmlLayer,
   LabelLayer,
@@ -175,6 +174,12 @@ import Plot from '@dc-modules/plot/Plot'
 import WindLayer from '@dc-modules/wind/WindLayer'
 
 /**
+ *
+ * heat
+ */
+import HeatLayer from '@dc-modules/heat/HeatLayer'
+
+/**
  * exts
  */
 import { GroundSkyBox } from '@dc-modules/exts'
@@ -231,7 +236,6 @@ const components = {
   DynamicLayer,
   FeatureGridLayer,
   GeoJsonLayer,
-  HeatLayer,
   HtmlLayer,
   KmlLayer,
   LabelLayer,
@@ -336,6 +340,10 @@ const components = {
    * wind
    */
   WindLayer,
+  /**
+   * heat
+   */
+  HeatLayer,
   /**
    * exts
    */
