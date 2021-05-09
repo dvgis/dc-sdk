@@ -12,7 +12,7 @@
 - Add dynamic layer
 - Add dynamic model and dynamic billbard
 - Add model management functions for model expansion and merging
-- Add shadows analysis
+- Add daylight 、through-view function
 
 ### 2.1.4 - 2021-04-24
 
