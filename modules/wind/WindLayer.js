@@ -130,7 +130,12 @@ class WindLayer extends Layer {
 
     this._delegate.unProject = pixel => {
       let pick = new Cesium.Cartesian2(pixel[0], pixel[1])
-      let cartesian = scene.globe.pick(camera.getPickRay(pick), scene)
+      let cartesian = undefined
+      if (scene.mode === Cesium.SceneMode.SCENE3D) {
+        cartesian = scene.globe.pick(camera.getPickRay(pick), scene)
+      } else {
+        cartesian = scene.camera.pickEllipsoid(pick, ellipsoid)
+      }
       if (!cartesian) {
         return null
       }
