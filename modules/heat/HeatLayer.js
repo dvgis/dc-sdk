@@ -83,7 +83,7 @@ class HeatLayer extends Layer {
    * @returns {{intensity: number, size: (*|number), x: number, y: number}}
    * @private
    */
-  _paserPosition(position) {
+  _parsePosition(position) {
     let point = WMP.project(
       Cesium.Cartographic.fromDegrees(position.lng, position.lat)
     )
@@ -101,8 +101,8 @@ class HeatLayer extends Layer {
    * @returns {*}
    * @private
    */
-  _paserPositions(positions) {
-    return positions.map(this._paserPosition.bind(this))
+  _parsePositions(positions) {
+    return positions.map(this._parsePosition.bind(this))
   }
 
   /**
@@ -209,7 +209,7 @@ class HeatLayer extends Layer {
         Math.abs(this._mRect.north - this._mRect.south) / this._canvas.height
       )
     }
-    this._points = this._paserPositions(this._positions)
+    this._points = this._parsePositions(this._positions)
     if (this._heat) {
       this._heat.blur()
       this._heat.addPoints(this._points)
@@ -244,7 +244,7 @@ class HeatLayer extends Layer {
       )
       this._heat.addPoints(this._points)
     }
-    let point = this._paserPosition(position)
+    let point = this._parsePosition(position)
     this._points.push(point)
     if (this._heat) {
       this._heat.addPoint(point.x, point.y, point.size, point.intensity)
