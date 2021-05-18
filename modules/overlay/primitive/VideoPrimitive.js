@@ -30,6 +30,10 @@ class VideoPrimitive extends Overlay {
         positions: Transform.transformWGS84ArrayToCartesianArray(
           this._positions
         ),
+        height: this._style?.height,
+        extrudedHeight: this._style?.extrudedHeight,
+        closeTop: this._style?.closeTop,
+        closeBottom: this._style?.closeBottom,
         vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
       }
     )
@@ -72,6 +76,22 @@ class VideoPrimitive extends Overlay {
      * initialize the Overlay parameter
      */
     this.video = this._video
+  }
+
+  /**
+   * Sets Style
+   * @param style
+   * @returns {VideoPrimitive}
+   */
+  setStyle(style) {
+    if (Object.keys(style).length === 0) {
+      return this
+    }
+    this._style = style
+    if (this._style?.classificationType) {
+      this._delegate.classificationType = this._style.classificationType
+    }
+    return this
   }
 }
 
