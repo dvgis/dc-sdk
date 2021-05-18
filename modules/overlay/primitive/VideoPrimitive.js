@@ -67,6 +67,10 @@ class VideoPrimitive extends Overlay {
      *  set the positions
      */
     this.positions = this._positions
+
+    /**
+     * initialize the Overlay parameter
+     */
     this.video = this._video
   }
 }
