@@ -43,6 +43,7 @@ export { default as TailedAttackArrow } from './plot/TailedAttackArrow'
  */
 export { default as ElecEllipsoidPrimitive } from './primitive/ElecEllipsoidPrimitive'
 export { default as FlowLinePrimitive } from './primitive/FlowLinePrimitive'
+export { default as ModelPrimitive } from './primitive/ModelPrimitive'
 export { default as ScanCirclePrimitive } from './primitive/ScanCirclePrimitive'
 export { default as TrailLinePrimitive } from './primitive/TrailLinePrimitive'
 export { default as VideoPrimitive } from './primitive/VideoPrimitive'
