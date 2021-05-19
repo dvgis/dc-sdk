@@ -23,8 +23,7 @@ class ModelPrimitive extends Overlay {
   set position(position) {
     this._position = Parse.parsePosition(position)
     let origin = Transform.transformWGS84ToCartesian(this._position)
-    let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(origin)
-    let hprMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
+    this._delegate.modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
       origin,
       new Cesium.HeadingPitchRoll(
         Cesium.Math.toRadians(this._position.heading),
@@ -32,8 +31,6 @@ class ModelPrimitive extends Overlay {
         Cesium.Math.toRadians(this._position.roll)
       )
     )
-    Cesium.Matrix4.multiply(modelMatrix, hprMatrix, modelMatrix)
-    this._delegate.modelMatrix = modelMatrix
     return this
   }
 
