@@ -1,5 +1,20 @@
 # Change Log
 
+### 2.2.1 - 2021-05-22
+
+#### Additions 🎉
+
+- Add camera video layer and plane video layer
+- Add plane video overlay
+- Add model primitive overlay
+
+#### Fixes 🔧
+
+- Improve the wind layer add fix the issue[#28](https://github.com/dvgis/dc-sdk/issues/28)
+- Repair the problem that the auxiliary view cone of video fusion function cannot be displayed[#29](https://github.com/dvgis/dc-sdk/issues/29)
+- Improve the video primitive 
+- Repair the problem that the animation function cannot be used after the scene time is stoped[#31](https://github.com/dvgis/dc-sdk/issues/31)
+
 ### 2.2.0 - 2021-05-09
 
 #### Breaking Changes 📣

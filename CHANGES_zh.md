@@ -1,5 +1,20 @@
 # Change Log
 
+### 2.2.1 - 2021-05-22
+
+#### Additions 🎉
+
+- 添加相机视频图层、平面视频图层
+- 添加平面视频覆盖物
+- 添加模型图元覆盖物
+
+#### Fixes 🔧
+
+- 修改风向图层在2维中显示不正确的问题[#28](https://github.com/dvgis/dc-sdk/issues/28)
+- 修复视频融合功能辅助视锥无法显示的问题[#29](https://github.com/dvgis/dc-sdk/issues/29)
+- 完善视频图元功能
+- 修复场景时间暂停后无法使用动画功能的问题[#31](https://github.com/dvgis/dc-sdk/issues/31)
+
 ### 2.2.0 - 2021-05-09
 
 #### Breaking Changes 📣
