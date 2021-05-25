@@ -83,6 +83,15 @@ class DynamicOverlay extends Overlay {
     this._cache.push(this._lastTime)
     return this
   }
+
+  /**
+   *
+   * @param content
+   * @returns {DynamicOverlay}
+   */
+  bindDom(content) {
+    return this
+  }
 }
 
 Overlay.registerType('dynamic-model')
