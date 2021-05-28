@@ -91,10 +91,41 @@ class Tileset extends Overlay {
       let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
         Cesium.Cartesian3.fromDegrees(position.lng, position.lat, position.alt)
       )
-      let rotationX = Cesium.Matrix4.fromRotationTranslation(
-        Cesium.Matrix3.fromRotationZ(Cesium.Math.toRadians(position.heading))
+      let rotation = Cesium.Matrix4.fromRotationTranslation(
+        Cesium.Matrix3.fromHeadingPitchRoll(
+          new Cesium.HeadingPitchRoll(
+            Cesium.Math.toRadians(position.heading),
+            Cesium.Math.toRadians(position.pitch),
+            Cesium.Math.toRadians(position.roll)
+          )
+        )
       )
-      Cesium.Matrix4.multiply(modelMatrix, rotationX, modelMatrix)
+      Cesium.Matrix4.multiply(modelMatrix, rotation, modelMatrix)
+      tileset.root.transform = modelMatrix
+    })
+    return this
+  }
+
+  /**
+   *
+   * @param heading
+   * @param pitch
+   * @param roll
+   * @returns {Tileset}
+   */
+  setHeadingPitchRoll(heading, pitch, roll) {
+    this.readyPromise.then(tileset => {
+      let modelMatrix = tileset.root.transform
+      let rotation = Cesium.Matrix4.fromRotationTranslation(
+        Cesium.Matrix3.fromHeadingPitchRoll(
+          new Cesium.HeadingPitchRoll(
+            Cesium.Math.toRadians(heading || 0),
+            Cesium.Math.toRadians(pitch || 0),
+            Cesium.Math.toRadians(roll || 0)
+          )
+        )
+      )
+      Cesium.Matrix4.multiply(modelMatrix, rotation, modelMatrix)
       tileset.root.transform = modelMatrix
     })
     return this
