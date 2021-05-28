@@ -8,6 +8,8 @@ import { Cesium } from '@dc-modules/namespace'
 const thirdPart = {
   Cartesian2: Cesium.Cartesian2,
   Cartesian3: Cesium.Cartesian3,
+  Matrix3: Cesium.Matrix3,
+  Matrix4: Cesium.Matrix4,
   SceneMode: Cesium.SceneMode,
   SkyBox: Cesium.SkyBox,
   Color: Cesium.Color,
