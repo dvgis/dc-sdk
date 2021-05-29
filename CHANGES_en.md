@@ -1,5 +1,18 @@
 # Change Log
 
+### 2.2.2 - 2021-05-29
+
+#### Additions 🎉
+
+- Open some Cesium internal properties
+- Add viewshed analysis
+- Add contour line analysis
+
+#### Fixes 🔧
+
+- Improve camera general tools
+- Improve the heading-pitch-roll setting of Tileset
+
 ### 2.2.1 - 2021-05-22
 
 #### Additions 🎉

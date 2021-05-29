@@ -114,7 +114,7 @@ class Viewer {
   }
 
   get postProcessStages() {
-    return this._delegate.postProcessStages
+    return this._delegate.scene.postProcessStages
   }
 
   get clock() {
