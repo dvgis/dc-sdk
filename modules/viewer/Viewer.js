@@ -36,7 +36,7 @@ const DEF_OPTS = {
 
 class Viewer {
   constructor(id, options = {}) {
-    if (!id || !document.getElementById(id)) {
+    if (!id || (typeof id === 'string' && !document.getElementById(id))) {
       throw new Error('Viewer：the id is empty')
     }
 
@@ -58,7 +58,7 @@ class Viewer {
     this._dcContainer = DomUtil.create(
       'div',
       'dc-container',
-      document.getElementById(id)
+      typeof id === 'string' ? document.getElementById(id) : id
     ) //Register the custom container
 
     this._baseLayerPicker = new Cesium.BaseLayerPickerViewModel({
