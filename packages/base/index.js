@@ -9,6 +9,7 @@ import * as turf from '@turf/turf'
 let DC = {
   version: __VERSION__,
   accessToken: '',
+  baseUrl: '',
   author: __AUTHOR__,
   home_page: __HOME_PAGE__,
   Namespace: {},
@@ -25,6 +26,9 @@ DC.init = callback => {
   if (!cesiumLoaded) {
     new Promise((resolve, reject) => {
       let Cesium = require('cesium/Cesium')
+      if (DC.baseUrl) {
+        Cesium.buildModuleUrl.setBaseUrl(DC.baseUrl)
+      }
       resolve(Cesium)
     })
       .then(Cesium => {
