@@ -1,3 +1,5 @@
+import DC from '../base/index'
+
 /**
  * @Author: Caven
  * @Date: 2021-03-13 13:15:38
@@ -19,6 +21,10 @@ const install = function(DC) {
           try {
             DC.mixin(require('./src/components.js').default)
             require('@dc-modules/copy-right')
+            if (DC.baseUrl) {
+              const { Cesium } = DC.Namespace
+              Cesium && Cesium.buildModuleUrl.setBaseUrl(DC.baseUrl)
+            }
             DC.Initialized = true
             callback && callback()
           } catch (e) {

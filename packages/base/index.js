@@ -26,9 +26,6 @@ DC.init = callback => {
   if (!cesiumLoaded) {
     new Promise((resolve, reject) => {
       let Cesium = require('cesium/Cesium')
-      if (DC.baseUrl) {
-        Cesium.buildModuleUrl.setBaseUrl(DC.baseUrl)
-      }
       resolve(Cesium)
     })
       .then(Cesium => {
