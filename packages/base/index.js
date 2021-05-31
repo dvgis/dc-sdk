@@ -9,7 +9,7 @@ import * as turf from '@turf/turf'
 let DC = {
   version: __VERSION__,
   accessToken: '',
-  baseUrl: '',
+  baseUrl: './libs/dc-sdk/resources/',
   author: __AUTHOR__,
   home_page: __HOME_PAGE__,
   Namespace: {},

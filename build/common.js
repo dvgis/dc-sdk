@@ -69,7 +69,6 @@ module.exports = {
   ],
   plugins: [
     new webpack.DefinePlugin({
-      CESIUM_BASE_URL: JSON.stringify('./libs/dc-sdk/resources/'),
       __VERSION__: JSON.stringify(packageInfo.version),
       __TIME__: JSON.stringify(getTime()),
       __AUTHOR__: JSON.stringify(packageInfo.author),
