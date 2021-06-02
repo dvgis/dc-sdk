@@ -1,5 +1,18 @@
 # Change Log
 
+### 2.3.0 - 2021-06-05
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.82.1
+- Modify the `CESIUM_BASE_URL` setting, which can be set via the global property `baseUrl`, which defaults to `. /libs/dc-sdk/resources/`
+
+#### Additions 🎉
+
+#### Fixes 🔧
+
+- Improve the viewer destroy
+
 ### 2.2.2 - 2021-05-29
 
 #### Additions 🎉
