@@ -577,9 +577,11 @@ class Viewer {
       })
     })
     this._delegate = undefined
+    this._baseLayerPicker.destroy()
     this._baseLayerPicker = undefined
     this._layerCache = {}
     this._dcContainer.parentNode.removeChild(this._dcContainer)
+    this._dcContainer = undefined
     return this
   }
 
