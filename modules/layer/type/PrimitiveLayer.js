@@ -11,8 +11,28 @@ class PrimitiveLayer extends Layer {
   constructor(id) {
     super(id)
     this._delegate = new Cesium.PrimitiveCollection()
+    this._points = this._delegate.add(new Cesium.PointPrimitiveCollection())
+    this._lalbes = this._delegate.add(new Cesium.LabelCollection())
+    this._billboards = this._delegate.add(new Cesium.BillboardCollection())
+    this._polylines = this._delegate.add(new Cesium.PolylineCollection())
     this.type = Layer.getLayerType('primitive')
     this._state = State.INITIALIZED
+  }
+
+  get points() {
+    return this._points
+  }
+
+  get lalbes() {
+    return this._lalbes
+  }
+
+  get billboards() {
+    return this._billboards
+  }
+
+  get polylines() {
+    return this._polylines
   }
 
   /**
