@@ -575,7 +575,6 @@ class Viewer {
         this._removeLayer(cache[layerId])
       })
     })
-    this._baseLayerPicker.destroy()
     this._delegate.destroy()
     this._delegate = undefined
     this._baseLayerPicker = undefined
