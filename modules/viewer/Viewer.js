@@ -569,15 +569,15 @@ class Viewer {
    * Destroys the viewer.
    */
   destroy() {
-    this._delegate.destroy()
     Object.keys(this._layerCache).forEach(type => {
       let cache = this._layerCache[type]
       Object.keys(cache).forEach(layerId => {
         this._removeLayer(cache[layerId])
       })
     })
-    this._delegate = undefined
     this._baseLayerPicker.destroy()
+    this._delegate.destroy()
+    this._delegate = undefined
     this._baseLayerPicker = undefined
     this._layerCache = {}
     this._dcContainer.parentNode.removeChild(this._dcContainer)
