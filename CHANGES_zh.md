@@ -4,7 +4,6 @@
 
 #### Breaking Changes 📣
 
-- 升级 Cesium 到 1.82.1 版本
 - 修改`CESIUM_BASE_URL`设置，可通过全局属性`baseUrl`进行赋值设置，默认为`./libs/dc-sdk/resources/`
 
 #### Additions 🎉

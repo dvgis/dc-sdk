@@ -4,7 +4,6 @@
 
 #### Breaking Changes 📣
 
-- Upgrade Cesium to version 1.82.1
 - Modify the `CESIUM_BASE_URL` setting, which can be set via the global property `baseUrl`, which defaults to `. /libs/dc-sdk/resources/`
 
 #### Additions 🎉
