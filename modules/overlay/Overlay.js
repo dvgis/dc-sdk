@@ -144,7 +144,7 @@ class Overlay {
       } else if (this.type === 'label_primitive' && this._layer.labels) {
         this._delegate = this._layer.labels.add(this._delegate)
       } else {
-        this._layer.delegate.remove(this._delegate)
+        this._layer.delegate.add(this._delegate)
       }
     }
     this._addedHook && this._addedHook()
