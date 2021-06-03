@@ -203,7 +203,7 @@ class ContextMenu extends Widget {
     }
 
     // for Primitve
-    else {
+    else if (target && target.primitive) {
       let layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]

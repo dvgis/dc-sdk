@@ -191,7 +191,7 @@ class MouseEvent extends Event {
     }
 
     // for Primitve
-    else {
+    else if (target && target.primitive) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]
