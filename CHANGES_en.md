@@ -8,6 +8,8 @@
 
 #### Additions 🎉
 
+-Add various primitive such as points, lines, icons, text
+
 #### Fixes 🔧
 
 - Improve the viewer destroy
