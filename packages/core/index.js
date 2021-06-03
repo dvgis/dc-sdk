@@ -1,5 +1,3 @@
-import DC from '../base/index'
-
 /**
  * @Author: Caven
  * @Date: 2021-03-13 13:15:38

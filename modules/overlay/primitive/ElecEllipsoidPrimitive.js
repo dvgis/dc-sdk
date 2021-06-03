@@ -82,6 +82,16 @@ class ElecEllipsoidPrimitive extends Overlay {
   }
 
   /**
+   *
+   * @param text
+   * @param textStyle
+   * @returns {ElecEllipsoidPrimitive}
+   */
+  setLabel(text, textStyle) {
+    return this
+  }
+
+  /**
    * Sets Style
    * @param style
    * @returns {ElecEllipsoidPrimitive}
@@ -95,5 +105,7 @@ class ElecEllipsoidPrimitive extends Overlay {
     return this
   }
 }
+
+Overlay.registerType('elec_ellipsoid_primitive')
 
 export default ElecEllipsoidPrimitive

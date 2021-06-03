@@ -41,9 +41,13 @@ export { default as TailedAttackArrow } from './plot/TailedAttackArrow'
 /**
  * primitive
  */
+export { default as BillboardPrimitive } from './primitive/BillboardPrimitive.js'
 export { default as ElecEllipsoidPrimitive } from './primitive/ElecEllipsoidPrimitive'
 export { default as FlowLinePrimitive } from './primitive/FlowLinePrimitive'
+export { default as LabelPrimitive } from './primitive/LabelPrimitive'
 export { default as ModelPrimitive } from './primitive/ModelPrimitive'
+export { default as PointPrimitive } from './primitive/PointPrimitive.js'
+export { default as PolylinePrimitive } from './primitive/PolylinePrimitive.js'
 export { default as ScanCirclePrimitive } from './primitive/ScanCirclePrimitive'
 export { default as TrailLinePrimitive } from './primitive/TrailLinePrimitive'
 export { default as VideoPrimitive } from './primitive/VideoPrimitive'

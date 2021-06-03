@@ -63,6 +63,16 @@ class FlowLinePrimitive extends Overlay {
   }
 
   /**
+   *
+   * @param text
+   * @param textStyle
+   * @returns {FlowLinePrimitive}
+   */
+  setLabel(text, textStyle) {
+    return this
+  }
+
+  /**
    * Sets Style
    * @param style
    * @returns {FlowLinePrimitive}

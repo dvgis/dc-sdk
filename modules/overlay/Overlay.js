@@ -3,6 +3,7 @@
  * @Date: 2020-01-03 12:18:17
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { Util } from '@dc-modules/utils'
 import { OverlayEventType, OverlayEvent } from '@dc-modules/event'
@@ -131,7 +132,20 @@ class Overlay {
       this._layer.delegate.entities.add(this._delegate)
     } else if (this._layer?.delegate?.add && this._delegate) {
       // for Primitive
-      this._layer.delegate.add(this._delegate)
+      if (this.type === 'point_primitive' && this._layer.points) {
+        this._delegate = this._layer.points.add(this._delegate)
+      } else if (
+        this.type === 'billboard_primitive' &&
+        this._layer.billboards
+      ) {
+        this._delegate = this._layer.billboards.add(this._delegate)
+      } else if (this.type === 'polyline_primitive' && this._layer.polylines) {
+        this._delegate = this._layer.polylines.add(this._delegate)
+      } else if (this.type === 'label_primitive' && this._layer.labels) {
+        this._delegate = this._layer.labels.add(this._delegate)
+      } else {
+        this._layer.delegate.remove(this._delegate)
+      }
     }
     this._addedHook && this._addedHook()
     this._state = State.ADDED
@@ -150,7 +164,20 @@ class Overlay {
       this._layer.delegate.entities.remove(this._delegate)
     } else if (this._layer?.delegate?.remove) {
       // for Primitive
-      this._layer.delegate.remove(this._delegate)
+      if (this.type === 'point_primitive' && this._layer.points) {
+        this._layer.points.remove(this._delegate)
+      } else if (
+        this.type === 'billboard_primitive' &&
+        this._layer.billboards
+      ) {
+        this._layer.billboards.remove(this._delegate)
+      } else if (this.type === 'polyline_primitive' && this._layer.polylines) {
+        this._layer.polylines.remove(this._delegate)
+      } else if (this.type === 'label_primitive' && this._layer.labels) {
+        this._layer.labels.remove(this._delegate)
+      } else {
+        this._layer.delegate.remove(this._delegate)
+      }
     }
     this._removedHook && this._removedHook()
     this._state = State.REMOVED
@@ -163,11 +190,15 @@ class Overlay {
    * @returns {Overlay}
    */
   setLabel(text, textStyle) {
-    this._delegate &&
-      (this._delegate.label = {
+    if (!this._delegate) {
+      return this
+    }
+    if (this._delegate instanceof Cesium.Entity) {
+      this._delegate.label = {
         ...textStyle,
         text: text
-      })
+      }
+    }
     return this
   }
 
