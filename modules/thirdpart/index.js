@@ -10,6 +10,7 @@ const thirdPart = {
   Cartesian3: Cesium.Cartesian3,
   Matrix3: Cesium.Matrix3,
   Matrix4: Cesium.Matrix4,
+  Material: Cesium.Material,
   SceneMode: Cesium.SceneMode,
   SkyBox: Cesium.SkyBox,
   Color: Cesium.Color,

@@ -177,8 +177,9 @@ class ContextMenu extends Widget {
         this._overlay = layer.getOverlay(target.id.overlayId)
       }
     }
+
     // for Cesium3DTileFeature
-    if (target && target instanceof Cesium.Cesium3DTileFeature) {
+    else if (target && target instanceof Cesium.Cesium3DTileFeature) {
       let layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.tileset.layerId)[0]
@@ -186,6 +187,31 @@ class ContextMenu extends Widget {
         this._overlay = layer.getOverlay(target.tileset.overlayId)
       }
     }
+
+    // for Cesium3DTileset
+    else if (
+      target &&
+      target.primitive &&
+      target.primitive instanceof Cesium.Cesium3DTileset
+    ) {
+      let layer = this._viewer
+        .getLayers()
+        .filter(item => item.layerId === target.primitive.layerId)[0]
+      if (layer && layer.getOverlay) {
+        this._overlay = layer.getOverlay(target.primitive.overlayId)
+      }
+    }
+
+    // for Primitve
+    else {
+      let layer = this._viewer
+        .getLayers()
+        .filter(item => item.layerId === target.primitive.layerId)[0]
+      if (layer && layer.getOverlay) {
+        this._overlay = layer.getOverlay(target.primitive.overlayId)
+      }
+    }
+
     this._overlayMenu = this._overlay?.contextMenu || []
     this._mountMenu()
   }
