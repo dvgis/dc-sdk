@@ -12,7 +12,7 @@ class PrimitiveLayer extends Layer {
     super(id)
     this._delegate = new Cesium.PrimitiveCollection()
     this._points = this._delegate.add(new Cesium.PointPrimitiveCollection())
-    this._lalbes = this._delegate.add(new Cesium.LabelCollection())
+    this._labels = this._delegate.add(new Cesium.LabelCollection())
     this._billboards = this._delegate.add(new Cesium.BillboardCollection())
     this._polylines = this._delegate.add(new Cesium.PolylineCollection())
     this.type = Layer.getLayerType('primitive')
@@ -23,8 +23,8 @@ class PrimitiveLayer extends Layer {
     return this._points
   }
 
-  get lalbes() {
-    return this._lalbes
+  get labels() {
+    return this._labels
   }
 
   get billboards() {
@@ -42,7 +42,7 @@ class PrimitiveLayer extends Layer {
   clear() {
     this._delegate && this._delegate.removeAll()
     this._points = this._delegate.add(new Cesium.PointPrimitiveCollection())
-    this._lalbes = this._delegate.add(new Cesium.LabelCollection())
+    this._labels = this._delegate.add(new Cesium.LabelCollection())
     this._billboards = this._delegate.add(new Cesium.BillboardCollection())
     this._polylines = this._delegate.add(new Cesium.PolylineCollection())
     this._cache = {}
