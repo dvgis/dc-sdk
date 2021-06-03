@@ -41,6 +41,10 @@ class PrimitiveLayer extends Layer {
    */
   clear() {
     this._delegate && this._delegate.removeAll()
+    this._points = this._delegate.add(new Cesium.PointPrimitiveCollection())
+    this._lalbes = this._delegate.add(new Cesium.LabelCollection())
+    this._billboards = this._delegate.add(new Cesium.BillboardCollection())
+    this._polylines = this._delegate.add(new Cesium.PolylineCollection())
     this._cache = {}
     this._state = State.CLEARED
     return this
