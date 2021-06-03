@@ -8,7 +8,7 @@
 
 #### Additions 🎉
 
--Add various primitive such as points, lines, icons, text
+- Add various primitive such as points, lines, icons, text
 
 #### Fixes 🔧
 
