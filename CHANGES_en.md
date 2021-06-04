@@ -8,7 +8,8 @@
 
 #### Additions 🎉
 
-- Add various primitive such as points, lines, icons, text
+- Add various base primitive such as point, line, billboard, text
+- Add diffuse wall primitive
 
 #### Fixes 🔧
 
