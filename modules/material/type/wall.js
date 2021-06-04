@@ -5,9 +5,28 @@
 
 import { Cesium } from '@dc-modules/namespace'
 
+const WallDiffuseMaterial = require('../shader/wall/WallDiffuseMaterial.glsl')
 const WallImageTrailMaterial = require('../shader/wall/WallImageTrailMaterial.glsl')
 const WallLineTrailMaterial = require('../shader/wall/WallLineTrailMaterial.glsl')
 const WallTrailMaterial = require('../shader/wall/WallTrailMaterial.glsl')
+
+/**
+ * WallDiffuse
+ * @type {string}
+ */
+Cesium.Material.WallDiffuseType = 'WallDiffuse'
+Cesium.Material._materialCache.addMaterial(Cesium.Material.WallDiffuseType, {
+  fabric: {
+    type: Cesium.Material.WallDiffuseType,
+    uniforms: {
+      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7)
+    },
+    source: WallDiffuseMaterial
+  },
+  translucent: function(material) {
+    return true
+  }
+})
 
 /**
  * WallImageTrail
