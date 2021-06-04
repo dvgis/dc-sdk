@@ -5,6 +5,8 @@
 
 const ignores = [
   'version',
+  'accessToken',
+  'baseUrl',
   'author',
   'home_page',
   'init',
