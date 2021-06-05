@@ -13,7 +13,8 @@
 
 #### Fixes 🔧
 
-- Improve the viewer destroy
+- Improve the viewer destroy 
+- Refine mouse and context-menu events for primitive
 
 ### 2.2.2 - 2021-05-29
 
