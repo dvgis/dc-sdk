@@ -17,7 +17,7 @@ class DynamicModel extends DynamicOverlay {
     this._posistion = Parse.parsePosition(position)
     this._modelUrl = modelUrl
     this._delegate = new Cesium.Entity({ model: {} })
-    this.type = Overlay.getOverlayType('dynamic-model')
+    this.type = Overlay.getOverlayType('dynamic_model')
     this._state = State.INITIALIZED
   }
 
@@ -69,6 +69,6 @@ class DynamicModel extends DynamicOverlay {
   }
 }
 
-Overlay.registerType('dynamic-model')
+Overlay.registerType('dynamic_model')
 
 export default DynamicModel

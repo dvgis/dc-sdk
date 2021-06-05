@@ -17,7 +17,7 @@ class DynamicBillboard extends DynamicOverlay {
     this._posistion = Parse.parsePosition(position)
     this._icon = icon
     this._delegate = new Cesium.Entity({ billboard: {} })
-    this.type = Overlay.getOverlayType('dynamic-billboard')
+    this.type = Overlay.getOverlayType('dynamic_billboard')
     this._state = State.INITIALIZED
   }
 
@@ -81,6 +81,6 @@ class DynamicBillboard extends DynamicOverlay {
   }
 }
 
-Overlay.registerType('dynamic-billboard')
+Overlay.registerType('dynamic_billboard')
 
 export default DynamicBillboard
