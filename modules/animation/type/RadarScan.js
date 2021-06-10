@@ -3,13 +3,11 @@
  * @Date: 2020-12-01 20:40:02
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import Parse from '@dc-modules/parse/Parse'
 import { Util } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
-
 import Animation from '../Animation'
-
-
 
 const RadarScanShader = require('@dc-modules/material/shader/radar/RadarScanShader.glsl')
 
