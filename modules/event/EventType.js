@@ -61,11 +61,18 @@ const LayerEventType = {
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK
 }
 
-const RoamingEventType = {
+const TrackEventType = {
   ...BaseEventType,
-  POST_UPDATE: 'postUpdate',
-  ACTIVE: 'active',
-  RELEASE: 'release'
+  POST_RENDER: 'postRender',
+  ACTIVATE: 'activate',
+  DEACTIVATE: 'deactivate',
+  RESET_TIME_LINE: 'restTimeLine'
+}
+
+const PathEventType = {
+  ...BaseEventType,
+  POST_RENDER: 'postRender',
+  RESET_TIME_LINE: 'restTimeLine'
 }
 
 export {
@@ -75,5 +82,6 @@ export {
   LayerGroupEventType,
   LayerEventType,
   OverlayEventType,
-  RoamingEventType
+  TrackEventType,
+  PathEventType
 }

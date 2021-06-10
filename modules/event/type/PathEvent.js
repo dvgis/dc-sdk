@@ -4,10 +4,10 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
-import { RoamingEventType } from '../EventType'
+import { PathEventType } from '../EventType'
 import Event from '../Event'
 
-class RoamingEvent extends Event {
+class PathEvent extends Event {
   constructor() {
     super()
   }
@@ -17,11 +17,11 @@ class RoamingEvent extends Event {
    * @private
    */
   _registerEvent() {
-    Object.keys(RoamingEventType).forEach(key => {
-      let type = RoamingEventType[key]
+    Object.keys(PathEventType).forEach(key => {
+      let type = PathEventType[key]
       this._cache[type] = new Cesium.Event()
     })
   }
 }
 
-export default RoamingEvent
+export default PathEvent
