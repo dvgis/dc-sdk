@@ -1,8 +1,10 @@
 /**
  * @Author: Caven
- * @Date: 2020-04-13 09:32:31
+ * @Date: 2021-06-08 20:41:51
  */
 
-export { default as RoamingViewMode } from './RoamingViewMode'
-export { default as RoamingPath } from './RoamingPath'
+/**
+ * roaming
+ */
 export { default as RoamingController } from './RoamingController'
+export { default as RoamingPath } from './RoamingPath'

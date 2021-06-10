@@ -1,218 +1,117 @@
 /**
  * @Author: Caven
- * @Date: 2020-04-01 10:36:36
+ * @Date: 2021-06-08 20:41:51
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { RoamingEventType } from '@dc-modules/event'
+import { SceneEventType, PathEventType } from '@dc-modules/event'
 
 class RoamingController {
   constructor(viewer) {
     this._viewer = viewer
-    this._roamingLayer = new Cesium.CustomDataSource('roaming-layer')
-    viewer.dataSources.add(this._roamingLayer)
-    this._postUpdateRemoveCallback = undefined
-    this._startTime = undefined
-    this._cache = {}
-    this._activePath = undefined
-    this._viewMode = undefined
     this._viewOption = {}
-  }
-
-  get startTime() {
-    return this._startTime
-  }
-
-  get roamingLayer() {
-    return this._roamingLayer.entities
-  }
-
-  /**
-   * @private
-   */
-  _onPostUpdate(scene, time) {
-    Object.keys(this._cache).forEach(key => {
-      let path = this._cache[key]
-      path.roamingEvent &&
-        path.roamingEvent.fire(RoamingEventType.POST_UPDATE, {
-          currentTime: time,
-          viewMode: this._viewMode,
-          viewOption: this._viewOption
-        })
-    })
+    this._cache = {}
+    this._activedPath = undefined
   }
 
   /**
    *
+   * @returns {boolean}
    * @private
    */
-  _addPostUpdateListener() {
-    this._postUpdateRemoveCallback && this._postUpdateRemoveCallback()
-    this._postUpdateRemoveCallback = this._viewer.scene.postUpdate.addEventListener(
-      this._onPostUpdate,
-      this
-    )
-  }
-
-  /**
-   * Sets time range
-   * @param startTime
-   * @returns {RoamingController}
-   */
-  setStartTime(startTime) {
-    if (!startTime || !(startTime instanceof Date)) {
-      throw new Error('RoamingController: the start time invalid ')
+  _onPostRender() {
+    if (!this._activedPath) {
+      return false
     }
-    this._startTime = Cesium.JulianDate.fromDate(startTime)
-    return this
-  }
-
-  /**
-   * Starts play all path
-   * @returns {RoamingController}
-   */
-  play() {
-    this._viewer.clock.shouldAnimate = true
-    this._viewer.clock.currentTime = this._startTime || Cesium.JulianDate.now()
-    this._addPostUpdateListener()
-    return this
+    this._activedPath.pathEvent &&
+      this._activedPath.pathEvent.fire(
+        PathEventType.POST_RENDER,
+        this._viewer,
+        this._viewOption
+      )
   }
 
   /**
    *
-   */
-  pause() {
-    this._viewer.clock.shouldAnimate = false
-    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
-    this._viewer.delegate.trackedEntity = undefined
-    this._postUpdateRemoveCallback && this._postUpdateRemoveCallback()
-    this._postUpdateRemoveCallback = undefined
-    return this
-  }
-
-  /**
-   *
-   */
-  restore() {
-    this._viewer.clock.shouldAnimate = true
-    this._postUpdateRemoveCallback && this._postUpdateRemoveCallback()
-    this._postUpdateRemoveCallback = this._viewer.scene.postUpdate.addEventListener(
-      this._onPostUpdate,
-      this
-    )
-    this._addPostUpdateListener()
-    return this
-  }
-
-  /**
-   *
-   * @param speed
-   * @returns {RoamingController}
-   */
-  changeSpeed(speed) {
-    this._viewer.clock.multiplier = speed
-    return this
-  }
-
-  /**
-   * Adds a path
    * @param path
    * @returns {RoamingController}
    */
   addPath(path) {
-    if (
-      path &&
-      path.roamingEvent &&
-      !Object(this._cache).hasOwnProperty(path.id)
-    ) {
-      path.roamingEvent.fire(RoamingEventType.ADD, this)
-      this._cache[path.id] = path
+    if (path && !this._cache.hasOwnProperty(path.pathId)) {
+      path.pathEvent.fire(PathEventType.ADD)
+      this._cache[path.pathId] = path
     }
     return this
   }
 
   /**
-   * Returns a path
-   * @param id
-   * @returns {*|undefined}
+   *
+   * @param paths
+   * @returns {RoamingController}
    */
-  getPath(id) {
-    return this._cache[id] || undefined
+  addPaths(paths) {
+    if (Array.isArray(paths)) {
+      paths.forEach(item => {
+        this.addPath(item)
+      })
+    }
+    return this
   }
 
   /**
-   * removes a path
+   *
    * @param path
    * @returns {RoamingController}
    */
   removePath(path) {
-    if (
-      path &&
-      Object(this._cache).hasOwnProperty(path.id) &&
-      path.roamingEvent
-    ) {
-      path.roamingEvent.fire(RoamingEventType.REMOVE, this)
-      delete this._cache[path.id]
+    if (path && this._cache.hasOwnProperty(path.pathId)) {
+      delete this._cache[path.pathId]
+      path.pathEvent.fire(PathEventType.REMOVE)
     }
     return this
   }
 
   /**
    *
-   * @returns {RoamingController}
+   * @param id
+   * @returns {*|undefined}
    */
-  clearPath() {
+  getPath(id) {
+    let filters = this.getPaths().filter(item => item.id === id)
+    return filters && filters.length ? filters[0] : undefined
+  }
+
+  /**
+   *
+   * @returns {*[]}
+   */
+  getPaths() {
+    let result = []
     Object.keys(this._cache).forEach(key => {
-      let path = this._cache[key]
-      path && this.removePath(path)
+      result.push(this._cache[key])
     })
-    return this
+    return result
   }
 
   /**
    *
    * @param path
-   * @param viewMode
    * @param viewOption
    * @returns {RoamingController}
    */
-  trackedPath(path, viewMode, viewOption = {}) {
-    if (!this._cache[path.id]) {
-      throw new Error('RoamingController: path does not added ')
-    }
-    this._viewMode = viewMode
-    this._viewOption = viewOption
-    if (this._activePath && this._activePath.id === path.id) {
+  activate(path, viewOption = {}) {
+    if (
+      !path ||
+      path?.pathId === this._activedPath?.pathId ||
+      !this._cache.hasOwnProperty(path?.pathId)
+    ) {
       return this
     }
-    if (this._activePath && this._activePath.roamingEvent) {
-      this._activePath.roamingEvent.fire(RoamingEventType.RELEASE, path.id)
-    }
-    this._activePath = path
-    if (this._activePath && this._activePath.roamingEvent) {
-      this._activePath.roamingEvent.fire(
-        RoamingEventType.ACTIVE,
-        this._activePath.id
-      )
-    }
-    return this
-  }
-
-  /**
-   *
-   * @param path
-   * @returns {RoamingController}
-   */
-  releasePath(path) {
-    if (!this._cache[path.id]) {
-      throw new Error('RoamingController: path does not added ')
-    }
-    if (path && path.isActive && path.roamingEvent) {
-      path.roamingEvent.fire(RoamingEventType.RELEASE, path.id)
-    }
-    this._activePath = undefined
-    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
-    this._viewer.delegate.trackedEntity = undefined
+    this._viewOption = viewOption
+    this._activedPath && this.deactivate()
+    this._activedPath = path
+    this._activedPath.pathEvent &&
+      this._activedPath.pathEvent.fire(PathEventType.RESET_TIME_LINE)
+    this._viewer.on(SceneEventType.POST_RENDER, this._onPostRender, this)
     return this
   }
 
@@ -220,16 +119,22 @@ class RoamingController {
    *
    * @returns {RoamingController}
    */
-  releaseCamera() {
-    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
-    this._viewer.delegate.trackedEntity = undefined
-    if (this._activePath && this._activePath.roamingEvent) {
-      this._activePath.roamingEvent.fire(
-        RoamingEventType.RELEASE,
-        this._activePath.id
-      )
-    }
-    this._activePath = undefined
+  deactivate() {
+    this._activedPath && (this._activedPath.actived = false)
+    this._activedPath = undefined
+    this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
+    return this
+  }
+
+  /**
+   *
+   * @returns {RoamingController}
+   */
+  clear() {
+    this._cache = {}
+    this._activedPath && (this._activedPath.actived = false)
+    this._activedPath = undefined
+    this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
     return this
   }
 }
