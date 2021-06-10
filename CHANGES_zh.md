@@ -1,5 +1,18 @@
 # Change Log
 
+### 2.2.4 - 2021-06-12
+
+#### Breaking Changes 📣
+
+- 重构漫游功能，漫游功能分为第一人称漫游和键盘漫游[#34](https://github.com/dvgis/dc-sdk/issues/34)
+- 原有的漫游功能变为历史轨迹，完善其暂停和播放[#35](https://github.com/dvgis/dc-sdk/issues/35)
+
+#### Fixes 🔧
+
+- 完善 heading 函数
+- 完善扩散墙功能
+- 修复 RadarScan 缺少 Cesium 的问题[#33](https://github.com/dvgis/dc-sdk/issues/33)
+
 ### 2.2.3 - 2021-06-05
 
 #### Breaking Changes 📣
