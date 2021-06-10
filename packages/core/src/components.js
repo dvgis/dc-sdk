@@ -155,7 +155,11 @@ import {
  *
  * roaming
  */
-import { RoamingController, RoamingPath } from '@dc-modules/roaming'
+import {
+  KeyboardRoaming,
+  RoamingController,
+  RoamingPath
+} from '@dc-modules/roaming'
 
 /**
  *
@@ -343,6 +347,7 @@ const components = {
    *
    * roaming
    */
+  KeyboardRoaming,
   RoamingController,
   RoamingPath,
   /**
