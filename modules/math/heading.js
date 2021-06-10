@@ -8,10 +8,8 @@ import { Transform } from '@dc-modules/transform'
 import Parse from '@dc-modules/parse/Parse'
 
 export default function heading(start, end) {
-  let heading = 0
   let startPosition = start
   let endPosition = end
-
   if (!(start instanceof Cesium.Cartesian3)) {
     startPosition = Parse.parsePosition(start)
     startPosition = Transform.transformWGS84ToCartesian(startPosition)
@@ -22,27 +20,18 @@ export default function heading(start, end) {
     endPosition = Transform.transformWGS84ToCartesian(endPosition)
   }
 
+  let ff = Cesium.Transforms.eastNorthUpToFixedFrame(startPosition)
   let v = Cesium.Cartesian3.subtract(
     endPosition,
     startPosition,
     new Cesium.Cartesian3()
   )
-  if (v) {
-    Cesium.Cartesian3.normalize(v, v)
-    let up = Cesium.Ellipsoid.WGS84.geodeticSurfaceNormal(
-      startPosition,
-      new Cesium.Cartesian3()
-    )
-    let east = Cesium.Cartesian3.cross(
-      Cesium.Cartesian3.UNIT_Z,
-      up,
-      new Cesium.Cartesian3()
-    )
-    let north = Cesium.Cartesian3.cross(up, east, new Cesium.Cartesian3())
-    heading = Math.atan2(
-      Cesium.Cartesian3.dot(v, east),
-      Cesium.Cartesian3.dot(v, north)
-    )
-  }
-  return heading
+  let vector = Cesium.Matrix4.multiplyByPointAsVector(
+    Cesium.Matrix4.inverse(ff, new Cesium.Matrix4()),
+    v,
+    new Cesium.Cartesian3()
+  )
+  Cesium.Cartesian3.normalize(vector, vector)
+  let heading = Math.atan2(vector.y, vector.x) - Cesium.Math.PI_OVER_TWO
+  return Cesium.Math.TWO_PI - Cesium.Math.zeroToTwoPi(heading)
 }
