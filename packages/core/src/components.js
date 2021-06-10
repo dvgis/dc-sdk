@@ -155,11 +155,17 @@ import {
  *
  * roaming
  */
+import { RoamingController, RoamingPath } from '@dc-modules/roaming'
+
+/**
+ *
+ * history-track
+ */
 import {
-  RoamingViewMode,
-  RoamingPath,
-  RoamingController
-} from '@dc-modules/roaming'
+  TrackController,
+  Track,
+  TrackViewMode
+} from '@dc-modules/history-track'
 
 /**
  *
@@ -337,9 +343,15 @@ const components = {
    *
    * roaming
    */
-  RoamingViewMode,
-  RoamingPath,
   RoamingController,
+  RoamingPath,
+  /**
+   *
+   * track
+   */
+  TrackController,
+  Track,
+  TrackViewMode,
   /**
    * weather
    */
