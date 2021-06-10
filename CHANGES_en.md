@@ -1,5 +1,18 @@
 # Change Log
 
+### 2.2.4 - 2021-06-12
+
+#### Breaking Changes 📣
+
+- Refactored the roaming function into first-person roaming and keyboard roaming [#34](https://github.com/dvgis/dc-sdk/issues/34)
+- Original roaming function becomes history track, refine its pause and play [#35](https://github.com/dvgis/dc-sdk/issues/35)
+
+#### Fixes 🔧
+
+- Improve heading function
+- Improve diffuse wall primitive
+- Fixes RadarScan missing Cesium issue [#33](https://github.com/dvgis/dc-sdk/issues/33)
+
 ### 2.2.3 - 2021-06-05
 
 #### Breaking Changes 📣

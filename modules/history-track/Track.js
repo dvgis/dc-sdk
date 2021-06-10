@@ -13,12 +13,15 @@ import { heading, distance } from '@dc-modules/math'
 import TrackViewMode from './TrackViewMode'
 
 const DEF_OPTS = {
-  showPath: false,
-  pathWidth: 1,
-  pathMaterial: Cesium.Color.ORANGE.withAlpha(0.8),
-  pathLeadTime: 1,
   clampToGround: false,
   clampToTileset: false
+}
+
+const DEF_PATH_STYLE = {
+  width: 2,
+  material: Cesium.Color.ORANGE,
+  clampToGround: true,
+  depthFailMaterial: Cesium.Color.ORANGE.withAlpha(0.8)
 }
 
 class Track {
@@ -35,6 +38,16 @@ class Track {
     this._controller = undefined
     this._viewed = false
     this._delegate = new Cesium.Entity()
+    this._pathPositions = []
+    this._path = new Cesium.Entity({
+      show: false,
+      polyline: {
+        positions: new Cesium.CallbackProperty(() => {
+          return this._pathPositions
+        })
+      }
+    })
+
     this._positionIndex = 0
     this._timeLine = []
     this._startTime = undefined
@@ -61,7 +74,7 @@ class Track {
 
   set positions(postions) {
     this._positions = Parse.parsePositions(postions)
-    this._resetTimeLine()
+    this._resetTimeLine({})
     return this
   }
 
@@ -71,7 +84,7 @@ class Track {
 
   set duration(duration) {
     this._duration = duration
-    this._resetTimeLine()
+    this._resetTimeLine({})
     return this
   }
 
@@ -85,7 +98,7 @@ class Track {
     } else {
       this._startTime = startTime
     }
-    this._resetTimeLine()
+    this._resetTimeLine({})
     return this
   }
 
@@ -121,6 +134,7 @@ class Track {
     }
     this._controller = controller
     this._controller.delegate.add(this._delegate)
+    this._controller.delegate.add(this._path)
     !this._startTime && (this._startTime = Cesium.JulianDate.now())
     this._state = State.ADDED
   }
@@ -130,10 +144,13 @@ class Track {
    * @private
    */
   _onRemove() {
-    if (this._controller) {
-      this._controller.delegate.remove(this._delegate)
+    if (!this._controller) {
+      return false
     }
+    this._controller.delegate.remove(this._delegate)
+    this._controller.delegate.remove(this._path)
     this._viewed = false
+    this._startTime = undefined
     this._state = State.REMOVED
   }
 
@@ -149,13 +166,14 @@ class Track {
     }
     let now = Cesium.JulianDate.now()
     if (Cesium.JulianDate.lessThan(now, this._endTime)) {
+      let p = this._sampledPosition.getValue(now)
+      this._pathPositions.push(p)
       if (this._options.clampToTileset) {
-        this._delegate.position = viewer.scene.clampToHeight(
-          this._sampledPosition.getValue(now),
-          [this._delegate]
-        )
+        this._delegate.position = viewer.scene.clampToHeight(p, [
+          this._delegate
+        ])
       } else {
-        this._delegate.position = this._sampledPosition.getValue(now)
+        this._delegate.position = p
       }
       let time = this._timeLine[this._positionIndex]
       if (time) {
@@ -166,10 +184,7 @@ class Track {
             let mat = Cesium.Matrix3.fromQuaternion(
               this._delegate.orientation.getValue(now)
             )
-            let mat4 = Cesium.Matrix4.fromRotationTranslation(
-              mat,
-              this._sampledPosition.getValue(now)
-            )
+            let mat4 = Cesium.Matrix4.fromRotationTranslation(mat, p)
             let hpr = Cesium.Transforms.fixedFrameToHeadingPitchRoll(mat4)
             position.heading = Cesium.Math.toDegrees(hpr.heading)
             position.pitch = Cesium.Math.toDegrees(hpr.pitch)
@@ -287,6 +302,7 @@ class Track {
       this._sampledPosition
     )
     this._endTime = this._timeLine[this._timeLine.length - 1]
+    this._pathPositions = []
   }
 
   /**
@@ -353,7 +369,17 @@ class Track {
     return this
   }
 
-  setPath() {}
+  /**
+   *
+   * @param visible
+   * @param style
+   * @returns {Track}
+   */
+  setPath(visible, style = {}) {
+    this._path.show = !!visible
+    Util.merge(this._path.polyline, DEF_PATH_STYLE, style)
+    return this
+  }
 }
 
 export default Track
