@@ -56,6 +56,11 @@ class Track {
     this._trackEvent.on(TrackEventType.POST_RENDER, this._onPostRender, this)
     this._trackEvent.on(TrackEventType.ADD, this._onAdd, this)
     this._trackEvent.on(TrackEventType.REMOVE, this._onRemove, this)
+    this._trackEvent.on(
+      TrackEventType.RESET_TIME_LINE,
+      this._resetTimeLine,
+      this
+    )
     this._state = State.INITIALIZED
   }
 
@@ -280,12 +285,14 @@ class Track {
         if (Cesium.JulianDate.greaterThan(item, params.stopTime)) {
           item = Cesium.JulianDate.addSeconds(
             item,
-            params.stopTime,
+            params.duration,
             new Cesium.JulianDate()
           )
         }
         return item
       })
+    } else {
+      this._pathPositions = []
     }
     this._sampledPosition = new Cesium.SampledPositionProperty()
     this._sampledPosition.addSamples(
@@ -302,7 +309,6 @@ class Track {
       this._sampledPosition
     )
     this._endTime = this._timeLine[this._timeLine.length - 1]
-    this._pathPositions = []
   }
 
   /**
@@ -314,7 +320,7 @@ class Track {
   addPosition(position, duration) {
     this._positions.push(Parse.parsePosition(position))
     this._duration += duration
-    this._resetTimeLine()
+    this._resetTimeLine({})
     return this
   }
 
