@@ -14,7 +14,9 @@ import TrackViewMode from './TrackViewMode'
 
 const DEF_OPTS = {
   clampToGround: false,
-  clampToTileset: false
+  clampToTileset: false,
+  interpolationType: 'Hermite',
+  interpolationDegree: 2
 }
 
 const DEF_PATH_STYLE = {
@@ -301,10 +303,23 @@ class Track {
     )
     this._sampledPosition.forwardExtrapolationType =
       Cesium.ExtrapolationType.HOLD
-    this._sampledPosition.setInterpolationOptions({
-      interpolationDegree: 5,
-      interpolationAlgorithm: Cesium.HermitePolynomialApproximation
-    })
+    /// setInterpolationOptions
+    if (this._options.interpolationType === 'Hermite') {
+      this._sampledPosition.setInterpolationOptions({
+        interpolationDegree: this._options.interpolationDegree || 2,
+        interpolationAlgorithm: Cesium.HermitePolynomialApproximation
+      })
+    } else if (this._options.interpolationType === 'Linear') {
+      this._sampledPosition.setInterpolationOptions({
+        interpolationDegree: this._options.interpolationDegree || 1,
+        interpolationAlgorithm: Cesium.LinearApproximation
+      })
+    } else if (this._options.interpolationType === 'Lagrange') {
+      this._sampledPosition.setInterpolationOptions({
+        interpolationDegree: this._options.interpolationDegree || 5,
+        interpolationAlgorithm: Cesium.LagrangePolynomialApproximation
+      })
+    }
     this._delegate.orientation = new Cesium.VelocityOrientationProperty(
       this._sampledPosition
     )
