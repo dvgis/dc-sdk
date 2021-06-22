@@ -51,6 +51,12 @@ class Draw {
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
   }
 
+  /**
+   *
+   * @param position
+   * @param isCenter
+   * @returns {*}
+   */
   createAnchor(position, isCenter = false) {
     return this._layer.add({
       position: position,
@@ -68,13 +74,18 @@ class Draw {
     })
   }
 
-  start(plot) {
+  /**
+   *
+   * @param plot
+   * @param clampToGround
+   */
+  start(plot, clampToGround) {
     this._viewer = plot.viewer
     this._tooltip = plot.viewer.tooltip
     this._layer = plot.overlayLayer
     this._plotEvent = plot.plotEvent
     this._options = plot.options
-    this._clampToGround = plot.options.clampToGround ?? true
+    this._clampToGround = clampToGround
     this._mountEntity()
     this.bindEvent()
   }

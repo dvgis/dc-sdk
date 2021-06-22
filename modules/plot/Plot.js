@@ -101,6 +101,12 @@ class Plot {
     this._plotEvent.addEventListener(this._completeCallback, this)
   }
 
+  /**
+   *
+   * @param type
+   * @param style
+   * @private
+   */
   _createDrawWorker(type, style) {
     switch (type) {
       case OverlayType.POINT:
@@ -141,6 +147,11 @@ class Plot {
     }
   }
 
+  /**
+   *
+   * @param overlay
+   * @private
+   */
   _createEditWorker(overlay) {
     switch (overlay.type) {
       case OverlayType.POINT:
@@ -181,7 +192,15 @@ class Plot {
     }
   }
 
-  draw(type, callback, style) {
+  /**
+   *
+   * @param type
+   * @param callback
+   * @param style
+   * @param clampToGround
+   * @returns {Plot}
+   */
+  draw(type, callback, style, clampToGround) {
     this._state = 'draw'
     if (this._drawWorker) {
       this._drawWorker.unbindEvent()
@@ -190,10 +209,19 @@ class Plot {
     this._viewer.tooltip.enable = true
     this._bindEvent(callback)
     this._createDrawWorker(type, style)
-    this._drawWorker && this._drawWorker.start(this)
+    this._drawWorker &&
+      this._drawWorker.start(this, clampToGround ?? this._options.clampToGround)
+    return this
   }
 
-  edit(overlay, callback) {
+  /**
+   *
+   * @param overlay
+   * @param callback
+   * @param clampToGround
+   * @returns {Plot}
+   */
+  edit(overlay, callback, clampToGround) {
     this._state = 'edit'
     if (this._editWorker) {
       this._editWorker.unbindEvent()
@@ -202,15 +230,22 @@ class Plot {
     this._viewer.tooltip.enable = true
     this._bindEvent(callback)
     this._createEditWorker(overlay)
-    this._editWorker && this._editWorker.start(this)
+    this._editWorker &&
+      this._editWorker.start(this, clampToGround ?? this._options.clampToGround)
+    return this
   }
 
+  /**
+   *
+   * @returns {Plot}
+   */
   destroy() {
     this._plotEvent.removeEventListener(this._completeCallback, this)
     this._viewer.dataSources.remove(this._overlayLayer)
     this._viewer.dataSources.remove(this._anchorLayer)
     this._viewer = undefined
     this._plotEvent = undefined
+    return this
   }
 }
 

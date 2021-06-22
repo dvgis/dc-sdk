@@ -63,6 +63,13 @@ class Edit {
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
   }
 
+  /**
+   *
+   * @param position
+   * @param index
+   * @param isMid
+   * @param isCenter
+   */
   createAnchor(position, index, isMid = false, isCenter = false) {
     let image = isMid
       ? this._options.icon_midAnchor
@@ -92,6 +99,12 @@ class Edit {
     this._anchors.push(anchor)
   }
 
+  /**
+   *
+   * @param p1
+   * @param p2
+   * @returns {Cartesian3}
+   */
   computeMidPosition(p1, p2) {
     let c1 = Cesium.Ellipsoid.WGS84.cartesianToCartographic(p1)
     let c2 = Cesium.Ellipsoid.WGS84.cartesianToCartographic(p2)
@@ -99,14 +112,19 @@ class Edit {
     return Cesium.Ellipsoid.WGS84.cartographicToCartesian(cm)
   }
 
-  start(plot) {
+  /**
+   *
+   * @param plot
+   * @param clampToGround
+   */
+  start(plot, clampToGround) {
     this._viewer = plot.viewer
     this._tooltip = plot.viewer.tooltip
     this._layer = plot.overlayLayer
     this._anchorLayer = plot.anchorLayer
     this._plotEvent = plot.plotEvent
     this._options = plot.options
-    this._clampToGround = plot.options.clampToGround ?? true
+    this._clampToGround = clampToGround
     this._mountEntity()
     this._mountAnchor()
     this.bindEvent()
