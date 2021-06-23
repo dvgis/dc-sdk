@@ -51,7 +51,7 @@ class HtmlLayer extends Layer {
             position
           )
           let distance = Cesium.Cartesian3.distance(position, cameraPosition)
-          item._updateStyle({ transform: windowCoord }, distance)
+          windowCoord && item._updateStyle({ transform: windowCoord }, distance)
         }
       }, this)
     }, this)
