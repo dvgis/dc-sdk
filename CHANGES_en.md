@@ -1,5 +1,17 @@
 # Change Log
 
+### 2.2.5 - 2021-06-26
+
+#### Additions 🎉
+
+- Adds line and face rotation conversion calculations
+
+#### Fixes 🔧
+
+- Improve the interpolation of history track
+- Improve the function of plot for above the overlay
+- Fix the bug that DivIcon can't get the current coordinate set to (0,0,0) by default.
+
 ### 2.2.4 - 2021-06-12
 
 #### Breaking Changes 📣
