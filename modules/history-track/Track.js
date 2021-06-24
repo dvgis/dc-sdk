@@ -15,7 +15,7 @@ import TrackViewMode from './TrackViewMode'
 const DEF_OPTS = {
   clampToGround: false,
   clampToTileset: false,
-  interpolationType: 'Hermite',
+  interpolationType: 'Linear',
   interpolationDegree: 2
 }
 
