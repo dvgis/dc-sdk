@@ -104,11 +104,6 @@
 - 开放部分 Cesium 内部函数
 - 添加 FeatureGridLayer
 
-#### Additions 🎉
-
-- 添加 DivIcon 鼠标移入和移出功能
-- 添加地图当前分辨率和视野范围属性
-
 #### Fixes 🔧
 
 - 修复部分军标无法使用的问题[#24](https://github.com/dvgis/dc-sdk/issues/24)
