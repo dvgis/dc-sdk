@@ -38,6 +38,7 @@ class Track {
       ...options
     }
     this._controller = undefined
+    this._sampledPosition = undefined
     this._viewed = false
     this._delegate = new Cesium.Entity()
     this._pathPositions = []
