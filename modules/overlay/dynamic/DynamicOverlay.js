@@ -14,7 +14,7 @@ class DynamicOverlay extends Overlay {
     super()
     this._startTime = undefined
     this._lastTime = undefined
-    this._samplePosition = new Cesium.SampledPositionProperty()
+    this._sampledPosition = new Cesium.SampledPositionProperty()
     this._cache = []
     this._maxCacheSize = 10
     this._state = State.INITIALIZED
@@ -31,7 +31,7 @@ class DynamicOverlay extends Overlay {
 
   get position() {
     return Transform.transformCartesianToWGS84(
-      this._samplePosition.getValue(Cesium.JulianDate.now())
+      this._sampledPosition.getValue(Cesium.JulianDate.now())
     )
   }
 
@@ -51,7 +51,7 @@ class DynamicOverlay extends Overlay {
         -0.2,
         new Cesium.JulianDate()
       )
-      this._samplePosition.removeSamples(
+      this._sampledPosition.removeSamples(
         new Cesium.TimeInterval({
           start: start,
           stop: stop
@@ -75,7 +75,7 @@ class DynamicOverlay extends Overlay {
       interval,
       new Cesium.JulianDate()
     )
-    this._samplePosition.addSample(
+    this._sampledPosition.addSample(
       time,
       Transform.transformWGS84ToCartesian(Parse.parsePosition(position))
     )
@@ -93,7 +93,5 @@ class DynamicOverlay extends Overlay {
     return this
   }
 }
-
-Overlay.registerType('dynamic-model')
 
 export default DynamicOverlay

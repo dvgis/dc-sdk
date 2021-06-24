@@ -49,14 +49,14 @@ class DynamicBillboard extends DynamicOverlay {
     /**
      * set the location
      */
-    this._samplePosition.forwardExtrapolationType =
+    this._sampledPosition.forwardExtrapolationType =
       Cesium.ExtrapolationType.HOLD
     this._startTime = Cesium.JulianDate.now()
-    this._samplePosition.addSample(
+    this._sampledPosition.addSample(
       this._startTime,
       Transform.transformWGS84ToCartesian(this._posistion)
     )
-    this._delegate.position = this._samplePosition
+    this._delegate.position = this._sampledPosition
     this._cache.push(this._startTime)
     /**
      *  initialize the Overlay parameter
