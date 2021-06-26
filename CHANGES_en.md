@@ -10,7 +10,8 @@
 
 - Improve the interpolation of history track
 - Improve the function of plot for above the overlay
-- Fix the bug that DivIcon can't get the current coordinate set to (0,0,0) by default.
+- Fix the problem of flickering when analyzing transformation parameters in the viewable field [#37](https://github.com/dvgis/dc-sdk/issues/37)
+- Fix the problem that DivIcon cannot get the current coordinates set to (0,0,0) by default [#38](https://github.com/dvgis/dc-sdk/issues/38)
 
 ### 2.2.4 - 2021-06-12
 

@@ -9,8 +9,9 @@
 #### Fixes 🔧
 
 - 完善历史轨迹的插值方式
-- 完善标绘对于贴物标绘的功能
-- 修复 DivIcon 无法获取当前坐标默认设置为(0,0,0)的bug
+- 完善标绘模块在模型上标绘的功能
+- 修复可视域分析变换参数时闪烁的问题[#37](https://github.com/dvgis/dc-sdk/issues/37)
+- 修复 DivIcon 无法获取当前坐标默认设置为 (0,0,0) 的问题[#38](https://github.com/dvgis/dc-sdk/issues/38)
 
 ### 2.2.4 - 2021-06-12
 
