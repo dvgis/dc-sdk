@@ -42,7 +42,7 @@ class Parse {
       if (positions.indexOf('#') >= 0) {
         throw new Error('the positions invalid')
       }
-      positions = positions.split(';')
+      positions = positions.split(';').filter(item => !!item)
     }
     return positions.map(item => {
       if (typeof item === 'string') {
