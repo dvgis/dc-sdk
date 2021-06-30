@@ -13,6 +13,7 @@ import Parse from '@dc-modules/parse/Parse'
 import { Util, DomUtil, PlotUtil } from '@dc-modules/utils'
 import { Transform, CoordTransform } from '@dc-modules/transform'
 import { MouseEventType, SceneEventType } from '@dc-modules/event'
+import { MouseMode } from '@dc-modules/option'
 import {
   area,
   bounds,
@@ -228,6 +229,7 @@ const components = {
   CoordTransform,
   MouseEventType,
   SceneEventType,
+  MouseMode,
   Math: Cesium.Math,
   Viewer,
   World: Viewer,
