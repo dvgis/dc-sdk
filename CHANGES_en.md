@@ -1,5 +1,15 @@
 # Change Log
 
+### 2.3.0 - 2021-07-03
+
+#### Additions 🎉
+
+- Add constants for mouse mode
+
+#### Fixes 🔧
+
+- Improve the parsePositions for string coords
+
 ### 2.2.5 - 2021-06-26
 
 #### Additions 🎉
