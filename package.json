@@ -49,7 +49,7 @@
     "@turf/turf": "^6.3.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
-    "cesium": "1.81.0",
+    "cesium": "^1.83.0",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",

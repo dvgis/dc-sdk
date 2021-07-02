@@ -2,6 +2,10 @@
 
 ### 2.3.0 - 2021-07-03
 
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.83.0
+
 #### Additions 🎉
 
 - Add constants for mouse mode
