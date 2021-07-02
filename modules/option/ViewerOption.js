@@ -114,7 +114,10 @@ class ViewerOption {
       depthTestAgainstTerrain: globeOption?.depthTestAgainstTerrain ?? false,
       tileCacheSize: +globeOption?.tileCacheSize || 100,
       preloadSiblings: globeOption?.enableLighting ?? false,
-      baseColor: globeOption?.baseColor || new Cesium.Color(0, 0, 0.5, 1)
+      baseColor: globeOption?.baseColor || new Cesium.Color(0, 0, 0.5, 1),
+      terrainExaggeration: globeOption?.terrainExaggeration || 1,
+      terrainExaggerationRelativeHeight:
+        globeOption?.terrainExaggerationRelativeHeight || 0
     })
 
     Util.merge(globe.translucency, {
