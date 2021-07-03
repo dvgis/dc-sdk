@@ -9,6 +9,7 @@
 #### Additions 🎉
 
 - Add constants for mouse mode
+- Add property settings for globe terrain exaggeration
 
 #### Fixes 🔧
 
