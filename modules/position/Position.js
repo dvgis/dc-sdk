@@ -95,10 +95,10 @@ class Position {
   }
 
   /**
-   *
+   * clone a position
    * @returns {Position}
    */
-  copy() {
+  clone() {
     let position = new Position()
     position.lng = this.lng || 0
     position.lat = this.lat || 0
@@ -107,6 +107,15 @@ class Position {
     position.pitch = this.pitch || 0
     position.roll = this.roll || 0
     return position
+  }
+
+  /**
+   * clone a position
+   * @deprecated
+   * @returns {Position}
+   */
+  copy() {
+    return this.clone()
   }
 
   /**
