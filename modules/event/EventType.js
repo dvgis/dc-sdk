@@ -79,8 +79,8 @@ const PlotEventType = {
   DARW_START: 'drawStart',
   DARW_MOVING: 'drawMoving',
   DARW_END: 'drawEnd',
-  EDIT_START: 'drawStart',
-  EDIT_MOVING: 'drawMoving',
+  EDIT_START: 'editStart',
+  EDIT_MOVING: 'editMoving',
   ANCHOR_MOVING: 'anchorMoving',
   EDIT_END: 'editEnd'
 }
