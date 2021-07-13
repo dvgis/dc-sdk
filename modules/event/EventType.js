@@ -75,6 +75,16 @@ const PathEventType = {
   RESET_TIME_LINE: 'restTimeLine'
 }
 
+const PlotEventType = {
+  DARW_START: 'drawStart',
+  DARW_MOVING: 'drawMoving',
+  DARW_END: 'drawEnd',
+  EDIT_START: 'drawStart',
+  EDIT_MOVING: 'drawMoving',
+  ANCHOR_MOVING: 'anchorMoving',
+  EDIT_END: 'editEnd'
+}
+
 export {
   MouseEventType,
   ViewerEventType,
@@ -83,5 +93,6 @@ export {
   LayerEventType,
   OverlayEventType,
   TrackEventType,
-  PathEventType
+  PathEventType,
+  PlotEventType
 }

@@ -25,3 +25,8 @@ export { default as OverlayEvent } from './type/OverlayEvent'
  */
 export { default as TrackEvent } from './type/TrackEvent'
 export { default as PathEvent } from './type/PathEvent'
+
+/**
+ * plot
+ */
+export { default as PlotEvent } from './type/PlotEvent'
