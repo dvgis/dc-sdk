@@ -16,6 +16,7 @@ import { ViewerOption, CameraOption } from '@dc-modules/option'
 import { Util, DomUtil } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import createWidgets from '@dc-modules/widget'
+import createTools from '@dc-modules/tools'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -74,6 +75,14 @@ class Viewer {
     let widgets = createWidgets()
     Object.keys(widgets).forEach(key => {
       this.use(widgets[key])
+    })
+
+    /**
+     * Registers default tools
+     */
+    let tools = createTools()
+    Object.keys(tools).forEach(key => {
+      this.use(tools[key])
     })
   }
 
