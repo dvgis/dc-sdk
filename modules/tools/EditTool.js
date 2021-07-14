@@ -127,7 +127,7 @@ class EditTool {
    * @param isMid
    * @private
    */
-  _onAddAnchor({ position, index, isCenter = false, isMid = false }) {
+  _onCreateAnchor({ position, index, isCenter = false, isMid = false }) {
     let image = isMid
       ? this._options.icon_midAnchor
       : isCenter
@@ -172,7 +172,7 @@ class EditTool {
     this._viewer.on(MouseEventType.CLICK, this._onClick, this)
     this._viewer.on(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.on(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.on(PlotEventType.ADD_ANCHOR, this._onAddAnchor, this)
+    this.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
     this.on(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
@@ -184,7 +184,7 @@ class EditTool {
     this._viewer.off(MouseEventType.CLICK, this._onClick, this)
     this._viewer.off(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.off(PlotEventType.ADD_ANCHOR, this._onAddAnchor, this)
+    this.off(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
     this.off(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 

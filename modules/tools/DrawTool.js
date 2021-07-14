@@ -45,9 +45,9 @@ class DrawTool {
       return false
     }
     if (!this._floatingAnchor) {
-      this._floatingAnchor = this._onAddAnchor({ position })
+      this._floatingAnchor = this._onCreateAnchor({ position })
     }
-    this._plotEvent.fire(PlotEventType.ADD_ANCHOR, position)
+    this._plotEvent.fire(PlotEventType.DRAW_ANCHOR, position)
   }
 
   /**
@@ -85,7 +85,7 @@ class DrawTool {
    * @returns {*}
    * @private
    */
-  _onAddAnchor({ position, isCenter = false }) {
+  _onCreateAnchor({ position, isCenter = false }) {
     this._anchorLayer.entities.add({
       position: position,
       billboard: {
@@ -118,7 +118,7 @@ class DrawTool {
     this._viewer.on(MouseEventType.CLICK, this._onClick, this)
     this._viewer.on(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.on(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.on(PlotEventType.ADD_ANCHOR, this._onAddAnchor, this)
+    this.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
     this.on(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
@@ -130,7 +130,7 @@ class DrawTool {
     this._viewer.off(MouseEventType.CLICK, this._onClick, this)
     this._viewer.off(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.off(PlotEventType.ADD_ANCHOR, this._onAddAnchor, this)
+    this.off(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
     this.off(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
