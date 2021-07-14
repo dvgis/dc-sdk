@@ -57,7 +57,7 @@ class Plot {
     this._editWorker = undefined
     this._overlayLayer = new Cesium.CustomDataSource('plot-overlay-layer')
     this._viewer.dataSources.add(this._overlayLayer)
-    this._anchorLayer = new Cesium.CustomDataSource('plot-overlay-layer')
+    this._anchorLayer = new Cesium.CustomDataSource('plot-anchor-layer')
     this._viewer.dataSources.add(this._anchorLayer)
     this._state = undefined
   }
