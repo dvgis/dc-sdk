@@ -109,7 +109,7 @@ class EditTool {
   _onRightClick(e) {
     let position =
       this._options.clampToModel && e.position ? e.position : e.surfacePosition
-    this._plotEvent.fire(PlotEventType.DRAW_STOP, {
+    this._plotEvent.fire(PlotEventType.EDIT_STOP, {
       pickedAnchor: this._pickedAnchor,
       position: position
     })
@@ -152,6 +152,12 @@ class EditTool {
     this._anchors.push(anchor)
   }
 
+  /**
+   *
+   * @param index
+   * @param position
+   * @private
+   */
   _onUpdateAnchor({ index, position }) {
     this._anchors[index] && this._anchors[index].position.setValue(position)
   }
@@ -173,9 +179,9 @@ class EditTool {
     this._viewer.on(MouseEventType.CLICK, this._onClick, this)
     this._viewer.on(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.on(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
-    this.on(PlotEventType.UPDATE_ANCHOR, this._onUpdateAnchor, this)
-    this.on(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
+    this._plotEvent.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
+    this._plotEvent.on(PlotEventType.UPDATE_ANCHOR, this._onUpdateAnchor, this)
+    this._plotEvent.on(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
   /**
@@ -186,9 +192,9 @@ class EditTool {
     this._viewer.off(MouseEventType.CLICK, this._onClick, this)
     this._viewer.off(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.off(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
-    this.off(PlotEventType.UPDATE_ANCHOR, this._onUpdateAnchor, this)
-    this.off(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
+    this._plotEvent.off(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
+    this._plotEvent.off(PlotEventType.UPDATE_ANCHOR, this._onUpdateAnchor, this)
+    this._plotEvent.off(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
   /**
@@ -236,7 +242,7 @@ class EditTool {
     this._options = { ...DEF_OPTS, ...options }
     this._unbindEvent()
     this._bindEvent()
-    this.fire(PlotEventType.DRAW_START, this._options)
+    this.fire(PlotEventType.EDIT_START, this._options)
     return this
   }
 

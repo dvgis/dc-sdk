@@ -118,8 +118,8 @@ class DrawTool {
     this._viewer.on(MouseEventType.CLICK, this._onClick, this)
     this._viewer.on(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.on(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
-    this.on(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
+    this._plotEvent.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
+    this._plotEvent.on(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
   /**
@@ -130,8 +130,8 @@ class DrawTool {
     this._viewer.off(MouseEventType.CLICK, this._onClick, this)
     this._viewer.off(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-    this.off(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
-    this.off(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
+    this._plotEvent.off(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
+    this._plotEvent.off(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
   /**
