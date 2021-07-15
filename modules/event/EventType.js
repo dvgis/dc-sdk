@@ -77,11 +77,10 @@ const PathEventType = {
 
 const PlotEventType = {
   DRAW_START: 'drawStart',
-  DRAW_ANCHOR: 'drawAnchor',
-  DRAW_MOVING: 'drawMoving',
   DRAW_STOP: 'drawStop',
   EDIT_START: 'editStart',
   EDIT_STOP: 'editEnd',
+  DRAW_ANCHOR: 'drawAnchor',
   CREATE_ANCHOR: 'createAnchor',
   ANCHOR_MOVING: 'anchorMoving',
   EDIT_ANCHOR_STOP: 'editAnchorStop',

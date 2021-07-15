@@ -63,7 +63,7 @@ class DrawTool {
       return false
     }
     this._floatingAnchor && this._floatingAnchor.position.setValue(position)
-    this._plotEvent.fire(PlotEventType.DRAW_MOVING, position)
+    this._plotEvent.fire(PlotEventType.ANCHOR_MOVING, position)
   }
 
   /**
