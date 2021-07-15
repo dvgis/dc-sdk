@@ -82,6 +82,7 @@ const PlotEventType = {
   EDIT_STOP: 'editEnd',
   DRAW_ANCHOR: 'drawAnchor',
   CREATE_ANCHOR: 'createAnchor',
+  UPDATE_ANCHOR: 'updateAnchor',
   ANCHOR_MOVING: 'anchorMoving',
   EDIT_ANCHOR_STOP: 'editAnchorStop',
   CLEAR_ANCHOR: 'clearAnchor'

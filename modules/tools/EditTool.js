@@ -57,12 +57,9 @@ class EditTool {
         this._pickedAnchor.position &&
         this._pickedAnchor.properties
       ) {
-        let properties = this._pickedAnchor.properties.getValue(
-          Cesium.JulianDate.now()
-        )
         this._pickedAnchor.position.setValue(position)
         this._plotEvent.fire(PlotEventType.EDIT_ANCHOR_STOP, {
-          index: properties.index,
+          pickedAnchor: this._pickedAnchor,
           position: position
         })
       }
@@ -96,12 +93,9 @@ class EditTool {
       this._pickedAnchor.position &&
       this._pickedAnchor.properties
     ) {
-      let properties = this._pickedAnchor.properties.getValue(
-        Cesium.JulianDate.now()
-      )
       this._pickedAnchor.position.setValue(position)
       this._plotEvent.fire(PlotEventType.ANCHOR_MOVING, {
-        index: properties.index,
+        pickedAnchor: this._pickedAnchor,
         position: position
       })
     }
@@ -113,10 +107,12 @@ class EditTool {
    * @private
    */
   _onRightClick(e) {
-    this._plotEvent.fire(
-      PlotEventType.DRAW_STOP,
+    let position =
       this._options.clampToModel && e.position ? e.position : e.surfacePosition
-    )
+    this._plotEvent.fire(PlotEventType.DRAW_STOP, {
+      pickedAnchor: this._pickedAnchor,
+      position: position
+    })
   }
 
   /**
@@ -156,12 +152,17 @@ class EditTool {
     this._anchors.push(anchor)
   }
 
+  _onUpdateAnchor({ index, position }) {
+    this._anchors[index] && this._anchors[index].position.setValue(position)
+  }
+
   /**
    *
    * @private
    */
   _onClearAnchor() {
     this._anchorLayer.entities.removeAll()
+    this._anchors = []
   }
 
   /**
@@ -173,6 +174,7 @@ class EditTool {
     this._viewer.on(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.on(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
     this.on(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
+    this.on(PlotEventType.UPDATE_ANCHOR, this._onUpdateAnchor, this)
     this.on(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
   }
 
@@ -185,20 +187,8 @@ class EditTool {
     this._viewer.off(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
     this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
     this.off(PlotEventType.CREATE_ANCHOR, this._onCreateAnchor, this)
+    this.off(PlotEventType.UPDATE_ANCHOR, this._onUpdateAnchor, this)
     this.off(PlotEventType.CLEAR_ANCHOR, this._onClearAnchor, this)
-  }
-
-  /**
-   *
-   * @param p1
-   * @param p2
-   * @returns {Cartesian3}
-   */
-  computeMidPosition(p1, p2) {
-    let c1 = Cesium.Ellipsoid.WGS84.cartesianToCartographic(p1)
-    let c2 = Cesium.Ellipsoid.WGS84.cartesianToCartographic(p2)
-    let cm = new Cesium.EllipsoidGeodesic(c1, c2).interpolateUsingFraction(0.5)
-    return Cesium.Ellipsoid.WGS84.cartographicToCartesian(cm)
   }
 
   /**
