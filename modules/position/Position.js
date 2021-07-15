@@ -215,34 +215,6 @@ class Position {
     }
     return position
   }
-
-  /**
-   *  Returns position from coord String
-   * @deprecated
-   * @param str
-   * @returns {Position}
-   */
-  static fromCoordString(str) {
-    let position = new Position()
-    if (str && typeof str === 'string') {
-      position = this.fromArray(str.split(','))
-    }
-    return position
-  }
-
-  /**
-   * Returns position from coord array
-   * @deprecated
-   * @param arr
-   * @returns {Position}
-   */
-  static fromCoordArray(arr) {
-    let position = new Position()
-    if (Array.isArray(arr)) {
-      position = this.fromArray(arr)
-    }
-    return position
-  }
 }
 
 export default Position
