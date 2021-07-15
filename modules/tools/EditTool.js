@@ -129,7 +129,7 @@ class EditTool {
       : isCenter
       ? this._options.icon_center
       : this._options.icon_anchor
-    let anchor = this._anchorLayer.add({
+    let anchor = this._anchorLayer.entities.add({
       position: position,
       billboard: {
         image: image,
@@ -200,7 +200,6 @@ class EditTool {
    */
   on(type, callback, context) {
     this._plotEvent.on(type, callback, context || this)
-    this._plotEvent.on(type, callback, context || this)
     return this
   }
 
@@ -212,7 +211,6 @@ class EditTool {
    * @returns {EditTool}
    */
   off(type, callback, context) {
-    this._plotEvent.off(type, callback, context || this)
     this._plotEvent.off(type, callback, context || this)
     return this
   }
@@ -250,6 +248,7 @@ class EditTool {
     this._unbindEvent()
     this._viewer.tooltip.enable = false
     this._anchorLayer.entities.removeAll()
+    this._anchors = []
     return this
   }
 

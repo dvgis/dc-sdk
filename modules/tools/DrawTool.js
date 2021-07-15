@@ -143,7 +143,6 @@ class DrawTool {
    */
   on(type, callback, context) {
     this._plotEvent.on(type, callback, context || this)
-    this._plotEvent.on(type, callback, context || this)
     return this
   }
 
@@ -155,7 +154,6 @@ class DrawTool {
    * @returns {DrawTool}
    */
   off(type, callback, context) {
-    this._plotEvent.off(type, callback, context || this)
     this._plotEvent.off(type, callback, context || this)
     return this
   }
