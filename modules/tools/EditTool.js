@@ -135,9 +135,7 @@ class EditTool {
         image: image,
         width: 12,
         height: 12,
-        eyeOffset: new Cesium.ConstantProperty(
-          new Cesium.Cartesian3(0, 0, -500)
-        ),
+        eyeOffset: new Cesium.Cartesian3(0, 0, -100),
         heightReference:
           this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&
           !this._options.clampToModel

@@ -92,7 +92,7 @@ class DrawTool {
         image: isCenter ? this._options.icon_center : this._options.icon_anchor,
         width: this._options.icon_size[0],
         height: this._options.icon_size[1],
-        eyeOffset: new Cesium.Cartesian3(0, 0, -500),
+        eyeOffset: new Cesium.Cartesian3(0, 0, -100),
         heightReference:
           this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&
           !this._options.clampToModel
