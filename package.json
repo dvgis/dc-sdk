@@ -34,11 +34,12 @@
     "build:chart": "yarn run clean:chart && webpack --config build/webpack.chart.conf --mode production --env.production",
     "dev:mapv": "yarn run clean:mapv && webpack --config build/webpack.mapv.conf --mode development",
     "build:mapv": "yarn run clean:mapv && webpack --config build/webpack.mapv.conf --mode production --env.production",
-    "clean": "yarn run clean:base && yarn run clean:core && yarn run clean:chart && yarn run clean:mapv",
+    "clean": "yarn run clean:base && yarn run clean:core && yarn run clean:chart && yarn run clean:mapv && yarn run clean:sdk",
     "clean:base": "rimraf packages/base/dist",
     "clean:core": "rimraf packages/core/dist",
     "clean:chart": "rimraf packages/chart/dist",
-    "clean:mapv": "rimraf packages/mapv/dist"
+    "clean:mapv": "rimraf packages/mapv/dist",
+    "clean:sdk": "rimraf packages/sdk/dist"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
