@@ -4,13 +4,12 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import { Billboard } from '@dc-modules/overlay'
 import Draw from './Draw'
 
 const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
-
-const DEF_STYLE = {}
 
 class DrawPoint extends Draw {
   constructor(style) {
@@ -18,12 +17,16 @@ class DrawPoint extends Draw {
     this._position = Cesium.Cartesian3.ZERO
     this._style = {
       image: IMG_CIRCLE_RED,
-      ...DEF_STYLE,
       ...style
     }
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '单击选择点位'
     this._delegate = new Cesium.Entity({
       position: new Cesium.CallbackProperty(() => {
         return this._position
@@ -32,23 +35,38 @@ class DrawPoint extends Draw {
         ...this._style
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
-    this._position = this._clampToGround ? e.surfacePosition : e.position
-    this.unbindEvent()
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
     let billboard = new Billboard(
       Transform.transformCartesianToWGS84(this._position),
       this._style.image
-    )
-    billboard.setStyle(this._style)
-    this._plotEvent.raiseEvent(billboard)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(billboard)
   }
 
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, '单击选择点位')
-    this._position = this._clampToGround ? e.surfacePosition : e.position
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
+    this._position = position
+    this.drawTool.fire(PlotEventType.DRAW_STOP)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onAnchorMoving(position) {
+    this._position = position
   }
 }
 

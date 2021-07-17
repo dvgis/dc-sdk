@@ -5,6 +5,7 @@
 
 import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
+import { PlotEventType } from '@dc-modules/event'
 import { FineArrow } from '@dc-modules/overlay'
 import Draw from './Draw'
 import FineArrowGraphics from '../graphics/FineArrowGraphics'
@@ -17,7 +18,7 @@ const DEF_STYLE = {
 class DrawFineArrow extends Draw {
   constructor(style) {
     super()
-    this._floatingAnchor = undefined
+    this._maxAnchorSize = 2
     this._style = {
       ...DEF_STYLE,
       ...style
@@ -25,7 +26,12 @@ class DrawFineArrow extends Draw {
     this._graphics = new FineArrowGraphics()
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '单击选择点位'
     this._delegate = new Cesium.Entity({
       polygon: {
         ...this._style,
@@ -39,31 +45,33 @@ class DrawFineArrow extends Draw {
         }, false)
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
-    let position = this._clampToGround ? e.surfacePosition : e.position
-    if (!position) {
-      return false
-    }
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
+    let fineArrow = new FineArrow(
+      Transform.transformCartesianArrayToWGS84Array(this._positions)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(fineArrow)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
     let len = this._positions.length
-    if (len === 0) {
-      this._positions.push(position)
-      this.createAnchor(position)
-      this._floatingAnchor = this.createAnchor(position)
-    }
     this._positions.push(position)
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
     this._graphics.positions = this._positions
-    this.createAnchor(position)
-    if (len > 1) {
+    if (len >= this._maxAnchorSize) {
       this._positions.pop()
-      this.unbindEvent()
-      let fineArrow = new FineArrow(
-        Transform.transformCartesianArrayToWGS84Array(this._positions)
-      )
-      fineArrow.setStyle(this._style)
-      this._plotEvent.raiseEvent(fineArrow)
+      this.drawTool.fire(PlotEventType.DRAW_STOP)
     }
   }
 }

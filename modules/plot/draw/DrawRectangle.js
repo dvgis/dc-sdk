@@ -4,6 +4,7 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import { Rectangle } from '@dc-modules/overlay'
 import Draw from './Draw'
@@ -15,13 +16,19 @@ const DEF_STYLE = {
 class DrawRectangle extends Draw {
   constructor(style) {
     super()
+    this._maxAnchorSize = 2
     this._style = {
       ...DEF_STYLE,
       ...style
     }
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '左击选择点位'
     this._delegate = new Cesium.Entity({
       rectangle: {
         ...this._style,
@@ -34,30 +41,32 @@ class DrawRectangle extends Draw {
         }, false)
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
-    let position = this._clampToGround ? e.surfacePosition : e.position
-    if (!position) {
-      return false
-    }
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
+    let rectangle = new Rectangle(
+      Transform.transformCartesianArrayToWGS84Array(this._positions)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(rectangle)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
     let len = this._positions.length
-    if (len === 0) {
-      this._positions.push(position)
-      this.createAnchor(position)
-      this._floatingAnchor = this.createAnchor(position)
-    }
     this._positions.push(position)
-    this.createAnchor(position)
-    if (len > 1) {
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
+    if (len >= this._maxAnchorSize) {
       this._positions.pop()
-      this.unbindEvent()
-      let rectangle = new Rectangle(
-        Transform.transformCartesianArrayToWGS84Array(this._positions)
-      )
-      rectangle.setStyle(this._style)
-      this._plotEvent.raiseEvent(rectangle)
+      this.drawTool.fire(PlotEventType.DRAW_STOP)
     }
   }
 }

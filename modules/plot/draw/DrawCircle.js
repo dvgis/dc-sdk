@@ -4,6 +4,7 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import { Circle } from '@dc-modules/overlay'
 import Draw from './Draw'
@@ -16,6 +17,7 @@ const DEF_STYLE = {
 class DrawCircle extends Draw {
   constructor(style) {
     super()
+    this._maxAnchorSize = 2
     this._radius = 0
     this._style = {
       ...DEF_STYLE,
@@ -23,7 +25,12 @@ class DrawCircle extends Draw {
     }
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '单击选择点位'
     this._delegate = new Cesium.Entity({
       polygon: {
         ...this._style,
@@ -56,33 +63,36 @@ class DrawCircle extends Draw {
         }, false)
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
+    let circle = new Circle(
+      Transform.transformCartesianToWGS84(this._positions[0]),
+      this._radius
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(circle)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
     let len = this._positions.length
-    let position = this._clampToGround ? e.surfacePosition : e.position
-    if (!position) {
-      return false
-    }
-    if (len === 0) {
-      this._positions.push(position)
-      this.createAnchor(position, true)
-      this._floatingAnchor = this.createAnchor(position)
-    }
     this._positions.push(position)
-    if (len > 0) {
-      this.createAnchor(position)
-    }
-    if (len > 1) {
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, {
+      position,
+      isCenter: len === 1
+    })
+    if (len >= this._maxAnchorSize) {
       this._positions.pop()
-      this.unbindEvent()
-      let circle = new Circle(
-        Transform.transformCartesianToWGS84(this._positions[0]),
-        this._radius
-      )
-      circle.setStyle(this._style)
-      this._plotEvent.raiseEvent(circle)
+      this.drawTool.fire(PlotEventType.DRAW_STOP)
     }
   }
 }

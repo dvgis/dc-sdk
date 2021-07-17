@@ -5,6 +5,7 @@
 
 import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
+import { PlotEventType } from '@dc-modules/event'
 import { GatheringPlace } from '@dc-modules/overlay'
 import Draw from './Draw'
 import GatheringPlaceGraphics from '../graphics/GatheringPlaceGraphics'
@@ -17,7 +18,7 @@ const DEF_STYLE = {
 class DrawGatheringPlace extends Draw {
   constructor(style) {
     super()
-    this._floatingAnchor = undefined
+    this._maxAnchorSize = 3
     this._style = {
       ...DEF_STYLE,
       ...style
@@ -25,7 +26,12 @@ class DrawGatheringPlace extends Draw {
     this._graphics = new GatheringPlaceGraphics()
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '单击选择点位'
     this._delegate = new Cesium.Entity({
       polygon: {
         ...this._style,
@@ -39,28 +45,33 @@ class DrawGatheringPlace extends Draw {
         }, false)
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
-    let position = this._clampToGround ? e.surfacePosition : e.position
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
+    let gatheringPlace = new GatheringPlace(
+      Transform.transformCartesianArrayToWGS84Array(this._positions)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(gatheringPlace)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
     let len = this._positions.length
-    if (len === 0) {
-      this._positions.push(position)
-      this.createAnchor(position)
-      this._floatingAnchor = this.createAnchor(position)
-    }
     this._positions.push(position)
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
     this._graphics.positions = this._positions
-    this.createAnchor(position)
-    if (len > 2) {
+    if (len >= this._maxAnchorSize) {
       this._positions.pop()
-      this.unbindEvent()
-      let gatheringPlace = new GatheringPlace(
-        Transform.transformCartesianArrayToWGS84Array(this._positions)
-      )
-      gatheringPlace.setStyle(this._style)
-      this._plotEvent.raiseEvent(gatheringPlace)
+      this.drawTool.fire(PlotEventType.DRAW_STOP)
     }
   }
 }

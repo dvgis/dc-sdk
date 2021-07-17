@@ -4,6 +4,7 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import { TailedAttackArrow } from '@dc-modules/overlay'
 import Draw from './Draw'
@@ -17,7 +18,7 @@ const DEF_STYLE = {
 class DrawTailedAttackArrow extends Draw {
   constructor(style) {
     super()
-    this._floatingAnchor = undefined
+    this._maxAnchorSize = 3
     this._style = {
       ...DEF_STYLE,
       ...style
@@ -25,7 +26,12 @@ class DrawTailedAttackArrow extends Draw {
     this._graphics = new TailedAttackArrowGraphics()
   }
 
+  /**
+   *
+   * @private
+   */
   _mountEntity() {
+    this.drawTool.tooltipMess = '左击选择点位'
     this._delegate = new Cesium.Entity({
       polygon: {
         ...this._style,
@@ -39,31 +45,34 @@ class DrawTailedAttackArrow extends Draw {
         }, false)
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
-    let position = this._clampToGround ? e.surfacePosition : e.position
-    if (!position) {
-      return false
-    }
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
+    let tailedAttackArrow = new TailedAttackArrow(
+      Transform.transformCartesianArrayToWGS84Array(this._positions)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(tailedAttackArrow)
+  }
+
+  /**
+   *
+   * @param position
+   * @returns {boolean}
+   * @private
+   */
+  _onDrawAnchor(position) {
     let len = this._positions.length
-    if (len === 0) {
-      this._positions.push(position)
-      this.createAnchor(position)
-      this._floatingAnchor = this.createAnchor(position)
-    }
     this._positions.push(position)
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
     this._graphics.positions = this._positions
-    this.createAnchor(position)
-    if (len > 2) {
+    if (len >= this._maxAnchorSize) {
       this._positions.pop()
-      this.unbindEvent()
-      let tailedAttackArrow = new TailedAttackArrow(
-        Transform.transformCartesianArrayToWGS84Array(this._positions)
-      )
-      tailedAttackArrow.setStyle(this._style)
-      this._plotEvent.raiseEvent(tailedAttackArrow)
+      this.drawTool.fire(PlotEventType.DRAW_STOP)
     }
   }
 }

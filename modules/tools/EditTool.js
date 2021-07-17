@@ -60,7 +60,7 @@ class EditTool {
         this._pickedAnchor.position.setValue(position)
         this._plotEvent.fire(PlotEventType.EDIT_ANCHOR_STOP, {
           pickedAnchor: this._pickedAnchor,
-          position: position
+          position
         })
       }
       this._isMoving = false
@@ -80,7 +80,7 @@ class EditTool {
    */
   _onMouseMove(e) {
     this._viewer.tooltip.showAt(e.windowPosition, this._tooltipMess)
-    if (!this._isMoving) {
+    if (!this._isMoving && this._anchors.length !== 0) {
       return false
     }
     let position =
@@ -96,7 +96,11 @@ class EditTool {
       this._pickedAnchor.position.setValue(position)
       this._plotEvent.fire(PlotEventType.ANCHOR_MOVING, {
         pickedAnchor: this._pickedAnchor,
-        position: position
+        position
+      })
+    } else if (this._anchors.length === 0) {
+      this._plotEvent.fire(PlotEventType.ANCHOR_MOVING, {
+        position
       })
     }
   }
@@ -111,7 +115,7 @@ class EditTool {
       this._options.clampToModel && e.position ? e.position : e.surfacePosition
     this._plotEvent.fire(PlotEventType.EDIT_STOP, {
       pickedAnchor: this._pickedAnchor,
-      position: position
+      position
     })
   }
 

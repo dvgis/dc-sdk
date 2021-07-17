@@ -86,7 +86,7 @@ class DrawTool {
    * @private
    */
   _onCreateAnchor({ position, isCenter = false }) {
-    this._anchorLayer.entities.add({
+    return this._anchorLayer.entities.add({
       position: position,
       billboard: {
         image: isCenter ? this._options.icon_center : this._options.icon_anchor,
@@ -191,6 +191,7 @@ class DrawTool {
     this._unbindEvent()
     this._viewer.tooltip.enable = false
     this._anchorLayer.entities.removeAll()
+    this._floatingAnchor = undefined
     return this
   }
 

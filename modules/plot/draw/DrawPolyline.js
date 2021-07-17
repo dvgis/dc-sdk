@@ -4,6 +4,7 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import { Polyline } from '@dc-modules/overlay'
 import Draw from './Draw'
@@ -20,10 +21,14 @@ class DrawPolyline extends Draw {
       ...DEF_STYLE,
       ...style
     }
-    this._tooltipMess = '左击选择点位,右击结束'
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '左击选择点位,右击结束'
     this._delegate = new Cesium.Entity({
       polyline: {
         ...this._style,
@@ -32,31 +37,29 @@ class DrawPolyline extends Draw {
         }, false)
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
-    let position = this._clampToGround ? e.surfacePosition : e.position
-    if (!position) {
-      return false
-    }
-    let len = this._positions.length
-    if (len === 0) {
-      this._positions.push(position)
-      this.createAnchor(position)
-      this._floatingAnchor = this.createAnchor(position)
-    }
-    this._positions.push(position)
-    this.createAnchor(position)
-  }
-
-  _onRightClick(e) {
-    this.unbindEvent()
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
     let polyline = new Polyline(
       Transform.transformCartesianArrayToWGS84Array(this._positions)
-    )
-    polyline.setStyle(this._style)
-    this._plotEvent.raiseEvent(polyline)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(polyline)
+  }
+
+  /**
+   *
+   * @param position
+   * @returns {boolean}
+   * @private
+   */
+  _onDrawAnchor(position) {
+    this._positions.push(position)
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
   }
 }
 

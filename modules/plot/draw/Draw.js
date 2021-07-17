@@ -3,91 +3,100 @@
  * @Date: 2020-01-31 19:45:32
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { MouseEventType } from '@dc-modules/event'
+import { PlotEventType } from '@dc-modules/event'
 
 class Draw {
-  constructor() {
+  constructor(style) {
+    this._style = style
     this._viewer = undefined
-    this._delegate = undefined
-    this._floatingAnchor = undefined
-    this._clampToGround = true
-    this._tooltip = undefined
-    this._tooltipMess = '单击选择点位'
     this._layer = undefined
-    this._plotEvent = undefined
+    this._delegate = undefined
     this._options = {}
     this._positions = []
   }
 
-  _mountEntity() {}
-
-  _onClick(e) {}
-
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, this._tooltipMess)
-    if (this._floatingAnchor) {
-      let position = this._clampToGround ? e.surfacePosition : e.position
-      if (!position) {
-        return false
-      }
-      this._floatingAnchor.position.setValue(position)
-      this._positions.pop()
-      this._positions.push(position)
-    }
+  get drawTool() {
+    return this._viewer.drawTool
   }
 
-  _onRightClick(e) {}
+  /**
+   * The hook for mount viewer
+   * Subclasses need to be overridden
+   * @private
+   */
+  _mountedHook() {}
 
-  bindEvent() {
-    this._viewer.on(MouseEventType.CLICK, this._onClick, this)
-    this._viewer.on(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
-    this._viewer.on(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-  }
-
-  unbindEvent() {
-    this._viewer.off(MouseEventType.CLICK, this._onClick, this)
-    this._viewer.off(MouseEventType.MOUSE_MOVE, this._onMouseMove, this)
-    this._viewer.off(MouseEventType.RIGHT_CLICK, this._onRightClick, this)
-  }
+  /**
+   * The hook for mount stop
+   * Subclasses need to be overridden
+   * @private
+   */
+  _stopdHook() {}
 
   /**
    *
    * @param position
-   * @param isCenter
-   * @returns {*}
+   * @private
    */
-  createAnchor(position, isCenter = false) {
-    return this._layer.add({
-      position: position,
-      billboard: {
-        image: isCenter ? this._options.icon_center : this._options.icon_anchor,
-        width: this._options.icon_size[0],
-        height: this._options.icon_size[1],
-        eyeOffset: new Cesium.Cartesian3(0, 0, -500),
-        heightReference:
-          this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&
-          this._clampToGround
-            ? Cesium.HeightReference.CLAMP_TO_GROUND
-            : Cesium.HeightReference.NONE
-      }
-    })
+  _onDrawAnchor(position) {}
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onAnchorMoving(position) {
+    this._positions.pop()
+    this._positions.push(position)
+  }
+
+  /**
+   *
+   * @private
+   */
+  _onDrawStop() {
+    this._unbindEvent()
+    this._viewer.drawTool.deactivate()
+    this._layer.entities.remove(this._delegate)
+    this._stopdHook()
+  }
+
+  /**
+   *
+   * @private
+   */
+  _bindEvent() {
+    this.drawTool.on(PlotEventType.DRAW_ANCHOR, this._onDrawAnchor, this)
+    this.drawTool.on(PlotEventType.ANCHOR_MOVING, this._onAnchorMoving, this)
+    this.drawTool.on(PlotEventType.DRAW_STOP, this._onDrawStop, this)
+  }
+
+  /**
+   *
+   * @private
+   */
+  _unbindEvent() {
+    this.drawTool.off(PlotEventType.DRAW_ANCHOR, this._onDrawAnchor, this)
+    this.drawTool.off(PlotEventType.ANCHOR_MOVING, this._onAnchorMoving, this)
+    this.drawTool.off(PlotEventType.DRAW_STOP, this._onDrawStop, this)
   }
 
   /**
    *
    * @param plot
-   * @param clampToGround
+   * @param options
+   * @returns {Draw}
    */
-  start(plot, clampToGround) {
+  start(plot, options) {
     this._viewer = plot.viewer
-    this._tooltip = plot.viewer.tooltip
-    this._layer = plot.overlayLayer
-    this._plotEvent = plot.plotEvent
-    this._options = plot.options
-    this._clampToGround = clampToGround
-    this._mountEntity()
-    this.bindEvent()
+    this._layer = plot.layer
+    this._options = options
+    this._viewer.editTool.deactivate()
+    this._viewer.drawTool.activate(options)
+    this._mountedHook()
+    this._unbindEvent()
+    this._bindEvent()
+    return this
   }
 }
 

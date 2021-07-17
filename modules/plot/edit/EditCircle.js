@@ -4,26 +4,29 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import Edit from './Edit'
 
 class EditCircle extends Edit {
   constructor(overlay) {
-    super()
-    this._overlay = overlay
+    super(overlay)
     this._center = undefined
     this._radius = 0
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
     this._radius = this._overlay.radius
     this._center = Transform.transformWGS84ToCartesian(this._overlay.center)
-    this._overlay.show = false
-    this._delegate = new Cesium.Entity({
-      polygon: {
-        material: this._overlay.delegate?.polygon?.material
-      }
-    })
+    // this._delegate = new Cesium.Entity({
+    //   polygon: {
+    //     material: this._overlay.delegate?.polygon?.material
+    //   }
+    // })
     this._positions = [].concat([
       this._center,
       this._computeCirclePoints(this._center, this._radius)[0]
@@ -44,15 +47,16 @@ class EditCircle extends Edit {
         return null
       }
     }, false)
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _mountAnchor() {
-    this._positions.forEach((item, index) => {
-      this.createAnchor(item, index, false, index % 2 === 0)
-    })
-  }
-
+  /**
+   *
+   * @param center
+   * @param radius
+   * @returns {*[]}
+   * @private
+   */
   _computeCirclePoints(center, radius) {
     let pnts = []
     let cep = Cesium.EllipseGeometryLibrary.computeEllipsePositions(
@@ -72,36 +76,31 @@ class EditCircle extends Edit {
     return pnts
   }
 
-  _onClick(e) {
-    let now = Cesium.JulianDate.now()
-    if (this._isMoving) {
-      this._isMoving = false
-      if (this._pickedAnchor && this._pickedAnchor.position) {
-        let position = this._clampToGround ? e.surfacePosition : e.position
-        if (!position) {
-          return false
-        }
-        this._pickedAnchor.position.setValue(position)
-        let properties = this._pickedAnchor.properties.getValue(now)
-        this._positions[properties.index] = position
-      }
-    } else {
-      this._isMoving = true
-      if (!e.target || !e.target.id) {
-        return false
-      }
-      this._pickedAnchor = e.target.id
-    }
-  }
-
-  _onRightClick(e) {
-    this.unbindEvent()
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
     this._overlay.center = Transform.transformCartesianToWGS84(
       this._positions[0]
     )
     this._overlay.radius = this._radius
     this._overlay.show = true
-    this._plotEvent.raiseEvent(this._overlay)
+    this._options.onEditStop && this._options.onEditStop(this._overlay)
+  }
+
+  /**
+   *
+   * @private
+   */
+  _mountAnchor() {
+    this._positions.forEach((item, index) => {
+      this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
+        position: item,
+        index: index,
+        isCenter: index % 2 === 0
+      })
+    })
   }
 }
 
