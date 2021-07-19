@@ -1,5 +1,26 @@
 # Change Log
 
+### 2.3.1 - 2021-07-19
+
+#### Breaking Changes 📣
+
+- 重构标绘功能
+- 移除Position舍弃函数
+- 完善基础架构部分脚本
+
+#### Additions 🎉
+
+- 添加空间测量工具
+- 添加标绘工具模块
+- 添加函数 midCartesian，计算笛卡尔坐标系的中间点位
+
+#### Fixes 🔧
+
+- 完善Position复制功能
+- 完善模型编辑工具对于3dtiles的位置编辑功能
+- 完善函数 area
+- 完善扇形的点位计算功能
+
 ### 2.3.0 - 2021-07-03
 
 #### Breaking Changes 📣

@@ -1,5 +1,27 @@
 # Change Log
 
+### 2.3.1 - 2021-07-19
+
+#### Breaking Changes 📣
+
+- Refactored plotting function
+- Remove Position rounding function
+- Refine the infrastructure part of the script
+
+#### Additions 🎉
+
+- Add spatial measurement tools
+- Add the plotting tool module
+- Add function midCartesian to calculate the middle point of Cartesian3
+
+#### Fixes 🔧
+
+- Improve the Position copy function
+- Improve the model editing tool for 3dtiles position editing function
+- Improve the function area
+- Improve the function of calculating the point position of a sector
+
+
 ### 2.3.0 - 2021-07-03
 
 #### Breaking Changes 📣
