@@ -1,5 +1,15 @@
 # Change Log
 
+### 2.3.2 - 2021-07-25
+
+#### Additions 🎉
+
+- 添加模型图元获取节点相关函数 [#51](https://github.com/dvgis/dc-sdk/issues/51)
+
+#### Fixes 🔧
+
+- 完善历史轨迹恢复功能 [#50](https://github.com/dvgis/dc-sdk/issues/50)
+
 ### 2.3.1 - 2021-07-19
 
 #### Breaking Changes 📣

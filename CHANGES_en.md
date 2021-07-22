@@ -1,5 +1,15 @@
 # Change Log
 
+### 2.3.2 - 2021-07-25
+
+#### Additions 🎉
+
+- Add model primitive to get node-related functions [#51](https://github.com/dvgis/dc-sdk/issues/51)
+
+#### Fixes 🔧
+
+- Improve the history track restore function [#50](https://github.com/dvgis/dc-sdk/issues/50)
+
 ### 2.3.1 - 2021-07-19
 
 #### Breaking Changes 📣
