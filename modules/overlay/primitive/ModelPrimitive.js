@@ -20,6 +20,10 @@ class ModelPrimitive extends Overlay {
     this._state = State.INITIALIZED
   }
 
+  get readyPromise() {
+    return this._delegate.readyPromise
+  }
+
   set position(position) {
     this._position = Parse.parsePosition(position)
     let origin = Transform.transformWGS84ToCartesian(this._position)
@@ -58,6 +62,39 @@ class ModelPrimitive extends Overlay {
      * set the location
      */
     this.position = this._position
+  }
+
+  /**
+   *
+   * @param name
+   */
+  getMaterial(name) {
+    return this._delegate.getMaterial(name)
+  }
+
+  /**
+   *
+   * @param name
+   */
+  getMesh(name) {
+    return this._delegate.getMesh(name)
+  }
+
+  /**
+   *
+   * @param name
+   * @returns {*}
+   */
+  getNode(name) {
+    return this._delegate.getNode(name)
+  }
+
+  /**
+   *
+   * @returns {*}
+   */
+  getNodes() {
+    return this._delegate._runtime.nodes
   }
 
   /**
