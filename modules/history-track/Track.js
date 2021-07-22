@@ -183,19 +183,17 @@ class Track {
       } else {
         this._delegate.position = p
       }
-      let o = this._velocityOrientation.getValue(now)
-      if (o) {
-        this._delegate.orientation = o
+      let orientation = this._velocityOrientation.getValue(now)
+      if (orientation) {
+        this._delegate.orientation = orientation
       }
       let time = this._timeLine[this._positionIndex]
       if (time) {
         let timeDiff = Cesium.JulianDate.secondsDifference(now, time)
         if (timeDiff >= 0 && timeDiff <= 1) {
           let position = this._positions[this._positionIndex] || undefined
-          if (position) {
-            let mat = Cesium.Matrix3.fromQuaternion(
-              this._delegate.orientation.getValue(now)
-            )
+          if (position && orientation) {
+            let mat = Cesium.Matrix3.fromQuaternion(orientation)
             let mat4 = Cesium.Matrix4.fromRotationTranslation(mat, p)
             let hpr = Cesium.Transforms.fixedFrameToHeadingPitchRoll(mat4)
             position.heading = Cesium.Math.toDegrees(hpr.heading)
