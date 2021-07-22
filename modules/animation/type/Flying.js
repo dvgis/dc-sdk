@@ -15,7 +15,6 @@ class Flying extends Animation {
     this._positions = []
     this._durations = [3]
     this._currentIndex = 0
-
     this._timer = undefined
   }
 
