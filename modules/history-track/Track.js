@@ -173,7 +173,7 @@ class Track {
       return false
     }
     let now = Cesium.JulianDate.now()
-    if (Cesium.JulianDate.lessThan(now, this._endTime)) {
+    if (Cesium.JulianDate.lessThanOrEquals(now, this._endTime)) {
       let p = this._sampledPosition.getValue(now)
       this._pathPositions.push(p)
       if (this._options.clampToTileset) {
