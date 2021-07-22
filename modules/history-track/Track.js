@@ -271,18 +271,20 @@ class Track {
       return false
     }
     let interval = 0
-    let v = distance(this._positions) / this._duration
-    this._timeLine = this._positions.map((item, index, arr) => {
-      if (index !== 0) {
-        interval += distance([arr[index - 1], item]) / v
-      }
-      return Cesium.JulianDate.addSeconds(
-        this._startTime,
-        interval,
-        new Cesium.JulianDate()
-      )
-    })
-    if (params?.stopTime && params?.duration) {
+    if (!params?.stopTime && !params?.duration) {
+      let v = distance(this._positions) / this._duration
+      this._timeLine = this._positions.map((item, index, arr) => {
+        if (index !== 0) {
+          interval += distance([arr[index - 1], item]) / v
+        }
+        return Cesium.JulianDate.addSeconds(
+          this._startTime,
+          interval,
+          new Cesium.JulianDate()
+        )
+      })
+      this._pathPositions = []
+    } else if (params?.stopTime && params?.duration) {
       this._duration += params.duration
       this._timeLine = this._timeLine.map(item => {
         if (Cesium.JulianDate.greaterThan(item, params.stopTime)) {
@@ -294,8 +296,6 @@ class Track {
         }
         return item
       })
-    } else {
-      this._pathPositions = []
     }
     this._sampledPosition = new Cesium.SampledPositionProperty()
     this._sampledPosition.addSamples(
