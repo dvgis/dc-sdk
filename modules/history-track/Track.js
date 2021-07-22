@@ -39,6 +39,7 @@ class Track {
     }
     this._controller = undefined
     this._sampledPosition = undefined
+    this._velocityOrientation = undefined
     this._viewed = false
     this._delegate = new Cesium.Entity()
     this._pathPositions = []
@@ -50,7 +51,6 @@ class Track {
         })
       }
     })
-
     this._positionIndex = 0
     this._timeLine = []
     this._startTime = undefined
@@ -182,6 +182,10 @@ class Track {
         ])
       } else {
         this._delegate.position = p
+      }
+      let o = this._velocityOrientation.getValue(now)
+      if (o) {
+        this._delegate.orientation = o
       }
       let time = this._timeLine[this._positionIndex]
       if (time) {
@@ -321,7 +325,7 @@ class Track {
         interpolationAlgorithm: Cesium.LagrangePolynomialApproximation
       })
     }
-    this._delegate.orientation = new Cesium.VelocityOrientationProperty(
+    this._velocityOrientation = new Cesium.VelocityOrientationProperty(
       this._sampledPosition
     )
     this._endTime = this._timeLine[this._timeLine.length - 1]
