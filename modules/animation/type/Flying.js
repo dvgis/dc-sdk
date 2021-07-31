@@ -7,6 +7,7 @@ import { Cesium } from '@dc-modules/namespace'
 import Parse from '@dc-modules/parse/Parse'
 import { Transform } from '@dc-modules/transform'
 import Animation from '../Animation'
+import AnimationType from '../AnimationType'
 
 class Flying extends Animation {
   constructor(viewer, options = {}) {
@@ -16,6 +17,10 @@ class Flying extends Animation {
     this._durations = [3]
     this._currentIndex = 0
     this._timer = undefined
+  }
+
+  get type() {
+    return AnimationType.FLYING
   }
 
   set positions(positions) {
@@ -111,5 +116,7 @@ class Flying extends Animation {
     return this
   }
 }
+
+AnimationType.FLYING = 'flying'
 
 export default Flying

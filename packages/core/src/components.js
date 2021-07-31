@@ -147,6 +147,7 @@ import Effect from '@dc-modules/effect/Effect'
  * animation
  */
 import {
+  AnimationType,
   AroundView,
   AroundPoint,
   CircleScan,
@@ -346,6 +347,7 @@ const components = {
   /**
    * animation
    */
+  AnimationType,
   AroundView,
   AroundPoint,
   CircleScan,

@@ -8,6 +8,7 @@ import Parse from '@dc-modules/parse/Parse'
 import { Util } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Animation from '../Animation'
+import AnimationType from '../AnimationType'
 
 const RadarScanShader = require('@dc-modules/material/shader/radar/RadarScanShader.glsl')
 
@@ -19,7 +20,10 @@ class RadarScan extends Animation {
     this._color = options.color || Cesium.Color.BLUE
     this._speed = options.speed || 3
     this._delegate = undefined
-    this.type = 'radar_scan'
+  }
+
+  get type() {
+    return AnimationType.RADAR_SCAN
   }
 
   /**
@@ -91,5 +95,7 @@ class RadarScan extends Animation {
     return this
   }
 }
+
+AnimationType.RADAR_SCAN = 'radar_scan'
 
 export default RadarScan

@@ -5,6 +5,7 @@
 
 import { Cesium } from '@dc-modules/namespace'
 import Animation from '../Animation'
+import AnimationType from '../AnimationType'
 
 class AroundView extends Animation {
   constructor(viewer, options = {}) {
@@ -12,7 +13,10 @@ class AroundView extends Animation {
     this._options = options
     this._heading = viewer.camera.heading
     this._aroundAmount = 0.2
-    this.type = 'around_view'
+  }
+
+  get type() {
+    return AnimationType.AROUND_VIEW
   }
 
   set aroundAmount(aroundAmount) {
@@ -55,5 +59,7 @@ class AroundView extends Animation {
     })
   }
 }
+
+AnimationType.AROUND_VIEW = 'around_view'
 
 export default AroundView

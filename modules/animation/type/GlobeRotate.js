@@ -5,12 +5,16 @@
 
 import { Cesium } from '@dc-modules/namespace'
 import Animation from '../Animation'
+import AnimationType from '../AnimationType'
 
 class GlobeRotate extends Animation {
   constructor(viewer, options = {}) {
     super(viewer)
     this._options = options
-    this.type = 'globe_rotate'
+  }
+
+  get type() {
+    return AnimationType.GLOBE_ROTATE
   }
 
   /**
@@ -52,5 +56,7 @@ class GlobeRotate extends Animation {
     this._viewer.scene.postUpdate.removeEventListener(this._icrf, this)
   }
 }
+
+AnimationType.GLOBE_ROTATE = 'globe_rotate'
 
 export default GlobeRotate

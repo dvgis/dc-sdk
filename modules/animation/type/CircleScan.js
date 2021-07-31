@@ -8,6 +8,7 @@ import Parse from '@dc-modules/parse/Parse'
 import { Util } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Animation from '../Animation'
+import AnimationType from '../AnimationType'
 
 const CircleScanShader = require('@dc-modules/material/shader/circle/CircleScanShader.glsl')
 
@@ -19,7 +20,10 @@ class CircleScan extends Animation {
     this._radius = radius || 100
     this._color = options.color || Cesium.Color.RED
     this._speed = options.speed || 2
-    this.type = 'circle_scan'
+  }
+
+  get type() {
+    return AnimationType.CIRCLE_SCAN
   }
 
   /**
@@ -77,5 +81,7 @@ class CircleScan extends Animation {
     return this
   }
 }
+
+AnimationType.CIRCLE_SCAN = 'circle_scan'
 
 export default CircleScan
