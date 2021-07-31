@@ -40,7 +40,6 @@ pkgs.forEach(async (item, index) => {
         }
         if (index === count - 1) {
           shell.echo(chalk.green('release packages end'))
-          shell.exit(0)
         }
       } else {
         shell.echo(
@@ -50,7 +49,6 @@ pkgs.forEach(async (item, index) => {
         )
         if (index === count - 1) {
           shell.echo(chalk.green('release packages end'))
-          shell.exit(0)
         }
       }
     }
