@@ -71,24 +71,6 @@ class BounceBillboardPrimitive extends BillboardPrimitive {
     this._currentOffset.y += offsetAmount * (this._isUp ? -1 : 1)
     this._delegate.pixelOffset = this._currentOffset
   }
-
-  /**
-   *
-   * @param style
-   * @returns {BounceBillboardPrimitive}
-   */
-  setStyle(style) {
-    if (!style || Object.keys(style).length === 0) {
-      return this
-    }
-    delete style['position'] &&
-      delete style['image'] &&
-      delete style['width'] &&
-      delete style['height']
-    this._style = style
-    Util.merge(this._delegate, this._style)
-    return this
-  }
 }
 
 Overlay.registerType('bounce_billboard_primitive')
