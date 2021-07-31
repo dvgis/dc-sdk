@@ -42,8 +42,6 @@ export { default as TailedAttackArrow } from './plot/TailedAttackArrow'
  * primitive
  */
 export { default as BillboardPrimitive } from './primitive/BillboardPrimitive.js'
-export { default as BounceBillboardPrimitive } from './primitive/BounceBillboardPrimitive'
-export { default as BounceLabelPrimitive } from './primitive/BounceLabelPrimitive'
 export { default as DiffuseWallPrimitive } from './primitive/DiffuseWallPrimitive.js'
 export { default as ElecEllipsoidPrimitive } from './primitive/ElecEllipsoidPrimitive'
 export { default as FlowLinePrimitive } from './primitive/FlowLinePrimitive'
