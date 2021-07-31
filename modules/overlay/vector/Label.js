@@ -16,8 +16,11 @@ class Label extends Overlay {
     this._delegate = new Cesium.Entity({ label: {} })
     this._position = Parse.parsePosition(position)
     this._text = text
-    this.type = Overlay.getOverlayType('label')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('label')
   }
 
   set position(position) {

@@ -17,8 +17,11 @@ class Billboard extends Overlay {
     this._position = Parse.parsePosition(position)
     this._icon = icon
     this._size = [32, 32]
-    this.type = Overlay.getOverlayType('billboard')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('billboard')
   }
 
   set position(position) {

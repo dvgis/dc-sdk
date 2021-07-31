@@ -18,8 +18,11 @@ class LabelPrimitive extends Overlay {
       position: undefined,
       text: undefined
     }
-    this.type = Overlay.getOverlayType('label_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('label_primitive')
   }
 
   set position(position) {

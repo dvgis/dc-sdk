@@ -22,8 +22,11 @@ class AttackArrow extends Overlay {
     this.neckHeightFactor = 0.85
     this.neckWidthFactor = 0.15
     this.headTailFactor = 0.8
-    this.type = Overlay.getOverlayType('attack_arrow')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('attack_arrow')
   }
 
   set positions(positions) {

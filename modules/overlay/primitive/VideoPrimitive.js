@@ -19,8 +19,11 @@ class VideoPrimitive extends Overlay {
       })
     })
     this._video = video
-    this.type = Overlay.getOverlayType('video_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('video_primitive')
   }
 
   set positions(positions) {

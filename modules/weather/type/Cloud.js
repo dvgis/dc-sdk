@@ -16,9 +16,12 @@ class Cloud {
     this._delegate = undefined
     this._rotateAmount = 0
     this._enable = false
-    this.type = 'cloud'
     this._heading = 0
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'cloud'
   }
 
   set enable(enable) {

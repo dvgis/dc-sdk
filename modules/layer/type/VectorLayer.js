@@ -15,8 +15,11 @@ class VectorLayer extends Layer {
   constructor(id) {
     super(id)
     this._delegate = new Cesium.CustomDataSource(id)
-    this.type = Layer.getLayerType('vector')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('vector')
   }
 
   /**

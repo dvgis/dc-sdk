@@ -19,8 +19,11 @@ class ScanCirclePrimitive extends Overlay {
         geometry: {}
       })
     })
-    this.type = Overlay.getOverlayType('scan_circle_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('scan_circle_primitive')
   }
 
   set position(position) {

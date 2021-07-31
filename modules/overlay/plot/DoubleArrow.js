@@ -21,8 +21,11 @@ class DoubleArrow extends Overlay {
     this.headWidthFactor = 0.3
     this.neckHeightFactor = 0.85
     this.neckWidthFactor = 0.15
-    this.type = Overlay.getOverlayType('double_arrow')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('double_arrow')
   }
 
   set positions(positions) {

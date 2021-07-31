@@ -17,8 +17,11 @@ class Model extends Overlay {
     this._position = Parse.parsePosition(position)
     this._modelUrl = modelUrl
     this._rotateAmount = 0
-    this.type = Overlay.getOverlayType('model')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('model')
   }
 
   set position(position) {
@@ -55,7 +58,7 @@ class Model extends Overlay {
 
   set rotateAmount(amount) {
     this._rotateAmount = +amount
-    this._delegate.orientation = new Cesium.CallbackProperty(time => {
+    this._delegate.orientation = new Cesium.CallbackProperty(() => {
       this._position.heading += this._rotateAmount
       if (this._position.heading >= 360 || this._position.heading <= -360) {
         this._position.heading = 0

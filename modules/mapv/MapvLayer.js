@@ -6,6 +6,7 @@
 import { mapv } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { Layer } from '@dc-modules/layer'
+import Overlay from '../overlay/Overlay'
 
 class MapvLayer extends Layer {
   constructor(id, option = {}) {
@@ -16,7 +17,11 @@ class MapvLayer extends Layer {
     this._option = option
     this._dataSet = undefined
     this._delegate = undefined
-    this.type = Layer.getLayerType('mapv')
+    this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('mapv')
   }
 
   set show(show) {

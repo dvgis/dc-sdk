@@ -13,7 +13,7 @@ const DEF_OPTS = {
   count: 10,
   maximumLevel: 21,
   dataProperty: '',
-  callback: record => {
+  callback: () => {
     return null
   }
 }
@@ -35,7 +35,6 @@ class FeatureGridLayer extends Layer {
     this._rectangle = this._tilingScheme.rectangle
     this._credit = undefined
     this._token = undefined
-    this.type = Layer.getLayerType('feature_grid')
     for (let i = 0; i < this.maximumLevel; i++) {
       this._levelLayers[String(i)] = new VectorLayer(id + '-grid-' + i)
     }
@@ -45,6 +44,10 @@ class FeatureGridLayer extends Layer {
     this._imagery.width = this._tileWidth
     this._imagery.height = this._tileHeight
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('feature_grid')
   }
 
   get url() {

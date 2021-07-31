@@ -16,8 +16,11 @@ class Ellipsoid extends Overlay {
     this._position = Parse.parsePosition(position)
     this._radius = radius || { x: 10, y: 10, z: 10 }
     this._delegate = new Cesium.Entity({ ellipsoid: {} })
-    this.type = Overlay.getOverlayType('ellipsoid')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('ellipsoid')
   }
 
   set position(position) {

@@ -18,8 +18,11 @@ class Cylinder extends Overlay {
     this._topRadius = +topRadius || 0
     this._bottomRadius = +bottomRadius || 0
     this._delegate = new Cesium.Entity({ cylinder: {} })
-    this.type = Overlay.getOverlayType('cylinder')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('cylinder')
   }
 
   set position(position) {

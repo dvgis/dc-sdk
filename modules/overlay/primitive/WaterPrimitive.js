@@ -19,8 +19,11 @@ class WaterPrimitive extends Overlay {
       }),
       asynchronous: true
     })
-    this.type = Overlay.getOverlayType('water_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('water_primitive')
   }
 
   set positions(positions) {

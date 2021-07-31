@@ -17,8 +17,11 @@ class PolylinePrimitive extends Overlay {
     this._delegate = {
       positions: []
     }
-    this.type = Overlay.getOverlayType('polyline_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('polyline_primitive')
   }
 
   set positions(positions) {

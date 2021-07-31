@@ -11,8 +11,11 @@ class LoadingMask extends Widget {
   constructor() {
     super()
     this._wrapper = DomUtil.create('div', 'dc-loading-mask')
-    this.type = Widget.getWidgetType('loading_mask')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('loading_mask')
   }
 
   /**

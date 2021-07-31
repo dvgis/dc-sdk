@@ -15,8 +15,11 @@ class MapSplit extends Widget {
     this._wrapper = DomUtil.create('div', 'dc-slider')
     this._baseLayer = undefined
     this._moveActive = false
-    this.type = Widget.getWidgetType('map_split')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('map_split')
   }
 
   /**

@@ -15,8 +15,11 @@ class HtmlLayer extends Layer {
     this._delegate = DomUtil.create('div', 'html-layer', undefined)
     this._delegate.setAttribute('id', this._id)
     this._renderRemoveCallback = undefined
-    this.type = Layer.getLayerType('html')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('html')
   }
 
   set show(show) {

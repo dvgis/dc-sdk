@@ -24,22 +24,25 @@ class ContextMenu extends Widget {
     this._defaultMenu = [
       {
         label: '飞到默认位置',
-        callback: e => {
+        callback: () => {
           this._viewer.camera.flyHome(1.5)
         },
         context: this
       },
       {
         label: '取消飞行',
-        callback: e => {
+        callback: () => {
           this._viewer.camera.cancelFlight()
         },
         context: this
       }
     ]
     this._overlayMenu = []
-    this.type = Widget.getWidgetType('contextmenu')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('contextmenu')
   }
 
   set DEFAULT_MENU(menus) {

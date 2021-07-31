@@ -17,8 +17,11 @@ class Polygon extends Overlay {
     this._delegate = new Cesium.Entity({ polygon: {} })
     this._positions = Parse.parsePositions(positions)
     this._holes = []
-    this.type = Overlay.getOverlayType('polygon')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('polygon')
   }
 
   set positions(positions) {

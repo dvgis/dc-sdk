@@ -28,8 +28,11 @@ class DiffuseWallPrimitive extends Overlay {
     this._currentHeight = height || 0
     this._currentRadius = 10
     this._style = { ...DEF_STYLE }
-    this.type = Overlay.getOverlayType('diffuse_wall_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('diffuse_wall_primitive')
   }
 
   set center(position) {

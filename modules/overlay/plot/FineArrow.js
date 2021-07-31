@@ -22,8 +22,11 @@ class FineArrow extends Overlay {
     this.headWidthFactor = 0.25
     this.headAngle = Math.PI / 8.5
     this.neckAngle = Math.PI / 13
-    this.type = Overlay.getOverlayType('fine_arrow')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('fine_arrow')
   }
 
   set positions(positions) {

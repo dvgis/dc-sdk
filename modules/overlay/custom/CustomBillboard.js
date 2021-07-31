@@ -21,6 +21,10 @@ class CustomBillboard extends Overlay {
     this._state = State.INITIALIZED
   }
 
+  get type() {
+    return Overlay.getOverlayType('custom_billboard')
+  }
+
   set position(position) {
     this._position = Parse.parsePosition(position)
     this._delegate.position = Transform.transformWGS84ToCartesian(
@@ -130,7 +134,7 @@ class CustomBillboard extends Overlay {
       ...style,
       semiMajorAxis: radius,
       semiMinorAxis: radius,
-      stRotation: new Cesium.CallbackProperty(time => {
+      stRotation: new Cesium.CallbackProperty(() => {
         stRotation += amount
         if (stRotation >= 360 || stRotation <= -360) {
           stRotation = 0

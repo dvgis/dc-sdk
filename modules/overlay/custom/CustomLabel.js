@@ -16,8 +16,11 @@ class CustomLabel extends Overlay {
     this._delegate = new Cesium.Entity({ label: {} })
     this._position = Parse.parsePosition(position)
     this._text = text
-    this.type = Overlay.getOverlayType('custom_label')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('custom_label')
   }
 
   set position(position) {
@@ -101,7 +104,7 @@ class CustomLabel extends Overlay {
       ...style,
       semiMajorAxis: radius,
       semiMinorAxis: radius,
-      stRotation: new Cesium.CallbackProperty(time => {
+      stRotation: new Cesium.CallbackProperty(() => {
         stRotation += amount
         if (stRotation >= 360 || stRotation <= -360) {
           stRotation = 0

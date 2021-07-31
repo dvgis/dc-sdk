@@ -21,8 +21,11 @@ class Point extends Overlay {
     super()
     this._delegate = new Cesium.Entity({ point: {} })
     this._position = Parse.parsePosition(position)
-    this.type = Overlay.getOverlayType('point')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('point')
   }
 
   set position(position) {

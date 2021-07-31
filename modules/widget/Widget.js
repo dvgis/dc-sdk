@@ -12,7 +12,6 @@ class Widget {
     this._enable = false
     this._wrapper = undefined
     this._ready = false
-    this.type = undefined
   }
 
   set enable(enable) {

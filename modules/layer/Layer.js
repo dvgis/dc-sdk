@@ -23,7 +23,6 @@ class Layer {
     this._layerEvent.on(LayerEventType.ADD, this._onAdd, this)
     this._layerEvent.on(LayerEventType.REMOVE, this._onRemove, this)
     this._state = undefined
-    this.type = undefined
   }
 
   get layerId() {

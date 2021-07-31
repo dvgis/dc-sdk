@@ -5,7 +5,6 @@
 
 import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
-import { Util } from '@dc-modules/utils'
 import Overlay from '../Overlay'
 import LabelPrimitive from './LabelPrimitive'
 
@@ -19,39 +18,35 @@ class BounceLabelPrimitive extends LabelPrimitive {
     super(position, text)
     this._currentOffset = new Cesium.Cartesian2(0, 0)
     this._isUp = true
-    this.type = Overlay.getOverlayType('bounce_label_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('bounce_label_primitive')
   }
 
   /**
    *
-   * @param layer
    * @private
    */
-  _onAdd(layer) {
-    if (!layer) {
+  _addedHook() {
+    if (!this._delegate || !this._layer) {
       return
     }
-    this._layer = layer
-    this._mountedHook && this._mountedHook()
-    if (this._layer?.delegate?.add && this._delegate) {
-      this._delegate = this._layer.labels.add(this._delegate)
-      this._layer.delegate.add(this)
-    }
-    this._addedHook && this._addedHook()
-    this._state = State.ADDED
+    this._delegate.layerId = this._layer?.layerId
+    this._delegate.overlayId = this._id
+    this._layer.delegate.add(this)
   }
 
-  _onRemove() {
-    if (!this._layer || !this._delegate) {
+  /**
+   *
+   * @private
+   */
+  _removedHook() {
+    if (!this._layer) {
       return
     }
-    if (this._layer?.delegate?.remove) {
-      this._layer.labels.remove(this._delegate)
-      this._layer.delegate.remove(this)
-    }
-    this._removedHook && this._removedHook()
-    this._state = State.REMOVED
+    this._layer.delegate.remove(this)
   }
 
   /**

@@ -13,8 +13,11 @@ class MapSwitch extends Widget {
     this._wrapper = DomUtil.create('div', 'dc-map-switch')
     this._config = undefined
     this._cache = []
-    this.type = Widget.getWidgetType('map_switch')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('map_switch')
   }
 
   /**

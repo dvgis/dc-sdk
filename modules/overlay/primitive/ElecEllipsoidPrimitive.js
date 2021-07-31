@@ -19,8 +19,11 @@ class ElecEllipsoidPrimitive extends Overlay {
         geometry: {}
       })
     })
-    this.type = Overlay.getOverlayType('elec_ellipsoid_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('elec_ellipsoid_primitive')
   }
 
   set position(position) {

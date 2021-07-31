@@ -16,8 +16,11 @@ class ModelPrimitive extends Overlay {
     this._position = Parse.parsePosition(position)
     this._modelUrl = modelUrl
     this._delegate = Cesium.Model.fromGltf({ url: modelUrl })
-    this.type = Overlay.getOverlayType('model_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('model_primitive')
   }
 
   get readyPromise() {

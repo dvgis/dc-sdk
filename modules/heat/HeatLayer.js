@@ -42,6 +42,10 @@ class HeatLayer extends Layer {
     this._state = State.INITIALIZED
   }
 
+  get type() {
+    return Layer.getLayerType('heat')
+  }
+
   /**
    *
    * @private

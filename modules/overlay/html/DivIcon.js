@@ -24,8 +24,11 @@ class DivIcon extends Overlay {
       left: '0'
     })
     this.content = content
-    this.type = Overlay.getOverlayType('div_icon')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('div_icon')
   }
 
   set show(show) {

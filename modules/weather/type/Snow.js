@@ -16,8 +16,11 @@ class Snow {
     this._delegate = undefined
     this._enable = false
     this._speed = 10.0
-    this.type = 'snow'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'snow'
   }
 
   set enable(enable) {

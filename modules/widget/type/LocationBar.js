@@ -15,10 +15,13 @@ class LocationBar extends Widget {
     this._wrapper = DomUtil.create('div', 'dc-location-bar')
     this._mouseEl = undefined
     this._cameraEl = undefined
-    this.type = Widget.getWidgetType('location_bar')
     this._state = State.INITIALIZED
     this._lastMouseUpdate = Cesium.getTimestamp()
     this._lastCameraUpdate = Cesium.getTimestamp()
+  }
+
+  get type() {
+    return Widget.getWidgetType('location_bar')
   }
 
   /**

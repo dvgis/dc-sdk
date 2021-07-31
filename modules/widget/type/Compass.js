@@ -27,8 +27,11 @@ class Compass extends Widget {
     this._rotateFrame = undefined
     this._mouseMoveHandle = undefined
     this._mouseUpHandle = undefined
-    this.type = Widget.getWidgetType('compass')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('compass')
   }
 
   /**
@@ -115,7 +118,7 @@ class Compass extends Widget {
     }
   }
 
-  _handleDoubleClick(event) {
+  _handleDoubleClick() {
     let scene = this._viewer.scene
     let camera = scene.camera
     let sscc = scene.screenSpaceCameraController
@@ -272,7 +275,7 @@ class Compass extends Widget {
     this._updateAngleAndOpacity(vector, this._compassRectangle.width)
   }
 
-  _orbitTickFunction(e) {
+  _orbitTickFunction() {
     let scene = this._viewer.scene
     let camera = this._viewer.camera
     let timestamp = Cesium.getTimestamp()
