@@ -16,8 +16,11 @@ class Bloom {
     this._sigma = 3.8
     this._stepSize = 5
     this._selected = []
-    this.type = 'bloom'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'bloom'
   }
 
   set enable(enable) {

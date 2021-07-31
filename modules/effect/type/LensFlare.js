@@ -16,8 +16,11 @@ class LensFlare {
     this._dirtAmount = 0.4
     this._haloWidth = 0.4
     this._selected = []
-    this.type = 'lens_flare'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'lens_flare'
   }
 
   set enable(enable) {

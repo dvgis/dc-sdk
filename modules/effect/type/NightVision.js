@@ -10,8 +10,11 @@ class NightVision {
   constructor() {
     this._enable = false
     this._selected = []
-    this.type = 'night'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'night'
   }
 
   set enable(enable) {

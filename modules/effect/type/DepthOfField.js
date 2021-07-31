@@ -16,8 +16,11 @@ class DepthOfField {
     this._sigma = 3.8
     this._stepSize = 2.5
     this._selected = []
-    this.type = 'depth_of_field'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'depth_of_field'
   }
 
   set enable(enable) {
