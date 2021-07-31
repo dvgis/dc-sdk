@@ -6,7 +6,6 @@
 import { mapv } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import { Layer } from '@dc-modules/layer'
-import Overlay from '../overlay/Overlay'
 
 class MapvLayer extends Layer {
   constructor(id, option = {}) {
@@ -21,7 +20,7 @@ class MapvLayer extends Layer {
   }
 
   get type() {
-    return Overlay.getOverlayType('mapv')
+    return Layer.getLayerType('mapv')
   }
 
   set show(show) {
