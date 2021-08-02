@@ -12,7 +12,7 @@ class TrackController {
     this._viewer = viewer
     this._cache = {}
     this._delegete = new Cesium.CustomDataSource('history-track-layer')
-    viewer.dataSources.add(this._delegete)
+    this._viewer.dataSources.add(this._delegete)
     this._activedTrack = undefined
     this._viewMode = undefined
     this._viewOption = {}

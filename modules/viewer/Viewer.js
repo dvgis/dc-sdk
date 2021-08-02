@@ -185,8 +185,7 @@ class Viewer {
    */
   _addLayerGroup(layerGroup) {
     if (
-      layerGroup &&
-      layerGroup.layerGroupEvent &&
+      layerGroup?.layerGroupEvent &&
       !Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
     ) {
       layerGroup.layerGroupEvent.fire(LayerGroupEventType.ADD, this)
@@ -201,8 +200,7 @@ class Viewer {
    */
   _removeLayerGroup(layerGroup) {
     if (
-      layerGroup &&
-      layerGroup.layerGroupEvent &&
+      layerGroup?.layerGroupEvent &&
       Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
     ) {
       layerGroup.layerGroupEvent.fire(LayerGroupEventType.REMOVE, this)
@@ -215,7 +213,7 @@ class Viewer {
    * @private
    */
   _addLayer(layer) {
-    if (layer && layer.layerEvent) {
+    if (layer?.layerEvent) {
       !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
       if (!Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
         layer.layerEvent.fire(LayerEventType.ADD, this)
@@ -230,8 +228,7 @@ class Viewer {
    */
   _removeLayer(layer) {
     if (
-      layer &&
-      layer.layerEvent &&
+      layer?.layerEvent &&
       Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
     ) {
       layer.layerEvent.fire(LayerEventType.REMOVE, this)
@@ -435,8 +432,7 @@ class Viewer {
    */
   hasLayer(layer) {
     return (
-      layer &&
-      layer.layerEvent &&
+      layer?.layerEvent &&
       Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
     )
   }

@@ -129,8 +129,7 @@ class Layer {
    */
   _addOverlay(overlay) {
     if (
-      overlay &&
-      overlay.overlayEvent &&
+      overlay?.overlayEvent &&
       !this._cache.hasOwnProperty(overlay.overlayId)
     ) {
       this._cache[overlay.overlayId] = overlay
@@ -148,8 +147,7 @@ class Layer {
    */
   _removeOverlay(overlay) {
     if (
-      overlay &&
-      overlay.overlayEvent &&
+      overlay?.overlayEvent &&
       this._cache.hasOwnProperty(overlay.overlayId)
     ) {
       this._delegate && overlay.overlayEvent.fire(OverlayEventType.REMOVE, this)
@@ -277,7 +275,7 @@ class Layer {
    * @returns {Layer}
    */
   addTo(viewer) {
-    if (viewer && viewer.addLayer) {
+    if (viewer?.addLayer) {
       viewer.addLayer(this)
     }
     return this
