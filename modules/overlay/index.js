@@ -48,6 +48,7 @@ export { default as DiffuseWallPrimitive } from './primitive/DiffuseWallPrimitiv
 export { default as ElecEllipsoidPrimitive } from './primitive/ElecEllipsoidPrimitive'
 export { default as FlowLinePrimitive } from './primitive/FlowLinePrimitive'
 export { default as LabelPrimitive } from './primitive/LabelPrimitive'
+export { default as ModelCollectionPrimitive } from './primitive/ModelCollectionPrimitive'
 export { default as ModelPrimitive } from './primitive/ModelPrimitive'
 export { default as PointPrimitive } from './primitive/PointPrimitive.js'
 export { default as PolylinePrimitive } from './primitive/PolylinePrimitive.js'

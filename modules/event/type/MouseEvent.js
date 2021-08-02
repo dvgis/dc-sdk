@@ -141,7 +141,7 @@ class MouseEvent extends Event {
   /**
    * Returns the target information for the mouse event
    * @param target
-   * @returns {{overlay: any, feature: any, layer: any}}
+   * @returns {{instanceId: *, overlay: undefined, feature: undefined, layer: undefined}}
    * @private
    */
   _getTargetInfo(target) {
@@ -150,22 +150,22 @@ class MouseEvent extends Event {
     let feature = undefined
 
     // for Entity
-    if (target && target.id && target.id instanceof Cesium.Entity) {
+    if (target?.id instanceof Cesium.Entity) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.id.layerId)[0]
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.id.overlayId)
       }
     }
 
     // for Cesium3DTileFeature
-    else if (target && target instanceof Cesium.Cesium3DTileFeature) {
+    else if (target instanceof Cesium.Cesium3DTileFeature) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.tileset.layerId)[0]
       feature = target
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.tileset.overlayId)
         if (feature && feature.getPropertyNames) {
           let propertyNames = feature.getPropertyNames()
@@ -177,30 +177,31 @@ class MouseEvent extends Event {
     }
 
     // for Cesium3DTileset
-    else if (
-      target &&
-      target.primitive &&
-      target.primitive instanceof Cesium.Cesium3DTileset
-    ) {
+    else if (target?.primitive instanceof Cesium.Cesium3DTileset) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.primitive.overlayId)
       }
     }
 
     // for Primitve
-    else if (target && target.primitive) {
+    else if (target?.primitive) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.primitive.overlayId)
       }
     }
 
-    return { layer: layer, overlay: overlay, feature: feature }
+    return {
+      layer: layer,
+      overlay: overlay,
+      feature: feature,
+      instanceId: target?.instanceId
+    }
   }
 
   /**
