@@ -1,5 +1,21 @@
 # Change Log
 
+### 2.4.0 - 2021-07-07
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.84.0
+
+#### Additions 🎉
+
+- Add bounce primitive overlays
+- Add model collection primitive
+
+#### Fixes 🔧
+
+- Refine type property
+- Improve mouse event
+
 ### 2.3.2 - 2021-07-25
 
 #### Additions 🎉
