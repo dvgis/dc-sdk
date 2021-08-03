@@ -126,13 +126,23 @@ class MouseEvent extends Event {
     let overlayId = undefined
 
     // for Entity
-    if (target && target.id && target.id instanceof Cesium.Entity) {
+    if (target?.id instanceof Cesium.Entity) {
       overlayId = target.id.overlayId
     }
 
     // for Cesium3DTileFeature
-    if (target && target instanceof Cesium.Cesium3DTileFeature) {
+    else if (target instanceof Cesium.Cesium3DTileFeature) {
       overlayId = target.tileset.overlayId
+    }
+
+    // for Cesium3DTileset
+    else if (target?.primitive instanceof Cesium.Cesium3DTileset) {
+      overlayId = target.primitive.overlayId
+    }
+
+    // for Primitve
+    else if (target?.primitive) {
+      overlayId = target.primitive.overlayId
     }
 
     return overlayId
@@ -215,7 +225,7 @@ class MouseEvent extends Event {
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo?.overlay
     // get Overlay Event
-    if (overlay && overlay.overlayEvent) {
+    if (overlay?.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
     }
 
@@ -231,7 +241,7 @@ class MouseEvent extends Event {
       })
 
     // get Drill Pick Event
-    if (overlay && overlay.allowDrillPicking) {
+    if (overlay?.allowDrillPicking) {
       let drillInfos = this._getDrillInfos(mouseInfo.windowPosition)
       drillInfos.forEach(drillInfo => {
         let dillOverlay = drillInfo?.overlay
