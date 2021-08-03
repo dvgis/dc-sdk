@@ -22,6 +22,10 @@ class ModelCollectionPrimitive extends Overlay {
     return Overlay.getOverlayType('model_collection_primitive')
   }
 
+  get readyPromise() {
+    return this._delegate.readyPromise
+  }
+
   set attrs(attrs) {
     this._attrs = attrs
     return this
