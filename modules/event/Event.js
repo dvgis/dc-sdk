@@ -78,8 +78,14 @@ class Event {
    * @param context
    */
   once(type, callback, context) {
-    let removeCallback = this._on(type, callback, context)
-    removeCallback && removeCallback()
+    let removeCallback = this._on(
+      type,
+      e => {
+        callback(e)
+        removeCallback && removeCallback()
+      },
+      context
+    )
   }
 
   /**
