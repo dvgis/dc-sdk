@@ -15,6 +15,7 @@
 
 - Refine type property
 - Improve mouse event
+- Improve once event
 
 ### 2.3.2 - 2021-07-25
 
