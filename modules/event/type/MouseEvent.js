@@ -16,8 +16,12 @@ class MouseEvent extends Event {
     this._viewer = viewer
     this._selected = undefined
     this._setInputAction()
+    this.on(MouseEventType.LEFT_DOWN, this._leftDownHandler, this)
+    this.on(MouseEventType.LEFT_UP, this._leftUpHandler, this)
     this.on(MouseEventType.CLICK, this._clickHandler, this)
     this.on(MouseEventType.DB_CLICK, this._dbClickHandler, this)
+    this.on(MouseEventType.RIGHT_DOWN, this._rightDownHandler, this)
+    this.on(MouseEventType.RIGHT_UP, this._rightUpHandler, this)
     this.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this.on(MouseEventType.MOUSE_MOVE, this._mouseMoveHandler, this)
     this.on(MouseEventType.WHEEL, this._mouseWheelHandler, this)
@@ -268,7 +272,7 @@ class MouseEvent extends Event {
    * @private
    */
   _clickHandler(movement) {
-    if (!movement || !movement.position) {
+    if (!movement?.position) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
@@ -282,7 +286,7 @@ class MouseEvent extends Event {
    * @private
    */
   _dbClickHandler(movement) {
-    if (!movement || !movement.position) {
+    if (!movement?.position) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
@@ -296,7 +300,7 @@ class MouseEvent extends Event {
    * @private
    */
   _rightClickHandler(movement) {
-    if (!movement || !movement.position) {
+    if (!movement?.position) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
@@ -310,7 +314,7 @@ class MouseEvent extends Event {
    * @private
    */
   _mouseMoveHandler(movement) {
-    if (!movement || !movement.endPosition) {
+    if (!movement?.endPosition) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.endPosition)
@@ -327,6 +331,50 @@ class MouseEvent extends Event {
       this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo)
       this._selected = mouseInfo
     }
+  }
+
+  /**
+   * Default mouse left down event handler
+   * @param movement
+   * @private
+   */
+  _leftDownHandler(movement) {
+    if (!movement?.position) {
+      return false
+    }
+    let mouseInfo = this._getMouseInfo(movement.position)
+    this._raiseEvent(MouseEventType.LEFT_DOWN, mouseInfo)
+  }
+
+  /**
+   * Default mouse left up event handler
+   * @param movement
+   * @private
+   */
+  _leftUpHandler(movement) {
+    this._raiseEvent(MouseEventType.LEFT_UP, { movement })
+  }
+
+  /**
+   * Default mouse right down event handler
+   * @param movement
+   * @private
+   */
+  _rightDownHandler(movement) {
+    if (!movement?.position) {
+      return false
+    }
+    let mouseInfo = this._getMouseInfo(movement.position)
+    this._raiseEvent(MouseEventType.RIGHT_DOWN, mouseInfo)
+  }
+
+  /**
+   * Default mouse right up event handler
+   * @param movement
+   * @private
+   */
+  _rightUpHandler(movement) {
+    this._raiseEvent(MouseEventType.RIGHT_UP, { movement })
   }
 
   /**

@@ -11,7 +11,11 @@ const BaseEventType = {
 }
 
 const MouseEventType = {
+  LEFT_DOWN: Cesium.ScreenSpaceEventType.LEFT_DOWN,
+  LEFT_UP: Cesium.ScreenSpaceEventType.LEFT_UP,
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_DOWN: Cesium.ScreenSpaceEventType.RIGHT_DOWN,
+  RIGHT_UP: Cesium.ScreenSpaceEventType.RIGHT_UP,
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
