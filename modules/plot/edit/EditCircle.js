@@ -22,11 +22,6 @@ class EditCircle extends Edit {
   _mountedHook() {
     this._radius = this._overlay.radius
     this._center = Transform.transformWGS84ToCartesian(this._overlay.center)
-    // this._delegate = new Cesium.Entity({
-    //   polygon: {
-    //     material: this._overlay.delegate?.polygon?.material
-    //   }
-    // })
     this._positions = [].concat([
       this._center,
       this._computeCirclePoints(this._center, this._radius)[0]
@@ -80,7 +75,7 @@ class EditCircle extends Edit {
    *
    * @private
    */
-  _stopdHook() {
+  _stopedHook() {
     this._overlay.center = Transform.transformCartesianToWGS84(
       this._positions[0]
     )
