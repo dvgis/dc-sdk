@@ -338,6 +338,19 @@ class Viewer {
   }
 
   /**
+   *
+   * @param windowPosition
+   * @returns {Promise}
+   */
+  getImageryLayerInfo(windowPosition) {
+    let ray = this._delegate.camera.getPickRay(windowPosition)
+    return this._delegate.imageryLayers.pickImageryLayerFeatures(
+      ray,
+      this._delegate.scene
+    )
+  }
+
+  /**
    * Adds the terrain
    * @param terrain
    * @returns {Viewer}
