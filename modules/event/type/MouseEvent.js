@@ -228,15 +228,25 @@ class MouseEvent extends Event {
     let event = undefined
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo?.overlay
+    let layer = targetInfo?.layer
     // get Overlay Event
     if (overlay?.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
     }
 
+    // get Layer Event
+    if ((!event || event.numberOfListeners === 0) && layer?.layerEvent) {
+      event = layer.layerEvent.getEvent(type)
+    }
+
     // get Viewer Event
-    if (!event || event.numberOfListeners === 0) {
+    if (
+      (!event || event.numberOfListeners === 0) &&
+      this._viewer?.viewerEvent
+    ) {
       event = this._viewer.viewerEvent.getEvent(type)
     }
+
     event &&
       event.numberOfListeners > 0 &&
       event.raiseEvent({
@@ -249,11 +259,20 @@ class MouseEvent extends Event {
       let drillInfos = this._getDrillInfos(mouseInfo.windowPosition)
       drillInfos.forEach(drillInfo => {
         let dillOverlay = drillInfo?.overlay
+        let dillLayer = drillInfo?.layer
         if (
           dillOverlay?.overlayId !== overlay.overlayId &&
           dillOverlay?.overlayEvent
         ) {
+          // get Overlay Event
           event = dillOverlay.overlayEvent.getEvent(type)
+          // get Layer Event
+          if (
+            (!event || event.numberOfListeners === 0) &&
+            dillLayer?.layerEvent
+          ) {
+            event = dillLayer.layerEvent.getEvent(type)
+          }
           event &&
             event.numberOfListeners > 0 &&
             event.raiseEvent({

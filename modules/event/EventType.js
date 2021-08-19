@@ -62,7 +62,9 @@ const LayerGroupEventType = BaseEventType
 
 const LayerEventType = {
   ...BaseEventType,
-  CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK
+  CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
+  DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
 }
 
 const TrackEventType = {
