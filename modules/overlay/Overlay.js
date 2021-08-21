@@ -22,8 +22,8 @@ class Overlay {
     this._allowDrillPicking = false
     this._contextMenu = []
     this._overlayEvent = new OverlayEvent()
-    this.on(OverlayEventType.ADD, this._onAdd, this)
-    this.on(OverlayEventType.REMOVE, this._onRemove, this)
+    this._overlayEvent.on(OverlayEventType.ADD, this._onAdd, this)
+    this._overlayEvent.on(OverlayEventType.REMOVE, this._onRemove, this)
   }
 
   get overlayId() {

@@ -22,7 +22,6 @@ class Layer {
     this._layerEvent = new LayerEvent()
     this._layerEvent.on(LayerEventType.ADD, this._onAdd, this)
     this._layerEvent.on(LayerEventType.REMOVE, this._onRemove, this)
-    this._state = undefined
   }
 
   get layerId() {
@@ -128,12 +127,9 @@ class Layer {
    * @private
    */
   _addOverlay(overlay) {
-    if (
-      overlay?.overlayEvent &&
-      !this._cache.hasOwnProperty(overlay.overlayId)
-    ) {
+    if (!this._cache.hasOwnProperty(overlay.overlayId)) {
       this._cache[overlay.overlayId] = overlay
-      this._delegate && overlay.overlayEvent.fire(OverlayEventType.ADD, this)
+      this._delegate && overlay.fire(OverlayEventType.ADD, this)
       if (this._state === State.CLEARED) {
         this._state = State.ADDED
       }
@@ -146,11 +142,8 @@ class Layer {
    * @private
    */
   _removeOverlay(overlay) {
-    if (
-      overlay?.overlayEvent &&
-      this._cache.hasOwnProperty(overlay.overlayId)
-    ) {
-      this._delegate && overlay.overlayEvent.fire(OverlayEventType.REMOVE, this)
+    if (this._cache.hasOwnProperty(overlay.overlayId)) {
+      this._delegate && overlay.fire(OverlayEventType.REMOVE, this)
       delete this._cache[overlay.overlayId]
     }
   }
@@ -287,6 +280,41 @@ class Layer {
    * @param style
    */
   setStyle(style) {}
+
+  /**
+   * Subscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Layer}
+   */
+  on(type, callback, context) {
+    this._layerEvent.on(type, callback, context || this)
+    return this
+  }
+
+  /**
+   * Unsubscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Layer}
+   */
+  off(type, callback, context) {
+    this._layerEvent.off(type, callback, context || this)
+    return this
+  }
+
+  /**
+   * Trigger subscription event
+   * @param type
+   * @param params
+   * @returns {Layer}
+   */
+  fire(type, params) {
+    this._layerEvent.fire(type, params)
+    return this
+  }
 
   /**
    * Registers Type

@@ -213,12 +213,10 @@ class Viewer {
    * @private
    */
   _addLayer(layer) {
-    if (layer?.layerEvent) {
-      !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
-      if (!Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
-        layer.layerEvent.fire(LayerEventType.ADD, this)
-        this._layerCache[layer.type][layer.id] = layer
-      }
+    !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
+    if (!Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
+      layer.fire(LayerEventType.ADD, this)
+      this._layerCache[layer.type][layer.id] = layer
     }
   }
 
@@ -227,11 +225,8 @@ class Viewer {
    * @private
    */
   _removeLayer(layer) {
-    if (
-      layer?.layerEvent &&
-      Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
-    ) {
-      layer.layerEvent.fire(LayerEventType.REMOVE, this)
+    if (Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
+      layer.fire(LayerEventType.REMOVE, this)
       delete this._layerCache[layer.type][layer.id]
     }
   }
@@ -444,10 +439,7 @@ class Viewer {
    * @returns {boolean}
    */
   hasLayer(layer) {
-    return (
-      layer?.layerEvent &&
-      Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
-    )
+    return Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
   }
 
   /**
