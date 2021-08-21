@@ -1,5 +1,17 @@
 # Change Log
 
+### 2.4.1 - 2021-08-21
+
+#### Additions 🎉
+
+- Added support for layer mouse events [#53](https://github.com/dvgis/dc-sdk/issues/54)
+- Add partial mouse default events [#54](https://github.com/dvgis/dc-sdk/issues/54)
+- Add function to get tile information
+
+#### Fixes 🔧
+
+- Improve the plot function
+
 ### 2.4.0 - 2021-08-07
 
 #### Breaking Changes 📣
