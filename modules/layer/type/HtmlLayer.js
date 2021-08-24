@@ -50,21 +50,19 @@ class HtmlLayer extends Layer {
       this.eachOverlay(item => {
         if (item && item.position) {
           let position = Transform.transformWGS84ToCartesian(item.position)
-          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
-            scene,
-            position
-          )
           let up = scene.globe.ellipsoid.geodeticSurfaceNormal(
             position,
             new Cesium.Cartesian3()
           )
-
-          windowCoord &&
-            item._updateStyle(
-              { transform: windowCoord },
-              Cesium.Cartesian3.distance(position, cp),
-              Cesium.Cartesian3.dot(cd, up) <= 0
-            )
+          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+            scene,
+            position
+          )
+          item._updateStyle(
+            windowCoord,
+            Cesium.Cartesian3.distance(position, cp),
+            Cesium.Cartesian3.dot(cd, up) <= 0
+          )
         }
       }, this)
     }, this)

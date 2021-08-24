@@ -68,22 +68,22 @@ class DivIcon extends Overlay {
 
   /**
    * Updates style
-   * @param style
+   * @param windowCoord
    * @param distance
    * @param isFront
    * @private
    */
-  _updateStyle(style, distance, isFront) {
-    if (!this._show) {
+  _updateStyle(windowCoord, distance, isFront) {
+    if (!this._show || !windowCoord) {
       return
     }
-    let isDisplay = true
-    let translate3d = 'translate3d(0,0,0)'
-    if (style.transform) {
-      let x = style.transform.x - this._delegate.offsetWidth / 2
-      let y = style.transform.y - this._delegate.offsetHeight / 2
-      translate3d = `translate3d(${Math.round(x)}px,${Math.round(y)}px, 0)`
-    }
+
+    // set translate
+    let x = windowCoord.x - this._delegate.offsetWidth / 2
+    let y = windowCoord.y - this._delegate.offsetHeight / 2
+    let translate3d = `translate3d(${Math.round(x)}px,${Math.round(y)}px, 0)`
+
+    // set scale
     let scale3d = 'scale3d(1,1,1)'
     let scaleByDistance = this._style.scaleByDistance
     if (distance && scaleByDistance) {
@@ -99,6 +99,9 @@ class DivIcon extends Overlay {
         scale3d = `scale3d(${scale},${scale},1)`
       }
     }
+
+    // set condition
+    let isDisplay = true
     let distanceDisplayCondition = this._style.distanceDisplayCondition
     if (distance && distanceDisplayCondition) {
       isDisplay = isBetween(
@@ -107,6 +110,8 @@ class DivIcon extends Overlay {
         distanceDisplayCondition.far
       )
     }
+
+    // update style
     this._delegate.style.transform = `${translate3d} ${scale3d}`
     this._delegate.style.visibility =
       isDisplay && isFront ? 'visible' : 'hidden'
@@ -126,6 +131,7 @@ class DivIcon extends Overlay {
       overlay: this,
       position: Transform.transformWGS84ToCartesian(this._position)
     }
+
     this._delegate.addEventListener('click', () => {
       this._overlayEvent.fire(MouseEventType.CLICK, params)
     })
