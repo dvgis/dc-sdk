@@ -23,7 +23,7 @@ class CoordinateSystem {
   }
 
   dataToPoint(data) {
-    let result = [0, 0]
+    let result = []
     let cartesian3 = Cesium.Cartesian3.fromDegrees(data[0], data[1])
     if (!cartesian3) {
       return result
