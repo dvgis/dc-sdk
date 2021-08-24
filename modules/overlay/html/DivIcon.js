@@ -70,16 +70,20 @@ class DivIcon extends Overlay {
    * Updates style
    * @param style
    * @param distance
+   * @param isFront
    * @private
    */
-  _updateStyle(style, distance) {
+  _updateStyle(style, distance, isFront) {
+    if (!this._show) {
+      return
+    }
+    let isDisplay = true
     let translate3d = 'translate3d(0,0,0)'
     if (style.transform) {
       let x = style.transform.x - this._delegate.offsetWidth / 2
       let y = style.transform.y - this._delegate.offsetHeight / 2
       translate3d = `translate3d(${Math.round(x)}px,${Math.round(y)}px, 0)`
     }
-
     let scale3d = 'scale3d(1,1,1)'
     let scaleByDistance = this._style.scaleByDistance
     if (distance && scaleByDistance) {
@@ -95,18 +99,17 @@ class DivIcon extends Overlay {
         scale3d = `scale3d(${scale},${scale},1)`
       }
     }
-
     let distanceDisplayCondition = this._style.distanceDisplayCondition
     if (distance && distanceDisplayCondition) {
-      this.show =
-        this._show &&
-        isBetween(
-          distance,
-          distanceDisplayCondition.near,
-          distanceDisplayCondition.far
-        )
+      isDisplay = isBetween(
+        distance,
+        distanceDisplayCondition.near,
+        distanceDisplayCondition.far
+      )
     }
     this._delegate.style.transform = `${translate3d} ${scale3d}`
+    this._delegate.style.visibility =
+      isDisplay && isFront ? 'visible' : 'hidden'
   }
 
   /**

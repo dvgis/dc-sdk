@@ -45,7 +45,8 @@ class HtmlLayer extends Layer {
     this._viewer.dcContainer.appendChild(this._delegate)
     let scene = this._viewer.scene
     this._renderRemoveCallback = scene.postRender.addEventListener(() => {
-      let cameraPosition = this._viewer.camera.positionWC
+      let cp = this._viewer.camera.positionWC
+      let cd = this._viewer.camera.direction
       this.eachOverlay(item => {
         if (item && item.position) {
           let position = Transform.transformWGS84ToCartesian(item.position)
@@ -53,8 +54,17 @@ class HtmlLayer extends Layer {
             scene,
             position
           )
-          let distance = Cesium.Cartesian3.distance(position, cameraPosition)
-          windowCoord && item._updateStyle({ transform: windowCoord }, distance)
+          let up = scene.globe.ellipsoid.geodeticSurfaceNormal(
+            position,
+            new Cesium.Cartesian3()
+          )
+
+          windowCoord &&
+            item._updateStyle(
+              { transform: windowCoord },
+              Cesium.Cartesian3.distance(position, cp),
+              Cesium.Cartesian3.dot(cd, up) <= 0
+            )
         }
       }, this)
     }, this)
