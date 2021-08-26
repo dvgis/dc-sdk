@@ -4,8 +4,8 @@
 
 #### Fixes 🔧
 
-- 隐藏DivIcon当在地球背面时 [#55](https://github.com/dvgis/dc-sdk/issues/55)
-- 隐藏图表图层当在地球背面 [#56](https://github.com/dvgis/dc-sdk/issues/56)
+- 隐藏图表图层当在地球背面 [#55](https://github.com/dvgis/dc-sdk/issues/55)
+- 隐藏DivIcon当在地球背面时 [#56](https://github.com/dvgis/dc-sdk/issues/56)
 - 完善模型位置编辑工具 [#57](https://github.com/dvgis/dc-sdk/issues/57)
 - 完善地形裁剪分析 [#58](https://github.com/dvgis/dc-sdk/issues/58)
 

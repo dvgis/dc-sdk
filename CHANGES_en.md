@@ -4,8 +4,8 @@
 
 #### Fixes 🔧
 
-- Hide the div icon at the back [#55](https://github.com/dvgis/dc-sdk/issues/55)
-- Hide the chart layer at the back [#56](https://github.com/dvgis/dc-sdk/issues/56)
+- Hide the chart layer at the back [#55](https://github.com/dvgis/dc-sdk/issues/55)
+- Hide the div icon at the back [#56](https://github.com/dvgis/dc-sdk/issues/56)
 - Improve the position editor [#57](https://github.com/dvgis/dc-sdk/issues/57)
 - Improve the terrain clipping [#58](https://github.com/dvgis/dc-sdk/issues/58)
 
