@@ -1,5 +1,11 @@
 # Change Log
 
+### 2.5.0 - 2021-09-04
+
+#### Fixes 🔧
+
+- Fix the problem that roaming cannot set parameters and the failed camera cannot move [#65](https://github.com/dvgis/dc-sdk/issues/65)
+
 ### 2.4.2 - 2021-08-28
 
 #### Fixes 🔧
