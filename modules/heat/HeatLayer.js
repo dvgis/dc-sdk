@@ -61,7 +61,7 @@ class HeatLayer extends Layer {
 
   /**
    *
-   * @returns {string|undefined}
+   * @returns {HTMLCanvasElement|undefined}
    * @private
    */
   _createGradientTexture() {
@@ -74,11 +74,11 @@ class HeatLayer extends Layer {
     let ctx = canvas.getContext('2d')
     let grd = ctx.createLinearGradient(0, 0, 200, 0)
     for (let key in this._options.gradient) {
-      grd.addColorStop(+key, this._options.gradient[+key])
+      grd.addColorStop(+key, this._options.gradient[key])
     }
     ctx.fillStyle = grd
     ctx.fillRect(0, 0, 200, 10)
-    return canvas.toDataURL()
+    return canvas
   }
 
   /**
