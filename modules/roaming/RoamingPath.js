@@ -101,7 +101,7 @@ class RoamingPath {
    * @param viewOption
    * @private
    */
-  _onPostRender(viewer, viewOption) {
+  _onPostRender({ viewer, viewOption }) {
     if (!this.actived) {
       return false
     }
