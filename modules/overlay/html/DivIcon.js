@@ -87,12 +87,14 @@ class DivIcon extends Overlay {
     let scale3d = 'scale3d(1,1,1)'
     let scaleByDistance = this._style.scaleByDistance
     if (distance && scaleByDistance) {
-      let nearValue = scaleByDistance.nearValue
-      let farValue = scaleByDistance.farValue
-      let f = distance / scaleByDistance.far
-      if (distance < scaleByDistance.near) {
+      let near = scaleByDistance.near || 0.0
+      let nearValue = scaleByDistance.nearValue || 1.0
+      let far = scaleByDistance.far || Number.MAX_VALUE
+      let farValue = scaleByDistance.farValue || 0.0
+      let f = distance / far
+      if (distance < near) {
         scale3d = `scale3d(${nearValue},${nearValue},1)`
-      } else if (distance > scaleByDistance.far) {
+      } else if (distance > far) {
         scale3d = `scale3d(${farValue},${farValue},1)`
       } else {
         let scale = farValue + f * (nearValue - farValue)
@@ -106,8 +108,8 @@ class DivIcon extends Overlay {
     if (distance && distanceDisplayCondition) {
       isDisplay = isBetween(
         distance,
-        distanceDisplayCondition.near,
-        distanceDisplayCondition.far
+        distanceDisplayCondition.near || 0.0,
+        distanceDisplayCondition.far || Number.MAX_VALUE
       )
     }
 
