@@ -2,10 +2,15 @@
 
 ### 2.5.0 - 2021-09-04
 
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.85.0
+
 #### Fixes 🔧
 
 - Fix the problem that roaming cannot set parameters and the failed camera cannot move [#65](https://github.com/dvgis/dc-sdk/issues/65)
 - Fix the problem that the gradient setting of heat layer [#66](https://github.com/dvgis/dc-sdk/issues/66)
+- Improve the DivIcon style
 
 ### 2.4.2 - 2021-08-28
 
