@@ -88,11 +88,11 @@ class Cloud {
               alpha:
                 'texture2D(image, fract(repeat * materialInput.st)).r * color.a',
               diffuse: 'vec3(1.0)'
-            },
-            translucent: true,
-            aboveGround: true
+            }
           }
-        })
+        }),
+        translucent: true,
+        aboveGround: true
       })
     })
     this._delegate.geometryInstances = new Cesium.GeometryInstance({
