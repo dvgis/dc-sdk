@@ -45,7 +45,7 @@ class MapSwitch extends Widget {
       let width = 80
       let rightMargin = 5
       if (self._cache.length > 0) {
-        width = self._cache.length * (width+rightMargin) - rightMargin
+        width = self._cache.length * (width + rightMargin) - rightMargin
       }
       this._wrapper.style.width = `${width}px`
     }
