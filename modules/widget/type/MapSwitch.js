@@ -43,8 +43,9 @@ class MapSwitch extends Widget {
     let self = this
     this._wrapper.onmouseover = () => {
       let width = 80
+      let rightMargin = 5
       if (self._cache.length > 0) {
-        width = self._cache.length * 85
+        width = self._cache.length * (width+rightMargin) - rightMargin
       }
       this._wrapper.style.width = `${width}px`
     }
