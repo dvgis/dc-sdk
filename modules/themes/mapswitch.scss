@@ -10,7 +10,9 @@
   -webkit-transition: width 2s; /* Safari and Chrome */
   -o-transition: width 2s; /* Opera */
   padding: 5px 5px;
+  box-sizing: content-box;
   box-shadow: 2px 2px 3px #888888;
+  white-space: nowrap;
   cursor: pointer;
   overflow: hidden;
   visibility: hidden;
