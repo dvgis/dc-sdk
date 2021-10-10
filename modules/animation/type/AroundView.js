@@ -59,7 +59,7 @@ class AroundView extends Animation {
           ? Cesium.Math.toRadians(this._options.pitch)
           : this._viewer.camera.pitch,
         roll: this._options.roll
-          ? Cesium.Math.toRadians(this._options.pitch)
+          ? Cesium.Math.toRadians(this._options.roll)
           : this._viewer.camera.roll
       }
     })
