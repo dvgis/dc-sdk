@@ -1,5 +1,16 @@
 # Change Log
 
+### 2.6.0 - 2021-10-10
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.86.0
+
+#### Fixes 🔧
+
+- Improve the AroundView [#72](https://github.com/dvgis/dc-sdk/issues/72)
+
+
 ### 2.5.0 - 2021-09-04
 
 #### Breaking Changes 📣

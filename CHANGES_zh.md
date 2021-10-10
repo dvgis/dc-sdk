@@ -1,5 +1,15 @@
 # Change Log
 
+### 2.6.0 - 2021-10-10
+
+#### Breaking Changes 📣
+
+- 升级 Cesium 到 1.86.0 版本
+
+#### Fixes 🔧
+
+- 完善相机环绕功能 [#72](https://github.com/dvgis/dc-sdk/issues/72)
+
 ### 2.5.0 - 2021-09-04
 
 #### Breaking Changes 📣
