@@ -8,6 +8,7 @@
 
 #### Fixes 🔧
 
+- 完善地图切换组件样式 [#70](https://github.com/dvgis/dc-sdk/issues/70)
 - 完善相机环绕功能 [#72](https://github.com/dvgis/dc-sdk/issues/72)
 
 ### 2.5.0 - 2021-09-04

@@ -8,8 +8,8 @@
 
 #### Fixes 🔧
 
+- Improve the MapSwitch [#70](https://github.com/dvgis/dc-sdk/issues/70)
 - Improve the AroundView [#72](https://github.com/dvgis/dc-sdk/issues/72)
-
 
 ### 2.5.0 - 2021-09-04
 
