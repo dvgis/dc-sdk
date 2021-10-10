@@ -52,9 +52,15 @@ class AroundView extends Animation {
     if (this._heading >= Math.PI * 2 || this._heading <= -Math.PI * 2) {
       this._heading = 0
     }
-    this._viewer.scene.camera.setView({
+    this._viewer.camera.setView({
       orientation: {
-        heading: this._heading
+        heading: this._heading,
+        pitch: this._options.pitch
+          ? Cesium.Math.toRadians(this._options.pitch)
+          : this._viewer.camera.pitch,
+        roll: this._options.roll
+          ? Cesium.Math.toRadians(this._options.pitch)
+          : this._viewer.camera.roll
       }
     })
   }
