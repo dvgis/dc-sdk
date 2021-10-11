@@ -336,13 +336,14 @@ class Viewer {
    * @param terrain
    * @returns {Viewer}
    */
-  addTerrain(terrain) {
+  addTerrain(terrain, param = {}) {
     if (!terrain) {
       return this
     }
+    let { name = '地形' } = param
     this._baseLayerPicker.terrainProviderViewModels.push(
       new Cesium.ProviderViewModel({
-        name: '地形',
+        name,
         creationFunction: () => {
           return terrain
         }
