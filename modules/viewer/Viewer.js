@@ -16,6 +16,7 @@ import { ViewerOption, CameraOption } from '@dc-modules/option'
 import { Util, DomUtil } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import createWidgets from '@dc-modules/widget'
+import createTools from '@dc-modules/tools'
 
 const DEF_OPTS = {
   animation: false, //Whether to create animated widgets, lower left corner of the meter
@@ -74,6 +75,14 @@ class Viewer {
     let widgets = createWidgets()
     Object.keys(widgets).forEach(key => {
       this.use(widgets[key])
+    })
+
+    /**
+     * Registers default tools
+     */
+    let tools = createTools()
+    Object.keys(tools).forEach(key => {
+      this.use(tools[key])
     })
   }
 
@@ -176,8 +185,7 @@ class Viewer {
    */
   _addLayerGroup(layerGroup) {
     if (
-      layerGroup &&
-      layerGroup.layerGroupEvent &&
+      layerGroup?.layerGroupEvent &&
       !Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
     ) {
       layerGroup.layerGroupEvent.fire(LayerGroupEventType.ADD, this)
@@ -192,8 +200,7 @@ class Viewer {
    */
   _removeLayerGroup(layerGroup) {
     if (
-      layerGroup &&
-      layerGroup.layerGroupEvent &&
+      layerGroup?.layerGroupEvent &&
       Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
     ) {
       layerGroup.layerGroupEvent.fire(LayerGroupEventType.REMOVE, this)
@@ -206,12 +213,10 @@ class Viewer {
    * @private
    */
   _addLayer(layer) {
-    if (layer && layer.layerEvent) {
-      !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
-      if (!Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
-        layer.layerEvent.fire(LayerEventType.ADD, this)
-        this._layerCache[layer.type][layer.id] = layer
-      }
+    !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
+    if (!Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
+      layer.fire(LayerEventType.ADD, this)
+      this._layerCache[layer.type][layer.id] = layer
     }
   }
 
@@ -220,12 +225,8 @@ class Viewer {
    * @private
    */
   _removeLayer(layer) {
-    if (
-      layer &&
-      layer.layerEvent &&
-      Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
-    ) {
-      layer.layerEvent.fire(LayerEventType.REMOVE, this)
+    if (Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
+      layer.fire(LayerEventType.REMOVE, this)
       delete this._layerCache[layer.type][layer.id]
     }
   }
@@ -332,6 +333,19 @@ class Viewer {
   }
 
   /**
+   *
+   * @param windowPosition
+   * @returns {Promise}
+   */
+  getImageryLayerInfo(windowPosition) {
+    let ray = this._delegate.camera.getPickRay(windowPosition)
+    return this._delegate.imageryLayers.pickImageryLayerFeatures(
+      ray,
+      this._delegate.scene
+    )
+  }
+
+  /**
    * Adds the terrain
    * @param terrain
    * @returns {Viewer}
@@ -426,11 +440,7 @@ class Viewer {
    * @returns {boolean}
    */
   hasLayer(layer) {
-    return (
-      layer &&
-      layer.layerEvent &&
-      Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
-    )
+    return Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
   }
 
   /**

@@ -19,7 +19,7 @@
 
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
 
-> DC-SDK 是基于 Cesium 进行二次开发的2、3D一体 WebGis 应用框架,该框架优化了 Cesium 的使用方式和增添了一些额外功能，旨在为开发者快速构建 WebGis 应用。
+> `DC-SDK` 是基于开源项目 `Cesium` 进行二次开发的二三维一体的 `WebGis` 应用框架，该框架优化了部分 `Cesium` 的使用方式和增添一些通用功能，旨在为开发者快速构建 `WebGis` 应用。
 
 ```warning
 Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技术和 GIS 相关技术
@@ -96,7 +96,7 @@ import '@dvgis/dc-core/dist/dc.core.min.css' // 主要样式
 
 > 配置主要用于 `NPM / YARN` 的方式
 
-由于 DC 框架中将 `CESIUM_BASE_URL` 设置为 `JSON.stringify('./libs/dc-sdk/resources/')`，这样需将 `Cesium` 相关的静态资源文件: `Assets`、`Workers` 、`ThirdParty` 复制到工程的 `libs/dc-sdk/resources` 目录下以保证三维场景能够正常呈现
+由于 `DC` 框架中将 `CESIUM_BASE_URL` 设置为 `./libs/dc-sdk/resources/` ，这样需将 Cesium 相关的静态资源文件: `Assets` 、`Workers` 、`ThirdParty` 复制到工程的 `libs/dc-sdk/resources` 目录下以保证三维场景能够正常呈现,也可通过 `DC.baseUrl` 进行 `Cesium` 相关的静态资源路基设置
 
 `Webpack`
 
@@ -188,10 +188,10 @@ DC.ready(() => {
 
 ## 示例
 
-|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=1) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/china.gif) |
+|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=3) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png?v=3) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/china.gif) |
 |  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
 |  ![picture](http://dc.dvgis.cn/examples/images/mini-scene/dfmz.gif) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/factory.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
-|  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif?v=2)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png)   |
+|  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif?v=2)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png?v=3)   |
 
 [更多>>](http://dc.dvgis.cn/#/examples)
 

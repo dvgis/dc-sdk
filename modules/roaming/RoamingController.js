@@ -3,6 +3,7 @@
  * @Date: 2021-06-08 20:41:51
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { SceneEventType, PathEventType } from '@dc-modules/event'
 
 class RoamingController {
@@ -23,11 +24,10 @@ class RoamingController {
       return false
     }
     this._activedPath.pathEvent &&
-      this._activedPath.pathEvent.fire(
-        PathEventType.POST_RENDER,
-        this._viewer,
-        this._viewOption
-      )
+      this._activedPath.pathEvent.fire(PathEventType.POST_RENDER, {
+        viewer: this._viewer,
+        viewOption: this._viewOption
+      })
   }
 
   /**
@@ -123,6 +123,7 @@ class RoamingController {
     this._activedPath && (this._activedPath.actived = false)
     this._activedPath = undefined
     this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
+    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
     return this
   }
 
@@ -135,6 +136,7 @@ class RoamingController {
     this._activedPath && (this._activedPath.actived = false)
     this._activedPath = undefined
     this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
+    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
     return this
   }
 }

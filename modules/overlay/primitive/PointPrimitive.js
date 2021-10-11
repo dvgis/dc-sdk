@@ -20,11 +20,15 @@ class PointPrimitive extends Overlay {
   constructor(position) {
     super()
     this._position = Parse.parsePosition(position)
-    this.type = Overlay.getOverlayType('point_primitive')
+
     this._delegate = {
       position: undefined
     }
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('point_primitive')
   }
 
   set position(position) {

@@ -18,8 +18,11 @@ class Tileset extends Overlay {
     this._tileVisibleCallback = undefined
     this._properties = undefined
     this._customShader = undefined
-    this.type = Overlay.getOverlayType('tileset')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('tileset')
   }
 
   get readyPromise() {

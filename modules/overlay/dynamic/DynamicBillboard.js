@@ -17,8 +17,11 @@ class DynamicBillboard extends DynamicOverlay {
     this._posistion = Parse.parsePosition(position)
     this._icon = icon
     this._delegate = new Cesium.Entity({ billboard: {} })
-    this.type = Overlay.getOverlayType('dynamic_billboard')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('dynamic_billboard')
   }
 
   set icon(icon) {
@@ -49,14 +52,14 @@ class DynamicBillboard extends DynamicOverlay {
     /**
      * set the location
      */
-    this._samplePosition.forwardExtrapolationType =
+    this._sampledPosition.forwardExtrapolationType =
       Cesium.ExtrapolationType.HOLD
     this._startTime = Cesium.JulianDate.now()
-    this._samplePosition.addSample(
+    this._sampledPosition.addSample(
       this._startTime,
       Transform.transformWGS84ToCartesian(this._posistion)
     )
-    this._delegate.position = this._samplePosition
+    this._delegate.position = this._sampledPosition
     this._cache.push(this._startTime)
     /**
      *  initialize the Overlay parameter

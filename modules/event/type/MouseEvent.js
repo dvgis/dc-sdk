@@ -16,8 +16,12 @@ class MouseEvent extends Event {
     this._viewer = viewer
     this._selected = undefined
     this._setInputAction()
+    this.on(MouseEventType.LEFT_DOWN, this._leftDownHandler, this)
+    this.on(MouseEventType.LEFT_UP, this._leftUpHandler, this)
     this.on(MouseEventType.CLICK, this._clickHandler, this)
     this.on(MouseEventType.DB_CLICK, this._dbClickHandler, this)
+    this.on(MouseEventType.RIGHT_DOWN, this._rightDownHandler, this)
+    this.on(MouseEventType.RIGHT_UP, this._rightUpHandler, this)
     this.on(MouseEventType.RIGHT_CLICK, this._rightClickHandler, this)
     this.on(MouseEventType.MOUSE_MOVE, this._mouseMoveHandler, this)
     this.on(MouseEventType.WHEEL, this._mouseWheelHandler, this)
@@ -126,13 +130,23 @@ class MouseEvent extends Event {
     let overlayId = undefined
 
     // for Entity
-    if (target && target.id && target.id instanceof Cesium.Entity) {
+    if (target?.id instanceof Cesium.Entity) {
       overlayId = target.id.overlayId
     }
 
     // for Cesium3DTileFeature
-    if (target && target instanceof Cesium.Cesium3DTileFeature) {
+    else if (target instanceof Cesium.Cesium3DTileFeature) {
       overlayId = target.tileset.overlayId
+    }
+
+    // for Cesium3DTileset
+    else if (target?.primitive instanceof Cesium.Cesium3DTileset) {
+      overlayId = target.primitive.overlayId
+    }
+
+    // for Primitve
+    else if (target?.primitive) {
+      overlayId = target.primitive.overlayId
     }
 
     return overlayId
@@ -141,7 +155,7 @@ class MouseEvent extends Event {
   /**
    * Returns the target information for the mouse event
    * @param target
-   * @returns {{overlay: any, feature: any, layer: any}}
+   * @returns {{instanceId: *, overlay: undefined, feature: undefined, layer: undefined}}
    * @private
    */
   _getTargetInfo(target) {
@@ -150,22 +164,22 @@ class MouseEvent extends Event {
     let feature = undefined
 
     // for Entity
-    if (target && target.id && target.id instanceof Cesium.Entity) {
+    if (target?.id instanceof Cesium.Entity) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.id.layerId)[0]
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.id.overlayId)
       }
     }
 
     // for Cesium3DTileFeature
-    else if (target && target instanceof Cesium.Cesium3DTileFeature) {
+    else if (target instanceof Cesium.Cesium3DTileFeature) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.tileset.layerId)[0]
       feature = target
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.tileset.overlayId)
         if (feature && feature.getPropertyNames) {
           let propertyNames = feature.getPropertyNames()
@@ -177,30 +191,31 @@ class MouseEvent extends Event {
     }
 
     // for Cesium3DTileset
-    else if (
-      target &&
-      target.primitive &&
-      target.primitive instanceof Cesium.Cesium3DTileset
-    ) {
+    else if (target?.primitive instanceof Cesium.Cesium3DTileset) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.primitive.overlayId)
       }
     }
 
     // for Primitve
-    else if (target && target.primitive) {
+    else if (target?.primitive) {
       layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]
-      if (layer && layer.getOverlay) {
+      if (layer?.getOverlay) {
         overlay = layer.getOverlay(target.primitive.overlayId)
       }
     }
 
-    return { layer: layer, overlay: overlay, feature: feature }
+    return {
+      layer: layer,
+      overlay: overlay,
+      feature: feature,
+      instanceId: target?.instanceId
+    }
   }
 
   /**
@@ -213,15 +228,25 @@ class MouseEvent extends Event {
     let event = undefined
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo?.overlay
+    let layer = targetInfo?.layer
     // get Overlay Event
-    if (overlay && overlay.overlayEvent) {
+    if (overlay?.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
     }
 
+    // get Layer Event
+    if ((!event || event.numberOfListeners === 0) && layer?.layerEvent) {
+      event = layer.layerEvent.getEvent(type)
+    }
+
     // get Viewer Event
-    if (!event || event.numberOfListeners === 0) {
+    if (
+      (!event || event.numberOfListeners === 0) &&
+      this._viewer?.viewerEvent
+    ) {
       event = this._viewer.viewerEvent.getEvent(type)
     }
+
     event &&
       event.numberOfListeners > 0 &&
       event.raiseEvent({
@@ -230,15 +255,24 @@ class MouseEvent extends Event {
       })
 
     // get Drill Pick Event
-    if (overlay && overlay.allowDrillPicking) {
+    if (overlay?.allowDrillPicking) {
       let drillInfos = this._getDrillInfos(mouseInfo.windowPosition)
       drillInfos.forEach(drillInfo => {
         let dillOverlay = drillInfo?.overlay
+        let dillLayer = drillInfo?.layer
         if (
           dillOverlay?.overlayId !== overlay.overlayId &&
           dillOverlay?.overlayEvent
         ) {
+          // get Overlay Event
           event = dillOverlay.overlayEvent.getEvent(type)
+          // get Layer Event
+          if (
+            (!event || event.numberOfListeners === 0) &&
+            dillLayer?.layerEvent
+          ) {
+            event = dillLayer.layerEvent.getEvent(type)
+          }
           event &&
             event.numberOfListeners > 0 &&
             event.raiseEvent({
@@ -257,7 +291,7 @@ class MouseEvent extends Event {
    * @private
    */
   _clickHandler(movement) {
-    if (!movement || !movement.position) {
+    if (!movement?.position) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
@@ -271,7 +305,7 @@ class MouseEvent extends Event {
    * @private
    */
   _dbClickHandler(movement) {
-    if (!movement || !movement.position) {
+    if (!movement?.position) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
@@ -285,7 +319,7 @@ class MouseEvent extends Event {
    * @private
    */
   _rightClickHandler(movement) {
-    if (!movement || !movement.position) {
+    if (!movement?.position) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.position)
@@ -299,7 +333,7 @@ class MouseEvent extends Event {
    * @private
    */
   _mouseMoveHandler(movement) {
-    if (!movement || !movement.endPosition) {
+    if (!movement?.endPosition) {
       return false
     }
     let mouseInfo = this._getMouseInfo(movement.endPosition)
@@ -316,6 +350,50 @@ class MouseEvent extends Event {
       this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo)
       this._selected = mouseInfo
     }
+  }
+
+  /**
+   * Default mouse left down event handler
+   * @param movement
+   * @private
+   */
+  _leftDownHandler(movement) {
+    if (!movement?.position) {
+      return false
+    }
+    let mouseInfo = this._getMouseInfo(movement.position)
+    this._raiseEvent(MouseEventType.LEFT_DOWN, mouseInfo)
+  }
+
+  /**
+   * Default mouse left up event handler
+   * @param movement
+   * @private
+   */
+  _leftUpHandler(movement) {
+    this._raiseEvent(MouseEventType.LEFT_UP, { movement })
+  }
+
+  /**
+   * Default mouse right down event handler
+   * @param movement
+   * @private
+   */
+  _rightDownHandler(movement) {
+    if (!movement?.position) {
+      return false
+    }
+    let mouseInfo = this._getMouseInfo(movement.position)
+    this._raiseEvent(MouseEventType.RIGHT_DOWN, mouseInfo)
+  }
+
+  /**
+   * Default mouse right up event handler
+   * @param movement
+   * @private
+   */
+  _rightUpHandler(movement) {
+    this._raiseEvent(MouseEventType.RIGHT_UP, { movement })
   }
 
   /**

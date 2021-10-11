@@ -16,8 +16,15 @@ class ModelPrimitive extends Overlay {
     this._position = Parse.parsePosition(position)
     this._modelUrl = modelUrl
     this._delegate = Cesium.Model.fromGltf({ url: modelUrl })
-    this.type = Overlay.getOverlayType('model_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('model_primitive')
+  }
+
+  get readyPromise() {
+    return this._delegate.readyPromise
   }
 
   set position(position) {
@@ -58,6 +65,39 @@ class ModelPrimitive extends Overlay {
      * set the location
      */
     this.position = this._position
+  }
+
+  /**
+   *
+   * @param name
+   */
+  getMaterial(name) {
+    return this._delegate.getMaterial(name)
+  }
+
+  /**
+   *
+   * @param name
+   */
+  getMesh(name) {
+    return this._delegate.getMesh(name)
+  }
+
+  /**
+   *
+   * @param name
+   * @returns {*}
+   */
+  getNode(name) {
+    return this._delegate.getNode(name)
+  }
+
+  /**
+   *
+   * @returns {*}
+   */
+  getNodes() {
+    return this._delegate._runtime.nodes
   }
 
   /**

@@ -24,8 +24,11 @@ class DivIcon extends Overlay {
       left: '0'
     })
     this.content = content
-    this.type = Overlay.getOverlayType('div_icon')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('div_icon')
   }
 
   set show(show) {
@@ -65,27 +68,33 @@ class DivIcon extends Overlay {
 
   /**
    * Updates style
-   * @param style
+   * @param windowCoord
    * @param distance
+   * @param isFront
    * @private
    */
-  _updateStyle(style, distance) {
-    let translate3d = 'translate3d(0,0,0)'
-    if (style.transform) {
-      let x = style.transform.x - this._delegate.offsetWidth / 2
-      let y = style.transform.y - this._delegate.offsetHeight / 2
-      translate3d = `translate3d(${Math.round(x)}px,${Math.round(y)}px, 0)`
+  _updateStyle(windowCoord, distance, isFront) {
+    if (!this._show || !windowCoord) {
+      return
     }
 
+    // set translate
+    let x = windowCoord.x - this._delegate.offsetWidth / 2
+    let y = windowCoord.y - this._delegate.offsetHeight / 2
+    let translate3d = `translate3d(${Math.round(x)}px,${Math.round(y)}px, 0)`
+
+    // set scale
     let scale3d = 'scale3d(1,1,1)'
     let scaleByDistance = this._style.scaleByDistance
     if (distance && scaleByDistance) {
-      let nearValue = scaleByDistance.nearValue
-      let farValue = scaleByDistance.farValue
-      let f = distance / scaleByDistance.far
-      if (distance < scaleByDistance.near) {
+      let near = scaleByDistance.near || 0.0
+      let nearValue = scaleByDistance.nearValue || 1.0
+      let far = scaleByDistance.far || Number.MAX_VALUE
+      let farValue = scaleByDistance.farValue || 0.0
+      let f = distance / far
+      if (distance < near) {
         scale3d = `scale3d(${nearValue},${nearValue},1)`
-      } else if (distance > scaleByDistance.far) {
+      } else if (distance > far) {
         scale3d = `scale3d(${farValue},${farValue},1)`
       } else {
         let scale = farValue + f * (nearValue - farValue)
@@ -93,17 +102,21 @@ class DivIcon extends Overlay {
       }
     }
 
+    // set condition
+    let isDisplay = true
     let distanceDisplayCondition = this._style.distanceDisplayCondition
     if (distance && distanceDisplayCondition) {
-      this.show =
-        this._show &&
-        isBetween(
-          distance,
-          distanceDisplayCondition.near,
-          distanceDisplayCondition.far
-        )
+      isDisplay = isBetween(
+        distance,
+        distanceDisplayCondition.near || 0.0,
+        distanceDisplayCondition.far || Number.MAX_VALUE
+      )
     }
+
+    // update style
     this._delegate.style.transform = `${translate3d} ${scale3d}`
+    this._delegate.style.visibility =
+      isDisplay && isFront ? 'visible' : 'hidden'
   }
 
   /**
@@ -120,6 +133,7 @@ class DivIcon extends Overlay {
       overlay: this,
       position: Transform.transformWGS84ToCartesian(this._position)
     }
+
     this._delegate.addEventListener('click', () => {
       this._overlayEvent.fire(MouseEventType.CLICK, params)
     })

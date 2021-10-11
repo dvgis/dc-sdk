@@ -35,8 +35,12 @@ class ClusterLayer extends Layer {
       this
     )
     this._delegate.clustering.pixelRange = this._options.pixelRange
-    this.type = Layer.getLayerType('cluster')
+
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('cluster')
   }
 
   set enableCluster(enableCluster) {

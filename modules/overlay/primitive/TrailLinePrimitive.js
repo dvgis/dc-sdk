@@ -19,8 +19,11 @@ class TrailLinePrimitive extends Overlay {
         geometry: {}
       })
     })
-    this.type = Overlay.getOverlayType('trail_line_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('trail_line_primitive')
   }
 
   set positions(positions) {

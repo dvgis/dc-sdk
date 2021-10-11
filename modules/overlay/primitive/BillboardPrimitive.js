@@ -21,8 +21,11 @@ class BillboardPrimitive extends Overlay {
       width: 0,
       height: 0
     }
-    this.type = Overlay.getOverlayType('billboard_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('billboard_primitive')
   }
 
   set position(position) {

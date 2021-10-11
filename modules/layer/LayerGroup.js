@@ -17,12 +17,15 @@ class LayerGroup {
     this._layerGroupEvent = new LayerGroupEvent()
     this._layerGroupEvent.on(LayerGroupEventType.ADD, this._onAdd, this)
     this._layerGroupEvent.on(LayerGroupEventType.REMOVE, this._onRemove, this)
-    this.type = Layer.getLayerType('layer_group')
     this._state = State.INITIALIZED
   }
 
   get id() {
     return this._id
+  }
+
+  get type() {
+    return Layer.getLayerType('layer_group')
   }
 
   set show(show) {

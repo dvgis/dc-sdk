@@ -16,8 +16,11 @@ class Rain {
     this._delegate = undefined
     this._enable = false
     this._speed = 10.0
-    this.type = 'rain'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'rain'
   }
 
   set enable(enable) {

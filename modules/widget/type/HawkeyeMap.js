@@ -32,8 +32,11 @@ class HawkeyeMap extends Widget {
     this._wrapper.setAttribute('id', Util.uuid())
     this._baseLayers = []
     this._map = undefined
-    this.type = Widget.getWidgetType('hawkeye_map')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('hawkeye_map')
   }
 
   get baseLayers() {

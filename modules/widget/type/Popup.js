@@ -14,8 +14,11 @@ class Popup extends Widget {
     this._wrapper = DomUtil.create('div', 'dc-popup')
     this._config = { customClass: '' }
     this._position = undefined
-    this.type = Widget.getWidgetType('popup')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('popup')
   }
 
   set config(config) {

@@ -14,8 +14,11 @@ class LabelLayer extends Layer {
     this._dataSource = Cesium.GeoJsonDataSource.load(url)
     this._delegate = new Cesium.CustomDataSource(id)
     this._initLabel()
-    this.type = Layer.registerType('label')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('label')
   }
 
   _createLabel(entity) {

@@ -19,8 +19,11 @@ class FlowLinePrimitive extends Overlay {
         geometry: {}
       })
     })
-    this.type = Overlay.getOverlayType('flow_line_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('flow_line_primitive')
   }
 
   set positions(positions) {

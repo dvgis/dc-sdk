@@ -15,8 +15,11 @@ class Rectangle extends Overlay {
     super()
     this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.Entity({ rectangle: {} })
-    this.type = Overlay.getOverlayType('rectangle')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('rectangle')
   }
 
   set positions(positions) {

@@ -13,8 +13,11 @@ class Tooltip extends Widget {
     super()
     this._wrapper = DomUtil.create('div', 'dc-tool-tip')
     this._ready = true
-    this.type = Widget.getWidgetType('tooltip')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('tooltip')
   }
 
   /**

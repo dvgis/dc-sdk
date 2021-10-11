@@ -13,8 +13,11 @@ class MapSwitch extends Widget {
     this._wrapper = DomUtil.create('div', 'dc-map-switch')
     this._config = undefined
     this._cache = []
-    this.type = Widget.getWidgetType('map_switch')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('map_switch')
   }
 
   /**
@@ -40,8 +43,9 @@ class MapSwitch extends Widget {
     let self = this
     this._wrapper.onmouseover = () => {
       let width = 80
+      let rightMargin = 5
       if (self._cache.length > 0) {
-        width = self._cache.length * 85
+        width = self._cache.length * (width + rightMargin) - rightMargin
       }
       this._wrapper.style.width = `${width}px`
     }

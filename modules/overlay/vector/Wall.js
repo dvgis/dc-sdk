@@ -15,8 +15,11 @@ class Wall extends Overlay {
     super()
     this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.Entity({ wall: {} })
-    this.type = Overlay.getOverlayType('wall')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('wall')
   }
 
   set positions(positions) {

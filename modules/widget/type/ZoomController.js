@@ -16,8 +16,11 @@ class ZoomController extends Widget {
     this._zoomInEl = undefined
     this._zoomOutEl = undefined
     this._refreshEl = undefined
-    this.type = Widget.getWidgetType('zoom_controller')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('zoom_controller')
   }
 
   /**
@@ -170,13 +173,13 @@ class ZoomController extends Widget {
     this._wrapper.appendChild(this._refreshEl)
     this._wrapper.appendChild(this._zoomOutEl)
     let self = this
-    this._zoomInEl.onclick = e => {
+    this._zoomInEl.onclick = () => {
       self._zoomIn()
     }
-    this._refreshEl.onclick = e => {
+    this._refreshEl.onclick = () => {
       self._refresh()
     }
-    this._zoomOutEl.onclick = e => {
+    this._zoomOutEl.onclick = () => {
       self._zoomOut()
     }
     this._ready = true

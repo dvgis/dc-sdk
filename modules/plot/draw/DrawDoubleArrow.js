@@ -4,6 +4,7 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import { DoubleArrow } from '@dc-modules/overlay'
 import Draw from './Draw'
@@ -17,7 +18,7 @@ const DEF_STYLE = {
 class DrawDoubleArrow extends Draw {
   constructor(style) {
     super()
-    this._floatingAnchor = undefined
+    this._maxAnchorSize = 4
     this._style = {
       ...DEF_STYLE,
       ...style
@@ -25,7 +26,12 @@ class DrawDoubleArrow extends Draw {
     this._graphics = new DoubleArrowGraphics()
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '单击选择点位'
     this._delegate = new Cesium.Entity({
       polygon: {
         ...this._style,
@@ -39,28 +45,33 @@ class DrawDoubleArrow extends Draw {
         }, false)
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
+    let doubleArrow = new DoubleArrow(
+      Transform.transformCartesianArrayToWGS84Array(this._positions)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(doubleArrow)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
     let len = this._positions.length
-    let position = this._clampToGround ? e.surfacePosition : e.position
-    if (len === 0) {
-      this._positions.push(position)
-      this.createAnchor(position)
-      this._floatingAnchor = this.createAnchor(position)
-    }
     this._positions.push(position)
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
     this._graphics.positions = this._positions
-    this.createAnchor(position)
-    if (len > 3) {
+    if (len >= this._maxAnchorSize) {
       this._positions.pop()
-      this.unbindEvent()
-      let doubleArrow = new DoubleArrow(
-        Transform.transformCartesianArrayToWGS84Array(this._positions)
-      )
-      doubleArrow.setStyle(this._style)
-      this._plotEvent.raiseEvent(doubleArrow)
+      this.drawTool.fire(PlotEventType.DRAW_STOP)
     }
   }
 }

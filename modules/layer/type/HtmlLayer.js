@@ -15,8 +15,11 @@ class HtmlLayer extends Layer {
     this._delegate = DomUtil.create('div', 'html-layer', undefined)
     this._delegate.setAttribute('id', this._id)
     this._renderRemoveCallback = undefined
-    this.type = Layer.getLayerType('html')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('html')
   }
 
   set show(show) {
@@ -42,16 +45,24 @@ class HtmlLayer extends Layer {
     this._viewer.dcContainer.appendChild(this._delegate)
     let scene = this._viewer.scene
     this._renderRemoveCallback = scene.postRender.addEventListener(() => {
-      let cameraPosition = this._viewer.camera.positionWC
+      let cp = this._viewer.camera.positionWC
+      let cd = this._viewer.camera.direction
       this.eachOverlay(item => {
         if (item && item.position) {
           let position = Transform.transformWGS84ToCartesian(item.position)
+          let up = scene.globe.ellipsoid.geodeticSurfaceNormal(
+            position,
+            new Cesium.Cartesian3()
+          )
           let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
             scene,
             position
           )
-          let distance = Cesium.Cartesian3.distance(position, cameraPosition)
-          item._updateStyle({ transform: windowCoord }, distance)
+          item._updateStyle(
+            windowCoord,
+            Cesium.Cartesian3.distance(position, cp),
+            Cesium.Cartesian3.dot(cd, up) <= 0
+          )
         }
       }, this)
     }, this)

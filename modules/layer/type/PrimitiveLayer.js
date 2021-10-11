@@ -7,6 +7,9 @@ import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Layer from '../Layer'
 
+/**
+ * PrimitiveLayer is used to add primitve
+ */
 class PrimitiveLayer extends Layer {
   constructor(id) {
     super(id)
@@ -15,8 +18,11 @@ class PrimitiveLayer extends Layer {
     this._labels = this._delegate.add(new Cesium.LabelCollection())
     this._billboards = this._delegate.add(new Cesium.BillboardCollection())
     this._polylines = this._delegate.add(new Cesium.PolylineCollection())
-    this.type = Layer.getLayerType('primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('primitive')
   }
 
   get points() {

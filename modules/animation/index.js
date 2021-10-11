@@ -4,6 +4,7 @@
  */
 
 export { default as Animation } from './Animation'
+export { default as AnimationType } from './AnimationType'
 
 /**
  * types

@@ -5,6 +5,7 @@
 
 import State from '@dc-modules/state/State'
 import GeoJsonLayer from './GeoJsonLayer'
+import Layer from '../Layer'
 
 class TopoJsonLayer extends GeoJsonLayer {
   constructor(id, url, options = {}) {
@@ -12,8 +13,11 @@ class TopoJsonLayer extends GeoJsonLayer {
       throw new Error('TopoJsonLayer：the url invalid')
     }
     super(id, url, options)
-    this.type = GeoJsonLayer.getLayerType('topojson')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('topojson')
   }
 }
 

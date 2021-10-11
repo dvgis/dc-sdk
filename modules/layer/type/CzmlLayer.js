@@ -11,8 +11,11 @@ class CzmlLayer extends Layer {
   constructor(id, url = '', options = {}) {
     super(id)
     this._delegate = Cesium.CzmlDataSource.load(url, options)
-    this.type = Layer.getLayerType('czml')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('czml')
   }
 
   set show(show) {

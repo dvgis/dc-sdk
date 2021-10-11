@@ -14,8 +14,11 @@ class Silhouette {
     this._color = Cesium.Color.GREEN
     this._length = 0.5
     this._selected = []
-    this.type = 'silhouette'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'silhouette'
   }
 
   set enable(enable) {

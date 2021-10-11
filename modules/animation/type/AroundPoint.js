@@ -6,6 +6,7 @@
 import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
 import Parse from '@dc-modules/parse/Parse'
+import AnimationType from '../AnimationType'
 
 import Animation from '../Animation'
 
@@ -16,7 +17,10 @@ class AroundPoint extends Animation {
     this._options = options
     this._heading = viewer.camera.heading
     this._aroundAmount = 0.2
-    this.type = 'around_point'
+  }
+
+  get type() {
+    return AnimationType.AROUND_POINT
   }
 
   set position(position) {
@@ -67,5 +71,7 @@ class AroundPoint extends Animation {
     )
   }
 }
+
+AnimationType.AROUND_POINT = 'around_point'
 
 export default AroundPoint

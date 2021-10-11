@@ -13,6 +13,7 @@ import Parse from '@dc-modules/parse/Parse'
 import { Util, DomUtil, PlotUtil } from '@dc-modules/utils'
 import { Transform, CoordTransform } from '@dc-modules/transform'
 import { MouseEventType, SceneEventType } from '@dc-modules/event'
+import { MouseMode } from '@dc-modules/option'
 import {
   area,
   bounds,
@@ -21,7 +22,8 @@ import {
   distance,
   heading,
   isBetween,
-  mid,
+  midCartesian,
+  midPosition,
   parabola
 } from '@dc-modules/math'
 import Viewer from '@dc-modules/viewer/Viewer'
@@ -75,10 +77,13 @@ import {
   GatheringPlace,
   TailedAttackArrow,
   BillboardPrimitive,
+  BounceBillboardPrimitive,
+  BounceLabelPrimitive,
   DiffuseWallPrimitive,
   ElecEllipsoidPrimitive,
   FlowLinePrimitive,
   LabelPrimitive,
+  ModelCollectionPrimitive,
   ModelPrimitive,
   PointPrimitive,
   PolylinePrimitive,
@@ -143,6 +148,7 @@ import Effect from '@dc-modules/effect/Effect'
  * animation
  */
 import {
+  AnimationType,
   AroundView,
   AroundPoint,
   CircleScan,
@@ -155,7 +161,11 @@ import {
  *
  * roaming
  */
-import { RoamingController, RoamingPath } from '@dc-modules/roaming'
+import {
+  KeyboardRoaming,
+  RoamingController,
+  RoamingPath
+} from '@dc-modules/roaming'
 
 /**
  *
@@ -203,11 +213,13 @@ import thirdPart from '@dc-modules/thirdpart'
 
 Cesium.Math.area = area
 Cesium.Math.bounds = bounds
-Cesium.Math.mid = mid
 Cesium.Math.center = center
 Cesium.Math.distance = distance
 Cesium.Math.heading = heading
 Cesium.Math.isBetween = isBetween
+Cesium.Math.midCartesian = midCartesian
+Cesium.Math.mid = midPosition
+Cesium.Math.midPosition = midPosition
 Cesium.Math.parabola = parabola
 Cesium.Math.curve = curve
 
@@ -224,6 +236,7 @@ const components = {
   CoordTransform,
   MouseEventType,
   SceneEventType,
+  MouseMode,
   Math: Cesium.Math,
   Viewer,
   World: Viewer,
@@ -273,10 +286,13 @@ const components = {
   GatheringPlace,
   TailedAttackArrow,
   BillboardPrimitive,
+  BounceBillboardPrimitive,
+  BounceLabelPrimitive,
   DiffuseWallPrimitive,
   ElecEllipsoidPrimitive,
   FlowLinePrimitive,
   LabelPrimitive,
+  ModelCollectionPrimitive,
   ModelPrimitive,
   PointPrimitive,
   PolylinePrimitive,
@@ -333,6 +349,7 @@ const components = {
   /**
    * animation
    */
+  AnimationType,
   AroundView,
   AroundPoint,
   CircleScan,
@@ -343,6 +360,7 @@ const components = {
    *
    * roaming
    */
+  KeyboardRoaming,
   RoamingController,
   RoamingPath,
   /**

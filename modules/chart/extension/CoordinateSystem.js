@@ -23,20 +23,20 @@ class CoordinateSystem {
   }
 
   dataToPoint(data) {
-    let scene = this._viewer.scene
-    let result = [0, 0]
+    let result = []
     let cartesian3 = Cesium.Cartesian3.fromDegrees(data[0], data[1])
     if (!cartesian3) {
       return result
     }
-    if (
-      scene.mode === Cesium.SceneMode.SCENE3D &&
-      Cesium.Cartesian3.angleBetween(scene.camera.position, cartesian3) >
-        Cesium.Math.toRadians(80)
-    ) {
-      return false
+    let up = Cesium.Ellipsoid.WGS84.geodeticSurfaceNormal(
+      cartesian3,
+      new Cesium.Cartesian3()
+    )
+    let cd = this._viewer.camera.direction
+    if (Cesium.Cartesian3.dot(up, cd) >= 0) {
+      return result
     }
-    let coords = scene.cartesianToCanvasCoordinates(cartesian3)
+    let coords = this._viewer.scene.cartesianToCanvasCoordinates(cartesian3)
     if (!coords) {
       return result
     }

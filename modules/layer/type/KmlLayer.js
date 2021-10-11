@@ -14,8 +14,11 @@ class KmlLayer extends Layer {
     }
     super(id)
     this._delegate = Cesium.KmlDataSource.load(url, options)
-    this.type = Layer.getLayerType('kml')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('kml')
   }
 
   set show(show) {

@@ -1,5 +1,139 @@
 # Change Log
 
+### 2.6.0 - 2021-10-10
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.86.0
+
+#### Fixes 🔧
+
+- Improve the MapSwitch [#70](https://github.com/dvgis/dc-sdk/issues/70)
+- Improve the AroundView [#72](https://github.com/dvgis/dc-sdk/issues/72)
+
+### 2.5.0 - 2021-09-04
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.85.0
+
+#### Fixes 🔧
+
+- Fix the problem that roaming cannot set parameters and the failed camera cannot move [#65](https://github.com/dvgis/dc-sdk/issues/65)
+- Fix the problem that the gradient setting of heat layer [#66](https://github.com/dvgis/dc-sdk/issues/66)
+- Improve the DivIcon style
+
+### 2.4.2 - 2021-08-28
+
+#### Fixes 🔧
+
+- Hide the chart layer at the back [#55](https://github.com/dvgis/dc-sdk/issues/55)
+- Hide the div icon at the back [#56](https://github.com/dvgis/dc-sdk/issues/56)
+- Improve the position editor [#57](https://github.com/dvgis/dc-sdk/issues/57)
+- Improve the terrain clipping [#58](https://github.com/dvgis/dc-sdk/issues/58)
+
+### 2.4.1 - 2021-08-21
+
+#### Additions 🎉
+
+- Added support for layer mouse events [#53](https://github.com/dvgis/dc-sdk/issues/54)
+- Add partial mouse default events [#54](https://github.com/dvgis/dc-sdk/issues/54)
+- Add function to get tile information
+
+#### Fixes 🔧
+
+- Improve the plot function
+
+### 2.4.0 - 2021-08-07
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.84.0
+
+#### Additions 🎉
+
+- Add bounce primitive overlays
+- Add model collection primitive
+
+#### Fixes 🔧
+
+- Refine type property
+- Improve mouse event
+- Improve once event
+
+### 2.3.2 - 2021-07-25
+
+#### Additions 🎉
+
+- Add model primitive to get node-related functions [#51](https://github.com/dvgis/dc-sdk/issues/51)
+
+#### Fixes 🔧
+
+- Improve the history track restore function [#50](https://github.com/dvgis/dc-sdk/issues/50)
+
+### 2.3.1 - 2021-07-19
+
+#### Breaking Changes 📣
+
+- Refactored plotting function
+- Remove Position rounding function
+- Refine the infrastructure part of the script
+
+#### Additions 🎉
+
+- Add spatial measurement tools
+- Add the plotting tool module
+- Add function midCartesian to calculate the middle point of Cartesian3
+
+#### Fixes 🔧
+
+- Improve the Position copy function
+- Improve the model editing tool for 3dtiles position editing function
+- Improve the function area
+- Improve the function of calculating the point position of a sector
+
+
+### 2.3.0 - 2021-07-03
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.83.0
+
+#### Additions 🎉
+
+- Add constants for mouse mode
+- Add property settings for globe terrain exaggeration
+
+#### Fixes 🔧
+
+- Improve the parsePositions for string coords
+
+### 2.2.5 - 2021-06-26
+
+#### Additions 🎉
+
+- Adds line and face rotation conversion calculations
+
+#### Fixes 🔧
+
+- Improve the interpolation of history track
+- Improve the function of plot for above the overlay
+- Fix the problem of flickering when analyzing transformation parameters in the viewable field [#37](https://github.com/dvgis/dc-sdk/issues/37)
+- Fix the problem that DivIcon cannot get the current coordinates set to (0,0,0) by default [#38](https://github.com/dvgis/dc-sdk/issues/38)
+
+### 2.2.4 - 2021-06-12
+
+#### Breaking Changes 📣
+
+- Refactored the roaming function into first-person roaming and keyboard roaming [#34](https://github.com/dvgis/dc-sdk/issues/34)
+- Original roaming function becomes history track, refine its pause and play [#35](https://github.com/dvgis/dc-sdk/issues/35)
+
+#### Fixes 🔧
+
+- Improve heading function
+- Improve diffuse wall primitive
+- Fixes RadarScan missing Cesium issue [#33](https://github.com/dvgis/dc-sdk/issues/33)
+
 ### 2.2.3 - 2021-06-05
 
 #### Breaking Changes 📣

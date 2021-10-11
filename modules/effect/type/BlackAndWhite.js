@@ -13,8 +13,11 @@ class BlackAndWhite {
     this._enable = false
     this._gradations = 1
     this._selected = []
-    this.type = 'black_and_white'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'black_and_white'
   }
 
   set enable(enable) {

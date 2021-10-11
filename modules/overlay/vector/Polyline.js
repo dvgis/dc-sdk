@@ -16,8 +16,11 @@ class Polyline extends Overlay {
     super()
     this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.Entity({ polyline: {} })
-    this.type = Overlay.getOverlayType('polyline')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('polyline')
   }
 
   set positions(positions) {

@@ -16,8 +16,11 @@ class GeoJsonLayer extends Layer {
     }
     super(id)
     this._delegate = Cesium.GeoJsonDataSource.load(url, options)
-    this.type = Layer.getLayerType('geojson')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('geojson')
   }
 
   set show(show) {

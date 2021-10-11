@@ -12,7 +12,7 @@ class TrackController {
     this._viewer = viewer
     this._cache = {}
     this._delegete = new Cesium.CustomDataSource('history-track-layer')
-    viewer.dataSources.add(this._delegete)
+    this._viewer.dataSources.add(this._delegete)
     this._activedTrack = undefined
     this._viewMode = undefined
     this._viewOption = {}
@@ -147,7 +147,7 @@ class TrackController {
         let track = this._cache[key]
         track.trackEvent.fire(TrackEventType.RESET_TIME_LINE, {
           stopTime: this._stopTime,
-          duration: Cesium.JulianDate.secondsDifference(this._stopTime, now)
+          duration: Cesium.JulianDate.secondsDifference(now, this._stopTime)
         })
       })
     }

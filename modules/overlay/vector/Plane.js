@@ -38,8 +38,11 @@ class Plane extends Overlay {
         plane: new Cesium.Plane(this._normal, this._distance)
       }
     })
-    this.type = Overlay.getOverlayType('plane')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('plane')
   }
 
   set position(position) {

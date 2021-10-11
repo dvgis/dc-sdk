@@ -18,8 +18,11 @@ class Circle extends Overlay {
     this._radius = +radius || 0
     this._rotateAmount = 0
     this._stRotation = 0
-    this.type = Overlay.getOverlayType('circle')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('circle')
   }
 
   set center(center) {
@@ -44,7 +47,7 @@ class Circle extends Overlay {
 
   set rotateAmount(amount) {
     this._rotateAmount = +amount
-    this._delegate.polygon.stRotation = new Cesium.CallbackProperty(time => {
+    this._delegate.polygon.stRotation = new Cesium.CallbackProperty(() => {
       this._stRotation += this._rotateAmount
       if (this._stRotation >= 360 || this._stRotation <= -360) {
         this._stRotation = 0

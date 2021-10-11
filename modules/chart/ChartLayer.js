@@ -12,10 +12,13 @@ class ChartLayer extends Layer {
     super(id)
     this._option = option
     this._delegate = DomUtil.create('div', 'dc-chart')
-    this._setWrapperStyle()
     this._chart = undefined
-    this.type = Layer.getLayerType('chart')
+    this._setWrapperStyle()
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('chart')
   }
 
   get chart() {

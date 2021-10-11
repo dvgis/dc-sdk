@@ -13,23 +13,26 @@ import Overlay from '../Overlay'
 const DEF_STYLE = {
   minRadius: 10,
   minHeight: 30,
-  color: Cesium.Color.RED
+  color: Cesium.Color.RED,
+  slices: 128,
+  speed: 10
 }
 
 class DiffuseWallPrimitive extends Overlay {
-  constructor(center, radius, height, slices, speed) {
+  constructor(center, radius, height) {
     super()
     this._center = Parse.parsePosition(center)
     this._delegate = undefined
     this._height = height
     this._radius = radius
-    this._slices = slices || 128
-    this._speed = speed || 10
     this._currentHeight = height || 0
     this._currentRadius = 10
     this._style = { ...DEF_STYLE }
-    this.type = Overlay.getOverlayType('diffuse_wall_primitive')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('diffuse_wall_primitive')
   }
 
   set center(position) {
@@ -59,24 +62,6 @@ class DiffuseWallPrimitive extends Overlay {
     return this._height
   }
 
-  set slices(slices) {
-    this._slices = slices
-    return this
-  }
-
-  get slices() {
-    return this._slices
-  }
-
-  set speed(speed) {
-    this._speed = speed
-    return this
-  }
-
-  get speed() {
-    return this._speed
-  }
-
   /**
    *
    * @returns {*}
@@ -87,8 +72,8 @@ class DiffuseWallPrimitive extends Overlay {
     let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
       Transform.transformWGS84ToCartesian(this._center)
     )
-    for (let i = 0; i < this._slices; i++) {
-      let angle = (i / this._slices) * Cesium.Math.TWO_PI
+    for (let i = 0; i < this._style.slices; i++) {
+      let angle = (i / this._style.slices) * Cesium.Math.TWO_PI
       let x = Math.cos(angle)
       let y = Math.sin(angle)
       let point = new Cesium.Cartesian3(
@@ -161,8 +146,8 @@ class DiffuseWallPrimitive extends Overlay {
    */
   update(frameState) {
     this._delegate = this._delegate && this._delegate.destroy()
-    this._currentRadius += this._radius / this._speed / 20
-    this._currentHeight -= this._height / this._speed / 20
+    this._currentRadius += this._radius / this._style.speed / 20
+    this._currentHeight -= this._height / this._style.speed / 20
     if (
       this._currentRadius > this._radius ||
       this._currentHeight < this._style.minHeight
@@ -170,7 +155,7 @@ class DiffuseWallPrimitive extends Overlay {
       this._currentRadius = this._style.minRadius
       this._currentHeight = this._height
     }
-    if (!this._slices || this._slices < 3) {
+    if (!this._style.slices || this._style.slices < 3) {
       return false
     }
     let positions = this._getPositions()

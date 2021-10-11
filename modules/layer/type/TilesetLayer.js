@@ -14,8 +14,11 @@ class TilesetLayer extends Layer {
   constructor(id) {
     super(id)
     this._delegate = new Cesium.PrimitiveCollection()
-    this.type = Layer.getLayerType('tileset')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('tileset')
   }
 
   /**

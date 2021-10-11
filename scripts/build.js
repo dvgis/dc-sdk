@@ -11,31 +11,33 @@ const chalk = require('chalk')
 
 shell.echo(chalk.green('build sdk start'))
 
-shell.rm('-rf', path.resolve(__dirname, '..', 'packages/sdk/dist/*'))
+let outoutDir = path.resolve(__dirname, '..', 'packages/sdk/dist')
+
+fse.ensureDirSync(outoutDir)
+
+fse.emptyDirSync(outoutDir)
 
 const pkgs = ['base', 'core', 'chart', 'mapv']
+
 const count = pkgs.length
 
-pkgs.forEach(async (item, index) => {
-  await fse.exists(
+pkgs.forEach((item, index) => {
+  fse.exists(
     path.resolve(__dirname, '..', `packages/${item}/dist`),
-    exists => {
+    async exists => {
       if (exists) {
-        shell.cp(
-          '-R',
-          path.resolve(__dirname, '..', `packages/${item}/dist/*`),
-          path.resolve(__dirname, '..', 'packages/sdk/dist')
+        fse.copySync(
+          path.resolve(__dirname, '..', `packages/${item}/dist`),
+          outoutDir
         )
         shell.echo(chalk.yellow(`copy ${item} success`))
         if (index === count - 1) {
-          shell.echo(chalk.green('build sdk end'))
-          shell.exit(0)
+          await shell.echo(chalk.green('build sdk end'))
         }
       } else {
         shell.echo(chalk.red(`no ${item} dist`))
         if (index === count - 1) {
           shell.echo(chalk.green('build sdk end'))
-          shell.exit(0)
         }
       }
     }

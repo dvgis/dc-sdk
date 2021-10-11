@@ -30,8 +30,11 @@ class WindLayer extends Layer {
     }
     this._data = undefined
     this._canvas = document.createElement('canvas')
-    this.type = Layer.getLayerType('wind')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('wind')
   }
 
   set show(show) {

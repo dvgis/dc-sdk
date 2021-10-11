@@ -26,8 +26,11 @@ class Box extends Overlay {
         }
       }
     })
-    this.type = Overlay.getOverlayType('box')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('box')
   }
 
   /**

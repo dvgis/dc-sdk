@@ -13,8 +13,11 @@ class Brightness {
     this._enable = false
     this._intensity = 1
     this._selected = []
-    this.type = 'brightness'
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'brightness'
   }
 
   set enable(enable) {

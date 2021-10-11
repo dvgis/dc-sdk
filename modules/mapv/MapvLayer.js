@@ -16,7 +16,11 @@ class MapvLayer extends Layer {
     this._option = option
     this._dataSet = undefined
     this._delegate = undefined
-    this.type = Layer.getLayerType('mapv')
+    this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Layer.getLayerType('mapv')
   }
 
   set show(show) {

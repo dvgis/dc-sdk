@@ -22,9 +22,8 @@ class Overlay {
     this._allowDrillPicking = false
     this._contextMenu = []
     this._overlayEvent = new OverlayEvent()
-    this.type = undefined
-    this.on(OverlayEventType.ADD, this._onAdd, this)
-    this.on(OverlayEventType.REMOVE, this._onRemove, this)
+    this._overlayEvent.on(OverlayEventType.ADD, this._onAdd, this)
+    this._overlayEvent.on(OverlayEventType.REMOVE, this._onRemove, this)
   }
 
   get overlayId() {
@@ -132,16 +131,19 @@ class Overlay {
       this._layer.delegate.entities.add(this._delegate)
     } else if (this._layer?.delegate?.add && this._delegate) {
       // for Primitive
-      if (this.type === 'point_primitive' && this._layer.points) {
+      if (this.type && this.type === 'point_primitive' && this._layer.points) {
         this._delegate = this._layer.points.add(this._delegate)
       } else if (
-        this.type === 'billboard_primitive' &&
+        this.type.indexOf('billboard_primitive') >= 0 &&
         this._layer.billboards
       ) {
         this._delegate = this._layer.billboards.add(this._delegate)
       } else if (this.type === 'polyline_primitive' && this._layer.polylines) {
         this._delegate = this._layer.polylines.add(this._delegate)
-      } else if (this.type === 'label_primitive' && this._layer.labels) {
+      } else if (
+        this.type.indexOf('label_primitive') >= 0 &&
+        this._layer.labels
+      ) {
         this._delegate = this._layer.labels.add(this._delegate)
       } else {
         this._layer.delegate.add(this._delegate)
@@ -167,13 +169,16 @@ class Overlay {
       if (this.type === 'point_primitive' && this._layer.points) {
         this._layer.points.remove(this._delegate)
       } else if (
-        this.type === 'billboard_primitive' &&
+        this.type.indexOf('billboard_primitive') >= 0 &&
         this._layer.billboards
       ) {
         this._layer.billboards.remove(this._delegate)
       } else if (this.type === 'polyline_primitive' && this._layer.polylines) {
         this._layer.polylines.remove(this._delegate)
-      } else if (this.type === 'label_primitive' && this._layer.labels) {
+      } else if (
+        this.type.indexOf('label_primitive') >= 0 &&
+        this._layer.labels
+      ) {
         this._layer.labels.remove(this._delegate)
       } else {
         this._layer.delegate.remove(this._delegate)

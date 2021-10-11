@@ -22,8 +22,11 @@ class TailedAttackArrow extends AttackArrow {
     this.tailWidthFactor = 0.1
     this.headTailFactor = 0.8
     this.swallowTailFactor = 1
-    this.type = Overlay.getOverlayType('tailed_attack_arrow')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('tailed_attack_arrow')
   }
 
   set positions(positions) {

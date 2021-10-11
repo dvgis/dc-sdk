@@ -11,7 +11,11 @@ const BaseEventType = {
 }
 
 const MouseEventType = {
+  LEFT_DOWN: Cesium.ScreenSpaceEventType.LEFT_DOWN,
+  LEFT_UP: Cesium.ScreenSpaceEventType.LEFT_UP,
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_DOWN: Cesium.ScreenSpaceEventType.RIGHT_DOWN,
+  RIGHT_UP: Cesium.ScreenSpaceEventType.RIGHT_UP,
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
@@ -25,7 +29,11 @@ const ViewerEventType = {
   REMOVE_LAYER: 'removeLayer',
   ADD_EFFECT: 'addEffect',
   REMOVE_EFFECT: 'removeEffect',
+  LEFT_DOWN: Cesium.ScreenSpaceEventType.LEFT_DOWN,
+  LEFT_UP: Cesium.ScreenSpaceEventType.LEFT_UP,
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_DOWN: Cesium.ScreenSpaceEventType.RIGHT_DOWN,
+  RIGHT_UP: Cesium.ScreenSpaceEventType.RIGHT_UP,
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
@@ -45,7 +53,11 @@ const SceneEventType = {
 
 const OverlayEventType = {
   ...BaseEventType,
+  LEFT_DOWN: Cesium.ScreenSpaceEventType.LEFT_DOWN,
+  LEFT_UP: Cesium.ScreenSpaceEventType.LEFT_UP,
   CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_DOWN: Cesium.ScreenSpaceEventType.RIGHT_DOWN,
+  RIGHT_UP: Cesium.ScreenSpaceEventType.RIGHT_UP,
   RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
   DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK,
   MOUSE_MOVE: Cesium.ScreenSpaceEventType.MOUSE_MOVE,
@@ -58,7 +70,13 @@ const LayerGroupEventType = BaseEventType
 
 const LayerEventType = {
   ...BaseEventType,
-  CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK
+  LEFT_DOWN: Cesium.ScreenSpaceEventType.LEFT_DOWN,
+  LEFT_UP: Cesium.ScreenSpaceEventType.LEFT_UP,
+  CLICK: Cesium.ScreenSpaceEventType.LEFT_CLICK,
+  RIGHT_DOWN: Cesium.ScreenSpaceEventType.RIGHT_DOWN,
+  RIGHT_UP: Cesium.ScreenSpaceEventType.RIGHT_UP,
+  RIGHT_CLICK: Cesium.ScreenSpaceEventType.RIGHT_CLICK,
+  DB_CLICK: Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
 }
 
 const TrackEventType = {
@@ -75,6 +93,19 @@ const PathEventType = {
   RESET_TIME_LINE: 'restTimeLine'
 }
 
+const PlotEventType = {
+  DRAW_START: 'drawStart',
+  DRAW_STOP: 'drawStop',
+  EDIT_START: 'editStart',
+  EDIT_STOP: 'editEnd',
+  DRAW_ANCHOR: 'drawAnchor',
+  CREATE_ANCHOR: 'createAnchor',
+  UPDATE_ANCHOR: 'updateAnchor',
+  ANCHOR_MOVING: 'anchorMoving',
+  EDIT_ANCHOR_STOP: 'editAnchorStop',
+  CLEAR_ANCHOR: 'clearAnchor'
+}
+
 export {
   MouseEventType,
   ViewerEventType,
@@ -83,5 +114,6 @@ export {
   LayerEventType,
   OverlayEventType,
   TrackEventType,
-  PathEventType
+  PathEventType,
+  PlotEventType
 }

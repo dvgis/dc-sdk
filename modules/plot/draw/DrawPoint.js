@@ -4,6 +4,7 @@
  */
 
 import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
 import { Transform } from '@dc-modules/transform'
 import { Point } from '@dc-modules/overlay'
 import Draw from './Draw'
@@ -24,7 +25,12 @@ class DrawPoint extends Draw {
     }
   }
 
-  _mountEntity() {
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '单击选择点位'
     this._delegate = new Cesium.Entity({
       position: new Cesium.CallbackProperty(() => {
         return this._position
@@ -33,20 +39,37 @@ class DrawPoint extends Draw {
         ...this._style
       }
     })
-    this._layer.add(this._delegate)
+    this._layer.entities.add(this._delegate)
   }
 
-  _onClick(e) {
-    this._position = this._clampToGround ? e.surfacePosition : e.position
-    this.unbindEvent()
-    let point = new Point(Transform.transformCartesianToWGS84(this._position))
-    point.setStyle(this._style)
-    this._plotEvent.raiseEvent(point)
+  /**
+   *
+   * @private
+   */
+  _stopdHook() {
+    let point = new Point(
+      Transform.transformCartesianToWGS84(this._position)
+    ).setStyle(this._style)
+    this._options.onDrawStop && this._options.onDrawStop(point)
   }
 
-  _onMouseMove(e) {
-    this._tooltip.showAt(e.windowPosition, this._tooltipMess)
-    this._position = this._clampToGround ? e.surfacePosition : e.position
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
+    this._position = position
+    this.drawTool.fire(PlotEventType.DRAW_STOP, position)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onAnchorMoving(position) {
+    this._position = position
   }
 }
 

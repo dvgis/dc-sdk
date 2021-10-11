@@ -17,8 +17,11 @@ class Ellipse extends Overlay {
     this._semiMajorAxis = +semiMajorAxis || 0
     this._semiMinorAxis = +semiMinorAxis || 0
     this._delegate = new Cesium.Entity({ ellipse: {} })
-    this.type = Overlay.getOverlayType('ellipse')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('ellipse')
   }
 
   set position(position) {

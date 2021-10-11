@@ -20,26 +20,30 @@ class ContextMenu extends Widget {
     this._surfacePosition = undefined
     this._wgs84SurfacePosition = undefined
     this._windowPosition = undefined
+    this._instanceId = undefined
     this._config = {}
     this._defaultMenu = [
       {
         label: '飞到默认位置',
-        callback: e => {
+        callback: () => {
           this._viewer.camera.flyHome(1.5)
         },
         context: this
       },
       {
         label: '取消飞行',
-        callback: e => {
+        callback: () => {
           this._viewer.camera.cancelFlight()
         },
         context: this
       }
     ]
     this._overlayMenu = []
-    this.type = Widget.getWidgetType('contextmenu')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('contextmenu')
   }
 
   set DEFAULT_MENU(menus) {
@@ -168,8 +172,9 @@ class ContextMenu extends Widget {
         }
       }
     }
+    this._instanceId = target?.instanceId
     // for Entity
-    if (target && target.id && target.id instanceof Cesium.Entity) {
+    if (target?.id instanceof Cesium.Entity) {
       let layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.id.layerId)[0]
@@ -179,7 +184,7 @@ class ContextMenu extends Widget {
     }
 
     // for Cesium3DTileFeature
-    else if (target && target instanceof Cesium.Cesium3DTileFeature) {
+    else if (target instanceof Cesium.Cesium3DTileFeature) {
       let layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.tileset.layerId)[0]
@@ -189,11 +194,7 @@ class ContextMenu extends Widget {
     }
 
     // for Cesium3DTileset
-    else if (
-      target &&
-      target.primitive &&
-      target.primitive instanceof Cesium.Cesium3DTileset
-    ) {
+    else if (target?.primitive instanceof Cesium.Cesium3DTileset) {
       let layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]
@@ -203,7 +204,7 @@ class ContextMenu extends Widget {
     }
 
     // for Primitve
-    else if (target && target.primitive) {
+    else if (target?.primitive) {
       let layer = this._viewer
         .getLayers()
         .filter(item => item.layerId === target.primitive.layerId)[0]
@@ -275,7 +276,8 @@ class ContextMenu extends Widget {
           wgs84Position: self._wgs84Position,
           surfacePosition: self._surfacePosition,
           wgs84SurfacePosition: self._wgs84SurfacePosition,
-          overlay: self._overlay
+          overlay: self._overlay,
+          instanceId: self._instanceId
         })
         self.hide()
       }

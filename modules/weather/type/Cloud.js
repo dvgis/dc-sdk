@@ -16,9 +16,12 @@ class Cloud {
     this._delegate = undefined
     this._rotateAmount = 0
     this._enable = false
-    this.type = 'cloud'
     this._heading = 0
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return 'cloud'
   }
 
   set enable(enable) {
@@ -85,11 +88,11 @@ class Cloud {
               alpha:
                 'texture2D(image, fract(repeat * materialInput.st)).r * color.a',
               diffuse: 'vec3(1.0)'
-            },
-            translucent: true,
-            aboveGround: true
+            }
           }
-        })
+        }),
+        translucent: true,
+        aboveGround: true
       })
     })
     this._delegate.geometryInstances = new Cesium.GeometryInstance({

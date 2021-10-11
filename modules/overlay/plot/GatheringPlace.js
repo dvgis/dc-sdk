@@ -20,8 +20,11 @@ class GatheringPlace extends Overlay {
     this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.Entity({ polygon: {} })
     this.t = 0.4
-    this.type = Overlay.getOverlayType('gathering_place')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('gathering_place')
   }
 
   set positions(positions) {

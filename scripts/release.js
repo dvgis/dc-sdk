@@ -19,11 +19,11 @@ const count = pkgs.length
 pkgs.forEach(async (item, index) => {
   await fse.exists(
     path.resolve(__dirname, '..', `packages/${item}/dist`),
-    exists => {
+    async exists => {
       if (exists) {
         shell.cd(path.resolve(__dirname, '..', `packages/${item}`))
         try {
-          let code = shell.exec(
+          let code = await shell.exec(
             `yarn publish --new-version ${version} --access public`
           ).code
           if (code !== 0) {
@@ -40,7 +40,6 @@ pkgs.forEach(async (item, index) => {
         }
         if (index === count - 1) {
           shell.echo(chalk.green('release packages end'))
-          shell.exit(0)
         }
       } else {
         shell.echo(
@@ -50,7 +49,6 @@ pkgs.forEach(async (item, index) => {
         )
         if (index === count - 1) {
           shell.echo(chalk.green('release packages end'))
-          shell.exit(0)
         }
       }
     }

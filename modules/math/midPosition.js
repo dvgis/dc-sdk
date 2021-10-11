@@ -8,12 +8,11 @@ import { Transform } from '@dc-modules/transform'
 import Parse from '@dc-modules/parse/Parse'
 import Position from '@dc-modules/position/Position'
 
-export default function mid(start, end) {
+export default function midPosition(start, end) {
   let startPosition = Parse.parsePosition(start)
   let endPosition = Parse.parsePosition(end)
   startPosition = Transform.transformWGS84ToCartographic(startPosition)
   endPosition = Transform.transformWGS84ToCartographic(endPosition)
-
   let mc = new Cesium.EllipsoidGeodesic(
     startPosition,
     endPosition

@@ -30,8 +30,11 @@ class DistanceLegend extends Widget {
     this._labelEl = undefined
     this._scaleBarEl = undefined
     this._lastUpdate = Cesium.getTimestamp()
-    this.type = Widget.getWidgetType('distance_legend')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Widget.getWidgetType('distance_legend')
   }
 
   /**

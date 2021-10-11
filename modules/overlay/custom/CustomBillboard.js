@@ -17,8 +17,11 @@ class CustomBillboard extends Overlay {
     this._position = Parse.parsePosition(position)
     this._icon = icon
     this._size = [32, 32]
-    this.type = Overlay.getOverlayType('custom_billboard')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('custom_billboard')
   }
 
   set position(position) {
@@ -130,7 +133,7 @@ class CustomBillboard extends Overlay {
       ...style,
       semiMajorAxis: radius,
       semiMinorAxis: radius,
-      stRotation: new Cesium.CallbackProperty(time => {
+      stRotation: new Cesium.CallbackProperty(() => {
         stRotation += amount
         if (stRotation >= 360 || stRotation <= -360) {
           stRotation = 0

@@ -17,8 +17,11 @@ class DynamicModel extends DynamicOverlay {
     this._posistion = Parse.parsePosition(position)
     this._modelUrl = modelUrl
     this._delegate = new Cesium.Entity({ model: {} })
-    this.type = Overlay.getOverlayType('dynamic_model')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('dynamic_model')
   }
 
   set modelUrl(modelUrl) {
@@ -35,16 +38,16 @@ class DynamicModel extends DynamicOverlay {
     /**
      * set the location
      */
-    this._samplePosition.forwardExtrapolationType =
+    this._sampledPosition.forwardExtrapolationType =
       Cesium.ExtrapolationType.HOLD
     this._startTime = Cesium.JulianDate.now()
-    this._samplePosition.addSample(
+    this._sampledPosition.addSample(
       this._startTime,
       Transform.transformWGS84ToCartesian(this._posistion)
     )
-    this._delegate.position = this._samplePosition
+    this._delegate.position = this._sampledPosition
     this._delegate.orientation = new Cesium.VelocityOrientationProperty(
-      this._samplePosition
+      this._sampledPosition
     )
     this._cache.push(this._startTime)
     /**

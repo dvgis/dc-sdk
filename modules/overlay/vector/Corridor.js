@@ -15,8 +15,11 @@ class Corridor extends Overlay {
     super()
     this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.Entity({ corridor: {} })
-    this.type = Overlay.getOverlayType('corridor')
     this._state = State.INITIALIZED
+  }
+
+  get type() {
+    return Overlay.getOverlayType('corridor')
   }
 
   set positions(positions) {

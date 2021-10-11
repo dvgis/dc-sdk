@@ -1,6 +1,6 @@
 {
   "name": "dc-sdk",
-  "version": "2.2.4",
+  "version": "2.6.0",
   "description": "The SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.",
   "repository": "https://github.com/dvgis/dc-sdk.git",
   "homepage": "https://www.dvgis.cn",
@@ -34,11 +34,12 @@
     "build:chart": "yarn run clean:chart && webpack --config build/webpack.chart.conf --mode production --env.production",
     "dev:mapv": "yarn run clean:mapv && webpack --config build/webpack.mapv.conf --mode development",
     "build:mapv": "yarn run clean:mapv && webpack --config build/webpack.mapv.conf --mode production --env.production",
-    "clean": "yarn run clean:base && yarn run clean:core && && yarn run clean:chart",
+    "clean": "yarn run clean:base && yarn run clean:core && yarn run clean:chart && yarn run clean:mapv && yarn run clean:sdk",
     "clean:base": "rimraf packages/base/dist",
     "clean:core": "rimraf packages/core/dist",
     "clean:chart": "rimraf packages/chart/dist",
-    "clean:mapv": "rimraf packages/mapv/dist"
+    "clean:mapv": "rimraf packages/mapv/dist",
+    "clean:sdk": "rimraf packages/sdk/dist"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
@@ -49,7 +50,7 @@
     "@turf/turf": "^6.3.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
-    "cesium": "1.81.0",
+    "cesium": "^1.86.0",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",
