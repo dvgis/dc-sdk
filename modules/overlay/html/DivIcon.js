@@ -81,6 +81,20 @@ class DivIcon extends Overlay {
     // set translate
     let x = windowCoord.x - this._delegate.offsetWidth / 2
     let y = windowCoord.y - this._delegate.offsetHeight / 2
+
+    if (this._style.position === 'topleft') {
+      x = windowCoord.x
+      y = windowCoord.y
+    } else if (this._style.position === 'topright') {
+      x = windowCoord.x - this._delegate.offsetWidth
+      y = windowCoord.y
+    } else if (this._style.position === 'bottomleft') {
+      x = windowCoord.x
+      y = windowCoord.y - this._delegate.offsetHeight
+    } else if (this._style.position === 'bottomright') {
+      x = windowCoord.x - this._delegate.offsetWidth
+      y = windowCoord.y - this._delegate.offsetHeight
+    }
     let translate3d = `translate3d(${Math.round(x)}px,${Math.round(y)}px, 0)`
 
     // set scale
