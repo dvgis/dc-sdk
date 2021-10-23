@@ -9,7 +9,7 @@
 #### Fixes 🔧
 
 - Improve the DivIcon style
-- Improve the Popup style
+- Improve the Popup config
 - Improve the terrian name option  [#74](https://github.com/dvgis/dc-sdk/pull/74)
 
 ### 2.6.0 - 2021-10-10
