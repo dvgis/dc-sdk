@@ -348,6 +348,7 @@ class Viewer {
   /**
    * Adds the terrain
    * @param terrain
+   * @param options
    * @returns {Viewer}
    */
   addTerrain(terrain, options = {}) {
