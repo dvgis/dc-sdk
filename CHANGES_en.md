@@ -1,5 +1,17 @@
 # Change Log
 
+### 2.6.1 - 2021-10-23
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.86.0
+
+#### Fixes 🔧
+
+- Improve the DivIcon style
+- Improve the Popup style
+- Improve the terrian name option  [#74](https://github.com/dvgis/dc-sdk/pull/74)
+
 ### 2.6.0 - 2021-10-10
 
 #### Breaking Changes 📣

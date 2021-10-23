@@ -1,5 +1,17 @@
 # Change Log
 
+### 2.6.1 - 2021-10-23
+
+#### Breaking Changes 📣
+
+- 升级 Cesium 到 1.86.1 版本
+
+#### Fixes 🔧
+
+- 完善DivIcon的样式位置的设置
+- 完善Popup的样式位置的设置
+- 完善添加地形名称的设置 [#74](https://github.com/dvgis/dc-sdk/pull/74)
+
 ### 2.6.0 - 2021-10-10
 
 #### Breaking Changes 📣
@@ -8,7 +20,7 @@
 
 #### Fixes 🔧
 
-- 完善地图切换组件样式 [#70](https://github.com/dvgis/dc-sdk/issues/70)
+- 完善地图切换组件样式 [#70](https://github.com/dvgis/dc-sdk/pull/70)
 - 完善相机环绕功能 [#72](https://github.com/dvgis/dc-sdk/issues/72)
 
 ### 2.5.0 - 2021-09-04
