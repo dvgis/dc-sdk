@@ -82,17 +82,17 @@ class Popup extends Widget {
     let y = windowCoord.y - this._wrapper.offsetHeight
 
     if (this._config.position === 'topleft') {
-      x = windowCoord.x
-      y = windowCoord.y
+      x = windowCoord.x - this._wrapper.offsetWidth
+      y = windowCoord.y - this._wrapper.offsetHeight
     } else if (this._config.position === 'topright') {
-      x = windowCoord.x - this._wrapper.offsetWidth
-      y = windowCoord.y
-    } else if (this._config.position === 'bottomleft') {
       x = windowCoord.x
       y = windowCoord.y - this._wrapper.offsetHeight
-    } else if (this._config.position === 'bottomright') {
+    } else if (this._config.position === 'bottomleft') {
       x = windowCoord.x - this._wrapper.offsetWidth
-      y = windowCoord.y - this._wrapper.offsetHeight
+      y = windowCoord.y
+    } else if (this._config.position === 'bottomright') {
+      x = windowCoord.x
+      y = windowCoord.y
     }
 
     this._wrapper.style.cssText = `
