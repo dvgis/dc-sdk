@@ -3,6 +3,7 @@
  * @Date: 2019-12-27 14:35:02
  */
 
+import { Cesium } from '@dc-modules/namespace'
 import { Transform } from '@dc-modules/transform'
 
 class Position {
