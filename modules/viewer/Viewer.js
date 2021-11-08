@@ -415,6 +415,15 @@ class Viewer {
   }
 
   /**
+   *
+   * @param id
+   * @returns {undefined}
+   */
+  getLayerGroup(id) {
+    return this._layerGroupCache[id] || undefined
+  }
+
+  /**
    * add a layer
    * @param layer
    * @returns {Viewer}
