@@ -130,21 +130,22 @@ class Overlay {
     }
     this._layer = layer
     this._mountedHook && this._mountedHook()
-    let collection = {
-      point_primitive: this._layer.points,
-      billboard_primitive: this._layer.billboards,
-      bounce_billboard_primitive: this._layer.billboards,
-      label_primitive: this._layer.labels,
-      bounce_label_primitive: this._layer.labels,
-      polyline_primitive: this._layer.polylines,
-      cloud_primitive: this._layer.clouds
-    }
+
     // for Entity
     if (this._layer?.delegate?.entities && this._delegate) {
       this._layer.delegate.entities.add(this._delegate)
     }
     // for Primitive
     else if (this._layer?.delegate?.add && this._delegate) {
+      let collection = {
+        point_primitive: this._layer.points,
+        billboard_primitive: this._layer.billboards,
+        bounce_billboard_primitive: this._layer.billboards,
+        label_primitive: this._layer.labels,
+        bounce_label_primitive: this._layer.labels,
+        polyline_primitive: this._layer.polylines,
+        cloud_primitive: this._layer.clouds
+      }
       if (this.type && collection[this.type]) {
         this._delegate = collection[this.type].add(this._delegate)
       } else {
@@ -163,21 +164,21 @@ class Overlay {
     if (!this._layer || !this._delegate) {
       return
     }
-    let collection = {
-      point_primitive: this._layer.points,
-      billboard_primitive: this._layer.billboards,
-      bounce_billboard_primitive: this._layer.billboards,
-      label_primitive: this._layer.labels,
-      bounce_label_primitive: this._layer.labels,
-      polyline_primitive: this._layer.polylines,
-      cloud_primitive: this._layer.clouds
-    }
     // for Entity
     if (this._layer?.delegate?.entities) {
       this._layer.delegate.entities.remove(this._delegate)
     }
     // for Primitive
     else if (this._layer?.delegate?.remove) {
+      let collection = {
+        point_primitive: this._layer.points,
+        billboard_primitive: this._layer.billboards,
+        bounce_billboard_primitive: this._layer.billboards,
+        label_primitive: this._layer.labels,
+        bounce_label_primitive: this._layer.labels,
+        polyline_primitive: this._layer.polylines,
+        cloud_primitive: this._layer.clouds
+      }
       if (this.type && collection[this.type]) {
         collection[this.type].remove(this._delegate)
       } else {
