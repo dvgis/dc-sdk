@@ -18,6 +18,9 @@ class PrimitiveLayer extends Layer {
     this._labels = this._delegate.add(new Cesium.LabelCollection())
     this._billboards = this._delegate.add(new Cesium.BillboardCollection())
     this._polylines = this._delegate.add(new Cesium.PolylineCollection())
+    if (Cesium.CloudCollection) {
+      this._clouds = this._delegate.add(new Cesium.CloudCollection())
+    }
     this._state = State.INITIALIZED
   }
 
@@ -41,6 +44,10 @@ class PrimitiveLayer extends Layer {
     return this._polylines
   }
 
+  get clouds() {
+    return this._clouds
+  }
+
   /**
    * Clears all primitives
    * @returns {PrimitiveLayer}
@@ -51,6 +58,9 @@ class PrimitiveLayer extends Layer {
     this._labels = this._delegate.add(new Cesium.LabelCollection())
     this._billboards = this._delegate.add(new Cesium.BillboardCollection())
     this._polylines = this._delegate.add(new Cesium.PolylineCollection())
+    if (Cesium.CloudCollection) {
+      this._clouds = this._delegate.add(new Cesium.CloudCollection())
+    }
     this._cache = {}
     this._state = State.CLEARED
     return this

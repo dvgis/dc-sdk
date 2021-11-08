@@ -30,6 +30,10 @@ class Overlay {
     return this._id
   }
 
+  get type() {
+    return ''
+  }
+
   set id(id) {
     this._bid = id
     return this
@@ -126,25 +130,23 @@ class Overlay {
     }
     this._layer = layer
     this._mountedHook && this._mountedHook()
+    let collection = {
+      point_primitive: this._layer.points,
+      billboard_primitive: this._layer.billboards,
+      bounce_billboard_primitive: this._layer.billboards,
+      label_primitive: this._layer.labels,
+      bounce_label_primitive: this._layer.labels,
+      polyline_primitive: this._layer.polylines,
+      cloud_primitive: this._layer.clouds
+    }
     // for Entity
     if (this._layer?.delegate?.entities && this._delegate) {
       this._layer.delegate.entities.add(this._delegate)
-    } else if (this._layer?.delegate?.add && this._delegate) {
-      // for Primitive
-      if (this.type && this.type === 'point_primitive' && this._layer.points) {
-        this._delegate = this._layer.points.add(this._delegate)
-      } else if (
-        this.type.indexOf('billboard_primitive') >= 0 &&
-        this._layer.billboards
-      ) {
-        this._delegate = this._layer.billboards.add(this._delegate)
-      } else if (this.type === 'polyline_primitive' && this._layer.polylines) {
-        this._delegate = this._layer.polylines.add(this._delegate)
-      } else if (
-        this.type.indexOf('label_primitive') >= 0 &&
-        this._layer.labels
-      ) {
-        this._delegate = this._layer.labels.add(this._delegate)
+    }
+    // for Primitive
+    else if (this._layer?.delegate?.add && this._delegate) {
+      if (this.type && collection[this.type]) {
+        this._delegate = collection[this.type].add(this._delegate)
       } else {
         this._layer.delegate.add(this._delegate)
       }
@@ -161,25 +163,23 @@ class Overlay {
     if (!this._layer || !this._delegate) {
       return
     }
+    let collection = {
+      point_primitive: this._layer.points,
+      billboard_primitive: this._layer.billboards,
+      bounce_billboard_primitive: this._layer.billboards,
+      label_primitive: this._layer.labels,
+      bounce_label_primitive: this._layer.labels,
+      polyline_primitive: this._layer.polylines,
+      cloud_primitive: this._layer.clouds
+    }
     // for Entity
     if (this._layer?.delegate?.entities) {
       this._layer.delegate.entities.remove(this._delegate)
-    } else if (this._layer?.delegate?.remove) {
-      // for Primitive
-      if (this.type === 'point_primitive' && this._layer.points) {
-        this._layer.points.remove(this._delegate)
-      } else if (
-        this.type.indexOf('billboard_primitive') >= 0 &&
-        this._layer.billboards
-      ) {
-        this._layer.billboards.remove(this._delegate)
-      } else if (this.type === 'polyline_primitive' && this._layer.polylines) {
-        this._layer.polylines.remove(this._delegate)
-      } else if (
-        this.type.indexOf('label_primitive') >= 0 &&
-        this._layer.labels
-      ) {
-        this._layer.labels.remove(this._delegate)
+    }
+    // for Primitive
+    else if (this._layer?.delegate?.remove) {
+      if (this.type && collection[this.type]) {
+        collection[this.type].remove(this._delegate)
       } else {
         this._layer.delegate.remove(this._delegate)
       }
