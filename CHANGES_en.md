@@ -1,5 +1,20 @@
 # Change Log
 
+### 2.7.0 - 2021-11-13
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.87.0
+
+#### Additions 🎉
+
+- Added overlay clouds
+- Add get LayerGroup function
+
+#### Fixes 🔧
+
+- Improve the plot module
+
 ### 2.6.1 - 2021-10-23
 
 #### Breaking Changes 📣
