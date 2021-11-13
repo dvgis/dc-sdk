@@ -98,6 +98,15 @@ class Draw {
     this._bindEvent()
     return this
   }
+
+  /**
+   *
+   * @returns {Draw}
+   */
+  stop() {
+    this.drawTool.fire(PlotEventType.DRAW_STOP)
+    return this
+  }
 }
 
 export default Draw

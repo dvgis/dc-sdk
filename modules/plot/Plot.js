@@ -36,6 +36,7 @@ class Plot {
     this._options = options
     this._layer = new Cesium.CustomDataSource('plot-layer')
     this._viewer.dataSources.add(this._layer)
+    this._currentWorker = undefined
     this._state = undefined
   }
 
@@ -156,7 +157,10 @@ class Plot {
    */
   draw(type, callback, style = {}, clampToModel = false) {
     this._state = 'draw'
-    this._createDrawWorker(type, style)?.start(this, {
+    if (this._currentWorker) {
+      this._currentWorker.stop()
+    }
+    this._currentWorker = this._createDrawWorker(type, style)?.start(this, {
       ...this._options,
       onDrawStop: callback,
       clampToModel: clampToModel ?? this._options.clampToModel
@@ -173,7 +177,10 @@ class Plot {
    */
   edit(overlay, callback, clampToModel = false) {
     this._state = 'edit'
-    this._createEditWorker(overlay)?.start(this, {
+    if (this._currentWorker) {
+      this._currentWorker.stop()
+    }
+    this._currentWorker = this._createEditWorker(overlay)?.start(this, {
       ...this._options,
       onEditStop: callback,
       clampToModel: clampToModel ?? this._options.clampToModel

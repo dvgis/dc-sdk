@@ -147,6 +147,18 @@ class Edit {
     this._bindEvent()
     return this
   }
+
+  /**
+   *
+   * @returns {Edit}
+   */
+  stop() {
+    this.editTool.fire(PlotEventType.EDIT_STOP, {
+      pickedAnchor: null,
+      position: null
+    })
+    return this
+  }
 }
 
 export default Edit
