@@ -17,7 +17,8 @@ class Tileset extends Overlay {
     })
     this._tileVisibleCallback = undefined
     this._properties = undefined
-    this._customShader = undefined
+    this._fragmentShader = undefined
+    this._replaceFS = false
     this._state = State.INITIALIZED
   }
 
@@ -48,10 +49,10 @@ class Tileset extends Overlay {
    */
   _updateTile(tile) {
     let content = tile.content
+    let model = content._model
+    // sets properties
     for (let i = 0; i < content.featuresLength; i++) {
       let feature = content.getFeature(i)
-      let model = feature.content._model
-      // sets properties
       if (this._properties && this._properties.length) {
         this._properties.forEach(property => {
           if (
@@ -65,21 +66,30 @@ class Tileset extends Overlay {
           }
         })
       }
-      // sets customShader
-      if (
-        this._customShader &&
-        model &&
-        model._sourcePrograms &&
-        model._rendererResources
-      ) {
-        Object.keys(model._sourcePrograms).forEach(key => {
-          let program = model._sourcePrograms[key]
-          model._rendererResources.sourceShaders[
-            program.fragmentShader
-          ] = this._customShader
-        })
-        model._shouldRegenerateShaders = true
-      }
+    }
+    // sets fragmentShader
+    if (
+      this._fragmentShader &&
+      model &&
+      model._sourcePrograms &&
+      model._rendererResources
+    ) {
+      Object.keys(model._sourcePrograms).forEach(key => {
+        let program = model._sourcePrograms[key]
+        let sourceShaders = model._rendererResources.sourceShaders
+        if (this._replaceFS) {
+          sourceShaders[program.fragmentShader] = this._fragmentShader
+        } else {
+          let oldFS = sourceShaders[program.fragmentShader]
+          sourceShaders[program.fragmentShader] = oldFS.replace(
+            'gl_FragColor = vec4(color, 1.0);\n}',
+            `gl_FragColor = vec4(color, 1.0);
+             ${this._fragmentShader}\n}
+            `
+          )
+        }
+      })
+      model._shouldRegenerateShaders = true
     }
   }
 
@@ -232,11 +242,36 @@ class Tileset extends Overlay {
 
   /**
    * Sets feature FS
-   * @param customShader
+   * @param fragmentShader
    * @returns {Tileset}
    */
-  setCustomShader(customShader) {
-    this._customShader = customShader
+  setCustomShader(fragmentShader) {
+    this._replaceFS = true
+    this._fragmentShader = fragmentShader
+    this._bindVisibleEvent()
+    return this
+  }
+
+  /**
+   *
+   * @param fragmentShader
+   * @return {Tileset}
+   */
+  replaceFS(fragmentShader) {
+    this._replaceFS = true
+    this._fragmentShader = fragmentShader
+    this._bindVisibleEvent()
+    return this
+  }
+
+  /**
+   *
+   * @param fragmentShader
+   * @return {Tileset}
+   */
+  appendFS(fragmentShader) {
+    this._replaceFS = false
+    this._fragmentShader = fragmentShader
     this._bindVisibleEvent()
     return this
   }
