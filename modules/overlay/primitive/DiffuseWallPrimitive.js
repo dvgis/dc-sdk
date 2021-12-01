@@ -194,6 +194,13 @@ class DiffuseWallPrimitive extends Overlay {
     Util.merge(this._style, style)
     return this
   }
+
+  /**
+   * @return {*}
+   */
+  destroy() {
+    return Cesium.destroyObject(this)
+  }
 }
 
 Overlay.registerType('diffuse_wall_primitive')
