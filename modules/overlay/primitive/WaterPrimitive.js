@@ -10,9 +10,10 @@ import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
 
 class WaterPrimitive extends Overlay {
-  constructor(positions) {
+  constructor(positions, holes = []) {
     super()
     this._positions = Parse.parsePositions(positions)
+    this._holes = holes.map(item => Parse.parsePositions(item))
     this._delegate = new Cesium.GroundPrimitive({
       geometryInstances: new Cesium.GeometryInstance({
         geometry: {}
@@ -28,18 +29,22 @@ class WaterPrimitive extends Overlay {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    this._delegate.geometryInstances.geometry = Cesium.PolygonGeometry.fromPositions(
-      {
-        positions: Transform.transformWGS84ArrayToCartesianArray(
-          this._positions
-        ),
-        height: this._style?.height,
-        extrudedHeight: this._style?.extrudedHeight,
-        closeTop: this._style?.closeTop,
-        closeBottom: this._style?.closeBottom,
-        vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
-      }
-    )
+    this._delegate.geometryInstances.geometry = new Cesium.PolygonGeometry({
+      polygonHierarchy: new Cesium.PolygonHierarchy(
+        Transform.transformWGS84ArrayToCartesianArray(this._positions),
+        this._holes.map(
+          item =>
+            new Cesium.PolygonHierarchy(
+              Transform.transformWGS84ArrayToCartesianArray(item)
+            )
+        )
+      ),
+      height: this._style?.height,
+      extrudedHeight: this._style?.extrudedHeight,
+      closeTop: this._style?.closeTop,
+      closeBottom: this._style?.closeBottom,
+      vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
+    })
     return this
   }
 
