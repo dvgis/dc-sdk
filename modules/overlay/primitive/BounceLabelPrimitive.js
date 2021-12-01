@@ -49,9 +49,6 @@ class BounceLabelPrimitive extends LabelPrimitive {
     this._layer.delegate.remove(this)
   }
 
-  /**
-   *
-   */
   update() {
     if (!this._show) {
       return
@@ -65,6 +62,13 @@ class BounceLabelPrimitive extends LabelPrimitive {
     }
     this._currentOffset.y += offsetAmount * (this._isUp ? -1 : 1)
     this._delegate.pixelOffset = this._currentOffset
+  }
+
+  /**
+   * @return {*}
+   */
+  destroy() {
+    return Cesium.destroyObject(this)
   }
 }
 
