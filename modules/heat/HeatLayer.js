@@ -13,7 +13,9 @@ const WMP = new Cesium.WebMercatorProjection()
 const DEF_OPTS = {
   radius: 30,
   height: 0,
-  gradient: undefined
+  gradient: undefined,
+  useGround: false,
+  classificationType: 2
 }
 
 class HeatLayer extends Layer {
@@ -23,6 +25,7 @@ class HeatLayer extends Layer {
       ...DEF_OPTS,
       ...options
     }
+    this._isGround = this._options.useGround
     this._canvas = document.createElement('canvas')
     this._canvas.setAttribute('id', id)
     this._heat = undefined
@@ -30,11 +33,18 @@ class HeatLayer extends Layer {
     this._rect = new Cesium.Rectangle()
     this._delegate = new Cesium.PrimitiveCollection()
     this._primitive = this._delegate.add(
-      new Cesium.Primitive({
-        geometryInstances: new Cesium.GeometryInstance({
-          geometry: {}
-        })
-      })
+      this._isGround
+        ? new Cesium.GroundPrimitive({
+            geometryInstances: new Cesium.GeometryInstance({
+              geometry: {}
+            }),
+            classificationType: this._options.classificationType
+          })
+        : new Cesium.Primitive({
+            geometryInstances: new Cesium.GeometryInstance({
+              geometry: {}
+            })
+          })
     )
     this._scale = 1
     this._points = []
