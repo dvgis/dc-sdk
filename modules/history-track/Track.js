@@ -16,7 +16,8 @@ const DEF_OPTS = {
   clampToGround: false,
   clampToTileset: false,
   interpolationType: 'Linear',
-  interpolationDegree: 2
+  interpolationDegree: 2,
+  endDelayTime: 0.5
 }
 
 const DEF_PATH_STYLE = {
@@ -205,7 +206,7 @@ class Track {
               position,
               this._positionIndex + 1 === this._positions.length
             )
-          this._positionIndex += 1
+          this._positionIndex++
         }
       }
     }
@@ -286,6 +287,7 @@ class Track {
         )
       })
       this._pathPositions = []
+      this._positionIndex = 0
     } else if (params?.stopTime && params?.duration) {
       this._duration += params.duration
       this._timeLine = this._timeLine.map(item => {
@@ -326,7 +328,11 @@ class Track {
     this._velocityOrientation = new Cesium.VelocityOrientationProperty(
       this._sampledPosition
     )
-    this._endTime = this._timeLine[this._timeLine.length - 1]
+    this._endTime = Cesium.JulianDate.addSeconds(
+      this._timeLine[this._timeLine.length - 1],
+      this._options.endDelayTime,
+      new Cesium.JulianDate()
+    )
   }
 
   /**
