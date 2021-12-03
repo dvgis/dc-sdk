@@ -17,6 +17,7 @@ class Layer {
     this._viewer = undefined
     this._state = undefined
     this._show = true
+    this._isGround = false
     this._cache = {}
     this._attr = {}
     this._layerEvent = new LayerEvent()
@@ -85,7 +86,11 @@ class Layer {
       return
     }
     if (this._delegate instanceof Cesium.PrimitiveCollection) {
-      this._viewer.scene.primitives.add(this._delegate)
+      if (this._isGround) {
+        this._viewer.scene.groundPrimitives.add(this._delegate)
+      } else {
+        this._viewer.scene.primitives.add(this._delegate)
+      }
     } else {
       this._viewer.dataSources.add(this._delegate)
     }
@@ -106,7 +111,11 @@ class Layer {
       this._cache = {}
       if (this._delegate instanceof Cesium.PrimitiveCollection) {
         this._delegate.removeAll()
-        this._viewer.scene.primitives.remove(this._delegate)
+        if (this._isGround) {
+          this._viewer.scene.groundPrimitives.remove(this._delegate)
+        } else {
+          this._viewer.scene.primitives.remove(this._delegate)
+        }
       } else if (this._delegate.then) {
         this._delegate.then(dataSource => {
           dataSource.entities.removeAll()
