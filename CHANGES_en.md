@@ -1,5 +1,23 @@
 # Change Log
 
+### 2.8.0 - 2021-12-04
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.88.0
+
+#### Additions 🎉
+
+- Add ground primitive layer
+- Add both replacement and append FS modes for 3Dtiles
+- Add water primitive holes param
+- Add hot layer support for classificationType
+
+#### Fixes 🔧
+
+- Improve the function of clearing or removing the primitive layer 
+- Improve the history track function
+
 ### 2.7.0 - 2021-11-13
 
 #### Breaking Changes 📣
@@ -8,7 +26,7 @@
 
 #### Additions 🎉
 
-- Added overlay clouds
+- Add overlay clouds
 - Add get LayerGroup function
 
 #### Fixes 🔧
@@ -63,7 +81,7 @@
 
 #### Additions 🎉
 
-- Added support for layer mouse events [#53](https://github.com/dvgis/dc-sdk/issues/54)
+- Add support for layer mouse events [#53](https://github.com/dvgis/dc-sdk/issues/54)
 - Add partial mouse default events [#54](https://github.com/dvgis/dc-sdk/issues/54)
 - Add function to get tile information
 

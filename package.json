@@ -1,6 +1,6 @@
 {
   "name": "dc-sdk",
-  "version": "2.7.0",
+  "version": "2.8.0",
   "description": "The SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.",
   "repository": "https://github.com/dvgis/dc-sdk.git",
   "homepage": "https://www.dvgis.cn",
