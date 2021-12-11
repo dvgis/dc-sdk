@@ -6,15 +6,22 @@
 import { Cesium } from '@dc-modules/namespace'
 import ImageryType from '../ImageryType'
 
-const IMG_URL =
-  'https://p{s}.map.gtimg.com/sateTiles/{z}/{sx}/{sy}/{x}_{reverseY}.jpg?version=400'
-
-const ELEC_URL =
-  'https://rt{s}.map.gtimg.com/tile?z={z}&x={x}&y={reverseY}&styleid={style}&scene=0&version=347'
+const TILE_URL = {
+  img:
+    '//p{s}.map.gtimg.com/sateTiles/{z}/{sx}/{sy}/{x}_{reverseY}.jpg?version=400',
+  elec:
+    '//rt{s}.map.gtimg.com/tile?z={z}&x={x}&y={reverseY}&styleid={style}&scene=0&version=347'
+}
 
 class TencentImageryProvider extends Cesium.UrlTemplateImageryProvider {
   constructor(options = {}) {
-    let url = options.style === 'img' ? IMG_URL : ELEC_URL
+    let url =
+      options.url ||
+      [
+        options.protocol || '',
+        options.protocol ? ':' : '',
+        TILE_URL[options.style || 'elec']
+      ].join('')
     options['url'] = url.replace('{style}', options.style || 1)
     options['subdomains'] = options.subdomains || ['1', '2', '3']
     if (options.style === 'img') {
