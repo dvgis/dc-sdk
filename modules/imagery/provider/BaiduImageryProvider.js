@@ -24,8 +24,7 @@ class BaiduImageryProvider {
       options.url ||
       [
         options.protocol || '',
-        options.protocol ? ':' : '',
-        TILE_URL[options.style || 'custom']
+        TILE_URL[options.style] || TILE_URL['custom']
       ].join('')
     this._labelStyle = options.labelStyle || 'web2D'
     this._tileWidth = 256

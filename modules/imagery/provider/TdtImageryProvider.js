@@ -14,7 +14,6 @@ class TdtImageryProvider extends Cesium.UrlTemplateImageryProvider {
     super({
       url: [
         options.protocol || '',
-        options.protocol ? ':' : '',
         MAP_URL.replace(/\{style\}/g, options.style || 'vec').replace(
           /\{key\}/g,
           options.key || ''

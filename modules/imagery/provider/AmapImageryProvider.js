@@ -21,8 +21,7 @@ class AmapImageryProvider extends Cesium.UrlTemplateImageryProvider {
       options.url ||
       [
         options.protocol || '',
-        options.protocol ? ':' : '',
-        TILE_URL[options.style || 'elec']
+        TILE_URL[options.style] || TILE_URL['elec']
       ].join('')
     options['subdomains'] = options.subdomains || ['01', '02', '03', '04']
     if (options.crs === 'WGS84') {

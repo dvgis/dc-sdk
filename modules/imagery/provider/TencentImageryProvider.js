@@ -19,8 +19,7 @@ class TencentImageryProvider extends Cesium.UrlTemplateImageryProvider {
       options.url ||
       [
         options.protocol || '',
-        options.protocol ? ':' : '',
-        TILE_URL[options.style || 'elec']
+        TILE_URL[options.style] || TILE_URL['elec']
       ].join('')
     options['url'] = url.replace('{style}', options.style || 1)
     options['subdomains'] = options.subdomains || ['1', '2', '3']
