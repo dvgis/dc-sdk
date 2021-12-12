@@ -135,11 +135,11 @@ class ContextMenu extends Widget {
     this._overlay = undefined
     let scene = this._viewer.scene
     this._windowPosition = movement.position
-    this._updateWindowCoord(movement.position)
     let target = scene.pick(movement.position)
     if (scene.pickPositionSupported) {
       this._position = scene.pickPosition(movement.position)
     }
+
     if (this._position) {
       let c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(this._position)
       if (c) {
@@ -150,6 +150,7 @@ class ContextMenu extends Widget {
         }
       }
     }
+
     if (scene.mode === Cesium.SceneMode.SCENE3D) {
       let ray = scene.camera.getPickRay(movement.position)
       this._surfacePosition = scene.globe.pick(ray, scene)
@@ -172,6 +173,7 @@ class ContextMenu extends Widget {
         }
       }
     }
+
     this._instanceId = target?.instanceId
     // for Entity
     if (target?.id instanceof Cesium.Entity) {
@@ -215,6 +217,7 @@ class ContextMenu extends Widget {
 
     this._overlayMenu = this._overlay?.contextMenu || []
     this._mountMenu()
+    this._updateWindowCoord(movement.position)
   }
   /**
    *
@@ -231,8 +234,9 @@ class ContextMenu extends Widget {
    * @private
    */
   _updateWindowCoord(windowCoord) {
+    let visibility = this._ulEl.hasChildNodes() ? 'visible' : 'hidden'
     this._wrapper.style.cssText = `
-    visibility:visible;
+    visibility:${visibility};
     z-index:1;
     transform:translate3d(${Math.round(windowCoord.x)}px,${Math.round(
       windowCoord.y
