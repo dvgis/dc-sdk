@@ -193,7 +193,7 @@ class DivIcon extends Overlay {
     if (!style || Object.keys(style).length === 0) {
       return this
     }
-    this._style = style
+    Util.merge(this._style, style)
     this._style.className &&
       DomUtil.addClass(this._delegate, this._style.className)
     return this

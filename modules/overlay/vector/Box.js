@@ -105,8 +105,8 @@ class Box extends Overlay {
       return this
     }
     delete style['length'] && delete style['width'] && delete style['height']
-    this._style = style
-    Util.merge(this._delegate.box, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.box, style)
     return this
   }
 }

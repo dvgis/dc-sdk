@@ -76,8 +76,8 @@ class Label extends Overlay {
       return this
     }
     delete style['text']
-    this._style = style
-    Util.merge(this._delegate.label, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.label, style)
     return this
   }
 

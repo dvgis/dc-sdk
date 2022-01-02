@@ -75,8 +75,8 @@ class Polyline extends Overlay {
       return this
     }
     delete style['positions']
-    this._style = style
-    Util.merge(this._delegate.polyline, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.polyline, style)
     return this
   }
 

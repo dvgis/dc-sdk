@@ -107,15 +107,6 @@ class Plane extends Overlay {
   }
 
   /**
-   *
-   * @param {*} text
-   * @param {*} textStyle
-   */
-  setLabel(text, textStyle) {
-    return this
-  }
-
-  /**
    * Sets Style
    * @param style
    * @returns {Plane}
@@ -125,8 +116,8 @@ class Plane extends Overlay {
       return this
     }
     delete style['dimensions'] && delete ['plane']
-    this._style = style
-    Util.merge(this._delegate.plane, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.plane, style)
     return this
   }
 }

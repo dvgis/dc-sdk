@@ -62,7 +62,7 @@ class Point extends Overlay {
       return this
     }
     delete style['position']
-    this._style = style
+    Util.merge(this._style, style)
     Util.merge(this._delegate.point, DEF_STYLE, this._style)
     return this
   }

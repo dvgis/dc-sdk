@@ -109,8 +109,8 @@ class ModelPrimitive extends Overlay {
     if (!style || Object.keys(style).length === 0) {
       return this
     }
-    this._style = style
-    Util.merge(this._delegate, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate, style)
     return this
   }
 }

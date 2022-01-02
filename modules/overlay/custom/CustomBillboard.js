@@ -96,8 +96,8 @@ class CustomBillboard extends Overlay {
       return this
     }
     delete style['image'] && delete style['width'] && delete style['height']
-    this._style = style
-    Util.merge(this._delegate.billboard, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.billboard, style)
     return this
   }
 

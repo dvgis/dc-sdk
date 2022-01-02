@@ -89,8 +89,8 @@ class BillboardPrimitive extends Overlay {
       delete style['image'] &&
       delete style['width'] &&
       delete style['height']
-    this._style = style
-    Util.merge(this._delegate, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate, style)
     return this
   }
 }

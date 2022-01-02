@@ -111,8 +111,8 @@ class Cylinder extends Overlay {
       delete style['topRadius'] &&
       delete style['bottomRadius']
 
-    this._style = style
-    Util.merge(this._delegate.cylinder, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.cylinder, style)
     return this
   }
 }

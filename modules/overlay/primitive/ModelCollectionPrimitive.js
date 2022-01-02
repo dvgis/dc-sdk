@@ -6,6 +6,7 @@
 import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
+import { Util } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
 
@@ -119,7 +120,7 @@ class ModelCollectionPrimitive extends Overlay {
       return this
     }
     delete style['instances'] && delete style['url']
-    this._style = style
+    Util.merge(this._style, style)
     if (this._layer) {
       this._resetDelegate()
       this._layer.delegate.add(this._delegate)

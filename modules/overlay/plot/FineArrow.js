@@ -125,8 +125,8 @@ class FineArrow extends Overlay {
       return this
     }
     delete style['positions']
-    this._style = style
-    Util.merge(this._delegate.polygon, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.polygon, style)
     return this
   }
 }

@@ -86,8 +86,8 @@ class Ellipse extends Overlay {
       return this
     }
     delete style['semiMajorAxis'] && delete style['semiMinorAxis']
-    this._style = style
-    Util.merge(this._delegate.ellipse, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.ellipse, style)
     return this
   }
 }

@@ -100,8 +100,8 @@ class Model extends Overlay {
       return this
     }
     delete style['uri']
-    this._style = style
-    Util.merge(this._delegate.model, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.model, style)
     return this
   }
 

@@ -75,8 +75,8 @@ class Ellipsoid extends Overlay {
       return this
     }
     delete style['radius']
-    this._style = style
-    Util.merge(this._delegate.ellipsoid, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.ellipsoid, style)
     return this
   }
 }

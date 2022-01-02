@@ -53,8 +53,8 @@ class CloudPrimitive extends Overlay {
       return this
     }
     delete style['position']
-    this._style = style
-    Util.merge(this._delegate, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate, style)
     return this
   }
 }

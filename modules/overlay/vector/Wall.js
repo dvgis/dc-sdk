@@ -61,8 +61,8 @@ class Wall extends Overlay {
       return this
     }
     delete style['positions']
-    this._style = style
-    Util.merge(this._delegate.wall, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.wall, style)
     return this
   }
 

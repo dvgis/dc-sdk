@@ -60,8 +60,8 @@ class Rectangle extends Overlay {
       return this
     }
     delete style['positions']
-    this._style = style
-    Util.merge(this._delegate.rectangle, this._style)
+    Util.merge(this._style, style)
+    Util.merge(this._delegate.rectangle, style)
     return this
   }
 }

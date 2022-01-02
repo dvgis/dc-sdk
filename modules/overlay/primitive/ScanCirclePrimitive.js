@@ -6,6 +6,7 @@
 import { Cesium } from '@dc-modules/namespace'
 import State from '@dc-modules/state/State'
 import Parse from '@dc-modules/parse/Parse'
+import { Util } from '@dc-modules/utils'
 import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
 
@@ -88,7 +89,7 @@ class ScanCirclePrimitive extends Overlay {
     if (Object.keys(style).length === 0) {
       return this
     }
-    this._style = style
+    Util.merge(this._style, style)
     style.classificationType &&
       (this._delegate.classificationType = this._style.classificationType)
     this._setAppearance()
