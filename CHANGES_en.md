@@ -1,5 +1,22 @@
 # Change Log
 
+### 2.9.0 - 2021-01-08
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.89.0
+
+#### Additions 🎉
+
+- Added protocol parameter settings when creating partial map tiles
+- Add partial tool class name abbreviations
+
+#### Fixes 🔧
+
+- Solve the problem that right click menu content is still displayed when empty
+- Fix overlay style setting overlay issue
+- Solve the problem that some overlay setting labels are invalid
+
 ### 2.8.0 - 2021-12-04
 
 #### Breaking Changes 📣
