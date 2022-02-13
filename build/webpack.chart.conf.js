@@ -35,6 +35,7 @@ module.exports = env => {
       path: path.resolve(__dirname, '..', 'packages/chart/dist'),
       publicPath: publicPath,
       library: 'DcChart',
+      libraryExport: 'default',
       libraryTarget: 'umd',
       umdNamedDefine: true
     },

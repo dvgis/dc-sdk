@@ -46,6 +46,7 @@ module.exports = env => {
       ),
       publicPath: publicPath,
       library: 'DcCore',
+      libraryExport: 'default',
       libraryTarget: 'umd',
       umdNamedDefine: true
     },

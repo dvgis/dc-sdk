@@ -35,6 +35,7 @@ module.exports = env => {
       path: path.resolve(__dirname, '..', 'packages/mapv/dist'),
       publicPath: publicPath,
       library: 'DcMapv',
+      libraryExport: 'default',
       libraryTarget: 'umd',
       umdNamedDefine: true
     },
