@@ -132,12 +132,18 @@ class ViewerOption {
 
     if (globeOption?.filterColor) {
       let filterColor = globeOption?.filterColor
+
       let globeFS = globe._surfaceShaderSet.baseFragmentShaderSource
       let oriShder = globeFS.sources[globeFS.sources.length - 1]
-      globeFS.sources[globeFS.sources.length - 1] = oriShder.replace(
-        'gl_FragColor = finalColor;',
-        `gl_FragColor = finalColor * vec4(${filterColor.red},${filterColor.green},${filterColor.blue},${filterColor.alpha});`
-      )
+      globeFS.sources[globeFS.sources.length - 1] = oriShder
+        .replace(
+          'gl_FragColor = finalColor;',
+          `gl_FragColor = finalColor * vec4(${filterColor.red},${filterColor.green},${filterColor.blue},${filterColor.alpha});`
+        )
+        .replace(
+          /^gl_FragColor = finalColor[ * vec4([(\d.\d),?]+\)]?$/,
+          `gl_FragColor = finalColor * vec4(${filterColor.red},${filterColor.green},${filterColor.blue},${filterColor.alpha});`
+        )
     }
 
     return this
