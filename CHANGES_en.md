@@ -1,5 +1,20 @@
 # Change Log
 
+### 2.9.0 - 2021-02-08
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.90.0
+
+#### Additions 🎉
+
+- Added map filter color feature
+- Added framework support for vite
+
+#### Fixes 🔧
+
+- Fix Mapv module packaging issue
+
 ### 2.9.0 - 2021-01-08
 
 #### Breaking Changes 📣

@@ -12,7 +12,8 @@
 		"cesium",
 		"heatmap",
 		"turf",
-		"mapv"
+		"mapv",
+    "s3m"
 	],
 	"author": "Caven Chen <cavencj@gmail.com>",
 	"license": "Apache 2.0",
