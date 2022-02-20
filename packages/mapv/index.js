@@ -10,15 +10,17 @@ const install = function(DC) {
 
   DC.init(() => {
     try {
-      let mapv = require('mapv-lib')
-      DC.Namespace['mapv'] = mapv
+      require('mapv-lib/mapv.min.js')
+      DC.Namespace['mapv'] = window.mapv
       DC.mixin(require('./src/components.js').default)
       DC.mixin({
-        MapvDataSet: mapv?.DataSet
+        MapvDataSet: window.mapv?.DataSet
       })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.error(e)
+    } finally {
+      delete window['mapv']
     }
   })
 }
