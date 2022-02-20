@@ -1,6 +1,6 @@
 # Change Log
 
-### 2.9.0 - 2021-02-08
+### 2.9.0 - 2022-02-08
 
 #### Breaking Changes 📣
 
@@ -15,7 +15,7 @@
 
 - Fix Mapv module packaging issue
 
-### 2.9.0 - 2021-01-08
+### 2.9.0 - 2022-01-08
 
 #### Breaking Changes 📣
 
