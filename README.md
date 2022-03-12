@@ -1,5 +1,3 @@
-# DC-SDK
-
 <p>
 <img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/build"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
@@ -42,6 +40,7 @@ import DC from '@dvgis/dc-sdk/dist/dc.base.min'
 import DcCore from '@dvgis/dc-sdk/dist/dc.core.min'
 import DcChart from '@dvgis/dc-sdk/dist/dc.chart.min'
 import DcMapv from '@dvgis/dc-sdk/dist/dc.mapv.min'
+import DcS3M from '@dvgis/dc-sdk/dist/dc.s3m.min'
 import '@dvgis/dc-sdk/dist/dc.core.min.css'
 ```
 
@@ -52,11 +51,13 @@ yarn add @dvgis/dc-base
 yarn add @dvgis/dc-core
 yarn add @dvgis/dc-chart
 yarn add @dvgis/dc-mapv
+yarn add @dvgis/dc-s3m
 -------------------------
 npm install @dvgis/dc-base
 npm install @dvgis/dc-core
 npm install @dvgis/dc-chart
 npm install @dvgis/dc-mapv
+npm install @dvgis/dc-s3m
 ```
 
 ```js
@@ -64,6 +65,7 @@ import DC from '@dvgis/dc-base'
 import DcCore from '@dvgis/dc-core'
 import DcChart from '@dvgis/dc-chart'
 import DcMapv from '@dvgis/dc-mapv'
+import DcS3M from '@dvgis/dc-s3m'
 import '@dvgis/dc-core/dist/dc.core.min.css'
 ```
 
@@ -76,6 +78,7 @@ import '@dvgis/dc-core/dist/dc.core.min.css'
 <script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.chart.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.mapv.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.s3m.min.js"></script>
 <link
   href="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.css"
   rel="stylesheet"
@@ -182,15 +185,6 @@ DC.ready(() => {
 |  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif?v=4)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png?v=4)   |
 
 [More>>](http://dc.dvgis.cn/#/examples)
-
-## Ecosystem
-
-|  Module | Status | Description | 
-|  :------ | :------: | :------ |
-|  [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | dc chart module for adding ECharts functionality in 3d scenes | 
-|  [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | dc big-data module for adding MAPV functions in 3d scenes |  
-|  [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | dc components for Vue2.x | 
-|  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | dc components for Vue3.x |
 
 ## Copyright
 

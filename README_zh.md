@@ -42,6 +42,7 @@ import DC from '@dvgis/dc-sdk/dist/dc.base.min' //基础包
 import DcCore from '@dvgis/dc-sdk/dist/dc.core.min' //核心包
 import DcChart from '@dvgis/dc-sdk/dist/dc.chart.min' //chart包
 import DcMapv from '@dvgis/dc-sdk/dist/dc.mapv.min' //mapv包
+import DcS3M from '@dvgis/dc-sdk/dist/dc.s3m.min' // s3m包
 import '@dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
 ```
 
@@ -52,11 +53,13 @@ yarn add @dvgis/dc-base
 yarn add @dvgis/dc-core
 yarn add @dvgis/dc-chart
 yarn add @dvgis/dc-mapv
+yarn add @dvgis/dc-s3m
 -------------------------
 npm install @dvgis/dc-base
 npm install @dvgis/dc-core
 npm install @dvgis/dc-chart
 npm install @dvgis/dc-mapv
+npm install @dvgis/dc-s3m
 ```
 
 ```js
@@ -64,6 +67,7 @@ import DC from '@dvgis/dc-base' //基础包
 import DcCore from '@dvgis/dc-core' //核心包
 import DcChart from '@dvgis/dc-chart' //chart包
 import DcMapv from '@dvgis/dc-mapv' //mapv包
+import DcS3M from '@dvgis/dc-s3m' //mapv包
 import '@dvgis/dc-core/dist/dc.core.min.css' // 主要样式
 ```
 
@@ -80,6 +84,8 @@ import '@dvgis/dc-core/dist/dc.core.min.css' // 主要样式
 <script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.chart.min.js"></script>
 <!--mapv包-->
 <script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.mapv.min.js"></script>
+<!--s3m包-->
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.s3m.min.js"></script>
 <!--主要样式-->
 <link
   href="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.css"
@@ -194,15 +200,6 @@ DC.ready(() => {
 |  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif?v=2)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png?v=3)   |
 
 [更多>>](http://dc.dvgis.cn/#/examples)
-
-## 生态
-
-|  模块名称 | 状态 | 描述 | 
-|  :------ | :------: | :------ | 
-| [dc-chart](https://github.com/dvgis/dc-chart) | <img src="https://img.shields.io/npm/v/@dvgis/dc-chart?logo=npm" /> | DC图表模块，用于在三维场景中添加Echarts功能 | 
-| [dc-mapv](https://github.com/dvgis/dc-mapv) | <img src="https://img.shields.io/npm/v/@dvgis/dc-mapv?logo=npm" /> | DC大数据模块，用于在三维场景中添加Mapv功能 | 
-| [dc-ui](https://github.com/dvgis/dc-ui) | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui?logo=npm" /> | DC基于Vue2.x组件开发框架，将DC功能Vue模块化 | 
-|  dc-ui-next | <img src="https://img.shields.io/npm/v/@dvgis/dc-ui-next?logo=npm" /> | DC基于Vue3.x组件开发框架，将DC功能Vue模块化 |
 
 ## QQ 群
 
