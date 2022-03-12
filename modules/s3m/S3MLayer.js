@@ -6,7 +6,6 @@
 import State from '@dc-modules/state/State'
 import { Layer } from '@dc-modules/layer'
 import S3MTilesLayer from 's3m-lib/S3MTiles/S3MTilesLayer'
-import ClusterLayer from '../layer/type/ClusterLayer'
 
 class S3MLayer extends Layer {
   constructor(id, url, options = {}) {
@@ -17,6 +16,10 @@ class S3MLayer extends Layer {
 
   get type() {
     return Layer.getLayerType('s3m')
+  }
+
+  get readyPromise() {
+    return this._delegate.readyPromise
   }
 
   _onAdd(viewer) {
