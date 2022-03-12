@@ -66,6 +66,10 @@ class ViewerOption {
 
     scene.postProcessStages.fxaa.enabled = this._options.enableFxaa ?? false
 
+    if (scene.msaaSupported) {
+      scene.msaaSamples = +this._options.msaaSamples || 1
+    }
+
     return this
   }
 
