@@ -1,5 +1,36 @@
 # Change Log
 
+### 2.11.0 - 2022-03-12
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.91.0
+
+#### Additions 🎉
+
+- Added support for MSAA (a type of anti-aliasing)
+- Added GPX layer
+- Added S3M layer (as a separate package)
+
+#### Fixes 🔧
+
+- Fixes node-sass installation issues
+
+### 2.10.0 - 2022-02-20
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.90.0
+
+#### Additions 🎉
+
+- Added map filter color feature
+- Added framework support for vite
+
+#### Fixes 🔧
+
+- Fix Mapv module packaging issue
+
 ### 2.9.0 - 2022-02-08
 
 #### Breaking Changes 📣
