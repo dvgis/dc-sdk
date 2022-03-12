@@ -1,6 +1,6 @@
 {
   "name": "dc-sdk",
-  "version": "2.10.0",
+  "version": "2.11.0",
   "description": "The SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.",
   "repository": "https://github.com/dvgis/dc-sdk.git",
   "homepage": "https://www.dvgis.cn",
@@ -22,8 +22,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "gen:version": "node scripts/gen-version.js",
     "copy": "node scripts/build.js",
-    "dev": "yarn run dev:base && yarn run dev:core && yarn run dev:chart && yarn run dev:mapv",
-    "build": "yarn run build:base && yarn run build:core && yarn run build:chart && yarn run build:mapv",
+    "dev": "yarn run dev:base && yarn run dev:core && yarn run dev:chart && yarn run dev:mapv && yarn run dev:s3m",
+    "build": "yarn run build:base && yarn run build:core && yarn run build:chart && yarn run build:mapv && yarn run build:s3m",
     "dev:sdk": "yarn run dev && node scripts/build.js",
     "build:sdk": "yarn run build && node scripts/build.js",
     "release": "node scripts/release.js",
@@ -35,11 +35,14 @@
     "build:chart": "yarn run clean:chart && webpack --config build/webpack.chart.conf --mode production --env.production",
     "dev:mapv": "yarn run clean:mapv && webpack --config build/webpack.mapv.conf --mode development",
     "build:mapv": "yarn run clean:mapv && webpack --config build/webpack.mapv.conf --mode production --env.production",
+    "dev:s3m": "yarn run clean:s3m && webpack --config build/webpack.s3m.conf --mode development",
+    "build:s3m": "yarn run clean:s3m && webpack --config build/webpack.s3m.conf --mode production --env.production",
     "clean": "yarn run clean:base && yarn run clean:core && yarn run clean:chart && yarn run clean:mapv && yarn run clean:sdk",
     "clean:base": "rimraf packages/base/dist",
     "clean:core": "rimraf packages/core/dist",
     "clean:chart": "rimraf packages/chart/dist",
     "clean:mapv": "rimraf packages/mapv/dist",
+    "clean:s3m": "rimraf packages/s3m/dist",
     "clean:sdk": "rimraf packages/sdk/dist"
   },
   "devDependencies": {

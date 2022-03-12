@@ -17,7 +17,7 @@ fse.ensureDirSync(outoutDir)
 
 fse.emptyDirSync(outoutDir)
 
-const pkgs = ['base', 'core', 'chart', 'mapv']
+const pkgs = ['base', 'core', 'chart', 'mapv', 's3m']
 
 const count = pkgs.length
 
