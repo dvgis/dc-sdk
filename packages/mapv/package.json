@@ -17,7 +17,7 @@
 	],
 	"author": "Caven Chen <cavencj@gmail.com>",
 	"license": "Apache 2.0",
-	"main": "dist/dc.mapv.js",
+	"main": "dist/dc.mapv.min.js",
 	"peerDependencies": {
 		"@dvgis/dc-base": "^2.11.0"
 	},
