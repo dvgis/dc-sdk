@@ -112,9 +112,11 @@ class KeyboardRoaming {
         }
         break
       case 'A'.charCodeAt(0):
+      case 37:
         flag = 'moveLeft'
         break
       case 'D'.charCodeAt(0):
+      case 39:
         flag = 'moveRight'
         break
       case 'Q'.charCodeAt(0):
