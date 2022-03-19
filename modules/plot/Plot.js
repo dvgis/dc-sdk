@@ -190,6 +190,18 @@ class Plot {
 
   /**
    *
+   * @return {Plot}
+   */
+  stop() {
+    if (this._currentWorker) {
+      this._currentWorker.stop()
+    }
+    this._currentWorker = null
+    return undefined
+  }
+
+  /**
+   *
    * @returns {Plot}
    */
   destroy() {
