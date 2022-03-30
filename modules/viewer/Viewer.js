@@ -178,6 +178,10 @@ class Viewer {
     return Cesium.Rectangle.fromDegrees(min.lng, min.lat, max.lng, max.lat)
   }
 
+  get level() {
+    return this._delegate.scene.globe._surface._debug.maxDepthVisited
+  }
+
   /***
    *
    * @param layerGroup
