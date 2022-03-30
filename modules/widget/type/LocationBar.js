@@ -15,9 +15,15 @@ class LocationBar extends Widget {
     this._wrapper = DomUtil.create('div', 'dc-location-bar')
     this._mouseEl = undefined
     this._cameraEl = undefined
+    this._fpsEl = undefined
+    this._msEl = undefined
+    this._lastMouseSampleTime = Cesium.getTimestamp()
+    this._lastCameraSampleTime = Cesium.getTimestamp()
+    this._lastFpsSampleTime = Cesium.getTimestamp()
+    this._lastMsSampleTime = Cesium.getTimestamp()
+    this._fpsFrameCount = 0
+    this._msFrameCount = 0
     this._state = State.INITIALIZED
-    this._lastMouseUpdate = Cesium.getTimestamp()
-    this._lastCameraUpdate = Cesium.getTimestamp()
   }
 
   get type() {
@@ -40,8 +46,9 @@ class LocationBar extends Widget {
    * @private
    */
   _bindEvent() {
-    this._viewer.on(MouseEventType.MOUSE_MOVE, this._moveHandler, this)
-    this._viewer.on(SceneEventType.CAMERA_CHANGED, this._cameraHandler, this)
+    this._viewer.on(MouseEventType.MOUSE_MOVE, this._onMove, this)
+    this._viewer.on(SceneEventType.CAMERA_CHANGED, this._onCameraChanged, this)
+    this._viewer.on(SceneEventType.POST_UPDATE, this._onPostUpdate, this)
   }
 
   /**
@@ -49,8 +56,9 @@ class LocationBar extends Widget {
    * @private
    */
   _unbindEvent() {
-    this._viewer.off(MouseEventType.MOUSE_MOVE, this._moveHandler, this)
-    this._viewer.off(SceneEventType.CAMERA_CHANGED, this._cameraHandler, this)
+    this._viewer.off(MouseEventType.MOUSE_MOVE, this._onMove, this)
+    this._viewer.off(SceneEventType.CAMERA_CHANGED, this._onCameraChanged, this)
+    this._viewer.off(SceneEventType.POST_UPDATE, this._onPostUpdate, this)
   }
 
   /**
@@ -58,8 +66,10 @@ class LocationBar extends Widget {
    * @private
    */
   _mountContent() {
-    this._mouseEl = DomUtil.create('div', 'mouse-location', this._wrapper)
-    this._cameraEl = DomUtil.create('div', 'camera-location', this._wrapper)
+    this._mouseEl = DomUtil.create('div', 'mouse-bar', this._wrapper)
+    this._cameraEl = DomUtil.create('div', 'camera-bar', this._wrapper)
+    this._msEl = DomUtil.create('div', 'ms-bar', this._wrapper)
+    this._fpsEl = DomUtil.create('div', 'fbs-bar', this._wrapper)
     this._ready = true
   }
 
@@ -68,12 +78,11 @@ class LocationBar extends Widget {
    * @param e
    * @private
    */
-  _moveHandler(e) {
+  _onMove(e) {
     let now = Cesium.getTimestamp()
-    if (now < this._lastMouseUpdate + 300) {
+    if (now < this._lastMouseSampleTime + 300) {
       return
     }
-    this._lastMouseUpdate = now
     let ellipsoid = Cesium.Ellipsoid.WGS84
     let cartographic = e.surfacePosition
       ? ellipsoid.cartesianToCartographic(e.surfacePosition)
@@ -87,23 +96,52 @@ class LocationBar extends Widget {
       <span>经度：${lng.toFixed(8)}</span>
       <span>纬度：${lat.toFixed(8)}</span>
       <span>海拔：${alt.toFixed(2)} 米</span>`
+    this._lastMouseSampleTime = now
   }
 
   /**
    *
    * @private
    */
-  _cameraHandler() {
+  _onCameraChanged() {
     let now = Cesium.getTimestamp()
-    if (now < this._lastCameraUpdate + 300) {
+    if (now < this._lastCameraSampleTime + 300) {
       return
     }
-    this._lastCameraUpdate = now
     let cameraPosition = this._viewer.cameraPosition
     this._cameraEl.innerHTML = `
       <span>视角：${(+cameraPosition.pitch).toFixed(2)}</span>
       <span>视高：${(+cameraPosition.alt).toFixed(2)} 米</span>
     `
+    this._lastCameraSampleTime = now
+  }
+
+  /**
+   *
+   * @private
+   */
+  _onPostUpdate() {
+    let now = Cesium.getTimestamp()
+
+    // ms
+    this._msFrameCount++
+    let msElapsedTime = now - this._lastMsSampleTime
+    if (msElapsedTime > 200) {
+      let ms = (msElapsedTime / this._msFrameCount).toFixed(2)
+      this._msEl.innerHTML = `<span>${ms} MS</span>`
+      this._lastMsSampleTime = now
+      this._msFrameCount = 0
+    }
+
+    // fps
+    this._fpsFrameCount++
+    let fpsElapsedTime = now - this._lastFpsSampleTime
+    if (fpsElapsedTime > 1000) {
+      let fps = ((this._fpsFrameCount * 1000) / fpsElapsedTime) | 0
+      this._fpsEl.innerHTML = `<span>${fps} FPS</span>`
+      this._lastFpsSampleTime = now
+      this._fpsFrameCount = 0
+    }
   }
 }
 
