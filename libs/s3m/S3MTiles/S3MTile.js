@@ -385,7 +385,7 @@ S3MTile.prototype.requestContent = function() {
   }
 
   this.contentState = ContentState.LOADING
-  this.contentReadyPromise = Cesium.when.defer()
+  this.contentReadyPromise = new Promise()
   let contentFailedFunction = getContentFailedFunction(this)
 
   promise

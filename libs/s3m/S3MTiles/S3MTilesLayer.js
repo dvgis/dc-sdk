@@ -54,7 +54,7 @@ function S3MTilesLayer(options) {
     distance: Number.MAX_VALUE,
     pixel: Number.MAX_VALUE
   }
-  this._readyPromise = Cesium.when.defer()
+  this._readyPromise = new Promise()
 
   this.loadConfig(options.url)
 }
@@ -150,7 +150,7 @@ Object.defineProperties(S3MTilesLayer.prototype, {
 
 S3MTilesLayer.prototype.loadConfig = function(url) {
   let that = this
-  Cesium.when(url)
+  Promise.resolve(url)
     .then(function(url) {
       let basePath
       let resource = Cesium.Resource.createIfNeeded(url)
