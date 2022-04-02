@@ -38,7 +38,7 @@ class MapSplit extends Widget {
    * @private
    */
   _bindEvent() {
-    this._viewer.scene.imagerySplitPosition = 0.5
+    this._viewer.scene.splitPosition = 0.5
     this._wrapper.style.left = '50%'
   }
 
@@ -48,10 +48,10 @@ class MapSplit extends Widget {
    */
   _unbindEvent() {
     if (this._baseLayer) {
-      this._viewer.scene.imagerySplitPosition =
+      this._viewer.scene.splitPosition =
         this._baseLayer.splitDirection > 0 ? 1 : 0
     } else {
-      this._viewer.scene.imagerySplitPosition = 0
+      this._viewer.scene.splitPosition = 0
     }
   }
 
