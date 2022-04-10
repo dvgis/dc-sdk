@@ -385,7 +385,7 @@ S3MTile.prototype.requestContent = function() {
   }
 
   this.contentState = ContentState.LOADING
-  this.contentReadyPromise = new Promise()
+  this.contentReadyPromise =  Promise
   let contentFailedFunction = getContentFailedFunction(this)
 
   promise
@@ -397,7 +397,7 @@ S3MTile.prototype.requestContent = function() {
 
       contentReadyFunction(layer, that, arrayBuffer)
     })
-    .otherwise(function(error) {
+    .catch(function(error) {
       if (request.state === Cesium.RequestState.CANCELLED) {
         that.contentState = ContentState.UNLOADED
         return

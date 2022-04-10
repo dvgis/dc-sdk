@@ -54,7 +54,7 @@ function S3MTilesLayer(options) {
     distance: Number.MAX_VALUE,
     pixel: Number.MAX_VALUE
   }
-  this._readyPromise = new Promise()
+  this._readyPromise = Promise
 
   this.loadConfig(options.url)
 }
@@ -205,7 +205,7 @@ S3MTilesLayer.prototype.loadConfig = function(url) {
 
       that._readyPromise.resolve(that)
     })
-    .otherwise(function(error) {
+    .catch(function(error) {
       that._readyPromise.reject(error)
     })
 }
