@@ -385,7 +385,7 @@ S3MTile.prototype.requestContent = function() {
   }
 
   this.contentState = ContentState.LOADING
-  this.contentReadyPromise =  Promise
+  this.contentReadyPromise = Promise
   let contentFailedFunction = getContentFailedFunction(this)
 
   promise
