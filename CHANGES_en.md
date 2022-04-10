@@ -1,5 +1,22 @@
 # Change Log
 
+### 2.12.0 - 2022-04-10
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.92.0
+
+#### Additions 🎉
+
+- Added 3dtiles splite effect
+- Added FPS and MS parameters for LocationBar
+- Added the ability to customize the logo (requires token)
+
+#### Fixes 🔧
+
+- Fix the problem caused by Cesium.when removal
+- Improve the map splite effect
+
 ### 2.11.0 - 2022-03-12
 
 #### Breaking Changes 📣

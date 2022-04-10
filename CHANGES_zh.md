@@ -1,6 +1,6 @@
 # Change Log
 
-### 2.12.0
+### 2.12.0 - 2022-04-10
 
 #### Breaking Changes 📣
 
