@@ -9,17 +9,17 @@ import Icons from '@dc-modules/icons'
 import { DomUtil } from '@dc-modules/utils'
 import Widget from '../Widget'
 
-class MapSplit extends Widget {
+class TilesetSplit extends Widget {
   constructor() {
     super()
     this._wrapper = DomUtil.create('div', 'dc-slider')
-    this._baseLayer = undefined
+    this._tileset = undefined
     this._moveActive = false
     this._state = State.INITIALIZED
   }
 
   get type() {
-    return Widget.getWidgetType('map_split')
+    return Widget.getWidgetType('tileset_split')
   }
 
   /**
@@ -27,7 +27,7 @@ class MapSplit extends Widget {
    * @private
    */
   _installHook() {
-    Object.defineProperty(this._viewer, 'mapSplit', {
+    Object.defineProperty(this._viewer, 'tilsetSplit', {
       value: this,
       writable: false
     })
@@ -47,9 +47,9 @@ class MapSplit extends Widget {
    * @private
    */
   _unbindEvent() {
-    if (this._baseLayer) {
+    if (this._tileset) {
       this._viewer.scene.splitPosition =
-        this._baseLayer.splitDirection > 0 ? 1 : 0
+        this._tileset.splitDirection > 0 ? 1 : 0
     } else {
       this._viewer.scene.splitPosition = 0
     }
@@ -107,18 +107,20 @@ class MapSplit extends Widget {
 
   /**
    *
-   * @param baseLayer
+   * @param tileset
    * @param splitDirection
-   * @returns {MapSplit}
+   * @return {TilesetSplit}
    */
-  addBaseLayer(baseLayer, splitDirection = 1) {
+  addTileset(tileset, splitDirection = 1) {
     if (!this._viewer || !this._enable) {
       return this
     }
-    if (baseLayer) {
-      this._baseLayer && this._viewer.imageryLayers.remove(this._baseLayer)
-      this._baseLayer = this._viewer.imageryLayers.addImageryProvider(baseLayer)
-      this._baseLayer.splitDirection = splitDirection || 0
+    if (tileset) {
+      this._tileset && this._viewer.scene.primitives.remove(this._tileset)
+      this._tileset = this._viewer.scene.primitives.add(
+        tileset.delegate || tileset
+      )
+      this._tileset.splitDirection = splitDirection || 0
       this._viewer.scene.splitPosition =
         this._wrapper.offsetLeft / this._wrapper.parentElement.offsetWidth
     }
@@ -126,6 +128,6 @@ class MapSplit extends Widget {
   }
 }
 
-Widget.registerType('map_split')
+Widget.registerType('tileset_split')
 
-export default MapSplit
+export default TilesetSplit

@@ -14,6 +14,7 @@ import Compass from './type/Compass'
 import DistanceLegend from './type/DistanceLegend'
 import ZoomController from './type/ZoomController'
 import LoadingMask from './type/LoadingMask'
+import TilesetSplit from './type/TilesetSplit'
 
 export default function createWidgets() {
   return {
@@ -27,6 +28,7 @@ export default function createWidgets() {
     compass: new Compass(),
     distanceLegend: new DistanceLegend(),
     zoomController: new ZoomController(),
-    loadingMask: new LoadingMask()
+    loadingMask: new LoadingMask(),
+    tilesetSplit: new TilesetSplit()
   }
 }
