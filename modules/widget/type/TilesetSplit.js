@@ -27,7 +27,7 @@ class TilesetSplit extends Widget {
    * @private
    */
   _installHook() {
-    Object.defineProperty(this._viewer, 'tilsetSplit', {
+    Object.defineProperty(this._viewer, 'tilesetSplit', {
       value: this,
       writable: false
     })
@@ -108,10 +108,9 @@ class TilesetSplit extends Widget {
   /**
    *
    * @param tileset
-   * @param splitDirection
    * @return {TilesetSplit}
    */
-  addTileset(tileset, splitDirection = 1) {
+  addTileset(tileset) {
     if (!this._viewer || !this._enable) {
       return this
     }
@@ -120,7 +119,6 @@ class TilesetSplit extends Widget {
       this._tileset = this._viewer.scene.primitives.add(
         tileset.delegate || tileset
       )
-      this._tileset.splitDirection = splitDirection || 0
       this._viewer.scene.splitPosition =
         this._wrapper.offsetLeft / this._wrapper.parentElement.offsetWidth
     }
