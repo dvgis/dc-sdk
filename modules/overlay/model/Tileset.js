@@ -277,6 +277,18 @@ class Tileset extends Overlay {
   }
 
   /**
+   *
+   * @param splitDirection
+   * @return {Tileset}
+   */
+  setSplitDirection(splitDirection) {
+    this.readyPromise.then(tileset => {
+      tileset.splitDirection = splitDirection
+    })
+    return this
+  }
+
+  /**
    * Sets style
    * @param style
    * @returns {Tileset}
