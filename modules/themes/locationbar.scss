@@ -9,20 +9,35 @@
   border-radius: 2px;
   user-select: none;
   display: flex;
-  span {
-    margin: 0 8px;
-    display: inline-block;
+  .mouse-bar, .camera-bar ,.ms-bar,.fps-bar{
+    display: flex;
+    span {
+      margin: 0 8px;
+    }
+
   }
-  .mouse-bar{
-    span{
-      min-width: 100px;
+
+  .mouse-bar {
+    span {
+      min-width: 140px;
+    }
+    span:nth-of-type(3) {
+      min-width: 120px;
     }
   }
 
-  .ms-bar,.fps-bar{
+  .camera-bar {
     span{
+      min-width: 90px;
+    }
+    span:nth-of-type(2) {
+      min-width: 145px;
+    }
+  }
+
+  .ms-bar,.fps-bar {
+    span {
       min-width: 70px;
     }
   }
-
 }

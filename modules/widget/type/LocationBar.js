@@ -69,7 +69,7 @@ class LocationBar extends Widget {
     this._mouseEl = DomUtil.create('div', 'mouse-bar', this._wrapper)
     this._cameraEl = DomUtil.create('div', 'camera-bar', this._wrapper)
     this._msEl = DomUtil.create('div', 'ms-bar', this._wrapper)
-    this._fpsEl = DomUtil.create('div', 'fbs-bar', this._wrapper)
+    this._fpsEl = DomUtil.create('div', 'fps-bar', this._wrapper)
     this._ready = true
   }
 
