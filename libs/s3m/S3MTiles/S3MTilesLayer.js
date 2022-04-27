@@ -13,6 +13,7 @@ function S3MTilesLayer(options) {
   this.id = Cesium.createGuid()
   this.name = options.name
   this.context = options.context
+  this.heightOffset = options.heightOffset || 0
   this._url = undefined
   this._basePath = undefined
   this._baseResource = undefined
@@ -166,7 +167,7 @@ S3MTilesLayer.prototype.loadConfig = function(url) {
       let lon = config.position.x
       let lat = config.position.y
       let height = config.position.z
-      that._position = Cesium.Cartesian3.fromDegrees(lon, lat, height)
+      that._position = Cesium.Cartesian3.fromDegrees(lon, lat, height + this.heightOffset)
       that.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
         that._position
       )
