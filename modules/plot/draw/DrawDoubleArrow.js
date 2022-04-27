@@ -53,9 +53,12 @@ class DrawDoubleArrow extends Draw {
    * @private
    */
   _stopdHook() {
-    let doubleArrow = new DoubleArrow(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let doubleArrow = null
+    if (this._positions.length) {
+      doubleArrow = new DoubleArrow(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(doubleArrow)
   }
 

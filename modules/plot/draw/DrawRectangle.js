@@ -49,9 +49,12 @@ class DrawRectangle extends Draw {
    * @private
    */
   _stopdHook() {
-    let rectangle = new Rectangle(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let rectangle = null
+    if (this._positions.length) {
+      rectangle = new Rectangle(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(rectangle)
   }
 

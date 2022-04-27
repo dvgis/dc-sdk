@@ -45,9 +45,12 @@ class DrawPolyline extends Draw {
    * @private
    */
   _stopdHook() {
-    let polyline = new Polyline(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let polyline = null
+    if (this._positions.length) {
+      polyline = new Polyline(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(polyline)
   }
 

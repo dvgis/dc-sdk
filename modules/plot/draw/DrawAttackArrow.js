@@ -53,9 +53,12 @@ class DrawAttackArrow extends Draw {
    * @private
    */
   _stopdHook() {
-    let attackArrow = new AttackArrow(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let attackArrow = null
+    if (this._positions.length) {
+      attackArrow = new AttackArrow(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(attackArrow)
   }
 

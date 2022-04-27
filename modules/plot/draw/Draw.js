@@ -57,7 +57,7 @@ class Draw {
   _onDrawStop() {
     this._unbindEvent()
     this._viewer.drawTool.deactivate()
-    this._layer.entities.remove(this._delegate)
+    this._delegate && this._layer.entities.remove(this._delegate)
     this._stopdHook()
   }
 

@@ -43,10 +43,13 @@ class DrawPoint extends Draw {
    * @private
    */
   _stopdHook() {
-    let billboard = new Billboard(
-      Transform.transformCartesianToWGS84(this._position),
-      this._style.image
-    ).setStyle(this._style)
+    let billboard = null
+    if (this._position) {
+      billboard = new Billboard(
+        Transform.transformCartesianToWGS84(this._position),
+        this._style.image
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(billboard)
   }
 

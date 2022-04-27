@@ -53,9 +53,12 @@ class DrawTailedAttackArrow extends Draw {
    * @private
    */
   _stopdHook() {
-    let tailedAttackArrow = new TailedAttackArrow(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let tailedAttackArrow = null
+    if (this._positions.length) {
+      tailedAttackArrow = new TailedAttackArrow(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(tailedAttackArrow)
   }
 

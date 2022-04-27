@@ -49,9 +49,12 @@ class DrawPolygon extends Draw {
    * @private
    */
   _stopdHook() {
-    let polygon = new Polygon(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let polygon = null
+    if (this._positions.length) {
+      polygon = new Polygon(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(polygon)
   }
 

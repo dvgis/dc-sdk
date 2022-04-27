@@ -53,9 +53,12 @@ class DrawGatheringPlace extends Draw {
    * @private
    */
   _stopdHook() {
-    let gatheringPlace = new GatheringPlace(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let gatheringPlace = null
+    if (this._positions.length) {
+      gatheringPlace = new GatheringPlace(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(gatheringPlace)
   }
 

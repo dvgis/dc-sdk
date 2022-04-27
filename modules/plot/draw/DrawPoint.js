@@ -47,9 +47,12 @@ class DrawPoint extends Draw {
    * @private
    */
   _stopdHook() {
-    let point = new Point(
-      Transform.transformCartesianToWGS84(this._position)
-    ).setStyle(this._style)
+    let point = null
+    if (this._position) {
+      point = new Point(
+        Transform.transformCartesianToWGS84(this._position)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(point)
   }
 

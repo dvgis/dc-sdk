@@ -71,10 +71,13 @@ class DrawCircle extends Draw {
    * @private
    */
   _stopdHook() {
-    let circle = new Circle(
-      Transform.transformCartesianToWGS84(this._positions[0]),
-      this._radius
-    ).setStyle(this._style)
+    let circle = null
+    if (this._positions.length) {
+      circle = new Circle(
+        Transform.transformCartesianToWGS84(this._positions[0]),
+        this._radius
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(circle)
   }
 

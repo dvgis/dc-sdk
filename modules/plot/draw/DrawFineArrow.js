@@ -53,9 +53,12 @@ class DrawFineArrow extends Draw {
    * @private
    */
   _stopdHook() {
-    let fineArrow = new FineArrow(
-      Transform.transformCartesianArrayToWGS84Array(this._positions)
-    ).setStyle(this._style)
+    let fineArrow = null
+    if (this._positions.length) {
+      fineArrow = new FineArrow(
+        Transform.transformCartesianArrayToWGS84Array(this._positions)
+      ).setStyle(this._style)
+    }
     this._options.onDrawStop && this._options.onDrawStop(fineArrow)
   }
 
