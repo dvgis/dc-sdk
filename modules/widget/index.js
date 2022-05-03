@@ -15,6 +15,7 @@ import DistanceLegend from './type/DistanceLegend'
 import ZoomController from './type/ZoomController'
 import LoadingMask from './type/LoadingMask'
 import TilesetSplit from './type/TilesetSplit'
+import SceneSplit from './type/SceneSplit'
 
 export default function createWidgets() {
   return {
@@ -29,6 +30,7 @@ export default function createWidgets() {
     distanceLegend: new DistanceLegend(),
     zoomController: new ZoomController(),
     loadingMask: new LoadingMask(),
-    tilesetSplit: new TilesetSplit()
+    tilesetSplit: new TilesetSplit(),
+    sceneSplit: new SceneSplit()
   }
 }
