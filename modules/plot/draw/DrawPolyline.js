@@ -61,8 +61,13 @@ class DrawPolyline extends Draw {
    * @private
    */
   _onDrawAnchor(position) {
+    let len = this._positions.length
     this._positions.push(position)
     this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
+    if (len >= this._options.maxAnchorSize) {
+      this._positions.pop()
+      this.drawTool.fire(PlotEventType.DRAW_STOP)
+    }
   }
 }
 

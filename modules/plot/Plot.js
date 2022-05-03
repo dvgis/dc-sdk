@@ -160,8 +160,11 @@ class Plot {
     if (this._currentWorker) {
       this._currentWorker.stop()
     }
+    let maxAnchorSize = style?.maxAnchorSize || 999
+    style && delete style['maxAnchorSize']
     this._currentWorker = this._createDrawWorker(type, style)?.start(this, {
       ...this._options,
+      maxAnchorSize: maxAnchorSize,
       onDrawStop: callback,
       clampToModel: clampToModel ?? this._options.clampToModel
     })

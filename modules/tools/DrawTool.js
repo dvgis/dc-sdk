@@ -14,7 +14,8 @@ const DEF_OPTS = {
   icon_center: IMG_CIRCLE_YELLOW,
   icon_anchor: IMG_CIRCLE_RED,
   icon_size: [12, 12],
-  clampToModel: false
+  clampToModel: false,
+  maxAnchorSize: 999
 }
 
 class DrawTool {
