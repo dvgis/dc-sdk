@@ -2829,10 +2829,10 @@ caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001317:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001324.tgz#e17c3a8b34822b02d5d15639d570057550074884"
   integrity sha512-/eYp1J6zYh1alySQB4uzYFkLmxxI8tk0kxldbNHXp8+v+rdMKdUBNjRLz7T7fz6Iox+1lIdYpc7rq6ZcXfTukg==
 
-cesium@^1.92.0:
-  version "1.92.0"
-  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.92.0.tgz#d4a736be7f3516830a814c4c99780a385c12a258"
-  integrity sha512-qU2EIV3M+ru6uF5UQUjUWXeq9UVieMBeq+Q8fzzNbFgeSbLrvnJ7jSJq0vvgaVDPe0PnmN72FZKMDiJdTFpMnQ==
+cesium@^1.93.0:
+  version "1.93.0"
+  resolved "https://registry.yarnpkg.com/cesium/-/cesium-1.93.0.tgz#4e98e7770b993a87e53bffa95ac5cbb89137d390"
+  integrity sha512-y5+KkISn3+0MZxGj96mNaZc5LAfpiOs1fmZCInH2xHwYw43FaaRbvdSHXZs8OwJ5dZIlo/m1biMyOKr354L+UA==
 
 chalk@4.1.0:
   version "4.1.0"
