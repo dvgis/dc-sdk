@@ -48,7 +48,7 @@ class SceneSplit extends Widget {
    * @private
    */
   _unbindEvent() {
-    this._viewer.scene.splitPosition = 0.5
+    this._viewer.scene.splitPosition = 1
   }
 
   /**
