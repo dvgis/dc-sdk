@@ -122,17 +122,16 @@ class SceneSplit extends Widget {
   /**
    *
    * @param baseLayer
-   * @param splitDirection
    * @returns {SceneSplit}
    */
-  addBaseLayer(baseLayer, splitDirection = 1) {
+  addBaseLayer(baseLayer) {
     if (!this._viewer || !this._enable) {
       return this
     }
     if (baseLayer) {
       this._baseLayer && this._viewer.imageryLayers.remove(this._baseLayer)
       this._baseLayer = this._viewer.imageryLayers.addImageryProvider(baseLayer)
-      this._baseLayer.splitDirection = splitDirection || 0
+      this._baseLayer.splitDirection = 1
     }
     return this
   }
