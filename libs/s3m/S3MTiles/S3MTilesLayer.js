@@ -167,7 +167,7 @@ S3MTilesLayer.prototype.loadConfig = function(url) {
       let lon = config.position.x
       let lat = config.position.y
       let height = config.position.z
-      that._position = Cesium.Cartesian3.fromDegrees(lon, lat, height + this.heightOffset)
+      that._position = Cesium.Cartesian3.fromDegrees(lon, lat, height + that.heightOffset)
       that.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
         that._position
       )
