@@ -17,7 +17,8 @@ const DEF_OPTS = {
   clampToTileset: false,
   interpolationType: 'Linear',
   interpolationDegree: 2,
-  endDelayTime: 0.5
+  endDelayTime: 0.5,
+  headingOffset: 0
 }
 
 const DEF_PATH_STYLE = {
@@ -186,7 +187,19 @@ class Track {
       }
       let orientation = this._velocityOrientation.getValue(now)
       if (orientation) {
-        this._delegate.orientation = orientation
+        let quaternion = Cesium.Quaternion.fromHeadingPitchRoll(
+          new Cesium.HeadingPitchRoll(
+            Cesium.Math.toRadians(this._options.headingOffset || 0),
+            0,
+            0
+          ),
+          new Cesium.Quaternion()
+        )
+        this._delegate.orientation = Cesium.Quaternion.multiply(
+          orientation,
+          quaternion,
+          new Cesium.Quaternion()
+        )
       }
       let time = this._timeLine[this._positionIndex]
       if (time) {
