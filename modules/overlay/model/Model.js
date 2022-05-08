@@ -71,7 +71,7 @@ class Model extends Overlay {
           Cesium.Math.toRadians(this._position.roll)
         )
       )
-    })
+    }, false)
     return this
   }
 
