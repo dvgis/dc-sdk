@@ -1,5 +1,22 @@
 # Change Log
 
+### 2.13.0 - 2022-05-08
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.93.0
+
+#### Additions 🎉
+
+- Added scene split
+- Added s3m height offset setting [#98](https://github.com/dvgis/dc-sdk/issues/98)
+- Add marker line add max anchor points [#99](https://github.com/dvgis/dc-sdk/issues/99)
+- Add history track add model orientation setting (heading offset) [#100](https://github.com/dvgis/dc-sdk/issues/100)
+
+#### Fixes 🔧
+
+- Fix the problem that plot plot coordinates are empty [#95](https://github.com/dvgis/dc-sdk/issues/95)
+
 ### 2.12.0 - 2022-04-10
 
 #### Breaking Changes 📣

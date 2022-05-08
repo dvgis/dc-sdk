@@ -1,5 +1,22 @@
 # Change Log
 
+### 2.13.0 - 2022-05-08
+
+#### Breaking Changes 📣
+
+- 升级 Cesium 到 1.93.0 版本
+
+#### Additions 🎉
+
+- 添加场景卷帘效果
+- 添加s3m高度偏移设置 [#98](https://github.com/dvgis/dc-sdk/issues/98)
+- 添加标绘线添加最大锚点数 [#99](https://github.com/dvgis/dc-sdk/issues/99)
+- 添加历史轨迹添加模型朝向设置(heading偏移) [#100](https://github.com/dvgis/dc-sdk/issues/100)
+
+#### Fixes 🔧
+
+- 修复plot标绘坐标为空的问题 [#95](https://github.com/dvgis/dc-sdk/issues/95)
+
 ### 2.12.0 - 2022-04-10
 
 #### Breaking Changes 📣
