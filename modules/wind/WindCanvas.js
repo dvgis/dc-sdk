@@ -126,6 +126,11 @@ class WindCanvas {
   _drawPixelParticle(particle, min, max) {
     let pointPrev = [particle.x, particle.y]
     let pointNext = [particle.xt, particle.yt]
+    let dx = particle.xt - particle.x
+    let dy = particle.yt - particle.y
+    if (dx * dx + dy * dy > 20 * 20) {
+      return
+    }
     if (
       pointNext &&
       pointPrev &&

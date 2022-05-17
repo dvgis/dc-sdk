@@ -117,9 +117,17 @@ class WindLayer extends Layer {
     let camera = this._viewer.camera
     let ellipsoid = Cesium.Ellipsoid.WGS84
     this._delegate.intersectsCoordinate = coordinate => {
-      let occluder = new Cesium.EllipsoidalOccluder(ellipsoid, camera.position)
-      let point = Cesium.Cartesian3.fromDegrees(coordinate[0], coordinate[1])
-      return occluder.isPointVisible(point)
+      if (scene.mode === Cesium.SceneMode.SCENE3D) {
+        let occluder = new Cesium.EllipsoidalOccluder(
+          ellipsoid,
+          camera.position
+        )
+        let point = Cesium.Cartesian3.fromDegrees(coordinate[0], coordinate[1])
+        return occluder.isPointVisible(point)
+      } else if (scene.mode === Cesium.SceneMode.SCENE2D) {
+        return !(coordinate[0] === -180 || coordinate[0] === 180)
+      }
+      return true
     }
 
     this._delegate.project = coordinate => {
