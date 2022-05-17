@@ -212,7 +212,9 @@ class TrackController {
    * @returns {TrackController}
    */
   clear() {
-    this._cache = {}
+    Object.keys(this._cache).forEach(key => {
+      this.removeTrack(this._cache[key])
+    })
     this._activedTrack && (this._activedTrack.viewed = false)
     this._activedTrack = undefined
     this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
