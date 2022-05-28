@@ -13,7 +13,7 @@ import Overlay from '../Overlay'
 class Circle extends Overlay {
   constructor(center, radius) {
     super()
-    this._delegate = new Cesium.Entity({ ellipse: {} })
+    this._delegate = new Cesium.Entity({ polygon: {} })
     this._center = Parse.parsePosition(center)
     this._radius = +radius || 0
     this._rotateAmount = 0
@@ -27,7 +27,7 @@ class Circle extends Overlay {
 
   set center(center) {
     this._center = Parse.parsePosition(center)
-    this._delegate.position = Transform.transformWGS84ToCartesian(this._center)
+    this._delegate.polygon.hierarchy = this._computeHierarchy()
     return this
   }
 
@@ -37,8 +37,7 @@ class Circle extends Overlay {
 
   set radius(radius) {
     this._radius = +radius
-    this._delegate.ellipse.semiMajorAxis = this._radius
-    this._delegate.ellipse.semiMinorAxis = this._radius
+    this._delegate.polygon.hierarchy = this._computeHierarchy()
     return this
   }
 
@@ -48,13 +47,13 @@ class Circle extends Overlay {
 
   set rotateAmount(amount) {
     this._rotateAmount = +amount
-    this._delegate.ellipse.stRotation = new Cesium.CallbackProperty(() => {
+    this._delegate.polygon.stRotation = new Cesium.CallbackProperty(() => {
       this._stRotation += this._rotateAmount
       if (this._stRotation >= 360 || this._stRotation <= -360) {
         this._stRotation = 0
       }
       return Cesium.Math.toRadians(this._stRotation)
-    }, false)
+    })
     return this
   }
 
@@ -62,12 +61,34 @@ class Circle extends Overlay {
     return this._rotateAmount
   }
 
+  /**
+   *
+   * @private
+   */
+  _computeHierarchy() {
+    let result = new Cesium.PolygonHierarchy()
+    let cep = Cesium.EllipseGeometryLibrary.computeEllipsePositions(
+      {
+        center: Transform.transformWGS84ToCartesian(this._center),
+        semiMajorAxis: this._radius,
+        semiMinorAxis: this._radius,
+        rotation: 0,
+        granularity: 0.005
+      },
+      false,
+      true
+    )
+    let pnts = Cesium.Cartesian3.unpackArray(cep.outerPositions)
+    pnts.push(pnts[0])
+    result.positions = pnts
+    return result
+  }
+
   _mountedHook() {
     /**
      * set the location
      */
     this.center = this._center
-    this.radius = this._radius
   }
 
   /**
@@ -77,6 +98,7 @@ class Circle extends Overlay {
    * @returns {Circle}
    */
   setLabel(text, textStyle) {
+    this._delegate.position = Transform.transformWGS84ToCartesian(this._center)
     this._delegate.label = {
       ...textStyle,
       text: text
@@ -93,11 +115,9 @@ class Circle extends Overlay {
     if (!style || Object.keys(style).length === 0) {
       return this
     }
-    delete style['position'] &&
-      delete style['semiMajorAxis'] &&
-      delete style['semiMinorAxis']
+    delete style['positions']
     Util.merge(this._style, style)
-    Util.merge(this._delegate.ellipse, style)
+    Util.merge(this._delegate.polygon, style)
     return this
   }
 }
