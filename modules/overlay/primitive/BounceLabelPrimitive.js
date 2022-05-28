@@ -27,29 +27,9 @@ class BounceLabelPrimitive extends LabelPrimitive {
 
   /**
    *
-   * @private
+   * @param frameState
    */
-  _addedHook() {
-    if (!this._delegate || !this._layer) {
-      return
-    }
-    this._delegate.layerId = this._layer?.layerId
-    this._delegate.overlayId = this._id
-    this._layer.delegate.add(this)
-  }
-
-  /**
-   *
-   * @private
-   */
-  _removedHook() {
-    if (!this._layer) {
-      return
-    }
-    this._layer.delegate.remove(this)
-  }
-
-  update() {
+  update(frameState) {
     if (!this._show) {
       return
     }

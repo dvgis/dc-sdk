@@ -110,37 +110,6 @@ class DiffuseWallPrimitive extends Overlay {
 
   /**
    *
-   * @param layer
-   * @private
-   */
-  _onAdd(layer) {
-    if (!layer) {
-      return
-    }
-    this._layer = layer
-    if (this._layer?.delegate?.add) {
-      this._layer.delegate.add(this)
-    }
-    this._addedHook && this._addedHook()
-    this._state = State.ADDED
-  }
-
-  /**
-   *
-   * @private
-   */
-  _onRemove() {
-    if (!this._layer) {
-      return
-    }
-    if (this._layer?.delegate?.remove) {
-      this._layer.delegate.remove(this)
-    }
-    this._state = State.REMOVED
-  }
-
-  /**
-   *
    * @param frameState
    * @returns {boolean}
    */
@@ -182,6 +151,7 @@ class DiffuseWallPrimitive extends Overlay {
     })
     this._delegate.update(frameState)
   }
+
   /**
    *
    * @param style
