@@ -129,6 +129,7 @@ class Overlay {
       return
     }
     this._layer = layer
+
     this._mountedHook && this._mountedHook()
 
     // for Entity
@@ -136,8 +137,8 @@ class Overlay {
       this._layer.delegate.entities.add(this._delegate)
     }
     // for Primitive
-    else if (this._layer?.delegate?.add && this._delegate) {
-      let collection = {
+    else if (this._layer?.delegate?.add) {
+      const collection = {
         point_primitive: this._layer.points,
         billboard_primitive: this._layer.billboards,
         bounce_billboard_primitive: this._layer.billboards,
@@ -146,9 +147,22 @@ class Overlay {
         polyline_primitive: this._layer.polylines,
         cloud_primitive: this._layer.clouds
       }
-      if (this.type && collection[this.type]) {
+
+      if (this.type && collection[this.type] && this._delegate) {
         this._delegate = collection[this.type].add(this._delegate)
-      } else {
+        // for custom primitve
+        if (
+          typeof this['update'] === 'function' &&
+          typeof this['destroy'] === 'function'
+        ) {
+          this._layer.delegate.add(this)
+        }
+      } else if (
+        typeof this['update'] === 'function' &&
+        typeof this['destroy'] === 'function'
+      ) {
+        this._layer.delegate.add(this)
+      } else if (this._delegate) {
         this._layer.delegate.add(this._delegate)
       }
     }
@@ -181,6 +195,18 @@ class Overlay {
       }
       if (this.type && collection[this.type]) {
         collection[this.type].remove(this._delegate)
+        // for custom primitve
+        if (
+          typeof this['update'] === 'function' &&
+          typeof this['destroy'] === 'function'
+        ) {
+          this._layer.delegate.remove(this)
+        }
+      } else if (
+        typeof this['update'] === 'function' &&
+        typeof this['destroy'] === 'function'
+      ) {
+        this._layer.delegate.remove(this)
       } else {
         this._layer.delegate.remove(this._delegate)
       }
