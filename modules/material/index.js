@@ -7,6 +7,7 @@
 
 export * from './type/thirdpart'
 export * from './type/circle'
+export * from './type/cylinder'
 export * from './type/ellipsoid'
 export * from './type/polyline'
 export * from './type/radar'

@@ -9,6 +9,8 @@ const CircleBlurMaterial = require('../shader/circle/CircleBlurMaterial.glsl')
 const CircleDiffuseMaterial = require('../shader/circle/CircleDiffuseMaterial.glsl')
 const CircleFadeMaterial = require('../shader/circle/CircleFadeMaterial.glsl')
 const CirclePulseMaterial = require('../shader/circle/CirclePulseMaterial.glsl')
+const CircleRingMaterial = require('../shader/circle/CircleRingMaterial.glsl')
+const CircleRotateMaterial = require('../shader/circle/CircleRotateMaterial.glsl')
 const CircleScanMaterial = require('../shader/circle/CircleScanMaterial.glsl')
 const CircleSpiralMaterial = require('../shader/circle/CircleSpiralMaterial.glsl')
 const CircleVaryMaterial = require('../shader/circle/CircleVaryMaterial.glsl')
@@ -84,6 +86,43 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CirclePulseType, {
       speed: 12.0
     },
     source: CirclePulseMaterial
+  },
+  translucent: function(material) {
+    return true
+  }
+})
+
+/**
+ * CircleRing
+ * @type {string}
+ */
+Cesium.Material.CircleRingType = 'CircleRing'
+Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleRingType, {
+  fabric: {
+    type: Cesium.Material.CircleRingType,
+    uniforms: {
+      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7)
+    },
+    source: CircleRingMaterial
+  },
+  translucent: function(material) {
+    return true
+  }
+})
+
+/**
+ * CircleRotate
+ * @type {string}
+ */
+Cesium.Material.CircleRotateType = 'CircleRotate'
+Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleRotateType, {
+  fabric: {
+    type: Cesium.Material.CircleRotateType,
+    uniforms: {
+      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
+      image: Cesium.Material.DefaultImageId
+    },
+    source: CircleRotateMaterial
   },
   translucent: function(material) {
     return true
