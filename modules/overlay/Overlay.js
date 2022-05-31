@@ -93,6 +93,38 @@ class Overlay {
   }
 
   /**
+   *
+   * @param type
+   * @return {undefined}
+   * @private
+   */
+  _getLayerCollection(type) {
+    let collection = undefined
+    switch (type) {
+      case 'point_primitive':
+        collection = this._layer.points
+        break
+      case 'billboard_primitive':
+      case 'bounce_billboard_primitive':
+        collection = this._layer.billboards
+        break
+      case 'label_primitive':
+      case 'bounce_label_primitive':
+        collection = this._layer.labels
+        break
+      case 'polyline_primitive':
+        collection = this._layer.polylines
+        break
+      case 'cloud_primitive':
+        collection = this._layer.clouds
+        break
+      default:
+        break
+    }
+    return collection
+  }
+
+  /**
    * The hook for mount layer
    * Subclasses need to be overridden
    * @private
@@ -138,18 +170,10 @@ class Overlay {
     }
     // for Primitive
     else if (this._layer?.delegate?.add) {
-      const collection = {
-        point_primitive: this._layer.points,
-        billboard_primitive: this._layer.billboards,
-        bounce_billboard_primitive: this._layer.billboards,
-        label_primitive: this._layer.labels,
-        bounce_label_primitive: this._layer.labels,
-        polyline_primitive: this._layer.polylines,
-        cloud_primitive: this._layer.clouds
-      }
+      let collection = this._getLayerCollection(this.type)
 
-      if (this.type && collection[this.type] && this._delegate) {
-        this._delegate = collection[this.type].add(this._delegate)
+      if (collection) {
+        this._delegate && (this._delegate = collection.add(this._delegate))
         // for custom primitve
         if (
           typeof this['update'] === 'function' &&
@@ -162,8 +186,8 @@ class Overlay {
         typeof this['destroy'] === 'function'
       ) {
         this._layer.delegate.add(this)
-      } else if (this._delegate) {
-        this._layer.delegate.add(this._delegate)
+      } else {
+        this._delegate && this._layer.delegate.add(this._delegate)
       }
     }
     this._addedHook && this._addedHook()
@@ -184,17 +208,9 @@ class Overlay {
     }
     // for Primitive
     else if (this._layer?.delegate?.remove) {
-      let collection = {
-        point_primitive: this._layer.points,
-        billboard_primitive: this._layer.billboards,
-        bounce_billboard_primitive: this._layer.billboards,
-        label_primitive: this._layer.labels,
-        bounce_label_primitive: this._layer.labels,
-        polyline_primitive: this._layer.polylines,
-        cloud_primitive: this._layer.clouds
-      }
-      if (this.type && collection[this.type]) {
-        collection[this.type].remove(this._delegate)
+      let collection = this._getLayerCollection(this.type)
+      if (collection) {
+        this._delegate && collection.remove(this._delegate)
         // for custom primitve
         if (
           typeof this['update'] === 'function' &&
@@ -208,7 +224,7 @@ class Overlay {
       ) {
         this._layer.delegate.remove(this)
       } else {
-        this._layer.delegate.remove(this._delegate)
+        this._delegate && this._layer.delegate.remove(this._delegate)
       }
     }
     this._removedHook && this._removedHook()
