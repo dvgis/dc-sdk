@@ -1,5 +1,22 @@
 # Change Log
 
+### 2.14.0 - 2022-06-04
+
+#### Breaking Changes 📣
+
+- 升级 Cesium 到 1.94.2 版本
+
+#### Additions 🎉
+
+- 添加发光圆锥覆盖物
+
+#### Fixes 🔧
+
+- 优化覆盖物添加和移除功能
+- 修复历史轨迹清除功能无效问题 [#102](https://github.com/dvgis/dc-sdk/issues/102)
+- 修复编辑圆无法使用问题 [#104](https://github.com/dvgis/dc-sdk/issues/104)
+- 修复移除Cesium.when导致部分分析功能无法使用问题 [#105](https://github.com/dvgis/dc-sdk/issues/105)
+
 ### 2.13.0 - 2022-05-08
 
 #### Breaking Changes 📣

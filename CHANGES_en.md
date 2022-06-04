@@ -1,5 +1,22 @@
 # Change Log
 
+### 2.14.0 - 2022-06-04
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.94.2
+
+#### Additions 🎉
+
+- Add light cylinder primitive
+
+#### Fixes 🔧
+
+- Optimize overlay add and remove function
+- Fix a bug that the history track clear function is not working [#102](https://github.com/dvgis/dc-sdk/issues/102)
+- Fix the problem that editing circle doesn't work [#104](https://github.com/dvgis/dc-sdk/issues/104)
+- Fix the problem that some analysis functions can't be used because of removing Cesium.when [#105](https://github.com/dvgis/dc-sdk/issues/105)
+
 ### 2.13.0 - 2022-05-08
 
 #### Breaking Changes 📣
