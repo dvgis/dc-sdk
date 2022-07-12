@@ -137,8 +137,8 @@ class EditTool {
       position: position,
       billboard: {
         image: image,
-        width: 12,
-        height: 12,
+        width: this._options.icon_size[0],
+        height: this._options.icon_size[1],
         eyeOffset: new Cesium.Cartesian3(0, 0, -100),
         heightReference:
           this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&

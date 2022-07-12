@@ -131,14 +131,15 @@ class Edit {
 
   /**
    *
-   * @param measure
+   * @param plot
    * @param options
    * @returns {Edit}
    */
-  start(measure, options) {
-    this._viewer = measure.viewer
-    this._layer = measure.layer
+  start(plot, options) {
+    this._viewer = plot.viewer
+    this._layer = plot.layer
     this._options = options
+    this._viewer.editTool.deactivate()
     this._viewer.editTool.tooltipMess = '点击锚点移动,右击结束编辑'
     this._viewer.editTool.activate(options)
     this._mountedHook()
