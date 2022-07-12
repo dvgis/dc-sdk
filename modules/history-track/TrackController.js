@@ -5,6 +5,7 @@
 
 import { Cesium } from '@dc-modules/namespace'
 import { SceneEventType, TrackEventType } from '@dc-modules/event'
+import State from '@dc-modules/state/State'
 import TrackViewMode from './TrackViewMode'
 
 class TrackController {
@@ -17,10 +18,15 @@ class TrackController {
     this._viewMode = undefined
     this._viewOption = {}
     this._stopTime = undefined
+    this._state = State.INITIALIZED
   }
 
   get delegate() {
     return this._delegete.entities
+  }
+
+  get state() {
+    return this._state
   }
 
   /**
@@ -123,6 +129,7 @@ class TrackController {
     this._stopTime = undefined
     this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
     this._viewer.on(SceneEventType.POST_RENDER, this._onPostRender, this)
+    this._state = State.PLAY
     return this
   }
 
@@ -134,6 +141,7 @@ class TrackController {
     this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
     this._viewer.delegate.trackedEntity = undefined
     this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
+    this._state = State.PAUSE
     return this
   }
 
@@ -141,6 +149,9 @@ class TrackController {
    *
    */
   restore() {
+    if (this._state !== State.PAUSE) {
+      return this
+    }
     if (this._stopTime) {
       let now = Cesium.JulianDate.now()
       Object.keys(this._cache).forEach(key => {
@@ -153,6 +164,7 @@ class TrackController {
     }
     this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
     this._viewer.on(SceneEventType.POST_RENDER, this._onPostRender, this)
+    this._state = State.PLAY
     return this
   }
 
