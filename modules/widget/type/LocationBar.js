@@ -83,19 +83,12 @@ class LocationBar extends Widget {
     if (now < this._lastMouseSampleTime + 300) {
       return
     }
-    let ellipsoid = Cesium.Ellipsoid.WGS84
-    let cartographic = e.surfacePosition
-      ? ellipsoid.cartesianToCartographic(e.surfacePosition)
-      : undefined
-    let lng = +Cesium.Math.toDegrees(cartographic?.longitude || 0)
-    let lat = +Cesium.Math.toDegrees(cartographic?.latitude || 0)
-    let alt = cartographic
-      ? +this._viewer.scene.globe.getHeight(cartographic)
-      : 0
+
+    let position = e.wgs84SurfacePosition
     this._mouseEl.innerHTML = `
-      <span>经度：${lng.toFixed(8)}</span>
-      <span>纬度：${lat.toFixed(8)}</span>
-      <span>海拔：${alt.toFixed(2)} 米</span>`
+      <span>经度：${position.lng}</span>
+      <span>纬度：${position.lat}</span>
+      <span>海拔：${position.alt} 米</span>`
     this._lastMouseSampleTime = now
   }
 
