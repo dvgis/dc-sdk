@@ -552,6 +552,60 @@ class Viewer {
   }
 
   /**
+   * Camera fly to bounds
+   * @param bounds
+   * @param heading
+   * @param pitch
+   * @param roll
+   * @param completeCallback
+   * @param duration
+   * @return {Viewer}
+   */
+  flyToBounds(
+    bounds,
+    { heading = 0, pitch = 0, roll = 0 },
+    completeCallback,
+    duration
+  ) {
+    if (!bounds) {
+      return this
+    }
+    if (!Array.isArray(bounds)) {
+      bounds = bounds.split(',')
+    }
+    this.camera.flyTo({
+      destination: Cesium.Rectangle.fromDegrees(
+        bounds[0],
+        bounds[1],
+        bounds[2],
+        bounds[3]
+      ),
+      orientation: {
+        heading: Cesium.Math.toRadians(heading),
+        pitch: Cesium.Math.toRadians(pitch),
+        roll: Cesium.Math.toRadians(roll)
+      },
+      complete: completeCallback,
+      duration: duration
+    })
+    return this
+  }
+
+  /**
+   *
+   * @param bounds
+   * @param heading
+   * @param pitch
+   * @param roll
+   * @param completeCallback
+   * @return {Viewer}
+   */
+  zoomToBounds(bounds, { heading = 0, pitch = 0, roll = 0 }, completeCallback) {
+    this.flyToBounds(bounds, { heading, pitch, roll }, completeCallback)
+    return this
+  }
+
+  /**
    *
    * @param type
    * @param callback
