@@ -86,9 +86,9 @@ class LocationBar extends Widget {
 
     let position = e.wgs84SurfacePosition
     this._mouseEl.innerHTML = `
-      <span>经度：${position.lng}</span>
-      <span>纬度：${position.lat}</span>
-      <span>海拔：${position.alt} 米</span>`
+      <span>经度：${position.lng.toFixed(8)}</span>
+      <span>纬度：${position.lat.toFixed(8)}</span>
+      <span>海拔：${position.alt.toFixed(2)} 米</span>`
     this._lastMouseSampleTime = now
   }
 
