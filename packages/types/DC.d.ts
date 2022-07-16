@@ -59,6 +59,19 @@ declare module 'dc' {
     MOUSE_OUT = 'mouseout'
   }
 
+  
+  export enum SceneEventType {
+    CAMERA_MOVE_END = 'cameraMoveEnd',
+    CAMERA_CHANGED = 'cameraChanged',
+    PRE_UPDATE = 'preUpdate',
+    POST_UPDATE = 'postUpdate',
+    PRE_RENDER = 'preRender',
+    POST_RENDER = 'postRender',
+    MORPH_COMPLETE = 'morphComplete',
+    CLOCK_TICK = 'clockTick',
+    RENDER_ERROR = 'renderError'
+  }
+
   export enum ImageryType {
     AMAP = 'amap',
     BAIDU = 'baidu',
