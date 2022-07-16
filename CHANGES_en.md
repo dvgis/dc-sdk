@@ -10,11 +10,13 @@
 
 - Added flyToBounds and zoomToBounds functions
 - Added code hint module
+- Add scene rendering error subscription event
 
 #### Fixes 🔧
 
 - Optimize position bar elevation value [#109](https://github.com/dvgis/dc-sdk/issues/109)
 - Fix the problem of incorrect recovery time of history track several times
+- Fix the problem of wrong display of the end of history track 
 - Fix the problem that the number of anchor points is wrong and the size cannot be set when editing the marker.
 
 ### 2.14.0 - 2022-06-04
