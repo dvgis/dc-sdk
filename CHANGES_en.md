@@ -1,5 +1,22 @@
 # Change Log
 
+### 2.15.0 - 2022-07-16
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.95.0
+
+#### Additions 🎉
+
+- Added flyToBounds and zoomToBounds functions
+- Added code hint module
+
+#### Fixes 🔧
+
+- Optimize position bar elevation value [#109](https://github.com/dvgis/dc-sdk/issues/109)
+- Fix the problem of incorrect recovery time of history track several times
+- Fix the problem that the number of anchor points is wrong and the size cannot be set when editing the marker.
+
 ### 2.14.0 - 2022-06-04
 
 #### Breaking Changes 📣
