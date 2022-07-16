@@ -168,15 +168,15 @@ class TrackController {
     return this
   }
 
-  /**
-   *
-   * @param speed
-   * @returns {TrackController}
-   */
-  changeSpeed(speed) {
-    this._viewer.clock.multiplier = speed
-    return this
-  }
+  // /**
+  //  *
+  //  * @param speed
+  //  * @returns {TrackController}
+  //  */
+  // changeSpeed(speed) {
+  //   this._viewer.clock.multiplier = speed
+  //   return this
+  // }
 
   /**
    *
