@@ -48,7 +48,8 @@ const SceneEventType = {
   PRE_RENDER: 'preRender',
   POST_RENDER: 'postRender',
   MORPH_COMPLETE: 'morphComplete',
-  CLOCK_TICK: 'clockTick'
+  CLOCK_TICK: 'clockTick',
+  RENDER_ERROR: 'renderError'
 }
 
 const OverlayEventType = {

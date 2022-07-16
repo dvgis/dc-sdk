@@ -72,6 +72,12 @@ class SceneEvent extends Event {
           context || this
         )
         break
+      case SceneEventType.RENDER_ERROR:
+        removeCallback = this._scene.renderError.addEventListener(
+          callback,
+          context || this
+        )
+        break
       default:
         break
     }
@@ -132,6 +138,12 @@ class SceneEvent extends Event {
         break
       case SceneEventType.CLOCK_TICK:
         removed = this._clock.onTick.removeEventListener(
+          callback,
+          context || this
+        )
+        break
+      case SceneEventType.RENDER_ERROR:
+        removed = this._scene.renderError.removeEventListener(
           callback,
           context || this
         )
