@@ -37,5 +37,8 @@ export default function heading(start, end) {
   )
   Cesium.Cartesian3.normalize(vector, vector)
   let heading = Math.atan2(vector.y, vector.x) - Cesium.Math.PI_OVER_TWO
-  return Cesium.Math.TWO_PI - Cesium.Math.zeroToTwoPi(heading)
+
+  heading = Cesium.Math.TWO_PI - Cesium.Math.zeroToTwoPi(heading)
+
+  return isNaN(heading) ? 0 : heading
 }

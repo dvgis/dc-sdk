@@ -177,6 +177,9 @@ class Track {
     let now = Cesium.JulianDate.now()
     if (Cesium.JulianDate.lessThanOrEquals(now, this._endTime)) {
       let p = this._sampledPosition.getValue(now)
+      if (!p) {
+        return false
+      }
       this._pathPositions.push(p)
       if (this._options.clampToTileset) {
         this._delegate.position = viewer.scene.clampToHeight(p, [
