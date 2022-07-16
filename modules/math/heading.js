@@ -10,6 +10,10 @@ import Parse from '@dc-modules/parse/Parse'
 export default function heading(start, end) {
   let startPosition = start
   let endPosition = end
+  if (!startPosition || !endPosition) {
+    return 0
+  }
+
   if (!(start instanceof Cesium.Cartesian3)) {
     startPosition = Parse.parsePosition(start)
     startPosition = Transform.transformWGS84ToCartesian(startPosition)
