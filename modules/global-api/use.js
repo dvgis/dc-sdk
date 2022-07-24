@@ -11,8 +11,8 @@
 export function initUse(DC) {
   DC.use = function(plugin) {
     const installedPlugins =
-      this._installedPlugins || (this._installedPlugins = [])
-    if (installedPlugins.indexOf(plugin) > -1) {
+      this._installedPlugins || (this._installedPlugins = {})
+    if (this._installedPlugins[plugin.name]) {
       return this
     }
     // additional parameters
@@ -23,7 +23,7 @@ export function initUse(DC) {
     } else if (typeof plugin === 'function') {
       plugin.apply(null, args)
     }
-    installedPlugins.push(plugin)
+    installedPlugins[plugin.name] = plugin
     return this
   }
 }
