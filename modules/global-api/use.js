@@ -9,7 +9,7 @@
  * @returns this
  */
 export function initUse(DC) {
-  DC.use = function(plugin) {
+  DC.use = function(plugin, lib) {
     const installedPlugins =
       this._installedPlugins || (this._installedPlugins = {})
     if (this._installedPlugins[plugin.name]) {
@@ -17,6 +17,9 @@ export function initUse(DC) {
     }
     // additional parameters
     const args = []
+    if (lib) {
+      args.push(lib)
+    }
     args.unshift(this)
     if (typeof plugin.install === 'function') {
       plugin.install.apply(plugin, args)
