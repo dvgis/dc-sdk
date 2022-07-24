@@ -57,6 +57,7 @@ class BaiduImageryProvider {
     this._credit = undefined
     this._token = undefined
     this._style = options.style || 'normal'
+    this._errorEvent = new Cesium.Event()
   }
 
   get url() {
@@ -131,6 +132,10 @@ class BaiduImageryProvider {
 
   get hasAlphaChannel() {
     return true
+  }
+
+  get errorEvent() {
+    return this._errorEvent
   }
 
   getTileCredits(x, y, level) {}
