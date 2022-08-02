@@ -49,12 +49,6 @@ module.exports = env => {
       libraryTarget: 'umd',
       umdNamedDefine: true
     },
-    amd: {
-      toUrlUndefined: true
-    },
-    node: {
-      fs: 'empty'
-    },
     module: {
       unknownContextCritical: false,
       rules: common.rules
@@ -62,8 +56,8 @@ module.exports = env => {
     resolve: {
       extensions: ['.js', '.json', '.css'],
       alias: {
-        '@dc-modules': path.resolve(__dirname, '..', 'modules'),
-        cesium: path.resolve(__dirname, cesiumBuild)
+        '@dc-modules': path.resolve(__dirname, '..', 'modules')
+        // cesium: path.resolve(__dirname, cesiumBuild)
       }
     },
     plugins

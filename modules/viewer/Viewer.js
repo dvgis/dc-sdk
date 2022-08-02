@@ -310,6 +310,8 @@ class Viewer {
     this._baseLayerPicker.imageryProviderViewModels.push(
       new Cesium.ProviderViewModel({
         name: options.name || '地图',
+        tooltip: options.tooltip || '地图',
+        iconUrl: '',
         creationFunction: () => {
           return baseLayers
         }
