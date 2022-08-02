@@ -3,18 +3,10 @@
  * @Date: 2021-03-15 18:36:48
  */
 
-const cahce = {}
+import { getCesium, getTurf, getMapv } from './NSManager'
 
-export function setNamespace(name, lib) {
-  cahce[name] = lib
-}
+export const Cesium = getCesium()
 
-export function getNamespace(name) {
-  return cahce[name]
-}
+export const turf = getTurf()
 
-export const Cesium = getNamespace('Cesium')
-
-export const mapv = getNamespace('mapv')
-
-export const turf = getNamespace('turf')
+export const mapv = getMapv()

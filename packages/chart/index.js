@@ -3,6 +3,8 @@
  * @Date: 2020-02-02 15:55:53
  */
 
+import { add } from '@dc-modules/namespace/NSManager'
+
 const install = function(DC, echarts) {
   echarts = echarts || global.echarts
 
@@ -14,14 +16,13 @@ const install = function(DC, echarts) {
     throw new Error('Chart: Missing DC Base')
   }
 
-  DC.init(() => {
-    try {
-      DC.mixin(require('./src/components.js').default)
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-    }
-  })
+  try {
+    add('Cesium', DC.Namespace.Cesium)
+    DC.mixin(require('./src/components.js').default)
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e)
+  }
 }
 
 /* istanbul ignore if */

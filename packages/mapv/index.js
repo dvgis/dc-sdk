@@ -3,29 +3,29 @@
  * @Date: 2021-03-12 16:45:45
  */
 
-import { setNamespace } from '@dc-modules/namespace'
+import { add } from '@dc-modules/namespace/NSManager'
 
 const install = function(DC) {
   if (!DC || !DC.init) {
     throw new Error('Mapv: Missing DC Base')
   }
 
-  DC.init(() => {
-    try {
-      require('mapv-lib/mapv.min.js')
-      DC.Namespace['mapv'] = window.mapv
-      setNamespace('mapv', window.mapv)
-      DC.mixin(require('./src/components.js').default)
-      DC.mixin({
-        MapvDataSet: window.mapv?.DataSet
-      })
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e)
-    } finally {
-      delete window['mapv']
-    }
-  })
+  add('Cesium', DC.Namespace.Cesium)
+
+  try {
+    require('mapv-lib/mapv.min.js')
+    DC.Namespace['mapv'] = window.mapv
+    add('mapv', DC.Namespace['mapv'])
+    DC.mixin(require('./src/components.js').default)
+    DC.mixin({
+      MapvDataSet: window.mapv?.DataSet
+    })
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e)
+  } finally {
+    delete window['mapv']
+  }
 }
 
 /* istanbul ignore if */
