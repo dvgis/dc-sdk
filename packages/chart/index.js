@@ -3,7 +3,9 @@
  * @Date: 2020-02-02 15:55:53
  */
 
-const install = function(DC) {
+const install = function(DC, echarts) {
+  echarts = echarts || global.echarts
+
   if (!echarts) {
     throw new Error('Chart: missing charts lib')
   }
@@ -23,11 +25,12 @@ const install = function(DC) {
 }
 
 /* istanbul ignore if */
-if (typeof window !== 'undefined' && window.DC) {
-  install(window.DC)
+if (typeof window !== 'undefined' && window.DC && window.echarts) {
+  install(window.DC, window.echarts)
 }
 
 export default {
+  name: 'dc-chart',
   version: __VERSION__,
   compile_time: __TIME__,
   install

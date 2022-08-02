@@ -3,20 +3,18 @@
  * @Date: 2021-03-15 18:36:48
  */
 
-const getCesium = () => {
-  return DC.Namespace?.Cesium
+const cahce = {}
+
+export function setNamespace(name, lib) {
+  cahce[name] = lib
 }
 
-const getMapv = () => {
-  return DC.Namespace?.mapv
+export function getNamespace(name) {
+  return cahce[name]
 }
 
-const getTurf = () => {
-  return DC.Namespace?.turf
-}
+export const Cesium = getNamespace('Cesium')
 
-export const Cesium = getCesium()
+export const mapv = getNamespace('mapv')
 
-export const mapv = getMapv()
-
-export const turf = getTurf()
+export const turf = getNamespace('turf')

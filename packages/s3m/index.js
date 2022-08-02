@@ -20,10 +20,11 @@ const install = function(DC) {
 
 /* istanbul ignore if */
 if (typeof window !== 'undefined' && window.DC) {
-  install(DC)
+  install(window.DC)
 }
 
 export default {
+  name: 'dc-s3m',
   version: __VERSION__,
   compile_time: __TIME__,
   install

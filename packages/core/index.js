@@ -4,7 +4,7 @@
  */
 
 const install = function(DC) {
-  if (!DC) {
+  if (!DC || !DC.init) {
     throw new Error('Missing DC Base Package')
   }
 
@@ -49,6 +49,7 @@ if (typeof window !== 'undefined' && window.DC) {
 }
 
 export default {
+  name: 'dc-core',
   version: __VERSION__,
   compile_time: __TIME__,
   install
