@@ -3,10 +3,10 @@
  * @Date: 2021-03-15 18:36:48
  */
 
-import { getCesium, getTurf, getMapv } from './NSManager'
+import { getlib } from '@dc-modules/global-api'
 
-export const Cesium = getCesium()
+export const Cesium = getlib('Cesium')
 
-export const turf = getTurf()
+export const turf = getlib('turf')
 
-export const mapv = getMapv()
+export const mapv = getlib('mapv')
