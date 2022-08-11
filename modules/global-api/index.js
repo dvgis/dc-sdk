@@ -5,3 +5,4 @@
 
 export * from './mixin'
 export * from './use'
+export * from './lib-util'

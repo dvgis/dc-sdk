@@ -3,19 +3,19 @@
  * @Date: 2021-03-12 16:45:45
  */
 
-import { add } from '@dc-modules/namespace/NSManager'
+import { registerLib } from '@dc-modules/global-api'
 
 const install = function(DC) {
-  if (!DC || !DC.init) {
+  if (!DC) {
     throw new Error('Mapv: Missing DC Base')
   }
 
-  add('Cesium', DC.Namespace.Cesium)
+  registerLib('Cesium', DC.Namespace.Cesium)
 
   try {
     require('mapv-lib/mapv.min.js')
     DC.Namespace['mapv'] = window.mapv
-    add('mapv', DC.Namespace['mapv'])
+    registerLib('mapv', DC.Namespace['mapv'])
     DC.mixin(require('./src/components.js').default)
     DC.mixin({
       MapvDataSet: window.mapv?.DataSet

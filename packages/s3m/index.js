@@ -3,15 +3,14 @@
  * @Date: 2021-03-12 16:45:45
  */
 
-import { add } from '@dc-modules/namespace/NSManager'
+import { registerLib } from '@dc-modules/global-api'
 
 const install = function(DC) {
-  if (!DC || !DC.init) {
+  if (!DC) {
     throw new Error('Mapv: Missing DC Base')
   }
 
-  add('Cesium', DC.Namespace.Cesium)
-
+  registerLib('Cesium', DC.Namespace.Cesium)
   try {
     DC.mixin(require('./src/components.js').default)
   } catch (e) {

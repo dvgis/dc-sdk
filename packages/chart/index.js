@@ -3,7 +3,7 @@
  * @Date: 2020-02-02 15:55:53
  */
 
-import { add } from '@dc-modules/namespace/NSManager'
+import { registerLib } from '@dc-modules/global-api'
 
 const install = function(DC, echarts) {
   echarts = echarts || global.echarts
@@ -12,12 +12,12 @@ const install = function(DC, echarts) {
     throw new Error('Chart: missing charts lib')
   }
 
-  if (!DC || !DC.init) {
+  if (!DC) {
     throw new Error('Chart: Missing DC Base')
   }
 
   try {
-    add('Cesium', DC.Namespace.Cesium)
+    registerLib('Cesium', DC.Namespace.Cesium)
     DC.mixin(require('./src/components.js').default)
   } catch (e) {
     // eslint-disable-next-line no-console

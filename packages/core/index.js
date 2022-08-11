@@ -3,15 +3,15 @@
  * @Date: 2021-03-13 13:15:38
  */
 
-import { add } from '@dc-modules/namespace/NSManager'
+import { registerLib } from '@dc-modules/global-api'
 
 const install = function(DC) {
-  if (!DC || !DC.init) {
+  if (!DC) {
     throw new Error('Missing DC Base Package')
   }
 
-  add('Cesium', DC.Namespace.Cesium)
-  add('turf', DC.Namespace.turf)
+  registerLib('Cesium', DC.Namespace.Cesium)
+  registerLib('turf', DC.Namespace.turf)
 
   /**
    * start
