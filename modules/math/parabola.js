@@ -48,6 +48,6 @@ export default function parabola(
       result.push([lng, lat, h])
     }
   }
-
+  result.push([endPosition.lng, endPosition.lat, endPosition.alt || 0])
   return result
 }
