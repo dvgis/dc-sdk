@@ -5,10 +5,20 @@
 
 const cache = {}
 
+/**
+ * register lib
+ * @param name
+ * @param lib
+ */
 export function registerLib(name, lib) {
   cache[name] = lib
 }
 
-export function getlib(name) {
+/**
+ * get lib
+ * @param name
+ * @return {*}
+ */
+export function getLib(name) {
   return cache[name]
 }
