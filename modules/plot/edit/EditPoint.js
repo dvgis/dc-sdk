@@ -22,7 +22,7 @@ class EditPoint extends Edit {
     this._position = this._delegate.position.getValue(Cesium.JulianDate.now())
     this._delegate.position = new Cesium.CallbackProperty(() => {
       return this._position
-    })
+    }, false)
     this._layer.entities.add(this._delegate)
   }
 

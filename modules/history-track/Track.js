@@ -50,7 +50,7 @@ class Track {
       polyline: {
         positions: new Cesium.CallbackProperty(() => {
           return this._pathPositions
-        })
+        }, false)
       }
     })
     this._positionIndex = 0

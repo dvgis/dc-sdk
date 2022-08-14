@@ -53,7 +53,7 @@ class Circle extends Overlay {
         this._stRotation = 0
       }
       return Cesium.Math.toRadians(this._stRotation)
-    })
+    }, false)
     return this
   }
 

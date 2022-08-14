@@ -139,7 +139,7 @@ class CustomBillboard extends Overlay {
           stRotation = 0
         }
         return stRotation
-      })
+      }, false)
     }
     return this
   }
