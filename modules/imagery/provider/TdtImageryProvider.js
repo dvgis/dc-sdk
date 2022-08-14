@@ -7,7 +7,7 @@ import { Cesium } from '@dc-modules/namespace'
 import ImageryType from '../ImageryType'
 
 const MAP_URL =
-  '//t{s}.tianditu.gov.cn/DataServer?T={style}_w&x={x}&y={y}&l={z}&tk={key}'
+  '//t{s}.tianditu.gov.cn/DataServer?T={style}_c&x={x}&y={y}&l={z}&tk={key}'
 
 class TdtImageryProvider extends Cesium.UrlTemplateImageryProvider {
   constructor(options = {}) {
@@ -20,7 +20,6 @@ class TdtImageryProvider extends Cesium.UrlTemplateImageryProvider {
         )
       ].join(''),
       subdomains: ['0', '1', '2', '3', '4', '5', '6', '7'],
-      tilingScheme: new Cesium.WebMercatorTilingScheme(),
       maximumLevel: 18
     })
   }
