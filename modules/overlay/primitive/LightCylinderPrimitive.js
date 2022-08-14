@@ -211,9 +211,9 @@ class LightCylinderPrimitive extends Overlay {
             this._computeEllipsePositions(this._center, this._bottomRadius * 2)
           ),
           perPositionHeight: !isGroud
-        })
-      }),
-      asynchronous: false
+        }),
+        asynchronous: false
+      })
     }
 
     // ring
@@ -254,9 +254,17 @@ class LightCylinderPrimitive extends Overlay {
       asynchronous: false
     })
 
-    this._delegate.add(ring)
-    this._delegate.add(circle)
-    this._delegate.add(cylinder)
+    if (isGroud) {
+      Cesium.GroundPrimitive.initializeTerrainHeights().then(() => {
+        this._delegate.add(ring)
+        this._delegate.add(circle)
+        this._delegate.add(cylinder)
+      })
+    } else {
+      this._delegate.add(ring)
+      this._delegate.add(circle)
+      this._delegate.add(cylinder)
+    }
 
     // particles
     Cesium.Resource.fetchImage({ url: IMG_PARTICLES }).then(image => {
