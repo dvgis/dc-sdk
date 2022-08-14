@@ -37,7 +37,7 @@
     "build:mapv": "yarn run clean:mapv && webpack --config build/webpack.mapv.conf --mode production --env.production",
     "dev:s3m": "yarn run clean:s3m && webpack --config build/webpack.s3m.conf --mode development",
     "build:s3m": "yarn run clean:s3m && webpack --config build/webpack.s3m.conf --mode production --env.production",
-    "clean": "yarn run clean:base && yarn run clean:core && yarn run clean:chart && yarn run clean:mapv && yarn run clean:sdk",
+    "clean": "yarn run clean:base && yarn run clean:core && yarn run clean:chart && yarn run clean:mapv && yarn run clean:s3m &&  yarn run clean:sdk",
     "clean:base": "rimraf packages/base/dist",
     "clean:core": "rimraf packages/core/dist",
     "clean:chart": "rimraf packages/chart/dist",
