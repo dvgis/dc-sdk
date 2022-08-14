@@ -8,15 +8,12 @@
 - Abandon the init function
 - Modify Cesium introduction
 
-#### Additions 🎉
-
-- Add transparent values for viewable field colors
-
 #### Fixes 🔧
 
 - Optimize the parabola function to add an end point to the calculation result
 - Optimize the use of name space module.
 - Fix the problem that the framework cannot be used due to repeated use in CDN mode.
+- Fix an issue created by upgrading Cesium
 
 ### 2.15.0 - 2022-07-16
 
