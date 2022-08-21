@@ -1,5 +1,15 @@
 # Change Log
 
+### 2.16.1 - 2022-08-21
+
+#### Additions 🎉
+
+- Add mixNum parameter for viewable fields
+
+#### Fixes 🔧
+
+- Improve Model Instance
+
 ### 2.16.0 - 2022-08-14
 
 #### Breaking Changes 📣
