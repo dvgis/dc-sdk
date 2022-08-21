@@ -9,6 +9,7 @@
 #### Fixes 🔧
 
 - Improve Model Instance
+- Improve heading math
 
 ### 2.16.0 - 2022-08-14
 
