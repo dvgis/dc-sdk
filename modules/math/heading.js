@@ -36,11 +36,6 @@ export default function heading(start, end) {
     new Cesium.Cartesian3()
   )
 
-  if (isNaN(vector.x) || isNaN(vector.y) || isNaN(vector.z)) {
-    return 0
-  }
-
-  Cesium.Cartesian3.normalize(vector, vector)
   let heading = Math.atan2(vector.y, vector.x) - Cesium.Math.PI_OVER_TWO
 
   heading = Cesium.Math.TWO_PI - Cesium.Math.zeroToTwoPi(heading)
