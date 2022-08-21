@@ -39,6 +39,7 @@ class ModelCollectionPrimitive extends Overlay {
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
     if (this._layer) {
+      this._layer.delegate.remove(this._delegate)
       this._resetDelegate()
       this._layer.delegate.add(this._delegate)
     }
@@ -48,6 +49,7 @@ class ModelCollectionPrimitive extends Overlay {
   set modelUrl(modelUrl) {
     this._modelUrl = modelUrl
     if (this._layer) {
+      this._layer.delegate.remove(this._delegate)
       this._resetDelegate()
       this._layer.delegate.add(this._delegate)
     }
@@ -59,7 +61,6 @@ class ModelCollectionPrimitive extends Overlay {
   }
 
   _resetDelegate() {
-    this._delegate = this._delegate && this._delegate.destroy()
     this._delegate = new Cesium.ModelInstanceCollection({
       url: this._modelUrl,
       instances: this._positions.map(item => {
