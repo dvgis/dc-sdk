@@ -31,7 +31,11 @@ const thirdPart = {
   PolylineGlowMaterialProperty: Cesium.PolylineGlowMaterialProperty,
   PolylineOutlineMaterialProperty: Cesium.PolylineOutlineMaterialProperty,
   PolylineArrowMaterialProperty: Cesium.PolylineArrowMaterialProperty,
-  writeTextToCanvas: Cesium.writeTextToCanvas
+  writeTextToCanvas: Cesium.writeTextToCanvas,
+  CustomShaderMode: Cesium.CustomShaderMode,
+  CustomShaderTranslucencyMode: Cesium.CustomShaderTranslucencyMode,
+  CustomShader: Cesium.CustomShader,
+  UniformType: Cesium.UniformType
 }
 
 export default thirdPart
