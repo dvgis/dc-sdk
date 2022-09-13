@@ -672,6 +672,7 @@ class Viewer {
    * @returns {Viewer}
    */
   exportScene(name) {
+    this.scene.render()
     let canvas = this.canvas
     let image = canvas
       .toDataURL('image/png')
