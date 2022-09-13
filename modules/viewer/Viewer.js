@@ -365,6 +365,7 @@ class Viewer {
       new Cesium.ProviderViewModel({
         name: options.name || '地形',
         tooltip: options.tooltip || '地形',
+        iconUrl: '',
         creationFunction: () => {
           return terrain
         }
