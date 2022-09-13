@@ -364,6 +364,7 @@ class Viewer {
     this._baseLayerPicker.terrainProviderViewModels.push(
       new Cesium.ProviderViewModel({
         name: options.name || '地形',
+        tooltip: options.tooltip || '地形',
         creationFunction: () => {
           return terrain
         }
