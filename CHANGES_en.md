@@ -1,5 +1,16 @@
 # Change Log
 
+### 2.16.2 - 2022-09-13
+
+#### Additions 🎉
+
+- Open some Cesium native classes
+
+#### Fixes 🔧
+
+- Improve the scene export 
+- Improve terrain loading [#126](https://github.com/dvgis/dc-sdk/issues/126)
+
 ### 2.16.1 - 2022-08-21
 
 #### Additions 🎉
