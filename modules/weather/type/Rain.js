@@ -16,6 +16,7 @@ class Rain {
     this._delegate = undefined
     this._enable = false
     this._speed = 10.0
+    this._mixNum = 0.5
     this._state = State.INITIALIZED
   }
 
@@ -46,6 +47,16 @@ class Rain {
     return this._speed
   }
 
+  set mixNum(mixNum) {
+    this._mixNum = mixNum
+    this._delegate && (this._delegate.uniforms.mixNum = mixNum)
+    return this
+  }
+
+  get mixNum() {
+    return this._mixNum
+  }
+
   /**
    *
    * @private
@@ -55,7 +66,8 @@ class Rain {
       name: this._id,
       fragmentShader: RainShader,
       uniforms: {
-        speed: this._speed
+        speed: this._speed,
+        mixNum: this._mixNum
       }
     })
     this._viewer.scene.postProcessStages.add(this._delegate)
