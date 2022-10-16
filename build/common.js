@@ -5,6 +5,7 @@
 
 'use strict'
 
+const path = require('path')
 const webpack = require('webpack')
 const packageInfo = require('../package.json')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -22,7 +23,12 @@ module.exports = {
   rules: [
     {
       test: /\.js$/,
-      exclude: /node_modules/,
+      include: [
+        path.resolve(__dirname, '../node_modules/cesium'),
+        path.resolve(__dirname, '../libs'),
+        path.resolve(__dirname, '../modules'),
+        path.resolve(__dirname, '../packages')
+      ],
       loader: 'babel-loader',
       options: {
         presets: ['@babel/preset-env'],
