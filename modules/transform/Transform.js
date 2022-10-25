@@ -20,9 +20,9 @@ class Transform {
         cartesian
       )
       return new Position(
-        Cesium.Math.toDegrees(cartographic.longitude),
-        Cesium.Math.toDegrees(cartographic.latitude),
-        cartographic.height
+        Cesium.Math.toDegrees(cartographic?.longitude || 0),
+        Cesium.Math.toDegrees(cartographic?.latitude || 0),
+        cartographic.height || 0
       )
     }
     return new Position(0, 0)
