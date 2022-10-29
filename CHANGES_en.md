@@ -1,5 +1,18 @@
 # Change Log
 
+### 2.17.0 - 2022-10-29
+
+#### Breaking Changes 📣
+
+- Upgrade Cesium to version 1.98.1
+- Remove ModelCollectionPrimitive
+
+#### Fixes 🔧
+
+- Fix locatonbar mouse movement coordinate error
+- Fix a coordinate conversion problem in transform
+- Fix the tile mask issue
+
 ### 2.16.2 - 2022-09-13
 
 #### Additions 🎉
