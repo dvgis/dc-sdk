@@ -37,7 +37,7 @@ module.exports = env => {
   }
   return {
     entry: {
-      'dc.base': [path.resolve(__dirname, '..', 'packages/base/index.js')]
+      'dc.base': path.resolve(__dirname, '..', 'packages/base/index.js')
     },
     devtool: IS_PROD ? false : 'cheap-module-eval-source-map',
     output: {
@@ -50,14 +50,13 @@ module.exports = env => {
       umdNamedDefine: true
     },
     module: {
-      unknownContextCritical: false,
+      // unknownContextCritical: false,
       rules: common.rules
     },
     resolve: {
       extensions: ['.js', '.json', '.css'],
       alias: {
         '@dc-modules': path.resolve(__dirname, '..', 'modules')
-        // cesium: path.resolve(__dirname, cesiumBuild)
       }
     },
     plugins

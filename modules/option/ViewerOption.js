@@ -139,7 +139,7 @@ class ViewerOption {
       let globeFS = globe._surfaceShaderSet.baseFragmentShaderSource
       let oriShder = globeFS.sources[globeFS.sources.length - 1]
       globeFS.sources[globeFS.sources.length - 1] = oriShder.replace(
-        'gl_FragColor = finalColor;',
+        'gl_FragColor =  finalColor;',
         `gl_FragColor = finalColor * vec4(${filterColor.red.toFixed(
           2
         )},${filterColor.green.toFixed(2)},${filterColor.blue.toFixed(

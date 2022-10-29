@@ -1,5 +1,18 @@
 # Change Log
 
+### 2.17.0 - 2022-10-29
+
+#### Breaking Changes 📣
+
+- 升级 Cesium 到 1.98.1 版本 
+- 移除 ModelCollectionPrimitive
+
+#### Fixes 🔧
+
+- 修复 locatonbar 鼠标移动的坐标错误
+- 修复 transform 中坐标转换的问题
+- 修复瓦片蒙层问题
+
 ### 2.16.2 - 2022-09-13
 
 #### Additions 🎉
