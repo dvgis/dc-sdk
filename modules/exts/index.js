@@ -4,3 +4,4 @@
  */
 
 export { default as GroundSkyBox } from './GroundSkyBox'
+export { default as CesiumViewer } from './CesiumViewer'

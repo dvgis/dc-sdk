@@ -24,7 +24,7 @@ module.exports = {
     {
       test: /\.js$/,
       include: [
-        path.resolve(__dirname, '../node_modules/cesium'),
+        path.resolve(__dirname, '../node_modules/@cesium'),
         path.resolve(__dirname, '../libs'),
         path.resolve(__dirname, '../modules'),
         path.resolve(__dirname, '../packages')

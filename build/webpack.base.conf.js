@@ -8,22 +8,25 @@
 const path = require('path')
 const webpack = require('webpack')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const cesiumBuild = '../node_modules/cesium/Build/Cesium'
 const common = require('./common')
 
 let cesiumCopyPlugin = [
   new CopyWebpackPlugin([
     {
-      from: path.resolve(__dirname, cesiumBuild, 'Assets'),
+      from: path.resolve(
+        __dirname,
+        '../node_modules/@cesium/engine/Source',
+        'Assets'
+      ),
       to: 'resources/Assets'
     },
     {
-      from: path.resolve(__dirname, cesiumBuild, 'Workers'),
+      from: path.resolve(
+        __dirname,
+        '../node_modules/@cesium/engine/Build',
+        'Workers'
+      ),
       to: 'resources/Workers'
-    },
-    {
-      from: path.resolve(__dirname, cesiumBuild, 'ThirdParty'),
-      to: 'resources/ThirdParty'
     }
   ])
 ]
@@ -50,7 +53,7 @@ module.exports = env => {
       umdNamedDefine: true
     },
     module: {
-      // unknownContextCritical: false,
+      unknownContextCritical: false,
       rules: common.rules
     },
     resolve: {

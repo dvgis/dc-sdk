@@ -14,3 +14,4 @@ dist/
 *.njsproj
 package-lock.json
 .DS_Store
+/examples

@@ -51,10 +51,8 @@
     "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/polyfill": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
-    "@turf/turf": "^6.3.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
-    "cesium": "^1.98.1",
     "chalk": "^4.1.0",
     "copy-webpack-plugin": "^5.0.2",
     "css-loader": "^2.1.1",
@@ -80,5 +78,9 @@
     "webpack-cli": "^3.3.0",
     "webpack-glsl-loader": "^1.0.1",
     "webpack-obfuscator": "^1.8.0"
+  },
+  "dependencies": {
+    "@cesium/engine": "^1.1.0",
+    "@turf/turf": "^6.3.0"
   }
 }
