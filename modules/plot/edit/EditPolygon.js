@@ -34,10 +34,9 @@ class EditPolygon extends Edit {
    * @private
    */
   _mountAnchor() {
-    let positions = [].concat(
-      this._overlay.delegate.polygon.hierarchy.getValue(Cesium.JulianDate.now())
+    this._positions = []
+    let positions = this._overlay.delegate.polygon.hierarchy.getValue(Cesium.JulianDate.now())
         .positions
-    )
     positions.push(positions[0])
     for (let i = 0; i < positions.length - 1; i++) {
       let mid = midCartesian(positions[i], positions[i + 1])

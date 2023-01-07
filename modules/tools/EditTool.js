@@ -240,6 +240,8 @@ class EditTool {
    * @returns {EditTool}
    */
   activate(options = {}) {
+    this._anchorLayer.entities.removeAll()
+    this._anchors = []
     this._viewer.tooltip.enable = true
     this._options = { ...DEF_OPTS, ...options }
     this._unbindEvent()

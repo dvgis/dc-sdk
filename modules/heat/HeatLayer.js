@@ -266,6 +266,14 @@ class HeatLayer extends Layer {
     }
     return this
   }
+
+  /**
+   *
+   * @return {HeatLayer}
+   */
+  clear() {
+    return this
+  }
 }
 
 Layer.registerType('heat')

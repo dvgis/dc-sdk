@@ -2,7 +2,6 @@
  * @Author: Caven
  * @Date: 2019-12-27 17:13:24
  */
-
 import { Cesium } from '@dc-modules/namespace'
 import Parse from '@dc-modules/parse/Parse'
 import {
@@ -19,18 +18,6 @@ import createWidgets from '@dc-modules/widget'
 import createTools from '@dc-modules/tools'
 
 const DEF_OPTS = {
-  animation: false, //Whether to create animated widgets, lower left corner of the meter
-  baseLayerPicker: false, //Whether to display the layer selector
-  imageryProvider: false, // Whether to display the default imagery
-  fullscreenButton: false, //Whether to display the full-screen button
-  geocoder: false, //To display the geocoder widget, query the button in the upper right corner
-  homeButton: false, //Whether to display the Home button
-  infoBox: false, //Whether to display the information box
-  sceneModePicker: false, //Whether to display 3D/2D selector
-  selectionIndicator: false, //Whether to display the selection indicator component
-  timeline: false, //Whether to display the timeline
-  navigationHelpButton: false, //Whether to display the help button in the upper right corner
-  navigationInstructionsInitiallyVisible: false,
   creditContainer: undefined,
   shouldAnimate: true
 }

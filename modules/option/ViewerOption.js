@@ -9,22 +9,8 @@ import { Util } from '@dc-modules/utils'
 class ViewerOption {
   constructor(viewer) {
     this._viewer = viewer
-    this._options = {}
-    this._init()
-  }
-
-  /**
-   * Init viewer
-   * @private
-   */
-  _init() {
-    this._viewer.delegate.cesiumWidget.creditContainer.style.display = 'none'
-    this._viewer.delegate.cesiumWidget.screenSpaceEventHandler.removeInputAction(
-      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
-    )
     this._viewer.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
-    this._viewer.scene.backgroundColor = Cesium.Color.TRANSPARENT
-    this._viewer.delegate.imageryLayers.removeAll()
+    this._options = {}
   }
 
   /**

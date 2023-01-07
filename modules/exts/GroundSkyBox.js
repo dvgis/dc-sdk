@@ -3,9 +3,7 @@
  * @Date: 2021-02-21 17:50:31
  */
 
-import { Cesium } from '@dc-modules/namespace'
-
-const {
+import {
   BoxGeometry,
   Cartesian3,
   defined,
@@ -23,8 +21,9 @@ const {
   BlendingState,
   SceneMode,
   ShaderProgram,
-  ShaderSource
-} = Cesium
+  ShaderSource,
+  SkyBox
+} from '@cesium/engine'
 
 const SkyBoxFS = `
   uniform samplerCube u_cubeMap;
@@ -48,7 +47,7 @@ const SkyBoxVS = `
   }
 `
 
-class GroundSkyBox extends Cesium.SkyBox {
+class GroundSkyBox extends SkyBox {
   constructor(options = {}) {
     super(options)
     this.offsetAngle = options?.offsetAngle || 0
