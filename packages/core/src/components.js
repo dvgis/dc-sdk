@@ -193,6 +193,11 @@ import Weather from '@dc-modules/weather/Weather'
 import Plot from '@dc-modules/plot/Plot'
 
 /**
+ * measure
+ */
+import { MeasureType, Measure } from '@dc-modules/measure'
+
+/**
  *
  * wind
  */
@@ -382,6 +387,11 @@ const components = {
    * plot
    */
   Plot,
+  /**
+   * measure
+   */
+  MeasureType,
+  Measure,
   /**
    * wind
    */

@@ -1,0 +1,47 @@
+/**
+ * @Author: Caven
+ * @Date: 2020-08-29 20:55:14
+ */
+
+import { Cesium } from '@dc-modules/namespace'
+import { PlotEventType } from '@dc-modules/event'
+import Draw from './Draw'
+
+class DrawPolygon extends Draw {
+  constructor(style) {
+    super(style)
+  }
+
+  /**
+   *
+   * @private
+   */
+  _mountedHook() {
+    this.drawTool.tooltipMess = '左击选择点位,右击结束'
+    this._delegate = new Cesium.Entity({
+      polygon: {
+        ...this._style,
+        hierarchy: new Cesium.CallbackProperty(() => {
+          if (this._positions.length > 2) {
+            return new Cesium.PolygonHierarchy(this._positions)
+          } else {
+            return null
+          }
+        }, false)
+      }
+    })
+    this._layer.entities.add(this._delegate)
+  }
+
+  /**
+   *
+   * @param position
+   * @private
+   */
+  _onDrawAnchor(position) {
+    this._positions.push(position)
+    this.drawTool.fire(PlotEventType.CREATE_ANCHOR, { position })
+  }
+}
+
+export default DrawPolygon
