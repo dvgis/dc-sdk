@@ -5,8 +5,8 @@
 
 import { Cesium } from '@dc-modules/namespace'
 import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
 import { midCartesian } from '@dc-modules/math'
+import { Transform } from '@dc-modules/transform'
 import Edit from './Edit'
 
 class EditPolygon extends Edit {
@@ -33,10 +33,23 @@ class EditPolygon extends Edit {
    *
    * @private
    */
+  _stopedHook() {
+    this._overlay.positions = Transform.transformCartesianArrayToWGS84Array(
+      this._positions.filter((item, index) => index % 2 === 0)
+    )
+    this._overlay.show = true
+    this._options.onEditStop && this._options.onEditStop(this._overlay)
+  }
+
+  /**
+   *
+   * @private
+   */
   _mountAnchor() {
     this._positions = []
-    let positions = this._overlay.delegate.polygon.hierarchy.getValue(Cesium.JulianDate.now())
-        .positions
+    let positions = this._overlay.delegate.polygon.hierarchy.getValue(
+      Cesium.JulianDate.now()
+    ).positions
     positions.push(positions[0])
     for (let i = 0; i < positions.length - 1; i++) {
       let mid = midCartesian(positions[i], positions[i + 1])

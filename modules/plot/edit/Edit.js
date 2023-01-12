@@ -27,13 +27,7 @@ class Edit {
    *
    * @private
    */
-  _mountedHook() {
-    this._overlay.positions = Transform.transformCartesianArrayToWGS84Array(
-      this._positions
-    )
-    this._overlay.show = true
-    this._options.onEditStop && this._options.onEditStop(this._overlay)
-  }
+  _mountedHook() {}
 
   /**
    *

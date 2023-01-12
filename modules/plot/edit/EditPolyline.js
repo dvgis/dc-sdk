@@ -6,6 +6,7 @@
 import { Cesium } from '@dc-modules/namespace'
 import { PlotEventType } from '@dc-modules/event'
 import { midCartesian } from '@dc-modules/math'
+import { Transform } from '@dc-modules/transform'
 import Edit from './Edit'
 
 class EditPolyline extends Edit {
@@ -32,9 +33,23 @@ class EditPolyline extends Edit {
    *
    * @private
    */
+  _stopedHook() {
+    this._overlay.positions = Transform.transformCartesianArrayToWGS84Array(
+      this._positions.filter((item, index) => index % 2 === 0)
+    )
+    this._overlay.show = true
+    this._options.onEditStop && this._options.onEditStop(this._overlay)
+  }
+
+  /**
+   *
+   * @private
+   */
   _mountAnchor() {
     this._positions = []
-    let positions = this._overlay.delegate.polyline.positions.getValue(Cesium.JulianDate.now())
+    let positions = this._overlay.delegate.polyline.positions.getValue(
+      Cesium.JulianDate.now()
+    )
     for (let i = 0; i < positions.length - 1; i++) {
       let mid = midCartesian(positions[i], positions[i + 1])
       this._positions.push(positions[i])
