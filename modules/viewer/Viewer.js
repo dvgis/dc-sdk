@@ -49,7 +49,7 @@ class Viewer {
       typeof id === 'string' ? document.getElementById(id) : id
     ) //Register the custom container
 
-    this._baseLayerPicker = new Cesium.BaseLayerPickerViewModel({
+    this._baseLayerPicker = new Cesium.BaseLayerPicker({
       globe: this._delegate.scene.globe
     }) //Initialize the baseLayer picker
 
@@ -294,18 +294,9 @@ class Viewer {
     if (!baseLayers) {
       return this
     }
-    this._baseLayerPicker.imageryProviderViewModels.push(
-      new Cesium.ProviderViewModel({
-        name: options.name || '地图',
-        tooltip: options.tooltip || '地图',
-        iconUrl: '',
-        creationFunction: () => {
-          return baseLayers
-        }
-      })
-    )
+    this._baseLayerPicker.addImageryProvider(baseLayers)
     if (!this._baseLayerPicker.selectedImagery) {
-      this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[0]
+      this._baseLayerPicker.changeBaseLayer(0)
     }
     this.mapSwitch && this.mapSwitch.addMap(options)
     return this
@@ -317,11 +308,7 @@ class Viewer {
    * @returns {Viewer}
    */
   changeBaseLayer(index) {
-    if (this._baseLayerPicker && index >= 0) {
-      this._baseLayerPicker.selectedImagery = this._baseLayerPicker.imageryProviderViewModels[
-        index
-      ]
-    }
+    this._baseLayerPicker.changeBaseLayer(index)
     return this
   }
 
@@ -339,27 +326,17 @@ class Viewer {
   }
 
   /**
-   * Adds the terrain
+   *
    * @param terrain
-   * @param options
-   * @returns {Viewer}
+   * @return {Viewer}
    */
-  addTerrain(terrain, options = {}) {
+  addTerrain(terrain) {
     if (!terrain) {
       return this
     }
-    this._baseLayerPicker.terrainProviderViewModels.push(
-      new Cesium.ProviderViewModel({
-        name: options.name || '地形',
-        tooltip: options.tooltip || '地形',
-        iconUrl: '',
-        creationFunction: () => {
-          return terrain
-        }
-      })
-    )
+    this._baseLayerPicker.addTerrainProvider(terrain)
     if (!this._baseLayerPicker.selectedTerrain) {
-      this._baseLayerPicker.selectedTerrain = this._baseLayerPicker.terrainProviderViewModels[0]
+      this._baseLayerPicker.changeTerrain(0)
     }
     return this
   }
@@ -370,11 +347,7 @@ class Viewer {
    * @returns {Viewer}
    */
   changeTerrain(index) {
-    if (this._baseLayerPicker && index >= 0) {
-      this._baseLayerPicker.selectedTerrain = this._baseLayerPicker.terrainProviderViewModels[
-        index
-      ]
-    }
+    this._baseLayerPicker.changeTerrain(index)
     return this
   }
 
@@ -383,8 +356,6 @@ class Viewer {
    * @returns {Viewer}
    */
   removeTerrain() {
-    this._baseLayerPicker.terrainProviderViewModels = []
-    this._baseLayerPicker.selectedTerrain = undefined
     this._delegate.terrainProvider = new Cesium.EllipsoidTerrainProvider()
     return this
   }
