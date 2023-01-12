@@ -67,30 +67,6 @@ class Tileset extends Overlay {
         })
       }
     }
-    // sets fragmentShader
-    if (
-      this._fragmentShader &&
-      model &&
-      model._sourcePrograms &&
-      model._rendererResources
-    ) {
-      Object.keys(model._sourcePrograms).forEach(key => {
-        let program = model._sourcePrograms[key]
-        let sourceShaders = model._rendererResources.sourceShaders
-        if (this._replaceFS) {
-          sourceShaders[program.fragmentShader] = this._fragmentShader
-        } else {
-          let oldFS = sourceShaders[program.fragmentShader]
-          sourceShaders[program.fragmentShader] = oldFS.replace(
-            'gl_FragColor = vec4(color, 1.0);\n}',
-            `gl_FragColor = vec4(color, 1.0);
-             ${this._fragmentShader}\n}
-            `
-          )
-        }
-      })
-      model._shouldRegenerateShaders = true
-    }
   }
 
   /**
@@ -236,42 +212,6 @@ class Tileset extends Overlay {
    */
   setProperties(properties) {
     this._properties = properties
-    this._bindVisibleEvent()
-    return this
-  }
-
-  /**
-   * Sets feature FS
-   * @param fragmentShader
-   * @returns {Tileset}
-   */
-  setCustomShader(fragmentShader) {
-    this._replaceFS = true
-    this._fragmentShader = fragmentShader
-    this._bindVisibleEvent()
-    return this
-  }
-
-  /**
-   *
-   * @param fragmentShader
-   * @return {Tileset}
-   */
-  replaceFS(fragmentShader) {
-    this._replaceFS = true
-    this._fragmentShader = fragmentShader
-    this._bindVisibleEvent()
-    return this
-  }
-
-  /**
-   *
-   * @param fragmentShader
-   * @return {Tileset}
-   */
-  appendFS(fragmentShader) {
-    this._replaceFS = false
-    this._fragmentShader = fragmentShader
     this._bindVisibleEvent()
     return this
   }
