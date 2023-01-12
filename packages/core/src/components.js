@@ -205,11 +205,6 @@ import WindLayer from '@dc-modules/wind/WindLayer'
 import HeatLayer from '@dc-modules/heat/HeatLayer'
 
 /**
- * exts
- */
-import { GroundSkyBox } from '@dc-modules/exts'
-
-/**
  * thirdPart
  */
 import thirdPart from '@dc-modules/thirdpart'
@@ -395,10 +390,6 @@ const components = {
    * heat
    */
   HeatLayer,
-  /**
-   * exts
-   */
-  GroundSkyBox,
   /**
    * thirdPart
    */
