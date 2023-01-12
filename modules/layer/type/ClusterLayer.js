@@ -147,6 +147,8 @@ class ClusterLayer extends Layer {
               this._options.gradient[key],
               numLength
             )
+          } else if (this._options.style === 'custom') {
+            cluster.billboard.image = this._options.gradient[key]
           } else {
             cluster.billboard.image = this._drawClustering(
               this._options.gradient[key],
