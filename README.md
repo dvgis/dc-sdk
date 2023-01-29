@@ -1,5 +1,5 @@
 <p>
-<img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/build"/>
+<img src="https://img.shields.io/github/actions/workflow/status/dvgis/dc-sdk/build.yml"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
 <a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
  <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
