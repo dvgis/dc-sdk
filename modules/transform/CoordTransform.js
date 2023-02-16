@@ -70,22 +70,20 @@ class CoordTransform {
   static GCJ02ToWGS84(lng, lat) {
     lat = +lat
     lng = +lng
+
     if (this.out_of_china(lng, lat)) {
       return [lng, lat]
-    } else {
-      let out = [lng, lat]
-
-      let gcj02_point = this.WGS84ToGCJ02(lng, lat)
-      let dlng = gcj02_point[0] - lng
-      let dlat = gcj02_point[1] - lat
-      do {
-        gcj02_point = this.WGS84ToGCJ02((out[0] -= dlng), (out[1] -= dlat))
-        dlng = gcj02_point[0] - lng
-        dlat = gcj02_point[1] - lat
-      } while (Math.abs(dlng) > 1e-7 || Math.abs(dlat) > 1e-7)
-
-      return out
     }
+
+    let gcj02_point = this.WGS84ToGCJ02(lng, lat)
+    let deltaLng = lng - gcj02_point[0]
+    let deltaLat = lat - gcj02_point[1]
+
+    if (Math.abs(deltaLng) < 1e-7 && Math.abs(deltaLat) < 1e-7) {
+      return [lng, lat]
+    }
+
+    return this.GCJ02ToWGS84(lng - deltaLng, lat - deltaLat)
   }
 
   /**
