@@ -296,7 +296,7 @@ class Viewer {
     }
     this._baseLayerPicker.addImageryProvider(baseLayers)
     if (!this._baseLayerPicker.selectedImagery) {
-      this._baseLayerPicker.changeBaseLayer(0)
+      this._baseLayerPicker.changeImagery(0)
     }
     this.mapSwitch && this.mapSwitch.addMap(options)
     return this
@@ -308,7 +308,7 @@ class Viewer {
    * @returns {Viewer}
    */
   changeBaseLayer(index) {
-    this._baseLayerPicker.changeBaseLayer(index)
+    this._baseLayerPicker.changeImagery(index)
     return this
   }
 
