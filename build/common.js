@@ -73,6 +73,11 @@ module.exports = {
       loader: 'webpack-glsl-loader'
     }
   ],
+  performance: {
+    hints: 'warning',
+    maxAssetSize: 30000000,
+    maxEntrypointSize: 50000000
+  },
   plugins: [
     new webpack.DefinePlugin({
       __VERSION__: JSON.stringify(packageInfo.version),

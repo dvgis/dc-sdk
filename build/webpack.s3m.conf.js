@@ -62,6 +62,7 @@ module.exports = env => {
         entry: path.resolve(__dirname, '..', 'packages/s3m/index.js')
       }
     },
+    performance: common.performance,
     plugins
   }
 }

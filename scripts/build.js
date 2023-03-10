@@ -22,24 +22,24 @@ const pkgs = ['base', 'core', 'chart', 'mapv', 's3m']
 const count = pkgs.length
 
 pkgs.forEach((item, index) => {
-  fse.exists(
-    path.resolve(__dirname, '..', `packages/${item}/dist`),
-    async exists => {
-      if (exists) {
-        fse.copySync(
-          path.resolve(__dirname, '..', `packages/${item}/dist`),
-          outoutDir
-        )
-        shell.echo(chalk.yellow(`copy ${item} success`))
-        if (index === count - 1) {
-          await shell.echo(chalk.green('build sdk end'))
-        }
-      } else {
-        shell.echo(chalk.red(`no ${item} dist`))
-        if (index === count - 1) {
-          shell.echo(chalk.green('build sdk end'))
+  let dist = path.resolve(__dirname, '..', `packages/${item}/dist`)
+  fse.exists(dist, async exists => {
+    if (exists) {
+      if (item === 'base') {
+        for (let i = 0; i < 7; i++) {
+          fse.removeSync(path.join(dist, `${i}.min.js`))
         }
       }
+      fse.copySync(dist, outoutDir)
+      shell.echo(chalk.yellow(`copy ${item} success`))
+      if (index === count - 1) {
+        await shell.echo(chalk.green('build sdk end'))
+      }
+    } else {
+      shell.echo(chalk.red(`no ${item} dist`))
+      if (index === count - 1) {
+        await shell.echo(chalk.green('build sdk end'))
+      }
     }
-  )
+  })
 })

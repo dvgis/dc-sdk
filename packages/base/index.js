@@ -4,12 +4,16 @@
  */
 
 import * as turf from '@turf/turf'
+
 import { initMixin, initUse } from '@dc-modules/global-api'
-import { CesiumViewer, GroundSkyBox } from '@dc-modules/exts'
+
+import { CesiumViewer, GroundSkyBox, BaseLayerPicker } from '@dc-modules/exts'
+
 const Cesium = require('@cesium/engine')
 
 Cesium['Viewer'] = CesiumViewer
 Cesium['GroundSkyBox'] = GroundSkyBox
+Cesium['BaseLayerPicker'] = BaseLayerPicker
 
 let DC = {
   version: __VERSION__,

@@ -63,6 +63,7 @@ module.exports = env => {
         cesium: path.resolve(__dirname, cesiumBuild)
       }
     },
+    performance: common.performance,
     plugins
   }
 }

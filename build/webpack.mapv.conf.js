@@ -62,6 +62,7 @@ module.exports = env => {
         entry: path.resolve(__dirname, '..', 'packages/mapv/index.js')
       }
     },
+    performance: common.performance,
     plugins
   }
 }

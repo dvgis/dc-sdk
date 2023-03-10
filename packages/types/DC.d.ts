@@ -59,7 +59,7 @@ declare module 'dc' {
     MOUSE_OUT = 'mouseout'
   }
 
-  
+
   export enum SceneEventType {
     CAMERA_MOVE_END = 'cameraMoveEnd',
     CAMERA_CHANGED = 'cameraChanged',
@@ -508,7 +508,7 @@ declare module 'dc' {
   }
 
   export class TilesetLayer extends Layer {
-    constructor(id: String, url: String, options?: JSON)
+    constructor(id: String)
   }
 
   export class TopoJsonLayer extends Layer {

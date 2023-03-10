@@ -27,6 +27,14 @@ let cesiumCopyPlugin = [
         'Workers'
       ),
       to: 'resources/Workers'
+    },
+    {
+      from: path.resolve(
+        __dirname,
+        '../node_modules/@cesium/engine/Source',
+        'ThirdParty'
+      ),
+      to: 'resources/ThirdParty'
     }
   ])
 ]
@@ -49,7 +57,7 @@ module.exports = env => {
       publicPath: publicPath,
       library: 'DC',
       libraryExport: 'default',
-      libraryTarget: 'umd',
+      libraryTarget: `umd`,
       umdNamedDefine: true
     },
     module: {
@@ -62,6 +70,7 @@ module.exports = env => {
         '@dc-modules': path.resolve(__dirname, '..', 'modules')
       }
     },
+    performance: common.performance,
     plugins
   }
 }
