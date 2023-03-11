@@ -229,6 +229,18 @@ class Tileset extends Overlay {
   }
 
   /**
+   *
+   * @param customShader
+   * @return {Tileset}
+   */
+  setCustomShader(customShader) {
+    this.readyPromise.then(tileset => {
+      tileset.customShader = customShader
+    })
+    return this
+  }
+
+  /**
    * Sets style
    * @param style
    * @returns {Tileset}

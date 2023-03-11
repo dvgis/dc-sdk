@@ -1,7 +1,7 @@
 # DC-SDK
 
 <p>
-<img src="https://img.shields.io/github/workflow/status/dvgis/dc-sdk/build"/>
+<img src="https://img.shields.io/github/actions/workflow/status/dvgis/dc-sdk/build.yml"/>
 <img src="https://img.shields.io/badge/license-Apache%202-blue"/>
 <a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
  <img src="https://img.shields.io/npm/v/@dvgis/dc-sdk?color=orange&logo=npm" />
@@ -23,6 +23,13 @@
 
 ```warning
 Tips：本框架是 JS+GIS 的框架包。开发者需要有一定的前端技术和 GIS 相关技术
+```
+
+## 运行示例
+
+```shell
+  yarn run build
+  yarn run server
 ```
 
 ## 安装

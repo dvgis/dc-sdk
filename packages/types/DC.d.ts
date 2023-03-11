@@ -659,9 +659,7 @@ declare module 'dc' {
 
     setProperties(properties: JSON): Tileset
 
-    setCustomShader(fragmentShader: String): Tileset
-
-    replaceFS(fragmentShader: String): Tileset
+    setCustomShader(CustomShader: Object): Tileset
 
     setSplitDirection(splitDirection: Number): Tileset
   }
