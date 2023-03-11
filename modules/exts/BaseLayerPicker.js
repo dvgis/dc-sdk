@@ -64,10 +64,10 @@ class BaseLayerPicker {
   addImageryProvider(provider) {
     let providers = []
     let len = this._imageryProviders.length + 1
-    if (!Array.isArray(provider)) {
-      providers = [provider]
+    if (Array.isArray(provider)) {
+      providers = provider.slice(0)
     } else {
-      providers = provider.since(0)
+      providers = [provider]
     }
     this._imageryProviders.push({
       id: `dc-imagery-${len}`,
