@@ -16,19 +16,20 @@
 </p>
 
 
-## Run examples
-
-```shell
-  yarn run build
-  yarn run server
-```
-
 [**🇨🇳 中文**](./README_zh.md) | [**🇬🇧English**](./README.md)
 
 `DC-SDK` is based on the open source project `Cesium` for the second development of two three-dimensional `WebGis` application framework , the framework optimizes the use of `Cesium` and adds some additional features , designed for developers to quickly build `WebGis` application.
 
 ```warning
 Tips：This SDK is JS+GIS framework package. Developers need to have some front-end technology and GIS related technology
+```
+
+
+## Run examples
+
+```shell
+  yarn run build
+  yarn run server
 ```
 
 ## Installation
