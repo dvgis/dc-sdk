@@ -29,7 +29,7 @@
     "dev:all": "yarn run dev:base && yarn run dev:core && yarn run dev:chart && yarn run dev:mapv && yarn run dev:s3m",
     "build:all": "yarn run build:base && yarn run build:core && yarn run build:chart && yarn run build:mapv && yarn run build:s3m",
     "dev:base": "yarn run clean:base && webpack --config build/webpack.base.conf --mode development",
-    "build:base": "yarn run clean:base && webpack --config build/webpack.base.conf --mode production --env.production",
+    "build:base": " yarn run clean:base && webpack --config build/webpack.base.conf --mode production --env.production",
     "dev:core": "yarn run clean:core && webpack --config build/webpack.core.conf --mode development",
     "build:core": "yarn run clean:core && webpack --config build/webpack.core.conf --mode production --env.production",
     "dev:chart": "yarn run clean:chart && webpack --config build/webpack.chart.conf --mode development",
