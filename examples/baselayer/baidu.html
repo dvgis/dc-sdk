@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.base.min.js'></script>
+  <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
+  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body,#viewer-container{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+<div id="viewer-container"></div>
+<script>
+  let viewer = undefined
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container')
+
+    let baselayer_img = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style:'img'
+    })
+
+    let baselayer_vec = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style:'vec'
+    })
+
+    viewer.addBaseLayer([baselayer_img,baselayer_vec], {
+      iconUrl: '../assets/icon/img.png',
+      name: '影像'
+    })
+
+
+    let baselayer = DC.ImageryLayerFactory.createBaiduImageryLayer()
+    let baselayer_traffic = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style:'traffic'
+    })
+    viewer.addBaseLayer([baselayer,baselayer_traffic], {
+      iconUrl: '../assets/icon/elec.png',
+      name: '电子'
+    })
+
+    let baselayer_dark = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style: 'dark'
+    })
+    viewer.addBaseLayer(baselayer_dark, {
+      iconUrl: '../assets/icon/dark.png',
+      name: '黑夜'
+    })
+
+    let baselayer_googlelite = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style: 'googlelite'
+    })
+    viewer.addBaseLayer(baselayer_googlelite, {
+      iconUrl: '../assets/icon/elec.png',
+      name: '精简'
+    })
+
+    let baselayer_midnight = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style: 'midnight'
+    })
+    viewer.addBaseLayer(baselayer_midnight, {
+      iconUrl: '../assets/icon/midnight.png',
+      name: '午夜蓝'
+    })
+
+    let baselayer_redalert = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style: 'redalert'
+    })
+
+    viewer.addBaseLayer(baselayer_redalert, {
+      iconUrl: '../assets/icon/redalert.png',
+      name: '红色警戒'
+    })
+
+    viewer.zoomToPosition(
+      new DC.Position(105.565571, 31.984708, 15362816, 0, -90)
+    )
+  }
+  DC.ready(initViewer)
+</script>
+</body>
+</html>

@@ -19,5 +19,5 @@ void main(){
   float v=1.-sin(hash(floor(uv.x*100.))*2.);
   float b=clamp(abs(sin(20.*time*v+uv.y*(5./(2.+v))))-.95,0.,1.)*10.;
   c*=v*b;
-  gl_FragColor = mix(texture2D(colorTexture, v_textureCoordinates), vec4(c,1), mixNum);
+  gl_FragColor = mix(texture(colorTexture, v_textureCoordinates), vec4(c,1), mixNum);
 }

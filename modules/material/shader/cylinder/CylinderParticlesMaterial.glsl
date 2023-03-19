@@ -5,7 +5,7 @@ czm_material czm_getMaterial(czm_materialInput materialInput){
   vec2 st = materialInput.st;
   float time = fract(czm_frameNumber / 90.) ;
   vec2 new_st = fract(st- vec2(time,time));
-  vec4 colorImage = texture2D(image, new_st);
+  vec4 colorImage = texture(image, new_st);
   vec3 diffuse = colorImage.rgb;
   float alpha = colorImage.a;
   diffuse *= color.rgb;

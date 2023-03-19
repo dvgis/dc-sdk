@@ -5,7 +5,7 @@ uniform vec4 fogColor;
 varying vec2 v_textureCoordinates;
 
 float getDistance(sampler2D depthTexture, vec2 texCoords){
-  float depth = czm_unpackDepth(texture2D(depthTexture, texCoords));
+  float depth = czm_unpackDepth(texture(depthTexture, texCoords));
   if (depth == 0.0) {
     return czm_infinity;
   }
@@ -29,7 +29,7 @@ vec4 alphaBlend(vec4 sourceColor, vec4 destinationColor){
 
 void main(void){
   float distance = getDistance(depthTexture, v_textureCoordinates);
-  vec4 sceneColor = texture2D(colorTexture, v_textureCoordinates);
+  vec4 sceneColor = texture(colorTexture, v_textureCoordinates);
   float blendAmount = interpolateByDistance(fogByDistance, distance);
   vec4 finalFogColor = vec4(fogColor.rgb, fogColor.a * blendAmount);
   gl_FragColor = alphaBlend(finalFogColor, sceneColor);

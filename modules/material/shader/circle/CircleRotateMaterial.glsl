@@ -8,7 +8,7 @@ czm_material czm_getMaterial(czm_materialInput materialInput){
   float sin_t = sin(time);
   float cos_t = cos(time);
   vec2 center_rotate = vec2(center.s * cos_t - center.t * sin_t + 0.5,center.s * sin_t + center.t * cos_t + 0.5);
-  vec4 colorImage = texture2D(image,center_rotate);
+  vec4 colorImage = texture(image,center_rotate);
   vec3 temp = colorImage.rgb * color.rgb;
   temp *= color.a;
   material.diffuse = temp;

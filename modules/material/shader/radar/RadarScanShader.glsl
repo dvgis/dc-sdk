@@ -8,7 +8,7 @@ uniform float radius;
 uniform vec4 color;
 
 float getDepth(){
-  float z_window = czm_unpackDepth(texture2D(depthTexture, v_textureCoordinates));
+  float z_window = czm_unpackDepth(texture(depthTexture, v_textureCoordinates));
   z_window = czm_reverseLogDepth(z_window);
   float n_range = czm_depthRange.near;
   float f_range = czm_depthRange.far;
@@ -46,7 +46,7 @@ float distancePointToLine(in vec3 ptOnLine, in vec3 lineNormal, in vec3 testPt)
 }
 
 void main() {
-  gl_FragColor = texture2D(colorTexture, v_textureCoordinates);
+  gl_FragColor = texture(colorTexture, v_textureCoordinates);
   float depth = getDepth();
   vec4 viewPos = toEye(v_textureCoordinates, depth);
   vec4 centerEC = czm_view * vec4(centerWC,1);

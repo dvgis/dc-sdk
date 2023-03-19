@@ -1,0 +1,39 @@
+<div id="viewer-container"></div>
+<script>
+  let viewer = undefined
+
+  function loadChinaLine(){
+    let layer_china  = new DC.VectorLayer('layer-china')
+    let chainData = new DC.GeoJsonLayer('china','examples/data/china.geojson')
+    let now = DC.JulianDate.now()
+    chainData.eachOverlay(entity => {
+      if(entity.polygon){
+        let positions = DC.Transform.transformCartesianArrayToWGS84Array(
+          entity.polygon.hierarchy.getValue(now).positions
+        )
+        let polyline = new DC.Polyline(positions)
+        polyline.setStyle({
+          material:new DC.PolylineFlickerMaterialProperty({
+            speed:10 * Math.random()
+          })
+        })
+        layer_china.addOverlay(polyline)
+      }
+    })
+    viewer.addLayer(layer_china)
+  }
+
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container')
+    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+      style: 'img'
+    })
+    baselayer.defaultBrightness = 0.05
+    viewer.addBaseLayer(baselayer)
+    viewer.flyToPosition("112.25902819,29.43306223,8813200.25,355,-89.5",()=>{
+      loadChinaLine()
+    })
+  }
+
+  DC.ready(initViewer)
+</script>

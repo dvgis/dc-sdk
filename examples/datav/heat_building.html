@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.base.min.js'></script>
+  <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
+  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body,#viewer-container{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="viewer-container"></div>
+<script>
+  let viewer = undefined
+
+  function generatePosition(num) {
+    let list = []
+    for (let i = 0; i < num; i++) {
+      let lng = 121.48339987478337 + Math.random() * 0.05
+      let lat = 31.220954026657488 + Math.random() * 0.05
+      list.push(new DC.Position(lng, lat))
+    }
+    return list
+  }
+
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container')
+    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer()
+    baselayer.defaultBrightness= 0.2
+    viewer.addBaseLayer(baselayer)
+    let buildingLayer = new DC.TilesetLayer('building-layer').addTo(viewer)
+    let tileset = new DC.Tileset(
+      '//resource.dvgis.cn/data/3dtiles/ljz/tileset.json'
+    )
+    buildingLayer.addOverlay(tileset)
+    let layer = new DC.HeatLayer('layer',{
+      useGround: true
+    })
+    viewer.addLayer(layer)
+    layer.setPositions(generatePosition(10000))
+    viewer.flyToPosition("121.45765915248303,31.202070402003816,2301.94,44.95,-23.06")
+  }
+  DC.ready(initViewer)
+</script>
+</body>
+</html>

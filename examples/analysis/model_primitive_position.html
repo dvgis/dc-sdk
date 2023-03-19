@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.base.min.js'></script>
+  <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
+  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body,#viewer-container{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="viewer-container"></div>
+<div class="btn-box">
+  <ul>
+    <li><button onclick="translation()">移动</button></li>
+    <li><button onclick="rotation()">旋转</button></li>
+    <li><button onclick="stop()">结束</button></li>
+    <li><button onclick="locate()">定位</button></li>
+  </ul>
+</div>
+<script>
+  let viewer = undefined
+  let positionEditor = undefined
+
+  function translation(){
+    positionEditor.activate(DC.PositionEditorType.TRANSLATION,e=>{})
+  }
+
+  function rotation(){
+    positionEditor.activate(DC.PositionEditorType.ROTATION,e=>{})
+  }
+
+  function  stop(){
+    positionEditor.deactivate()
+  }
+
+
+  function locate(){
+    viewer.flyToPosition("121.46739860539422,31.222994902679385,32,10,-33")
+  }
+
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container')
+    let baselayer = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style: 'dark',
+      crs:"WGS84"
+    })
+    viewer.addBaseLayer(baselayer)
+
+    let layer = new DC.PrimitiveLayer("layer").addTo(viewer)
+    let model = new DC.ModelPrimitive("121.46748793889597,31.22345700031846","examples/data/model/GroundVehicle.glb")
+    layer.addOverlay(model)
+    positionEditor = new DC.PositionEditor(viewer)
+    positionEditor.overlay = model
+    viewer.flyToPosition("121.46739860539422,31.222994902679385,32,10,-33")
+  }
+  DC.ready(initViewer)
+</script>
+</body>
+</html>

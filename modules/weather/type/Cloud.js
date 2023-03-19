@@ -86,7 +86,7 @@ class Cloud {
             },
             components: {
               alpha:
-                'texture2D(image, fract(repeat * materialInput.st)).r * color.a',
+                'texture(image, fract(repeat * materialInput.st)).r * color.a',
               diffuse: 'vec3(1.0)'
             }
           }

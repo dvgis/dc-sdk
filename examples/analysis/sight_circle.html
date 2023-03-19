@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.base.min.js'></script>
+  <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
+  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body,#viewer-container{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="viewer-container"></div>
+<div class="btn-box">
+  <ul>
+    <li><button onclick="draw()">标绘</button></li>
+    <li><button onclick="removeAll()">清除</button></li>
+    <li><button onclick="gotoTerrain()">定位山区</button></li>
+    <li><button onclick="gotoModel()">定位模型</button></li>
+  </ul>
+</div>
+<script>
+  let viewer = undefined
+  let plot = undefined
+  let tileset = undefined
+
+  function draw(){
+    viewer.analysis.deactivate(DC.AnalysisType.SIGHT_CIRCLE)
+    plot.draw(DC.OverlayType.CIRCLE,overlay => {
+        viewer.analysis.sightCircle(overlay.center,overlay.radius,[])
+    })
+  }
+
+  function removeAll(){
+    viewer.analysis.deactivate(DC.AnalysisType.SIGHT_CIRCLE)
+  }
+
+  function gotoTerrain(){
+    removeAll()
+    viewer.flyToPosition("102.72499624,30.46623447,13002.32,13.57,-21.91")
+  }
+
+  function gotoModel(){
+    removeAll()
+    viewer.flyTo(tileset)
+  }
+
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container')
+    viewer.setOptions({enableFxaa:true})
+    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+      style:"img",
+      crs:"WGS84"
+    })
+    viewer.addBaseLayer(baselayer)
+    let terrain = DC.TerrainFactory.createArcgisTerrain({
+      url:
+        'https://elevation3d.arcgis.com/arcgis/rest/services/WorldElevation3D/Terrain3D/ImageServer'
+    })
+    viewer.addTerrain(terrain)
+    let tilsetLayer = new DC.TilesetLayer('layer').addTo(viewer)
+    tileset = new DC.Tileset(
+      '//resource.dvgis.cn/data/3dtiles/dayanta/tileset.json'
+    )
+    tileset.setHeight(10)
+    tilsetLayer.addOverlay(tileset)
+    plot = new DC.Plot(viewer,{
+      clampToGround: false
+    })
+    viewer.use(new DC.Analysis())
+    viewer.flyToPosition("102.72499624,30.46623447,13002.32,13.57,-21.91")
+  }
+
+  DC.ready(initViewer)
+</script>
+</body>
+</html>

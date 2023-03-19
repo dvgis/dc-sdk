@@ -180,7 +180,7 @@ class HeatLayer extends Layer {
              czm_material czm_getMaterial(czm_materialInput materialInput){
                czm_material material = czm_getDefaultMaterial(materialInput);
                vec2 st = materialInput.st;
-               vec4 colorImage = texture2D(image,st);
+               vec4 colorImage = texture(image,st);
                if(colorImage.rgb == vec3(1.0) || colorImage.rgb == vec3(0.0)){
                   discard;
                }

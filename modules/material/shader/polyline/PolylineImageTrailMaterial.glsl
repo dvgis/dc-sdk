@@ -7,7 +7,7 @@ czm_material czm_getMaterial(czm_materialInput materialInput){
    czm_material material = czm_getDefaultMaterial(materialInput);
    vec2 st = repeat * materialInput.st;
    float time = fract(czm_frameNumber * speed / 1000.0);
-   vec4 colorImage = texture2D(image, vec2(fract(st.s - time), st.t));
+   vec4 colorImage = texture(image, vec2(fract(st.s - time), st.t));
    if(color.a == 0.0){
      if(colorImage.rgb == vec3(1.0) || colorImage.rgb == vec3(0.0)){
        discard;

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.base.min.js'></script>
+  <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body,#viewer-container{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="viewer-container"></div>
+<script>
+  let viewer = undefined
+
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container',{
+      contextOptions: {
+        requestWebgl2: true,
+      },
+    })
+    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+      style: 'img'
+    })
+    viewer.addBaseLayer(baselayer)
+    let layer = new DC.TilesetLayer('layer')
+    viewer.addLayer(layer)
+    let tileset = new DC.Tileset(
+      '//resource.dvgis.cn/data/3dtiles/dayanta/tileset.json'
+    )
+    tileset.setHeight(-420)
+    layer.addOverlay(tileset)
+    viewer.flyTo(tileset)
+    addGuiController() // add controller
+  }
+
+  function addGuiController(){
+    let controls = {
+      enableFxaa:false,
+      showSkyBox:true,
+      showSun:true,
+      showMoon:true,
+      msaa:1,
+    }
+    let gui = new dat.GUI()
+    gui.add(controls,'enableFxaa').onChange(value=>{
+      viewer.setOptions({
+        enableFxaa:value
+      })
+    })
+
+    gui.add(controls,'showSkyBox').onChange(value=>{
+      viewer.setOptions({
+       skyBox:{
+         show:value
+       }
+      })
+    })
+
+    gui.add(controls,'showSun').onChange(value=>{
+      viewer.setOptions({
+        showSun:value
+      })
+    })
+
+    gui.add(controls,'showMoon').onChange(value=>{
+      viewer.setOptions({
+        showMoon:value
+      })
+    })
+
+    gui.add(controls,'msaa',{'off':1,'2x':2,'4x':4,'8x':8}).onChange(value=>{
+      viewer.setOptions({
+        msaaSamples:value
+      })
+    })
+  }
+  DC.ready(initViewer)
+</script>
+</body>
+</html>

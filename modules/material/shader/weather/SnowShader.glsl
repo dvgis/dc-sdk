@@ -29,5 +29,5 @@ void main(){
   c+=snow(uv,6.);
   c+=snow(uv,5.);
   finalColor=(vec3(c));
-  gl_FragColor = mix(texture2D(colorTexture, v_textureCoordinates), vec4(finalColor,1), 0.3);
+  gl_FragColor = mix(texture(colorTexture, v_textureCoordinates), vec4(finalColor,1), 0.3);
 }
