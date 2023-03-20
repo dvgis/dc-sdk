@@ -1,5 +1,5 @@
+in vec2 v_textureCoordinates;
 uniform sampler2D colorTexture;
-varying vec2 v_textureCoordinates;
 uniform float speed;
 
 float snow(vec2 uv,float scale){
@@ -29,5 +29,5 @@ void main(){
   c+=snow(uv,6.);
   c+=snow(uv,5.);
   finalColor=(vec3(c));
-  gl_FragColor = mix(texture(colorTexture, v_textureCoordinates), vec4(finalColor,1), 0.3);
+  out_FragColor = mix(texture(colorTexture, v_textureCoordinates), vec4(finalColor,1), 0.3);
 }
