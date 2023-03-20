@@ -1,6 +1,6 @@
+in vec2 v_textureCoordinates;
 uniform sampler2D colorTexture;
 uniform sampler2D depthTexture;
-varying vec2 v_textureCoordinates;
 uniform vec3 centerWC;
 uniform vec3 planeNormalWC;
 uniform vec3 lineNormalWC;
@@ -46,7 +46,7 @@ float distancePointToLine(in vec3 ptOnLine, in vec3 lineNormal, in vec3 testPt)
 }
 
 void main() {
-  gl_FragColor = texture(colorTexture, v_textureCoordinates);
+  out_FragColor = texture(colorTexture, v_textureCoordinates);
   float depth = getDepth();
   vec4 viewPos = toEye(v_textureCoordinates, depth);
   vec4 centerEC = czm_view * vec4(centerWC,1);
@@ -65,6 +65,6 @@ void main() {
       f = abs(diameter - dis1) / diameter;
       f = pow(f, 3.0);
     }
-    gl_FragColor = mix(gl_FragColor, color, f + f0);
+    out_FragColor = mix(out_FragColor, color, f + f0);
   }
 }

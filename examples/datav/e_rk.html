@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
+  <script src='http://dc.dvgis.cn/libs/echarts/echarts.min.js'></script>
   <script src='/libs/dc-sdk/dc.base.min.js'></script>
   <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script src='/libs/dc-sdk/dc.chart.min.js'></script>
   <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
   <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
@@ -30,18 +33,13 @@
   let viewer = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer_midnight = DC.ImageryLayerFactory.createBaiduImageryLayer({
-      style: 'dark'
-    })
-    viewer.addBaseLayer(baselayer_midnight, {
-      iconUrl: '../assets/icon/midnight.png',
-      name: '午夜蓝'
-    })
-
-    let chartLayer = new DC.ChartLayer('layer').addTo(viewer)
+    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer()
+    baselayer.defaultBrightness =  0.1
+    viewer.addBaseLayer(baselayer)
     viewer.flyToPosition(
       new DC.Position(108.198353, 20.758452, 10733735.96, 0, -90, 0),
       () => {
+        let chartLayer = new DC.ChartLayer('layer').addTo(viewer)
         chartLayer.setOption(getOption())
       }
     )

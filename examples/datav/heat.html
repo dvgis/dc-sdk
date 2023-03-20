@@ -44,10 +44,12 @@
     let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer()
     baselayer.defaultBrightness= 0.2
     viewer.addBaseLayer(baselayer)
-    let layer = new DC.HeatLayer('layer')
-    viewer.addLayer(layer)
-    let positions = generatePosition(1000)
-    layer.setPositions(positions)
+    setTimeout(()=>{
+      let layer = new DC.HeatLayer('layer')
+      viewer.addLayer(layer)
+      let positions = generatePosition(1000)
+      layer.setPositions(positions)
+    })
     viewer.flyToPosition("120.670183527,31.348282115,109658.22,0,-89.90659095062371")
   }
   DC.ready(initViewer)

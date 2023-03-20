@@ -7,6 +7,7 @@
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.base.min.js'></script>
   <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script src='/libs/dc-sdk/dc.mapv.min.js'></script>
   <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
   <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
@@ -202,11 +203,12 @@
       },
       draw: 'grid'
     }
-    let layer = new DC.MapvLayer('layer', options)
-    viewer.addLayer(layer)
+
     viewer.flyToPosition(
       new DC.Position(108.198353, 20.758452, 10733735.96, 0, -90, 0),
       () => {
+        let layer = new DC.MapvLayer('layer', options)
+        viewer.addLayer(layer)
         layer.setDataSet(dataset)
       }
     )

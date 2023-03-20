@@ -31,18 +31,22 @@
 <script>
   let viewer = undefined
   function initViewer() {
-    viewer = new DC.Viewer('viewer-container')
-    viewer.scene.canvas.setAttribute('tabIndex', 0)
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style:'img'
+    viewer = new DC.Viewer('viewer-container',{
+      contextOptions: {
+        requestWebgl1: true,
+      },
     })
-    baselayer.defaultBrightness=0.2
+
+    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer()
+    baselayer.defaultBrightness =  0.1
     viewer.addBaseLayer(baselayer)
-    let chartLayer = new DC.ChartLayer('layer').addTo(viewer)
+    viewer.scene.canvas.setAttribute('tabIndex', 0)
     viewer.flyToPosition(
       new DC.Position(108.198353, 20.758452, 10733735.96, 0, -90, 0),
       () => {
+        let chartLayer = new DC.ChartLayer('layer')
         chartLayer.setOption(getOption())
+        viewer.addLayer(chartLayer)
       }
     )
   }

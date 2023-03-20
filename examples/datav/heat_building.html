@@ -49,11 +49,15 @@
       '//resource.dvgis.cn/data/3dtiles/ljz/tileset.json'
     )
     buildingLayer.addOverlay(tileset)
-    let layer = new DC.HeatLayer('layer',{
-      useGround: true
+
+    setTimeout(()=>{
+      let layer = new DC.HeatLayer('layer',{
+        useGround: true
+      })
+      viewer.addLayer(layer)
+      layer.setPositions(generatePosition(10000))
     })
-    viewer.addLayer(layer)
-    layer.setPositions(generatePosition(10000))
+
     viewer.flyToPosition("121.45765915248303,31.202070402003816,2301.94,44.95,-23.06")
   }
   DC.ready(initViewer)
