@@ -83,7 +83,7 @@
     "webpack-obfuscator": "^1.8.0"
   },
   "dependencies": {
-    "@cesium/engine": "^2.1.0",
+    "@cesium/engine": "^2.2.0",
     "@turf/turf": "^6.3.0"
   }
 }
