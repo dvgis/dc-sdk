@@ -11,7 +11,7 @@ const DEF_OPTS = {
   radialColor: Cesium.Color.WHITE,
   radialWidth: 2,
   showRadial: true,
-  LableColor: Cesium.Color.YELLOW,
+  LabelColor: Cesium.Color.YELLOW,
   weftColor: Cesium.Color.WHITE,
   weftWidth: 2
 }
@@ -52,7 +52,7 @@ class GraticuleLayer extends Layer {
         label: {
           text: i * 10 + '°',
           font: '12px',
-          fillColor: this._options.LableColor
+          fillColor: this._options.LabelColor
         }
       })
     }
