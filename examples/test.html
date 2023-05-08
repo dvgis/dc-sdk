@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>demo</title>
+    <script src='/libs/dc-sdk/dc.min.js'></script>
+    <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        html,body,#map-container{
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+<div id="map-container">
+</div>
+</body>
+<script>
+    DC.ready().then(()=>{
+        new DC.Viewer('map-container')
+    })
+</script>

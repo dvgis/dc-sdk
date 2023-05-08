@@ -1,6 +1,6 @@
 {
   "root": true,
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "parserOptions": {
     "sourceType": "module"
   },
@@ -12,16 +12,12 @@
   "plugins": ["prettier"],
   "extends": ["eslint:recommended", "plugin:prettier/recommended"],
   "globals": {
-    "__VERSION__": false,
-    "__TIME__": false,
-    "__AUTHOR__": false,
-    "__HOME_PAGE__": false,
-    "__REPOSITORY__": false,
+    "__namespace": false,
+    "__cmdOut":false,
     "echarts": false,
     "mapv": false,
     "DC": false,
-    "Cesium": false,
-    "@dc-modules": false
+    "Cesium": false
   },
   "rules": {
     "global-require": 0,
