@@ -10,7 +10,7 @@ console.clear()
 console.log(
   `%c \n DC-SDK \n  %c \n 用数字描绘世界之美  %c \n
     版本:${__VERSION__} - ${__TIME__}
-    Cesium Engine 版本：2.10.0
+    Cesium Engine 版本：2.2.0
     开发作者:${__AUTHOR__}
     网站主页: ${__HOME_PAGE__}
     github:${__REPOSITORY__}
