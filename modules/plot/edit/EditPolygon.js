@@ -21,7 +21,9 @@ class EditPolygon extends Edit {
   _mountedHook() {
     this._delegate.polygon.hierarchy = new Cesium.CallbackProperty(time => {
       if (this._positions.length > 2) {
-        return new Cesium.PolygonHierarchy(this._positions)
+        return new Cesium.PolygonHierarchy(
+          this._positions.map(item => item.clone())
+        )
       } else {
         return null
       }
