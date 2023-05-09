@@ -17,7 +17,7 @@ import { Util, DomUtil } from '../utils'
 import { Transform } from '../transform'
 import createWidgets from '../widget'
 import createTools from '../tools'
-import { CesiumViewer } from '../exts'
+import { BaseLayerPicker, CesiumViewer } from '../exts'
 
 const DEF_OPTS = {
   creditContainer: undefined,
@@ -51,7 +51,7 @@ class Viewer {
       typeof id === 'string' ? document.getElementById(id) : id
     ) //Register the custom container
 
-    this._baseLayerPicker = new Cesium.BaseLayerPicker({
+    this._baseLayerPicker = new BaseLayerPicker({
       globe: this._delegate.scene.globe,
     }) //Initialize the baseLayer picker
 
@@ -179,6 +179,7 @@ class Viewer {
   _addLayerGroup(layerGroup) {
     if (
       layerGroup?.layerGroupEvent &&
+      // eslint-disable-next-line no-prototype-builtins
       !Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
     ) {
       layerGroup.layerGroupEvent.fire(LayerGroupEventType.ADD, this)
@@ -194,6 +195,7 @@ class Viewer {
   _removeLayerGroup(layerGroup) {
     if (
       layerGroup?.layerGroupEvent &&
+      // eslint-disable-next-line no-prototype-builtins
       Object(this._layerGroupCache).hasOwnProperty(layerGroup.id)
     ) {
       layerGroup.layerGroupEvent.fire(LayerGroupEventType.REMOVE, this)
@@ -207,6 +209,7 @@ class Viewer {
    */
   _addLayer(layer) {
     !this._layerCache[layer.type] && (this._layerCache[layer.type] = {})
+    // eslint-disable-next-line no-prototype-builtins
     if (!Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
       layer.fire(LayerEventType.ADD, this)
       this._layerCache[layer.type][layer.id] = layer
@@ -218,6 +221,7 @@ class Viewer {
    * @private
    */
   _removeLayer(layer) {
+    // eslint-disable-next-line no-prototype-builtins
     if (Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)) {
       layer.fire(LayerEventType.REMOVE, this)
       delete this._layerCache[layer.type][layer.id]
@@ -417,6 +421,7 @@ class Viewer {
    * @returns {boolean}
    */
   hasLayer(layer) {
+    // eslint-disable-next-line no-prototype-builtins
     return Object(this._layerCache[layer.type]).hasOwnProperty(layer.id)
   }
 
