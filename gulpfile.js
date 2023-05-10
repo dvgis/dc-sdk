@@ -19,6 +19,8 @@ import javascriptObfuscator from 'gulp-javascript-obfuscator'
 import { babel } from '@rollup/plugin-babel'
 import startServer from './server.js'
 import { uglify } from 'rollup-plugin-uglify'
+import inlineImage from 'esbuild-plugin-inline-image'
+import { glsl } from "esbuild-plugin-glsl";
 
 const obfuscatorConfig = {
   compact: true, //压缩代码
@@ -158,6 +160,7 @@ async function buildModules(options) {
       ...buildConfig,
       format: 'iife',
       globalName: 'DC',
+      plugins: [inlineImage({limit: -1 }),glsl()],
       outfile: path.join('dist', 'modules.js'),
     })
   }
@@ -183,6 +186,7 @@ async function buildModules(options) {
       define: {
         TransformStream: 'null',
       },
+      plugins: [inlineImage({limit: -1 }),glsl()],
       outfile: path.join('dist', 'modules.cjs'),
     })
   }
