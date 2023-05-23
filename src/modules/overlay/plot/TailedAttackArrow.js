@@ -3,12 +3,12 @@
  * @Date: 2020-08-29 22:51:36
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { PlotUtil } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { PlotUtil } from '../../utils'
 import AttackArrow from './AttackArrow'
 
 class TailedAttackArrow extends AttackArrow {
@@ -32,7 +32,6 @@ class TailedAttackArrow extends AttackArrow {
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
     this._delegate.polygon.hierarchy = this._getHierarchy()
-    return this
   }
 
   get positions() {
@@ -81,7 +80,7 @@ class TailedAttackArrow extends AttackArrow {
         Parse.parsePositions(
           leftPnts.concat(headPnts, rightPnts.reverse(), [
             swallowTailPnt,
-            leftPnts[0]
+            leftPnts[0],
           ])
         )
       )

@@ -3,7 +3,7 @@
  * @Date: 2020-08-30 23:46:07
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../namespace'
 import Edit from './Edit'
 import TailedAttackArrowGraphics from '../graphics/TailedAttackArrowGraphics'
 

@@ -3,11 +3,11 @@
  * @Date: 2020-05-06 13:25:36
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Icons from '@dc-modules/icons'
-import { DomUtil } from '@dc-modules/utils'
+import { Cesium } from '../../../namespace'
 import Widget from '../Widget'
+import State from '../../state/State'
+import Icons from '../../icons'
+import { DomUtil } from '../../utils'
 
 class ZoomController extends Widget {
   constructor() {
@@ -101,10 +101,10 @@ class ZoomController extends Widget {
         orientation: {
           heading: camera.heading,
           pitch: camera.pitch,
-          roll: camera.roll
+          roll: camera.roll,
         },
         duration: 0.5,
-        convert: false
+        convert: false,
       })
     }
   }
@@ -142,10 +142,10 @@ class ZoomController extends Widget {
         orientation: {
           heading: camera.heading,
           pitch: camera.pitch,
-          roll: camera.roll
+          roll: camera.roll,
         },
         duration: 0.5,
-        convert: false
+        convert: false,
       })
     }
   }
@@ -157,7 +157,7 @@ class ZoomController extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'zoomController', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 

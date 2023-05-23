@@ -3,19 +3,19 @@
  * @Date: 2021-06-03 21:16:27
  */
 
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
-import { center, distance } from '@dc-modules/math'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
+import { center, distance } from '../../math'
 
 class PolylinePrimitive extends Overlay {
   constructor(positions) {
     super()
     this._positions = Parse.parsePositions(positions)
     this._delegate = {
-      positions: []
+      positions: [],
     }
     this._state = State.INITIALIZED
   }
@@ -29,7 +29,6 @@ class PolylinePrimitive extends Overlay {
     this._delegate.positions = Transform.transformWGS84ArrayToCartesianArray(
       this._positions
     )
-    return this
   }
 
   get positions() {

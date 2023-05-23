@@ -3,12 +3,12 @@
  * @Date: 2020-01-06 20:03:25
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class Model extends Overlay {
   constructor(position, modelUrl) {
@@ -39,7 +39,6 @@ class Model extends Overlay {
         )
       )
     }
-    return this
   }
 
   get position() {
@@ -49,7 +48,6 @@ class Model extends Overlay {
   set modelUrl(modelUrl) {
     this._modelUrl = modelUrl
     this._delegate.model.uri = this._modelUrl
-    return this
   }
 
   get modelUrl() {
@@ -72,7 +70,6 @@ class Model extends Overlay {
         )
       )
     }, false)
-    return this
   }
 
   get rotateAmount() {
@@ -118,7 +115,7 @@ class Model extends Overlay {
     )
     let model = new Model(position, modelUrl)
     model.attr = {
-      ...entity.properties.getValue(now)
+      ...entity.properties.getValue(now),
     }
     return model
   }

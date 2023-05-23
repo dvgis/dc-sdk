@@ -3,12 +3,12 @@
  * @Date: 2020-04-11 18:58:17
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
 
 class Corridor extends Overlay {
   constructor(positions) {
@@ -24,9 +24,8 @@ class Corridor extends Overlay {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    this._delegate.corridor.positions = Transform.transformWGS84ArrayToCartesianArray(
-      this._positions
-    )
+    this._delegate.corridor.positions =
+      Transform.transformWGS84ArrayToCartesianArray(this._positions)
     return this
   }
 
@@ -79,7 +78,7 @@ class Corridor extends Overlay {
       )
       corridor = new Corridor(positions)
       corridor.attr = {
-        ...entity?.properties?.getValue(now)
+        ...entity?.properties?.getValue(now),
       }
     }
     return corridor

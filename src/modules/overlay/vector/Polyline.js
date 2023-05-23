@@ -3,13 +3,13 @@
  * @Date: 2020-01-06 15:03:25
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
-import { center, distance } from '@dc-modules/math'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
+import { center, distance } from '../../math'
 
 class Polyline extends Overlay {
   constructor(positions) {
@@ -25,9 +25,8 @@ class Polyline extends Overlay {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    this._delegate.polyline.positions = Transform.transformWGS84ArrayToCartesianArray(
-      this._positions
-    )
+    this._delegate.polyline.positions =
+      Transform.transformWGS84ArrayToCartesianArray(this._positions)
     return this
   }
 
@@ -60,7 +59,7 @@ class Polyline extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(this.center)
     this._delegate.label = {
       text: text,
-      ...textStyle
+      ...textStyle,
     }
     return this
   }
@@ -94,7 +93,7 @@ class Polyline extends Overlay {
       )
       polyline = new Polyline(positions)
       polyline.attr = {
-        ...entity?.properties?.getValue(now)
+        ...entity?.properties?.getValue(now),
       }
     }
     return polyline

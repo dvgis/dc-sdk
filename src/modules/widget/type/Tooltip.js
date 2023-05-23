@@ -3,10 +3,9 @@
  * @Date: 2020-02-01 12:07:54
  */
 
-import State from '@dc-modules/state/State'
-import { DomUtil } from '@dc-modules/utils'
-
 import Widget from '../Widget'
+import State from '../../state/State'
+import { DomUtil } from '../../utils'
 
 class Tooltip extends Widget {
   constructor() {
@@ -27,7 +26,7 @@ class Tooltip extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'tooltip', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 

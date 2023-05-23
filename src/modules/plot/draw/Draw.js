@@ -2,8 +2,7 @@
  * @Author: Caven
  * @Date: 2020-01-31 19:45:32
  */
-
-import { PlotEventType } from '@dc-modules/event'
+import { PlotEventType } from '../../event'
 
 class Draw {
   constructor(style) {
@@ -31,7 +30,7 @@ class Draw {
    * Subclasses need to be overridden
    * @private
    */
-  _stopdHook() {}
+  _stoppedHook() {}
 
   /**
    *
@@ -58,7 +57,7 @@ class Draw {
     this._unbindEvent()
     this._viewer.drawTool.deactivate()
     this._delegate && this._layer.entities.remove(this._delegate)
-    this._stopdHook()
+    this._stoppedHook()
   }
 
   /**

@@ -3,16 +3,17 @@
  * @Date: 2020-08-30 17:22:21
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { Transform } from '@dc-modules/transform'
-import { PlotEventType } from '@dc-modules/event'
-import { GatheringPlace } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
 import Draw from './Draw'
+import { Transform } from '../../transform'
+import { PlotEventType } from '../../event'
+import { GatheringPlace } from '../../overlay'
+
 import GatheringPlaceGraphics from '../graphics/GatheringPlaceGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
-  fill: true
+  fill: true,
 }
 
 class DrawGatheringPlace extends Draw {
@@ -21,7 +22,7 @@ class DrawGatheringPlace extends Draw {
     this._maxAnchorSize = 3
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
     this._graphics = new GatheringPlaceGraphics()
   }
@@ -42,8 +43,8 @@ class DrawGatheringPlace extends Draw {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -52,7 +53,7 @@ class DrawGatheringPlace extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let gatheringPlace = null
     if (this._positions.length) {
       gatheringPlace = new GatheringPlace(

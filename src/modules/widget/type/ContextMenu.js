@@ -3,9 +3,9 @@
  * @Date: 2019-12-31 17:32:01
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { DomUtil } from '@dc-modules/utils'
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import { DomUtil } from '../../utils'
 import Widget from '../Widget'
 
 class ContextMenu extends Widget {
@@ -28,15 +28,15 @@ class ContextMenu extends Widget {
         callback: () => {
           this._viewer.camera.flyHome(1.5)
         },
-        context: this
+        context: this,
       },
       {
         label: '取消飞行',
         callback: () => {
           this._viewer.camera.cancelFlight()
         },
-        context: this
-      }
+        context: this,
+      },
     ]
     this._overlayMenu = []
     this._state = State.INITIALIZED
@@ -48,13 +48,11 @@ class ContextMenu extends Widget {
 
   set DEFAULT_MENU(menus) {
     this._defaultMenu = menus
-    return this
   }
 
   set config(config) {
     this._config = config
     config.customClass && this._setCustomClass()
-    return this
   }
 
   /**
@@ -64,7 +62,7 @@ class ContextMenu extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'contextMenu', {
       value: this,
-      writable: false
+      writable: false,
     })
     this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
   }
@@ -74,11 +72,11 @@ class ContextMenu extends Widget {
    * @private
    */
   _bindEvent() {
-    this._handler.setInputAction(movement => {
+    this._handler.setInputAction((movement) => {
       this._onRightClick(movement)
     }, Cesium.ScreenSpaceEventType.RIGHT_CLICK)
 
-    this._handler.setInputAction(movement => {
+    this._handler.setInputAction((movement) => {
       this._onClick(movement)
     }, Cesium.ScreenSpaceEventType.LEFT_CLICK)
   }
@@ -111,13 +109,13 @@ class ContextMenu extends Widget {
     }
     // Add menu item
     if (this._overlayMenu && this._overlayMenu.length) {
-      this._overlayMenu.forEach(item => {
+      this._overlayMenu.forEach((item) => {
         this._addMenuItem(item.label, item.callback, item.context || this)
       })
     }
 
     if (this._defaultMenu && this._defaultMenu.length) {
-      this._defaultMenu.forEach(item => {
+      this._defaultMenu.forEach((item) => {
         this._addMenuItem(item.label, item.callback, item.context || this)
       })
     }
@@ -146,7 +144,7 @@ class ContextMenu extends Widget {
         this._wgs84Position = {
           lng: Cesium.Math.toDegrees(c.longitude),
           lat: Cesium.Math.toDegrees(c.latitude),
-          alt: c.height
+          alt: c.height,
         }
       }
     }
@@ -169,7 +167,7 @@ class ContextMenu extends Widget {
         this._wgs84SurfacePosition = {
           lng: Cesium.Math.toDegrees(c.longitude),
           lat: Cesium.Math.toDegrees(c.latitude),
-          alt: c.height
+          alt: c.height,
         }
       }
     }
@@ -179,7 +177,7 @@ class ContextMenu extends Widget {
     if (target?.id instanceof Cesium.Entity) {
       let layer = this._viewer
         .getLayers()
-        .filter(item => item.layerId === target.id.layerId)[0]
+        .filter((item) => item.layerId === target.id.layerId)[0]
       if (layer && layer.getOverlay) {
         this._overlay = layer.getOverlay(target.id.overlayId)
       }
@@ -189,7 +187,7 @@ class ContextMenu extends Widget {
     else if (target instanceof Cesium.Cesium3DTileFeature) {
       let layer = this._viewer
         .getLayers()
-        .filter(item => item.layerId === target.tileset.layerId)[0]
+        .filter((item) => item.layerId === target.tileset.layerId)[0]
       if (layer && layer.getOverlay) {
         this._overlay = layer.getOverlay(target.tileset.overlayId)
       }
@@ -199,17 +197,17 @@ class ContextMenu extends Widget {
     else if (target?.primitive instanceof Cesium.Cesium3DTileset) {
       let layer = this._viewer
         .getLayers()
-        .filter(item => item.layerId === target.primitive.layerId)[0]
+        .filter((item) => item.layerId === target.primitive.layerId)[0]
       if (layer && layer.getOverlay) {
         this._overlay = layer.getOverlay(target.primitive.overlayId)
       }
     }
 
-    // for Primitve
+    // for Primitive
     else if (target?.primitive) {
       let layer = this._viewer
         .getLayers()
-        .filter(item => item.layerId === target.primitive.layerId)[0]
+        .filter((item) => item.layerId === target.primitive.layerId)[0]
       if (layer && layer.getOverlay) {
         this._overlay = layer.getOverlay(target.primitive.overlayId)
       }
@@ -281,7 +279,7 @@ class ContextMenu extends Widget {
           surfacePosition: self._surfacePosition,
           wgs84SurfacePosition: self._wgs84SurfacePosition,
           overlay: self._overlay,
-          instanceId: self._instanceId
+          instanceId: self._instanceId,
         })
         self.hide()
       }

@@ -3,15 +3,15 @@
  * @Date: 2020-08-29 20:54:37
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { Polyline } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { Polyline } from '../../overlay'
 import Draw from './Draw'
 
 const DEF_STYLE = {
   width: 3,
-  material: Cesium.Color.YELLOW.withAlpha(0.6)
+  material: Cesium.Color.YELLOW.withAlpha(0.6),
 }
 
 class DrawPolyline extends Draw {
@@ -19,7 +19,7 @@ class DrawPolyline extends Draw {
     super()
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
   }
 
@@ -34,8 +34,8 @@ class DrawPolyline extends Draw {
         ...this._style,
         positions: new Cesium.CallbackProperty(() => {
           return this._positions
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -44,7 +44,7 @@ class DrawPolyline extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let polyline = null
     if (this._positions.length) {
       polyline = new Polyline(

@@ -3,11 +3,10 @@
  * @Date: 2020-02-26 23:05:44
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { Util } from '@dc-modules/utils'
-
-const FogShader = require('@dc-modules/material/shader/weather/FogShader.glsl')
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import { Util } from '../../utils'
+import FogShader from '../../material/shader/weather/FogShader.glsl'
 
 class Fog {
   constructor() {
@@ -30,7 +29,6 @@ class Fog {
       this._createPostProcessStage()
     }
     this._delegate && (this._delegate.enabled = enable)
-    return this
   }
 
   get enable() {
@@ -46,7 +44,6 @@ class Fog {
         this._fogByDistance?.far || 2000,
         this._fogByDistance?.farValue || 1.0
       ))
-    return this
   }
 
   get fogByDistance() {
@@ -77,8 +74,8 @@ class Fog {
           this._fogByDistance?.far || 200,
           this._fogByDistance?.farValue || 1.0
         ),
-        fogColor: this._color
-      }
+        fogColor: this._color,
+      },
     })
     this._viewer.scene.postProcessStages.add(this._delegate)
   }

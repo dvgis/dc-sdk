@@ -3,7 +3,7 @@
  * @Date: 2022-05-28 21:36:23
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../namespace'
 
 const CylinderFadeMaterial = require('../shader/cylinder/CylinderFadeMaterial.glsl')
 const CylinderParticlesMaterial = require('../shader/cylinder/CylinderParticlesMaterial.glsl')
@@ -17,13 +17,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CylinderFadeType, {
   fabric: {
     type: Cesium.Material.CylinderFadeType,
     uniforms: {
-      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7)
+      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
     },
-    source: CylinderFadeMaterial
+    source: CylinderFadeMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -38,12 +38,12 @@ Cesium.Material._materialCache.addMaterial(
       type: Cesium.Material.CylinderParticlesType,
       uniforms: {
         color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-        image: Cesium.Material.DefaultImageId
+        image: Cesium.Material.DefaultImageId,
       },
-      source: CylinderParticlesMaterial
+      source: CylinderParticlesMaterial,
     },
-    translucent: function(material) {
+    translucent: function (material) {
       return true
-    }
+    },
   }
 )

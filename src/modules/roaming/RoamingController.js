@@ -3,8 +3,8 @@
  * @Date: 2021-06-08 20:41:51
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { SceneEventType, PathEventType } from '@dc-modules/event'
+import { Cesium } from '../../namespace'
+import { SceneEventType, PathEventType } from '../event'
 
 class RoamingController {
   constructor(viewer) {
@@ -26,7 +26,7 @@ class RoamingController {
     this._activedPath.pathEvent &&
       this._activedPath.pathEvent.fire(PathEventType.POST_RENDER, {
         viewer: this._viewer,
-        viewOption: this._viewOption
+        viewOption: this._viewOption,
       })
   }
 
@@ -50,7 +50,7 @@ class RoamingController {
    */
   addPaths(paths) {
     if (Array.isArray(paths)) {
-      paths.forEach(item => {
+      paths.forEach((item) => {
         this.addPath(item)
       })
     }
@@ -76,7 +76,7 @@ class RoamingController {
    * @returns {*|undefined}
    */
   getPath(id) {
-    let filters = this.getPaths().filter(item => item.id === id)
+    let filters = this.getPaths().filter((item) => item.id === id)
     return filters && filters.length ? filters[0] : undefined
   }
 
@@ -86,7 +86,7 @@ class RoamingController {
    */
   getPaths() {
     let result = []
-    Object.keys(this._cache).forEach(key => {
+    Object.keys(this._cache).forEach((key) => {
       result.push(this._cache[key])
     })
     return result

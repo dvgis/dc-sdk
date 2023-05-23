@@ -3,14 +3,14 @@
  * @Date: 2020-02-12 21:46:22
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { DomUtil, Util } from '@dc-modules/utils'
-import { MouseEventType } from '@dc-modules/event'
-import { isBetween } from '@dc-modules/math'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { isBetween } from '../../math'
+import { Util, DomUtil } from '../../utils'
+import { MouseEventType } from '../../event'
 
 class DivIcon extends Overlay {
   constructor(position, content) {
@@ -21,7 +21,7 @@ class DivIcon extends Overlay {
     Util.merge(this._delegate.style, {
       position: 'absolute',
       top: '0',
-      left: '0'
+      left: '0',
     })
     this.content = content
     this._state = State.INITIALIZED
@@ -34,7 +34,6 @@ class DivIcon extends Overlay {
   set show(show) {
     this._show = show
     this._delegate.style.visibility = this._show ? 'visible' : 'hidden'
-    return this
   }
 
   get show() {
@@ -43,7 +42,6 @@ class DivIcon extends Overlay {
 
   set position(position) {
     this._position = Parse.parsePosition(position)
-    return this
   }
 
   get position() {
@@ -59,7 +57,6 @@ class DivIcon extends Overlay {
       }
       this._delegate.appendChild(content)
     }
-    return this
   }
 
   get content() {
@@ -145,7 +142,7 @@ class DivIcon extends Overlay {
     let params = {
       layer: layer,
       overlay: this,
-      position: Transform.transformWGS84ToCartesian(this._position)
+      position: Transform.transformWGS84ToCartesian(this._position),
     }
 
     this._delegate.addEventListener('click', () => {
@@ -214,7 +211,7 @@ class DivIcon extends Overlay {
     divIcon = new DivIcon(position, content)
     if (entity.billboard) {
       divIcon.attr = {
-        ...entity?.properties?.getValue(now)
+        ...entity?.properties?.getValue(now),
       }
     }
     return divIcon

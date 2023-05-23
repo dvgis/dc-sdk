@@ -3,9 +3,9 @@
  * @Date: 2020-02-11 18:34:46
  */
 
-import State from '@dc-modules/state/State'
-import { DomUtil } from '@dc-modules/utils'
 import Widget from '../Widget'
+import State from '../../state/State'
+import { DomUtil } from '../../utils'
 
 class MapSwitch extends Widget {
   constructor() {
@@ -37,7 +37,7 @@ class MapSwitch extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'mapSwitch', {
       value: this,
-      writable: false
+      writable: false,
     })
     this.enable = true
     let self = this
@@ -59,7 +59,7 @@ class MapSwitch extends Widget {
     let index = this._cache.length ? this._cache.length - 1 : 0
     index === 0 && DomUtil.addClass(mapEl, 'active')
     mapEl.setAttribute('data-index', String(index))
-    mapEl.onclick = e => {
+    mapEl.onclick = (e) => {
       let old = document.getElementsByClassName('map-item active')
       if (old && old.length) {
         old[0].className = 'map-item'

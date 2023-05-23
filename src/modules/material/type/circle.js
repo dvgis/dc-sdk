@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 22:49:41
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../namespace'
 
 const CircleBlurMaterial = require('../shader/circle/CircleBlurMaterial.glsl')
 const CircleDiffuseMaterial = require('../shader/circle/CircleDiffuseMaterial.glsl')
@@ -26,13 +26,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleBlurType, {
     type: Cesium.Material.CircleBlurType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: CircleBlurMaterial
+    source: CircleBlurMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -45,13 +45,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleDiffuseType, {
     type: Cesium.Material.CircleDiffuseType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: CircleDiffuseMaterial
+    source: CircleDiffuseMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -64,13 +64,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleFadeType, {
     type: Cesium.Material.CircleFadeType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: CircleFadeMaterial
+    source: CircleFadeMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -83,13 +83,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CirclePulseType, {
     type: Cesium.Material.CirclePulseType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 12.0
+      speed: 12.0,
     },
-    source: CirclePulseMaterial
+    source: CirclePulseMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -101,13 +101,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleRingType, {
   fabric: {
     type: Cesium.Material.CircleRingType,
     uniforms: {
-      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7)
+      color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
     },
-    source: CircleRingMaterial
+    source: CircleRingMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -120,13 +120,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleRotateType, {
     type: Cesium.Material.CircleRotateType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      image: Cesium.Material.DefaultImageId
+      image: Cesium.Material.DefaultImageId,
     },
-    source: CircleRotateMaterial
+    source: CircleRotateMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -139,13 +139,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleScanType, {
     type: Cesium.Material.CircleScanType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 1
+      speed: 1,
     },
-    source: CircleScanMaterial
+    source: CircleScanMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -158,13 +158,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleSpiralType, {
     type: Cesium.Material.CircleSpiralType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: CircleSpiralMaterial
+    source: CircleSpiralMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -177,13 +177,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleVaryType, {
     type: Cesium.Material.CircleVaryType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: CircleVaryMaterial
+    source: CircleVaryMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -198,11 +198,11 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CircleWaveType, {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
       speed: 3.0,
       count: 1,
-      gradient: 0.1
+      gradient: 0.1,
     },
-    source: CircleWaveMaterial
+    source: CircleWaveMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })

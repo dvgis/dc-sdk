@@ -3,12 +3,12 @@
  * @Date: 2020-04-14 20:10:34
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
 
 class PolylineVolume extends Overlay {
   constructor(positions, shape) {
@@ -25,9 +25,8 @@ class PolylineVolume extends Overlay {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    this._delegate.polylineVolume.positions = Transform.transformWGS84ArrayToCartesianArray(
-      this._positions
-    )
+    this._delegate.polylineVolume.positions =
+      Transform.transformWGS84ArrayToCartesianArray(this._positions)
     return this
   }
 
@@ -96,7 +95,7 @@ class PolylineVolume extends Overlay {
       )
       polylineVolume = new PolylineVolume(positions, shape)
       polylineVolume.attr = {
-        ...entity?.properties?.getValue(now)
+        ...entity?.properties?.getValue(now),
       }
     }
     return polylineVolume

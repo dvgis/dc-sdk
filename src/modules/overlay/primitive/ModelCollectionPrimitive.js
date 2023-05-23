@@ -3,12 +3,12 @@
  * @Date: 2021-08-02 20:12:04
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class ModelCollectionPrimitive extends Overlay {
   constructor(positions, modelUrl) {
@@ -29,7 +29,6 @@ class ModelCollectionPrimitive extends Overlay {
 
   set attrs(attrs) {
     this._attrs = attrs
-    return this
   }
 
   get attrs() {
@@ -43,7 +42,6 @@ class ModelCollectionPrimitive extends Overlay {
       this._resetDelegate()
       this._layer.delegate.add(this._delegate)
     }
-    return this
   }
 
   set modelUrl(modelUrl) {
@@ -53,7 +51,6 @@ class ModelCollectionPrimitive extends Overlay {
       this._resetDelegate()
       this._layer.delegate.add(this._delegate)
     }
-    return this
   }
 
   get modelUrl() {
@@ -63,7 +60,7 @@ class ModelCollectionPrimitive extends Overlay {
   _resetDelegate() {
     this._delegate = new Cesium.ModelInstanceCollection({
       url: this._modelUrl,
-      instances: this._positions.map(item => {
+      instances: this._positions.map((item) => {
         let origin = Transform.transformWGS84ToCartesian(item)
         let modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
           origin,
@@ -80,10 +77,10 @@ class ModelCollectionPrimitive extends Overlay {
             modelMatrix
           )
         return {
-          modelMatrix
+          modelMatrix,
         }
       }),
-      ...this._style
+      ...this._style,
     })
     this._delegate.layerId = this._layer?.layerId
     this._delegate.overlayId = this._id

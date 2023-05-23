@@ -3,14 +3,14 @@
  * @Date: 2021-06-03 21:06:17
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
 import LabelPrimitive from './LabelPrimitive'
 
 const DEF_STYLE = {
   maxOffsetY: 10,
-  offsetAmount: 0.1
+  offsetAmount: 0.1,
 }
 
 class BounceLabelPrimitive extends LabelPrimitive {

@@ -3,11 +3,11 @@
  * @Date: 2020-03-19 13:11:12
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Icons from '@dc-modules/icons'
-import { DomUtil } from '@dc-modules/utils'
-import { SceneEventType } from '@dc-modules/event'
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import Icons from '../../icons'
+import { DomUtil } from '../../utils'
+import { SceneEventType } from '../../event'
 import Widget from '../Widget'
 
 class Compass extends Widget {
@@ -41,12 +41,12 @@ class Compass extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'compass', {
       value: this,
-      writable: false
+      writable: false,
     })
-    this._wrapper.onmousedown = e => {
+    this._wrapper.onmousedown = (e) => {
       this._handleMouseDown(e)
     }
-    this._wrapper.ondblclick = e => {
+    this._wrapper.ondblclick = (e) => {
       this._handleDoubleClick(e)
     }
   }
@@ -160,7 +160,7 @@ class Compass extends Widget {
           Cesium.Cartesian3.angleBetween(surfaceNormal, camera.directionWC),
         Cesium.Cartesian3.distance(cameraPosition, center)
       ),
-      duration: 1.5
+      duration: 1.5,
     })
   }
 
@@ -234,7 +234,7 @@ class Compass extends Widget {
         break
     }
 
-    this._mouseMoveHandle = e => {
+    this._mouseMoveHandle = (e) => {
       this._orbitMouseMoveFunction(e)
     }
     this._mouseUpHandle = () => {
@@ -363,7 +363,7 @@ class Compass extends Widget {
     ) {
       return
     }
-    this._mouseMoveHandle = e => {
+    this._mouseMoveHandle = (e) => {
       this._rotateMouseMoveFunction(e)
     }
     this._mouseUpHandle = () => {

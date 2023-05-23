@@ -3,11 +3,11 @@
  * @Date: 2020-08-30 22:39:34
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { midCartesian } from '@dc-modules/math'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Edit from './Edit'
+import { PlotEventType } from '../../event'
+import { midCartesian } from '../../math'
+import { Transform } from '../../transform'
 
 class EditPolyline extends Edit {
   constructor(overlay) {
@@ -60,7 +60,7 @@ class EditPolyline extends Edit {
       this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
         position: item,
         index: index,
-        isMid: index % 2 !== 0
+        isMid: index % 2 !== 0,
       })
     })
   }
@@ -96,7 +96,7 @@ class EditPolyline extends Edit {
         this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
           position: item,
           index: index,
-          isMid: index % 2 !== 0
+          isMid: index % 2 !== 0,
         })
       })
     }
@@ -140,7 +140,7 @@ class EditPolyline extends Edit {
         this._positions[preMidAnchorIndex] = preMidPosition
         this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
           index: preMidAnchorIndex,
-          position: preMidPosition
+          position: preMidPosition,
         })
       }
 
@@ -152,7 +152,7 @@ class EditPolyline extends Edit {
         this._positions[nextMidAnchorIndex] = nextMidPosition
         this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
           index: nextMidAnchorIndex,
-          position: nextMidPosition
+          position: nextMidPosition,
         })
       }
     }

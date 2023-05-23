@@ -3,12 +3,12 @@
  * @Date: 2021-01-09 21:40:36
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class ElecEllipsoidPrimitive extends Overlay {
   constructor(position, radius) {
@@ -17,8 +17,8 @@ class ElecEllipsoidPrimitive extends Overlay {
     this._radius = radius || { x: 10, y: 10, z: 10 }
     this._delegate = new Cesium.Primitive({
       geometryInstances: new Cesium.GeometryInstance({
-        geometry: {}
-      })
+        geometry: {},
+      }),
     })
     this._state = State.INITIALIZED
   }
@@ -29,10 +29,10 @@ class ElecEllipsoidPrimitive extends Overlay {
 
   set position(position) {
     this._position = Parse.parsePosition(position)
-    this._delegate.geometryInstances.modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
-      Transform.transformWGS84ToCartesian(this._position)
-    )
-    return this
+    this._delegate.geometryInstances.modelMatrix =
+      Cesium.Transforms.eastNorthUpToFixedFrame(
+        Transform.transformWGS84ToCartesian(this._position)
+      )
   }
 
   get position() {
@@ -43,9 +43,8 @@ class ElecEllipsoidPrimitive extends Overlay {
     this._radius = radius
     this._delegate.geometryInstances.geometry = new Cesium.EllipsoidGeometry({
       radii: this._radius,
-      maximumCone: Cesium.Math.PI_OVER_TWO
+      maximumCone: Cesium.Math.PI_OVER_TWO,
     })
-    return this
   }
 
   get radius() {
@@ -63,8 +62,8 @@ class ElecEllipsoidPrimitive extends Overlay {
     this._delegate.appearance = new Cesium.MaterialAppearance({
       material: Cesium.Material.fromType('EllipsoidElectric', {
         color: this._style?.color || Cesium.Color.GREEN,
-        speed: this._style?.speed || 5
-      })
+        speed: this._style?.speed || 5,
+      }),
     })
   }
 

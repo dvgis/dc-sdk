@@ -3,9 +3,8 @@
  * @Date: 2019-12-31 17:58:01
  */
 
-const CHARS = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split(
-  ''
-)
+const CHARS =
+  '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('')
 
 /**
  *  Some of the code borrows from leaflet
@@ -102,7 +101,7 @@ class Util {
    * @returns {string}
    */
   static emptyImageUrl() {
-    return (function() {
+    return (function () {
       return 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='
     })()
   }
@@ -129,7 +128,7 @@ class Util {
    */
   static debounce(fn, delay) {
     let timer = null
-    return function() {
+    return function () {
       timer && clearTimeout(timer)
       timer = setTimeout(fn, delay)
     }
@@ -143,7 +142,7 @@ class Util {
    */
   static throttle(fn, delay) {
     let valid = true
-    return function() {
+    return function () {
       if (!valid) {
         return false
       }

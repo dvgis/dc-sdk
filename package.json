@@ -40,6 +40,8 @@
     "@turf/turf": "^6.5.0",
     "chalk": "^5.2.0",
     "esbuild": "^0.17.18",
+    "esbuild-plugin-glsl": "^1.2.1",
+    "esbuild-plugin-inline-image": "^0.0.9",
     "eslint": "^8.40.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",

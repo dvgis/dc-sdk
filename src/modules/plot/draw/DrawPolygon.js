@@ -3,15 +3,15 @@
  * @Date: 2020-08-29 20:55:14
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { Polygon } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { Polygon } from '../../overlay'
 import Draw from './Draw'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
-  fill: true
+  fill: true,
 }
 
 class DrawPolygon extends Draw {
@@ -19,7 +19,7 @@ class DrawPolygon extends Draw {
     super()
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
   }
 
@@ -35,13 +35,13 @@ class DrawPolygon extends Draw {
         hierarchy: new Cesium.CallbackProperty(() => {
           if (this._positions.length > 2) {
             return new Cesium.PolygonHierarchy(
-              this._positions.map(item => item.clone())
+              this._positions.map((item) => item.clone())
             )
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -50,7 +50,7 @@ class DrawPolygon extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let polygon = null
     if (this._positions.length) {
       polygon = new Polygon(

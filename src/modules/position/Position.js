@@ -3,8 +3,8 @@
  * @Date: 2019-12-27 14:35:02
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../namespace'
+import { Transform } from '../transform'
 
 class Position {
   constructor(lng, lat, alt, heading, pitch, roll) {
@@ -146,7 +146,7 @@ class Position {
       alt: this.alt,
       heading: this.heading,
       pitch: this.pitch,
-      roll: this.roll
+      roll: this.roll,
     }
   }
 

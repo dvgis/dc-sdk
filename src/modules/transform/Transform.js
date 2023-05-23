@@ -3,8 +3,8 @@
  * @Date: 2020-01-07 09:00:32
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import Position from '@dc-modules/position/Position'
+import { Cesium } from '../../namespace'
+import Position from '../position/Position'
 
 const WMP = new Cesium.WebMercatorProjection()
 
@@ -16,9 +16,8 @@ class Transform {
    */
   static transformCartesianToWGS84(cartesian) {
     if (cartesian) {
-      let cartographic = Cesium.Ellipsoid.WGS84.cartesianToCartographic(
-        cartesian
-      )
+      let cartographic =
+        Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian)
       return new Position(
         Cesium.Math.toDegrees(cartographic?.longitude || 0),
         Cesium.Math.toDegrees(cartographic?.latitude || 0),
@@ -66,7 +65,7 @@ class Transform {
    */
   static transformCartesianArrayToWGS84Array(cartesianArr) {
     return cartesianArr
-      ? cartesianArr.map(item => this.transformCartesianToWGS84(item))
+      ? cartesianArr.map((item) => this.transformCartesianToWGS84(item))
       : []
   }
 
@@ -77,7 +76,7 @@ class Transform {
    */
   static transformWGS84ArrayToCartesianArray(WGS84Arr) {
     return WGS84Arr
-      ? WGS84Arr.map(item => this.transformWGS84ToCartesian(item))
+      ? WGS84Arr.map((item) => this.transformWGS84ToCartesian(item))
       : []
   }
 

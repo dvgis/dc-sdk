@@ -3,7 +3,7 @@
  * @Date: 2020-08-21 18:16:52
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../namespace'
 
 export default function midCartesian(start, end) {
   let c1 = Cesium.Ellipsoid.WGS84.cartesianToCartographic(start)

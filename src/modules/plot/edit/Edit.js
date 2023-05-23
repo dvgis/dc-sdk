@@ -3,9 +3,9 @@
  * @Date: 2020-08-30 23:50:53
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
 
 class Edit {
   constructor(overlay) {
@@ -52,7 +52,7 @@ class Edit {
     this._positions.forEach((item, index) => {
       this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
         position: item,
-        index: index
+        index: index,
       })
     })
   }
@@ -150,7 +150,7 @@ class Edit {
   stop() {
     this.editTool.fire(PlotEventType.EDIT_STOP, {
       pickedAnchor: null,
-      position: null
+      position: null,
     })
     return this
   }

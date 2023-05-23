@@ -3,10 +3,10 @@
  * @Date: 2020-03-04 15:38:40
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Icons from '@dc-modules/icons'
-import { DomUtil } from '@dc-modules/utils'
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import Icons from '../../icons'
+import { DomUtil } from '../../utils'
 import Widget from '../Widget'
 
 class MapSplit extends Widget {
@@ -29,7 +29,7 @@ class MapSplit extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'mapSplit', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 
@@ -71,11 +71,11 @@ class MapSplit extends Widget {
       self._moveActive = true
     }, Cesium.ScreenSpaceEventType.PINCH_START)
 
-    handler.setInputAction(movement => {
+    handler.setInputAction((movement) => {
       self._moveHandler(movement)
     }, Cesium.ScreenSpaceEventType.MOUSE_MOVE)
 
-    handler.setInputAction(movement => {
+    handler.setInputAction((movement) => {
       self._moveHandler(movement)
     }, Cesium.ScreenSpaceEventType.PINCH_MOVE)
 

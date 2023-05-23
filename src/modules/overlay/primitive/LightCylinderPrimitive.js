@@ -3,16 +3,16 @@
  * @Date: 2022-05-28 10:25:24
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
-import { IMG_PARTICLES } from '@dc-modules/images/base64'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
+import { IMG_PARTICLES } from '../../images/base64'
 
 const DEF_STYLE = {
-  color: Cesium.Color.ORANGE
+  color: Cesium.Color.ORANGE,
 }
 
 class LightCylinderPrimitive extends Overlay {
@@ -34,7 +34,6 @@ class LightCylinderPrimitive extends Overlay {
   set center(position) {
     this._center = Parse.parsePosition(position)
     this._updatePrimitives()
-    return this
   }
 
   get center() {
@@ -44,7 +43,6 @@ class LightCylinderPrimitive extends Overlay {
   set length(length) {
     this._length = length
     this._updatePrimitives()
-    return this
   }
 
   get length() {
@@ -54,7 +52,6 @@ class LightCylinderPrimitive extends Overlay {
   set topRadius(topRadius) {
     this._topRadius = topRadius
     this._updatePrimitives()
-    return this
   }
 
   get topRadius() {
@@ -64,7 +61,6 @@ class LightCylinderPrimitive extends Overlay {
   set bottomRadius(bottomRadius) {
     this._bottomRadius = bottomRadius
     this._updatePrimitives()
-    return this
   }
 
   get bottomRadius() {
@@ -85,7 +81,7 @@ class LightCylinderPrimitive extends Overlay {
         semiMajorAxis: radius,
         semiMinorAxis: radius,
         rotation: 0,
-        granularity: 0.005
+        granularity: 0.005,
       },
       false,
       true
@@ -133,13 +129,13 @@ class LightCylinderPrimitive extends Overlay {
     let polygon = Cesium.PolygonGeometry.createGeometry(
       new Cesium.PolygonGeometry({
         polygonHierarchy: new Cesium.PolygonHierarchy(newpts),
-        perPositionHeight: true
+        perPositionHeight: true,
       })
     )
     polygon.indices = define_indices
     polygon.attributes.st.values = sts
     return new Cesium.GeometryInstance({
-      geometry: polygon
+      geometry: polygon,
     })
   }
 
@@ -210,10 +206,10 @@ class LightCylinderPrimitive extends Overlay {
           polygonHierarchy: new Cesium.PolygonHierarchy(
             this._computeEllipsePositions(this._center, this._bottomRadius * 2)
           ),
-          perPositionHeight: !isGroud
+          perPositionHeight: !isGroud,
         }),
-        asynchronous: false
-      })
+        asynchronous: false,
+      }),
     }
 
     // ring
@@ -223,8 +219,8 @@ class LightCylinderPrimitive extends Overlay {
 
     ring.appearance = new Cesium.EllipsoidSurfaceAppearance({
       material: Cesium.Material.fromType(Cesium.Material.CircleRingType, {
-        color: this._style.color
-      })
+        color: this._style.color,
+      }),
     })
 
     // circle
@@ -235,8 +231,8 @@ class LightCylinderPrimitive extends Overlay {
     circle.appearance = new Cesium.EllipsoidSurfaceAppearance({
       material: Cesium.Material.fromType(Cesium.Material.CircleRotateType, {
         color: this._style.color,
-        image: this._getCircleImage()
-      })
+        image: this._getCircleImage(),
+      }),
     })
 
     // cylinder
@@ -248,10 +244,10 @@ class LightCylinderPrimitive extends Overlay {
       ),
       appearance: new Cesium.EllipsoidSurfaceAppearance({
         material: Cesium.Material.fromType(Cesium.Material.CylinderFadeType, {
-          color: this._style.color
-        })
+          color: this._style.color,
+        }),
       }),
-      asynchronous: false
+      asynchronous: false,
     })
 
     if (isGroud) {
@@ -267,7 +263,7 @@ class LightCylinderPrimitive extends Overlay {
     }
 
     // particles
-    Cesium.Resource.fetchImage({ url: IMG_PARTICLES }).then(image => {
+    Cesium.Resource.fetchImage({ url: IMG_PARTICLES }).then((image) => {
       let particles = new Cesium.Primitive({
         geometryInstances: this._createCylinderInstance(
           topPositions,
@@ -279,11 +275,11 @@ class LightCylinderPrimitive extends Overlay {
             Cesium.Material.CylinderParticlesType,
             {
               color: this._style.color,
-              image: this._getParticlesImage(image)
+              image: this._getParticlesImage(image),
             }
-          )
+          ),
         }),
-        asynchronous: false
+        asynchronous: false,
       })
       this._delegate.add(particles)
     })

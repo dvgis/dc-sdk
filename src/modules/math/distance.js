@@ -3,8 +3,8 @@
  * @Date: 2020-03-31 20:58:06
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../namespace'
+import { Transform } from '../transform'
 
 export default function distance(positions) {
   let distance = 0

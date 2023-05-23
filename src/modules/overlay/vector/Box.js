@@ -3,12 +3,12 @@
  * @Date: 2020-02-25 18:28:36
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
 
 class Box extends Overlay {
   constructor(position, length, width, height) {
@@ -22,9 +22,9 @@ class Box extends Overlay {
         dimensions: {
           x: +this._length,
           y: +this._width,
-          z: +this._height
-        }
-      }
+          z: +this._height,
+        },
+      },
     })
     this._state = State.INITIALIZED
   }

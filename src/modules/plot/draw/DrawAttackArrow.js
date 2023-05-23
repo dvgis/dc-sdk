@@ -3,16 +3,16 @@
  * @Date: 2020-08-30 16:43:12
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { AttackArrow } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
 import Draw from './Draw'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { AttackArrow } from '../../overlay'
 import AttackArrowGraphics from '../graphics/AttackArrowGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
-  fill: true
+  fill: true,
 }
 
 class DrawAttackArrow extends Draw {
@@ -21,7 +21,7 @@ class DrawAttackArrow extends Draw {
     this._maxAnchorSize = 3
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
     this._graphics = new AttackArrowGraphics()
   }
@@ -42,8 +42,8 @@ class DrawAttackArrow extends Draw {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -52,7 +52,7 @@ class DrawAttackArrow extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let attackArrow = null
     if (this._positions.length) {
       attackArrow = new AttackArrow(

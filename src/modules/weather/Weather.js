@@ -14,7 +14,7 @@ class Weather {
       fog: new Fog(),
       rain: new Rain(),
       snow: new Snow(),
-      cloud: new Cloud()
+      cloud: new Cloud(),
     }
   }
 
@@ -39,12 +39,12 @@ class Weather {
    * @param viewer
    */
   install(viewer) {
-    Object.keys(this._comps).forEach(key => {
+    Object.keys(this._comps).forEach((key) => {
       this._comps[key].addTo(viewer)
     })
     Object.defineProperty(viewer, 'weather', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 }

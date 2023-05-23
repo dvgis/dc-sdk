@@ -3,8 +3,8 @@
  * @Date: 2020-08-29 19:26:06
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { OverlayType } from '@dc-modules/overlay'
+import { Cesium } from '../../namespace'
+import { OverlayType } from '../overlay'
 
 import DrawPoint from './draw/DrawPoint'
 import DrawPolyline from './draw/DrawPolyline'
@@ -166,7 +166,7 @@ class Plot {
       ...this._options,
       maxAnchorSize: maxAnchorSize,
       onDrawStop: callback,
-      clampToModel: clampToModel ?? this._options.clampToModel
+      clampToModel: clampToModel ?? this._options.clampToModel,
     })
     return this
   }
@@ -186,7 +186,7 @@ class Plot {
     this._currentWorker = this._createEditWorker(overlay)?.start(this, {
       ...this._options,
       onEditStop: callback,
-      clampToModel: clampToModel ?? this._options.clampToModel
+      clampToModel: clampToModel ?? this._options.clampToModel,
     })
     return this
   }

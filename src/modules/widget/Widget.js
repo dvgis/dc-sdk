@@ -3,7 +3,7 @@
  * @Date: 2020-01-15 19:17:52
  */
 
-import State from '@dc-modules/state/State'
+import State from '../state/State'
 import WidgetType from './WidgetType'
 
 class Widget {
@@ -16,12 +16,11 @@ class Widget {
 
   set enable(enable) {
     if (this._enable === enable) {
-      return this
+      return
     }
     this._enable = enable
     this._state = this._enable ? State.ENABLED : State.DISABLED
     this._enableHook && this._enableHook()
-    return this
   }
 
   get enable() {

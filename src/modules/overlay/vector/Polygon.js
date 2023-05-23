@@ -3,13 +3,13 @@
  * @Date: 2020-01-09 09:10:37
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
-import { center, area } from '@dc-modules/math'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
+import { center, area } from '../../math'
 
 class Polygon extends Overlay {
   constructor(positions) {
@@ -36,7 +36,7 @@ class Polygon extends Overlay {
 
   set holes(holes) {
     if (holes && holes.length) {
-      this._holes = holes.map(item => Parse.parsePositions(item))
+      this._holes = holes.map((item) => Parse.parsePositions(item))
       this._delegate.polygon.hierarchy = this._computeHierarchy()
     }
     return this
@@ -64,7 +64,7 @@ class Polygon extends Overlay {
       this._positions
     )
     result.holes = this._holes.map(
-      item =>
+      (item) =>
         new Cesium.PolygonHierarchy(
           Transform.transformWGS84ArrayToCartesianArray(item)
         )
@@ -89,7 +89,7 @@ class Polygon extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(this.center)
     this._delegate.label = {
       text: text,
-      ...textStyle
+      ...textStyle,
     }
     return this
   }
@@ -123,7 +123,7 @@ class Polygon extends Overlay {
       )
       polygon = new Polygon(positions)
       polygon.attr = {
-        ...entity?.properties?.getValue(now)
+        ...entity?.properties?.getValue(now),
       }
     }
     return polygon

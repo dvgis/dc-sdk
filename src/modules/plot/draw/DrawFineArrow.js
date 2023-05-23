@@ -3,16 +3,17 @@
  * @Date: 2020-08-30 16:43:12
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { Transform } from '@dc-modules/transform'
-import { PlotEventType } from '@dc-modules/event'
-import { FineArrow } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
 import Draw from './Draw'
+import { Transform } from '../../transform'
+import { PlotEventType } from '../../event'
+import { FineArrow } from '../../overlay'
+
 import FineArrowGraphics from '../graphics/FineArrowGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
-  fill: true
+  fill: true,
 }
 
 class DrawFineArrow extends Draw {
@@ -21,7 +22,7 @@ class DrawFineArrow extends Draw {
     this._maxAnchorSize = 2
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
     this._graphics = new FineArrowGraphics()
   }
@@ -42,8 +43,8 @@ class DrawFineArrow extends Draw {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -52,7 +53,7 @@ class DrawFineArrow extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let fineArrow = null
     if (this._positions.length) {
       fineArrow = new FineArrow(

@@ -8,7 +8,7 @@ let TerrainType = {
   XYZ: 'xyz',
   ARCGIS: 'arcgis',
   GOOGLE: 'google',
-  VR: 'vr'
+  VR: 'vr',
 }
 
 export default TerrainType

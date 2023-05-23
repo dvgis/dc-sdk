@@ -3,16 +3,16 @@
  * @Date: 2020-01-31 16:25:29
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { Point } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { Point } from '../../overlay'
 import Draw from './Draw'
 
 const DEF_STYLE = {
   pixelSize: 10,
   outlineColor: Cesium.Color.BLUE,
-  outlineWidth: 5
+  outlineWidth: 5,
 }
 
 class DrawPoint extends Draw {
@@ -21,7 +21,7 @@ class DrawPoint extends Draw {
     this._position = Cesium.Cartesian3.ZERO
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
   }
 
@@ -36,8 +36,8 @@ class DrawPoint extends Draw {
         return this._position
       }, false),
       point: {
-        ...this._style
-      }
+        ...this._style,
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -46,7 +46,7 @@ class DrawPoint extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let point = null
     if (this._position) {
       point = new Point(

@@ -3,17 +3,17 @@
  * @Date: 2020-01-06 15:03:25
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
 
 const DEF_STYLE = {
   pixelSize: 8,
   outlineColor: Cesium.Color.BLUE,
-  outlineWidth: 2
+  outlineWidth: 2,
 }
 
 class Point extends Overlay {
@@ -80,7 +80,7 @@ class Point extends Overlay {
     )
     point = new Point(position)
     point.attr = {
-      ...entity?.properties?.getValue(now)
+      ...entity?.properties?.getValue(now),
     }
     return point
   }

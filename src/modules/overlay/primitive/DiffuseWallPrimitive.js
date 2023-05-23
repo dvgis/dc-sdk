@@ -3,19 +3,19 @@
  * @Date: 2021-06-04 20:38:39
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 const DEF_STYLE = {
   minRadius: 10,
   minHeight: 30,
   color: Cesium.Color.RED,
   slices: 128,
-  speed: 10
+  speed: 10,
 }
 
 class DiffuseWallPrimitive extends Overlay {
@@ -134,20 +134,20 @@ class DiffuseWallPrimitive extends Overlay {
     let geometry = new Cesium.WallGeometry({
       positions: positions,
       minimumHeights: this._getHeights(positions.length, 0),
-      maximumHeights: this._getHeights(positions.length, this._currentHeight)
+      maximumHeights: this._getHeights(positions.length, this._currentHeight),
     })
 
     this._delegate = new Cesium.Primitive({
       geometryInstances: new Cesium.GeometryInstance({
-        geometry
+        geometry,
       }),
       appearance: new Cesium.MaterialAppearance({
         material: Cesium.Material.fromType('WallDiffuse', {
-          color: this._style?.color
+          color: this._style?.color,
         }),
-        flat: true
+        flat: true,
       }),
-      asynchronous: false
+      asynchronous: false,
     })
     this._delegate.update(frameState)
   }

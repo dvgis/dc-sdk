@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 23:20:11
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../namespace'
 
 const EllipsoidElectricMaterial = require('../shader/ellipsoid/EllipsoidElectricMaterial.glsl')
 const EllipsoidTrailMaterial = require('../shader/ellipsoid/EllipsoidTrailMaterial.glsl')
@@ -20,13 +20,13 @@ Cesium.Material._materialCache.addMaterial(
       type: Cesium.Material.EllipsoidElectricType,
       uniforms: {
         color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-        speed: 1
+        speed: 1,
       },
-      source: EllipsoidElectricMaterial
+      source: EllipsoidElectricMaterial,
     },
-    translucent: function(material) {
+    translucent: function (material) {
       return true
-    }
+    },
   }
 )
 
@@ -40,11 +40,11 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.EllipsoidTrailType, {
     type: Cesium.Material.EllipsoidTrailType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: EllipsoidTrailMaterial
+    source: EllipsoidTrailMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })

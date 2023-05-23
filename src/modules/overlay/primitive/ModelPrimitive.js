@@ -3,12 +3,12 @@
  * @Date: 2021-05-14 00:33:27
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class ModelPrimitive extends Overlay {
   constructor(position, modelUrl) {
@@ -38,7 +38,6 @@ class ModelPrimitive extends Overlay {
         Cesium.Math.toRadians(this._position.roll)
       )
     )
-    return this
   }
 
   get position() {
@@ -49,7 +48,6 @@ class ModelPrimitive extends Overlay {
     this._modelUrl = modelUrl
     this._delegate = Cesium.Model.fromGltf({ url: modelUrl })
     this.position = this._position
-    return this
   }
 
   get modelUrl() {

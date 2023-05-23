@@ -3,19 +3,17 @@
  * @Date: 2021-07-14 20:28:14
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { MouseEventType, PlotEventType, PlotEvent } from '@dc-modules/event'
-
-const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
-
-const IMG_CIRCLE_YELLOW = require('@dc-modules/images/circle_yellow.png')
+import { Cesium } from '../../namespace'
+import { MouseEventType, PlotEventType, PlotEvent } from '../event'
+import IMG_CIRCLE_RED from '../images/circle_red.png'
+import IMG_CIRCLE_YELLOW from '../images/circle_yellow.png'
 
 const DEF_OPTS = {
   icon_center: IMG_CIRCLE_YELLOW,
   icon_anchor: IMG_CIRCLE_RED,
   icon_size: [12, 12],
   clampToModel: false,
-  maxAnchorSize: 999
+  maxAnchorSize: 999,
 }
 
 class DrawTool {
@@ -30,7 +28,6 @@ class DrawTool {
 
   set tooltipMess(tooltipMess) {
     this._tooltipMess = tooltipMess
-    return this
   }
 
   /**
@@ -98,8 +95,8 @@ class DrawTool {
           this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&
           !this._options.clampToModel
             ? Cesium.HeightReference.CLAMP_TO_GROUND
-            : Cesium.HeightReference.NONE
-      }
+            : Cesium.HeightReference.NONE,
+      },
     })
   }
 
@@ -162,11 +159,11 @@ class DrawTool {
   /**
    *
    * @param type
-   * @param parmas
+   * @param params
    * @returns {DrawTool}
    */
-  fire(type, parmas) {
-    this._plotEvent.fire(type, parmas)
+  fire(type, params = {}) {
+    this._plotEvent.fire(type, params)
     return this
   }
 
@@ -205,7 +202,7 @@ class DrawTool {
     this._viewer.dataSources.add(this._anchorLayer)
     Object.defineProperty(this._viewer, 'drawTool', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 }

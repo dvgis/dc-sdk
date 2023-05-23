@@ -3,23 +3,23 @@
  * @Date: 2020-10-11 18:24:37
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class WaterPrimitive extends Overlay {
   constructor(positions, holes = []) {
     super()
     this._positions = Parse.parsePositions(positions)
-    this._holes = holes.map(item => Parse.parsePositions(item))
+    this._holes = holes.map((item) => Parse.parsePositions(item))
     this._delegate = new Cesium.GroundPrimitive({
       geometryInstances: new Cesium.GeometryInstance({
-        geometry: {}
+        geometry: {},
       }),
-      asynchronous: true
+      asynchronous: true,
     })
     this._state = State.INITIALIZED
   }
@@ -34,7 +34,7 @@ class WaterPrimitive extends Overlay {
       polygonHierarchy: new Cesium.PolygonHierarchy(
         Transform.transformWGS84ArrayToCartesianArray(this._positions),
         this._holes.map(
-          item =>
+          (item) =>
             new Cesium.PolygonHierarchy(
               Transform.transformWGS84ArrayToCartesianArray(item)
             )
@@ -44,9 +44,8 @@ class WaterPrimitive extends Overlay {
       extrudedHeight: this._style?.extrudedHeight,
       closeTop: this._style?.closeTop,
       closeBottom: this._style?.closeBottom,
-      vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
+      vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT,
     })
-    return this
   }
 
   get positions() {
@@ -72,8 +71,8 @@ class WaterPrimitive extends Overlay {
         frequency: this._style?.frequency || 1000.0,
         animationSpeed: this._style?.animationSpeed || 0.01,
         amplitude: this._style?.amplitude || 10,
-        specularIntensity: this._style?.specularIntensity || 0.5
-      })
+        specularIntensity: this._style?.specularIntensity || 0.5,
+      }),
     })
   }
 

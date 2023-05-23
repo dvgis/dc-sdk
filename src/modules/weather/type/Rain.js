@@ -3,11 +3,10 @@
  * @Date: 2020-01-15 20:23:42
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { Util } from '@dc-modules/utils'
-
-const RainShader = require('@dc-modules/material/shader/weather/RainShader.glsl')
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import { Util } from '../../utils'
+import RainShader from '../../material/shader/weather/RainShader.glsl'
 
 class Rain {
   constructor() {
@@ -40,7 +39,6 @@ class Rain {
   set speed(speed) {
     this._speed = speed
     this._delegate && (this._delegate.uniforms.speed = speed)
-    return this
   }
 
   get speed() {
@@ -50,7 +48,6 @@ class Rain {
   set mixNum(mixNum) {
     this._mixNum = mixNum
     this._delegate && (this._delegate.uniforms.mixNum = mixNum)
-    return this
   }
 
   get mixNum() {
@@ -67,8 +64,8 @@ class Rain {
       fragmentShader: RainShader,
       uniforms: {
         speed: this._speed,
-        mixNum: this._mixNum
-      }
+        mixNum: this._mixNum,
+      },
     })
     this._viewer.scene.postProcessStages.add(this._delegate)
   }

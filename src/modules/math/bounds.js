@@ -8,7 +8,7 @@ export default function bounds(positions = [], expand = 0) {
   let minLat = 90
   let maxLng = -180
   let maxLat = -90
-  positions.forEach(item => {
+  positions.forEach((item) => {
     minLng = Math.min(minLng, item.lng || item.x)
     minLat = Math.min(minLat, item.lat || item.y)
     maxLng = Math.max(maxLng, item.lng || item.x)
@@ -27,6 +27,6 @@ export default function bounds(positions = [], expand = 0) {
     west: minLng,
     south: minLat,
     east: maxLng,
-    north: maxLat
+    north: maxLat,
   }
 }

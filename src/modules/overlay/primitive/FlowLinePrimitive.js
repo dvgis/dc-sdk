@@ -3,12 +3,12 @@
  * @Date: 2021-01-05 20:18:34
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class FlowLinePrimitive extends Overlay {
   constructor(positions, width = 1) {
@@ -17,8 +17,8 @@ class FlowLinePrimitive extends Overlay {
     this._width = width
     this._delegate = new Cesium.Primitive({
       geometryInstances: new Cesium.GeometryInstance({
-        geometry: {}
-      })
+        geometry: {},
+      }),
     })
     this._state = State.INITIALIZED
   }
@@ -31,9 +31,8 @@ class FlowLinePrimitive extends Overlay {
     this._positions = Parse.parsePositions(positions)
     this._delegate.geometryInstances.geometry = new Cesium.PolylineGeometry({
       positions: Transform.transformWGS84ArrayToCartesianArray(this._positions),
-      width: this._width
+      width: this._width,
     })
-    return this
   }
 
   get positions() {
@@ -50,8 +49,8 @@ class FlowLinePrimitive extends Overlay {
         color: this._style?.color || new Cesium.Color(1.0, 0.0, 0.0, 0.7),
         speed: this._style?.speed || 1,
         percent: this._style?.percent || 0.03,
-        gradient: this._style?.gradient || 0.1
-      })
+        gradient: this._style?.gradient || 0.1,
+      }),
     })
   }
 

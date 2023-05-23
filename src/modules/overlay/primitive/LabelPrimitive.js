@@ -3,11 +3,11 @@
  * @Date: 2021-06-03 22:28:49
  */
 
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class LabelPrimitive extends Overlay {
   constructor(position, text) {
@@ -16,7 +16,7 @@ class LabelPrimitive extends Overlay {
     this._text = text
     this._delegate = {
       position: undefined,
-      text: undefined
+      text: undefined,
     }
     this._state = State.INITIALIZED
   }
@@ -30,7 +30,6 @@ class LabelPrimitive extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {
@@ -40,7 +39,6 @@ class LabelPrimitive extends Overlay {
   set text(text) {
     this._text = text
     this._delegate.text = this._text
-    return this
   }
 
   get text() {

@@ -13,7 +13,7 @@ const State = {
   DISABLED: 'disabled',
   PLAY: 'play',
   PAUSE: 'pause',
-  RESTORE: 'restore'
+  RESTORE: 'restore',
 }
 
 export default State

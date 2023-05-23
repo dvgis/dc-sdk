@@ -3,10 +3,10 @@
  * @Date: 2020-12-09 20:54:06
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { DomUtil } from '@dc-modules/utils'
-import { SceneEventType } from '@dc-modules/event'
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import { DomUtil } from '../../utils'
+import { SceneEventType } from '../../event'
 import Widget from '../Widget'
 
 const geodesic = new Cesium.EllipsoidGeodesic()
@@ -15,12 +15,12 @@ const BASE = [1, 2, 3, 5]
 
 const DIS = [
   ...BASE,
-  ...BASE.map(item => item * 10),
-  ...BASE.map(item => item * 100),
-  ...BASE.map(item => item * 1000),
-  ...BASE.map(item => item * 10000),
-  ...BASE.map(item => item * 100000),
-  ...BASE.map(item => item * 1000000)
+  ...BASE.map((item) => item * 10),
+  ...BASE.map((item) => item * 100),
+  ...BASE.map((item) => item * 1000),
+  ...BASE.map((item) => item * 10000),
+  ...BASE.map((item) => item * 100000),
+  ...BASE.map((item) => item * 1000000),
 ]
 
 class DistanceLegend extends Widget {
@@ -44,7 +44,7 @@ class DistanceLegend extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'distanceLegend', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 
@@ -111,9 +111,9 @@ class DistanceLegend extends Widget {
       this._labelEl.innerHTML =
         distance >= 1000 ? `${distance / 1000} km` : `${distance} m`
       let barWidth = (distance / pixelDistance) | 0
-      this._scaleBarEl.style.cssText = `width: ${barWidth}px; left: ${(125 -
-        barWidth) /
-        2}px;`
+      this._scaleBarEl.style.cssText = `width: ${barWidth}px; left: ${
+        (125 - barWidth) / 2
+      }px;`
     }
   }
 

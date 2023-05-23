@@ -19,6 +19,8 @@ import javascriptObfuscator from 'gulp-javascript-obfuscator'
 import { babel } from '@rollup/plugin-babel'
 import startServer from './server.js'
 import { uglify } from 'rollup-plugin-uglify'
+import inlineImage from 'esbuild-plugin-inline-image'
+import { glsl } from 'esbuild-plugin-glsl'
 
 const obfuscatorConfig = {
   compact: true, //压缩代码
@@ -44,6 +46,12 @@ const buildConfig = {
   sourcemap: false,
   write: true,
   logLevel: 'info',
+  plugins: [
+    inlineImage({
+      limit: -1,
+    }),
+    glsl(),
+  ],
 }
 
 const packageJson = fse.readJsonSync('./package.json')
@@ -59,7 +67,7 @@ function getTime() {
 
 async function buildNamespace(options) {
   const bundle = await rollup({
-    input: 'src/namespace.js',
+    input: 'src/namespace/libs.js',
     plugins: [
       commonjs(),
       resolve({ preferBuiltins: true }),
@@ -136,8 +144,7 @@ async function buildModules(options) {
 
   const exportNamespace = `
         export const __namespace = {
-            Cesium: exports.Cesium,
-            turf:  exports.turf
+            Cesium: exports.Cesium
         }
      `
 

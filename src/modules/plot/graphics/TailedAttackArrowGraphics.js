@@ -3,11 +3,11 @@
  * @Date: 2020-08-30 17:26:34
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import Parse from '@dc-modules/parse/Parse'
-import { Transform } from '@dc-modules/transform'
-import { PlotUtil } from '@dc-modules/utils'
+import { Cesium } from '../../../namespace'
 import AttackArrowGraphics from './AttackArrowGraphics'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { PlotUtil } from '../../utils'
 
 class TailedAttackArrowGraphics extends AttackArrowGraphics {
   constructor(options) {
@@ -65,7 +65,7 @@ class TailedAttackArrowGraphics extends AttackArrowGraphics {
         Parse.parsePositions(
           leftPnts.concat(headPnts, rightPnts.reverse(), [
             swallowTailPnt,
-            leftPnts[0]
+            leftPnts[0],
           ])
         )
       )

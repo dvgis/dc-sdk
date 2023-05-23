@@ -3,11 +3,11 @@
  * @Date: 2020-02-25 18:28:36
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
 import Overlay from '../Overlay'
 
 class Wall extends Overlay {
@@ -24,9 +24,8 @@ class Wall extends Overlay {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    this._delegate.wall.positions = Transform.transformWGS84ArrayToCartesianArray(
-      this._positions
-    )
+    this._delegate.wall.positions =
+      Transform.transformWGS84ArrayToCartesianArray(this._positions)
     return this
   }
 
@@ -80,7 +79,7 @@ class Wall extends Overlay {
       )
       wall = new Wall(positions)
       wall.attr = {
-        ...entity?.properties?.getValue(now)
+        ...entity?.properties?.getValue(now),
       }
     }
     return wall

@@ -3,11 +3,10 @@
  * @Date: 2020-11-30 20:19:19
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { Util } from '@dc-modules/utils'
-
-const IMG = require('@dc-modules/images/cloud.jpg')
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import { Util } from '../../utils'
+import IMG from '../../images/cloud.jpg'
 
 class Cloud {
   constructor() {
@@ -26,7 +25,7 @@ class Cloud {
 
   set enable(enable) {
     if (!this._viewer.scene.mode === Cesium.SceneMode.SCENE3D) {
-      return this
+      return
     }
     this._enable = this._delegate.show = enable
     if (this._enable) {
@@ -34,7 +33,6 @@ class Cloud {
     } else {
       this._viewer.scene.postUpdate.removeEventListener(this._onRotate, this)
     }
-    return this
   }
 
   get enable() {
@@ -43,7 +41,6 @@ class Cloud {
 
   set rotateAmount(rotateAmount) {
     this._rotateAmount = rotateAmount
-    return this
   }
 
   get rotateAmount() {
@@ -82,25 +79,25 @@ class Cloud {
             type: 'Image',
             uniforms: {
               color: new Cesium.Color(1.0, 1.0, 1.0, 1.0),
-              image: IMG
+              image: IMG,
             },
             components: {
               alpha:
                 'texture(image, fract(repeat * materialInput.st)).r * color.a',
-              diffuse: 'vec3(1.0)'
-            }
-          }
+              diffuse: 'vec3(1.0)',
+            },
+          },
         }),
         translucent: true,
-        aboveGround: true
-      })
+        aboveGround: true,
+      }),
     })
     this._delegate.geometryInstances = new Cesium.GeometryInstance({
       geometry: new Cesium.EllipsoidGeometry({
         vertexFormat: Cesium.VertexFormat.POSITION_AND_ST,
-        radii: this._viewer.scene.globe.ellipsoid.radii
+        radii: this._viewer.scene.globe.ellipsoid.radii,
       }),
-      id: this._id
+      id: this._id,
     })
     this._delegate.show = this._enable
     this._viewer.scene.primitives.add(this._delegate)

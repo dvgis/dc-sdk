@@ -2,13 +2,12 @@
  * @Author: Caven
  * @Date: 2020-02-12 21:44:24
  */
-
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class CustomBillboard extends Overlay {
   constructor(position, icon) {
@@ -29,7 +28,6 @@ class CustomBillboard extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {
@@ -39,7 +37,6 @@ class CustomBillboard extends Overlay {
   set icon(icon) {
     this._icon = icon
     this._delegate.billboard.image = this._icon
-    return this
   }
 
   get icon() {
@@ -53,7 +50,6 @@ class CustomBillboard extends Overlay {
     this._size = size
     this._delegate.billboard.width = this._size[0] || 32
     this._delegate.billboard.height = this._size[1] || 32
-    return this
   }
 
   get size() {
@@ -81,7 +77,7 @@ class CustomBillboard extends Overlay {
   setLabel(text, textStyle) {
     this._delegate.label = {
       ...textStyle,
-      text: text
+      text: text,
     }
     return this
   }
@@ -114,8 +110,8 @@ class CustomBillboard extends Overlay {
         ...style,
         positions: Transform.transformWGS84ArrayToCartesianArray([
           position,
-          this._position
-        ])
+          this._position,
+        ]),
       }
     }
     return this
@@ -139,7 +135,7 @@ class CustomBillboard extends Overlay {
           stRotation = 0
         }
         return stRotation
-      }, false)
+      }, false),
     }
     return this
   }

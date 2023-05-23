@@ -3,17 +3,17 @@
  * @Date: 2021-06-03 20:51:25
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 const DEF_STYLE = {
   pixelSize: 8,
   outlineColor: Cesium.Color.BLUE,
-  outlineWidth: 2
+  outlineWidth: 2,
 }
 
 class PointPrimitive extends Overlay {
@@ -22,7 +22,7 @@ class PointPrimitive extends Overlay {
     this._position = Parse.parsePosition(position)
 
     this._delegate = {
-      position: undefined
+      position: undefined,
     }
     this._state = State.INITIALIZED
   }
@@ -36,7 +36,6 @@ class PointPrimitive extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {

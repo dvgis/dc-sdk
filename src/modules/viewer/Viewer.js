@@ -3,7 +3,7 @@
  * @Date: 2019-12-27 17:13:24
  */
 
-import { Cesium } from '../../namespace.js'
+import { Cesium } from '../../namespace/libs.js'
 import Parse from '../parse/Parse'
 import {
   LayerGroupEventType,
@@ -29,11 +29,15 @@ class Viewer {
     if (!id || (typeof id === 'string' && !document.getElementById(id))) {
       throw new Error('Viewer：the id is empty')
     }
-
-    this._delegate = new CesiumViewer(id, {
-      ...DEF_OPTS,
-      ...options,
-    }) // Initialize the viewer
+    this._delegate = Cesium.Viewer
+      ? Cesium.Viewer(id, {
+          ...DEF_OPTS,
+          ...options,
+        })
+      : new CesiumViewer(id, {
+          ...DEF_OPTS,
+          ...options,
+        }) // Initialize the viewer
 
     /**
      *  Registers events
@@ -246,18 +250,6 @@ class Viewer {
    */
   setPitchRange(min = -90, max = -20) {
     this._cameraOption.setPitchRange(min, max)
-    return this
-  }
-
-  /**
-   * @param west
-   * @param south
-   * @param east
-   * @param north
-   * @returns {Viewer}
-   */
-  setBounds(west, south, east, north) {
-    this._cameraOption.setBounds(west, south, east, north)
     return this
   }
 

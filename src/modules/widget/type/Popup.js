@@ -3,10 +3,10 @@
  * @Date: 2020-01-15 19:16:45
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { DomUtil } from '@dc-modules/utils'
+import { Cesium } from '../../../namespace'
 import Widget from '../Widget'
+import State from '../../state/State'
+import { DomUtil } from '../../utils'
 
 class Popup extends Widget {
   constructor() {
@@ -68,7 +68,7 @@ class Popup extends Widget {
     this._bindEvent()
     Object.defineProperty(this._viewer, 'popup', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 

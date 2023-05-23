@@ -3,13 +3,13 @@
  * @Date: 2021-06-08 20:41:51
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { PathEventType, PathEvent } from '@dc-modules/event'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
-import { heading, distance } from '@dc-modules/math'
+import { Cesium } from '../../namespace'
+import State from '../state/State'
+import Parse from '../parse/Parse'
+import { PathEventType, PathEvent } from '../event'
+import { Util } from '../utils'
+import { Transform } from '../transform'
+import { heading, distance } from '../math'
 
 class RoamingPath {
   constructor(positions, duration, pathMode) {
@@ -36,7 +36,6 @@ class RoamingPath {
 
   set id(id) {
     this._bid = id
-    return this
   }
 
   get id() {
@@ -45,7 +44,6 @@ class RoamingPath {
 
   set positions(postions) {
     this._positions = Parse.parsePositions(postions)
-    return this
   }
 
   get positions() {
@@ -54,7 +52,6 @@ class RoamingPath {
 
   set duration(duration) {
     this._duration = duration
-    return this
   }
 
   get duration() {
@@ -63,7 +60,6 @@ class RoamingPath {
 
   set pathMode(pathMode) {
     this._pathMode = pathMode
-    return this
   }
 
   get pathMode() {
@@ -76,7 +72,6 @@ class RoamingPath {
 
   set actived(actived) {
     this._actived = actived
-    return this
   }
 
   get actived() {
@@ -173,7 +168,7 @@ class RoamingPath {
       Cesium.ExtrapolationType.HOLD
     this._sampledPosition.setInterpolationOptions({
       interpolationDegree: 2,
-      interpolationAlgorithm: Cesium.HermitePolynomialApproximation
+      interpolationAlgorithm: Cesium.HermitePolynomialApproximation,
     })
     this._endTime = timeLine[timeLine.length - 1]
     this._actived = true

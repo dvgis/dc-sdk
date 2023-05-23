@@ -3,21 +3,18 @@
  * @Date: 2021-07-14 20:28:10
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { MouseEventType, PlotEventType, PlotEvent } from '@dc-modules/event'
-
-const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
-
-const IMG_CIRCLE_BLUE = require('@dc-modules/images/circle_blue.png')
-
-const IMG_CIRCLE_YELLOW = require('@dc-modules/images/circle_yellow.png')
+import { Cesium } from '../../namespace'
+import { MouseEventType, PlotEventType, PlotEvent } from '../event'
+import IMG_CIRCLE_RED from '../images/circle_red.png'
+import IMG_CIRCLE_BLUE from '../images/circle_blue.png'
+import IMG_CIRCLE_YELLOW from '../images/circle_yellow.png'
 
 const DEF_OPTS = {
   icon_center: IMG_CIRCLE_YELLOW,
   icon_anchor: IMG_CIRCLE_RED,
   icon_midAnchor: IMG_CIRCLE_BLUE,
   icon_size: [12, 12],
-  clampToModel: true
+  clampToModel: true,
 }
 
 class EditTool {
@@ -34,7 +31,6 @@ class EditTool {
 
   set tooltipMess(tooltipMess) {
     this._tooltipMess = tooltipMess
-    return this
   }
 
   /**
@@ -60,7 +56,7 @@ class EditTool {
         this._pickedAnchor.position.setValue(position)
         this._plotEvent.fire(PlotEventType.EDIT_ANCHOR_STOP, {
           pickedAnchor: this._pickedAnchor,
-          position
+          position,
         })
       }
       this._isMoving = false
@@ -96,11 +92,11 @@ class EditTool {
       this._pickedAnchor.position.setValue(position)
       this._plotEvent.fire(PlotEventType.ANCHOR_MOVING, {
         pickedAnchor: this._pickedAnchor,
-        position
+        position,
       })
     } else if (this._anchors.length === 0) {
       this._plotEvent.fire(PlotEventType.ANCHOR_MOVING, {
-        position
+        position,
       })
     }
   }
@@ -115,7 +111,7 @@ class EditTool {
       this._options.clampToModel && e.position ? e.position : e.surfacePosition
     this._plotEvent.fire(PlotEventType.EDIT_STOP, {
       pickedAnchor: this._pickedAnchor,
-      position
+      position,
     })
   }
 
@@ -144,12 +140,12 @@ class EditTool {
           this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&
           !this._options.clampToModel
             ? Cesium.HeightReference.CLAMP_TO_GROUND
-            : Cesium.HeightReference.NONE
+            : Cesium.HeightReference.NONE,
       },
       properties: {
         isMid: isMid,
-        index: index
-      }
+        index: index,
+      },
     })
     this._anchors.push(anchor)
   }
@@ -271,7 +267,7 @@ class EditTool {
     this._viewer.dataSources.add(this._anchorLayer)
     Object.defineProperty(this._viewer, 'editTool', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 }

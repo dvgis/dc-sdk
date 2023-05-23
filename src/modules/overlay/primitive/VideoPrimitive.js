@@ -3,12 +3,12 @@
  * @Date: 2020-11-09 20:04:30
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class VideoPrimitive extends Overlay {
   constructor(positions, video) {
@@ -16,8 +16,8 @@ class VideoPrimitive extends Overlay {
     this._positions = Parse.parsePositions(positions)
     this._delegate = new Cesium.GroundPrimitive({
       geometryInstances: new Cesium.GeometryInstance({
-        geometry: {}
-      })
+        geometry: {},
+      }),
     })
     this._video = video
     this._state = State.INITIALIZED
@@ -29,8 +29,8 @@ class VideoPrimitive extends Overlay {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    this._delegate.geometryInstances.geometry = Cesium.PolygonGeometry.fromPositions(
-      {
+    this._delegate.geometryInstances.geometry =
+      Cesium.PolygonGeometry.fromPositions({
         positions: Transform.transformWGS84ArrayToCartesianArray(
           this._positions
         ),
@@ -38,10 +38,8 @@ class VideoPrimitive extends Overlay {
         extrudedHeight: this._style?.extrudedHeight,
         closeTop: this._style?.closeTop,
         closeBottom: this._style?.closeBottom,
-        vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT
-      }
-    )
-    return this
+        vertexFormat: Cesium.EllipsoidSurfaceAppearance.VERTEX_FORMAT,
+      })
   }
 
   get positions() {
@@ -51,7 +49,6 @@ class VideoPrimitive extends Overlay {
   set video(video) {
     this._video = video
     this._setAppearance()
-    return this
   }
 
   get video() {
@@ -65,8 +62,8 @@ class VideoPrimitive extends Overlay {
   _setAppearance() {
     this._delegate.appearance = new Cesium.EllipsoidSurfaceAppearance({
       material: Cesium.Material.fromType('Image', {
-        image: this._video
-      })
+        image: this._video,
+      }),
     })
   }
 

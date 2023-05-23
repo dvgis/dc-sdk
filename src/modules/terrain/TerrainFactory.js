@@ -3,14 +3,14 @@
  * @Date: 2020-01-21 15:54:56
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../namespace'
 import TerrainType from './TerrainType'
 
 class TerrainFactory {
   /**
-   * Create ellipsoid terrain
+   *
    * @param options
-   * @returns {module:cesium.EllipsoidTerrainProvider}
+   * @returns {module:@cesium/engine.EllipsoidTerrainProvider}
    */
   static createEllipsoidTerrain(options) {
     return new Cesium.EllipsoidTerrainProvider(options)

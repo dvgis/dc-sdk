@@ -3,10 +3,10 @@
  * @Date: 2020-08-30 17:10:33
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import Parse from '@dc-modules/parse/Parse'
-import { Transform } from '@dc-modules/transform'
-import { PlotUtil } from '@dc-modules/utils'
+import { Cesium } from '../../../namespace'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { PlotUtil } from '../../utils'
 
 const HALF_PI = Math.PI / 2
 
@@ -87,7 +87,7 @@ class FineArrowGraphics {
           pnt2,
           headRight,
           neckRight,
-          tailRight
+          tailRight,
         ])
       )
     )

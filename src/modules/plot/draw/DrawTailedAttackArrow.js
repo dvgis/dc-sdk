@@ -3,16 +3,16 @@
  * @Date: 2020-08-30 16:43:12
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { TailedAttackArrow } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
 import Draw from './Draw'
 import TailedAttackArrowGraphics from '../graphics/TailedAttackArrowGraphics'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { TailedAttackArrow } from '../../overlay'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
-  fill: true
+  fill: true,
 }
 
 class DrawTailedAttackArrow extends Draw {
@@ -21,7 +21,7 @@ class DrawTailedAttackArrow extends Draw {
     this._maxAnchorSize = 3
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
     this._graphics = new TailedAttackArrowGraphics()
   }
@@ -42,8 +42,8 @@ class DrawTailedAttackArrow extends Draw {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -52,7 +52,7 @@ class DrawTailedAttackArrow extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let tailedAttackArrow = null
     if (this._positions.length) {
       tailedAttackArrow = new TailedAttackArrow(

@@ -4,7 +4,7 @@
  */
 
 import { Cesium } from '../../namespace'
-import { Transform } from '@dc-modules/transform'
+import { Transform } from '../transform'
 
 /**
  *

@@ -36,7 +36,6 @@ const thirdPart = {
   CustomShaderTranslucencyMode: Cesium.CustomShaderTranslucencyMode,
   CustomShader: Cesium.CustomShader,
   UniformType: Cesium.UniformType,
-  GroundSkyBox: Cesium.GroundSkyBox,
 }
 
 export default thirdPart

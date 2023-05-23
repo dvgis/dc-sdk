@@ -3,9 +3,9 @@
  * @Date: 2021-03-02 13:38:48
  */
 
-import State from '@dc-modules/state/State'
-import { DomUtil } from '@dc-modules/utils'
 import Widget from '../Widget'
+import State from '../../state/State'
+import { DomUtil } from '../../utils'
 
 class LoadingMask extends Widget {
   constructor() {
@@ -25,7 +25,7 @@ class LoadingMask extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'loadingMask', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 

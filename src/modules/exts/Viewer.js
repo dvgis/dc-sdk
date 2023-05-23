@@ -1,8 +1,9 @@
 /**
  @author : Caven Chen
- @date : 2023-05-07
+ @date : 2023-05-23
  */
-import { Cesium } from '../../namespace'
+import { Cesium } from '../../namespace/index.js'
+
 const {
   BoundingSphere,
   BoundingSphereState,
@@ -44,10 +45,104 @@ function trackDataSourceClock(timeline, clock, dataSource) {
 }
 
 /**
+ * @typedef {object} Viewer.ConstructorOptions
  *
- * @param container
- * @param options
+ * Initialization options for the Viewer constructor
+ *
+ * @property {ImageryProvider|false} [imageryProvider=createWorldImagery()] The imagery provider to use.  This value is only valid if `baseLayerPicker` is set to false. Deprecated.
+ * @property {ImageryLayer|false} [baseLayer=ImageryLayer.fromWorldImagery()] The bottommost imagery layer applied to the globe. If set to <code>false</code>, no imagery provider will be added. This value is only valid if `baseLayerPicker` is set to false.
+ * @property {TerrainProvider} [terrainProvider=new EllipsoidTerrainProvider()] The terrain provider to use
+ * @property {Terrain} [terrain] A terrain object which handles asynchronous terrain provider. Can only specify if options.terrainProvider is undefined.
+ * @property {SkyBox|false} [skyBox] The skybox used to render the stars.  When <code>undefined</code>, the default stars are used. If set to <code>false</code>, no skyBox, Sun, or Moon will be added.
+ * @property {SkyAtmosphere|false} [skyAtmosphere] Blue sky, and the glow around the Earth's limb.  Set to <code>false</code> to turn it off.
+ * @property {Element|string} [fullscreenElement=document.body] The element or id to be placed into fullscreen mode when the full screen button is pressed.
+ * @property {boolean} [useDefaultRenderLoop=true] True if this widget should control the render loop, false otherwise.
+ * @property {number} [targetFrameRate] The target frame rate when using the default render loop.
+ * @property {boolean} [showRenderLoopErrors=true] If true, this widget will automatically display an HTML panel to the user containing the error, if a render loop error occurs.
+ * @property {boolean} [useBrowserRecommendedResolution=true] If true, render at the browser's recommended resolution and ignore <code>window.devicePixelRatio</code>.
+ * @property {boolean} [automaticallyTrackDataSourceClocks=true] If true, this widget will automatically track the clock settings of newly added DataSources, updating if the DataSource's clock changes.  Set this to false if you want to configure the clock independently.
+ * @property {ContextOptions} [contextOptions] Context and WebGL creation properties passed to {@link Scene}.
+ * @property {SceneMode} [sceneMode=SceneMode.SCENE3D] The initial scene mode.
+ * @property {MapProjection} [mapProjection=new GeographicProjection()] The map projection to use in 2D and Columbus View modes.
+ * @property {Globe|false} [globe=new Globe(mapProjection.ellipsoid)] The globe to use in the scene.  If set to <code>false</code>, no globe will be added.
+ * @property {boolean} [orderIndependentTranslucency=true] If true and the configuration supports it, use order independent translucency.
+ * @property {Element|string} [creditContainer] The DOM element or ID that will contain the {@link CreditDisplay}.  If not specified, the credits are added to the bottom of the widget itself.
+ * @property {Element|string} [creditViewport] The DOM element or ID that will contain the credit pop up created by the {@link CreditDisplay}.  If not specified, it will appear over the widget itself.
+ * @property {DataSourceCollection} [dataSources=new DataSourceCollection()] The collection of data sources visualized by the widget.  If this parameter is provided,
+ *                               the instance is assumed to be owned by the caller and will not be destroyed when the viewer is destroyed.
+ * @property {boolean} [shadows=false] Determines if shadows are cast by light sources.
+ * @property {ShadowMode} [terrainShadows=ShadowMode.RECEIVE_ONLY] Determines if the terrain casts or receives shadows from light sources.
+ * @property {MapMode2D} [mapMode2D=MapMode2D.INFINITE_SCROLL] Determines if the 2D map is rotatable or can be scrolled infinitely in the horizontal direction.
+ * @property {boolean} [projectionPicker=false] If set to true, the ProjectionPicker widget will be created.
+ * @property {boolean} [blurActiveElementOnCanvasFocus=true] If true, the active element will blur when the viewer's canvas is clicked. Setting this to false is useful for cases when the canvas is clicked only for retrieving position or an entity data without actually meaning to set the canvas to be the active element.
+ * @property {boolean} [requestRenderMode=false] If true, rendering a frame will only occur when needed as determined by changes within the scene. Enabling reduces the CPU/GPU usage of your application and uses less battery on mobile, but requires using {@link Scene#requestRender} to render a new frame explicitly in this mode. This will be necessary in many cases after making changes to the scene in other parts of the API. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
+ * @property {number} [maximumRenderTimeChange=0.0] If requestRenderMode is true, this value defines the maximum change in simulation time allowed before a render is requested. See {@link https://cesium.com/blog/2018/01/24/cesium-scene-rendering-performance/|Improving Performance with Explicit Rendering}.
+ * @property {number} [depthPlaneEllipsoidOffset=0.0] Adjust the DepthPlane to address rendering artefacts below ellipsoid zero elevation.
+ * @property {number} [msaaSamples=1] If provided, this value controls the rate of multisample antialiasing. Typical multisampling rates are 2, 4, and sometimes 8 samples per pixel. Higher sampling rates of MSAA may impact performance in exchange for improved visual quality. This value only applies to WebGL2 contexts that support multisample render targets.
+ */
+
+/**
+ * A base widget for building applications.  It composites all of the standard Cesium widgets into one reusable package.
+ * The widget can always be extended by using mixins, which add functionality useful for a variety of applications.
+ *
+ * @alias Viewer
  * @constructor
+ *
+ * @param {Element|string} container The DOM element or ID that will contain the widget.
+ * @param {Viewer.ConstructorOptions} [options] Object describing initialization options
+ *
+ * @exception {DeveloperError} Element with id "container" does not exist in the document.
+ * @exception {DeveloperError} options.selectedImageryProviderViewModel is not available when not using the BaseLayerPicker widget, specify options.baseLayer instead.
+ * @exception {DeveloperError} options.selectedTerrainProviderViewModel is not available when not using the BaseLayerPicker widget, specify options.terrainProvider instead.
+ *
+ * @see Animation
+ * @see BaseLayerPicker
+ * @see CesiumWidget
+ * @see FullscreenButton
+ * @see HomeButton
+ * @see SceneModePicker
+ * @see Timeline
+ * @see viewerDragDropMixin
+ *
+ * @demo {@link https://sandcastle.cesium.com/index.html?src=Hello%20World.html|Cesium Sandcastle Hello World Demo}
+ *
+ * @example
+ * // Initialize the viewer widget with several custom options and mixins.
+ * try {
+ *   const viewer = new Cesium.Viewer("cesiumContainer", {
+ *     // Start in Columbus Viewer
+ *     sceneMode: Cesium.SceneMode.COLUMBUS_VIEW,
+ *     // Use Cesium World Terrain
+ *     terrain: Cesium.Terrain.fromWorldTerrain(),
+ *     // Use OpenStreetMaps
+ *     baseLayer: new Cesium.ImageryLayer(OpenStreetMapImageryProvider({
+ *       url: "https://a.tile.openstreetmap.org/"
+ *     })),
+ *     skyBox: new Cesium.SkyBox({
+ *       sources: {
+ *         positiveX: "stars/TychoSkymapII.t3_08192x04096_80_px.jpg",
+ *         negativeX: "stars/TychoSkymapII.t3_08192x04096_80_mx.jpg",
+ *         positiveY: "stars/TychoSkymapII.t3_08192x04096_80_py.jpg",
+ *         negativeY: "stars/TychoSkymapII.t3_08192x04096_80_my.jpg",
+ *         positiveZ: "stars/TychoSkymapII.t3_08192x04096_80_pz.jpg",
+ *         negativeZ: "stars/TychoSkymapII.t3_08192x04096_80_mz.jpg"
+ *       }
+ *     }),
+ *     // Show Columbus View map with Web Mercator projection
+ *     mapProjection: new Cesium.WebMercatorProjection()
+ *   });
+ * } catch (error) {
+ *   console.log(error);
+ * }
+ *
+ * // Add basic drag and drop functionality
+ * viewer.extend(Cesium.viewerDragDropMixin);
+ *
+ * // Show a pop-up alert if we encounter an error when processing a dropped file
+ * viewer.dropError.addEventListener(function(dropHandler, name, error) {
+ *   console.log(error);
+ *   window.alert(error);
+ * });
  */
 function Viewer(container, options) {
   //>>includeStart('debug', pragmas.debug);
@@ -59,19 +154,9 @@ function Viewer(container, options) {
   container = getElement(container)
   options = defaultValue(options, defaultValue.EMPTY_OBJECT)
 
-  //>>includeEnd('debug')
   const viewerContainer = document.createElement('div')
-  viewerContainer.className = 'dc-viewer'
-  container.appendChild(viewerContainer)
 
-  // Cesium widget container
-  const cesiumWidgetContainer = document.createElement('div')
-  cesiumWidgetContainer.className = 'dc-viewer-widget-container'
-  viewerContainer.appendChild(cesiumWidgetContainer)
-
-  // Bottom container
   const bottomContainer = document.createElement('div')
-  bottomContainer.className = 'dc-viewer-bottom'
 
   const scene3DOnly = defaultValue(options.scene3DOnly, false)
 
@@ -82,7 +167,7 @@ function Viewer(container, options) {
   }
 
   // Cesium widget
-  const cesiumWidget = new CesiumWidget(cesiumWidgetContainer, {
+  const cesiumWidget = new CesiumWidget(container, {
     baseLayer: false,
     clock: clock,
     skyBox: options.skyBox,
@@ -96,10 +181,6 @@ function Viewer(container, options) {
     targetFrameRate: options.targetFrameRate,
     showRenderLoopErrors: options.showRenderLoopErrors,
     useBrowserRecommendedResolution: options.useBrowserRecommendedResolution,
-    creditContainer: defined(options.creditContainer)
-      ? options.creditContainer
-      : bottomContainer,
-    creditViewport: options.creditViewport,
     scene3DOnly: scene3DOnly,
     shadows: options.shadows,
     terrainShadows: options.terrainShadows,
@@ -111,17 +192,18 @@ function Viewer(container, options) {
     msaaSamples: options.msaaSamples,
   })
 
-  cesiumWidget.container.firstChild.className = 'dc-widget'
   cesiumWidget.scene.backgroundColor = Color.TRANSPARENT
-  cesiumWidget.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
 
-  let childrens = cesiumWidget.creditViewport.children
-
-  for (let i = 0; i < childrens.length; i++) {
-    if (!(childrens[i] instanceof HTMLCanvasElement)) {
-      cesiumWidget.creditViewport.removeChild(childrens[i])
-    }
+  while (
+    cesiumWidget.creditViewport.hasChildNodes() &&
+    !(cesiumWidget.creditViewport.lastChild instanceof HTMLCanvasElement)
+  ) {
+    cesiumWidget.creditViewport.removeChild(
+      cesiumWidget.creditViewport.lastChild
+    )
   }
+
+  cesiumWidget.creditViewport.className = 'dc-viewer-canvas'
 
   let dataSourceCollection = options.dataSources
   let destroyDataSourceCollection = false
@@ -144,7 +226,7 @@ function Viewer(container, options) {
 
   // Main Toolbar
   const toolbar = document.createElement('div')
-  toolbar.className = 'dc-viewer-toolbar'
+
   //Assign all properties to this instance.  No "this" assignments should
   //take place above this line.
   this._dataSourceChangedListeners = {}
@@ -223,7 +305,7 @@ function Viewer(container, options) {
 Object.defineProperties(Viewer.prototype, {
   /**
    * Gets the parent container.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Element}
    * @readonly
    */
@@ -236,7 +318,7 @@ Object.defineProperties(Viewer.prototype, {
   /**
    * Gets the DOM element for the area at the bottom of the window containing the
    * {@link CreditDisplay} and potentially other things.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Element}
    * @readonly
    */
@@ -248,7 +330,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the CesiumWidget.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {CesiumWidget}
    * @readonly
    */
@@ -260,7 +342,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the display used for {@link DataSource} visualization.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {DataSourceDisplay}
    * @readonly
    */
@@ -273,7 +355,7 @@ Object.defineProperties(Viewer.prototype, {
   /**
    * Gets the collection of entities not tied to a particular data source.
    * This is a shortcut to [dataSourceDisplay.defaultDataSource.entities]{@link Viewer#dataSourceDisplay}.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {EntityCollection}
    * @readonly
    */
@@ -285,7 +367,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the set of {@link DataSource} instances to be visualized.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {DataSourceCollection}
    * @readonly
    */
@@ -297,7 +379,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the canvas.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {HTMLCanvasElement}
    * @readonly
    */
@@ -309,7 +391,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the scene.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Scene}
    * @readonly
    */
@@ -321,8 +403,8 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Determines if shadows are cast by light sources.
-   * @memberof viewer.prototype
-   * @type {Boolean}
+   * @memberof Viewer.prototype
+   * @type {boolean}
    */
   shadows: {
     get: function () {
@@ -335,7 +417,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Determines if the terrain casts or shadows from light sources.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {ShadowMode}
    */
   terrainShadows: {
@@ -349,7 +431,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Get the scene's shadow map
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {ShadowMap}
    * @readonly
    */
@@ -361,7 +443,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the collection of image layers that will be rendered on the globe.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
    * @type {ImageryLayerCollection}
    * @readonly
@@ -374,7 +456,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * The terrain provider providing surface geometry for the globe.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
    * @type {TerrainProvider}
    */
@@ -389,7 +471,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the camera.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
    * @type {Camera}
    * @readonly
@@ -402,7 +484,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the post-process stages.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
    * @type {PostProcessStageCollection}
    * @readonly
@@ -415,7 +497,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the clock.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Clock}
    * @readonly
    */
@@ -427,7 +509,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets the screen space event handler.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {ScreenSpaceEventHandler}
    * @readonly
    */
@@ -442,9 +524,9 @@ Object.defineProperties(Viewer.prototype, {
    * is true. If undefined, the browser's requestAnimationFrame implementation
    * determines the frame rate.  If defined, this value must be greater than 0.  A value higher
    * than the underlying requestAnimationFrame implementation will have no effect.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
-   * @type {Number}
+   * @type {number}
    */
   targetFrameRate: {
     get: function () {
@@ -465,9 +547,9 @@ Object.defineProperties(Viewer.prototype, {
    * <code>renderError</code> event will be raised and this property
    * will be set to false.  It must be set back to true to continue rendering
    * after the error.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
-   * @type {Boolean}
+   * @type {boolean}
    */
   useDefaultRenderLoop: {
     get: function () {
@@ -485,9 +567,9 @@ Object.defineProperties(Viewer.prototype, {
    * For example, if the widget is laid out at a size of 640x480, setting this value to 0.5
    * will cause the scene to be rendered at 320x240 and then scaled up while setting
    * it to 2.0 will cause the scene to be rendered at 1280x960 and then scaled down.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
-   * @type {Number}
+   * @type {number}
    * @default 1.0
    */
   resolutionScale: {
@@ -506,9 +588,9 @@ Object.defineProperties(Viewer.prototype, {
    * performance on less powerful devices that have high pixel density. When false, rendering
    * will be in device pixels. {@link Viewer#resolutionScale} will still take effect whether
    * this flag is true or false.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
-   * @type {Boolean}
+   * @type {boolean}
    * @default true
    */
   useBrowserRecommendedResolution: {
@@ -526,9 +608,9 @@ Object.defineProperties(Viewer.prototype, {
    * For example, if asynchronous primitives are being processed in the
    * background, the clock will not advance until the geometry is ready.
    *
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    *
-   * @type {Boolean}
+   * @type {boolean}
    */
   allowDataSourcesToSuspendAnimation: {
     get: function () {
@@ -541,7 +623,7 @@ Object.defineProperties(Viewer.prototype, {
 
   /**
    * Gets or sets the Entity instance currently being tracked by the camera.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Entity | undefined}
    */
   trackedEntity: {
@@ -594,7 +676,7 @@ Object.defineProperties(Viewer.prototype, {
    * If a user interactively picks a Cesium3DTilesFeature instance, then this property
    * will contain a transient Entity instance with a property named "feature" that is
    * the instance that was picked.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Entity | undefined}
    */
   selectedEntity: {
@@ -610,7 +692,7 @@ Object.defineProperties(Viewer.prototype, {
   },
   /**
    * Gets the event that is raised when the selected entity changes.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Event}
    * @readonly
    */
@@ -621,7 +703,7 @@ Object.defineProperties(Viewer.prototype, {
   },
   /**
    * Gets the event that is raised when the tracked entity changes.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {Event}
    * @readonly
    */
@@ -632,7 +714,7 @@ Object.defineProperties(Viewer.prototype, {
   },
   /**
    * Gets or sets the data source to track with the viewer's clock.
-   * @memberof viewer.prototype
+   * @memberof Viewer.prototype
    * @type {DataSource}
    */
   clockTrackedDataSource: {
@@ -649,9 +731,14 @@ Object.defineProperties(Viewer.prototype, {
 })
 
 /**
+ * Extends the base viewer functionality with the provided mixin.
+ * A mixin may add additional properties, functions, or other behavior
+ * to the provided viewer instance.
  *
- * @param mixin
- * @param options
+ * @param {Viewer.ViewerMixin} mixin The Viewer mixin to add to this instance.
+ * @param {object} [options] The options object to be passed to the mixin function.
+ *
+ * @see viewerDragDropMixin
  */
 Viewer.prototype.extend = function (mixin, options) {
   //>>includeStart('debug', pragmas.debug);
@@ -723,9 +810,6 @@ Viewer.prototype.destroy = function () {
     this._dataSourceRemoved(dataSources, dataSources.get(i))
   }
   this._dataSourceRemoved(undefined, this._dataSourceDisplay.defaultDataSource)
-
-  this._container.removeChild(this._element)
-  this._element.removeChild(this._toolbar)
 
   this._eventHelper.removeAll()
 
@@ -976,12 +1060,12 @@ Viewer.prototype.zoomTo = function (target, offset) {
  * target will be the range. The heading will be determined from the offset. If the heading cannot be
  * determined from the offset, the heading will be north.</p>
  *
- * @param {Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud|Promise.<Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud>} target The entity, array of entities, entity collection, data source, Cesium3DTileset, point cloud, or imagery layer to view. You can also pass a promise that resolves to one of the previously mentioned types.
- * @param {Object} [options] Object with the following properties:
- * @param {Number} [options.duration=3.0] The duration of the flight in seconds.
- * @param {Number} [options.maximumHeight] The maximum height at the peak of the flight.
+ * @param {Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud|Promise<Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud|VoxelPrimitive>} target The entity, array of entities, entity collection, data source, Cesium3DTileset, point cloud, or imagery layer to view. You can also pass a promise that resolves to one of the previously mentioned types.
+ * @param {object} [options] Object with the following properties:
+ * @param {number} [options.duration=3.0] The duration of the flight in seconds.
+ * @param {number} [options.maximumHeight] The maximum height at the peak of the flight.
  * @param {HeadingPitchRange} [options.offset] The offset from the target in the local east-north-up reference frame centered at the target.
- * @returns {Promise.<Boolean>} A Promise that resolves to true if the flight was successful or false if the target is not currently visualized in the scene or the flight was cancelled. //TODO: Cleanup entity mentions
+ * @returns {Promise<boolean>} A Promise that resolves to true if the flight was successful or false if the target is not currently visualized in the scene or the flight was cancelled. //TODO: Cleanup entity mentions
  */
 Viewer.prototype.flyTo = function (target, options) {
   return zoomToOrFly(this, target, options, true)
@@ -1115,7 +1199,6 @@ Viewer.prototype._postRender = function () {
   updateZoomTarget(this)
   updateTrackedEntity(this)
 }
-
 function updateZoomTarget(viewer) {
   const target = viewer._zoomTarget
   if (!defined(target) || viewer.scene.mode === SceneMode.MORPHING) {

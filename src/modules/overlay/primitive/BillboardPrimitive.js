@@ -3,11 +3,11 @@
  * @Date: 2021-06-03 21:06:17
  */
 
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class BillboardPrimitive extends Overlay {
   constructor(position, icon) {
@@ -19,7 +19,7 @@ class BillboardPrimitive extends Overlay {
       position: undefined,
       image: undefined,
       width: 0,
-      height: 0
+      height: 0,
     }
     this._state = State.INITIALIZED
   }
@@ -33,7 +33,6 @@ class BillboardPrimitive extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {
@@ -43,7 +42,6 @@ class BillboardPrimitive extends Overlay {
   set icon(icon) {
     this._icon = icon
     this._delegate.image = this._icon
-    return this
   }
 
   get icon() {
@@ -57,7 +55,6 @@ class BillboardPrimitive extends Overlay {
     this._size = size
     this._delegate.width = this._size[0] || 32
     this._delegate.height = this._size[1] || 32
-    return this
   }
 
   get size() {

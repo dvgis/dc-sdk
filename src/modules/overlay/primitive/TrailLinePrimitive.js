@@ -1,14 +1,14 @@
 /**
  * @Author: Caven
- * @Date: 2021-01-09 21:33:59
+ * @Date: 2021-01-09
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class TrailLinePrimitive extends Overlay {
   constructor(positions, width = 1) {
@@ -17,8 +17,8 @@ class TrailLinePrimitive extends Overlay {
     this._width = width
     this._delegate = new Cesium.Primitive({
       geometryInstances: new Cesium.GeometryInstance({
-        geometry: {}
-      })
+        geometry: {},
+      }),
     })
     this._state = State.INITIALIZED
   }
@@ -31,9 +31,8 @@ class TrailLinePrimitive extends Overlay {
     this._positions = Parse.parsePositions(positions)
     this._delegate.geometryInstances.geometry = new Cesium.PolylineGeometry({
       positions: Transform.transformWGS84ArrayToCartesianArray(this._positions),
-      width: this._width
+      width: this._width,
     })
-    return this
   }
 
   get positions() {
@@ -48,8 +47,8 @@ class TrailLinePrimitive extends Overlay {
     this._delegate.appearance = new Cesium.PolylineMaterialAppearance({
       material: Cesium.Material.fromType('PolylineTrail', {
         color: this._style?.color || new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-        speed: this._style?.speed || 5
-      })
+        speed: this._style?.speed || 5,
+      }),
     })
   }
 

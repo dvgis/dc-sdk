@@ -3,12 +3,12 @@
  * @Date: 2020-12-31 11:05:32
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class ScanCirclePrimitive extends Overlay {
   constructor(position, radius) {
@@ -17,8 +17,8 @@ class ScanCirclePrimitive extends Overlay {
     this._radius = radius
     this._delegate = new Cesium.GroundPrimitive({
       geometryInstances: new Cesium.GeometryInstance({
-        geometry: {}
-      })
+        geometry: {},
+      }),
     })
     this._state = State.INITIALIZED
   }
@@ -32,9 +32,8 @@ class ScanCirclePrimitive extends Overlay {
     this._delegate.geometryInstances.geometry = new Cesium.EllipseGeometry({
       center: Transform.transformWGS84ToCartesian(this._position),
       semiMajorAxis: this._radius,
-      semiMinorAxis: this._radius
+      semiMinorAxis: this._radius,
     })
-    return this
   }
 
   get position() {
@@ -45,7 +44,6 @@ class ScanCirclePrimitive extends Overlay {
     this._radius = radius
     this._delegate.geometryInstances.geometry.semiMajorAxis = this._radius
     this._delegate.geometryInstances.geometry.semiMinorAxis = this._radius
-    return this
   }
 
   get radius() {
@@ -63,8 +61,8 @@ class ScanCirclePrimitive extends Overlay {
     this._delegate.appearance = new Cesium.MaterialAppearance({
       material: Cesium.Material.fromType('CircleScan', {
         color: this._style?.color || Cesium.Color.WHITE,
-        speed: this._style?.speed || 10
-      })
+        speed: this._style?.speed || 10,
+      }),
     })
   }
 

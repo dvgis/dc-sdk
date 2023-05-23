@@ -3,12 +3,12 @@
  * @Date: 2020-01-31 18:57:02
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
 
 class Circle extends Overlay {
   constructor(center, radius) {
@@ -73,7 +73,7 @@ class Circle extends Overlay {
         semiMajorAxis: this._radius,
         semiMinorAxis: this._radius,
         rotation: 0,
-        granularity: 0.005
+        granularity: 0.005,
       },
       false,
       true
@@ -101,7 +101,7 @@ class Circle extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(this._center)
     this._delegate.label = {
       ...textStyle,
-      text: text
+      text: text,
     }
     return this
   }

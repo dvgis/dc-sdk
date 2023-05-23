@@ -3,15 +3,15 @@
  * @Date: 2020-08-29 21:24:55
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { Circle } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { Circle } from '../../overlay'
 import Draw from './Draw'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
-  fill: true
+  fill: true,
 }
 
 class DrawCircle extends Draw {
@@ -21,7 +21,7 @@ class DrawCircle extends Draw {
     this._radius = 0
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
   }
 
@@ -49,7 +49,7 @@ class DrawCircle extends Draw {
                 semiMajorAxis: this._radius,
                 semiMinorAxis: this._radius,
                 rotation: 0,
-                granularity: 0.005
+                granularity: 0.005,
               },
               false,
               true
@@ -60,8 +60,8 @@ class DrawCircle extends Draw {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -70,7 +70,7 @@ class DrawCircle extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let circle = null
     if (this._positions.length) {
       circle = new Circle(
@@ -91,7 +91,7 @@ class DrawCircle extends Draw {
     this._positions.push(position)
     this.drawTool.fire(PlotEventType.CREATE_ANCHOR, {
       position,
-      isCenter: len === 1
+      isCenter: len === 1,
     })
     if (len >= this._maxAnchorSize) {
       this._positions.pop()

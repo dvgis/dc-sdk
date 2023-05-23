@@ -3,9 +3,9 @@
  * @Date: 2020-08-30 22:04:36
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Edit from './Edit'
+import { Transform } from '../../transform'
 
 class EditBillboard extends Edit {
   constructor(overlay) {

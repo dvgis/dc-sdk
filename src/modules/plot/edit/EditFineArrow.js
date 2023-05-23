@@ -3,9 +3,7 @@
  * @Date: 2020-08-30 23:46:07
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Edit from './Edit'
 import FineArrowGraphics from '../graphics/FineArrowGraphics'
 

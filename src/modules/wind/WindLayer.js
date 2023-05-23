@@ -3,9 +3,9 @@
  * @Date: 2021-01-18 20:13:30
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { Layer } from '@dc-modules/layer'
+import { Cesium } from '../../namespace'
+import { Layer } from '../layer'
+import State from '../state/State'
 import Field from './Field'
 import WindCanvas from './WindCanvas'
 
@@ -18,7 +18,7 @@ const DEF_OPTS = {
   paths: 800,
   frameRate: 20,
   useCoordsDraw: true,
-  gpet: true
+  gpet: true,
 }
 
 class WindLayer extends Layer {
@@ -26,7 +26,7 @@ class WindLayer extends Layer {
     super(id)
     this._options = {
       ...DEF_OPTS,
-      ...options
+      ...options,
     }
     this._data = undefined
     this._canvas = document.createElement('canvas')
@@ -55,7 +55,7 @@ class WindLayer extends Layer {
   _formatData(data) {
     let uComp
     let vComp
-    data.forEach(function(record) {
+    data.forEach(function (record) {
       switch (
         record.header.parameterCategory +
         ',' +
@@ -85,7 +85,7 @@ class WindLayer extends Layer {
       cols: header.nx,
       rows: header.ny,
       us: uComp.data,
-      vs: vComp.data
+      vs: vComp.data,
     })
   }
 
@@ -116,7 +116,7 @@ class WindLayer extends Layer {
     let scene = this._viewer.scene
     let camera = this._viewer.camera
     let ellipsoid = Cesium.Ellipsoid.WGS84
-    this._delegate.intersectsCoordinate = coordinate => {
+    this._delegate.intersectsCoordinate = (coordinate) => {
       if (scene.mode === Cesium.SceneMode.SCENE3D) {
         let occluder = new Cesium.EllipsoidalOccluder(
           ellipsoid,
@@ -130,7 +130,7 @@ class WindLayer extends Layer {
       return true
     }
 
-    this._delegate.project = coordinate => {
+    this._delegate.project = (coordinate) => {
       let position = Cesium.Cartesian3.fromDegrees(coordinate[0], coordinate[1])
       let coord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
         scene,
@@ -139,7 +139,7 @@ class WindLayer extends Layer {
       return [coord.x, coord.y]
     }
 
-    this._delegate.unProject = pixel => {
+    this._delegate.unProject = (pixel) => {
       let pick = new Cesium.Cartesian2(pixel[0], pixel[1])
       let cartesian = undefined
       if (scene.mode === Cesium.SceneMode.SCENE3D) {
@@ -209,7 +209,7 @@ class WindLayer extends Layer {
       if (options) {
         this._options = {
           ...this._options,
-          ...options
+          ...options,
         }
         this._delegate.setOptions(this._options)
       }
@@ -227,7 +227,7 @@ class WindLayer extends Layer {
   setOptions(options) {
     this._options = {
       ...this._options,
-      ...options
+      ...options,
     }
     if (this._delegate) {
       this._delegate.setOptions(this._options)

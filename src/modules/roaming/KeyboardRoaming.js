@@ -3,7 +3,7 @@
  * @Date: 2021-06-08 20:41:51
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../namespace'
 
 class KeyboardRoaming {
   constructor(viewer) {
@@ -19,7 +19,7 @@ class KeyboardRoaming {
       moveLeft: false,
       moveRight: false,
       turnLeft: false,
-      turnRight: false
+      turnRight: false,
     }
   }
 
@@ -75,7 +75,7 @@ class KeyboardRoaming {
    * @private
    */
   _unbindEvent() {
-    Object.keys(this._flags).forEach(key => {
+    Object.keys(this._flags).forEach((key) => {
       this._flags[key] = false
     })
     let canvas = this._viewer.scene.canvas
@@ -158,7 +158,7 @@ class KeyboardRoaming {
    * @private
    */
   _onKeyup(e) {
-    Object.keys(this._flags).forEach(key => {
+    Object.keys(this._flags).forEach((key) => {
       this._flags[key] = false
     })
   }
@@ -169,9 +169,10 @@ class KeyboardRoaming {
    */
   _onTick() {
     let camera = this._viewer.scene.camera
-    let cameraHeight = this._viewer.scene.globe.ellipsoid.cartesianToCartographic(
-      camera.position
-    ).height
+    let cameraHeight =
+      this._viewer.scene.globe.ellipsoid.cartesianToCartographic(
+        camera.position
+      ).height
     let moveRate = cameraHeight / this._moveRate
     let axis = Cesium.Cartesian3.clone(camera.position, new Cesium.Cartesian3())
     this._flags.moveForward && camera.moveForward(moveRate)

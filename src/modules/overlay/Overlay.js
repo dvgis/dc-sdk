@@ -3,10 +3,10 @@
  * @Date: 2020-01-03 12:18:17
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { Util } from '@dc-modules/utils'
-import { OverlayEventType, OverlayEvent } from '@dc-modules/event'
+import { Cesium } from '../../namespace'
+import State from '../state/State'
+import { Util } from '../utils'
+import { OverlayEventType, OverlayEvent } from '../event'
 import OverlayType from './OverlayType'
 
 class Overlay {
@@ -244,7 +244,7 @@ class Overlay {
     if (this._delegate instanceof Cesium.Entity) {
       this._delegate.label = {
         ...textStyle,
-        text: text
+        text: text,
       }
     }
     return this

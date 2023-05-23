@@ -3,11 +3,10 @@
  * @Date: 2020-01-15 20:23:46
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { Util } from '@dc-modules/utils'
-
-const SnowShader = require('@dc-modules/material/shader/weather/SnowShader.glsl')
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import { Util } from '../../utils'
+import SnowShader from '../../material/shader/weather/SnowShader.glsl'
 
 class Snow {
   constructor() {
@@ -29,7 +28,6 @@ class Snow {
       this._createPostProcessStage()
     }
     this._delegate && (this._delegate.enabled = enable)
-    return this
   }
 
   get enable() {
@@ -39,7 +37,6 @@ class Snow {
   set speed(speed) {
     this._speed = speed
     this._delegate && (this._delegate.uniforms.speed = speed)
-    return this
   }
 
   get speed() {
@@ -55,8 +52,8 @@ class Snow {
       name: this._id,
       fragmentShader: SnowShader,
       uniforms: {
-        speed: this._speed
-      }
+        speed: this._speed,
+      },
     })
     this._viewer.scene.postProcessStages.add(this._delegate)
   }

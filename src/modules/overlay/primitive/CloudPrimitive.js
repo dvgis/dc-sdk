@@ -3,11 +3,11 @@
  * @Date: 2021-11-08 20:35:42
  */
 
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class CloudPrimitive extends Overlay {
   constructor(position) {
@@ -15,7 +15,7 @@ class CloudPrimitive extends Overlay {
     this._position = Parse.parsePosition(position)
     this._delegate = {
       position: undefined,
-      scale: { x: 12, y: 8 }
+      scale: { x: 12, y: 8 },
     }
     this._state = State.INITIALIZED
   }
@@ -29,7 +29,6 @@ class CloudPrimitive extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {

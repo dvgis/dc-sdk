@@ -3,10 +3,10 @@
  * @Date: 2020-08-31 10:54:38
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Edit from './Edit'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
 
 class EditCircle extends Edit {
   constructor(overlay) {
@@ -24,9 +24,9 @@ class EditCircle extends Edit {
     this._center = Transform.transformWGS84ToCartesian(this._overlay.center)
     this._positions = [].concat([
       this._center,
-      this._computeCirclePoints(this._center, this._radius)[0]
+      this._computeCirclePoints(this._center, this._radius)[0],
     ])
-    this._delegate.polygon.hierarchy = new Cesium.CallbackProperty(time => {
+    this._delegate.polygon.hierarchy = new Cesium.CallbackProperty((time) => {
       if (this._positions.length > 1) {
         this._radius = Cesium.Cartesian3.distance(
           this._positions[0],
@@ -60,7 +60,7 @@ class EditCircle extends Edit {
         semiMajorAxis: radius,
         semiMinorAxis: radius,
         rotation: 0,
-        granularity: 0.005
+        granularity: 0.005,
       },
       false,
       true
@@ -93,7 +93,7 @@ class EditCircle extends Edit {
       this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
         position: item,
         index: index,
-        isCenter: index % 2 === 0
+        isCenter: index % 2 === 0,
       })
     })
   }

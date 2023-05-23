@@ -9,6 +9,6 @@ import EditTool from './EditTool'
 export default function createTools() {
   return {
     drawTool: new DrawTool(),
-    editTool: new EditTool()
+    editTool: new EditTool(),
   }
 }

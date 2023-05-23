@@ -3,10 +3,10 @@
  * @Date: 2020-08-21 18:16:52
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { Transform } from '@dc-modules/transform'
-import Parse from '@dc-modules/parse/Parse'
-import Position from '@dc-modules/position/Position'
+import { Cesium } from '../../namespace'
+import { Transform } from '../transform'
+import Parse from '../parse/Parse'
+import Position from '../position/Position'
 
 export default function midPosition(start, end) {
   let startPosition = Parse.parsePosition(start)

@@ -3,12 +3,12 @@
  * @Date: 2020-01-19 10:18:23
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import State from '../../state/State'
+import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
+import { Transform } from '../../transform'
 
 class Billboard extends Overlay {
   constructor(position, icon) {
@@ -101,7 +101,7 @@ class Billboard extends Overlay {
     if (entity.billboard) {
       billboard = new Billboard(position, entity.billboard.image.getValue(now))
       billboard.attr = {
-        ...entity?.properties?.getValue(now)
+        ...entity?.properties?.getValue(now),
       }
     }
     return billboard

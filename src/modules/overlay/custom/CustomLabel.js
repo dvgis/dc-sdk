@@ -2,13 +2,12 @@
  * @Author: Caven
  * @Date: 2020-07-28 18:37:59
  */
-
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class CustomLabel extends Overlay {
   constructor(position, text) {
@@ -28,7 +27,6 @@ class CustomLabel extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {
@@ -38,7 +36,6 @@ class CustomLabel extends Overlay {
   set text(text) {
     this._text = text
     this._delegate.label.text = this._text
-    return this
   }
 
   get text() {
@@ -83,8 +80,8 @@ class CustomLabel extends Overlay {
         ...style,
         positions: Transform.transformWGS84ArrayToCartesianArray([
           position,
-          this._position
-        ])
+          this._position,
+        ]),
       }
     }
     return this
@@ -110,7 +107,7 @@ class CustomLabel extends Overlay {
           stRotation = 0
         }
         return stRotation
-      }, false)
+      }, false),
     }
     return this
   }

@@ -3,11 +3,11 @@
  * @Date: 2020-03-04 18:02:32
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { DomUtil } from '@dc-modules/utils'
-import { MouseEventType, SceneEventType } from '@dc-modules/event'
+import { Cesium } from '../../../namespace'
 import Widget from '../Widget'
+import State from '../../state/State'
+import { DomUtil } from '../../utils'
+import { MouseEventType, SceneEventType } from '../../event'
 
 class LocationBar extends Widget {
   constructor() {
@@ -37,7 +37,7 @@ class LocationBar extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'locationBar', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 

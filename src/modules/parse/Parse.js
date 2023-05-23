@@ -2,8 +2,7 @@
  * @Author: Caven
  * @Date: 2020-03-22 00:10:25
  */
-
-import Position from '@dc-modules/position/Position'
+import Position from '../position/Position'
 
 class Parse {
   /**
@@ -42,9 +41,9 @@ class Parse {
       if (positions.indexOf('#') >= 0) {
         throw new Error('the positions invalid')
       }
-      positions = positions.split(';').filter(item => !!item)
+      positions = positions.split(';').filter((item) => !!item)
     }
-    return positions.map(item => {
+    return positions.map((item) => {
       if (typeof item === 'string') {
         return Position.fromString(item)
       } else if (Array.isArray(item)) {
@@ -79,7 +78,7 @@ class Parse {
   static parsePolylineCoordToArray(positions) {
     let result = []
     positions = this.parsePositions(positions)
-    positions.forEach(item => {
+    positions.forEach((item) => {
       result.push([item.lng, item.lat])
     })
     return result
@@ -94,7 +93,7 @@ class Parse {
   static parsePolygonCoordToArray(positions, loop = false) {
     let result = []
     positions = this.parsePositions(positions)
-    positions.forEach(item => {
+    positions.forEach((item) => {
       result.push([item.lng, item.lat])
     })
     if (loop && result.length > 0) {

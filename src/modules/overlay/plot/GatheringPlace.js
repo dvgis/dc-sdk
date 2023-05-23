@@ -3,12 +3,12 @@
  * @Date: 2020-08-29 23:00:27
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util, PlotUtil } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { Util, PlotUtil } from '../../utils'
 
 const HALF_PI = Math.PI / 2
 
@@ -30,7 +30,6 @@ class GatheringPlace extends Overlay {
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
     this._delegate.polygon.hierarchy = this._getHierarchy()
-    return this
   }
 
   get positions() {

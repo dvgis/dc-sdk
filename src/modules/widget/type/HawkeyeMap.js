@@ -3,10 +3,10 @@
  * @Date: 2020-03-15 17:47:42
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import { Util, DomUtil } from '@dc-modules/utils'
-import { SceneEventType } from '@dc-modules/event'
+import { Cesium } from '../../../namespace'
+import State from '../../state/State'
+import { Util, DomUtil } from '../../utils'
+import { SceneEventType } from '../../event'
 import Widget from '../Widget'
 
 const DEF_OPTS = {
@@ -22,7 +22,7 @@ const DEF_OPTS = {
   timeline: false,
   navigationHelpButton: false,
   navigationInstructionsInitiallyVisible: false,
-  creditContainer: undefined
+  creditContainer: undefined,
 }
 
 class HawkeyeMap extends Widget {
@@ -50,7 +50,7 @@ class HawkeyeMap extends Widget {
   _mountContent() {
     let map = new Cesium.Viewer(this._wrapper, {
       ...DEF_OPTS,
-      sceneMode: Cesium.SceneMode.SCENE2D
+      sceneMode: Cesium.SceneMode.SCENE2D,
     })
     map.imageryLayers.removeAll()
     map.cesiumWidget.creditContainer.style.display = 'none'
@@ -64,7 +64,7 @@ class HawkeyeMap extends Widget {
       enableZoom: false,
       enableTilt: false,
       enableLook: false,
-      maximumZoomDistance: 40489014.0
+      maximumZoomDistance: 40489014.0,
     })
     this._map = map
 
@@ -94,7 +94,7 @@ class HawkeyeMap extends Widget {
   _installHook() {
     Object.defineProperty(this._viewer, 'hawkeyeMap', {
       value: this,
-      writable: false
+      writable: false,
     })
     this._viewer.camera.percentageChanged = 0.01
   }
@@ -139,7 +139,7 @@ class HawkeyeMap extends Widget {
       if (!Array.isArray(baseLayer)) {
         baseLayer = [baseLayer]
       }
-      baseLayer.forEach(item => {
+      baseLayer.forEach((item) => {
         this._baseLayers.push(this._map.imageryLayers.addImageryProvider(item))
       })
     }

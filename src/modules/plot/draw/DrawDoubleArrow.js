@@ -1,18 +1,18 @@
 /**
  * @Author: Caven
- * @Date: 2020-08-30 16:43:12
+ * @Date: 2020-08-30
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { DoubleArrow } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { DoubleArrow } from '../../overlay'
 import Draw from './Draw'
 import DoubleArrowGraphics from '../graphics/DoubleArrowGraphics'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
-  fill: true
+  fill: true,
 }
 
 class DrawDoubleArrow extends Draw {
@@ -21,7 +21,7 @@ class DrawDoubleArrow extends Draw {
     this._maxAnchorSize = 4
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
     this._graphics = new DoubleArrowGraphics()
   }
@@ -42,8 +42,8 @@ class DrawDoubleArrow extends Draw {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -52,7 +52,7 @@ class DrawDoubleArrow extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let doubleArrow = null
     if (this._positions.length) {
       doubleArrow = new DoubleArrow(

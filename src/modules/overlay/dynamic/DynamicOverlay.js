@@ -3,11 +3,11 @@
  * @Date: 2021-05-05 09:16:35
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
 
 class DynamicOverlay extends Overlay {
   constructor() {
@@ -54,7 +54,7 @@ class DynamicOverlay extends Overlay {
       this._sampledPosition.removeSamples(
         new Cesium.TimeInterval({
           start: start,
-          stop: stop
+          stop: stop,
         })
       )
       this._cache.splice(0, this._cache.length - this._maxCacheSize)

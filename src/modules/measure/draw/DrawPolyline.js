@@ -23,8 +23,8 @@ class DrawPolyline extends Draw {
         ...this._style,
         positions: new Cesium.CallbackProperty(() => {
           return this._positions
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }

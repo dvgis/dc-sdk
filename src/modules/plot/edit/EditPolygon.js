@@ -3,11 +3,11 @@
  * @Date: 2020-08-30 23:12:09
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { midCartesian } from '@dc-modules/math'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Edit from './Edit'
+import { PlotEventType } from '../../event'
+import { midCartesian } from '../../math'
+import { Transform } from '../../transform'
 
 class EditPolygon extends Edit {
   constructor(overlay) {
@@ -19,10 +19,10 @@ class EditPolygon extends Edit {
    * @private
    */
   _mountedHook() {
-    this._delegate.polygon.hierarchy = new Cesium.CallbackProperty(time => {
+    this._delegate.polygon.hierarchy = new Cesium.CallbackProperty((time) => {
       if (this._positions.length > 2) {
         return new Cesium.PolygonHierarchy(
-          this._positions.map(item => item.clone())
+          this._positions.map((item) => item.clone())
         )
       } else {
         return null
@@ -62,7 +62,7 @@ class EditPolygon extends Edit {
       this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
         position: item,
         index: index,
-        isMid: index % 2 !== 0
+        isMid: index % 2 !== 0,
       })
     })
   }
@@ -112,7 +112,7 @@ class EditPolygon extends Edit {
         this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
           position: item,
           index: index,
-          isMid: index % 2 !== 0
+          isMid: index % 2 !== 0,
         })
       })
     }
@@ -162,11 +162,11 @@ class EditPolygon extends Edit {
       this._positions[nextMidAnchorIndex] = nextMidPosition
       this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
         index: preMidAnchorIndex,
-        position: preMidPosition
+        position: preMidPosition,
       })
       this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
         index: nextMidAnchorIndex,
-        position: nextMidPosition
+        position: nextMidPosition,
       })
     }
   }

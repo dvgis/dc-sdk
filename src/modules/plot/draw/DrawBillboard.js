@@ -3,13 +3,12 @@
  * @Date: 2020-08-29 20:29:59
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { Billboard } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
 import Draw from './Draw'
-
-const IMG_CIRCLE_RED = require('@dc-modules/images/circle_red.png')
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { Billboard } from '../../overlay'
+import IMG_CIRCLE_RED from '../../images/circle_red.png'
 
 class DrawPoint extends Draw {
   constructor(style) {
@@ -17,7 +16,7 @@ class DrawPoint extends Draw {
     this._position = Cesium.Cartesian3.ZERO
     this._style = {
       image: IMG_CIRCLE_RED,
-      ...style
+      ...style,
     }
   }
 
@@ -32,8 +31,8 @@ class DrawPoint extends Draw {
         return this._position
       }, false),
       billboard: {
-        ...this._style
-      }
+        ...this._style,
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -42,7 +41,7 @@ class DrawPoint extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let billboard = null
     if (this._position) {
       billboard = new Billboard(

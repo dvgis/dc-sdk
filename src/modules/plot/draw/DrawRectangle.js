@@ -3,14 +3,14 @@
  * @Date: 2020-08-29 21:30:41
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { Transform } from '@dc-modules/transform'
-import { Rectangle } from '@dc-modules/overlay'
+import { Cesium } from '../../../namespace'
 import Draw from './Draw'
+import { PlotEventType } from '../../event'
+import { Transform } from '../../transform'
+import { Rectangle } from '../../overlay'
 
 const DEF_STYLE = {
-  material: Cesium.Color.YELLOW.withAlpha(0.6)
+  material: Cesium.Color.YELLOW.withAlpha(0.6),
 }
 
 class DrawRectangle extends Draw {
@@ -19,7 +19,7 @@ class DrawRectangle extends Draw {
     this._maxAnchorSize = 2
     this._style = {
       ...DEF_STYLE,
-      ...style
+      ...style,
     }
   }
 
@@ -32,14 +32,14 @@ class DrawRectangle extends Draw {
     this._delegate = new Cesium.Entity({
       rectangle: {
         ...this._style,
-        coordinates: new Cesium.CallbackProperty(time => {
+        coordinates: new Cesium.CallbackProperty((time) => {
           if (this._positions.length > 1) {
             return Cesium.Rectangle.fromCartesianArray(this._positions)
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._layer.entities.add(this._delegate)
   }
@@ -48,7 +48,7 @@ class DrawRectangle extends Draw {
    *
    * @private
    */
-  _stopdHook() {
+  _stoppedHook() {
     let rectangle = null
     if (this._positions.length) {
       rectangle = new Rectangle(

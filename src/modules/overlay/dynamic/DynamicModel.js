@@ -2,14 +2,13 @@
  * @Author: Caven
  * @Date: 2021-05-05 09:16:35
  */
-
-import { Cesium } from '@dc-modules/namespace'
-import State from '@dc-modules/state/State'
-import Parse from '@dc-modules/parse/Parse'
-import { Util } from '@dc-modules/utils'
-import { Transform } from '@dc-modules/transform'
+import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
 import DynamicOverlay from './DynamicOverlay'
+import Parse from '../../parse/Parse'
+import State from '../../state/State'
+import { Transform } from '../../transform'
+import { Util } from '../../utils'
 
 class DynamicModel extends DynamicOverlay {
   constructor(position, modelUrl) {
