@@ -2,7 +2,7 @@
  @Author: Caven Chen
  **/
 
-import { Cesium } from '../../namespace/index.js'
+import { Cesium } from '../../namespace'
 
 const { EllipsoidTerrainProvider } = Cesium
 

@@ -3,7 +3,7 @@
  * @Date: 2019-12-27 17:13:24
  */
 
-import { Cesium } from '../../namespace/libs.js'
+import { Cesium } from '../../namespace'
 import Parse from '../parse/Parse'
 import {
   LayerGroupEventType,

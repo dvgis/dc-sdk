@@ -2,7 +2,7 @@
  @author : Caven Chen
  @date : 2023-05-23
  */
-import { Cesium } from '../../namespace/index.js'
+import { Cesium } from '../../namespace'
 
 const {
   BoundingSphere,

@@ -37,9 +37,9 @@ export function ready(options = {}) {
     registerLib('Cesium', this['__namespace']['Cesium'])
   }
 
-  // if (options['echarts']) {
-  //   registerLib('echarts', options['echarts'])
-  // }
+  if (options['echarts']) {
+    registerLib('echarts', options['echarts'])
+  }
 
   // if (options['turf']) {
   //   registerLib('turf', options['turf'])

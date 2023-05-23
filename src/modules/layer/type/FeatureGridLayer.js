@@ -189,7 +189,7 @@ class FeatureGridLayer extends Layer {
       }).then((res) => {
         let dataList = res
         if (this._options.dataProperty) {
-          dataList = eval('res.' + this._options.dataProperty)
+          dataList = res[this._options.dataProperty]
         }
         if (dataList && dataList.length) {
           for (let i = level + 3; i < this._maximumLevel; i++) {

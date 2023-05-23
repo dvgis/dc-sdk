@@ -46,6 +46,7 @@ const buildConfig = {
   sourcemap: false,
   write: true,
   logLevel: 'info',
+  external: [`http`, `https`, `url`, `zlib`],
   plugins: [
     inlineImage({
       limit: -1,
@@ -67,7 +68,7 @@ function getTime() {
 
 async function buildNamespace(options) {
   const bundle = await rollup({
-    input: 'src/namespace/libs.js',
+    input: 'libs/index.js',
     plugins: [
       commonjs(),
       resolve({ preferBuiltins: true }),
