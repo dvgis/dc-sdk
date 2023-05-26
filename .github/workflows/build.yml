@@ -5,9 +5,9 @@ name: build
 
 on:
   push:
-    branches: [ gulp ]
+    branches: [ master ]
   pull_request:
-    branches: [ gulp ]
+    branches: [ master ]
 
 jobs:
   build:
