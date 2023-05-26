@@ -47,37 +47,8 @@ npm install @dvgis/dc-sdk
 ```
 
 ```js
-import DC from '@dvgis/dc-sdk/dist/dc.base.min'
-import DcCore from '@dvgis/dc-sdk/dist/dc.core.min'
-import DcChart from '@dvgis/dc-sdk/dist/dc.chart.min'
-import DcMapv from '@dvgis/dc-sdk/dist/dc.mapv.min'
-import DcS3M from '@dvgis/dc-sdk/dist/dc.s3m.min'
-import '@dvgis/dc-sdk/dist/dc.core.min.css'
-```
-
-`NPM / YARN` **_`(On-demand)`_**
-
-```shell
-yarn add @dvgis/dc-base
-yarn add @dvgis/dc-core
-yarn add @dvgis/dc-chart
-yarn add @dvgis/dc-mapv
-yarn add @dvgis/dc-s3m
--------------------------
-npm install @dvgis/dc-base
-npm install @dvgis/dc-core
-npm install @dvgis/dc-chart
-npm install @dvgis/dc-mapv
-npm install @dvgis/dc-s3m
-```
-
-```js
-import DC from '@dvgis/dc-base'
-import DcCore from '@dvgis/dc-core'
-import DcChart from '@dvgis/dc-chart'
-import DcMapv from '@dvgis/dc-mapv'
-import DcS3M from '@dvgis/dc-s3m'
-import '@dvgis/dc-core/dist/dc.core.min.css'
+import * as DC from '@dvgis/dc-sdk'
+import '@dvgis/dc-sdk/dist/dc.min.css'
 ```
 
 `CDN`
@@ -85,13 +56,9 @@ import '@dvgis/dc-core/dist/dc.core.min.css'
 [Resources](https://github.com/dvgis/dc-sdk/releases)
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.base.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.chart.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.mapv.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.s3m.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.min.js"></script>
 <link
-  href="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.core.min.css"
+  href="https://cdn.jsdelivr.net/npm/@dvgis/dc-sdk/dist/dc.min.css"
   rel="stylesheet"
   type="text/css"
 />
@@ -105,7 +72,7 @@ Please put the resources in the project root directory libs/dc-sdk, if you put i
 
 > The configuration is mainly used in the `NPM / YARN` way
 
-Since the `DC` framework sets `CESIUM_BASE_URL` to `./libs/dc-sdk/resources/` , you need to copy `Cesium` related static resources files: `Assets` , `Workers` , `ThirdParty `to `libs/dc-sdk/resources` directory of the project to ensure that the 3D scene can be rendered properly. You can also use `DC.baseUrl` to set the static resource base related to `Cesium` .
+Since the `DC` framework sets `CESIUM_BASE_URL` to `./libs/dc-sdk/resources/` , you need to copy `Cesium` related static resources files: `Assets` , `Workers` , `ThirdParty `to `libs/dc-sdk/resources` directory of the project to ensure that the 3D scene can be rendered properly. You can also use `DC.config.baseUrl` to set the static resource base related to `Cesium` .
 
 `Webpack`
 
@@ -182,9 +149,8 @@ module.exports = {
 
 ```js
 global.DC = DC
-DC.use(DcCore) // node
-DC.ready(() => {
-  let viewer = new DC.Viewer(divId) // divId is the Id attribute value of a div node. If it is not passed in, the 3D scene cannot be initialized
+DC.ready({}).then(()=>{
+    let viewer = new DC.Viewer()
 })
 ```
 
