@@ -1,0 +1,45 @@
+.widget.map-switch {
+  position: absolute;
+  right: 10px;
+  bottom: 5px;
+  width: 80px;
+  height: 60px;
+  background: #fff;
+  transition: width 2s;
+  -moz-transition: width 2s; /* Firefox 4 */
+  -webkit-transition: width 2s; /* Safari and Chrome */
+  -o-transition: width 2s; /* Opera */
+  padding: 5px 5px;
+  box-sizing: content-box;
+  box-shadow: 2px 2px 3px #888888;
+  white-space: nowrap;
+  cursor: pointer;
+  overflow: hidden;
+  visibility: hidden;
+  .map-item {
+    position: relative;
+    display: inline-block;
+    margin-right: 5px;
+    width: 80px;
+    height: 60px;
+    overflow: hidden;
+    span {
+      color: #fff;
+      font-size: 14px;
+      position: absolute;
+      right: 2px;
+      bottom: 2px;
+      user-select: none;
+      padding: 1px 3px;
+      pointer-events: none;
+    }
+    &.active {
+      span {
+        background-color: rgba(8, 101, 186, 0.8);
+      }
+    }
+    &:last-child {
+      margin-right: 0 !important;
+    }
+  }
+}

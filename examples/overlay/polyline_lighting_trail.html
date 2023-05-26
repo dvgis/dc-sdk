@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.base.min.js'></script>
+  <script src='/libs/dc-sdk/dc.core.min.js'></script>
+  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
+  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    html,body,#viewer-container{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="viewer-container"></div>
+<script>
+  let viewer = undefined
+
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container')
+    viewer.addBaseLayer(DC.ImageryLayerFactory.createAmapImageryLayer())
+    let layer = new DC.VectorLayer('layer')
+    viewer.addLayer(layer)
+
+    let polyline = new DC.Polyline('-75, 35; -125, 35')
+    polyline.setStyle({
+      width: 20,
+      material: new DC.PolylineLightingTrailMaterialProperty({
+        color: DC.Color.YELLOW,
+        speed: 5.0
+      }),
+      clampToGround: true
+    })
+    layer.addOverlay(polyline)
+    viewer.flyTo(layer)
+  }
+  DC.ready(initViewer)
+</script>
+</body>
+</html>
