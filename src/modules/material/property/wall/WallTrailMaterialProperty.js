@@ -43,7 +43,7 @@ class WallTrailMaterialProperty extends MaterialProperty {
 Object.defineProperties(WallTrailMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   speed: Cesium.createPropertyDescriptor('speed'),
-  image: Cesium.createPropertyDescriptor('image')
+  image: Cesium.createPropertyDescriptor('image'),
 })
 
 export default WallTrailMaterialProperty

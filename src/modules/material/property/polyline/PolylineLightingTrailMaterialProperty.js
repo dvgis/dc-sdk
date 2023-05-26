@@ -43,7 +43,7 @@ class PolylineLightingTrailMaterialProperty extends MaterialProperty {
 Object.defineProperties(PolylineLightingTrailMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   speed: Cesium.createPropertyDescriptor('speed'),
-  image: Cesium.createPropertyDescriptor('image')
+  image: Cesium.createPropertyDescriptor('image'),
 })
 
 export default PolylineLightingTrailMaterialProperty

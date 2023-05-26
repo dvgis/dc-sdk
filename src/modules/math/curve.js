@@ -32,13 +32,13 @@ function getCurveByTwoPoints(obj1, obj2, count) {
   }
   let curveCoordinates = []
   count = count || 40 // 曲线是由一些小的线段组成的，这个表示这个曲线所有到的折线的个数
-  let B1 = function(x) {
+  let B1 = function (x) {
     return 1 - 2 * x + x * x
   }
-  let B2 = x => {
+  let B2 = (x) => {
     return 2 * x - 2 * x * x
   }
-  let B3 = x => {
+  let B3 = (x) => {
     return x * x
   }
 

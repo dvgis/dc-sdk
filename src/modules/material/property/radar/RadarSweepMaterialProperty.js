@@ -34,7 +34,7 @@ class RadarSweepMaterialProperty extends MaterialProperty {
 
 Object.defineProperties(RadarSweepMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
-  speed: Cesium.createPropertyDescriptor('speed')
+  speed: Cesium.createPropertyDescriptor('speed'),
 })
 
 export default RadarSweepMaterialProperty

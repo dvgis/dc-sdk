@@ -28,7 +28,7 @@ const DEF_OPTS = {
 class HawkeyeMap extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-hawkeye-map', null)
+    this._wrapper = DomUtil.create('div', 'widget hawkeye-map', null)
     this._wrapper.setAttribute('id', Util.uuid())
     this._baseLayers = []
     this._map = undefined

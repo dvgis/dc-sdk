@@ -24,13 +24,13 @@ Cesium.Material._materialCache.addMaterial(
       type: Cesium.Material.PolylineFlickerType,
       uniforms: {
         color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-        speed: 1
+        speed: 1,
       },
-      source: LineFlickerMaterial
+      source: LineFlickerMaterial,
     },
-    translucent: function(material) {
+    translucent: function (material) {
       return true
-    }
+    },
   }
 )
 
@@ -46,13 +46,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineFlowType, {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
       speed: 1,
       percent: 0.03,
-      gradient: 0.1
+      gradient: 0.1,
     },
-    source: LineFlowMaterial
+    source: LineFlowMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -69,13 +69,13 @@ Cesium.Material._materialCache.addMaterial(
         color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
         image: Cesium.Material.DefaultImageId,
         speed: 1,
-        repeat: new Cesium.Cartesian2(1, 1)
+        repeat: new Cesium.Cartesian2(1, 1),
       },
-      source: LineImageTrailMaterial
+      source: LineImageTrailMaterial,
     },
-    translucent: function(material) {
+    translucent: function (material) {
       return true
-    }
+    },
   }
 )
 
@@ -91,13 +91,13 @@ Cesium.Material._materialCache.addMaterial(
       type: Cesium.Material.PolylineLightingType,
       uniforms: {
         color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-        image: Cesium.Material.DefaultImageId
+        image: Cesium.Material.DefaultImageId,
       },
-      source: LineLightingMaterial
+      source: LineLightingMaterial,
     },
-    translucent: function(material) {
+    translucent: function (material) {
       return true
-    }
+    },
   }
 )
 
@@ -114,13 +114,13 @@ Cesium.Material._materialCache.addMaterial(
       uniforms: {
         color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
         image: Cesium.Material.DefaultImageId,
-        speed: 3.0
+        speed: 3.0,
       },
-      source: LineLightingTrailMaterial
+      source: LineLightingTrailMaterial,
     },
-    translucent: function(material) {
+    translucent: function (material) {
       return true
-    }
+    },
   }
 )
 
@@ -136,11 +136,11 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.PolylineTrailType, {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
       image: Cesium.Material.DefaultImageId,
       speed: 1,
-      repeat: new Cesium.Cartesian2(1, 1)
+      repeat: new Cesium.Cartesian2(1, 1),
     },
-    source: LineTrailMaterial
+    source: LineTrailMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })

@@ -10,7 +10,7 @@ import { DomUtil } from '../../utils'
 class MapSwitch extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-map-switch')
+    this._wrapper = DomUtil.create('div', 'widget map-switch')
     this._config = undefined
     this._cache = []
     this._state = State.INITIALIZED
@@ -27,7 +27,7 @@ class MapSwitch extends Widget {
   _enableHook() {
     !this._wrapper.parentNode &&
       this._viewer &&
-      this._viewer.dcContainer.appendChild(this._wrapper)
+      this._viewer.widgetContainer.appendChild(this._wrapper)
   }
 
   /**

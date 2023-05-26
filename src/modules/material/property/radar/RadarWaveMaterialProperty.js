@@ -34,7 +34,7 @@ class RadarWaveMaterialProperty extends MaterialProperty {
 
 Object.defineProperties(RadarWaveMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
-  speed: Cesium.createPropertyDescriptor('speed')
+  speed: Cesium.createPropertyDescriptor('speed'),
 })
 
 export default RadarWaveMaterialProperty

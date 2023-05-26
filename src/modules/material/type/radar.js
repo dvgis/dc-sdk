@@ -19,13 +19,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.RadarLineType, {
     type: Cesium.Material.RadarLineType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: RadarLineMaterial
+    source: RadarLineMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -38,13 +38,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.RadarSweepType, {
     type: Cesium.Material.RadarSweepType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: RadarSweepMaterial
+    source: RadarSweepMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })
 
 /**
@@ -57,11 +57,11 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.RadarWaveType, {
     type: Cesium.Material.RadarWaveType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.7),
-      speed: 3.0
+      speed: 3.0,
     },
-    source: RadarWaveMaterial
+    source: RadarWaveMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return true
-  }
+  },
 })

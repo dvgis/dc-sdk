@@ -3,7 +3,7 @@
  * @Date: 2020-01-15 20:31:28
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../namespace'
 import ImageryType from '../ImageryType'
 import AmapMercatorTilingScheme from '../tiling-scheme/AmapMercatorTilingScheme'
 

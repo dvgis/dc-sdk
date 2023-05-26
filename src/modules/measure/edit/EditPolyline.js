@@ -48,7 +48,7 @@ class EditPolyline extends Edit {
         this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
           position: item,
           index: index,
-          isMid: index % 2 !== 0
+          isMid: index % 2 !== 0,
         })
       })
     } else {
@@ -56,7 +56,7 @@ class EditPolyline extends Edit {
       this._positions.forEach((item, index) => {
         this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
           position: item,
-          index: index
+          index: index,
         })
       })
     }
@@ -94,7 +94,7 @@ class EditPolyline extends Edit {
         this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
           position: item,
           index: index,
-          isMid: index % 2 !== 0
+          isMid: index % 2 !== 0,
         })
       })
     }
@@ -138,7 +138,7 @@ class EditPolyline extends Edit {
         this._positions[preMidAnchorIndex] = preMidPosition
         this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
           index: preMidAnchorIndex,
-          position: preMidPosition
+          position: preMidPosition,
         })
       }
 
@@ -150,7 +150,7 @@ class EditPolyline extends Edit {
         this._positions[nextMidAnchorIndex] = nextMidPosition
         this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
           index: nextMidAnchorIndex,
-          position: nextMidPosition
+          position: nextMidPosition,
         })
       }
     }

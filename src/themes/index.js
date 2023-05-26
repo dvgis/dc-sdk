@@ -4,3 +4,4 @@
  */
 
 import './index.scss'
+import './map-switch.scss'

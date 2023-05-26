@@ -11,7 +11,7 @@ import Widget from '../Widget'
 class ContextMenu extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-context-menu')
+    this._wrapper = DomUtil.create('div', 'widget context-menu')
     this._ulEl = undefined
     this._handler = undefined
     this._overlay = undefined

@@ -44,11 +44,11 @@ class DistanceSurface extends MeasureBase {
     new EditPolyline(entity).start(
       {
         viewer: this._viewer,
-        layer: this._layer
+        layer: this._layer,
       },
       {
         ...this._options,
-        ...{ maxAnchorSize: this._maxAnchorSize }
+        ...{ maxAnchorSize: this._maxAnchorSize },
       }
     )
   }
@@ -87,7 +87,7 @@ class DistanceSurface extends MeasureBase {
             )
           )
         })
-        .then(positions => {
+        .then((positions) => {
           let sum = 0
           for (let i = 0; i < positions.length - 1; i++) {
             let s = Cesium.Cartesian3.distance(positions[i], positions[i + 1])
@@ -118,13 +118,13 @@ class DistanceSurface extends MeasureBase {
       depthFailMaterial:
         options.depthFailMaterial ||
         new Cesium.PolylineDashMaterialProperty({
-          color: Cesium.Color.YELLOW.withAlpha(0.6)
+          color: Cesium.Color.YELLOW.withAlpha(0.6),
         }),
       width: options.width || 2,
-      clampToGround: true
+      clampToGround: true,
     }).start(measure, {
       ...this._options,
-      ...{ maxAnchorSize: this._maxAnchorSize }
+      ...{ maxAnchorSize: this._maxAnchorSize },
     })
     return this
   }

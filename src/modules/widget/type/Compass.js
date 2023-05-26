@@ -13,7 +13,7 @@ import Widget from '../Widget'
 class Compass extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', `dc-compass`)
+    this._wrapper = DomUtil.create('div', `widget compass`)
     this._compassRectangle = undefined
     this._outRing = undefined
     this._gyro = undefined

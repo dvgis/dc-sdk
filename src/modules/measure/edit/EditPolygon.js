@@ -19,7 +19,7 @@ class EditPolygon extends Edit {
    */
   _mountedHook() {
     this.editTool.tooltipMess = '点击锚点移动,右击结束编辑'
-    this._delegate.polygon.hierarchy = new Cesium.CallbackProperty(time => {
+    this._delegate.polygon.hierarchy = new Cesium.CallbackProperty((time) => {
       if (this._positions.length > 2) {
         return new Cesium.PolygonHierarchy(this._positions)
       } else {
@@ -48,7 +48,7 @@ class EditPolygon extends Edit {
       this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
         position: item,
         index: index,
-        isMid: index % 2 !== 0
+        isMid: index % 2 !== 0,
       })
     })
     this._layer.entities.remove(this._overlay)
@@ -99,7 +99,7 @@ class EditPolygon extends Edit {
         this.editTool.fire(PlotEventType.CREATE_ANCHOR, {
           position: item,
           index: index,
-          isMid: index % 2 !== 0
+          isMid: index % 2 !== 0,
         })
       })
     }
@@ -149,11 +149,11 @@ class EditPolygon extends Edit {
       this._positions[nextMidAnchorIndex] = nextMidPosition
       this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
         index: preMidAnchorIndex,
-        position: preMidPosition
+        position: preMidPosition,
       })
       this.editTool.fire(PlotEventType.UPDATE_ANCHOR, {
         index: nextMidAnchorIndex,
-        position: nextMidPosition
+        position: nextMidPosition,
       })
     }
     this._options.onCalc && this._options.onCalc(this._positions)

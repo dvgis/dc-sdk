@@ -10,7 +10,7 @@ import { DomUtil } from '../../utils'
 class Tooltip extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-tool-tip')
+    this._wrapper = DomUtil.create('div', 'widget tool-tip')
     this._ready = true
     this._state = State.INITIALIZED
   }

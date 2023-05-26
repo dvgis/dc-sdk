@@ -26,7 +26,7 @@ const DIS = [
 class DistanceLegend extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-distance-legend')
+    this._wrapper = DomUtil.create('div', 'widget distance-legend')
     this._labelEl = undefined
     this._scaleBarEl = undefined
     this._lastUpdate = Cesium.getTimestamp()

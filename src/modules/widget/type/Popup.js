@@ -11,7 +11,7 @@ import { DomUtil } from '../../utils'
 class Popup extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-popup')
+    this._wrapper = DomUtil.create('div', 'widget popup')
     this._config = { customClass: '' }
     this._position = undefined
     this._state = State.INITIALIZED

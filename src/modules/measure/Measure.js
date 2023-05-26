@@ -127,7 +127,7 @@ class Measure {
     this._viewer.dataSources.add(this._layer)
     Object.defineProperty(viewer, 'measure', {
       value: this,
-      writable: false
+      writable: false,
     })
   }
 

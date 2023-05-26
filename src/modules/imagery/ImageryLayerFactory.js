@@ -7,13 +7,14 @@ import { Cesium } from '../../namespace'
 import ImageryType from './ImageryType'
 import AmapImageryProvider from './provider/AmapImageryProvider'
 import BaiduImageryProvider from './provider/BaiduImageryProvider'
+import GeoVisImageryProvider from './provider/GeoVisImageryProvider.js'
 import GoogleImageryProvider from './provider/GoogleImageryProvider'
 import TdtImageryProvider from './provider/TdtImageryProvider'
 import TencentImageryProvider from './provider/TencentImageryProvider'
 
 class ImageryLayerFactory {
   /**
-   * Create amap image layer
+   * Create amap imagery layer
    * @param options
    * @returns {AmapImageryProvider}
    */
@@ -22,7 +23,7 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create baidu image layer
+   * Create baidu imagery layer
    * @param options
    * @returns {BaiduImageryProvider}
    */
@@ -31,7 +32,16 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create google image layer
+   * Create geoVis imagery layer
+   * @param options
+   * @returns {GeoVisImageryProvider}
+   */
+  static createGeoVisImageryLayer(options) {
+    return new GeoVisImageryProvider(options)
+  }
+
+  /**
+   * Create google imagery layer
    * @param options
    * @returns {GoogleImageryProvider}
    */
@@ -40,7 +50,7 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create tdt image layer
+   * Create tdt imagery layer
    * @param options
    * @returns {TdtImageryProvider}
    */
@@ -49,7 +59,7 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create tencent image layer
+   * Create tencent imagery layer
    * @param options
    * @returns {TencentImageryProvider}
    */
@@ -58,97 +68,97 @@ class ImageryLayerFactory {
   }
 
   /**
-   * Create arcgis image layer
+   * Create arcgis imagery layer
    * @param options
-   * @returns {module:cesium.ArcGisMapServerImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createArcGisImageryLayer(options) {
     return new Cesium.ArcGisMapServerImageryProvider(options)
   }
 
   /**
-   * Create single tile image layer
+   * Create single tile imagery layer
    * @param options
-   * @returns {module:cesium.SingleTileImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createSingleTileImageryLayer(options) {
     return new Cesium.SingleTileImageryProvider(options)
   }
 
   /**
-   * Create WMS image layer
+   * Create WMS imagery layer
    * @param options
-   * @returns {module:cesium.WebMapServiceImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createWMSImageryLayer(options) {
     return new Cesium.WebMapServiceImageryProvider(options)
   }
 
   /**
-   * Create WMTS image layer
+   * Create WMTS imagery layer
    * @param options
-   * @returns {module:cesium.WebMapTileServiceImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createWMTSImageryLayer(options) {
     return new Cesium.WebMapTileServiceImageryProvider(options)
   }
 
   /**
-   * Create xyz image layer
+   * Create xyz imagery layer
    * @param options
-   * @returns {module:cesium.UrlTemplateImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createXYZImageryLayer(options) {
     return new Cesium.UrlTemplateImageryProvider(options)
   }
 
   /**
-   * Create coord image layer
+   * Create coord imagery layer
    * @param options
-   * @returns {module:cesium.TileCoordinatesImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createCoordImageryLayer(options) {
     return new Cesium.TileCoordinatesImageryProvider(options)
   }
 
   /**
-   * Create grid image layer
+   * Create grid imagery layer
    * @param options
-   * @returns {module:cesium.GridImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createGridImageryLayer(options) {
     return new Cesium.GridImageryProvider(options)
   }
 
   /**
-   * Create mapbox image layer
+   * Create mapbox imagery layer
    * @param options
-   * @returns {module:cesium.MapboxImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createMapboxImageryLayer(options) {
     return new Cesium.MapboxImageryProvider(options)
   }
 
   /**
-   * Create mapbox style image layer
+   * Create mapbox style imagery layer
    * @param options
-   * @returns {module:cesium.MapboxStyleImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createMapboxStyleImageryLayer(options) {
     return new Cesium.MapboxStyleImageryProvider(options)
   }
 
   /**
-   * Create TMS image layer
+   * Create TMS imagery layer
    * @param options
-   * @returns {module:cesium.TileMapServiceImageryProvider}
+   * @returns {ImageryProvider}
    */
   static createTMSImageryLayer(options) {
     return new Cesium.TileMapServiceImageryProvider(options)
   }
 
   /**
-   * Create Imagery Layer
+   * Create Imagery Layer by Type
    * @param type
    * @param options
    * @returns {any}
@@ -161,6 +171,9 @@ class ImageryLayerFactory {
         break
       case ImageryType.BAIDU:
         imageryLayer = this.createBaiduImageryLayer(options)
+        break
+      case ImageryType.GEO_VIS:
+        imageryLayer = this.createGeoVisImageryLayer(options)
         break
       case ImageryType.GOOGLE:
         imageryLayer = this.createGoogleImageryLayer(options)

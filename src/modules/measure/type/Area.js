@@ -23,7 +23,7 @@ class Area extends MeasureBase {
     new EditPolygon(entity).start(
       {
         viewer: this._viewer,
-        layer: this._layer
+        layer: this._layer,
       },
       this._options
     )
@@ -36,9 +36,8 @@ class Area extends MeasureBase {
    */
   _onCalc(positions) {
     if (positions.length > 2) {
-      this._resultLabel.position = Cesium.BoundingSphere.fromPoints(
-        positions
-      )?.center
+      this._resultLabel.position =
+        Cesium.BoundingSphere.fromPoints(positions)?.center
       this._resultLabel.label.text = `面积：${area(positions).toFixed(
         2
       )} 平方米`
@@ -55,7 +54,7 @@ class Area extends MeasureBase {
     this._startHook(measure, options)
     new DrawPolygon({
       material: options.material || Cesium.Color.YELLOW.withAlpha(0.6),
-      perPositionHeight: true
+      perPositionHeight: true,
     }).start(measure, this._options)
     return this
   }

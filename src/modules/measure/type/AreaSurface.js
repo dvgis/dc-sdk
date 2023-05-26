@@ -50,7 +50,7 @@ class AreaSurface extends MeasureBase {
     new EditPolygon(entity).start(
       {
         viewer: this._viewer,
-        layer: this._layer
+        layer: this._layer,
       },
       this._options
     )
@@ -63,9 +63,8 @@ class AreaSurface extends MeasureBase {
    */
   _onCalc(positions) {
     if (positions.length > 2) {
-      this._resultLabel.position = Cesium.BoundingSphere.fromPoints(
-        positions
-      )?.center
+      this._resultLabel.position =
+        Cesium.BoundingSphere.fromPoints(positions)?.center
 
       let lerpPositions = this._lerp(
         Cesium.Rectangle.fromCartesianArray(positions),
@@ -74,7 +73,7 @@ class AreaSurface extends MeasureBase {
 
       this._getSampledHeight(lerpPositions.concat(positions), false)
         .then(([updatedCartographics]) => {
-          return updatedCartographics.map(item =>
+          return updatedCartographics.map((item) =>
             Cesium.Cartesian3.fromDegrees(
               Cesium.Math.toDegrees(item.longitude),
               Cesium.Math.toDegrees(item.latitude),
@@ -82,7 +81,7 @@ class AreaSurface extends MeasureBase {
             )
           )
         })
-        .then(positions => {
+        .then((positions) => {
           this._resultLabel.label.text = `面积：${area(positions).toFixed(
             2
           )} 平方米`
@@ -99,7 +98,7 @@ class AreaSurface extends MeasureBase {
   start(measure, options) {
     this._startHook(measure, options)
     new DrawPolygon({
-      material: options.material || Cesium.Color.YELLOW.withAlpha(0.6)
+      material: options.material || Cesium.Color.YELLOW.withAlpha(0.6),
     }).start(measure, this._options)
     return this
   }

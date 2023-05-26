@@ -49,11 +49,17 @@ class Viewer {
     this._viewerOption = new ViewerOption(this) // Initialize the viewer option
     this._cameraOption = new CameraOption(this) // Initialize the camera option
 
-    this._dcContainer = DomUtil.create(
+    this._widgetContainer = DomUtil.create(
       'div',
-      'dc-container',
+      'viewer-widgets',
       typeof id === 'string' ? document.getElementById(id) : id
-    ) //Register the custom container
+    ) //Register the widgets container
+
+    this._layerContainer = DomUtil.create(
+      'div',
+      'viewer-layers',
+      typeof id === 'string' ? document.getElementById(id) : id
+    ) //Register the layers container
 
     this._baseLayerPicker = new BaseLayerPicker({
       globe: this._delegate.scene.globe,
@@ -83,8 +89,16 @@ class Viewer {
     return this._delegate
   }
 
-  get dcContainer() {
-    return this._dcContainer
+  get container() {
+    return this._delegate.container
+  }
+
+  get widgetContainer() {
+    return this._widgetContainer
+  }
+
+  get layerContainer() {
+    return this._layerContainer
   }
 
   get scene() {
@@ -284,19 +298,19 @@ class Viewer {
    * Adds the baseLayer .
    * The baseLayer can be a single or an array,
    * and when the baseLayer is an array, the baseLayer will be loaded together
-   * @param baseLayers
+   * @param baseLayer
    * @param options
    * @returns {Viewer}
    */
-  addBaseLayer(baseLayers, options = {}) {
-    if (!baseLayers) {
+  addBaseLayer(baseLayer, options = {}) {
+    if (!baseLayer) {
       return this
     }
-    this._baseLayerPicker.addImageryProvider(baseLayers)
-    if (!this._baseLayerPicker.selectedImagery) {
-      this._baseLayerPicker.changeImagery(0)
+    this._baseLayerPicker.addImageryLayer(baseLayer)
+    if (!this._baseLayerPicker.selectedImageryLayer) {
+      this._baseLayerPicker.changeImageryLayer(0)
     }
-    this.mapSwitch && this.mapSwitch.addMap(options)
+    this['mapSwitch'] && this['mapSwitch'].addMap(options)
     return this
   }
 
@@ -306,7 +320,7 @@ class Viewer {
    * @returns {Viewer}
    */
   changeBaseLayer(index) {
-    this._baseLayerPicker.changeImagery(index)
+    this._baseLayerPicker.changeImageryLayer(index)
     return this
   }
 

@@ -81,7 +81,7 @@ Object.defineProperties(WaterMaterialProperty.prototype, {
   baseWaterColor: Cesium.createPropertyDescriptor('baseWaterColor'),
   blendColor: Cesium.createPropertyDescriptor('blendColor'),
   specularMap: Cesium.createPropertyDescriptor('specularMap'),
-  normalMap: Cesium.createPropertyDescriptor('normalMap')
+  normalMap: Cesium.createPropertyDescriptor('normalMap'),
 })
 
 export default WaterMaterialProperty

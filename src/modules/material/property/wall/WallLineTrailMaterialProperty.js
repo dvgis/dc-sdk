@@ -51,7 +51,7 @@ Object.defineProperties(WallLineTrailMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
   image: Cesium.createPropertyDescriptor('image'),
   repeat: Cesium.createPropertyDescriptor('repeat'),
-  speed: Cesium.createPropertyDescriptor('speed')
+  speed: Cesium.createPropertyDescriptor('speed'),
 })
 
 export default WallLineTrailMaterialProperty

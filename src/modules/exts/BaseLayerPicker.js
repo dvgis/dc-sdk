@@ -3,8 +3,7 @@
  **/
 
 import { Cesium } from '../../namespace'
-
-const { EllipsoidTerrainProvider } = Cesium
+const { EllipsoidTerrainProvider, ImageryLayer } = Cesium
 
 class BaseLayerPicker {
   constructor(options) {
@@ -26,7 +25,10 @@ class BaseLayerPicker {
     let imageryLayers = this._globe.imageryLayers
     if (!this._selectedImageryLayer) {
       for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
-        imageryLayers.add(imageryLayer.layers[i], 0)
+        imageryLayers.add(
+          new ImageryLayer(imageryLayer.layers[i], imageryLayer.options),
+          0
+        )
       }
     } else if (
       this._selectedImageryLayer &&
@@ -34,7 +36,10 @@ class BaseLayerPicker {
     ) {
       imageryLayers.removeAll()
       for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
-        imageryLayers.addImageryProvider(imageryLayer.layers[i], 0)
+        imageryLayers.add(
+          new ImageryLayer(imageryLayer.layers[i], imageryLayer.options),
+          0
+        )
       }
     }
     this._selectedImageryLayer = imageryLayer
@@ -61,9 +66,10 @@ class BaseLayerPicker {
   /**
    *
    * @param imageryLayer
+   * @param options
    * @returns {BaseLayerPicker}
    */
-  addImageryLayer(imageryLayer) {
+  addImageryLayer(imageryLayer, options = {}) {
     let imageryLayers = []
     if (Array.isArray(imageryLayer)) {
       imageryLayers = imageryLayer.slice(0)
@@ -74,6 +80,7 @@ class BaseLayerPicker {
     this._imageryLayers.push({
       id: `dc-imagery-${this._count}`,
       layers: imageryLayers,
+      options: options,
     })
     return this
   }

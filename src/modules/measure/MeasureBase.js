@@ -15,16 +15,16 @@ class MeasureBase {
         font: '12px',
         pixelOffset: { x: 0, y: -15 },
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        showBackground: true
-      }
+        showBackground: true,
+      },
     })
     this._resultLabel = new Cesium.Entity({
       label: {
         font: '12px',
         pixelOffset: { x: 0, y: -15 },
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        showBackground: true
-      }
+        showBackground: true,
+      },
     })
     this._options = {}
   }
@@ -41,10 +41,10 @@ class MeasureBase {
       !(this._viewer.terrainProvider instanceof Cesium.EllipsoidTerrainProvider)
         ? Cesium.sampleTerrainMostDetailed(
             this._viewer.terrainProvider,
-            positions.map(item => Cesium.Cartographic.fromCartesian(item))
+            positions.map((item) => Cesium.Cartographic.fromCartesian(item))
           )
         : Promise.resolve(
-            positions.map(item => Cesium.Cartographic.fromCartesian(item))
+            positions.map((item) => Cesium.Cartographic.fromCartesian(item))
           )
 
     let modelPromise =

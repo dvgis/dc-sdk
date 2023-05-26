@@ -21,32 +21,32 @@ class TriangleHeight extends MeasureBase {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
     this._lengthLabel = new Cesium.Entity({
       label: {
         font: '12px',
         pixelOffset: { x: 0, y: -15 },
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        showBackground: true
-      }
+        showBackground: true,
+      },
     })
     this._heightLabel = new Cesium.Entity({
       label: {
         font: '12px',
         pixelOffset: { x: 0, y: -15 },
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        showBackground: true
-      }
+        showBackground: true,
+      },
     })
     this._distanceLabel = new Cesium.Entity({
       label: {
         font: '12px',
         pixelOffset: { x: 0, y: -15 },
         disableDepthTestDistance: Number.POSITIVE_INFINITY,
-        showBackground: true
-      }
+        showBackground: true,
+      },
     })
   }
 
@@ -59,11 +59,11 @@ class TriangleHeight extends MeasureBase {
     new EditPolyline(delegate).start(
       {
         viewer: this._viewer,
-        layer: this._layer
+        layer: this._layer,
       },
       {
         ...this._options,
-        ...{ maxAnchorSize: this._maxAnchorSize }
+        ...{ maxAnchorSize: this._maxAnchorSize },
       }
     )
   }
@@ -141,7 +141,7 @@ class TriangleHeight extends MeasureBase {
   start(measure, options) {
     this._startHook(measure, options)
     let helpLineMaterial = new Cesium.PolylineDashMaterialProperty({
-      color: Cesium.Color.GREENYELLOW
+      color: Cesium.Color.GREENYELLOW,
     })
     this._helpLine.polyline.material = helpLineMaterial
     this._helpLine.polyline.depthFailMaterial = helpLineMaterial
@@ -154,13 +154,13 @@ class TriangleHeight extends MeasureBase {
       depthFailMaterial:
         options.depthFailMaterial ||
         new Cesium.PolylineDashMaterialProperty({
-          color: Cesium.Color.YELLOW.withAlpha(0.6)
+          color: Cesium.Color.YELLOW.withAlpha(0.6),
         }),
       width: options.width || 2,
-      clampToGround: false
+      clampToGround: false,
     }).start(measure, {
       ...options,
-      ...{ maxAnchorSize: this._maxAnchorSize }
+      ...{ maxAnchorSize: this._maxAnchorSize },
     })
     return this
   }

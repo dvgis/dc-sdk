@@ -22,7 +22,7 @@ class AreaHeight extends MeasureBase {
     new EditPolygon(entity).start(
       {
         viewer: this._viewer,
-        layer: this._layer
+        layer: this._layer,
       },
       this._options
     )
@@ -79,14 +79,14 @@ class AreaHeight extends MeasureBase {
                   ? Cesium.Cartographic.fromCartesian(updatedCartesians[index])
                       .height
                   : 0
-              )
+              ),
             }
           })
         })
-        .then(positions => {
+        .then((positions) => {
           let max = 0
           let position = undefined
-          positions.forEach(item => {
+          positions.forEach((item) => {
             if (item.alt > max) {
               max = item.alt
               position = item
@@ -113,7 +113,7 @@ class AreaHeight extends MeasureBase {
   start(measure, options) {
     this._startHook(measure, options)
     new DrawPolygon({
-      material: options.material || Cesium.Color.YELLOW.withAlpha(0.6)
+      material: options.material || Cesium.Color.YELLOW.withAlpha(0.6),
     }).start(measure, this._options)
     return this
   }

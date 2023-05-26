@@ -12,7 +12,7 @@ const MeasureType = {
   DISTANCE_SURFACE: 'diatance_surface',
   HEADING: 'heading',
   HEIGHT: 'height',
-  TRIANGLE_HEIGHT: 'triangle_height'
+  TRIANGLE_HEIGHT: 'triangle_height',
 }
 
 export default MeasureType

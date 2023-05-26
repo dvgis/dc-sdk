@@ -12,7 +12,7 @@ import { MouseEventType, SceneEventType } from '../../event'
 class LocationBar extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-location-bar')
+    this._wrapper = DomUtil.create('div', 'widget location-bar')
     this._mouseEl = undefined
     this._cameraEl = undefined
     this._fpsEl = undefined

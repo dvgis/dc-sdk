@@ -57,12 +57,12 @@ class Widget {
     !this._ready && this._mountContent()
     if (this._enable) {
       !this._wrapper.parentNode &&
-        this._viewer.dcContainer.appendChild(this._wrapper)
+        this._viewer.widgetContainer.appendChild(this._wrapper)
       this._bindEvent()
     } else {
       this._unbindEvent()
       this._wrapper.parentNode &&
-        this._viewer.dcContainer.removeChild(this._wrapper)
+        this._viewer.widgetContainer.removeChild(this._wrapper)
     }
   }
 

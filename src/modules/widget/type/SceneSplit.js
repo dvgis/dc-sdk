@@ -12,7 +12,7 @@ import { DomUtil } from '../../utils'
 class SceneSplit extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-slider')
+    this._wrapper = DomUtil.create('div', 'widget slider')
     this._tileset = undefined
     this._baseLayer = undefined
     this._moveActive = false

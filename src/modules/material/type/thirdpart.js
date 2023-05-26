@@ -34,13 +34,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.AsphaltType, {
     uniforms: {
       asphaltColor: new Cesium.Color(0.15, 0.15, 0.15, 1.0),
       bumpSize: 0.02,
-      roughness: 0.2
+      roughness: 0.2,
     },
-    source: AsphaltMaterial
+    source: AsphaltMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return material.uniforms.asphaltColor.alpha < 1.0
-  }
+  },
 })
 
 /**
@@ -54,14 +54,14 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.BlobType, {
     uniforms: {
       lightColor: new Cesium.Color(1.0, 1.0, 1.0, 0.5),
       darkColor: new Cesium.Color(0.0, 0.0, 1.0, 0.5),
-      frequency: 10.0
+      frequency: 10.0,
     },
-    source: BlobMaterial
+    source: BlobMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     var uniforms = material.uniforms
     return uniforms.lightColor.alpha < 1.0 || uniforms.darkColor.alpha < 0.0
-  }
+  },
 })
 
 /**
@@ -78,14 +78,14 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.BrickType, {
       brickSize: new Cesium.Cartesian2(0.3, 0.15),
       brickPct: new Cesium.Cartesian2(0.9, 0.85),
       brickRoughness: 0.2,
-      mortarRoughness: 0.1
+      mortarRoughness: 0.1,
     },
-    source: BrickMaterial
+    source: BrickMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     var uniforms = material.uniforms
     return uniforms.brickColor.alpha < 1.0 || uniforms.mortarColor.alpha < 1.0
-  }
+  },
 })
 
 /**
@@ -99,13 +99,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.CementType, {
     uniforms: {
       cementColor: new Cesium.Color(0.95, 0.95, 0.85, 1.0),
       grainScale: 0.01,
-      roughness: 0.3
+      roughness: 0.3,
     },
-    source: CementMaterial
+    source: CementMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return material.uniforms.cementColor.alpha < 1.0
-  }
+  },
 })
 
 /**
@@ -118,13 +118,13 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.ErosionType, {
     type: Cesium.Material.ErosionType,
     uniforms: {
       color: new Cesium.Color(1.0, 0.0, 0.0, 0.5),
-      time: 1.0
+      time: 1.0,
     },
-    source: ErosionMaterial
+    source: ErosionMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     return material.uniforms.color.alpha < 1.0
-  }
+  },
 })
 
 /**
@@ -138,14 +138,14 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.FacetType, {
     uniforms: {
       lightColor: new Cesium.Color(0.25, 0.25, 0.25, 0.75),
       darkColor: new Cesium.Color(0.75, 0.75, 0.75, 0.75),
-      frequency: 10.0
+      frequency: 10.0,
     },
-    source: FacetMaterial
+    source: FacetMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     var uniforms = material.uniforms
     return uniforms.lightColor.alpha < 1.0 || uniforms.darkColor.alpha < 0.0
-  }
+  },
 })
 
 /**
@@ -158,15 +158,15 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.FresnelType, {
     type: Cesium.Material.FresnelType,
     materials: {
       reflection: {
-        type: Cesium.Material.ReflectionType
+        type: Cesium.Material.ReflectionType,
       },
       refraction: {
-        type: Cesium.Material.RefractionType
-      }
+        type: Cesium.Material.RefractionType,
+      },
     },
-    source: FresnelMaterial
+    source: FresnelMaterial,
   },
-  translucent: false
+  translucent: false,
 })
 
 /**
@@ -180,14 +180,14 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.GrassType, {
     uniforms: {
       grassColor: new Cesium.Color(0.25, 0.4, 0.1, 1.0),
       dirtColor: new Cesium.Color(0.1, 0.1, 0.1, 1.0),
-      patchiness: 1.5
+      patchiness: 1.5,
     },
-    source: GrassMaterial
+    source: GrassMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     var uniforms = material.uniforms
     return uniforms.grassColor.alpha < 1.0 || uniforms.dirtColor.alpha < 1.0
-  }
+  },
 })
 
 /**
@@ -200,11 +200,11 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.ReflectionType, {
     type: Cesium.Material.ReflectionType,
     uniforms: {
       cubeMap: Cesium.Material.DefaultCubeMapId,
-      channels: 'rgb'
+      channels: 'rgb',
     },
-    source: ReflectionMaterial
+    source: ReflectionMaterial,
   },
-  translucent: false
+  translucent: false,
 })
 
 /**
@@ -218,11 +218,11 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.RefractionType, {
     uniforms: {
       cubeMap: Cesium.Material.DefaultCubeMapId,
       channels: 'rgb',
-      indexOfRefractionRatio: 0.9
+      indexOfRefractionRatio: 0.9,
     },
-    source: RefractionMaterial
+    source: RefractionMaterial,
   },
-  translucent: false
+  translucent: false,
 })
 
 /**
@@ -236,14 +236,14 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.TyeDyeType, {
     uniforms: {
       lightColor: new Cesium.Color(1.0, 1.0, 0.0, 0.75),
       darkColor: new Cesium.Color(1.0, 0.0, 0.0, 0.75),
-      frequency: 5.0
+      frequency: 5.0,
     },
-    source: TieDyeMaterial
+    source: TieDyeMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     var uniforms = material.uniforms
     return uniforms.lightColor.alpha < 1.0 || uniforms.darkColor.alpha < 0.0
-  }
+  },
 })
 
 /**
@@ -259,14 +259,14 @@ Cesium.Material._materialCache.addMaterial(Cesium.Material.WoodType, {
       darkWoodColor: new Cesium.Color(0.4, 0.2, 0.07, 1.0),
       ringFrequency: 3.0,
       noiseScale: new Cesium.Cartesian2(0.7, 0.5),
-      grainFrequency: 27.0
+      grainFrequency: 27.0,
     },
-    source: WoodMaterial
+    source: WoodMaterial,
   },
-  translucent: function(material) {
+  translucent: function (material) {
     let uniforms = material.uniforms
     return (
       uniforms.lightWoodColor.alpha < 1.0 || uniforms.darkWoodColor.alpha < 1.0
     )
-  }
+  },
 })

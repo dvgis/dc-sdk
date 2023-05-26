@@ -223,7 +223,7 @@ class WindCanvas {
       particles.push(
         this.field.randomize(
           {
-            age: Math.floor(Math.random() * this.options.maxAge)
+            age: Math.floor(Math.random() * this.options.maxAge),
           },
           width,
           height,

@@ -12,7 +12,7 @@ import Widget from '../Widget'
 class MapSplit extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-slider')
+    this._wrapper = DomUtil.create('div', 'widget slider')
     this._baseLayer = undefined
     this._moveActive = false
     this._state = State.INITIALIZED

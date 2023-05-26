@@ -12,7 +12,7 @@ import { DomUtil } from '../../utils'
 class ZoomController extends Widget {
   constructor() {
     super()
-    this._wrapper = DomUtil.create('div', 'dc-zoom-controller')
+    this._wrapper = DomUtil.create('div', 'widget zoom-controller')
     this._zoomInEl = undefined
     this._zoomOutEl = undefined
     this._refreshEl = undefined

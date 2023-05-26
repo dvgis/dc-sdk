@@ -1,9 +1,9 @@
 /**
  @author : Caven Chen
- @date : 2023-05-23
+ @date : 2023-05-26
  */
-import { Cesium } from '../../namespace'
 
+import { Cesium } from '../../namespace'
 const {
   BoundingSphere,
   BoundingSphereState,
@@ -203,7 +203,7 @@ function Viewer(container, options) {
     )
   }
 
-  cesiumWidget.creditViewport.className = 'dc-viewer-canvas'
+  cesiumWidget.creditViewport.className = 'viewer-canvas'
 
   let dataSourceCollection = options.dataSources
   let destroyDataSourceCollection = false

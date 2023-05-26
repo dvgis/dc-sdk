@@ -34,7 +34,7 @@ class RadarLineMaterialProperty extends MaterialProperty {
 
 Object.defineProperties(RadarLineMaterialProperty.prototype, {
   color: Cesium.createPropertyDescriptor('color'),
-  speed: Cesium.createPropertyDescriptor('speed')
+  speed: Cesium.createPropertyDescriptor('speed'),
 })
 
 export default RadarLineMaterialProperty

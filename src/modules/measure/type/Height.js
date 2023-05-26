@@ -21,8 +21,8 @@ class Height extends MeasureBase {
           } else {
             return null
           }
-        }, false)
-      }
+        }, false),
+      },
     })
   }
 
@@ -35,11 +35,11 @@ class Height extends MeasureBase {
     new EditPolyline(entity).start(
       {
         viewer: this._viewer,
-        layer: this._layer
+        layer: this._layer,
       },
       {
         ...this._options,
-        ...{ maxAnchorSize: this._maxAnchorSize }
+        ...{ maxAnchorSize: this._maxAnchorSize },
       }
     )
   }
@@ -70,7 +70,7 @@ class Height extends MeasureBase {
           positions[1],
           new Cesium.Cartesian3()
         ),
-        positions[1]
+        positions[1],
       ]
 
       let hegiht = Math.abs(Cesium.Plane.getPointDistance(plane, positions[1]))
@@ -88,7 +88,7 @@ class Height extends MeasureBase {
   start(measure, options) {
     this._startHook(measure, options)
     let helpLineMaterial = new Cesium.PolylineDashMaterialProperty({
-      color: Cesium.Color.GREENYELLOW
+      color: Cesium.Color.GREENYELLOW,
     })
     this._helpLine.polyline.material = helpLineMaterial
     this._helpLine.polyline.depthFailMaterial = helpLineMaterial
@@ -98,12 +98,12 @@ class Height extends MeasureBase {
       depthFailMaterial:
         options.depthFailMaterial ||
         new Cesium.PolylineDashMaterialProperty({
-          color: Cesium.Color.YELLOW.withAlpha(0.6)
+          color: Cesium.Color.YELLOW.withAlpha(0.6),
         }),
-      width: options.width || 2
+      width: options.width || 2,
     }).start(measure, {
       ...this._options,
-      ...{ maxAnchorSize: this._maxAnchorSize }
+      ...{ maxAnchorSize: this._maxAnchorSize },
     })
     return this
   }

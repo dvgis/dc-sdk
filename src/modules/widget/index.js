@@ -31,6 +31,6 @@ export default function createWidgets() {
     zoomController: new ZoomController(),
     loadingMask: new LoadingMask(),
     tilesetSplit: new TilesetSplit(),
-    sceneSplit: new SceneSplit()
+    sceneSplit: new SceneSplit(),
   }
 }
