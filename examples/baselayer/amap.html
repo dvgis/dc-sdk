@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -8,14 +7,6 @@
   <script src='/libs/dc-sdk/dc.min.js'></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
-  <style>
-    .viewer-container{
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  </style>
 </head>
 
 <body>
@@ -35,7 +26,7 @@
     })
     viewer.addBaseLayer(baseLayer_img, {
       iconUrl: '../assets/icon/img.png',
-      name: '地图'
+      name: '影像'
     })
 
     let baseLayer_cva = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
@@ -43,7 +34,7 @@
     })
     viewer.addBaseLayer([baseLayer_img, baseLayer_cva], {
       iconUrl: '../assets/icon/img.png',
-      name: '地图'
+      name: '影像+注记'
     })
 
     viewer.zoomToPosition(

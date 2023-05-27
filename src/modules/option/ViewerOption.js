@@ -102,7 +102,8 @@ class ViewerOption {
       enableLighting: globeOption?.enableLighting ?? false,
       depthTestAgainstTerrain: globeOption?.depthTestAgainstTerrain ?? false,
       tileCacheSize: +globeOption?.tileCacheSize || 100,
-      preloadSiblings: globeOption?.enableLighting ?? false,
+      preloadSiblings: globeOption?.preloadSiblings ?? false,
+      showSkirts: globeOption?.showSkirts ?? true,
       baseColor: globeOption?.baseColor || new Cesium.Color(0, 0, 0.5, 1),
       terrainExaggeration: globeOption?.terrainExaggeration || 1,
       terrainExaggerationRelativeHeight:
@@ -118,20 +119,6 @@ class ViewerOption {
       frontFaceAlphaByDistance:
         globeOption?.translucency?.frontFaceAlphaByDistance,
     })
-
-    // if (globeOption?.filterColor) {
-    //   let filterColor = globeOption?.filterColor
-    //   let globeFS = globe._surfaceShaderSet.baseFragmentShaderSource
-    //   let oriShader = globeFS.sources[globeFS.sources.length - 1]
-    //   globeFS.sources[globeFS.sources.length - 1] = oriShader.replace(
-    //     'gl_FragColor =  finalColor;',
-    //     `gl_FragColor = finalColor * vec4(${filterColor.red.toFixed(
-    //       2
-    //     )},${filterColor.green.toFixed(2)},${filterColor.blue.toFixed(
-    //       2
-    //     )},${filterColor.alpha.toFixed(2)});`
-    //   )
-    // }
 
     return this
   }

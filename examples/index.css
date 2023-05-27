@@ -10,6 +10,13 @@ body {
   overflow: hidden;
 }
 
+.viewer-container{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
 .custom-popup {
   background: rgba(39, 39, 39, 0.6);
   border-radius: 4px;
@@ -26,7 +33,7 @@ body {
   border-style: solid;
   border-color: rgba(39, 39, 39, 0.6) transparent transparent transparent;
 }
-.dc-hawkeye-map {
+.hawkeye-map {
   left: unset !important;
   bottom: unset !important;
   top: 20px !important;
@@ -102,7 +109,7 @@ body {
 }
 
 .dg.ac{
-  left: 90px !important;
+  left: 20px !important;
   top:20px;
   right: unset;
 }

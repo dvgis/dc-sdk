@@ -109,12 +109,12 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createBaiduImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createBaiduImageryLayer({
       style: 'dark',
       crs:'WGS84'
     })
-    baselayer.defaultBrightness = 0.05
-    viewer.addBaseLayer(baselayer)
+     baseLayer.defaultBrightness = 0.05
+    viewer.addBaseLayer( baseLayer)
     viewer.setOptions({
       enableFxaa:true
     })
@@ -129,5 +129,7 @@
     })
   }
 
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>

@@ -1,4 +1,4 @@
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
@@ -67,5 +67,7 @@
     layer2.addOverlay(scanCircle)
     viewer.flyToPosition('116.3904847,39.8773787,2807.38,0,-48.89')
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>

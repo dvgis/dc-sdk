@@ -214,6 +214,8 @@ function Viewer(container, options) {
 
   const scene = cesiumWidget.scene
 
+  scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
+
   const dataSourceDisplay = new DataSourceDisplay({
     scene: scene,
     dataSourceCollection: dataSourceCollection,

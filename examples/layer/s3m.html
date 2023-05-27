@@ -26,19 +26,21 @@
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
       style: 'img'
     })
-    viewer.addBaseLayer(baselayer)
+    viewer.addBaseLayer( baseLayer)
     let layer = new DC.S3MLayer('id','//resource.dvgis.cn/data/3dtiles/CBD/cbd.scp')
     viewer.addLayer(layer)
     viewer.flyToPosition('116.45793269658417,39.92711385557482,617.5967826044838,181.95219395269424,-21.286437065473546')
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>

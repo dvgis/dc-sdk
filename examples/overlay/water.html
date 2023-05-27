@@ -5,37 +5,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
-  <script src='/libs/dc-sdk/dc.base.min.js'></script>
-  <script src='/libs/dc-sdk/dc.core.min.js'></script>
-  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
-  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <script src='/libs/dc-sdk/dc.min.js'></script>
+  <script src="../dat.gui.min.js"></script>
+  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    html,body,#viewer-container{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  </style>
 </head>
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
       style: 'img',
       crs:'WGS84'
     })
-    viewer.addBaseLayer(baselayer)
+    viewer.addBaseLayer( baseLayer)
     let coords=`120.99033554014366,31.39560938002704;120.99041939679988,31.39445508618271;
                 120.989050149,31.39421205200007;120.98716707200008,31.39376734600003;120.98665941500008,31.393660703000013;
                 120.98638794500009,31.393620849000094;120.986114132,31.393603230000046;120.9833415840001,31.393600375000087;
@@ -60,7 +48,9 @@
     layer.addOverlay(water)
     viewer.flyToPosition(new DC.Position(120.98516078138239,31.392917623508968,729.1673469895062,0,-83.6210050749661))
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>

@@ -1,0 +1,25 @@
+.widget.slider {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  background-color: #d3d3d3;
+  width: 5px;
+  height: 100%;
+  z-index: 9999;
+  .splitter {
+    position: absolute;
+    left: -21px;
+    top: calc(50% - 21px);
+    width: 42px;
+    height: 42px;
+    background: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 58px;
+    padding: 2px;
+    border: 1px solid lightgrey;
+    &:hover {
+      cursor: ew-resize;
+    }
+  }
+}

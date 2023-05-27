@@ -5,35 +5,23 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
-  <script src='/libs/dc-sdk/dc.base.min.js'></script>
-  <script src='/libs/dc-sdk/dc.core.min.js'></script>
-  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
-  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <script src='/libs/dc-sdk/dc.min.js'></script>
+  <script src="../dat.gui.min.js"></script>
+  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    html,body,#viewer-container{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  </style>
 </head>
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer_img = DC.ImageryLayerFactory.createTencentImageryLayer({
+    let baselayer_img = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.TENCENT,{
       style:'img'
     })
-    let baselayer_vec = DC.ImageryLayerFactory.createTencentImageryLayer({
+    let baselayer_vec = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.TENCENT,{
       style: 2
     })
     viewer.addBaseLayer([baselayer_img,baselayer_vec], {
@@ -41,13 +29,13 @@
       iconUrl: '../assets/icon/img.png'
     })
 
-    let baselayer = DC.ImageryLayerFactory.createTencentImageryLayer()
-    viewer.addBaseLayer(baselayer, {
+    let  baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.TENCENT)
+    viewer.addBaseLayer( baseLayer, {
       name: '经典',
       iconUrl: '../assets/icon/elec.png'
     })
 
-    let baselayer_2 = DC.ImageryLayerFactory.createTencentImageryLayer({
+    let baselayer_2 = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.TENCENT,{
       style: 4
     })
     viewer.addBaseLayer(baselayer_2, {
@@ -55,7 +43,7 @@
       iconUrl: '../assets/icon/dark.png'
     })
 
-    let baselayer_3 = DC.ImageryLayerFactory.createTencentImageryLayer({
+    let baselayer_3 = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.TENCENT,{
       style: 8
     })
     viewer.addBaseLayer(baselayer_3, {
@@ -67,7 +55,9 @@
       new DC.Position(105.565571, 31.984708, 15362816, 0, -90)
     )
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 
 </body>

@@ -26,7 +26,7 @@
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
@@ -41,8 +41,8 @@
   }
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer()
-    viewer.addBaseLayer(baselayer)
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer()
+    viewer.addBaseLayer( baseLayer)
     let layer = new DC.VectorLayer('layer')
     viewer.addLayer(layer)
     let positions = generatePosition(100)
@@ -52,5 +52,7 @@
     })
     viewer.flyTo(layer)
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>

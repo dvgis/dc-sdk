@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -8,14 +8,6 @@
   <script src='/libs/dc-sdk/dc.min.js'></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
-  <style>
-    .viewer-container{
-      position: relative;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  </style>
 </head>
 
 <body>
@@ -25,7 +17,7 @@
   let viewer = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer(
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,
       {
         crs:'WGS84'
       }
@@ -35,32 +27,32 @@
       name: '电子'
     })
 
-    let baseLayer_img = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let baseLayer_img = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
       style: 'img',
       crs:'WGS84'
     })
     viewer.addBaseLayer(baseLayer_img, {
       iconUrl: '../assets/icon/img.png',
-      name: '地图'
+      name: '影像'
     })
 
-    let baseLayer_cva = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let baseLayer_cva = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
       style: 'cva',
       crs:'WGS84'
     })
     viewer.addBaseLayer([baseLayer_img, baseLayer_cva], {
       iconUrl: '../assets/icon/img.png',
-      name: '地图'
+      name: '影像+注记'
     })
 
-    let layer = new DC.TilesetLayer('layer')
-    viewer.addLayer(layer)
-    let tileset = new DC.Tileset(
-      '//resource.dvgis.cn/data/3dtiles/dayanta/tileset.json'
-    )
-    tileset.setHeight(-420)
-    layer.addOverlay(tileset)
-    viewer.flyTo(tileset)
+    // let layer = new DC.TilesetLayer('layer')
+    // viewer.addLayer(layer)
+    // let tileset = new DC.Tileset(
+    //   '//resource.dvgis.cn/data/3dtiles/dayanta/tileset.json'
+    // )
+    // tileset.setHeight(-420)
+    // layer.addOverlay(tileset)
+    // viewer.flyTo(tileset)
 
   }
   DC.ready({

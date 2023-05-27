@@ -112,15 +112,15 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
       style: 'img',
       crs:'WGS84'
     })
-    baselayer.defaultBrightness = 0.05
+     baseLayer.defaultBrightness = 0.05
     viewer.setOptions({
       enableFxaa:true
     })
-    viewer.addBaseLayer(baselayer)
+    viewer.addBaseLayer( baseLayer)
     viewer.use(new DC.Effect())
     viewer.effect.bloom.enable = true
     let globeRotate = new DC.GlobeRotate(viewer,{
@@ -138,5 +138,7 @@
     globeRotate.start()
   }
 
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>

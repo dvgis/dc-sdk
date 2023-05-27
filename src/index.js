@@ -53,10 +53,17 @@ export function ready(options = {}) {
       throw new Error('missing Cesium Lib')
     }
     this.config.baseUrl && Cesium.buildModuleUrl.setBaseUrl(this.config.baseUrl)
+
     // register common modules
     const modules = require('./modules')
     Object.keys(modules).forEach((key) => {
       this[key] = modules[key]
+    })
+
+    // register third part modules
+    const { THIRD_PART } = require('./modules/third-part')
+    Object.keys(THIRD_PART).forEach((key) => {
+      this[key] = THIRD_PART[key]
     })
 
     // register chart module

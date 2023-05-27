@@ -1,32 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
-  <script src='/libs/dc-sdk/dc.base.min.js'></script>
-  <script src='/libs/dc-sdk/dc.core.min.js'></script>
-  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
-  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <script src='/libs/dc-sdk/dc.min.js'></script>
+  <script src="../dat.gui.min.js"></script>
+  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    html,body,#viewer-container{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  </style>
 </head>
 
 <body>
 
-<div id="viewer-container"></div>
+<body>
+
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
@@ -51,7 +41,9 @@
     })
   }
 
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>

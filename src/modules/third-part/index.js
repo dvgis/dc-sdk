@@ -3,9 +3,9 @@
  * @Date: 2019-12-30 09:35:51
  */
 
-import { Cesium } from '../../namespace'
+import { Cesium } from '../../namespace/index.js'
 
-const thirdPart = {
+export const THIRD_PART = {
   Cartesian2: Cesium.Cartesian2,
   Cartesian3: Cesium.Cartesian3,
   Matrix3: Cesium.Matrix3,
@@ -14,7 +14,7 @@ const thirdPart = {
   SceneMode: Cesium.SceneMode,
   SkyBox: Cesium.SkyBox,
   Color: Cesium.Color,
-  Rect: Cesium.Rectangle,
+  Rectangle: Cesium.Rectangle,
   ShadowMode: Cesium.ShadowMode,
   JulianDate: Cesium.JulianDate,
   HeightReference: Cesium.HeightReference,
@@ -37,5 +37,3 @@ const thirdPart = {
   CustomShader: Cesium.CustomShader,
   UniformType: Cesium.UniformType,
 }
-
-export default thirdPart

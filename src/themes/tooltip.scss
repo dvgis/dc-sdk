@@ -1,0 +1,26 @@
+.widget.tool-tip {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 100px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  padding: 0 10px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: -1;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    pointer-events: none;
+    left: -10px;
+    top: 5px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid rgba(0, 0, 0, 0.6);
+  }
+}

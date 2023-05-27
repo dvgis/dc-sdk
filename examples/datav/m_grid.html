@@ -26,7 +26,7 @@
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
   let geoCoordMap = {
@@ -151,9 +151,9 @@
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
     viewer.scene.canvas.setAttribute('tabIndex', 0)
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer()
-    baselayer.defaultBrightness= 0.2
-    viewer.addBaseLayer(baselayer)
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer()
+     baseLayer.defaultBrightness= 0.2
+    viewer.addBaseLayer( baseLayer)
     let data = []
     for (let key in geoCoordMap) {
       let geoCoord = geoCoordMap[key]
@@ -199,7 +199,9 @@
       }
     )
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>

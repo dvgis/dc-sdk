@@ -29,7 +29,7 @@
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
  <div class="btn-box">
    <ul>
      <li><button onclick="draw('point')">点</button></li>
@@ -53,10 +53,10 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
       style:'img'
     })
-    viewer.addBaseLayer(baselayer)
+    viewer.addBaseLayer( baseLayer)
     layer = new DC.VectorLayer('layer')
     viewer.addLayer(layer)
     plot= new DC.Plot(viewer)
@@ -75,7 +75,9 @@
     layer.clear()
   }
 
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>

@@ -58,29 +58,6 @@ class CameraOption {
 
   /**
    *
-   */
-  limitCameraToGround() {
-    this._viewer.camera.changed.addEventListener((frameState) => {
-      if (
-        this._viewer.camera._suspendTerrainAdjustment &&
-        this._viewer.scene.mode === Cesium.SceneMode.SCENE3D
-      ) {
-        this._viewer.camera._suspendTerrainAdjustment = false
-        this._viewer.camera._adjustOrthographicFrustum(true)
-      }
-    })
-  }
-
-  /**
-   * @param west
-   * @param south
-   * @param east
-   * @param north
-   */
-  setBounds(west, south, east, north) {}
-
-  /**
-   *
    * @param mouseMode
    */
   changeMouseMode(mouseMode) {

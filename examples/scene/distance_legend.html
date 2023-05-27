@@ -27,16 +27,16 @@
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
       style: 'img'
     })
-    viewer.addBaseLayer(baselayer)
+    viewer.addBaseLayer( baseLayer)
     viewer.distanceLegend.enable = true
     addGuiController() // add controller
   }
@@ -50,7 +50,9 @@
       viewer.distanceLegend.enable = value
     })
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>

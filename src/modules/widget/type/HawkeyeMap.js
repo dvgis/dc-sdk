@@ -8,22 +8,7 @@ import State from '../../state/State'
 import { Util, DomUtil } from '../../utils'
 import { SceneEventType } from '../../event'
 import Widget from '../Widget'
-
-const DEF_OPTS = {
-  animation: false,
-  baseLayerPicker: false,
-  imageryProvider: false,
-  fullscreenButton: false,
-  geocoder: false,
-  homeButton: false,
-  infoBox: false,
-  sceneModePicker: false,
-  selectionIndicator: false,
-  timeline: false,
-  navigationHelpButton: false,
-  navigationInstructionsInitiallyVisible: false,
-  creditContainer: undefined,
-}
+import { CesiumViewer } from '../../exts'
 
 class HawkeyeMap extends Widget {
   constructor() {
@@ -48,16 +33,10 @@ class HawkeyeMap extends Widget {
    * @private
    */
   _mountContent() {
-    let map = new Cesium.Viewer(this._wrapper, {
-      ...DEF_OPTS,
+    let map = new CesiumViewer(this._wrapper, {
       sceneMode: Cesium.SceneMode.SCENE2D,
     })
     map.imageryLayers.removeAll()
-    map.cesiumWidget.creditContainer.style.display = 'none'
-    map.cesiumWidget.screenSpaceEventHandler.removeInputAction(
-      Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
-    )
-    map.scene.backgroundColor = Cesium.Color.TRANSPARENT
     Util.merge(map.scene.screenSpaceCameraController, {
       enableRotate: false,
       enableTranslate: false,

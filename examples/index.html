@@ -61,6 +61,7 @@
       padding-top: 20px;
       margin: 10px 0;
       border-top: 1px  solid #444 ;
+      color: #bcbcbc;
     }
 
     .example-list h4:hover,.example-list ul li:hover{
@@ -77,12 +78,14 @@
       font-size: 15px;
     }
 
-    .example-list ul li:hover,.example-list ul li.active{
+    .example-list ul li:hover a,.example-list ul li.active a{
       color: #1e80ff;
     }
 
-
-
+    .example-list ul li:hover,.example-list ul li a{
+      color: #fff;
+      text-decoration: none;
+    }
 
   </style>
 </head>
@@ -96,13 +99,22 @@
     </div>
   </div>
   <div class="example">
-    <iframe id="inner-page" src="info/start.html"  style="border: 0"></iframe>
+    <iframe id="inner-page" name="inner-page"   style="border: 0" allow="fullscreen; xr-spatial-tracking;"></iframe>
   </div>
 
   <script src="./list.js"></script>
   <script type="text/javascript">
     $(document).ready(function() {
+      let href =undefined
       let $currentPage = undefined
+      if(window.location.href.indexOf("#")> -1){
+         let hrefArr = window.location.href.split('#')
+         if(hrefArr[1]){
+           href = hrefArr[1].replace('_','/')
+         }
+      }
+      $('#inner-page').attr('src',href ||  'info/start.html')
+
       EXAMPLE_LIST.forEach(item => {
         let $section = $('<div data-accordion ></div>')
         let $title = $('<h4 data-control ></h4>').text(item.name)
@@ -111,20 +123,22 @@
         $pageWrapper.appendTo($section)
         if(item.children){
           item.children.forEach(child => {
-            let $page = $('<li>'+ child.name +'</li>')
-            $page.bind('click',e=>{
+            let $page = $('<li></li>')
+            let $link = $('<a></a>').text(child.name)
+            $link.attr('href',item.folder+'/'+child.page).attr('target','inner-page')
+            $link.bind('click',e=>{
               if($currentPage){
                 $currentPage.removeClass('active')
               }
-               $('#inner-page').attr('src',item.folder+'/'+child.page)
-               $page.addClass('active')
+              window.location.href = window.location.href.replace(/#\w*\.?\w*/g,'') +'#'+ item.folder+ '_'+child.page
+              $page.addClass('active')
                $currentPage =$page
             })
+            $page.append($link)
             $pageWrapper.append($page)
           })
         }
         $section.appendTo($('#example-list'))
-
       })
       $('#example-list [data-accordion]').accordion();
     });

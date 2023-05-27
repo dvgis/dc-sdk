@@ -1,0 +1,43 @@
+.widget.location-bar {
+  position: absolute;
+  left: 270px;
+  bottom: 2px;
+  font-size: 14px;
+  color: rgb(255, 255, 255);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2px 5px;
+  border-radius: 2px;
+  user-select: none;
+  display: flex;
+  .mouse-bar, .camera-bar ,.ms-bar,.fps-bar{
+    display: flex;
+    span {
+      margin: 0 8px;
+    }
+
+  }
+
+  .mouse-bar {
+    span {
+      min-width: 140px;
+    }
+    span:nth-of-type(3) {
+      min-width: 120px;
+    }
+  }
+
+  .camera-bar {
+    span{
+      min-width: 90px;
+    }
+    span:nth-of-type(2) {
+      min-width: 145px;
+    }
+  }
+
+  .ms-bar,.fps-bar {
+    span {
+      min-width: 70px;
+    }
+  }
+}

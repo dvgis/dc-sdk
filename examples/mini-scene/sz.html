@@ -1,4 +1,4 @@
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
@@ -28,12 +28,12 @@
   }
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
       style: 'img',
       crs:'WGS84'
     })
-    baselayer.defaultBrightness = 0.05
-    viewer.addBaseLayer([baselayer])
+     baseLayer.defaultBrightness = 0.05
+    viewer.addBaseLayer([ baseLayer])
     let terrain = DC.TerrainFactory.createUrlTerrain({
       url: 'http://data.marsgis.cn/terrain'
     })
@@ -41,5 +41,7 @@
     loadBuild()
   }
 
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>

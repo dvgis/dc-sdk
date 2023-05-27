@@ -1,0 +1,40 @@
+.widget.context-menu {
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 120px;
+  min-height: 10px;
+  background: rgba(43,44,47,.8);
+  border: 1px solid #2b2c2f;
+  border-radius: 4px;
+  visibility: hidden;
+  z-index: -1;
+  cursor: pointer;
+  .menu-list {
+    width: 100%;
+    color: #fff;
+    .menu-item {
+      font-size: 14px;
+      list-style: none;
+      width: 100%;
+      &:nth-child(n+2)::before{
+        content: "";
+        display: block;
+        height: 1px;
+        width: 100%;
+        background: -webkit-linear-gradient(270deg,transparent,hsla(0,0%,100%,.2),transparent);
+        background: linear-gradient(270deg,transparent,hsla(0,0%,100%,.2),transparent);
+      }
+      a{
+        color: #fff;
+        display:block;
+        padding: 6px 10px;
+        clear: both;
+        text-decoration: none;
+        &:hover{
+          background-color: #444d59;
+        }
+      }
+    }
+  }
+}

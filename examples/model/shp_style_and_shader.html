@@ -26,15 +26,15 @@
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer()
-    baselayer.defaultBrightness = 0.1
-    viewer.addBaseLayer(baselayer)
+    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer()
+     baseLayer.defaultBrightness = 0.1
+    viewer.addBaseLayer( baseLayer)
     let layer = new DC.TilesetLayer('layer')
     viewer.addLayer(layer)
     let tileset = new DC.Tileset(
@@ -74,7 +74,9 @@
     layer.addOverlay(tileset)
     viewer.flyTo(tileset)
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>

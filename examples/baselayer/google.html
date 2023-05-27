@@ -5,51 +5,39 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
-  <script src='/libs/dc-sdk/dc.base.min.js'></script>
-  <script src='/libs/dc-sdk/dc.core.min.js'></script>
-  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
-  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <script src='/libs/dc-sdk/dc.min.js'></script>
+  <script src="../dat.gui.min.js"></script>
+  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    html,body,#viewer-container{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  </style>
 </head>
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
 
-    let baselayer = DC.ImageryLayerFactory.createGoogleImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE,{
       style: 'img'
     })
-    viewer.addBaseLayer(baselayer, {
+    viewer.addBaseLayer( baseLayer, {
       iconUrl: '../assets/icon/img.png',
       name: '地图'
     })
 
-    let baselayer_elc = DC.ImageryLayerFactory.createGoogleImageryLayer()
+    let baselayer_elc = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE)
     viewer.addBaseLayer(baselayer_elc, {
       iconUrl: '../assets/icon/elec.png',
       name: '电子'
     })
 
-    let baselayer_ter = DC.ImageryLayerFactory.createGoogleImageryLayer({
+    let baselayer_ter = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE,{
       style: 'ter'
     })
     viewer.addBaseLayer(baselayer_ter, {
-      iconUrl: '../assets/icon/img.png',
+      iconUrl: '../assets/icon/ter.png',
       name: '地形'
     })
 
@@ -57,7 +45,9 @@
       new DC.Position(105.565571, 31.984708, 15362816, 0, -90)
     )
   }
-  DC.ready(initViewer)
+  DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>

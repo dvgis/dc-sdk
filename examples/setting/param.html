@@ -8,7 +8,7 @@
   <script src='/libs/dc-sdk/dc.base.min.js'></script>
   <script src='/libs/dc-sdk/dc.core.min.js'></script>
   <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.9/dat.gui.min.js'></script>
   <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
   <style>
@@ -22,37 +22,50 @@
       overflow: hidden;
     }
   </style>
-</head>
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 
 <script>
   let viewer = undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img'
+    let  baseLayer = DC.ImageryLayerFactory.createBaiduImageryLayer({
+      style: 'midnight'
     })
-    viewer.addBaseLayer(baselayer)
-    viewer.locationBar.enable = true
+    viewer.addBaseLayer( baseLayer)
     addGuiController() // add controller
   }
 
   function addGuiController(){
     let controls = {
-      enable :true,
+      alpha :1,
+      brightness : 1,
+      contrast:1,
+      saturation:1
     }
+    let imageryLayer = viewer.imageryLayers.get(0)
     let gui = new dat.GUI();
-    gui.add(controls,'enable',).onChange(value=>{
-      viewer.locationBar.enable = value
+    gui.add(controls,'alpha',0,1).step(0.1).onChange(value=>{
+      imageryLayer.alpha = value
+    })
+    gui.add(controls,'brightness',-1,5).step(0.1).onChange(value=>{
+      imageryLayer.brightness = value
+    })
+    gui.add(controls,'contrast',-1,3).step(0.1).onChange(value=>{
+      imageryLayer.contrast = value
+    })
+    gui.add(controls,'saturation',0,2).step(0.1).onChange(value=>{
+      imageryLayer.saturation = value
     })
   }
 
-  DC.ready(initViewer)
-
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
+
 </body>
 </html>

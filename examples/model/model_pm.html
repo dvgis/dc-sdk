@@ -5,27 +5,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
-  <script src='/libs/dc-sdk/dc.base.min.js'></script>
-  <script src='/libs/dc-sdk/dc.core.min.js'></script>
-  <script>DC.baseUrl='../libs/dc-sdk/resources/'</script>
-  <link href='/libs/dc-sdk/dc.core.min.css' type='text/css' rel='stylesheet'>
+  <script src='/libs/dc-sdk/dc.min.js'></script>
+  <script src="../dat.gui.min.js"></script>
+  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
-  <style>
-    *{
-      margin: 0;
-      padding: 0;
-    }
-    html,body,#viewer-container{
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-    }
-  </style>
 </head>
 
 <body>
 
-<div id="viewer-container"></div>
+<div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
@@ -41,11 +29,11 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer = DC.ImageryLayerFactory.createBaiduImageryLayer({
+    let  baseLayer = DC.ImageryLayerFactory.createBaiduImageryLayer({
       style: 'dark'
     })
-    baselayer.defaultBrightness = 0.3
-    viewer.addBaseLayer(baselayer)
+     baseLayer.defaultBrightness = 0.3
+    viewer.addBaseLayer( baseLayer)
     let layer = new DC.VectorLayer('layer')
     viewer.addLayer(layer)
     let positions = generatePosition(1)
@@ -56,7 +44,9 @@
 
     viewer.flyTo(layer)
   }
-  DC.ready(initViewer)
+    DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/'
+  }).then(initViewer)
 </script>
 </body>
 </html>
