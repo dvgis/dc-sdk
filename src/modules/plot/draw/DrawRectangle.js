@@ -7,7 +7,7 @@ import { Cesium } from '../../../namespace'
 import Draw from './Draw'
 import { PlotEventType } from '../../event'
 import { Transform } from '../../transform'
-import { Rectangle } from '../../overlay'
+import { Rect } from '../../overlay'
 
 const DEF_STYLE = {
   material: Cesium.Color.YELLOW.withAlpha(0.6),
@@ -51,7 +51,7 @@ class DrawRectangle extends Draw {
   _stoppedHook() {
     let rectangle = null
     if (this._positions.length) {
-      rectangle = new Rectangle(
+      rectangle = new Rect(
         Transform.transformCartesianArrayToWGS84Array(this._positions)
       ).setStyle(this._style)
     }
