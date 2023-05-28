@@ -116,3 +116,5 @@ export {
   WallTrailMaterialProperty,
   WaterMaterialProperty,
 } from './material'
+
+export { default as Plot } from './plot/Plot'
