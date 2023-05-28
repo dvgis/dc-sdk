@@ -19,14 +19,14 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container', {})
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img'
-    })
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{style:'img'})
+    viewer.addBaseLayer( baseLayer)
     viewer.addBaseLayer( baseLayer)
     let layer = new DC.CzmlLayer('layer', '../assets/data/simple.czml')
     viewer.addLayer(layer)
   }
-    DC.ready({
+
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

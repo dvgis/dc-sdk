@@ -3,11 +3,10 @@
  * @Date: 2021-02-27 23:22:38
  */
 
-import { Cesium } from '@dc-modules/namespace'
-
-const RadarLineMaterial = require('../shader/radar/RadarLineMaterial.glsl')
-const RadarSweepMaterial = require('../shader/radar/RadarSweepMaterial.glsl')
-const RadarWaveMaterial = require('../shader/radar/RadarWaveMaterial.glsl')
+import { Cesium } from '../../../namespace'
+import RadarLineMaterial from '../shader/radar/RadarLineMaterial.glsl'
+import RadarSweepMaterial from '../shader/radar/RadarSweepMaterial.glsl'
+import RadarWaveMaterial from '../shader/radar/RadarWaveMaterial.glsl'
 
 /**
  * RadarLine

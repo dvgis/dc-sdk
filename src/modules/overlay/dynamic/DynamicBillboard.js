@@ -27,7 +27,6 @@ class DynamicBillboard extends DynamicOverlay {
   set icon(icon) {
     this._icon = icon
     this._delegate.billboard.image = this._icon
-    return this
   }
 
   get icon() {
@@ -41,7 +40,6 @@ class DynamicBillboard extends DynamicOverlay {
     this._size = size
     this._delegate.billboard.width = this._size[0] || 32
     this._delegate.billboard.height = this._size[1] || 32
-    return this
   }
 
   get size() {

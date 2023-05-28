@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 22:33:50
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../namespace'
 
 class MaterialProperty {
   constructor(options = {}) {

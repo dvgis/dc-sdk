@@ -3,7 +3,7 @@
  * @Date: 2020-02-25 21:16:00
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../../namespace'
 
 class WaterMaterialProperty {
   constructor(options) {

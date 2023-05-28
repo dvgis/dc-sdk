@@ -3,7 +3,7 @@
  * @Date: 2019-12-30 09:35:51
  */
 
-import { Cesium } from '../../namespace/index.js'
+import { Cesium } from '../../namespace'
 
 export const THIRD_PART = {
   Cartesian2: Cesium.Cartesian2,
@@ -36,4 +36,5 @@ export const THIRD_PART = {
   CustomShaderTranslucencyMode: Cesium.CustomShaderTranslucencyMode,
   CustomShader: Cesium.CustomShader,
   UniformType: Cesium.UniformType,
+  Math: Cesium.Math,
 }

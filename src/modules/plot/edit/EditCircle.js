@@ -75,7 +75,7 @@ class EditCircle extends Edit {
    *
    * @private
    */
-  _stopedHook() {
+  _stoppedHook() {
     this._overlay.center = Transform.transformCartesianToWGS84(
       this._positions[0]
     )

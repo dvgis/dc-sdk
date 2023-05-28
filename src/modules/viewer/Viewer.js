@@ -306,7 +306,7 @@ class Viewer {
     if (!baseLayer) {
       return this
     }
-    this._baseLayerPicker.addImageryLayer(baseLayer)
+    this._baseLayerPicker.addImageryLayer(baseLayer, options)
     if (!this._baseLayerPicker.selectedImageryLayer) {
       this._baseLayerPicker.changeImageryLayer(0)
     }

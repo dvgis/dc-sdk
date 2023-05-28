@@ -41,7 +41,7 @@ class HtmlLayer extends Layer {
    */
   _onAdd(viewer) {
     this._viewer = viewer
-    this._viewer.dcContainer.appendChild(this._delegate)
+    this._viewer.layerContainer.appendChild(this._delegate)
     let scene = this._viewer.scene
     this._renderRemoveCallback = scene.postRender.addEventListener(() => {
       let cp = this._viewer.camera.positionWC
@@ -75,7 +75,7 @@ class HtmlLayer extends Layer {
    */
   _onRemove() {
     this._renderRemoveCallback && this._renderRemoveCallback()
-    this._viewer.dcContainer.removeChild(this._delegate)
+    this._viewer.layerContainer.removeChild(this._delegate)
     this._state = State.REMOVED
   }
 

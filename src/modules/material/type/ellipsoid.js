@@ -4,9 +4,8 @@
  */
 
 import { Cesium } from '../../../namespace'
-
-const EllipsoidElectricMaterial = require('../shader/ellipsoid/EllipsoidElectricMaterial.glsl')
-const EllipsoidTrailMaterial = require('../shader/ellipsoid/EllipsoidTrailMaterial.glsl')
+import EllipsoidElectricMaterial from '../shader/ellipsoid/EllipsoidElectricMaterial.glsl'
+import EllipsoidTrailMaterial from '../shader/ellipsoid/EllipsoidTrailMaterial.glsl'
 
 /**
  * EllipsoidElectric

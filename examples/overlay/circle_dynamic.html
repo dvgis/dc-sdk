@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -18,10 +17,10 @@
   let viewer = undefined
 
   function generatePosition(num) {
-    var list = []
-    for (var i = 0; i < num; i++) {
-      var lng = 120.38105869 + Math.random() * 0.5
-      var lat = 31.10115627 + Math.random() * 0.5
+    let  list = []
+    for (let i = 0; i < num; i++) {
+      let lng = 120.38105869 + Math.random() * 0.5
+      let lat = 31.10115627 + Math.random() * 0.5
       list.push(new DC.Position(lng, lat))
     }
     return list
@@ -29,11 +28,13 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createBaiduImageryLayer({
-      style: 'dark'
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
+      crs:'WGS84'
     })
-     baseLayer.defaultBrightness = 0.3
-    viewer.addBaseLayer( baseLayer)
+    viewer.addBaseLayer( baseLayer,{
+      brightness:0.1
+    })
     let layer = new DC.VectorLayer('layer')
     viewer.addLayer(layer)
     let positions = generatePosition(1)
@@ -45,7 +46,7 @@
         })
       })
       circle.rotateAmount = -1
-      let model = new DC.Model(item, 'examples/data/model/zhui.glb')
+      let model = new DC.Model(item, '../assets/data/zhui.glb')
       model.setStyle({
         scale: 100
       })
@@ -55,7 +56,7 @@
 
     viewer.flyTo(layer)
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

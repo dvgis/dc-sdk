@@ -3,12 +3,11 @@
  * @Date: 2021-02-27 23:30:43
  */
 
-import { Cesium } from '@dc-modules/namespace'
-
-const WallDiffuseMaterial = require('../shader/wall/WallDiffuseMaterial.glsl')
-const WallImageTrailMaterial = require('../shader/wall/WallImageTrailMaterial.glsl')
-const WallLineTrailMaterial = require('../shader/wall/WallLineTrailMaterial.glsl')
-const WallTrailMaterial = require('../shader/wall/WallTrailMaterial.glsl')
+import { Cesium } from '../../../namespace'
+import WallDiffuseMaterial from '../shader/wall/WallDiffuseMaterial.glsl'
+import WallImageTrailMaterial from '../shader/wall/WallImageTrailMaterial.glsl'
+import WallLineTrailMaterial from '../shader/wall/WallLineTrailMaterial.glsl'
+import WallTrailMaterial from '../shader/wall/WallTrailMaterial.glsl'
 
 /**
  * WallDiffuse

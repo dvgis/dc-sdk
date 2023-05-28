@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -28,37 +27,29 @@
   }
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let key = '0f7c1d161d7352116a21aacf0e9f44c1'
-    let cva = DC.ImageryLayerFactory.createTdtImageryLayer({
-      key,
-      style: 'cva'
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
+      crs:'WGS84'
     })
-
-    let vec = DC.ImageryLayerFactory.createTdtImageryLayer({
-      key
+    viewer.addBaseLayer( baseLayer,{
+      brightness:0.1
     })
-    viewer.addBaseLayer([vec, cva])
     let layer = new DC.VectorLayer('layer')
     viewer.addLayer(layer)
     let positions = generatePosition(20)
     let material = new DC.PolylineDashMaterialProperty({
-      color: DC.Color.ORANGE
+      color: DC.Color.YELLOW
     })
     positions.forEach(item => {
-      let label = new DC.CustomLabel(
+      let billboard = new DC.CustomBillboard(
         item,
-        '数字视觉'
+        '../assets/icon/camera.png'
       )
-      label.setStyle({
-        fillColor: DC.Color.YELLOW,
-        font: '12px',
-        pixelOffset:{x:0, y:-10}
-      })
-      label.setVLine({
+      billboard.setVLine({
         width: 2,
         material
       })
-      layer.addOverlay(label)
+      layer.addOverlay(billboard)
     })
     viewer.flyTo(layer)
   }
@@ -66,5 +57,3 @@
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>
-</body>
-</html>

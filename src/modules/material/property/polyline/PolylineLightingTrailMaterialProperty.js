@@ -3,10 +3,9 @@
  * @Date: 2021-01-13 20:52:47
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../../namespace'
 import MaterialProperty from '../../MaterialProperty'
-
-const IMG = require('@dc-modules/images/lighting.png')
+import IMG from '../../../images/lighting.png'
 
 class PolylineLightingTrailMaterialProperty extends MaterialProperty {
   constructor(options = {}) {

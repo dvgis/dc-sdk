@@ -3,7 +3,7 @@
  * @Date: 2021-02-27 23:53:08
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../../namespace'
 import MaterialProperty from '../../MaterialProperty'
 
 class RadarLineMaterialProperty extends MaterialProperty {

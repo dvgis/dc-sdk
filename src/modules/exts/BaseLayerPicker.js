@@ -78,7 +78,7 @@ class BaseLayerPicker {
     }
     this._count++
     this._imageryLayers.push({
-      id: `dc-imagery-${this._count}`,
+      id: `imagery-no-${this._count}`,
       layers: imageryLayers,
       options: options,
     })

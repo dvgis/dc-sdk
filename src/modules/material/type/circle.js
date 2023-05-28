@@ -4,17 +4,16 @@
  */
 
 import { Cesium } from '../../../namespace'
-
-const CircleBlurMaterial = require('../shader/circle/CircleBlurMaterial.glsl')
-const CircleDiffuseMaterial = require('../shader/circle/CircleDiffuseMaterial.glsl')
-const CircleFadeMaterial = require('../shader/circle/CircleFadeMaterial.glsl')
-const CirclePulseMaterial = require('../shader/circle/CirclePulseMaterial.glsl')
-const CircleRingMaterial = require('../shader/circle/CircleRingMaterial.glsl')
-const CircleRotateMaterial = require('../shader/circle/CircleRotateMaterial.glsl')
-const CircleScanMaterial = require('../shader/circle/CircleScanMaterial.glsl')
-const CircleSpiralMaterial = require('../shader/circle/CircleSpiralMaterial.glsl')
-const CircleVaryMaterial = require('../shader/circle/CircleVaryMaterial.glsl')
-const CircleWaveMaterial = require('../shader/circle/CircleWaveMaterial.glsl')
+import CircleBlurMaterial from '../shader/circle/CircleBlurMaterial.glsl'
+import CircleDiffuseMaterial from '../shader/circle/CircleDiffuseMaterial.glsl'
+import CircleFadeMaterial from '../shader/circle/CircleFadeMaterial.glsl'
+import CirclePulseMaterial from '../shader/circle/CirclePulseMaterial.glsl'
+import CircleRingMaterial from '../shader/circle/CircleRingMaterial.glsl'
+import CircleRotateMaterial from '../shader/circle/CircleRotateMaterial.glsl'
+import CircleScanMaterial from '../shader/circle/CircleScanMaterial.glsl'
+import CircleSpiralMaterial from '../shader/circle/CircleSpiralMaterial.glsl'
+import CircleVaryMaterial from '../shader/circle/CircleVaryMaterial.glsl'
+import CircleWaveMaterial from '../shader/circle/CircleWaveMaterial.glsl'
 
 /**
  * CircleBlur

@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -26,7 +25,7 @@
     })
     let layer_build = new DC.TilesetLayer('layer_build').addTo(viewer)
     let build = new DC.Tileset(
-      'http://resource.dvgis.cn/data/3dtiles/ljz/tileset.json',
+      '//resource.dvgis.cn/data/3dtiles/ljz/tileset.json',
       {skipLevels:true}
     )
     let customShader =  new DC.CustomShader({

@@ -3,22 +3,21 @@
  * @Date: 2021-02-27 22:52:23
  */
 
-import { Cesium } from '@dc-modules/namespace'
-
-const czm_cellular = require('../shader/thirdpart/cellular.glsl')
-const czm_snoise = require('../shader/thirdpart/snoise.glsl')
-const AsphaltMaterial = require('../shader/thirdpart/AsphaltMaterial.glsl')
-const BlobMaterial = require('../shader/thirdpart/BlobMaterial.glsl')
-const BrickMaterial = require('../shader/thirdpart/BlobMaterial.glsl')
-const CementMaterial = require('../shader/thirdpart/CementMaterial.glsl')
-const ErosionMaterial = require('../shader/thirdpart/ErosionMaterial.glsl')
-const FacetMaterial = require('../shader/thirdpart/FacetMaterial.glsl')
-const FresnelMaterial = require('../shader/thirdpart/FresnelMaterial.glsl')
-const GrassMaterial = require('../shader/thirdpart/GrassMaterial.glsl')
-const ReflectionMaterial = require('../shader/thirdpart/ReflectionMaterial.glsl')
-const RefractionMaterial = require('../shader/thirdpart/RefractionMaterial.glsl')
-const TieDyeMaterial = require('../shader/thirdpart/TieDyeMaterial.glsl')
-const WoodMaterial = require('../shader/thirdpart/WoodMaterial.glsl')
+import { Cesium } from '../../../namespace'
+import czm_cellular from '../shader/thirdpart/cellular.glsl'
+import czm_snoise from '../shader/thirdpart/snoise.glsl'
+import AsphaltMaterial from '../shader/thirdpart/AsphaltMaterial.glsl'
+import BlobMaterial from '../shader/thirdpart/BlobMaterial.glsl'
+import BrickMaterial from '../shader/thirdpart/BlobMaterial.glsl'
+import CementMaterial from '../shader/thirdpart/CementMaterial.glsl'
+import ErosionMaterial from '../shader/thirdpart/ErosionMaterial.glsl'
+import FacetMaterial from '../shader/thirdpart/FacetMaterial.glsl'
+import FresnelMaterial from '../shader/thirdpart/FresnelMaterial.glsl'
+import GrassMaterial from '../shader/thirdpart/GrassMaterial.glsl'
+import ReflectionMaterial from '../shader/thirdpart/ReflectionMaterial.glsl'
+import RefractionMaterial from '../shader/thirdpart/RefractionMaterial.glsl'
+import TieDyeMaterial from '../shader/thirdpart/TieDyeMaterial.glsl'
+import WoodMaterial from '../shader/thirdpart/WoodMaterial.glsl'
 
 Cesium.ShaderSource._czmBuiltinsAndUniforms.czm_cellular = czm_cellular
 Cesium.ShaderSource._czmBuiltinsAndUniforms.czm_snoise = czm_snoise

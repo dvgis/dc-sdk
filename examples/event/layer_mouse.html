@@ -16,34 +16,41 @@
 <script>
   let viewer = undefined
 
+  function generatePosition(num) {
+    let  list = []
+    for (let i = 0; i < num; i++) {
+      let lng = 120.38105869 + Math.random() * 0.5
+      let lat = 31.10115627 + Math.random() * 0.5
+      list.push(new DC.Position(lng, lat))
+    }
+    return list
+  }
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
-      style:'img',
-      crs:'WGS84'
-    })
-    viewer.addBaseLayer( baseLayer,{
-      brightness : 0.1
-    })
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,
+      {
+        style:'img',
+        crs:'WGS84'
+      }
+    )
+    viewer.addBaseLayer(baseLayer)
     let layer = new DC.VectorLayer('layer')
-
     viewer.addLayer(layer)
 
-    let polyline = new DC.Polyline('-75, 35; -125, 35')
-    polyline.setStyle({
-      width: 3,
-      material: new DC.PolylineTrailMaterialProperty({
-        color: DC.Color.RED,
-        speed: 10
-      }),
-      clampToGround: true
+    let positions = generatePosition(10)
+    positions.forEach(item => {
+      let point = new DC.Point(item)
+      layer.addOverlay(point)
     })
-    layer.addOverlay(polyline)
+
+    layer.on(DC.MouseEventType.CLICK,e=>{
+      console.log(e)
+    })
+
     viewer.flyTo(layer)
   }
+
   DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>
-</body>
-</html>

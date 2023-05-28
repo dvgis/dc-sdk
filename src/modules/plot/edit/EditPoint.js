@@ -30,7 +30,7 @@ class EditPoint extends Edit {
    *
    * @private
    */
-  _stopedHook() {
+  _stoppedHook() {
     this._overlay.position = Transform.transformCartesianToWGS84(this._position)
     this._overlay.show = true
     this._options.onEditStop && this._options.onEditStop(this._overlay)

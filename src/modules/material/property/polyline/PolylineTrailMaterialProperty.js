@@ -3,7 +3,7 @@
  * @Date: 2020-02-24 13:09:09
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../../namespace'
 import MaterialProperty from '../../MaterialProperty'
 
 class PolylineTrailMaterialProperty extends MaterialProperty {

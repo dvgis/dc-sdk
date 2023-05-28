@@ -107,7 +107,7 @@ class Popup extends Widget {
    * @private
    */
   _setCustomClass() {
-    DomUtil.setClass(this._wrapper, `dc-popup ${this._config.customClass}`)
+    DomUtil.setClass(this._wrapper, `widget popup ${this._config.customClass}`)
   }
 
   /**
@@ -118,7 +118,7 @@ class Popup extends Widget {
   setWrapper(wrapper) {
     if (wrapper && wrapper instanceof Element) {
       this._wrapper = wrapper
-      DomUtil.addClass(this._wrapper, 'dc-popup')
+      DomUtil.addClass(this._wrapper, 'widget popup')
     }
     return this
   }

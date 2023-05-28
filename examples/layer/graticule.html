@@ -18,32 +18,18 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
-      style:'img',
-      crs:'WGS84'
-    })
-    viewer.addBaseLayer( baseLayer,{
-      brightness : 0.1
-    })
-    let layer = new DC.VectorLayer('layer')
 
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,
+      {
+        style:'img',
+      }
+    )
+    viewer.addBaseLayer( baseLayer)
+    let layer = new DC.GraticuleLayer('layer',)
     viewer.addLayer(layer)
-
-    let polyline = new DC.Polyline('-75, 35; -125, 35')
-    polyline.setStyle({
-      width: 3,
-      material: new DC.PolylineTrailMaterialProperty({
-        color: DC.Color.RED,
-        speed: 10
-      }),
-      clampToGround: true
-    })
-    layer.addOverlay(polyline)
-    viewer.flyTo(layer)
   }
+
   DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>
-</body>
-</html>

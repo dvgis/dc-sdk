@@ -26,7 +26,6 @@ class DynamicModel extends DynamicOverlay {
   set modelUrl(modelUrl) {
     this._modelUrl = modelUrl
     this._delegate.model.uri = this._modelUrl
-    return this
   }
 
   get modelUrl() {

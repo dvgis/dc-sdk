@@ -22,7 +22,6 @@ class DynamicOverlay extends Overlay {
 
   set maxCacheSize(maxCacheSize) {
     this._maxCacheSize = maxCacheSize
-    return this
   }
 
   get maxCacheSize() {

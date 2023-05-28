@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -19,10 +18,12 @@
   let tileset = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img',
-      crs:'WGS84'
-    })
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,
+      {
+        style:'img',
+        crs:'WGS84'
+      }
+    )
     viewer.addBaseLayer( baseLayer)
     let layer = new DC.TilesetLayer('layer')
     viewer.addLayer(layer)

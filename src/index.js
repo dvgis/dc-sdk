@@ -59,13 +59,18 @@ export function ready(options = {}) {
     Object.keys(modules).forEach((key) => {
       this[key] = modules[key]
     })
-
     // register third part modules
     const { THIRD_PART } = require('./modules/third-part')
     Object.keys(THIRD_PART).forEach((key) => {
       this[key] = THIRD_PART[key]
     })
-
+    // register math module
+    if (this['Math']) {
+      const funcs = require('./modules/math')
+      Object.keys(funcs).forEach((key) => {
+        this['Math'][key] = funcs[key]
+      })
+    }
     // register chart module
     if (getLib('echarts')) {
       const modules = require('./modules/chart')
@@ -73,7 +78,6 @@ export function ready(options = {}) {
         this[key] = modules[key]
       })
     }
-
     // register turf module
     if (getLib('turf')) {
       // todo

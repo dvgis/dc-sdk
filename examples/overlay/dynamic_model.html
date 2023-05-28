@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -30,8 +29,9 @@
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
     let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+      crs:"WGS84"
     })
-    viewer.addBaseLayer( baseLayer)
+    viewer.addBaseLayer( baseLayer,{brightness:0.1})
     let layer = new DC.DynamicLayer('layer').addTo(viewer)
     for(let i = 0; i<50; i++){
       let model = new DC.DynamicModel(generatePosition(1)[0],'../assets/data/qiche.gltf')

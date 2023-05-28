@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -11,35 +10,29 @@
 </head>
 
 <body>
-
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
-
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
-      style:'img',
-      crs:'WGS84'
+    let baseLayer_img = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style: 'img'
     })
-    viewer.addBaseLayer( baseLayer,{
-      brightness : 0.1
-    })
-    let layer = new DC.VectorLayer('layer')
 
-    viewer.addLayer(layer)
-
-    let polyline = new DC.Polyline('-75, 35; -125, 35')
-    polyline.setStyle({
-      width: 3,
-      material: new DC.PolylineTrailMaterialProperty({
-        color: DC.Color.RED,
-        speed: 10
-      }),
-      clampToGround: true
+    viewer.on(DC.MouseEventType.CLICK,e=>{
+       console.log(e)
     })
-    layer.addOverlay(polyline)
-    viewer.flyTo(layer)
+
+    viewer.on(DC.MouseEventType.RIGHT_CLICK,e=>{
+      console.log('do right click')
+    })
+
+    viewer.on(DC.MouseEventType.WHEEL,e=>{
+      console.log('do wheel')
+    })
+
+    viewer.addBaseLayer(baseLayer_img)
+
   }
   DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
@@ -47,3 +40,4 @@
 </script>
 </body>
 </html>
+

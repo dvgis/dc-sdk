@@ -136,7 +136,6 @@ class Layer {
    * @private
    */
   _addOverlay(overlay) {
-    // eslint-disable-next-line no-prototype-builtins
     if (!this._cache.hasOwnProperty(overlay.overlayId)) {
       this._cache[overlay.overlayId] = overlay
       this._delegate && overlay.fire(OverlayEventType.ADD, this)
@@ -152,7 +151,6 @@ class Layer {
    * @private
    */
   _removeOverlay(overlay) {
-    // eslint-disable-next-line no-prototype-builtins
     if (this._cache.hasOwnProperty(overlay.overlayId)) {
       this._delegate && overlay.fire(OverlayEventType.REMOVE, this)
       delete this._cache[overlay.overlayId]

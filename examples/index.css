@@ -18,8 +18,7 @@ body {
 }
 
 .custom-popup {
-  background: rgba(39, 39, 39, 0.6);
-  border-radius: 4px;
+  background: rgba(39, 39, 39, 0.6) !important;
   color: #fff;
   text-align: center;
 }

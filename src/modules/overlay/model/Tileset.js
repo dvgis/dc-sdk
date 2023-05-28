@@ -11,10 +11,7 @@ import State from '../../state/State'
 class Tileset extends Overlay {
   constructor(url, options = {}) {
     super()
-    this._delegate = new Cesium.Cesium3DTileset({
-      ...options,
-      url: url,
-    })
+    this._delegate = Cesium.Cesium3DTileset.fromUrl(url, options)
     this._tileVisibleCallback = undefined
     this._properties = undefined
     this._state = State.INITIALIZED
@@ -24,8 +21,11 @@ class Tileset extends Overlay {
     return Overlay.getOverlayType('tileset')
   }
 
-  get readyPromise() {
-    return this._delegate.readyPromise
+  set show(show) {
+    this._show = show
+    this._delegate.then((tileset) => {
+      tileset.show = show
+    })
   }
 
   /**
@@ -73,7 +73,7 @@ class Tileset extends Overlay {
    */
   setPosition(position) {
     position = Parse.parsePosition(position)
-    this.readyPromise.then((tileset) => {
+    this._delegate.then((tileset) => {
       let modelMatrix = Cesium.Transforms.eastNorthUpToFixedFrame(
         Cesium.Cartesian3.fromDegrees(position.lng, position.lat, position.alt)
       )
@@ -100,7 +100,7 @@ class Tileset extends Overlay {
    * @returns {Tileset}
    */
   setHeadingPitchRoll(heading, pitch, roll) {
-    this.readyPromise.then((tileset) => {
+    this._delegate.then((tileset) => {
       let modelMatrix = tileset.root.transform
       let rotation = Cesium.Matrix4.fromRotationTranslation(
         Cesium.Matrix3.fromHeadingPitchRoll(
@@ -131,7 +131,7 @@ class Tileset extends Overlay {
    * @returns {Tileset}
    */
   clampToGround() {
-    this.readyPromise.then((tileset) => {
+    this._delegate.then((tileset) => {
       let center = Cesium.Cartographic.fromCartesian(
         tileset.boundingSphere.center
       )
@@ -162,7 +162,7 @@ class Tileset extends Overlay {
    * @returns {Tileset}
    */
   setHeight(height, isAbsolute = false) {
-    this.readyPromise.then((tileset) => {
+    this._delegate.then((tileset) => {
       let center = Cesium.Cartographic.fromCartesian(
         tileset.boundingSphere.center
       )
@@ -192,7 +192,7 @@ class Tileset extends Overlay {
    * @returns {Tileset}
    */
   setScale(scale) {
-    this.readyPromise.then((tileset) => {
+    this._delegate.then((tileset) => {
       let modelMatrix = tileset.root.transform
       if (scale > 0 && scale !== 1) {
         Cesium.Matrix4.multiplyByUniformScale(modelMatrix, scale, modelMatrix)
@@ -219,7 +219,7 @@ class Tileset extends Overlay {
    * @return {Tileset}
    */
   setSplitDirection(splitDirection) {
-    this.readyPromise.then((tileset) => {
+    this._delegate.then((tileset) => {
       tileset.splitDirection = splitDirection
     })
     return this
@@ -231,7 +231,7 @@ class Tileset extends Overlay {
    * @return {Tileset}
    */
   setCustomShader(customShader) {
-    this.readyPromise.then((tileset) => {
+    this._delegate.then((tileset) => {
       tileset.customShader = customShader
     })
     return this
@@ -245,7 +245,9 @@ class Tileset extends Overlay {
   setStyle(style) {
     if (style && style instanceof Cesium.Cesium3DTileStyle) {
       this._style = style
-      this._delegate.style = this._style
+      this._delegate.then((tileset) => {
+        tileset.style = style
+      })
     }
     return this
   }

@@ -36,7 +36,6 @@ class Overlay {
 
   set id(id) {
     this._bid = id
-    return this
   }
 
   get id() {
@@ -46,7 +45,6 @@ class Overlay {
   set show(show) {
     this._show = show
     this._delegate && (this._delegate.show = this._show)
-    return this
   }
 
   get show() {
@@ -55,7 +53,6 @@ class Overlay {
 
   set attr(attr) {
     this._attr = attr
-    return this
   }
 
   get attr() {
@@ -64,7 +61,6 @@ class Overlay {
 
   set allowDrillPicking(allowDrillPicking) {
     this._allowDrillPicking = allowDrillPicking
-    return this
   }
 
   get allowDrillPicking() {
@@ -85,7 +81,6 @@ class Overlay {
 
   set contextMenu(menus) {
     this._contextMenu = menus
-    return this
   }
 
   get contextMenu() {
@@ -174,17 +169,14 @@ class Overlay {
 
       if (collection) {
         this._delegate && (this._delegate = collection.add(this._delegate))
-        // for custom primitve
-        if (
-          typeof this['update'] === 'function' &&
-          typeof this['destroy'] === 'function'
-        ) {
+        if (this['update'] && this['destroy']) {
           this._layer.delegate.add(this)
         }
-      } else if (
-        typeof this['update'] === 'function' &&
-        typeof this['destroy'] === 'function'
-      ) {
+      } else if (this._delegate.then) {
+        this._delegate.then((obj) => {
+          this._layer.delegate.add(obj)
+        })
+      } else if (this['update'] && this['destroy']) {
         this._layer.delegate.add(this)
       } else {
         this._delegate && this._layer.delegate.add(this._delegate)
@@ -199,7 +191,7 @@ class Overlay {
    * @private
    */
   _onRemove() {
-    if (!this._layer || !this._delegate) {
+    if (!this._layer) {
       return
     }
     // for Entity
@@ -210,21 +202,18 @@ class Overlay {
     else if (this._layer?.delegate?.remove) {
       let collection = this._getLayerCollection(this.type)
       if (collection) {
-        this._delegate && collection.remove(this._delegate)
-        // for custom primitve
-        if (
-          typeof this['update'] === 'function' &&
-          typeof this['destroy'] === 'function'
-        ) {
+        collection.remove(this._delegate)
+        if (this['update'] && this['destroy']) {
           this._layer.delegate.remove(this)
         }
-      } else if (
-        typeof this['update'] === 'function' &&
-        typeof this['destroy'] === 'function'
-      ) {
+      } else if (this._delegate.then) {
+        this._delegate.then((obj) => {
+          this._layer.delegate.add(obj)
+        })
+      } else if (this['update'] && this['destroy']) {
         this._layer.delegate.remove(this)
       } else {
-        this._delegate && this._layer.delegate.remove(this._delegate)
+        this._layer.delegate.remove(this._delegate)
       }
     }
     this._removedHook && this._removedHook()

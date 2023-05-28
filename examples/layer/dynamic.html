@@ -29,9 +29,11 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-       crs:'WGS84'
-    })
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,
+      {
+        style:'img',
+      }
+    )
     viewer.addBaseLayer( baseLayer)
     let layer = new DC.DynamicLayer('layer').addTo(viewer)
     for(let i = 0; i<50; i++){

@@ -35,7 +35,7 @@ class EditPolygon extends Edit {
    *
    * @private
    */
-  _stopedHook() {
+  _stoppedHook() {
     this._overlay.positions = Transform.transformCartesianArrayToWGS84Array(
       this._positions.filter((item, index) => index % 2 === 0)
     )

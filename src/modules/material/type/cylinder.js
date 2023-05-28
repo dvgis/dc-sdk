@@ -4,9 +4,8 @@
  */
 
 import { Cesium } from '../../../namespace'
-
-const CylinderFadeMaterial = require('../shader/cylinder/CylinderFadeMaterial.glsl')
-const CylinderParticlesMaterial = require('../shader/cylinder/CylinderParticlesMaterial.glsl')
+import CylinderFadeMaterial from '../shader/cylinder/CylinderFadeMaterial.glsl'
+import CylinderParticlesMaterial from '../shader/cylinder/CylinderParticlesMaterial.glsl'
 
 /**
  * CylinderFade

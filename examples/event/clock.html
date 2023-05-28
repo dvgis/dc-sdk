@@ -18,13 +18,17 @@
   let viewer = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img'
-    })
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,
+      {
+        style:'img',
+      }
+    )
     viewer.addBaseLayer( baseLayer)
-    viewer.on(DC.SceneEventType.CLOCK_TICK, e => {})
+    viewer.on(DC.SceneEventType.CLOCK_TICK, e => {
+      console.log(e)
+    })
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

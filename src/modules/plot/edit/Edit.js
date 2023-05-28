@@ -33,7 +33,7 @@ class Edit {
    *
    * @private
    */
-  _stopedHook() {
+  _stoppedHook() {
     this._overlay.positions = Transform.transformCartesianArrayToWGS84Array(
       this._positions
     )
@@ -90,7 +90,7 @@ class Edit {
     this._unbindEvent()
     this._viewer.editTool.deactivate()
     this._layer.entities.remove(this._delegate)
-    this._stopedHook()
+    this._stoppedHook()
   }
 
   /**

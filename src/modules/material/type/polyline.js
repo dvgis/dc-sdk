@@ -3,14 +3,13 @@
  * @Date: 2021-02-27 23:23:12
  */
 
-import { Cesium } from '@dc-modules/namespace'
-
-const LineFlickerMaterial = require('../shader/polyline/PolylineFlickerMaterial.glsl')
-const LineFlowMaterial = require('../shader/polyline/PolylineFlowMaterial.glsl')
-const LineImageTrailMaterial = require('../shader/polyline/PolylineImageTrailMaterial.glsl')
-const LineLightingMaterial = require('../shader/polyline/PolylineLightingMaterial.glsl')
-const LineLightingTrailMaterial = require('../shader/polyline/PolylineLightingTrailMaterial.glsl')
-const LineTrailMaterial = require('../shader/polyline/PolylineTrailMaterial.glsl')
+import { Cesium } from '../../../namespace'
+import LineFlickerMaterial from '../shader/polyline/PolylineFlickerMaterial.glsl'
+import LineFlowMaterial from '../shader/polyline/PolylineFlowMaterial.glsl'
+import LineImageTrailMaterial from '../shader/polyline/PolylineImageTrailMaterial.glsl'
+import LineLightingMaterial from '../shader/polyline/PolylineLightingMaterial.glsl'
+import LineLightingTrailMaterial from '../shader/polyline/PolylineLightingTrailMaterial.glsl'
+import LineTrailMaterial from '../shader/polyline/PolylineTrailMaterial.glsl'
 
 /**
  * PolylineFlicker
