@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -29,20 +28,21 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer()
-     baseLayer.defaultBrightness = 0.3
-    viewer.addBaseLayer( baseLayer)
-    let layer = new DC.VectorLayer('layer')
-    viewer.addLayer(layer)
-    let positions = generatePosition(1)
-    positions.forEach(item => {
-      let model = new DC.Model(item, '../assets/data/GroundVehicle.glb')
-      layer.addOverlay(model)
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
+      crs:'WGS84'
     })
-
-    viewer.flyTo(layer)
+    viewer.addBaseLayer( baseLayer)
+    let layer = new DC.PrimitiveLayer('layer')
+    viewer.addLayer(layer)
+    let positions = generatePosition(100)
+    positions.forEach(item => {
+      let point = new DC.PointPrimitive(item)
+      layer.addOverlay(point)
+    })
+    viewer.flyToPosition("120.71194923787839,31.416199224240913,160990.91306777575,0,-90")
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

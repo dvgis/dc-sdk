@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -17,15 +16,26 @@
 <script>
   let viewer = undefined
 
+  function generatePosition(num,isAdd) {
+    let list = []
+    for (let i = 0; i < num; i++) {
+      let lng = 121.49536592256028 + Math.random() * 0.04 * (isAdd ? 1 :-1)
+      let lat = 31.241616722278213 + Math.random() * 0.04 * (isAdd ? 1 :-1)
+      list.push({lng,lat})
+    }
+    return list
+  }
+
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer()
-     baseLayer.defaultBrightness = 0.1
-    viewer.addBaseLayer( baseLayer)
-    let layer = new DC.TilesetLayer('layer')
-    viewer.addLayer(layer)
+    viewer.setOptions({
+      globe:{
+        baseColor:DC.Color.BLACK
+      }
+    })
+    let layer_build = new DC.TilesetLayer('layer_build').addTo(viewer)
     let build = new DC.Tileset(
-      'http://resource.dvgis.cn/data/3dtiles/ljz/tileset.json',
+      '//resource.dvgis.cn/data/3dtiles/ljz/tileset.json',
       {skipLevels:true}
     )
     let customShader =  new DC.CustomShader({
@@ -44,8 +54,24 @@
       `
     })
     build.setCustomShader(customShader)
-    layer.addOverlay(build)
-    viewer.flyTo(build)
+    layer_build.addOverlay(build)
+    let layer = new DC.PrimitiveLayer('layer').addTo(viewer)
+    let positions = generatePosition(50,true)
+    positions = positions.concat(generatePosition(50,))
+    positions.forEach(item=>{
+      let position = DC.Position.fromObject(item)
+      let end = position.copy()
+      end.alt = 5000 * Math.random()
+      let line = new DC.FlowLinePrimitive([position,end],0.5)
+      line.setStyle({
+        speed: 6 * Math.random(),
+        color: DC.Color.fromCssColorString("rgb(141,172,172)"),
+        percent:0.1,
+        gradient:0.01
+      })
+      layer.addOverlay(line)
+    })
+    viewer.flyToPosition("121.4941629,31.2091462,1859.56,0,-28.71")
   }
     DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'

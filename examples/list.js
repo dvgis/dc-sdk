@@ -219,8 +219,8 @@ const EXAMPLE_LIST = [
     ],
   },
   {
-    name: '基础要素',
-    folder: 'overlay',
+    name: '矢量要素',
+    folder: 'vector',
     children: [
       {
         name: '点',
@@ -229,10 +229,6 @@ const EXAMPLE_LIST = [
       {
         name: '图标点',
         page: 'point_icon.html',
-      },
-      {
-        name: 'html点',
-        page: 'point_html.html',
       },
       {
         name: '文字点',
@@ -395,12 +391,120 @@ const EXAMPLE_LIST = [
   {
     name: '图元要素',
     folder: 'primitive',
-    children: [],
+    children: [
+      {
+        name: '点',
+        page: 'point.html',
+      },
+      {
+        name: '线',
+        page: 'polyline.html',
+      },
+      {
+        name: '流动线',
+        page: 'flow_line.html',
+      },
+      {
+        name: '流动线(竖)',
+        page: 'flow_line_v.html',
+      },
+      {
+        name: '图标',
+        page: 'billboard.html',
+      },
+      {
+        name: '图标(大数量)',
+        page: 'billboard_m.html',
+      },
+      {
+        name: '跳动图标',
+        page: 'bounce_billboard.html',
+      },
+      {
+        name: '标签',
+        page: 'label.html',
+      },
+      {
+        name: '跳动标签',
+        page: 'bounce_label.html',
+      },
+      {
+        name: '扫描圆',
+        page: 'scan_circle.html',
+      },
+      {
+        name: '扩散墙',
+        page: 'wall_diffuse.html',
+      },
+      {
+        name: '电弧球',
+        page: 'elec_ellipsoid.html',
+      },
+      {
+        name: '发光柱',
+        page: 'light_cylinder.html',
+      },
+      {
+        name: '云',
+        page: 'cloud.html',
+      },
+      {
+        name: '水',
+        page: 'water.html',
+      },
+      {
+        name: '视频',
+        page: 'video.html',
+      },
+    ],
   },
   {
     name: '模型要素',
     folder: 'model',
-    children: [],
+    children: [
+      {
+        name: '模型（矢量）',
+        page: 'model_vector.html',
+      },
+      {
+        name: '动画模型（矢量）',
+        page: 'model_vector_d.html',
+      },
+      {
+        name: '模型（图元）',
+        page: 'model_primitive.html',
+      },
+      {
+        name: '3dtiles-3dmax',
+        page: '3dtiles_3dmax.html',
+      },
+      {
+        name: '3dtiles-osgb',
+        page: '3dtiles_osgb.html',
+      },
+      {
+        name: '3dtiles-shp',
+        page: '3dtiles_shp.html',
+      },
+      {
+        name: '3dtiles-自定shader',
+        page: '3dtiles_custom_shader.html',
+      },
+      {
+        name: '3dtiles-样式和自定shader',
+        page: '3dtiles_style_and_shader.html',
+      },
+    ],
+  },
+  {
+    name: 'DOM要素',
+    folder: 'html',
+    children: [
+      {
+        name: 'html点',
+        page: 'point_html.html',
+      },
+    ],
   },
   {
     name: '场景动画',

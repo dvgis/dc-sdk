@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -19,14 +18,17 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    viewer.setOptions({
-      globe:{
-        baseColor:DC.Color.BLACK
-      }
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
+      crs:'WGS84'
     })
-    let layer_build = new DC.TilesetLayer('layer_build').addTo(viewer)
+    viewer.addBaseLayer( baseLayer,{
+      brightness : 0.1
+    })
+    let layer = new DC.TilesetLayer('layer')
+    viewer.addLayer(layer)
     let build = new DC.Tileset(
-      '//resource.dvgis.cn/data/3dtiles/ljz/tileset.json',
+      'http://resource.dvgis.cn/data/3dtiles/ljz/tileset.json',
       {skipLevels:true}
     )
     let customShader =  new DC.CustomShader({
@@ -45,18 +47,10 @@
       `
     })
     build.setCustomShader(customShader)
-    layer_build.addOverlay(build)
-    let layer = new DC.PrimitiveLayer('layer').addTo(viewer)
-    let center = DC.Position.fromObject({lng: 121.49536592256028, lat: 31.241616722278213})
-    let scanCircle= new DC.ScanCirclePrimitive(center,3000)
-    scanCircle.setStyle({
-      color:DC.Color.YELLOW
-    })
-    layer.addOverlay(scanCircle)
-
-    viewer.flyToPosition("121.4941629,31.2091462,1859.56,0,-28.71")
+    layer.addOverlay(build)
+    viewer.flyTo(build)
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

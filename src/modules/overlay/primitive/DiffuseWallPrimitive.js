@@ -37,7 +37,6 @@ class DiffuseWallPrimitive extends Overlay {
 
   set center(position) {
     this._center = Parse.parsePosition(position)
-    return this
   }
 
   get center() {
@@ -46,7 +45,6 @@ class DiffuseWallPrimitive extends Overlay {
 
   set radius(radius) {
     this._radius = radius
-    return this
   }
 
   get radius() {
@@ -55,7 +53,6 @@ class DiffuseWallPrimitive extends Overlay {
 
   set height(height) {
     this._height = height
-    return this
   }
 
   get height() {
@@ -96,14 +93,14 @@ class DiffuseWallPrimitive extends Overlay {
   /**
    *
    * @param length
-   * @param hegiht
+   * @param height
    * @returns {*[]}
    * @private
    */
-  _getHeights(length, hegiht) {
+  _getHeights(length, height) {
     let heights = []
     for (let i = 0; i < length; i++) {
-      heights.push(hegiht)
+      heights.push(height)
     }
     return heights
   }

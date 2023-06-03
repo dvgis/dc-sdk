@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -17,36 +16,36 @@
 <script>
   let viewer = undefined
 
+  function generatePosition(num) {
+    let list = []
+    for (let i = 0; i < num; i++) {
+      let lng = 120.38105869 + Math.random() * 0.5
+      let lat = 31.10115627 + Math.random() * 0.5
+      list.push(new DC.Position(lng, lat))
+    }
+    return list
+  }
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img',
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
       crs:'WGS84'
     })
-     baseLayer.defaultBrightness = 0.2
     viewer.addBaseLayer( baseLayer)
     let layer = new DC.PrimitiveLayer('layer')
     viewer.addLayer(layer)
-
-    let wall = new DC.DiffuseWallPrimitive('121.121,31.122',2000,1000)
-    wall.setStyle({
-      color:DC.Color.YELLOW
+    let positions = generatePosition(20)
+    positions.forEach(item => {
+      let label = new DC.LabelPrimitive(item, '数字视觉')
+      label.setStyle({
+        fillColor: DC.Color.YELLOW,
+        font: '12px'
+      })
+      layer.addOverlay(label)
     })
-    layer.addOverlay(wall)
-    wall = new DC.DiffuseWallPrimitive('121.221,31.222',2000,1000)
-    wall.setStyle({
-      color:DC.Color.GREEN,
-      slices:6
-    })
-    layer.addOverlay(wall)
-    wall = new DC.DiffuseWallPrimitive('121.121,31.222',2000,1000)
-    wall.setStyle({
-      slices:5
-    })
-    layer.addOverlay(wall)
-    viewer.flyToPosition("121.17008196721969,30.97885778607079,24403.084,3,-50.2,0.2")
+    viewer.flyToPosition("120.8226729498609,31.268693185250438,114716.63624611919,0,-90")
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

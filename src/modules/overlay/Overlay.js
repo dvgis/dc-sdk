@@ -166,13 +166,14 @@ class Overlay {
     // for Primitive
     else if (this._layer?.delegate?.add) {
       let collection = this._getLayerCollection(this.type)
-
       if (collection) {
         this._delegate && (this._delegate = collection.add(this._delegate))
+        // for bounce primitive
         if (this['update'] && this['destroy']) {
           this._layer.delegate.add(this)
         }
-      } else if (this._delegate.then) {
+      } else if (this._delegate && this._delegate.then) {
+        // for 3dtiles
         this._delegate.then((obj) => {
           this._layer.delegate.add(obj)
         })
@@ -202,18 +203,20 @@ class Overlay {
     else if (this._layer?.delegate?.remove) {
       let collection = this._getLayerCollection(this.type)
       if (collection) {
-        collection.remove(this._delegate)
+        this._delegate && collection.remove(this._delegate)
+        // for bounce primitive
         if (this['update'] && this['destroy']) {
           this._layer.delegate.remove(this)
         }
-      } else if (this._delegate.then) {
+      } else if (this._delegate && this._delegate.then) {
+        // for 3dtiles
         this._delegate.then((obj) => {
           this._layer.delegate.add(obj)
         })
       } else if (this['update'] && this['destroy']) {
         this._layer.delegate.remove(this)
       } else {
-        this._layer.delegate.remove(this._delegate)
+        this._delegate && this._layer.delegate.remove(this._delegate)
       }
     }
     this._removedHook && this._removedHook()

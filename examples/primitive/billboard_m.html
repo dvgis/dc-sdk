@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
@@ -14,8 +13,37 @@
 <body>
 
 <div id="viewer-container" class="viewer-container"></div>
+<div class="btn-box">
+  <ul>
+    <li><button onclick="addPoint(100)">一百</button></li>
+    <li><button onclick="addPoint(1000)">一千</button></li>
+    <li><button onclick="addPoint(10000)">一万</button></li>
+    <li><button onclick="addPoint(50000)">五万</button></li>
+    <li><button onclick="addPoint(100000)">十万</button></li>
+    <li><button onclick="removeAll()">清除</button></li>
+  </ul>
+</div>
 <script>
   let viewer = undefined
+  let layer = undefined
+
+  function addPoint(num){
+    removeAll()
+    let start = new Date().getTime()
+    let positions = generatePosition(num)
+    console.log('create point time: ' + (new Date().getTime() - start) / 1000 )
+    start = new Date().getTime()
+    positions.forEach(item => {
+      let billboard = new DC.BillboardPrimitive(item, '../assets/icon/camera.png')
+      billboard.on(DC.MouseEventType.CLICK,e=> console.log(e))
+      layer.addOverlay(billboard)
+    })
+    console.log('add point time: ' + (new Date().getTime() - start) / 1000 )
+  }
+
+  function removeAll(){
+    layer.clear()
+  }
 
   function generatePosition(num) {
     let list = []
@@ -28,11 +56,12 @@
   }
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
       crs:'WGS84'
     })
     viewer.addBaseLayer( baseLayer)
-    let layer = new DC.PrimitiveLayer('layer')
+    layer = new DC.PrimitiveLayer('layer')
     viewer.addLayer(layer)
     let positions = generatePosition(100)
     positions.forEach(item => {
@@ -42,7 +71,7 @@
     })
     viewer.flyToPosition("120.8226729498609,31.268693185250438,114716.63624611919,0,-90")
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>
