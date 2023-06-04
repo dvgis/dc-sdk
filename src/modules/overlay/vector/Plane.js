@@ -57,7 +57,6 @@ class Plane extends Overlay {
         Cesium.Math.toRadians(this._position.roll)
       )
     )
-    return this
   }
 
   get position() {
@@ -67,7 +66,6 @@ class Plane extends Overlay {
   set width(width) {
     this._width = +width || 0
     this._delegate.plan.dimensions.x = this._width
-    return this
   }
 
   get width() {
@@ -77,7 +75,6 @@ class Plane extends Overlay {
   set height(height) {
     this._height = +height || 0
     this._delegate.plan.dimensions.y = this._height
-    return this
   }
 
   get height() {
@@ -87,7 +84,6 @@ class Plane extends Overlay {
   set distance(distance) {
     this._distance = distance
     this._delegate.plane.plane.distance = distance
-    return this
   }
 
   get distance() {

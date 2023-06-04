@@ -8,7 +8,7 @@ import { Util } from '../../utils'
 import SnowShader from '../../material/shader/weather/SnowShader.glsl'
 
 class Snow {
-  constructor() {
+  constructor(viewer) {
     this._id = Util.uuid()
     this._viewer = viewer
     this._delegate = undefined

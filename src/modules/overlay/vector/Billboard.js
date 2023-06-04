@@ -28,7 +28,6 @@ class Billboard extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {
@@ -38,7 +37,6 @@ class Billboard extends Overlay {
   set icon(icon) {
     this._icon = icon
     this._delegate.billboard.image = this._icon
-    return this
   }
 
   get icon() {
@@ -52,7 +50,6 @@ class Billboard extends Overlay {
     this._size = size
     this._delegate.billboard.width = this._size[0] || 32
     this._delegate.billboard.height = this._size[1] || 32
-    return this
   }
 
   get size() {

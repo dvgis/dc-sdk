@@ -24,14 +24,13 @@ class KeyboardRoaming {
 
   set enable(enable) {
     if (this._enable === enable) {
-      return this
+      return
     }
     if (this._viewer.scene.mode !== Cesium.SceneMode.SCENE3D) {
-      return this
+      return
     }
     this._enable = enable
     this._enable ? this._bindEvent() : this._unbindEvent()
-    return this
   }
 
   get enable() {
@@ -40,7 +39,6 @@ class KeyboardRoaming {
 
   set moveRate(moveRate) {
     this._moveRate = moveRate
-    return this
   }
 
   get moveRate() {
@@ -49,7 +47,6 @@ class KeyboardRoaming {
 
   set rotateRate(rotateRate) {
     this._rotateRate = rotateRate
-    return this
   }
 
   get rotateRate() {

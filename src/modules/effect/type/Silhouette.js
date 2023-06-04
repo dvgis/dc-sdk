@@ -41,7 +41,6 @@ class Silhouette {
   set color(color) {
     this._color = color
     this._delegate && (this._delegate.uniforms.color = color)
-    return this
   }
 
   get color() {
@@ -51,7 +50,6 @@ class Silhouette {
   set length(length) {
     this._length = length
     this._delegate && (this._delegate.uniforms.length = length)
-    return this
   }
 
   get length() {
@@ -61,7 +59,6 @@ class Silhouette {
   set selected(selected) {
     this._selected = selected
     this._delegate && (this._delegate.selected = selected)
-    return this
   }
 
   get selected() {

@@ -27,7 +27,6 @@ class Circle extends Overlay {
   set center(center) {
     this._center = Parse.parsePosition(center)
     this._delegate.polygon.hierarchy = this._computeHierarchy()
-    return this
   }
 
   get center() {
@@ -37,7 +36,6 @@ class Circle extends Overlay {
   set radius(radius) {
     this._radius = +radius
     this._delegate.polygon.hierarchy = this._computeHierarchy()
-    return this
   }
 
   get radius() {
@@ -53,7 +51,6 @@ class Circle extends Overlay {
       }
       return Cesium.Math.toRadians(this._stRotation)
     }, false)
-    return this
   }
 
   get rotateAmount() {

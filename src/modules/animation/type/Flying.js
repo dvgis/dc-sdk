@@ -24,7 +24,6 @@ class Flying extends Animation {
 
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
-    return this
   }
 
   get positions() {
@@ -33,7 +32,6 @@ class Flying extends Animation {
 
   set durations(durations) {
     this._durations = durations
-    return this
   }
 
   get durations() {

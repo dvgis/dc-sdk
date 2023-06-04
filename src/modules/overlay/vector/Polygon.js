@@ -26,7 +26,6 @@ class Polygon extends Overlay {
   set positions(positions) {
     this._positions = Parse.parsePositions(positions)
     this._delegate.polygon.hierarchy = this._computeHierarchy()
-    return this
   }
 
   get positions() {
@@ -38,7 +37,6 @@ class Polygon extends Overlay {
       this._holes = holes.map((item) => Parse.parsePositions(item))
       this._delegate.polygon.hierarchy = this._computeHierarchy()
     }
-    return this
   }
 
   get holes() {

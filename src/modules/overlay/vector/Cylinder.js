@@ -37,7 +37,6 @@ class Cylinder extends Overlay {
         Cesium.Math.toRadians(this._position.roll)
       )
     )
-    return this
   }
 
   get position() {
@@ -47,7 +46,6 @@ class Cylinder extends Overlay {
   set length(length) {
     this._length = +length || 0
     this._delegate.cylinder.length = this._length
-    return this
   }
 
   get length() {
@@ -57,7 +55,6 @@ class Cylinder extends Overlay {
   set topRadius(topRadius) {
     this._topRadius = +topRadius || 0
     this._delegate.cylinder.topRadius = this._topRadius
-    return this
   }
 
   get topRadius() {
@@ -67,7 +64,6 @@ class Cylinder extends Overlay {
   set bottomRadius(bottomRadius) {
     this._bottomRadius = +bottomRadius || 0
     this._delegate.cylinder.bottomRadius = this._bottomRadius
-    return this
   }
 
   get bottomRadius() {

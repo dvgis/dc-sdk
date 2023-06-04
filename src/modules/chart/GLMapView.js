@@ -13,13 +13,13 @@ extendComponentView({
     let viewer = api.getZr().viewer
     viewer.scene.postRender.addEventListener(this.moveHandler, this)
   },
-  moveHandler: function (t, e) {
+  moveHandler: function () {
     this.api.dispatchAction({
       type: 'GLMapRoam',
     })
   },
   render: function (t, e, i) {},
-  dispose: function (t) {
+  dispose: function () {
     let viewer = this.api.getZr().viewer
     viewer.scene.postRender.removeEventListener(this.moveHandler, this)
   },

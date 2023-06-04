@@ -58,7 +58,6 @@ class FeatureGridLayer extends Layer {
     Object.keys(this._levelLayers).forEach((key) => {
       this._levelLayers[key].show = show
     })
-    return this
   }
 
   get show() {

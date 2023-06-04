@@ -27,7 +27,6 @@ class Label extends Overlay {
     this._delegate.position = Transform.transformWGS84ToCartesian(
       this._position
     )
-    return this
   }
 
   get position() {
@@ -37,7 +36,6 @@ class Label extends Overlay {
   set text(text) {
     this._text = text
     this._delegate.label.text = this._text
-    return this
   }
 
   get text() {

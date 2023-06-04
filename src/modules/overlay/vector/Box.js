@@ -50,7 +50,6 @@ class Box extends Overlay {
         Cesium.Math.toRadians(this._position.roll)
       )
     )
-    return this
   }
 
   get position() {
@@ -60,7 +59,6 @@ class Box extends Overlay {
   set length(length) {
     this._length = length || 0
     this._delegate.box.dimensions.x = +this._length
-    return this
   }
 
   get length() {
@@ -70,7 +68,6 @@ class Box extends Overlay {
   set width(width) {
     this._width = width || 0
     this._delegate.box.dimensions.y = +this._width
-    return this
   }
 
   get width() {
@@ -80,7 +77,6 @@ class Box extends Overlay {
   set height(height) {
     this._height = height || 0
     this._delegate.box.dimensions.z = +this._height
-    return this
   }
 
   get height() {

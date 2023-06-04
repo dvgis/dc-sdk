@@ -20,7 +20,6 @@ class AroundView extends Animation {
 
   set aroundAmount(aroundAmount) {
     this._aroundAmount = aroundAmount
-    return this
   }
 
   /**

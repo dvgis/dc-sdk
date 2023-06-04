@@ -26,7 +26,6 @@ class PolylineVolume extends Overlay {
     this._positions = Parse.parsePositions(positions)
     this._delegate.polylineVolume.positions =
       Transform.transformWGS84ArrayToCartesianArray(this._positions)
-    return this
   }
 
   get positions() {
@@ -36,7 +35,6 @@ class PolylineVolume extends Overlay {
   set shape(shape) {
     this._shape = shape || []
     this._delegate.polylineVolume.shape = this._shape
-    return this
   }
 
   get shape() {

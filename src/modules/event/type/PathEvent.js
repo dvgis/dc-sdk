@@ -2,7 +2,6 @@
  * @Author : Caven Chen
  */
 
-import { Cesium } from '../../../namespace'
 import { PathEventType } from '../EventType'
 import Event from '../Event'
 

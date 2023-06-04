@@ -26,7 +26,6 @@ class Polyline extends Overlay {
     this._positions = Parse.parsePositions(positions)
     this._delegate.polyline.positions =
       Transform.transformWGS84ArrayToCartesianArray(this._positions)
-    return this
   }
 
   get positions() {

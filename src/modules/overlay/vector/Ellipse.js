@@ -36,7 +36,6 @@ class Ellipse extends Overlay {
         Cesium.Math.toRadians(this._position.roll)
       )
     )
-    return this
   }
 
   get position() {
@@ -46,7 +45,6 @@ class Ellipse extends Overlay {
   set semiMajorAxis(semiMajorAxis) {
     this._semiMajorAxis = +semiMajorAxis || 0
     this._delegate.ellipse.semiMajorAxis = this._semiMajorAxis
-    return this
   }
 
   get semiMajorAxis() {
@@ -56,7 +54,6 @@ class Ellipse extends Overlay {
   set semiMinorAxis(semiMinorAxis) {
     this._semiMinorAxis = +semiMinorAxis || 0
     this._delegate.ellipse.semiMinorAxis = this._semiMinorAxis
-    return this
   }
 
   get semiMinorAxis() {

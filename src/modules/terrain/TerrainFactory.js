@@ -9,7 +9,7 @@ class TerrainFactory {
   /**
    *
    * @param options
-   * @returns {module:@cesium/engine.EllipsoidTerrainProvider}
+   * @returns {TerrainProvider}
    */
   static createEllipsoidTerrain(options) {
     return new Cesium.EllipsoidTerrainProvider(options)
@@ -18,7 +18,7 @@ class TerrainFactory {
   /**
    * Create url terrain
    * @param options
-   * @returns {module:cesium.CesiumTerrainProvider}
+   * @returns {TerrainProvider}
    */
   static createUrlTerrain(options) {
     return new Cesium.CesiumTerrainProvider(options)
@@ -27,7 +27,7 @@ class TerrainFactory {
   /**
    * Create google terrain
    * @param options
-   * @returns {module:cesium.GoogleEarthEnterpriseTerrainProvider}
+   * @returns {TerrainProvider}
    */
   static createGoogleTerrain(options) {
     return new Cesium.GoogleEarthEnterpriseTerrainProvider(options)
@@ -36,7 +36,7 @@ class TerrainFactory {
   /**
    * Create arcgis terrain
    * @param options
-   * @returns {module:cesium.ArcGISTiledElevationTerrainProvider}
+   * @returns {TerrainProvider}
    */
   static createArcgisTerrain(options) {
     return new Cesium.ArcGISTiledElevationTerrainProvider(options)
@@ -45,7 +45,7 @@ class TerrainFactory {
   /**
    * Create vr terrain
    * @param options
-   * @returns {module:cesium.VRTheWorldTerrainProvider}
+   * @returns {TerrainProvider}
    */
   static createVRTerrain(options) {
     return new Cesium.VRTheWorldTerrainProvider(options)

@@ -35,7 +35,6 @@ class Ellipsoid extends Overlay {
         Cesium.Math.toRadians(this._position.roll)
       )
     )
-    return this
   }
 
   get position() {
@@ -45,7 +44,6 @@ class Ellipsoid extends Overlay {
   set radius(radius) {
     this._radius = radius || { x: 10, y: 10, z: 10 }
     this._delegate.ellipsoid.radii = this._radius
-    return this
   }
 
   get radius() {

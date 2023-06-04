@@ -26,7 +26,6 @@ class Rectangle extends Overlay {
     this._delegate.rectangle.coordinates = Cesium.Rectangle.fromCartesianArray(
       Transform.transformWGS84ArrayToCartesianArray(this._positions)
     )
-    return this
   }
 
   get positions() {
