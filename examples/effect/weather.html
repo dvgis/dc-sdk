@@ -18,17 +18,19 @@
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
+  let weather = undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
       style: 'img',
       crs:'WGS84'
     })
     viewer.addBaseLayer( baseLayer)
-    viewer.use(new DC.Weather())
-    viewer.weather.cloud.enable = true
-    viewer.weather.cloud.rotateAmount=0.02
+    weather = new DC.Weather()
+
+    // viewer.weather.cloud.enable = true
+    // viewer.weather.cloud.rotateAmount=0.02
     addGuiController() // add controller
   }
 

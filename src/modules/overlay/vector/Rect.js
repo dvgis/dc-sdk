@@ -9,7 +9,7 @@ import Parse from '../../parse/Parse'
 import { Util } from '../../utils'
 import { Transform } from '../../transform'
 
-class Rectangle extends Overlay {
+class Rect extends Overlay {
   constructor(positions) {
     super()
     this._positions = Parse.parsePositions(positions)
@@ -18,7 +18,7 @@ class Rectangle extends Overlay {
   }
 
   get type() {
-    return Overlay.getOverlayType('rectangle')
+    return Overlay.getOverlayType('rect')
   }
 
   set positions(positions) {
@@ -42,7 +42,7 @@ class Rectangle extends Overlay {
   /**
    * @param text
    * @param textStyle
-   * @returns {Rectangle}
+   * @returns {Rect}
    */
   setLabel(text, textStyle) {
     this._delegate.position = Cesium.Cartographic.toCartesian(
@@ -61,7 +61,7 @@ class Rectangle extends Overlay {
   /**
    * Sets Style
    * @param style
-   * @returns {Rectangle}
+   * @returns {Rect}
    */
   setStyle(style) {
     if (Object.keys(style).length === 0) {
@@ -74,6 +74,6 @@ class Rectangle extends Overlay {
   }
 }
 
-Overlay.registerType('rectangle')
+Overlay.registerType('rect')
 
-export default Rectangle
+export default Rect

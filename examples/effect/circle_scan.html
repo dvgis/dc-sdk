@@ -6,20 +6,18 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
 
 <body>
 
-<div id="viewer-container">
-  <div class="btn-box">
-    <ul>
-      <li><button onclick="start()">开始</button></li>
-      <li><button onclick="stop()">结束</button></li>
-    </ul>
-  </div>
+<div id="viewer-container"  class="viewer-container"></div>
+<div class="btn-box">
+  <ul>
+    <li><button onclick="start()">开始</button></li>
+    <li><button onclick="stop()">结束</button></li>
+  </ul>
 </div>
 <script>
   let viewer = undefined
@@ -39,11 +37,12 @@
         depthTestAgainstTerrain: true // 当前示例中的Shader渲染需要开启深度检测，并在无地形时效果好些。
       }
     })
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img',
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
       crs:'WGS84'
     })
-    viewer.addBaseLayer( baseLayer)
+    viewer.addBaseLayer( baseLayer,{
+      brightness:0.1
+    })
     let layer = new DC.TilesetLayer('layer')
     viewer.addLayer(layer)
     let style = new DC.TilesetStyle()
@@ -68,7 +67,7 @@
     }) // 扫描圈
     viewer.flyToPosition(new DC.Position(121.491415, 31.208443, 1954.04, 0, -28))
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

@@ -24,8 +24,10 @@
   let viewer = undefined
   let tc = undefined
   let track = undefined
+  let layer = undefined
 
   function play(){
+    layer.clear()
     tc.play()
   }
 
@@ -43,7 +45,7 @@
       crs:'WGS84'
     })
     viewer.addBaseLayer(baseLayer)
-    let layer = new DC.VectorLayer('layer').addTo(viewer)
+     layer = new DC.VectorLayer('layer').addTo(viewer)
     let positions = "120.71450195156326,31.34008410150321;120.71575718410492, 31.32906254460538;120.71755047923497, 31.319390534202;120.71992195728619, 31.31036033288049;120.72027974558881, 31.3011861708824;120.72044382952038,31.288363396025954;120.72063046005844, 31.281477152748355;120.72044354666637,31.27731493354631"
     tc = new DC.TrackController(viewer)
     track = new DC.Track(positions,20,(position,isLast)=>{
