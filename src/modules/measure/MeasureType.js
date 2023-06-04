@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-07-11 09:56:33
+ * @Author : Caven Chen
  */
 
 const MeasureType = {
@@ -9,7 +8,7 @@ const MeasureType = {
   AREA_HEIGHT: 'area_height',
   AREA_SURFACE: 'area_surface',
   DISTANCE: 'distance',
-  DISTANCE_SURFACE: 'diatance_surface',
+  DISTANCE_SURFACE: 'distance_surface',
   HEADING: 'heading',
   HEIGHT: 'height',
   TRIANGLE_HEIGHT: 'triangle_height',

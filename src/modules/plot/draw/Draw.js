@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-01-31 19:45:32
+ * @Author : Caven Chen
  */
 import { PlotEventType } from '../../event'
 

@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-14 23:49:14
+ * @Author : Caven Chen
  */
 
 import BlackAndWhite from './type/BlackAndWhite'
@@ -12,58 +11,45 @@ import NightVision from './type/NightVision'
 import Silhouette from './type/Silhouette'
 
 class Effect {
-  constructor() {
-    this._comps = {
-      blackAndWhite: new BlackAndWhite(),
-      bloom: new Bloom(),
-      brightness: new Brightness(),
-      depthOfField: new DepthOfField(),
-      lensFlare: new LensFlare(),
-      night: new NightVision(),
-      silhouette: new Silhouette(),
+  constructor(viewer) {
+    if (!viewer) {
+      throw Error('missing viewer param')
     }
+    this._blackAndWhite = new BlackAndWhite(viewer)
+    this._bloom = new Bloom(viewer)
+    this._brightness = new Brightness(viewer)
+    this._depthOfField = new DepthOfField(viewer)
+    this._lensFlare = new LensFlare(viewer)
+    this._night = new NightVision(viewer)
+    this._silhouette = new Silhouette(viewer)
   }
 
   get blackAndWhite() {
-    return this._comps.blackAndWhite
+    return this._blackAndWhite
   }
 
   get bloom() {
-    return this._comps.bloom
+    return this._bloom
   }
 
   get brightness() {
-    return this._comps.brightness
+    return this._brightness
   }
 
   get depthOfField() {
-    return this._comps.depthOfField
+    return this._depthOfField
   }
 
   get lensFlare() {
-    return this._comps.lensFlare
+    return this._lensFlare
   }
 
   get night() {
-    return this._comps.night
+    return this._night
   }
 
   get silhouette() {
-    return this._comps.silhouette
-  }
-
-  /**
-   *
-   * @param viewer
-   */
-  install(viewer) {
-    Object.keys(this._comps).forEach((key) => {
-      this._comps[key].addTo(viewer)
-    })
-    Object.defineProperty(viewer, 'effect', {
-      value: this,
-      writable: false,
-    })
+    return this._silhouette
   }
 }
 

@@ -1,6 +1,5 @@
 /**
- @author : Caven Chen
- @date : 2023-05-23
+ * @Author : Caven Chen
  */
 
 import { echarts } from '../../namespace'

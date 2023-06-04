@@ -1,10 +1,9 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-30 23:50:53
+ * @Author : Caven Chen
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
 
 class Edit {
   constructor(overlay) {

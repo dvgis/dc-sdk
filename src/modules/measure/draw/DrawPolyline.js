@@ -1,10 +1,9 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-29 20:54:37
+ * @Author : Caven Chen
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
 import Draw from './Draw'
 
 class DrawPolyline extends Draw {

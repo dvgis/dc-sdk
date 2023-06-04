@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-14 23:51:47
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
@@ -24,8 +23,6 @@ class Silhouette {
   set enable(enable) {
     this._enable = enable
     if (
-      enable &&
-      this._viewer &&
       Cesium.PostProcessStageLibrary.isSilhouetteSupported(
         this._viewer.scene
       ) &&
@@ -34,7 +31,7 @@ class Silhouette {
       this._createPostProcessStage()
     }
     this._delegate && (this._delegate.enabled = enable)
-    return this
+    this._state = enable ? State.ENABLED : State.DISABLED
   }
 
   get enable() {

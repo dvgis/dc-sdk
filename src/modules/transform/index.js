@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-01-31 21:38:15
+ * @Author : Caven Chen
  */
 
 export { default as Transform } from './Transform'

@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-04-13 09:32:31
+ * @Author : Caven Chen
  */
 
 export { default as TrackController } from './TrackController'

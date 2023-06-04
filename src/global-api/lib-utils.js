@@ -1,6 +1,5 @@
 /**
- @author : Caven Chen
- @date : 2023-05-06
+ * @Author : Caven Chen
  */
 
 const cache = {}

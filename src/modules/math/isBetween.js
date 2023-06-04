@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-31 20:58:06
+ * @Author : Caven Chen
  */
 
 export default function isBetween(value, min, max) {

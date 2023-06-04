@@ -14,18 +14,16 @@
 
 <body>
 
-<body>
-
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer_midnight = DC.ImageryLayerFactory.createBaiduImageryLayer({
-      style: 'midnight'
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      crs:'WGS84'
     })
-    viewer.addBaseLayer(baselayer_midnight)
+    viewer.addBaseLayer(baseLayer)
     viewer.use(new DC.Effect())
     viewer.effect.bloom.enable= true
     addGuiController() // add controller
@@ -60,7 +58,7 @@
       viewer.effect.bloom.delta=value
     })
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

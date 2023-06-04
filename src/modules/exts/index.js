@@ -1,6 +1,5 @@
 /**
- @author : Caven Chen
- @date : 2023-05-09
+ * @Author : Caven Chen
  */
 
 export { default as BaseLayerPicker } from './BaseLayerPicker.js'

@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2019-12-31 17:50:13
+ * @Author : Caven Chen
  */
 
 import Util from './Util'

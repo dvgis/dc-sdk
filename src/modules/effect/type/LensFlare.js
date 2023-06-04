@@ -1,14 +1,13 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-14 23:51:47
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
 import State from '../../state/State'
 
 class LensFlare {
-  constructor() {
-    this._viewer = undefined
+  constructor(viewer) {
+    this._viewer = viewer
     this._delegate = undefined
     this._enable = false
     this._intensity = 6
@@ -25,11 +24,11 @@ class LensFlare {
 
   set enable(enable) {
     this._enable = enable
-    if (enable && this._viewer && !this._delegate) {
+    if (!this._delegate) {
       this._createPostProcessStage()
     }
-    this._delegate && (this._delegate.enabled = enable)
-    return this
+    this._delegate.enabled = enable
+    this._state = enable ? State.ENABLED : State.DISABLED
   }
 
   get enable() {
@@ -39,7 +38,6 @@ class LensFlare {
   set intensity(intensity) {
     this._intensity = intensity
     this._delegate && (this._delegate.uniforms.intensity = intensity)
-    return this
   }
 
   get intensity() {
@@ -49,7 +47,6 @@ class LensFlare {
   set distortion(distortion) {
     this._distortion = distortion
     this._delegate && (this._delegate.uniforms.distortion = distortion)
-    return this
   }
 
   get distortion() {
@@ -59,7 +56,6 @@ class LensFlare {
   set dirtAmount(dirtAmount) {
     this._dirtAmount = dirtAmount
     this._delegate && (this._delegate.uniforms.dirtAmount = dirtAmount)
-    return this
   }
 
   get dirtAmount() {
@@ -69,7 +65,6 @@ class LensFlare {
   set haloWidth(haloWidth) {
     this._haloWidth = haloWidth
     this._delegate && (this._delegate.uniforms.haloWidth = haloWidth)
-    return this
   }
 
   get haloWidth() {
@@ -79,7 +74,6 @@ class LensFlare {
   set selected(selected) {
     this._selected = selected
     this._delegate && (this._delegate.selected = selected)
-    return this
   }
 
   get selected() {
@@ -99,20 +93,6 @@ class LensFlare {
       this._delegate.uniforms.haloWidth = this._haloWidth
       this._viewer.scene.postProcessStages.add(this._delegate)
     }
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {LensFlare}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

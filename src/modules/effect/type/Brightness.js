@@ -1,14 +1,13 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-14 23:51:47
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
 import State from '../../state/State'
 
 class Brightness {
-  constructor() {
-    this._viewer = undefined
+  constructor(viewer) {
+    this._viewer = viewer
     this._delegate = undefined
     this._enable = false
     this._intensity = 1
@@ -22,10 +21,11 @@ class Brightness {
 
   set enable(enable) {
     this._enable = enable
-    if (enable && this._viewer && !this._delegate) {
+    if (!this._delegate) {
       this._createPostProcessStage()
     }
-    this._delegate && (this._delegate.enabled = enable)
+    this._delegate.enabled = enable
+    this._state = enable ? State.ENABLED : State.DISABLED
   }
 
   get enable() {
@@ -60,20 +60,6 @@ class Brightness {
       this._delegate.uniforms.brightness = this._intensity
       this._viewer.scene.postProcessStages.add(this._delegate)
     }
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {Brightness}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

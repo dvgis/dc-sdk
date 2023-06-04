@@ -1,6 +1,6 @@
 /**
- @Author: Caven Chen
- **/
+ * @Author : Caven Chen
+ */
 
 import { Cesium } from '../../namespace'
 const { EllipsoidTerrainProvider, ImageryLayer } = Cesium

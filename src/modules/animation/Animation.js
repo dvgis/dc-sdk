@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-12-20 16:32:22
+ * @Author : Caven Chen
  */
 
 class Animation {

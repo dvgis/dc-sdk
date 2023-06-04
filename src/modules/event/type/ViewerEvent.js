@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-01-02 14:26:35
+ * @Author : Caven Chen
  */
 
 import { ViewerEventType } from '../EventType'

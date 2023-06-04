@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-03-14 00:31:46
+ * @Author : Caven Chen
  */
 
 export { default as ImageryType } from './ImageryType'

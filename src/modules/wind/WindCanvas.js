@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-01-18 17:46:40
+ * @Author : Caven Chen
  */
 
 class WindCanvas {

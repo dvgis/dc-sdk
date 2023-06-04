@@ -1,6 +1,5 @@
 /**
- @author : Caven Chen
- @date : 2023-05-08
+ * @Author : Caven Chen
  */
 
 export { default as Viewer } from './viewer/Viewer'
@@ -118,3 +117,19 @@ export {
 } from './material'
 
 export { default as Plot } from './plot/Plot'
+
+export {
+  AnimationType,
+  AroundPoint,
+  AroundView,
+  CircleScan,
+  Flying,
+  GlobeRotate,
+  RadarScan,
+} from './animation'
+
+export { default as Effect } from './effect/Effect'
+
+export { default as Weather } from './weather/Weather'
+
+export { KeyboardRoaming, RoamingController, RoamingPath } from './roaming'

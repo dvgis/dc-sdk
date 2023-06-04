@@ -509,7 +509,32 @@ const EXAMPLE_LIST = [
   {
     name: '场景动画',
     folder: 'animation',
-    children: [],
+    children: [
+      {
+        name: '地球自转',
+        page: 'globe_rotate.html',
+      },
+      {
+        name: '定点环绕',
+        page: 'around_point.html',
+      },
+      {
+        name: '相机环绕',
+        page: 'around_view.html',
+      },
+      {
+        name: '定点巡航',
+        page: 'flying.html',
+      },
+      {
+        name: '路径漫游',
+        page: 'roaming_path.html',
+      },
+      {
+        name: '键盘漫游',
+        page: 'roaming_keyboard.html',
+      },
+    ],
   },
   {
     name: '场景效果',

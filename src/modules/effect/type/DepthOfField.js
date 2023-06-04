@@ -1,14 +1,13 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-14 23:51:47
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
 import State from '../../state/State'
 
 class DepthOfField {
-  constructor() {
-    this._viewer = undefined
+  constructor(viewer) {
+    this._viewer = viewer
     this._delegate = undefined
     this._enable = false
     this._focalDistance = 87
@@ -26,8 +25,6 @@ class DepthOfField {
   set enable(enable) {
     this._enable = enable
     if (
-      enable &&
-      this._viewer &&
       Cesium.PostProcessStageLibrary.isDepthOfFieldSupported(
         this._viewer.scene
       ) &&
@@ -36,7 +33,7 @@ class DepthOfField {
       this._createPostProcessStage()
     }
     this._delegate && (this._delegate.enabled = enable)
-    return this
+    this._state = enable ? State.ENABLED : State.DISABLED
   }
 
   get enable() {
@@ -46,7 +43,6 @@ class DepthOfField {
   set focalDistance(focalDistance) {
     this._focalDistance = focalDistance
     this._delegate && (this._delegate.uniforms.focalDistance = focalDistance)
-    return this
   }
 
   get focalDistance() {
@@ -56,7 +52,6 @@ class DepthOfField {
   set delta(delta) {
     this._delta = delta
     this._delegate && (this._delegate.uniforms.delta = delta)
-    return this
   }
 
   get delta() {
@@ -66,7 +61,6 @@ class DepthOfField {
   set sigma(sigma) {
     this._sigma = sigma
     this._delegate && (this._delegate.uniforms.sigma = sigma)
-    return this
   }
 
   get sigma() {
@@ -76,7 +70,6 @@ class DepthOfField {
   set stepSize(stepSize) {
     this._stepSize = stepSize
     this._delegate && (this._delegate.uniforms.stepSize = stepSize)
-    return this
   }
 
   get stepSize() {
@@ -86,7 +79,6 @@ class DepthOfField {
   set selected(selected) {
     this._selected = selected
     this._delegate && (this._delegate.selected = selected)
-    return this
   }
 
   get selected() {
@@ -106,20 +98,6 @@ class DepthOfField {
       this._delegate.uniforms.stepSize = this._stepSize
       this._viewer.scene.postProcessStages.add(this._delegate)
     }
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {DepthOfField}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

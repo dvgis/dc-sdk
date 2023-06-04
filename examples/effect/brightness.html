@@ -14,8 +14,6 @@
 
 <body>
 
-<body>
-
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
@@ -26,9 +24,9 @@
       style: 'midnight'
     })
     viewer.addBaseLayer(baselayer_midnight)
-    viewer.use(new DC.Effect())
-    viewer.effect.brightness.enable= true
-    viewer.effect.brightness.intensity = 1.5
+    let effect = DC.Effect(viewer)
+    effect.brightness.enable= true
+    effect.brightness.intensity = 1.5
     addGuiController() // add controller
   }
 

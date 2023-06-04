@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-30 16:27:29
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'

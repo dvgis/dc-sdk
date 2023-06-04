@@ -1,7 +1,7 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-02 22:38:10
+ * @Author : Caven Chen
  */
+
 import { Cesium } from '../../../namespace'
 import AnimationType from '../AnimationType'
 import Animation from '../Animation'

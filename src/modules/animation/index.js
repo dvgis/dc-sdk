@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-05 22:15:27
+ * @Author : Caven Chen
  */
 
 export { default as Animation } from './Animation'

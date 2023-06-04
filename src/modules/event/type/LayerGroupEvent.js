@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-28 20:18:04
+ * @Author : Caven Chen
  */
 
 import { LayerGroupEventType } from '../EventType'

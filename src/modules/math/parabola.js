@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-05-28 10:24:38
+ * @Author : Caven Chen
  */
 
 export default function parabola(

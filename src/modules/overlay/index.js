@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-04-15 20:57:22
+ * @Author : Caven Chen
  */
 
 export { default as OverlayType } from './OverlayType'

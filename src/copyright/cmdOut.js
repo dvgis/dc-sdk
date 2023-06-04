@@ -1,6 +1,5 @@
 /**
- @author : Caven Chen
- @date : 2023-05-07
+ * @Author : Caven Chen
  */
 
 // eslint-disable-next-line no-console

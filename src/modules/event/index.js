@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-03-13 13:24:24
+ * @Author : Caven Chen
  */
 
 export * from './EventType'

@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-06-08 20:37:28
+ * @Author : Caven Chen
  */
 
 import { TrackEventType } from '../EventType'

@@ -1,9 +1,8 @@
 /**
- * @Author: Caven
- * @Date: 2021-07-11 09:56:33
+ * @Author : Caven Chen
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../namespace'
 
 class MeasureBase {
   constructor() {

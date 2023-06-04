@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-01-15 20:23:42
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
@@ -29,7 +28,6 @@ class Rain {
       this._createPostProcessStage()
     }
     this._delegate && (this._delegate.enabled = enable)
-    return this
   }
 
   get enable() {
@@ -68,20 +66,6 @@ class Rain {
       },
     })
     this._viewer.scene.postProcessStages.add(this._delegate)
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {Rain}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

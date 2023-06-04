@@ -1,7 +1,6 @@
 /**
-  @Author: Caven Chen
-  @Date: 2023-01-12
-**/
+ * @Author : Caven Chen
+ */
 
 import { Cesium } from '../../../namespace'
 import State from '../../state/State'

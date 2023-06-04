@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-01-15 20:23:46
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
@@ -11,7 +10,7 @@ import SnowShader from '../../material/shader/weather/SnowShader.glsl'
 class Snow {
   constructor() {
     this._id = Util.uuid()
-    this._viewer = undefined
+    this._viewer = viewer
     this._delegate = undefined
     this._enable = false
     this._speed = 10.0
@@ -56,20 +55,6 @@ class Snow {
       },
     })
     this._viewer.scene.postProcessStages.add(this._delegate)
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {Snow}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-02-26 23:05:44
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
@@ -9,9 +8,9 @@ import { Util } from '../../utils'
 import FogShader from '../../material/shader/weather/FogShader.glsl'
 
 class Fog {
-  constructor() {
+  constructor(viewer) {
     this._id = Util.uuid()
-    this._viewer = undefined
+    this._viewer = viewer
     this._delegate = undefined
     this._enable = false
     this._fogByDistance = { near: 10, nearValue: 0, far: 2000, farValue: 1.0 }
@@ -78,20 +77,6 @@ class Fog {
       },
     })
     this._viewer.scene.postProcessStages.add(this._delegate)
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {Fog}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

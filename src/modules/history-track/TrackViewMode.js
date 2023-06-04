@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-05 10:51:13
+ * @Author : Caven Chen
  */
 
 const TrackViewMode = {

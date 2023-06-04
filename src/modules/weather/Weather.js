@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-11-30 20:54:58
+ * @Author : Caven Chen
  */
 
 import Fog from './type/Fog'
@@ -9,43 +8,30 @@ import Snow from './type/Snow'
 import Cloud from './type/Cloud'
 
 class Weather {
-  constructor() {
-    this._comps = {
-      fog: new Fog(),
-      rain: new Rain(),
-      snow: new Snow(),
-      cloud: new Cloud(),
+  constructor(viewer) {
+    if (!viewer) {
+      throw Error('missing viewer param')
     }
+    this._fog = new Fog(viewer)
+    this._rain = new Rain(viewer)
+    this._snow = new Snow(viewer)
+    this._cloud = new Cloud(viewer)
   }
 
   get fog() {
-    return this._comps.fog
+    return this._fog
   }
 
   get rain() {
-    return this._comps.rain
+    return this._rain
   }
 
   get snow() {
-    return this._comps.snow
+    return this._snow
   }
 
   get cloud() {
-    return this._comps.cloud
-  }
-
-  /**
-   *
-   * @param viewer
-   */
-  install(viewer) {
-    Object.keys(this._comps).forEach((key) => {
-      this._comps[key].addTo(viewer)
-    })
-    Object.defineProperty(viewer, 'weather', {
-      value: this,
-      writable: false,
-    })
+    return this._cloud
   }
 }
 

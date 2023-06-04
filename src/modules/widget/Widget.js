@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-01-15 19:17:52
+ * @Author : Caven Chen
  */
 
 import State from '../state/State'

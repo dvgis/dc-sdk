@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-02 21:32:43
+ * @Author : Caven Chen
  */
 
 import { SceneEventType } from '../EventType'

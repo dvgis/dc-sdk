@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-11-30 20:19:19
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
@@ -9,9 +8,9 @@ import { Util } from '../../utils'
 import IMG from '../../images/cloud.jpg'
 
 class Cloud {
-  constructor() {
+  constructor(viewer) {
     this._id = Util.uuid()
-    this._viewer = undefined
+    this._viewer = viewer
     this._delegate = undefined
     this._rotateAmount = 0
     this._enable = false
@@ -26,6 +25,9 @@ class Cloud {
   set enable(enable) {
     if (!this._viewer.scene.mode === Cesium.SceneMode.SCENE3D) {
       return
+    }
+    if (!this._delegate) {
+      this._createPrimitive()
     }
     this._enable = this._delegate.show = enable
     if (this._enable) {
@@ -101,21 +103,6 @@ class Cloud {
     })
     this._delegate.show = this._enable
     this._viewer.scene.primitives.add(this._delegate)
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {Cloud}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._createPrimitive()
-    this._state = State.ADDED
-    return this
   }
 }
 

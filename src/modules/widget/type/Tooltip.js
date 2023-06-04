@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-02-01 12:07:54
+ * @Author : Caven Chen
  */
 
 import Widget from '../Widget'

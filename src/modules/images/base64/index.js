@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2022-05-28 23:30:45
+ * @Author : Caven Chen
  */
 
 const IMG_PARTICLES =

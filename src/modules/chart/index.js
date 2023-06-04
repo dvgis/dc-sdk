@@ -1,6 +1,6 @@
 /**
-  @Author: Caven Chen
-**/
+ * @Author : Caven Chen
+ */
 
 import { echarts } from '../../namespace'
 

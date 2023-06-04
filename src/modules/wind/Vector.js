@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-01-18 20:25:48
+ * @Author : Caven Chen
  */
 
 class Vector {

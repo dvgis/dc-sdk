@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-31 20:57:36
+ * @Author : Caven Chen
  */
 
 export { default as area } from './area'

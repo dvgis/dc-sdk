@@ -1,10 +1,9 @@
 /**
- * @Author: Caven
- * @Date: 2021-07-11 09:56:33
+ * @Author : Caven Chen
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { area } from '@dc-modules/math'
+import { Cesium } from '../../../namespace'
+import { area } from '../../math'
 import DrawPolygon from '../draw/DrawPolygon'
 import EditPolygon from '../edit/EditPolygon'
 import MeasureBase from '../MeasureBase'

@@ -1,13 +1,12 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-14 23:50:27
+ * @Author : Caven Chen
  */
 
 import State from '../../state/State'
 
 class Bloom {
-  constructor() {
-    this._viewer = undefined
+  constructor(viewer) {
+    this._viewer = viewer
     this._enable = false
     this._contrast = 128
     this._brightness = -0.3
@@ -25,10 +24,11 @@ class Bloom {
 
   set enable(enable) {
     this._enable = enable
-    if (enable && this._viewer && !this._delegate) {
+    if (!this._delegate) {
       this._createPostProcessStage()
     }
-    this._delegate && (this._delegate.enabled = enable)
+    this._delegate.enabled = enable
+    this._state = enable ? State.ENABLED : State.DISABLED
   }
 
   get enable() {
@@ -110,20 +110,6 @@ class Bloom {
     this._delegate.uniforms.delta = this._delta
     this._delegate.uniforms.sigma = this._sigma
     this._delegate.uniforms.stepSize = this._stepSize
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {Bloom}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

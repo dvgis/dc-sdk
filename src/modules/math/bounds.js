@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-04-23 09:29:56
+ * @Author : Caven Chen
  */
 
 export default function bounds(positions = [], expand = 0) {

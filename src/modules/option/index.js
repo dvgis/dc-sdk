@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-05 22:00:17
+ * @Author : Caven Chen
  */
 
 export { default as MouseMode } from './MouseMode'

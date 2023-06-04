@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-21 18:05:39
+ * @Author : Caven Chen
  */
 
 const TWO_PI = Math.PI * 2

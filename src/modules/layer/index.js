@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-03-13 13:46:19
+ * @Author : Caven Chen
  */
 
 export { default as LayerType } from './LayerType'

@@ -34,8 +34,8 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img',
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
       crs:'WGS84'
     })
     viewer.addBaseLayer( baseLayer)
@@ -46,7 +46,7 @@
       }
     )
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>

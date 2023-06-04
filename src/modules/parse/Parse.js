@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-03-22 00:10:25
+ * @Author : Caven Chen
  */
 import Position from '../position/Position'
 

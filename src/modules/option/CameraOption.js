@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-01-21 15:33:52
+ * @Author : Caven Chen
  */
 import { Cesium } from '../../namespace'
 import MouseMode from './MouseMode'

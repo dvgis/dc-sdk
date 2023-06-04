@@ -40,9 +40,9 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
-      style: 'img',
-      crs:"WGS84"
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
+      crs:'WGS84'
     })
     viewer.addBaseLayer( baseLayer)
     let layer = new DC.TilesetLayer('layer')

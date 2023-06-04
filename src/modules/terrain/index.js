@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-03-14 00:30:53
+ * @Author : Caven Chen
  */
 
 export { default as TerrainType } from './TerrainType'

@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-01-30 22:41:41
+ * @Author : Caven Chen
  */
 
 const EARTH_RADIUS = 6370996.81

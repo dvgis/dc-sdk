@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-06-05 16:01:22
+ * @Author : Caven Chen
  */
 
 const compass_outer = `

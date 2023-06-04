@@ -1,9 +1,8 @@
 /**
- * @Author: Caven
- * @Date: 2021-07-17 18:02:35
+ * @Author : Caven Chen
  */
 
-import { Cesium } from '@dc-modules/namespace'
+import { Cesium } from '../../../namespace'
 import DrawPolyline from '../draw/DrawPolyline'
 import EditPolyline from '../edit/EditPolyline'
 import MeasureBase from '../MeasureBase'

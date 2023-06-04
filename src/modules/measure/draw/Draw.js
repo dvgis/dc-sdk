@@ -1,9 +1,8 @@
 /**
- * @Author: Caven
- * @Date: 2020-01-31 19:45:32
+ * @Author : Caven Chen
  */
 
-import { PlotEventType } from '@dc-modules/event'
+import { PlotEventType } from '../../event'
 
 class Draw {
   constructor(style) {

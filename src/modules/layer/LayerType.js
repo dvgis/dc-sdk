@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-05-10 08:21:19
+ * @Author : Caven Chen
  */
 
 let LayerType = {}

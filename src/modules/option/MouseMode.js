@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-10-29 20:10:10
+ * @Author : Caven Chen
  */
 
 let MouseMode = {

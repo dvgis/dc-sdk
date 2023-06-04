@@ -1,13 +1,13 @@
 /**
- * @Author: Caven
- * @Date: 2020-08-14 23:10:14
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
 import State from '../../state/State'
 
 class NightVision {
-  constructor() {
+  constructor(viewer) {
+    this._viewer = viewer
     this._enable = false
     this._selected = []
     this._state = State.INITIALIZED
@@ -19,11 +19,11 @@ class NightVision {
 
   set enable(enable) {
     this._enable = enable
-    if (enable && this._viewer && !this._delegate) {
+    if (!this._delegate) {
       this._createPostProcessStage()
     }
-    this._delegate && (this._delegate.enabled = enable)
-    return this
+    this._delegate.enabled = enable
+    this._state = enable ? State.ENABLED : State.DISABLED
   }
 
   get enable() {
@@ -33,7 +33,6 @@ class NightVision {
   set selected(selected) {
     this._selected = selected
     this._delegate && (this._delegate.selected = selected)
-    return this
   }
 
   get selected() {
@@ -49,20 +48,6 @@ class NightVision {
     if (this._delegate) {
       this._viewer.scene.postProcessStages.add(this._delegate)
     }
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {NightVision}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 

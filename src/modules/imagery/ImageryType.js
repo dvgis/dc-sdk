@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-05-10 08:15:36
+ * @Author : Caven Chen
  */
 
 let ImageryType = {

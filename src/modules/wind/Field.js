@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2021-01-18 20:13:30
+ * @Author : Caven Chen
  */
 
 import Vector from './Vector'

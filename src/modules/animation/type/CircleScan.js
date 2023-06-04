@@ -1,6 +1,5 @@
 /**
- * @Author: Caven
- * @Date: 2020-12-01 20:26:02
+ * @Author : Caven Chen
  */
 
 import { Cesium } from '../../../namespace'
@@ -9,8 +8,7 @@ import Animation from '../Animation'
 import { Util } from '../../utils'
 import { Transform } from '../../transform'
 import Parse from '../../parse/Parse.js'
-
-const CircleScanShader = require('@dc-modules/material/shader/circle/CircleScanShader.glsl')
+import CircleScanShader from '../../material/shader/circle/CircleScanShader.glsl'
 
 class CircleScan extends Animation {
   constructor(viewer, position, radius, options = {}) {
