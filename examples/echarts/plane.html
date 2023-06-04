@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.min.js'></script>
+  <script src='../echarts.min.js'></script>
+  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+</head>
+
+<body>
+
+<div id="viewer-container" class="viewer-container"></div>
+
+<script>
+  let viewer = undefined
+
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container')
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      crs:'WGS84'
+    })
+    viewer.addBaseLayer( baseLayer,{
+      brightness : 0.1
+    })
+    let layer = new DC.ChartLayer('layer',viewer)
+    layer.setOption(getOption())
+    viewer.addLayer(layer)
+    viewer.flyToPosition("115.79782534952115,31.47385026585756,4856091.799441838,0,-90")
+  }
+
+  function getOption(e) {
+    let chinaGeoCoordMap = {
+      黑龙江: [127.9688, 45.368],
+      大庆: [126.9688, 45.868],
+      内蒙古: [110.3467, 41.4899],
+      吉林: [125.8154, 44.2584],
+      北京: [116.4551, 40.2539],
+      辽宁: [123.1238, 42.1216],
+      河北: [114.4995, 38.1006],
+      天津: [117.4219, 39.4189],
+      山西: [112.3352, 37.9413],
+      陕西: [109.1162, 34.2004],
+      甘肃: [103.5901, 36.3043],
+      宁夏: [106.3586, 38.1775],
+      青海: [101.4038, 36.8207],
+      新疆: [87.9236, 43.5883],
+      西藏: [91.11, 29.97],
+      四川: [103.9526, 30.7617],
+      重庆: [108.384366, 30.439702],
+      山东: [117.1582, 36.8701],
+      河南: [113.4668, 34.6234],
+      江苏: [118.8062, 31.9208],
+      安徽: [117.29, 32.0581],
+      湖北: [114.3896, 30.6628],
+      浙江: [119.5313, 29.8773],
+      福建: [119.4543, 25.9222],
+      江西: [116.0046, 28.6633],
+      湖南: [113.0823, 28.2568],
+      贵州: [106.6992, 26.7682],
+      云南: [102.9199, 25.4663],
+      广东: [113.12244, 23.009505],
+      广西: [108.479, 23.1152],
+      海南: [110.3893, 19.8516],
+      上海: [121.4648, 31.2891]
+    }
+    let chinaDatas = [
+      [
+        {
+          name: '黑龙江',
+          value: 0.88
+        }
+      ],
+      [
+        {
+          name: '内蒙古',
+          value: 0.12
+        }
+      ],
+      [
+        {
+          name: '吉林',
+          value: 0.89
+        }
+      ],
+      [
+        {
+          name: '辽宁',
+          value: 0.86
+        }
+      ],
+      [
+        {
+          name: '河北',
+          value: 0.88
+        }
+      ],
+      [
+        {
+          name: '北京',
+          value: 0.83
+        }
+      ],
+      [
+        {
+          name: '天津',
+          value: 0.71
+        }
+      ],
+      [
+        {
+          name: '山西',
+          value: 0.63
+        }
+      ],
+      [
+        {
+          name: '陕西',
+          value: 0.56
+        }
+      ],
+      [
+        {
+          name: '宁夏',
+          value: 0.17
+        }
+      ],
+      [
+        {
+          name: '云南',
+          value: 0.11
+        }
+      ],
+      [
+        {
+          name: '四川',
+          value: 1
+        }
+      ],
+      [
+        {
+          name: '重庆',
+          value: 0.8
+        }
+      ],
+      [
+        {
+          name: '山东',
+          value: 0.77
+        }
+      ],
+      [
+        {
+          name: '河南',
+          value: 0.75
+        }
+      ],
+      [
+        {
+          name: '江苏',
+          value: 0.88
+        }
+      ],
+      [
+        {
+          name: '安徽',
+          value: 0.73
+        }
+      ],
+      [
+        {
+          name: '湖北',
+          value: 0.75
+        }
+      ],
+      [
+        {
+          name: '浙江',
+          value: 0.82
+        }
+      ],
+      [
+        {
+          name: '福建',
+          value: 0.67
+        }
+      ],
+      [
+        {
+          name: '江西',
+          value: 0.71
+        }
+      ],
+      [
+        {
+          name: '湖南',
+          value: 0.75
+        }
+      ],
+      [
+        {
+          name: '广东',
+          value: 0.78
+        }
+      ],
+      [
+        {
+          name: '海南',
+          value: 0.1
+        }
+      ],
+      [
+        {
+          name: '新疆',
+          value: 0
+        }
+      ],
+      [
+        {
+          name: '上海',
+          value: 0.91
+        }
+      ]
+    ]
+
+    let convertData = function(data) {
+      let res = []
+      for (let i = 0; i < data.length; i++) {
+        let dataItem = data[i]
+        let fromCoord = chinaGeoCoordMap[dataItem[0].name]
+        let toCoord = [126.9688, 45.868]
+        if (fromCoord && toCoord) {
+          res.push([
+            {
+              coord: fromCoord,
+              value: dataItem[0].value
+            },
+            {
+              coord: toCoord
+            }
+          ])
+        }
+      }
+      return res
+    }
+    let series = []
+    let colors = ['#f44336', '#fc9700', '#ffde00', '#ffde00', '#00eaff']
+    ;[['大庆', chinaDatas]].forEach(function(item, i) {
+      let color = colors[Math.floor(Math.random() * colors.length)]
+      series.push(
+        {
+          type: 'lines',
+          zlevel: 2,
+          coordinateSystem: 'GLMap',
+          effect: {
+            show: true,
+            period: 4, //箭头指向速度，值越小速度越快
+            trailLength: 0.02, //特效尾迹长度[0,1]值越大，尾迹越长重
+            symbol: 'arrow', //箭头图标
+            symbolSize: 5 //图标大小
+          },
+          lineStyle: {
+            normal: {
+              width: 1, //尾迹线条宽度
+              opacity: 1, //尾迹线条透明度
+              curveness: 0.3, //尾迹线条曲直度
+              color: color
+            }
+          },
+          data: convertData(item[1])
+        },
+        {
+          type: 'effectScatter',
+          coordinateSystem: 'GLMap',
+          zlevel: 2,
+          rippleEffect: {
+            //涟漪特效
+            period: 4, //动画时间，值越小速度越快
+            brushType: 'stroke', //波纹绘制方式 stroke, fill
+            scale: 4 //波纹圆环最大限制，值越大波纹越大
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'right', //显示位置
+              offset: [5, 0], //偏移设置
+              formatter: function(params) {
+                //圆环显示文字
+                return params.data.name
+              },
+              fontSize: 13
+            },
+            emphasis: {
+              show: true
+            }
+          },
+          symbol: 'circle',
+          symbolSize: function(val) {
+            return 5 + val[2] * 5 //圆环大小
+          },
+          itemStyle: {
+            normal: {
+              show: false,
+              color: color
+            }
+          },
+          data: item[1].map(function(dataItem) {
+            return {
+              name: dataItem[0].name,
+              value: chinaGeoCoordMap[dataItem[0].name].concat([
+                dataItem[0].value
+              ])
+            }
+          })
+        },
+        //被攻击点
+        {
+          type: 'scatter',
+          coordinateSystem: 'GLMap',
+          zlevel: 2,
+          rippleEffect: {
+            period: 4,
+            brushType: 'stroke',
+            scale: 4
+          },
+          label: {
+            normal: {
+              show: true,
+              position: 'right',
+              //offset:[5, 0],
+              color: '#0f0',
+              formatter: '{b}',
+              textStyle: {
+                color: '#0f0'
+              }
+            },
+            emphasis: {
+              show: true,
+              color: '#f60'
+            }
+          },
+          symbol: 'pin',
+          symbolSize: 50,
+          data: [
+            {
+              name: item[0],
+              value: chinaGeoCoordMap[item[0]].concat([10])
+            }
+          ]
+        }
+      )
+    })
+
+    return {
+      series
+    }
+  }
+
+
+  DC.ready({
+    baseUrl:'../libs/dc-sdk/resources/',
+    echarts: window.echarts
+  }).then(initViewer)
+</script>
+</body>
+</html>

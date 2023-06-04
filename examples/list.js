@@ -534,12 +534,57 @@ const EXAMPLE_LIST = [
         name: '键盘漫游',
         page: 'roaming_keyboard.html',
       },
+      {
+        name: '轨迹回放',
+        page: 'track.html',
+      },
+      {
+        name: '轨迹回放（事件）',
+        page: 'track_event.html',
+      },
+      {
+        name: '轨迹贴地',
+        page: 'track_clamp_to_ground.html',
+      },
+      {
+        name: '轨迹贴模型',
+        page: 'track_clamp_to_tileset.html',
+      },
     ],
   },
   {
     name: '场景效果',
     folder: 'effect',
-    children: [],
+    children: [
+      {
+        name: '扫描圆',
+        page: 'circle_scan.html',
+      },
+      {
+        name: '雷达扫描',
+        page: 'radar_scan.html',
+      },
+      {
+        name: '泛光',
+        page: 'bloom.html',
+      },
+      {
+        name: '亮度',
+        page: 'brightness.html',
+      },
+      {
+        name: '景深',
+        page: 'depth_of_field.html',
+      },
+      {
+        name: '夜光',
+        page: 'night_vision.html',
+      },
+      {
+        name: '镜头眩光',
+        page: 'lens_flare.html',
+      },
+    ],
   },
   {
     name: '数据可视化',
@@ -549,6 +594,31 @@ const EXAMPLE_LIST = [
   {
     name: 'Echarts',
     folder: 'echarts',
-    children: [],
+    children: [
+      {
+        name: 'pm 2.5',
+        page: 'pm.html',
+      },
+      {
+        name: '迁徙图',
+        page: 'migrate.html',
+      },
+      {
+        name: '航线',
+        page: 'airline.html',
+      },
+      {
+        name: '航线（大庆）',
+        page: 'plane.html',
+      },
+      {
+        name: '人口迁徙图',
+        page: 'population_mobility.html',
+      },
+      {
+        name: '物流图',
+        page: 'logistics.html',
+      },
+    ],
   },
 ]

@@ -18,7 +18,6 @@
     <li><button onclick="play()">播放</button></li>
     <li><button onclick="pause()">暂停</button></li>
     <li><button onclick="restore()">恢复</button></li>
-    <li><button onclick="view()">跟随</button></li>
   </ul>
 </div>
 <script>
@@ -36,12 +35,6 @@
 
   function restore(){
     tc.restore()
-  }
-
-  function view(){
-    tc.viewTrack(track,{
-      mode: "tracked",
-    })
   }
 
   function initViewer() {

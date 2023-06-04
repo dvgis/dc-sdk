@@ -16,6 +16,7 @@
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
+  let effect =undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
@@ -23,9 +24,9 @@
       crs:'WGS84'
     })
     viewer.addBaseLayer(baseLayer)
-    viewer.use(new DC.Effect())
-    viewer.effect.blackAndWhite.enable= true
-    viewer.effect.blackAndWhite.gradations=4
+     effect = new DC.Effect(viewer)
+     effect.blackAndWhite.enable= true
+     effect.blackAndWhite.gradations=4
     addGuiController() // add controller
   }
 
@@ -36,10 +37,10 @@
     }
     let gui = new dat.GUI()
     gui.add(controls,'enable').onChange(value=>{
-      viewer.effect.blackAndWhite.enable=value
+      effect.blackAndWhite.enable=value
     })
     gui.add(controls,'gradations',0,20).step(1).onChange(value=>{
-      viewer.effect.blackAndWhite.gradations=value
+      effect.blackAndWhite.gradations=value
     })
   }
  DC.ready({
