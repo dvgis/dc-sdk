@@ -2,9 +2,9 @@
  * @Author : Caven Chen
  */
 
-import { Cesium } from '@dc-modules/namespace'
-import { PlotEventType } from '@dc-modules/event'
-import { midCartesian } from '@dc-modules/math'
+import { Cesium } from '../../../namespace'
+import { PlotEventType } from '../../event'
+import { midCartesian } from '../../math'
 import Edit from './Edit'
 
 class EditPolygon extends Edit {
