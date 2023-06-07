@@ -135,3 +135,5 @@ export { default as Weather } from './weather/Weather'
 export { KeyboardRoaming, RoamingController, RoamingPath } from './roaming'
 
 export { TrackViewMode, TrackController, Track } from './history-track'
+
+export { MeasureType, Measure } from './measure'
