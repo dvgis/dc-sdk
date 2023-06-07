@@ -72,7 +72,7 @@ class Plot {
       case OverlayType.CIRCLE:
         drawWorker = new DrawCircle(style)
         break
-      case OverlayType.RECTANGLE:
+      case OverlayType.RECT:
         drawWorker = new DrawRectangle(style)
         break
       case OverlayType.BILLBOARD:
@@ -119,7 +119,7 @@ class Plot {
       case OverlayType.CIRCLE:
         editWorker = new EditCircle(overlay)
         break
-      case OverlayType.RECTANGLE:
+      case OverlayType.RECT:
         editWorker = new EditRectangle(overlay)
         break
       case OverlayType.BILLBOARD:
