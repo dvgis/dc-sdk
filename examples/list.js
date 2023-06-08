@@ -182,7 +182,16 @@ const EXAMPLE_LIST = [
   {
     name: '地形设置',
     folder: 'terrain',
-    children: [],
+    children: [
+      {
+        name: '地形（中国）',
+        page: 'ter_ch.html',
+      },
+      {
+        name: '地形（夸张）',
+        page: 'ter_exaggeration.html',
+      },
+    ],
   },
   {
     name: '要素图层',
@@ -563,6 +572,10 @@ const EXAMPLE_LIST = [
       {
         name: '雷达扫描',
         page: 'radar_scan.html',
+      },
+      {
+        name: '区域切割',
+        page: 'bounds_clip.html',
       },
       {
         name: '泛光',

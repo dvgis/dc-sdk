@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -16,33 +17,44 @@
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
-  let effect =undefined
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
     let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      style:'img',
       crs:'WGS84'
     })
     viewer.addBaseLayer(baseLayer)
-    effect = new DC.Effect(viewer)
-    effect.blackAndWhite.enable= true
-    effect.blackAndWhite.gradations=4
+    let terrain = DC.TerrainFactory.createTerrain(DC.TerrainType.XYZ,{
+      url: 'http://data.marsgis.cn/terrain'
+    })
+    viewer.addTerrain(terrain)
+    viewer.flyToPosition(
+      new DC.Position(
+        96.70456483909693,
+        28.883444927447762,
+        48977.26981733466,
+        0,
+        -31
+      )
+    )
     addGuiController() // add controller
   }
 
   function addGuiController(){
     let controls = {
-      enable:true,
-      gradations: 4,
+      exaggeration:0,
     }
     let gui = new dat.GUI()
-    gui.add(controls,'enable').onChange(value=>{
-      effect.blackAndWhite.enable=value
-    })
-    gui.add(controls,'gradations',0,20).step(1).onChange(value=>{
-      effect.blackAndWhite.gradations=value
+    gui.add(controls,'exaggeration',0,10).step(1).onChange(value=>{
+      viewer.setOptions({
+        globe:{
+          terrainExaggeration: +value
+        }
+      })
     })
   }
+
   DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)

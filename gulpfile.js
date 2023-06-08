@@ -95,6 +95,8 @@ async function buildNamespace(options) {
     file: options.node ? 'dist/namespace.cjs' : 'dist/namespace.js',
     format: options.node ? 'cjs' : 'umd',
     sourcemap: false,
+    banner: options.node ? '(function(){' : '',
+    footer: options.node ? '})()' : '',
   })
 }
 
@@ -154,9 +156,10 @@ async function buildModules(options) {
     await fse.outputFile(
       dcPath,
       `
-                ${content}
-                ${exportVersion}
-                ${exportCmdOut}
+              ${exportVersion}
+              ${exportCmdOut}
+              ${content}
+
             `,
       {
         encoding: 'utf8',
@@ -175,10 +178,10 @@ async function buildModules(options) {
     await fse.outputFile(
       dcPath,
       `
-            ${content}
             ${exportNamespace}
             ${exportVersion}
             ${exportCmdOut}
+            ${content}
             `,
       {
         encoding: 'utf8',
