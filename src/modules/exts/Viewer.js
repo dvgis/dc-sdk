@@ -153,10 +153,6 @@ function Viewer(container, options) {
   container = getElement(container)
   options = defaultValue(options, defaultValue.EMPTY_OBJECT)
 
-  const viewerContainer = document.createElement('div')
-
-  const bottomContainer = document.createElement('div')
-
   const scene3DOnly = defaultValue(options.scene3DOnly, false)
 
   let clock = new Clock()
@@ -189,20 +185,12 @@ function Viewer(container, options) {
     maximumRenderTimeChange: options.maximumRenderTimeChange,
     depthPlaneEllipsoidOffset: options.depthPlaneEllipsoidOffset,
     msaaSamples: options.msaaSamples,
+    creditContainer: document.createElement('div'),
+    creditViewport: document.createElement('div'),
   })
 
   cesiumWidget.scene.backgroundColor = Color.TRANSPARENT
-
-  while (
-    cesiumWidget.creditViewport.hasChildNodes() &&
-    !(cesiumWidget.creditViewport.lastChild instanceof HTMLCanvasElement)
-  ) {
-    cesiumWidget.creditViewport.removeChild(
-      cesiumWidget.creditViewport.lastChild
-    )
-  }
-
-  cesiumWidget.creditViewport.className = 'viewer-canvas'
+  cesiumWidget.canvas.parentNode.className = 'viewer-canvas'
 
   let dataSourceCollection = options.dataSources
   let destroyDataSourceCollection = false
@@ -238,8 +226,8 @@ function Viewer(container, options) {
 
   this._clock = clock
   this._container = container
-  this._bottomContainer = bottomContainer
-  this._element = viewerContainer
+  this._bottomContainer = document.createElement('div')
+  this._element = document.createElement('div')
   this._cesiumWidget = cesiumWidget
   this._dataSourceCollection = dataSourceCollection
   this._destroyDataSourceCollection = destroyDataSourceCollection
@@ -802,6 +790,10 @@ Viewer.prototype.isDestroyed = function () {
  * removing the widget from layout.
  */
 Viewer.prototype.destroy = function () {
+  if (this.isDestroyed()) {
+    return undefined
+  }
+
   let i
 
   // Unsubscribe from data sources

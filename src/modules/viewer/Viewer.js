@@ -73,7 +73,7 @@ class Viewer {
      */
     let widgets = createWidgets()
     Object.keys(widgets).forEach((key) => {
-      this.use(widgets[key])
+      this._use(widgets[key])
     })
 
     /**
@@ -81,7 +81,7 @@ class Viewer {
      */
     let tools = createTools()
     Object.keys(tools).forEach((key) => {
-      this.use(tools[key])
+      this._use(tools[key])
     })
   }
 
@@ -187,6 +187,19 @@ class Viewer {
 
   get level() {
     return this._delegate.scene.globe._surface._debug.maxDepthVisited
+  }
+
+
+  /**
+   * Adds a plugin
+   * @param plugin
+   * @returns {Viewer}
+   */
+  _use(plugin) {
+    if (plugin && plugin.install) {
+      plugin.install(this)
+    }
+    return this
   }
 
   /***
@@ -632,8 +645,10 @@ class Viewer {
     this._delegate = undefined
     this._baseLayerPicker = undefined
     this._layerCache = {}
-    this._dcContainer.parentNode.removeChild(this._dcContainer)
-    this._dcContainer = undefined
+    this._widgetContainer.parentNode.removeChild(this._widgetContainer)
+    this._widgetContainer = undefined
+    this._layerContainer.parentNode.removeChild(this._layerContainer)
+    this._layerContainer = undefined
     return this
   }
 
@@ -657,17 +672,6 @@ class Viewer {
     return this
   }
 
-  /**
-   * Adds a plugin
-   * @param plugin
-   * @returns {Viewer}
-   */
-  use(plugin) {
-    if (plugin && plugin.install) {
-      plugin.install(this)
-    }
-    return this
-  }
 }
 
 export default Viewer
