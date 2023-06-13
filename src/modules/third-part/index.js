@@ -36,4 +36,5 @@ export const THIRD_PART = {
   CustomShader: Cesium.CustomShader,
   UniformType: Cesium.UniformType,
   Math: Cesium.Math,
+  Resource: Cesium.Resource,
 }
