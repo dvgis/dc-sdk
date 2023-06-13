@@ -14,7 +14,7 @@ class ModelPrimitive extends Overlay {
     super()
     this._position = Parse.parsePosition(position)
     this._modelUrl = modelUrl
-    this._delegate = Cesium.Model.fromGltf({ url: modelUrl })
+    this._delegate = Cesium.Model.fromGltfAsync({ url: modelUrl })
     this._state = State.INITIALIZED
   }
 
@@ -22,21 +22,19 @@ class ModelPrimitive extends Overlay {
     return Overlay.getOverlayType('model_primitive')
   }
 
-  get readyPromise() {
-    return this._delegate.readyPromise
-  }
-
   set position(position) {
     this._position = Parse.parsePosition(position)
     let origin = Transform.transformWGS84ToCartesian(this._position)
-    this._delegate.modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
-      origin,
-      new Cesium.HeadingPitchRoll(
-        Cesium.Math.toRadians(this._position.heading),
-        Cesium.Math.toRadians(this._position.pitch),
-        Cesium.Math.toRadians(this._position.roll)
+    this._delegate.then((model) => {
+      model.modelMatrix = Cesium.Transforms.headingPitchRollToFixedFrame(
+        origin,
+        new Cesium.HeadingPitchRoll(
+          Cesium.Math.toRadians(this._position.heading),
+          Cesium.Math.toRadians(this._position.pitch),
+          Cesium.Math.toRadians(this._position.roll)
+        )
       )
-    )
+    })
   }
 
   get position() {
@@ -45,7 +43,10 @@ class ModelPrimitive extends Overlay {
 
   set modelUrl(modelUrl) {
     this._modelUrl = modelUrl
-    this._delegate = Cesium.Model.fromGltf({ url: modelUrl })
+    this._delegate = Cesium.Model.fromGltfAsync({
+      url: modelUrl,
+      ...this._style,
+    })
     this.position = this._position
   }
 
@@ -65,39 +66,6 @@ class ModelPrimitive extends Overlay {
   }
 
   /**
-   *
-   * @param name
-   */
-  getMaterial(name) {
-    return this._delegate.getMaterial(name)
-  }
-
-  /**
-   *
-   * @param name
-   */
-  getMesh(name) {
-    return this._delegate.getMesh(name)
-  }
-
-  /**
-   *
-   * @param name
-   * @returns {*}
-   */
-  getNode(name) {
-    return this._delegate.getNode(name)
-  }
-
-  /**
-   *
-   * @returns {*}
-   */
-  getNodes() {
-    return this._delegate._runtime.nodes
-  }
-
-  /**
    * Sets style
    * @param style
    * @returns {ModelPrimitive}
@@ -107,7 +75,9 @@ class ModelPrimitive extends Overlay {
       return this
     }
     Util.merge(this._style, style)
-    Util.merge(this._delegate, style)
+    this._delegate.then((model) => {
+      Util.merge(model, style)
+    })
     return this
   }
 }

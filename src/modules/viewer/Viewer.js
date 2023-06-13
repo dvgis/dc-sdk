@@ -189,7 +189,6 @@ class Viewer {
     return this._delegate.scene.globe._surface._debug.maxDepthVisited
   }
 
-
   /**
    * Adds a plugin
    * @param plugin
@@ -671,7 +670,6 @@ class Viewer {
     link.click()
     return this
   }
-
 }
 
 export default Viewer
