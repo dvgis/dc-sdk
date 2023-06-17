@@ -120,6 +120,18 @@ class ViewerOption {
         globeOption?.translucency?.frontFaceAlphaByDistance,
     })
 
+    if (globeOption?.filterColor) {
+      let shaderSource =
+        this._viewer.scene.globe._surfaceShaderSet.baseFragmentShaderSource
+      let globeFS = shaderSource.sources.pop()
+      shaderSource.sources.push(
+        globeFS.replace(
+          'out_FragColor =  finalColor;',
+          `out_FragColor =  finalColor * vec4${globeOption.filterColor.toString()};`
+        )
+      )
+    }
+
     return this
   }
 
