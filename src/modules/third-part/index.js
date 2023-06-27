@@ -37,4 +37,7 @@ export const THIRD_PART = {
   UniformType: Cesium.UniformType,
   Math: Cesium.Math,
   Resource: Cesium.Resource,
+  createGooglePhotorealistic3DTileset:
+    Cesium.createGooglePhotorealistic3DTileset,
+  createElevationBandMaterial: Cesium.createElevationBandMaterial,
 }

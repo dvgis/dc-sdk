@@ -76,6 +76,24 @@ class ImageryLayerFactory {
   }
 
   /**
+   *
+   * @param options
+   * @returns {BingMapsImageryProvider}
+   */
+  static createBingImageryLayer(options) {
+    return new Cesium.BingMapsImageryProvider(options)
+  }
+
+  /**
+   *
+   * @param options
+   * @returns {OpenStreetMapImageryProvider}
+   */
+  static createOSMImageryLayer(options) {
+    return new Cesium.OpenStreetMapImageryProvider(options)
+  }
+
+  /**
    * Create single tile imagery layer
    * @param options
    * @returns {ImageryProvider}
@@ -185,6 +203,12 @@ class ImageryLayerFactory {
         break
       case ImageryType.ARCGIS:
         imageryLayer = this.createArcGisImageryLayer(options)
+        break
+      case ImageryType.BING:
+        imageryLayer = this.createBingImageryLayer(options)
+        break
+      case ImageryType.OSM:
+        imageryLayer = this.createOSMImageryLayer(options)
         break
       case ImageryType.SINGLE_TILE:
         imageryLayer = this.createSingleTileImageryLayer(options)

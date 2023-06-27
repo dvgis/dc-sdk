@@ -4,6 +4,8 @@
 
 let ImageryType = {
   ARCGIS: 'arcgis',
+  BING: 'bing',
+  OSM: 'osm',
   SINGLE_TILE: 'single_tile',
   WMS: 'wms',
   WMTS: 'wmts',
