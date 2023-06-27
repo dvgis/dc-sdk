@@ -134,8 +134,15 @@ class Overlay {
     if (!this._delegate) {
       return false
     }
-    this._delegate.layerId = this._layer?.layerId
-    this._delegate.overlayId = this._id
+    if (this._delegate instanceof Promise) {
+      this._delegate.then((obj) => {
+        obj.layerId = this._layer?.layerId
+        obj.overlayId = this._id
+      })
+    } else {
+      this._delegate.layerId = this._layer?.layerId
+      this._delegate.overlayId = this._id
+    }
   }
 
   /**
@@ -167,6 +174,7 @@ class Overlay {
       let collection = this._getLayerCollection(this.type)
       if (collection) {
         this._delegate && (this._delegate = collection.add(this._delegate))
+        Util.merge(this._delegate, this._style)
         // for bounce primitive
         if (this['update'] && this['destroy']) {
           this._layer.delegate.add(this)
