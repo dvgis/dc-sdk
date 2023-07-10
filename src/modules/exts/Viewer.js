@@ -113,6 +113,8 @@ function trackDataSourceClock(timeline, clock, dataSource) {
  *     sceneMode: Cesium.SceneMode.COLUMBUS_VIEW,
  *     // Use Cesium World Terrain
  *     terrain: Cesium.Terrain.fromWorldTerrain(),
+ *     // Hide the base layer picker
+ *     baseLayerPicker: false,
  *     // Use OpenStreetMaps
  *     baseLayer: new Cesium.ImageryLayer(OpenStreetMapImageryProvider({
  *       url: "https://a.tile.openstreetmap.org/"
@@ -176,6 +178,8 @@ function Viewer(container, options) {
     targetFrameRate: options.targetFrameRate,
     showRenderLoopErrors: options.showRenderLoopErrors,
     useBrowserRecommendedResolution: options.useBrowserRecommendedResolution,
+    creditContainer: document.createElement('div'),
+    creditViewport: document.createElement('div'),
     scene3DOnly: scene3DOnly,
     shadows: options.shadows,
     terrainShadows: options.terrainShadows,
@@ -185,8 +189,6 @@ function Viewer(container, options) {
     maximumRenderTimeChange: options.maximumRenderTimeChange,
     depthPlaneEllipsoidOffset: options.depthPlaneEllipsoidOffset,
     msaaSamples: options.msaaSamples,
-    creditContainer: document.createElement('div'),
-    creditViewport: document.createElement('div'),
   })
 
   cesiumWidget.scene.backgroundColor = Color.TRANSPARENT
@@ -779,7 +781,7 @@ Viewer.prototype.render = function () {
 }
 
 /**
- * @returns {Boolean} true if the object has been destroyed, false otherwise.
+ * @returns {boolean} true if the object has been destroyed, false otherwise.
  */
 Viewer.prototype.isDestroyed = function () {
   return false
@@ -1027,9 +1029,9 @@ Viewer.prototype._onDataSourceRemoved = function (
  * target will be the range. The heading will be determined from the offset. If the heading cannot be
  * determined from the offset, the heading will be north.</p>
  *
- * @param {Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud|Promise.<Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud>} target The entity, array of entities, entity collection, data source, Cesium3DTileset, point cloud, or imagery layer to view. You can also pass a promise that resolves to one of the previously mentioned types.
+ * @param {Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud|Promise<Entity|Entity[]|EntityCollection|DataSource|ImageryLayer|Cesium3DTileset|TimeDynamicPointCloud|VoxelPrimitive>} target The entity, array of entities, entity collection, data source, Cesium3DTileset, point cloud, or imagery layer to view. You can also pass a promise that resolves to one of the previously mentioned types.
  * @param {HeadingPitchRange} [offset] The offset from the center of the entity in the local east-north-up reference frame.
- * @returns {Promise.<Boolean>} A Promise that resolves to true if the zoom was successful or false if the target is not currently visualized in the scene or the zoom was cancelled.
+ * @returns {Promise<boolean>} A Promise that resolves to true if the zoom was successful or false if the target is not currently visualized in the scene or the zoom was cancelled.
  */
 Viewer.prototype.zoomTo = function (target, offset) {
   const options = {
@@ -1097,16 +1099,7 @@ function zoomToOrFly(that, zoomTarget, options, isFlight) {
       let rectanglePromise
 
       if (defined(zoomTarget.imageryProvider)) {
-        // This is here for backward compatibility. It can be removed when readyPromise is removed.
-        let promise = Promise.resolve()
-        if (defined(zoomTarget.imageryProvider._readyPromise)) {
-          promise = zoomTarget.imageryProvider._readyPromise
-        } else if (defined(zoomTarget.imageryProvider.readyPromise)) {
-          promise = zoomTarget.imageryProvider.readyPromise
-        }
-        rectanglePromise = promise.then(() => {
-          return zoomTarget.getImageryRectangle()
-        })
+        rectanglePromise = Promise.resolve(zoomTarget.getImageryRectangle())
       } else {
         rectanglePromise = new Promise((resolve) => {
           const removeListener = zoomTarget.readyEvent.addEventListener(() => {
@@ -1208,89 +1201,60 @@ function updateZoomTarget(viewer) {
   const camera = scene.camera
   const zoomOptions = defaultValue(viewer._zoomOptions, {})
   let options
+  function zoomToBoundingSphere(boundingSphere) {
+    // If offset was originally undefined then give it base value instead of empty object
+    if (!defined(zoomOptions.offset)) {
+      zoomOptions.offset = new HeadingPitchRange(
+        0.0,
+        -0.5,
+        boundingSphere.radius
+      )
+    }
 
-  // If zoomTarget was Cesium3DTileset
-  if (target instanceof Cesium3DTileset || target instanceof VoxelPrimitive) {
-    // This is here for backwards compatibility and can be removed once Cesium3DTileset.readyPromise and VoxelPrimitive.readyPromise is removed.
-    return target._readyPromise
-      .then(function () {
-        const boundingSphere = target.boundingSphere
-        // If offset was originally undefined then give it base value instead of empty object
-        if (!defined(zoomOptions.offset)) {
-          zoomOptions.offset = new HeadingPitchRange(
-            0.0,
-            -0.5,
-            boundingSphere.radius
-          )
-        }
+    options = {
+      offset: zoomOptions.offset,
+      duration: zoomOptions.duration,
+      maximumHeight: zoomOptions.maximumHeight,
+      complete: function () {
+        viewer._completeZoom(true)
+      },
+      cancel: function () {
+        viewer._completeZoom(false)
+      },
+    }
 
-        options = {
-          offset: zoomOptions.offset,
-          duration: zoomOptions.duration,
-          maximumHeight: zoomOptions.maximumHeight,
-          complete: function () {
-            viewer._completeZoom(true)
-          },
-          cancel: function () {
-            viewer._completeZoom(false)
-          },
-        }
+    if (viewer._zoomIsFlight) {
+      camera.flyToBoundingSphere(target.boundingSphere, options)
+    } else {
+      camera.viewBoundingSphere(boundingSphere, zoomOptions.offset)
+      camera.lookAtTransform(Matrix4.IDENTITY)
 
-        if (viewer._zoomIsFlight) {
-          camera.flyToBoundingSphere(target.boundingSphere, options)
-        } else {
-          camera.viewBoundingSphere(boundingSphere, zoomOptions.offset)
-          camera.lookAtTransform(Matrix4.IDENTITY)
+      // Finish the promise
+      viewer._completeZoom(true)
+    }
 
-          // Finish the promise
-          viewer._completeZoom(true)
-        }
-
-        clearZoom(viewer)
-      })
-      .catch(() => {
-        cancelZoom(viewer)
-      })
+    clearZoom(viewer)
   }
 
-  // If zoomTarget was TimeDynamicPointCloud
   if (target instanceof TimeDynamicPointCloud) {
-    // This is here for backwards compatibility and can be removed once TimeDynamicPointCloud.readyPromise is removed.
-    return target._readyPromise.then(function () {
-      const boundingSphere = target.boundingSphere
-      // If offset was originally undefined then give it base value instead of empty object
-      if (!defined(zoomOptions.offset)) {
-        zoomOptions.offset = new HeadingPitchRange(
-          0.0,
-          -0.5,
-          boundingSphere.radius
-        )
-      }
+    if (defined(target.boundingSphere)) {
+      zoomToBoundingSphere(target.boundingSphere)
+      return
+    }
 
-      options = {
-        offset: zoomOptions.offset,
-        duration: zoomOptions.duration,
-        maximumHeight: zoomOptions.maximumHeight,
-        complete: function () {
-          viewer._completeZoom(true)
-        },
-        cancel: function () {
-          viewer._completeZoom(false)
-        },
-      }
-
-      if (viewer._zoomIsFlight) {
-        camera.flyToBoundingSphere(boundingSphere, options)
-      } else {
-        camera.viewBoundingSphere(boundingSphere, zoomOptions.offset)
-        camera.lookAtTransform(Matrix4.IDENTITY)
-
-        // Finish the promise
-        viewer._completeZoom(true)
-      }
-
-      clearZoom(viewer)
+    // Otherwise, the first "frame" needs to have been rendered
+    const removeEventListener = target.frameChanged.addEventListener(function (
+      timeDynamicPointCloud
+    ) {
+      zoomToBoundingSphere(timeDynamicPointCloud.boundingSphere)
+      removeEventListener()
     })
+    return
+  }
+
+  if (target instanceof Cesium3DTileset || target instanceof VoxelPrimitive) {
+    zoomToBoundingSphere(target.boundingSphere)
+    return
   }
 
   // If zoomTarget was an ImageryLayer
