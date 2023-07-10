@@ -324,7 +324,7 @@ class Viewer {
       return this
     }
     let baseLayerPromises = []
-    if (!Array.isArray(baseLayer)) {
+    if (Array.isArray(baseLayer)) {
       baseLayerPromises = baseLayer.slice(0)
     } else {
       baseLayerPromises = [baseLayer]
