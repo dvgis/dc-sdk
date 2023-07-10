@@ -185,8 +185,13 @@ class Viewer {
     return Cesium.Rectangle.fromDegrees(min.lng, min.lat, max.lng, max.lat)
   }
 
-  get level() {
-    return this._delegate.scene.globe._surface._debug.maxDepthVisited
+  get zoom() {
+    let height = this._delegate.camera.positionCartographic.height
+    let A = 40487.57
+    let B = 0.00007096758
+    let C = 91610.74
+    let D = -40467.74
+    return Math.round(D + (A - D) / (1 + Math.pow(height / C, B)))
   }
 
   /**
@@ -318,11 +323,19 @@ class Viewer {
     if (!baseLayer) {
       return this
     }
-    this._baseLayerPicker.addImageryLayer(baseLayer, options)
-    if (!this._baseLayerPicker.selectedImageryLayer) {
-      this._baseLayerPicker.changeImageryLayer(0)
+    let baseLayerPromises = []
+    if (!Array.isArray(baseLayer)) {
+      baseLayerPromises = baseLayer.slice(0)
+    } else {
+      baseLayerPromises = [baseLayer]
     }
-    this['mapSwitch'] && this['mapSwitch'].addMap(options)
+    Promise.all(baseLayerPromises).then((baseLayers) => {
+      this._baseLayerPicker.addImageryLayer(baseLayers, options)
+      if (!this._baseLayerPicker.selectedImageryLayer) {
+        this._baseLayerPicker.changeImageryLayer(0)
+      }
+      this['mapSwitch'] && this['mapSwitch'].addMap(options)
+    })
     return this
   }
 

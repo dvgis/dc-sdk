@@ -15,163 +15,163 @@ class ImageryLayerFactory {
   /**
    * Create amap imagery layer
    * @param options
-   * @returns {AmapImageryProvider}
+   * @returns {Promise<AmapImageryProvider>}
    */
   static createAmapImageryLayer(options) {
-    return new AmapImageryProvider(options)
+    return Promise.resolve(new AmapImageryProvider(options))
   }
 
   /**
    * Create baidu imagery layer
    * @param options
-   * @returns {BaiduImageryProvider}
+   * @returns {Promise<BaiduImageryProvider>}
    */
   static createBaiduImageryLayer(options) {
-    return new BaiduImageryProvider(options)
+    return Promise.resolve(new BaiduImageryProvider(options))
   }
 
   /**
    * Create geoVis imagery layer
    * @param options
-   * @returns {GeoVisImageryProvider}
+   * @returns {Promise<GeoVisImageryProvider>}
    */
   static createGeoVisImageryLayer(options) {
-    return new GeoVisImageryProvider(options)
+    return Promise.resolve(new GeoVisImageryProvider(options))
   }
 
   /**
    * Create google imagery layer
    * @param options
-   * @returns {GoogleImageryProvider}
+   * @returns {Promise<GoogleImageryProvider>}
    */
   static createGoogleImageryLayer(options) {
-    return new GoogleImageryProvider(options)
+    return Promise.resolve(new GoogleImageryProvider(options))
   }
 
   /**
    * Create tdt imagery layer
    * @param options
-   * @returns {TdtImageryProvider}
+   * @returns {Promise<TdtImageryProvider>}
    */
   static createTdtImageryLayer(options) {
-    return new TdtImageryProvider(options)
+    return Promise.resolve(new TdtImageryProvider(options))
   }
 
   /**
    * Create tencent imagery layer
    * @param options
-   * @returns {TencentImageryProvider}
+   * @returns {Promise<TencentImageryProvider>}
    */
   static createTencentImageryLayer(options) {
-    return new TencentImageryProvider(options)
+    return Promise.resolve(new TencentImageryProvider(options))
   }
 
   /**
    * Create arcgis imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<ArcGisMapServerImageryProvider>}
    */
   static createArcGisImageryLayer(options) {
-    return new Cesium.ArcGisMapServerImageryProvider(options)
+    return Cesium.ArcGisMapServerImageryProvider.fromUrl(options.url, options)
   }
 
   /**
    *
    * @param options
-   * @returns {BingMapsImageryProvider}
+   * @returns {Promise<BingMapsImageryProvider>}
    */
   static createBingImageryLayer(options) {
-    return new Cesium.BingMapsImageryProvider(options)
+    return Cesium.BingMapsImageryProvider.fromUrl(options.url, options)
   }
 
   /**
    *
    * @param options
-   * @returns {OpenStreetMapImageryProvider}
+   * @returns {Promise<OpenStreetMapImageryProvider>}
    */
   static createOSMImageryLayer(options) {
-    return new Cesium.OpenStreetMapImageryProvider(options)
+    return Promise.resolve(new Cesium.OpenStreetMapImageryProvider(options))
   }
 
   /**
    * Create single tile imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<ImageryProvider>}
    */
   static createSingleTileImageryLayer(options) {
-    return new Cesium.SingleTileImageryProvider(options)
+    return Promise.resolve(new Cesium.SingleTileImageryProvider(options))
   }
 
   /**
    * Create WMS imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<WebMapServiceImageryProvider>}
    */
   static createWMSImageryLayer(options) {
-    return new Cesium.WebMapServiceImageryProvider(options)
+    return Promise.resolve(new Cesium.WebMapServiceImageryProvider(options))
   }
 
   /**
    * Create WMTS imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<WebMapTileServiceImageryProvider>}
    */
   static createWMTSImageryLayer(options) {
-    return new Cesium.WebMapTileServiceImageryProvider(options)
+    return Promise.resolve(new Cesium.WebMapTileServiceImageryProvider(options))
   }
 
   /**
    * Create xyz imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<UrlTemplateImageryProvider>}
    */
   static createXYZImageryLayer(options) {
-    return new Cesium.UrlTemplateImageryProvider(options)
+    return Promise.resolve(new Cesium.UrlTemplateImageryProvider(options))
   }
 
   /**
    * Create coord imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<TileCoordinatesImageryProvider>}
    */
   static createCoordImageryLayer(options) {
-    return new Cesium.TileCoordinatesImageryProvider(options)
+    return Promise.resolve(new Cesium.TileCoordinatesImageryProvider(options))
   }
 
   /**
    * Create grid imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<GridImageryProvider>}
    */
   static createGridImageryLayer(options) {
-    return new Cesium.GridImageryProvider(options)
+    return Promise.resolve(new Cesium.GridImageryProvider(options))
   }
 
   /**
    * Create mapbox imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<MapboxImageryProvider>}
    */
   static createMapboxImageryLayer(options) {
-    return new Cesium.MapboxImageryProvider(options)
+    return Promise.resolve(new Cesium.MapboxImageryProvider(options))
   }
 
   /**
    * Create mapbox style imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<MapboxStyleImageryProvider>}
    */
   static createMapboxStyleImageryLayer(options) {
-    return new Cesium.MapboxStyleImageryProvider(options)
+    return Promise.resolve(new Cesium.MapboxStyleImageryProvider(options))
   }
 
   /**
    * Create TMS imagery layer
    * @param options
-   * @returns {ImageryProvider}
+   * @returns {Promise<TileMapServiceImageryProvider>}
    */
   static createTMSImageryLayer(options) {
-    return new Cesium.TileMapServiceImageryProvider(options)
+    return Cesium.TileMapServiceImageryProvider.fromUrl(options.url, options)
   }
 
   /**
