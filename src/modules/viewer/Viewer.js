@@ -30,7 +30,7 @@ class Viewer {
       throw new Error('Viewer：the id is empty')
     }
     this._delegate = Cesium.Viewer
-      ? Cesium.Viewer(id, {
+      ? new Cesium.Viewer(id, {
           ...DEF_OPTS,
           ...options,
         })
