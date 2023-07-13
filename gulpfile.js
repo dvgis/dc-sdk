@@ -14,11 +14,11 @@ import { rollup } from 'rollup'
 import clean from 'gulp-clean'
 import commonjs from '@rollup/plugin-commonjs'
 import resolve from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
 import scss from 'rollup-plugin-scss'
 import javascriptObfuscator from 'gulp-javascript-obfuscator'
 import { babel } from '@rollup/plugin-babel'
 import startServer from './server.js'
-import { uglify } from 'rollup-plugin-uglify'
 import inlineImage from 'esbuild-plugin-inline-image'
 import { glsl } from 'esbuild-plugin-glsl'
 
@@ -87,8 +87,18 @@ async function buildNamespace(options) {
         ],
         plugins: ['@babel/plugin-transform-runtime'],
       }),
-      uglify(),
+      terser(),
     ],
+    onwarn: (message) => {
+      // Ignore eval warnings in third-party code we don't have control over
+      if (message.code === 'EVAL' && /protobufjs/.test(message.loc.file)) {
+        return
+      }
+      if (message.code === 'CIRCULAR_DEPENDENCY') {
+        return
+      }
+      console.log(message)
+    },
   })
   return bundle.write({
     name: 'DC.__namespace',
