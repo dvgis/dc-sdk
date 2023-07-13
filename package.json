@@ -25,7 +25,9 @@
     "build:iife": "rimraf dist && gulp buildIIFE",
     "build:release": "rimraf dist && gulp buildRelease",
     "prepublishOnly": "yarn run build:release",
-    "server": "gulp server"
+    "server": "gulp server",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
@@ -63,7 +65,8 @@
     "sass": "^1.62.1",
     "shelljs": "^0.8.5",
     "supercluster": "^8.0.1",
-    "vinyl-sourcemaps-apply": "^0.2.1"
+    "vinyl-sourcemaps-apply": "^0.2.1",
+    "vuepress": "^1.9.9"
   },
   "files": [
     "dist"
