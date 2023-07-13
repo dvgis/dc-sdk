@@ -641,31 +641,48 @@ viewer.addLayer(layer)
     - `{Object} options`
   - returns `windLayer`
 
-## DC.S3MLayer
+## DC.ChartLayer
 
-> SInherited from [Layer](#layer)
+> Inherited from [Layer](../layer/#layer)
 
 ### example
 
 ```js
-let layer = new DC.S3MLayer('id','**.scp')
-viewer.addLayer(layer)
+let chartLayer = new DC.ChartLayer('layer')
+viewer.addLayer(chartLayer)
 ```
+
+:::warning
+The chart layer depends on the echarts library, please make sure that echarts is available in the global variables before using it.
+:::
 
 ### creation
 
-- **_constructor(id,url,[options])_**
+- **_constructor([id],[option])_**
 
   - parameters
     - `{String} id`
-    - `{String} url`
-    - `{Object} options`
-  - returns `windLayer`
+    - `{Object} option` [echarts](https://www.echartsjs.com/zh/option.html#title)
+  - returns `chartLayer`
 
 ```json
-//options(optional)
+// options
 {
-  "maxVisibleDistance"：Number.MAX_VALUE, 
-  "minVisibleDistance"：0,
+  "animation": false, //required
+  "GLMap": {},
+  "series": [
+    {
+      "coordinateSystem": "GLMap"
+    }
+  ]
 }
 ```
+
+### methods
+
+- **_setOption(option)_**
+
+  - parameters
+    - `{Object} option` [echarts](https://www.echartsjs.com/zh/option.html#title)
+  - returns `this`
+

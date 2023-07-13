@@ -29,8 +29,6 @@ themeConfig: {
             { text: 'Materials', link: '/material/' },
             { text: 'Effects', link: '/effect/' },
             { text: 'Tools', link: '/tools/' },
-            { text: 'Analysis', link: '/analysis/' },
-            { text: 'ThirdPart', link: '/third-part/' },
           ],
         },
         {
@@ -83,8 +81,6 @@ themeConfig: {
             { text: '材质属性', link: '/zh/material/' },
             { text: '效果动画', link: '/zh/effect/' },
             { text: '实用工具', link: '/zh/tools/' },
-            { text: '场景分析', link: '/zh/analysis/' },
-            { text: '第三方集成', link: '/zh/third-part/' },
           ],
         },
         {

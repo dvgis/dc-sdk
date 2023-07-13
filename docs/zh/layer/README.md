@@ -759,3 +759,52 @@ viewer.addLayer(layer)
   "heightOffset":0,//高度偏移
 }
 ```
+
+## DC.ChartLayer
+
+> 图表图层，继承于[Layer](../layer/#layer)
+
+### example
+
+```js
+let chartLayer = new DC.ChartLayer('layer')
+viewer.addLayer(chartLayer)
+```
+
+:::warning
+图表图层依赖于 echarts 库，使用前请确保全局变量中能够获取到 echarts
+:::
+
+### creation
+
+- **_constructor([id],[option])_**
+
+  构造函数
+
+  - 参数
+    - `{String} id`：唯一标识
+    - `{Object} option`：echarts 配置，详情参考：[echarts](https://www.echartsjs.com/zh/option.html#title)
+  - 返回值 `chartLayer`
+
+```json
+// options，其他的参数参考 echarts
+{
+  "animation": false, // 必须要加
+  "GLMap": {}, //地图
+  "series": [
+    {
+      "coordinateSystem": "GLMap" // 坐标系统
+    }
+  ]
+}
+```
+
+### methods
+
+- **_setOption(option)_**
+
+  设置点位
+
+  - 参数
+    - `{Object} option`：echarts 配置，详情参考：[echarts](https://www.echartsjs.com/zh/option.html#title)
+  - 返回值 `this`

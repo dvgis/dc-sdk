@@ -28,98 +28,98 @@ viewer.addBaseLayer(baseLayer, {
 
   - parameters
     - `{Object} options`
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createBaiduImageryLayer(options)_**
 
   - parameters
     - `{Object} options`
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createGoogleImageryLayer(options)_**
 
   - parameters
     - `{Object} options`
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createTdtImageryLayer(options)_**
 
   - parameters
     - `{Object} options`
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createTencentImageryLayer(options)_**
 
   - parameters
     - `{Object} options`
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createArcGisImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [ArcGis](http://resource.dvgis.cn/cesium-docs/ArcGisMapServerImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createSingleTileImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [Single](http://resource.dvgis.cn/cesium-docs/SingleTileImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createWMSImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [WMS](http://resource.dvgis.cn/cesium-docs/WebMapServiceImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createWMTSImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [WMTS](http://resource.dvgis.cn/cesium-docs/WebMapTileServiceImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createXYZImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [X/Y/Z](http://resource.dvgis.cn/cesium-docs/UrlTemplateImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createCoordImageryLayer(options)_**
 
   - parameters
     - `{Object} options`
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createGridImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [Grid](http://resource.dvgis.cn/cesium-docs/GridImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createMapboxImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [Mapbox](http://resource.dvgis.cn/cesium-docs/MapboxImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createMapboxStyleImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [Mapbox Style](http://resource.dvgis.cn/cesium-docs/MapboxStyleImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createTMSImageryLayer(options)_**
 
   - parameters
     - `{Object} options` [TMS](http://resource.dvgis.cn/cesium-docs/TileMapServiceImageryProvider.html#.ConstructorOptions)
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 - **_createImageryLayer(type, options)_**
 
   - parameters
     - `{String} type`，DC.ImageryType
     - `{Object} options`
-  - returns `baseLayer`
+  - returns `Promise<baseLayerProvider>`
 
 ```json
 //options(optional)

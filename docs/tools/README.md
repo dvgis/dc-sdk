@@ -60,106 +60,91 @@ plot.draw(DC.OverlayType.POINT, (overlay) => {}, {})
 
   - returns `this`
 
-## DC.PositionEditor
 
-> Position Editor Tool
+## DC.Measure
+
+> viewer measure
 
 ### example
 
 ```js
-let positionEditor = new DC.PositionEditor(viewer)
+viewer.use(new DC.Measure())
 ```
 
 ### creation
 
-- **_constructor(viewer,[options])_**
+- **_constructor()_**
 
-  - parameters
-    - `{Viewer} viewer`
-    - `{Object} options`
-  - returns `positionEditor`
-
-```json
-// options(optional)
-{
-  "arrow": true, // whether the auxiliary axis is an arrow
-  "width": 8, // auxiliary axis width
-  "depthFail": true, // whether the auxiliary axis supports depth test
-  "axisLineScale": 1 // auxiliary axis scale
-}
-```
-
-### properties
-
-- `{Overlay} overlay` **_`readonly`_**
+  - returns `measure`
 
 ### methods
 
-- **_activate(type, callback)_**
+- **_angle([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_area([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_areaSurface([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_distance([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_distanceSurface([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_heading([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_height([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_triangleHeight([options])_**
+
+  - parameters
+    - `{Object} options`
+  - returns `this`
+
+- **_activate(type,[options])_**
 
   - parameters
     - `{String} type`
-    - `{Function} callback` parameter ：position
-  - returns `this`
-
-- **_deactivate()_**
-
-  - returns `this`
-
-## DC.ModelManager
-
-> Model Manager Tool
-
-### example
-
-```js
-let manager = new DC.ModelManager(viewer, layer.getOverlays())
-```
-
-### creation
-
-- **_constructor(viewer,models,[options])_**
-
-  - parameters
-    - `{Viewer} viewer`
-    - `{Array} models`
     - `{Object} options`
-  - returns `manager`
+  - returns `this`
 
 ```json
 // options(optional)
 {
-  "disappearHeight": 1000,
-  "disappearSeconds": 0.5,
-  "appearSeconds": 0.5
+  "icon_center": "**.png",
+  "icon_anchor": "**.png",
+  "icon_midAnchor": "**.png",
+  "icon_size": [12, 12],
+  "clampToModel": false
 }
 ```
 
-### properties
-
-- `{Array} models`
-
-### methods
-
-- **_spread(height, seconds)_**
-
-  - parameters
-    - `{Number} height`
-    - `{Number} seconds`
-  - returns `this`
-
-- **_combine(seconds)_**
-
-  - parameters
-    - `{Number} seconds`
-  - returns `this`
-
-- **_showModel(modelIndex)_**
-
-  - parameters
-    - `{Number} modelIndex`
-  - returns `this`
-
-- **_restore()_**
+- **_deactivate()_**
 
   - returns `this`

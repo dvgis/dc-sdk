@@ -68,122 +68,112 @@ plot.draw(DC.OverlayType.POINT, (overlay) => {}, {})
 
 - 返回值 `this`
 
-## DC.PositionEditor
+## DC.Measure
 
-> 位置编辑工具
+> 三维空间分析
 
 ### example
 
 ```js
-let coords = new DC.PositionEditor(viewer)
+let measure = new DC.Measure(viewer)
 ```
 
 ### creation
 
-- **_constructor(viewer,[options])_**
+- **_constructor()_**
 
   构造函数
 
+  - 返回值 `measure`
+
+### methods
+
+- **_angle([options])_**
+
+  角度
+
   - 参数
-    - `{Viewer} viewer`：场景
-    - `{Object} options`：属性
-  - 返回值 `plot`
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_area([options])_**
+
+  面积
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_areaSurface([options])_**
+
+  表面面积
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_distance([options])_**
+
+  距离
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_distanceSurface([options])_**
+
+  表面距离
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_heading([options])_**
+
+  偏航角
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_height([options])_**
+
+  高度
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_triangleHeight([options])_**
+
+  三角测量
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `this`
+
+- **_activate(type,[options])_**
+
+  根据类型分析
+
+  - 参数
+    - `{String} type`：分析类型，参考 `DC.MeasureType`,
+    - `{Object} options`：配置
+  - 返回值 `this`
 
 ```json
 //属性参数(可选)
 {
-  "arrow": true, // 辅助轴线是否为箭头
-  "width": 8, // 辅助轴线宽度
-  "depthFail": true, // 辅助轴线是否支持深度检测
-  "axisLineScale": 1 // 辅助轴线比例
+  "icon_center": "**.png", // 自定义的中心点图标
+  "icon_anchor": "**.png", //自定义的锚点图标
+  "icon_midAnchor": "**.png", //自定义的中心锚点图标
+  "icon_size": [12, 12], //自定义的中心锚点大小
+  "clampToModel": false //点位是否获取模型表面坐标
 }
 ```
-
-### properties
-
-- `{Overlay} overlay`：覆盖物 **_`writeOnly`_**
-
-### methods
-
-- **_activate(type, callback)_**
-
-  激活
-
-  - 参数
-    - `{String} type`：类型，`DC.PositionEditorType`
-    - `{Function} callback`：回调函数，参数为：position
-  - 返回值 `this`
 
 - **_deactivate()_**
 
-  失效
-
-  - 返回值 `this`
-
-## DC.ModelManager
-
-> 模型管理工具
-
-### example
-
-```js
-let manager = new DC.ModelManager(viewer, layer.getOverlays())
-```
-
-### creation
-
-- **_constructor(viewer,models,[options])_**
-
-  构造函数
-
-  - 参数
-    - `{Viewer} viewer`：场景
-    - `{Array} models`：覆盖物
-    - `{Object} options`：属性
-  - 返回值 `manager`
-
-```json
-//属性参数(可选)
-{
-  "disappearHeight": 1000, // 消失高度
-  "disappearSeconds": 0.5, // 消失时间
-  "appearSeconds": 0.5 // 出现时间
-}
-```
-
-### properties
-
-- `{Array} models`：覆盖物
-
-### methods
-
-- **_spread(height, seconds)_**
-
-  展开
-
-  - 参数
-    - `{Number} height`：高度
-    - `{Number} seconds`：时间
-  - 返回值 `this`
-
-- **_combine(seconds)_**
-
-  合并
-
-  - 参数
-    - `{Number} seconds`：时间
-  - 返回值 `this`
-
-- **_showModel(modelIndex)_**
-
-  展示模型
-
-  - 参数
-    - `{Number} modelIndex`：模型索引，和数组索引一致
-  - 返回值 `this`
-
-- **_restore()_**
-
-  还原
+  释放空间分析
 
   - 返回值 `this`
