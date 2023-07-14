@@ -181,66 +181,66 @@ class ImageryLayerFactory {
    * @returns {any}
    */
   static createImageryLayer(type, options) {
-    let imageryLayer = undefined
+    let promise = undefined
     switch (type) {
       case ImageryType.AMAP:
-        imageryLayer = this.createAmapImageryLayer(options)
+        promise = this.createAmapImageryLayer(options)
         break
       case ImageryType.BAIDU:
-        imageryLayer = this.createBaiduImageryLayer(options)
+        promise = this.createBaiduImageryLayer(options)
         break
       case ImageryType.GEO_VIS:
-        imageryLayer = this.createGeoVisImageryLayer(options)
+        promise = this.createGeoVisImageryLayer(options)
         break
       case ImageryType.GOOGLE:
-        imageryLayer = this.createGoogleImageryLayer(options)
+        promise = this.createGoogleImageryLayer(options)
         break
       case ImageryType.TDT:
-        imageryLayer = this.createTdtImageryLayer(options)
+        promise = this.createTdtImageryLayer(options)
         break
       case ImageryType.TENCENT:
-        imageryLayer = this.createTencentImageryLayer(options)
+        promise = this.createTencentImageryLayer(options)
         break
       case ImageryType.ARCGIS:
-        imageryLayer = this.createArcGisImageryLayer(options)
+        promise = this.createArcGisImageryLayer(options)
         break
       case ImageryType.BING:
-        imageryLayer = this.createBingImageryLayer(options)
+        promise = this.createBingImageryLayer(options)
         break
       case ImageryType.OSM:
-        imageryLayer = this.createOSMImageryLayer(options)
+        promise = this.createOSMImageryLayer(options)
         break
       case ImageryType.SINGLE_TILE:
-        imageryLayer = this.createSingleTileImageryLayer(options)
+        promise = this.createSingleTileImageryLayer(options)
         break
       case ImageryType.WMS:
-        imageryLayer = this.createWMSImageryLayer(options)
+        promise = this.createWMSImageryLayer(options)
         break
       case ImageryType.WMTS:
-        imageryLayer = this.createWMTSImageryLayer(options)
+        promise = this.createWMTSImageryLayer(options)
         break
       case ImageryType.XYZ:
-        imageryLayer = this.createXYZImageryLayer(options)
+        promise = this.createXYZImageryLayer(options)
         break
       case ImageryType.COORD:
-        imageryLayer = this.createCoordImageryLayer(options)
+        promise = this.createCoordImageryLayer(options)
         break
       case ImageryType.GRID:
-        imageryLayer = this.createGridImageryLayer(options)
+        promise = this.createGridImageryLayer(options)
         break
       case ImageryType.MAPBOX:
-        imageryLayer = this.createMapboxImageryLayer(options)
+        promise = this.createMapboxImageryLayer(options)
         break
       case ImageryType.MAPBOX_STYLE:
-        imageryLayer = this.createMapboxStyleImageryLayer(options)
+        promise = this.createMapboxStyleImageryLayer(options)
         break
       case ImageryType.TMS:
-        imageryLayer = this.createTMSImageryLayer(options)
+        promise = this.createTMSImageryLayer(options)
         break
       default:
         break
     }
-    return imageryLayer
+    return promise
   }
 }
 

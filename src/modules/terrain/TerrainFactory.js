@@ -9,46 +9,52 @@ class TerrainFactory {
   /**
    *
    * @param options
-   * @returns {TerrainProvider}
+   * @returns {Promise<EllipsoidTerrainProvider>}
    */
   static createEllipsoidTerrain(options) {
-    return new Cesium.EllipsoidTerrainProvider(options)
+    return Promise.resolve(new Cesium.EllipsoidTerrainProvider(options))
   }
 
   /**
    * Create url terrain
    * @param options
-   * @returns {TerrainProvider}
+   * @returns {Promise<CesiumTerrainProvider>}
    */
   static createUrlTerrain(options) {
-    return new Cesium.CesiumTerrainProvider(options)
+    return Cesium.CesiumTerrainProvider.fromUrl(options.url, options)
   }
 
   /**
    * Create google terrain
    * @param options
-   * @returns {TerrainProvider}
+   * @returns {Promise<GoogleEarthEnterpriseTerrainProvider>}
    */
   static createGoogleTerrain(options) {
-    return new Cesium.GoogleEarthEnterpriseTerrainProvider(options)
+    return Cesium.GoogleEarthEnterpriseTerrainProvider.fromUrl(
+      options.url,
+      options
+    )
   }
 
   /**
    * Create arcgis terrain
    * @param options
-   * @returns {TerrainProvider}
+   * @returns {Promise<ArcGISTiledElevationTerrainProvider>}
    */
   static createArcgisTerrain(options) {
-    return new Cesium.ArcGISTiledElevationTerrainProvider(options)
+    return Cesium.ArcGISTiledElevationTerrainProvider.fromUrl(
+      options.url,
+      options
+    )
   }
 
   /**
    * Create vr terrain
    * @param options
-   * @returns {TerrainProvider}
+   * @returns {Promise<VRTheWorldTerrainProvider>}
    */
   static createVRTerrain(options) {
-    return new Cesium.VRTheWorldTerrainProvider(options)
+    return Cesium.VRTheWorldTerrainProvider.fromUrl(options.url, options)
   }
 
   /**
@@ -58,27 +64,27 @@ class TerrainFactory {
    * @returns {any}
    */
   static createTerrain(type, options) {
-    let terrain = undefined
+    let promise = undefined
     switch (type) {
       case TerrainType.NONE:
-        terrain = this.createEllipsoidTerrain(options)
+        promise = this.createEllipsoidTerrain(options)
         break
       case TerrainType.XYZ:
-        terrain = this.createUrlTerrain(options)
+        promise = this.createUrlTerrain(options)
         break
       case TerrainType.GOOGLE:
-        terrain = this.createGoogleTerrain(options)
+        promise = this.createGoogleTerrain(options)
         break
       case TerrainType.ARCGIS:
-        terrain = this.createArcgisTerrain(options)
+        promise = this.createArcgisTerrain(options)
         break
       case TerrainType.VR:
-        terrain = this.createVRTerrain(options)
+        promise = this.createVRTerrain(options)
         break
       default:
         break
     }
-    return terrain
+    return promise
   }
 }
 

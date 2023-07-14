@@ -755,10 +755,6 @@ Viewer.prototype.resize = function () {
   if (width === this._lastWidth && height === this._lastHeight) {
     return
   }
-  let creditLeft = 0
-  let creditBottom = 0
-  this._bottomContainer.style.left = `${creditLeft}px`
-  this._bottomContainer.style.bottom = `${creditBottom}px`
   this._lastWidth = width
   this._lastHeight = height
 }

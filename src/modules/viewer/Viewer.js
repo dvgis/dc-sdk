@@ -371,10 +371,13 @@ class Viewer {
     if (!terrain) {
       return this
     }
-    this._baseLayerPicker.addTerrainProvider(terrain)
-    if (!this._baseLayerPicker.selectedTerrain) {
-      this._baseLayerPicker.changeTerrain(0)
-    }
+    Promise.resolve(terrain).then((t) => {
+      this._baseLayerPicker.addTerrainProvider(t)
+      if (!this._baseLayerPicker.selectedTerrain) {
+        this._baseLayerPicker.changeTerrain(0)
+      }
+    })
+
     return this
   }
 

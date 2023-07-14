@@ -25,10 +25,10 @@ class BaseLayerPicker {
     let imageryLayers = this._globe.imageryLayers
     if (!this._selectedImageryLayer) {
       for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
-        imageryLayers.add(
-          new ImageryLayer(imageryLayer.layers[i], imageryLayer.options),
-          0
-        )
+        let layer = imageryLayer.layers[i]
+        if (layer) {
+          imageryLayers.add(new ImageryLayer(layer, imageryLayer.options), 0)
+        }
       }
     } else if (
       this._selectedImageryLayer &&
@@ -36,10 +36,10 @@ class BaseLayerPicker {
     ) {
       imageryLayers.removeAll()
       for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
-        imageryLayers.add(
-          new ImageryLayer(imageryLayer.layers[i], imageryLayer.options),
-          0
-        )
+        let layer = imageryLayer.layers[i]
+        if (layer) {
+          imageryLayers.add(new ImageryLayer(layer, imageryLayer.options), 0)
+        }
       }
     }
     this._selectedImageryLayer = imageryLayer
@@ -91,6 +91,9 @@ class BaseLayerPicker {
    * @returns {BaseLayerPicker}
    */
   addTerrainProvider(provider) {
+    if (!provider) {
+      return this
+    }
     this._terrainProviders.push(provider)
     return this
   }
