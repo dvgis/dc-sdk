@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>dc-example</title>
+  <script src='/libs/dc-sdk/dc.min.js'></script>
+  <script src="https://cesium.com/downloads/cesiumjs/releases/1.107.1/Build/Cesium/Cesium.js"></script>
+  <link href="https://cesium.com/downloads/cesiumjs/releases/1.107.1/Build/Cesium/Widgets/widgets.css" rel="stylesheet">
+  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
+  <link href='../index.css' type='text/css' rel='stylesheet'>
+  <style>
+    .viewer-container{
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+<div id="viewer-container" class="viewer-container"></div>
+<script>
+  let viewer = undefined
+  function initViewer() {
+    viewer = new DC.Viewer('viewer-container',{
+      baseLayerPicker:false,
+      baseLayer:false,
+      animation: false,
+      fullscreenButton: false,
+      geocoder: false,
+      homeButton: false,
+      infoBox: false,
+      sceneModePicker: false,
+      selectionIndicator: false,
+      timeline: false,
+      navigationHelpButton: false,
+      navigationInstructionsInitiallyVisible: false,
+      creditContainer: undefined,
+      shouldAnimate: true
+    })
+    viewer.delegate.cesiumWidget.creditContainer.style.display = 'none'
+    viewer.delegate.cesiumWidget.screenSpaceEventHandler.removeInputAction(
+      window.Cesium.ScreenSpaceEventType.LEFT_DOUBLE_CLICK
+    )
+    viewer.scene.screenSpaceCameraController.maximumZoomDistance = 40489014.0
+    viewer.scene.backgroundColor = window.Cesium.Color.TRANSPARENT
+    viewer.delegate.imageryLayers.removeAll()
+  }
+  DC.ready({
+     Cesium: window.Cesium
+  }).then(initViewer)
+</script>
+</body>
+</html>

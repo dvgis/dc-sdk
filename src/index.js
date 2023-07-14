@@ -5,7 +5,9 @@ import { getLib, registerLib } from './global-api/lib-utils.js'
 
 export { registerLib, getLib } from './global-api/lib-utils.js'
 
-let _baseUrl = './libs/dc-sdk/resources/'
+const DEF_BASE_URL = './libs/dc-sdk/resources/'
+
+let _baseUrl = DEF_BASE_URL
 
 export const config = {
   set baseUrl(baseUrl) {
@@ -23,6 +25,9 @@ export function ready(options = {}) {
 
   if (options['Cesium']) {
     registerLib('Cesium', options['Cesium'])
+    if (this.config.baseUrl === DEF_BASE_URL) {
+      this.config.baseUrl = ''
+    }
   } else {
     registerLib('Cesium', this['__namespace']['Cesium'])
   }

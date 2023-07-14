@@ -11,6 +11,10 @@ const EXAMPLE_LIST = [
         name: '坐标参考',
         page: 'coord.html',
       },
+      {
+        name: '自定义Cesium',
+        page: 'custom.html',
+      },
     ],
   },
   {
