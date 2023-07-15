@@ -55,11 +55,6 @@ class BaiduImageryProvider extends Cesium.UrlTemplateImageryProvider {
   }
 
   requestImage(x, y, level) {
-    if (!this.ready) {
-      throw new Cesium.DeveloperError(
-        'requestImage must not be called before the imagery provider is ready.'
-      )
-    }
     let xTiles = this._tilingScheme.getNumberOfXTilesAtLevel(level)
     let yTiles = this._tilingScheme.getNumberOfYTilesAtLevel(level)
     let url = this._url
