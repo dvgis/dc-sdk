@@ -12,9 +12,7 @@ class BaseLayerPicker {
     }
     this._globe = options.globe
     this._imageryLayers = []
-    this._terrainProviders = []
     this._selectedImageryLayer = undefined
-    this._selectedTerrain = undefined
     this._count = 0
   }
 
@@ -27,7 +25,10 @@ class BaseLayerPicker {
       for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
         let layer = imageryLayer.layers[i]
         if (layer) {
-          imageryLayers.add(new ImageryLayer(layer, imageryLayer.options), 0)
+          imageryLayers.add(
+            ImageryLayer.fromProviderAsync(layer, imageryLayer.options),
+            0
+          )
         }
       }
     } else if (
@@ -38,7 +39,10 @@ class BaseLayerPicker {
       for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
         let layer = imageryLayer.layers[i]
         if (layer) {
-          imageryLayers.add(new ImageryLayer(layer, imageryLayer.options), 0)
+          imageryLayers.add(
+            ImageryLayer.fromProviderAsync(layer, imageryLayer.options),
+            0
+          )
         }
       }
     }
@@ -47,20 +51,6 @@ class BaseLayerPicker {
 
   get selectedImageryLayer() {
     return this._selectedImageryLayer
-  }
-
-  set selectedTerrain(terrain) {
-    if (this.selectedTerrain !== terrain) {
-      this._globe.depthTestAgainstTerrain = !(
-        terrain instanceof EllipsoidTerrainProvider
-      )
-      this._globe.terrainProvider = terrain
-      this._selectedTerrain = terrain
-    }
-  }
-
-  get selectedTerrain() {
-    return this._selectedTerrain
   }
 
   /**
@@ -87,19 +77,6 @@ class BaseLayerPicker {
 
   /**
    *
-   * @param provider
-   * @returns {BaseLayerPicker}
-   */
-  addTerrainProvider(provider) {
-    if (!provider) {
-      return this
-    }
-    this._terrainProviders.push(provider)
-    return this
-  }
-
-  /**
-   *
    * @param index
    * @returns {BaseLayerPicker}
    */
@@ -111,18 +88,6 @@ class BaseLayerPicker {
     return this
   }
 
-  /**
-   *
-   * @param index
-   * @returns {BaseLayerPicker}
-   */
-  changeTerrain(index) {
-    if (index > this._terrainProviders.length - 1) {
-      throw new Error('index error')
-    }
-    this.selectedTerrain = this._terrainProviders[index]
-    return this
-  }
 }
 
 export default BaseLayerPicker
