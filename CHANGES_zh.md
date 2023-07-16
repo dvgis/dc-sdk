@@ -1,5 +1,33 @@
 # Change Log
 
+### 3.0.0 
+
+#### Breaking Changes 📣
+
+- 升级 @Cesium/engine 到 3.0.1版本
+- 框架依赖从 Cesium 换成 @Cesium/engine，@Cesium/widget库不在使用，只同步`Viewer`相关代码
+- 重构框架打包方式, `iife` 和 `node` 两种方式生成单独的框架包
+- 重构框架库的目录结构
+- 升级材质 `glsl` 到 3.0
+- 移除`mapv`图层和`s3m`图层，同时移除了相应的依赖库
+- 移除全局函数 `init`、`mixin`、`use`
+- 移除`Namespace`全局属性，可通过全局函数`getLib`获取第三方库
+- 修改框架 `cdn` 和 `node` 的引入方式，框架使用一个整体包的方式进行加载
+- 修改框架入口函数，将使用`ready().then()`作为框架入口
+- 修改效果类构造函数，需将`viewer`作为参数传递
+- 修改场景dom结构，移除了无用的dom
+
+#### Additions 🎉
+
+- 框架库添加示例代码
+- 框架库添加文档代码
+
+#### Fixes 🔧
+
+- 优化聚合图层，使用第三方库 `supercluter` 进行聚合计算
+- 优化热区图层
+- 修复升级Cesium框架导致的一系列问题
+
 ### 2.17.0 - 2022-10-29
 
 #### Breaking Changes 📣
@@ -9,7 +37,7 @@
 
 #### Fixes 🔧
 
-- 修复 locatonbar 鼠标移动的坐标错误
+- 修复 locationbar 鼠标移动的坐标错误
 - 修复 transform 中坐标转换的问题
 - 修复瓦片蒙层问题
 
