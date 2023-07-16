@@ -468,26 +468,12 @@ global.viewer = viewer // 添加到全局变量
     - `{Object} windowPosition`：窗口坐标
   - 返回值 `promise`
 
-- **_addTerrain(terrain)_**
+- **_setTerrain(terrain)_**
 
-  添加地形
+  设置地形
 
   - 参数
     - `{Terrain} terrain`：地形
-  - 返回值 `this`
-
-- **_changeTerrain(index)_**
-
-  变换地形
-
-  - 参数
-    - `{Number} index`：地形索引
-  - 返回值 `this`
-
-- **_removeTerrain()_**
-
-  移除地形
-
   - 返回值 `this`
 
 - **_addLayerGroup(layerGroup)_**
