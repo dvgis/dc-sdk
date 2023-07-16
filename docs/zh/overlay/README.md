@@ -522,14 +522,14 @@ let circle = new DC.Circle(position, 200)
 }
 ```
 
-## DC.Rectangle
+## DC.Rect
 
 > 矩形要素，继承于[Overlay](#overlay)
 
 ### example
 
 ```js
-let rectangle = new DC.Rectangle('-90.0,32.0;-94.0,36.0;')
+let rectangle = new DC.Rect('-90.0,32.0;-94.0,36.0;')
 ```
 
 ### creation

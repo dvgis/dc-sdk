@@ -91,10 +91,9 @@ yarn add @dvgis/dc-sdk
 ```
 
 ```js
-import * as DC from '@dvgis/dc-sdk' //基础包
-import '@dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
+import * as DC from '@dvgis/dc-sdk' 
+import '@dvgis/dc-sdk/dist/dc.core.min.css' 
 ```
-
 
 `CDN`
 
@@ -111,7 +110,7 @@ import '@dvgis/dc-sdk/dist/dc.core.min.css' // 主要样式
 
 ### 应用配置
 
-由于 DC 框架中将 `CESIUM_BASE_URL` 设置为 `./libs/dc-sdk/resources/`，这样需将 `Cesium` 相关的静态资源文件: `Assets`、`Workers` 、`ThirdParty` 复制到工程的 `libs/dc-sdk/resources` 目录下以保证三维场景能够正常呈现,也可通过 `DC.baseUrl` 进行 `Cesium` 相关的静态资源路基设置
+由于 DC 框架将Cesium静态资源默认路径设置为 `./libs/dc-sdk/resources/`，这样需将 `Cesium` 相关的静态资源文件: `Assets`、`Workers` 、`ThirdParty` 复制到工程的 `libs/dc-sdk/resources` 目录下以保证三维场景能够正常呈现,也可通过全局函数进行 `Cesium` 相关的静态资源路基设置
 
 > `NPM / YARN`
 
@@ -223,6 +222,28 @@ DC.ready().then(() => {
 
 <iframe src="https://dc.dvgis.cn/#/editor?type=info&example=start" frameborder="0" height="500px" width="100%" >
 </iframe>
+
+## 从 v2.0 迁移
+
+- `修改框架引入方式修改`
+
+```js
+// import DC from '@dvgis/dc-sdk/dist/dc.base.min'
+// import DcCore from '@dvgis/dc-sdk/dist/dc.core.min'
+// import DcChart from '@dvgis/dc-sdk/dist/dc.chart.min'
+// import DcMapv from '@dvgis/dc-sdk/dist/dc.mapv.min'
+// import DcS3M from '@dvgis/dc-sdk/dist/dc.s3m.min'
+// import '@dvgis/dc-sdk/dist/dc.core.min.css'
+import * as DC from '@dvgis/dc-sdk'
+import  DC from '@dvgis/dc-sdk/dist/dc.min.css'
+```
+
+- `修改框架初始函数`
+
+```js
+// DC.ready(initViewer)
+DC.ready().then(initViewer)
+```
 
 ## 总架构图
 

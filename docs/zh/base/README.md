@@ -8,54 +8,56 @@ sidebar: auto
 
 **`DC`**
 
-DC 为框架默认命名空间，使用该框架开发时都需要统以 `DC.` 开始
+CDN 模式下使用 DC 为框架默认命名空间，使用该框架开发时都需要统以 `DC.` 开始
 
 :::danger
 开发时尽量不要使用 DC 为变量名或者命名空间，避免框架无法正常使用。
 :::
 
-## 全局配置
+## 全局Api
 
-### accessToken
+### ready()
 
-> 用于去除 logo 和控制端的输出信息。`不影响框架的使用`
-
-```js
-DC.accessToken = '<your access token>'
-```
-
-:::tip
-Token 申请可通过 [http://dvgis.cn/#/price](http://dvgis.cn/#/price) 进行申请
-:::
-
-### baseUrl
-
-> 用于设置 `Cesium` 相关的静态资源文件: `Assets`、`Workers` 、`ThirdParty`、`Widgets` 的路径
+> 框架主入口函数，使用框架时必须以其开始，否则使用框架
 
 ```js
-DC.baseUrl = './libs/dc-sdk/resources/'
-DC.ready(() => {})
+DC.ready({}).then(()=>{})
+```
+- 参数
+  - `{Object} config`：配置参数
+- 返回值 `Promise`
+
+```json
+//属性参数（可选）
+{
+  "Cesium": '<自定义的Cesium库，如果未设置，将使用框架内部默认Cesium框架>',
+  "echarts": '<echarts库，设置后将加载echarts图层>',
+  "baseUrl": '<Cesium 静态资源路径，默认值为：“./libs/dc-sdk/resources/” >'
+}
 ```
 
-:::warning
-`baseUrl` 的设置需要在 `ready` 函数之前，否则将使用默认的设置 `./libs/dc-sdk/resources/`
-:::
+### registerLib()
 
-### __Namespace
-
-> 第三方库的命名空间集合
-
-## 全局函数
-
-### ready
-
-> 框架主入口，使用框架时必须以这个开始，否则无法构建 3D 场景
+> 框架中注册第三放框架包，
 
 ```js
-DC.ready().then(()=>{
-  
-})
+DC.registerLib("turf",turf)
+console.log(DC.__namspace.turf)
 ```
+- 参数
+  - `{String} name`：名称
+  - `{Object} lib`: 库模块
+
+### getLib()
+
+> 获取框架中注册的第三方框架包，
+
+```js
+let turf =  DC.getLib("turf")
+```
+- 参数
+  - `{String} name`：名称
+- 返回值 `Object`
 
 ## 常量
 
@@ -139,6 +141,8 @@ DC.ready().then(()=>{
 
 **_`DC.ImageryType.TENCENT`_**: 腾讯地图
 
+**_`DC.ImageryType.GEO_VIS`_**: 星图地图
+
 ### TerrainType
 
 **_`DC.TerrainType.NONE`_**: 无地形
@@ -165,17 +169,11 @@ DC.ready().then(()=>{
 
 **_`DC.LayerType.CLUSTER`_**: 聚合图层
 
-**_`DC.LayerType.CAMERA_VIDEO`_**: 相机视频图层
-
-**_`DC.LayerType.PLANE_VIDEO`_**: 平面视频图层
-
 **_`DC.LayerType.KML`_**: kml 图层
 
 **_`DC.LayerType.CZML`_**: czml 图层
 
 **_`DC.LayerType.HEAT`_**: 热区图层
-
-**_`DC.LayerType.MAPV`_**: Mapv 图层
 
 **_`DC.LayerType.CHART`_**: echarts 图层
 
@@ -257,10 +255,6 @@ DC.ready().then(()=>{
 
 **_`DC.OverlayType.VIDEO_PRIMITIVE`_**: 视频图元
 
-**_`DC.OverlayType.CAMERA_VIDEO`_**: 视频融合
-
-**_`DC.OverlayType.PLAN_VIDEO`_**: 平面视频
-
 ### TrackViewMode
 
 **_`DC.TrackViewMode.FP`_**: 第一人称视角
@@ -271,41 +265,9 @@ DC.ready().then(()=>{
 
 **_`DC.TrackViewMode.FREE`_**: 自由视角
 
-### PositionEditorType
-
-**_`DC.PositionEditorType.TRANSLATION`_**: 偏移
-
-**_`DC.PositionEditorType.ROTATION`_**: 旋转
-
-### ClippingDirection
-
-**_`DC.ClippingDirection.UP`_**: 向上
-
-**_`DC.ClippingDirection.DOWN`_**: 向下
-
-**_`DC.ClippingDirection.LEFT`_**: 向左
-
-**_`DC.ClippingDirection.RIGHT`_**: 向右
-
-**_`DC.ClippingDirection.FRONT`_**: 向前
-
-**_`DC.ClippingDirection.BACK`_**: 向后
-
-### AnalysisType
-
-**_`DC.AnalysisType.CONTOUR_LINE`_**：等高线
-
-**_`DC.AnalysisType.SHADOWS`_**：阴影
-
-**_`DC.AnalysisType.SIGHT_LINE`_**：通视分析（线）
-
-**_`DC.AnalysisType.SIGHT_CIRCLE`_**：通视分析（圆）
-
-**_`DC.AnalysisType.VIEWSHED`_**：可视域
-
 ## DC.Viewer
 
-> 3D 场景主要接口，在给定的 DivId 中构建三维场景，也可用 DC.World.
+> 3D 场景主要接口，在给定的 DivId 中构建三维场景
 
 ### example
 
@@ -329,7 +291,7 @@ global.viewer = viewer // 添加到全局变量
   构造函数
 
   - 参数
-    - `{String} id`：容器 ID
+    - `{String | Element } id`：容器 ID
     - `{Object} options`：属性
   - 返回值 `viewer`
 
@@ -355,7 +317,9 @@ global.viewer = viewer // 添加到全局变量
 
 ### properties
 
-- `{Element} dcContainer`：框架自定义容器 **_`readonly`_**
+- `{Element} container`：场景容器 **_`readonly`_**
+- `{Element} widgetContainer`：场景组件容器 **_`readonly`_**
+- `{Element} layerContainer`：场景图层容器 **_`readonly`_**
 - `{Object} scene`：场景 **_`readonly`_**，详情参考：[Scene](http://resource.dvgis.cn/cesium-docs/Scene.html)
 - `{Object} camera`：相机 **_`readonly`_**，详情参考：[Camera](http://resource.dvgis.cn/cesium-docs/Scene.html)
 - `{Element} canvas`：canvas 节点 **_`readonly`_**
@@ -419,7 +383,7 @@ global.viewer = viewer // 添加到全局变量
     "terrainExaggeration": 1, //地形夸张系数
     "terrainExaggerationRelativeHeight": 1, //地形相对高度夸张系数
     "baseColor": new DC.Color(0, 0, 0.5, 1), //地球默认底色
-    "filterColor": new DC.Color(0, 0, 0, 0), //瓦片过滤色
+    "filterColor": new DC.Color(0, 0, 0, 0), //瓦片过滤色,设置后不可逆
     "translucency": {
       //地表透明
       "enabled": false, // 是否开启地表透明
@@ -473,10 +437,18 @@ global.viewer = viewer // 添加到全局变量
   - 返回值 `this`
 
 ```json
-//属性参数
+//属性参数 (可选)
 {
   "name": "电子地图", //名称
   "iconUrl": "../preview.png" //缩略图
+  "alpha" : 1.0,
+  "nightAlpha" : 1.0,
+  "dayAlpha" : 1.0,
+  "brightness" : 1.0,
+  "contrast" : 1.0,
+  "hue" : 1.0,
+  "saturation : 1.0,
+  "gamma : 1.0,
 }
 ```
 
@@ -685,21 +657,6 @@ global.viewer = viewer // 添加到全局变量
   - 参数
     - `{String} name` ：名称，默认为 scene
   - 返回值 `this`
-
-- **_use(plugin)_**
-
-  使用插件(`慎用`)，这个和全局的不同。该函数会将 3D 场景作为参数传入到插件中
-
-  - 参数
-    - `{Object} plugin` ：插件
-  - 返回值 `this`
-
-  ```js
-  let plugin = {
-    install: (viewer) => {},
-  }
-  viewer.use(plugin)
-  ```
 
 ## Popup
 
@@ -1257,14 +1214,14 @@ let date = DC.JulianDate.now()
 
 [JulianDate](http://resource.dvgis.cn/cesium-docs/JulianDate.html)
 
-## DC.Rect
+## DC.Rectangle
 
 > 矩形相关函数
 
 ### example
 
 ```js
-let r = DC.Rect.fromDegrees(10, 20, 12, 31)
+let r = DC.Rectangle.fromDegrees(10, 20, 12, 31)
 ```
 
 [详情参考](http://resource.dvgis.cn/cesium-docs/Rectangle.html)

@@ -86,11 +86,18 @@ themeConfig: {
         {
           text: '集成Vue',
           items: [
-            { text: 'dc-ui', link: 'http://ui.dvgis.cn/dc-ui' },
             { text: 'dc-vue', link: 'https://github.com/dvgis/dc-vue' },
             {
               text: 'dc-vue-next',
               link: 'https://github.com/dvgis/dc-vue-next',
+            },
+            {
+              text: 'vite-plugin-dc',
+              link: 'https://github.com/dvgis/vite-plugin-dc',
+            },
+            {
+              text: 'dc-vite',
+              link: 'https://github.com/dvgis/dc-vite',
             },
           ],
         },

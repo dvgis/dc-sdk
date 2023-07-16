@@ -30,7 +30,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createBaiduImageryLayer(options)_**
 
@@ -38,7 +38,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createGoogleImageryLayer(options)_**
 
@@ -46,7 +46,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createTdtImageryLayer(options)_**
 
@@ -54,7 +54,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createTencentImageryLayer(options)_**
 
@@ -62,7 +62,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createArcGisImageryLayer(options)_**
 
@@ -70,7 +70,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性，详情参考 [ArcGis](http://resource.dvgis.cn/cesium-docs/ArcGisMapServerImageryProvider.html#.ConstructorOptions)
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createSingleTileImageryLayer(options)_**
 
@@ -86,7 +86,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性，详情参考 [WMS](http://resource.dvgis.cn/cesium-docs/WebMapServiceImageryProvider.html#.ConstructorOptions)
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createWMTSImageryLayer(options)_**
 
@@ -94,7 +94,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性，详情参考 [WMTS](http://resource.dvgis.cn/cesium-docs/WebMapTileServiceImageryProvider.html#.ConstructorOptions)
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createXYZImageryLayer(options)_**
 
@@ -110,7 +110,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createGridImageryLayer(options)_**
 
@@ -118,7 +118,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性，详情参考 [Grid](http://resource.dvgis.cn/cesium-docs/GridImageryProvider.html#.ConstructorOptions)
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createMapboxImageryLayer(options)_**
 
@@ -126,7 +126,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性，详情参考 [Mapbox](http://resource.dvgis.cn/cesium-docs/MapboxImageryProvider.html#.ConstructorOptions)
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createMapboxStyleImageryLayer(options)_**
 
@@ -134,7 +134,7 @@ viewer.addBaseLayer(baseLayer, {
 
   - 参数
     - `{Object} options`：属性，详情参考 [Mapbox Style](http://resource.dvgis.cn/cesium-docs/MapboxStyleImageryProvider.html#.ConstructorOptions)
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 - **_createTMSImageryLayer(options)_**
 
@@ -151,7 +151,7 @@ viewer.addBaseLayer(baseLayer, {
   - 参数
     - `{String} type`：类型，参考：DC.ImageryType
     - `{Object} options`：属性
-  - 返回值 `baseLayer`
+  - 返回值 `Promise<baseLayer>`
 
 ```json
 //属性参数(可选)
@@ -191,7 +191,7 @@ viewer.addTerrain(terrain)
 
   创建默认地形
 
-  returns `terrain`
+  returns `Promise<terrain>`
 
 - **_createUrlTerrain(options)_**
 
@@ -199,7 +199,7 @@ viewer.addTerrain(terrain)
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `terrain`
+  - 返回值 `Promise<terrain>`
 
 - **_createGoogleTerrain(options)_**
 
@@ -207,7 +207,7 @@ viewer.addTerrain(terrain)
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `terrain`
+  - 返回值 `Promise<terrain>`
 
 - **_createArcgisTerrain(options)_**
 
@@ -215,7 +215,7 @@ viewer.addTerrain(terrain)
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `terrain`
+  - 返回值 `Promise<terrain>`
 
 - **_createVRTerrain(options)_**
 
@@ -223,7 +223,7 @@ viewer.addTerrain(terrain)
 
   - 参数
     - `{Object} options`：属性
-  - 返回值 `terrain`
+  - 返回值 `Promise<terrain>`
 
 - **_createTerrain(type，options)_**
 
@@ -232,7 +232,7 @@ viewer.addTerrain(terrain)
   - 参数
     - `{String} type`：类型，参考：DC.TerrainType
     - `{Object} options`：属性
-  - 返回值 `terrain`
+  - 返回值 `Promise<terrain>`
 
 ```json
 //属性参数（可选）

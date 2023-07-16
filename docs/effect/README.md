@@ -11,8 +11,7 @@ Add dynamic elements to the 3D scene to allow the scene to move and run more clo
 ### example
 
 ```js
-let weather = new DC.Weather()
-viewer.use(weather)
+let weather = new DC.Weather(viewer)
 ```
 
 ### creation
