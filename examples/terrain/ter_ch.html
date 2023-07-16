@@ -19,15 +19,15 @@
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
+    let terrain = DC.TerrainFactory.createTerrain(DC.TerrainType.XYZ,{
+      url: 'http://data.marsgis.cn/terrain'
+    })
+    viewer.setTerrain(terrain)
     let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
       style:'img',
       crs:'WGS84'
     })
     viewer.addBaseLayer(baseLayer)
-    let terrain = DC.TerrainFactory.createTerrain(DC.TerrainType.XYZ,{
-      url: 'http://data.marsgis.cn/terrain'
-    })
-    viewer.addTerrain(terrain)
     viewer.flyToPosition(
       new DC.Position(
         96.70456483909693,

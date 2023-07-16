@@ -606,7 +606,24 @@ const EXAMPLE_LIST = [
   {
     name: '数据可视化',
     folder: 'datav',
-    children: [],
+    children: [
+      {
+        name: '热区图',
+        page: 'heat.html',
+      },
+      {
+        name: '热区图(高度)',
+        page: 'heat_height.html',
+      },
+      {
+        name: '热区图(建筑)',
+        page: 'heat_building.html',
+      },
+      {
+        name: '风场',
+        page: 'wind.html',
+      },
+    ],
   },
   {
     name: 'Echarts',

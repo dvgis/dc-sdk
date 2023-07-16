@@ -42,6 +42,9 @@ export {
   VectorLayer,
 } from './layer'
 
+export { default as HeatMapLayer } from './heat-map/HeatMapLayer'
+export { default as WindLayer } from './wind/WindLayer'
+
 export {
   Overlay,
   OverlayType,

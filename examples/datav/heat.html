@@ -22,25 +22,28 @@
     for (let i = 0; i < num; i++) {
       let lng = 120.38105869 + Math.random() * 0.5
       let lat = 31.10115627 + Math.random() * 0.5
-      list.push(new DC.Position(lng, lat))
+      list.push({lng,lat})
     }
     return list
   }
 
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let  baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer()
-     baseLayer.defaultBrightness= 0.2
-    viewer.addBaseLayer( baseLayer)
-    setTimeout(()=>{
-      let layer = new DC.HeatLayer('layer')
-      viewer.addLayer(layer)
-      let positions = generatePosition(1000)
-      layer.setPositions(positions)
+    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
+      crs:'WGS84'
     })
-    viewer.flyToPosition("120.670183527,31.348282115,109658.22,0,-89.90659095062371")
+    viewer.addBaseLayer( baseLayer,{
+      brightness : 0.1
+    })
+
+    viewer.flyToPosition("120.670183527,31.348282115,109658.22,0,-90",()=>{
+      let layer = new DC.HeatMapLayer('layer')
+      layer.setPoints(generatePosition(1000))
+      viewer.addLayer(layer)
+
+    })
   }
-    DC.ready({
+  DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
 </script>
