@@ -312,6 +312,20 @@ class Viewer {
   }
 
   /**
+   *
+   * @param terrain
+   * @return {Viewer}
+   */
+  setTerrain(terrain) {
+    this._delegate.scene.setTerrain(
+      new Cesium.Terrain(
+        terrain || Promise.resolve(new Cesium.EllipsoidTerrainProvider())
+      )
+    )
+    return this
+  }
+
+  /**
    * Adds the baseLayer .
    * The baseLayer can be a single or an array,
    * and when the baseLayer is an array, the baseLayer will be loaded together
@@ -323,19 +337,11 @@ class Viewer {
     if (!baseLayer) {
       return this
     }
-    let baseLayerPromises = []
-    if (Array.isArray(baseLayer)) {
-      baseLayerPromises = baseLayer.slice(0)
-    } else {
-      baseLayerPromises = [baseLayer]
+    this._baseLayerPicker.addImageryLayer(baseLayer, options)
+    if (!this._baseLayerPicker.selectedImageryLayer) {
+      this._baseLayerPicker.changeImageryLayer(0)
     }
-    Promise.all(baseLayerPromises).then((baseLayers) => {
-      this._baseLayerPicker.addImageryLayer(baseLayers, options)
-      if (!this._baseLayerPicker.selectedImageryLayer) {
-        this._baseLayerPicker.changeImageryLayer(0)
-      }
-      this['mapSwitch'] && this['mapSwitch'].addMap(options)
-    })
+    this['mapSwitch'] && this['mapSwitch'].addMap(options)
     return this
   }
 
@@ -360,44 +366,6 @@ class Viewer {
       ray,
       this._delegate.scene
     )
-  }
-
-  /**
-   *
-   * @param terrain
-   * @return {Viewer}
-   */
-  addTerrain(terrain) {
-    if (!terrain) {
-      return this
-    }
-    Promise.resolve(terrain).then((t) => {
-      this._baseLayerPicker.addTerrainProvider(t)
-      if (!this._baseLayerPicker.selectedTerrain) {
-        this._baseLayerPicker.changeTerrain(0)
-      }
-    })
-
-    return this
-  }
-
-  /**
-   * Changes the current globe display of the terrain
-   * @param index
-   * @returns {Viewer}
-   */
-  changeTerrain(index) {
-    this._baseLayerPicker.changeTerrain(index)
-    return this
-  }
-
-  /**
-   * Removes terrain
-   * @returns {Viewer}
-   */
-  removeTerrain() {
-    this._delegate.terrainProvider = new Cesium.EllipsoidTerrainProvider()
-    return this
   }
 
   /**

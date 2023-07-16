@@ -104,7 +104,7 @@ class WindLayer extends Layer {
     this._canvas.height = height
     this._canvas.style.width = width + 'px'
     this._canvas.style.height = height + 'px'
-    this._viewer.dcContainer.appendChild(this._canvas)
+    this._viewer.layerContainer.appendChild(this._canvas)
   }
 
   /**
@@ -186,7 +186,7 @@ class WindLayer extends Layer {
       this._delegate.stop()
     }
     if (this._canvas) {
-      this._viewer.dcContainer.removeChild(this._canvas)
+      this._viewer.layerContainer.removeChild(this._canvas)
     }
     delete this._canvas
   }

@@ -237,14 +237,14 @@ class WindCanvas {
    *
    */
   project() {
-    throw new Error('project must be overriden')
+    throw new Error('project must be override')
   }
 
   /**
    *
    */
   unProject() {
-    throw new Error('unProject must be overriden')
+    throw new Error('unProject must be override')
   }
 
   /**
