@@ -1,5 +1,35 @@
 # Change Log
 
+### 3.0.0
+
+#### Breaking Changes 📣
+
+- Upgrade @cesium/engine to version 3.0.1.
+- Changed framework dependency from Cesium to @cesium/engine, @cesium/widget library is no longer used, only `Viewer` related code is synchronized.
+- Refactored framework packaging, `iife` and `node` generate separate framework packages.
+- Refactor the directory structure of the framework library.
+- Upgrade material `glsl` to 3.0.
+- Remove the `mapv` layer and `s3m` layer, and remove their dependencies.
+- Removed global functions `init`, `mixin`, `use`.
+- Remove `Namespace` global attribute, you can get third party libraries through global function `getLib`.
+- Modify the way of introducing framework `cdn` and `node`, the framework uses a whole package to load.
+- Modify the framework entry function to use `ready().then()` as the framework entry.
+- Modify the effect class constructor, need to pass `viewer` as parameter.
+- Modify the scene dom structure, remove the useless dom.
+
+#### Additions 🎉
+
+- Add sample code to the framework library
+- Add documentation code to the framework library
+- Add latitude and longitude layers
+
+#### Fixes 🔧
+
+- Optimize aggregation layer, use third party library `supercluster` for aggregation calculation
+- Optimize heat zone layer
+- Fix a number of issues caused by upgrading the Cesium framework
+
+
 ### 2.17.0 - 2022-10-29
 
 #### Breaking Changes 📣
