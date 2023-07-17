@@ -122,9 +122,9 @@ class HeatMapLayer extends Layer {
    *
    * @private
    */
-  _computeBounds(points) {
+  _computeBounds() {
     Cesium.Rectangle.fromCartographicArray(
-      points.map((item) => Cesium.Cartographic.fromDegrees(item.lng, item.lat)),
+      this._points.map((item) => Cesium.Cartographic.fromDegrees(item.lng, item.lat)),
       this._bounds
     )
   }
@@ -137,7 +137,7 @@ class HeatMapLayer extends Layer {
   _computeBoundsInMeter() {
     let swInMeter = WMP.project(Cesium.Rectangle.southwest(this._bounds))
     let neInMeter = WMP.project(Cesium.Rectangle.northeast(this._bounds))
-    return new Cesium.Rectangle(
+    this._boundsInMeter = new Cesium.Rectangle(
       swInMeter.x,
       swInMeter.y,
       neInMeter.x,
@@ -202,11 +202,8 @@ class HeatMapLayer extends Layer {
    */
   setPoints(points) {
     this._points = points
-    this._computeBounds(points)
-    let boundsInMeter = this._computeBoundsInMeter()
-    if (!Cesium.Rectangle.equals(this._boundsInMeter, boundsInMeter)) {
-      this._boundsInMeter = boundsInMeter
-    }
+    this._computeBounds()
+    this._computeBoundsInMeter()
     if (this._viewer) {
       this._scale = Math.min(
         Math.abs(this._boundsInMeter.west - this._boundsInMeter.east) /
