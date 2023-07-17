@@ -124,7 +124,9 @@ class HeatMapLayer extends Layer {
    */
   _computeBounds() {
     Cesium.Rectangle.fromCartographicArray(
-      this._points.map((item) => Cesium.Cartographic.fromDegrees(item.lng, item.lat)),
+      this._points.map((item) =>
+        Cesium.Cartographic.fromDegrees(item.lng, item.lat)
+      ),
       this._bounds
     )
   }

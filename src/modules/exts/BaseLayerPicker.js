@@ -87,7 +87,6 @@ class BaseLayerPicker {
     this.selectedImageryLayer = this._imageryLayers[index]
     return this
   }
-
 }
 
 export default BaseLayerPicker
