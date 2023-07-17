@@ -567,7 +567,7 @@ let layer = new DC.GpxLayer('id', '**/**.gpx')
 ### example
 
 ```js
-let layer = new DC.ClusterLayer('id')
+let layer = new DC.ClusterLayer('id',{image:''})
 viewer.addLayer(layer)
 ```
 
@@ -582,31 +582,46 @@ viewer.addLayer(layer)
     - `{Object} options`：属性配置
   - 返回值 `clusterLayer`
 
-```json
+```js
 // 属性参数(可选)
 {
-  "size": 48, //聚合的尺寸
-  "pixelRange": 40, //像素范围
-  "gradient": {
+  "radius": 40,//像素范围
+  "maxZoom": 25,
+  "image": "<单个点图片地址>",
+  "style": "circle", // circle 、 clustering 、custom
+  "gradientColors": {
     "0.0001": DC.Color.DEEPSKYBLUE,
     "0.001": DC.Color.GREEN,
     "0.01": DC.Color.ORANGE,
     "0.1": DC.Color.RED
-  }, // 幅度颜色设置
-  "style": "circle", // circle 和 clustering
-  "fontSize": 12, // 字体大小
-  "fontColor": DC.Color.BLACK // 字体颜色
+  },//幅度颜色设置
+  "gradientImages": {},//幅度图片设置，仅当style为custom有效
+  "clusterSize":16//集合图标尺寸
+  "fontSize": 12,
+  // 字体大小
+  "fontColor": DC.Color.BLACK //字体颜色
+  "getCountOffset": (count)=>{return {x:0,y:0}} //字体偏移函数
 }
 ```
 
-## DC.HeatLayer
+### methods
+
+- **_setPoints(points)_**
+
+  设置点位
+
+  - 参数
+    - `{Array<Object>} points`：点位信息
+  - 返回值 `clusterLayer`
+
+## DC.HeatMapLayer
 
 > 热区图层，继承于[Layer](../dc-sdk/#layer)
 
 ### example
 
 ```js
-let layer = new DC.HeatLayer('id')
+let layer = new DC.HeatMapLayer('layer')
 viewer.addLayer(layer)
 ```
 
@@ -619,7 +634,7 @@ viewer.addLayer(layer)
   - 参数
     - `{String} id`：图层唯一标识
     - `{Object} options`：属性配置
-  - 返回值 `heatLayer`
+  - 返回值 `heatMapLayer`
 
 ```json
 //属性参数(可选)
@@ -638,30 +653,13 @@ viewer.addLayer(layer)
 
 ### methods
 
-- **_setPositions(positions)_**
+- **_setPoints(points)_**
 
   设置点位
 
   - 参数
-    - `{Array<Object>} positions`：点位信息
-  - 返回值 `heatLayer`
-
-```json
-//点位信息参数
-{
-  "lng": "", //经度
-  "lat": "", //纬度
-  "value": 10 //强度
-}
-```
-
-- **_addPosition(position)_**
-
-  添加点位
-
-  - 参数
-    - `{Object} position`：点位信息
-  - 返回值 `heatLayer`
+    - `{Array<Object>} points`：点位信息
+  - 返回值 `heatMapLayer`
 
 ```json
 //点位信息参数
@@ -727,38 +725,6 @@ viewer.addLayer(layer)
   - 参数
     - `{Object} options`：配置信息，参考构造函数的配置信息
   - 返回值 `windLayer`
-
-## DC.S3MLayer
-
-> S3M图层，继承于[Layer](../dc-sdk/#layer)
-
-### example
-
-```js
-let layer = new DC.S3MLayer('id','**.scp')
-viewer.addLayer(layer)
-```
-
-### creation
-
-- **_constructor(id,url,[options])_**
-
-  构造函数
-
-  - 参数
-    - `{String} id`：图层唯一标识
-    - `{String} url`：数据地址
-    - `{Object} options`：属性配置
-  - 返回值 `windLayer`
-
-```json
-//属性参数(可选)
-{
-  "maxVisibleDistance"：Number.MAX_VALUE, //最大可见距离
-  "minVisibleDistance"：0,//最小可见距离,
-  "heightOffset":0,//高度偏移
-}
-```
 
 ## DC.ChartLayer
 
