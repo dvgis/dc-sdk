@@ -231,7 +231,6 @@ class HeatMapLayer extends Layer {
    */
   clear() {
     this._heat.clear()
-    this._positions = []
     this._points = []
     this._state = State.CLEARED
     return this
