@@ -13,16 +13,17 @@ sidebar: auto
 ### example
 
 ```js
-let weather = new DC.Weather()
-viewer.use(weather)
+let weather = new DC.Weather(viewer)
 ```
 
 ### creation
 
-- **_constructor()_**
+- **_constructor(viewer)_**
 
   构造函数
-
+  
+  - 参数
+     - `{Viewer} viewer`：3D 场景
   - 返回值 `weather`
 
 ### properties
@@ -39,8 +40,8 @@ viewer.use(weather)
 ### example
 
 ```js
-viewer.weather.rain.enable = true
-viewer.weather.rain.speed = 2
+weather.rain.enable = true
+weather.rain.speed = 2
 ```
 
 ### properties
@@ -55,8 +56,8 @@ viewer.weather.rain.speed = 2
 ### example
 
 ```js
-viewer.weather.snow.enable = true
-viewer.weather.snow.speed = 2
+weather.snow.enable = true
+weather.snow.speed = 2
 ```
 
 ### properties
@@ -71,8 +72,8 @@ viewer.weather.snow.speed = 2
 ### example
 
 ```js
-viewer.weather.fog.enable = true
-viewer.weather.fog.fogColor = DC.Color.BLACK
+weather.fog.enable = true
+weather.fog.fogColor = DC.Color.BLACK
 ```
 
 ### properties
@@ -88,8 +89,8 @@ viewer.weather.fog.fogColor = DC.Color.BLACK
 ### example
 
 ```js
-viewer.weather.cloud.enable = true
-viewer.weather.cloud.rotateAmount = 0.02
+weather.cloud.enable = true
+weather.cloud.rotateAmount = 0.02
 ```
 
 ### properties
@@ -104,16 +105,17 @@ viewer.weather.cloud.rotateAmount = 0.02
 ### example
 
 ```js
-let effect = new DC.Effect()
-viewer.use(effect)
+let effect = new DC.Effect(viewer)
 ```
 
 ### creation
 
-- **_constructor()_**
+- **_constructor(viewer)_**
 
   构造函数
 
+  - 参数
+    - `{Viewer} viewer`：3D 场景
   - 返回值 `effect`
 
 ### properties
@@ -133,7 +135,7 @@ viewer.use(effect)
 ### example
 
 ```js
-viewer.effect.blackAndWhite.enable = true
+effect.blackAndWhite.enable = true
 ```
 
 ### properties
@@ -149,7 +151,7 @@ viewer.effect.blackAndWhite.enable = true
 ### example
 
 ```js
-viewer.effect.bloom.enable = true
+effect.bloom.enable = true
 ```
 
 ### properties
@@ -170,7 +172,7 @@ viewer.effect.bloom.enable = true
 ### example
 
 ```js
-viewer.effect.brightness.enable = true
+effect.brightness.enable = true
 ```
 
 ### properties
@@ -186,7 +188,7 @@ viewer.effect.brightness.enable = true
 ### example
 
 ```js
-viewer.effect.depthOfField.enable = true
+effect.depthOfField.enable = true
 ```
 
 ### properties
@@ -205,7 +207,7 @@ viewer.effect.depthOfField.enable = true
 ### example
 
 ```js
-viewer.effect.lensFlare.enable = true
+effect.lensFlare.enable = true
 ```
 
 ### properties
@@ -224,7 +226,7 @@ viewer.effect.lensFlare.enable = true
 ### example
 
 ```js
-viewer.effect.night.enable = true
+effect.night.enable = true
 ```
 
 ### properties
@@ -239,7 +241,7 @@ viewer.effect.night.enable = true
 ### example
 
 ```js
-viewer.effect.silhouette.enable = true
+effect.silhouette.enable = true
 ```
 
 ### properties
