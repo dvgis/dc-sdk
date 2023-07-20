@@ -218,7 +218,7 @@ class Overlay {
       } else if (this._delegate && this._delegate.then) {
         // for 3dtiles
         this._delegate.then((obj) => {
-          this._layer.delegate.add(obj)
+          this._layer.delegate.remove(obj)
         })
       } else if (this['update'] && this['destroy']) {
         this._layer.delegate.remove(this)
