@@ -36,6 +36,12 @@ export function ready(options = {}) {
     registerLib('echarts', options['echarts'])
   }
 
+  if (options['Supercluster']) {
+    registerLib('Supercluster', options['Supercluster'])
+  } else {
+    registerLib('Supercluster', this['__namespace']['Supercluster'])
+  }
+
   this['__cmdOut'] && this['__cmdOut']()
 
   return new Promise((resolve, reject) => {

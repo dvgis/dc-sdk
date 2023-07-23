@@ -157,7 +157,8 @@ async function buildModules(options) {
 
   const exportNamespace = `
         export const __namespace = {
-            Cesium: exports.Cesium
+            Cesium: exports.Cesium,
+            Supercluster: exports.Supercluster
         }
      `
 
