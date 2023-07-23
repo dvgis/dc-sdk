@@ -41,7 +41,7 @@ const buildConfig = {
   color: true,
   legalComments: `inline`,
   logLimit: 0,
-  target: `es2020`,
+  target: `es2019`,
   minify: false,
   sourcemap: false,
   write: true,
