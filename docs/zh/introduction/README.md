@@ -235,7 +235,7 @@ DC.ready().then(() => {
 // import DcS3M from '@dvgis/dc-sdk/dist/dc.s3m.min'
 // import '@dvgis/dc-sdk/dist/dc.core.min.css'
 import * as DC from '@dvgis/dc-sdk'
-import  DC from '@dvgis/dc-sdk/dist/dc.min.css'
+import '@dvgis/dc-sdk/dist/dc.min.css'
 ```
 
 - `修改框架初始函数`
