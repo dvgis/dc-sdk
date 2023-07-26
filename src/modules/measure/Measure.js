@@ -15,9 +15,13 @@ import TriangleHeight from './type/TriangleHeight'
 import MeasureType from './MeasureType'
 
 class Measure {
-  constructor() {
-    this._viewer = undefined
+  constructor(viewer) {
+   if (!viewer) {
+      throw Error('missing viewer param')
+    }
+    this._viewer = viewer
     this._layer = new Cesium.CustomDataSource('measure-layer')
+    this._viewer.dataSources.add(this._layer)
   }
 
   get viewer() {
@@ -117,18 +121,8 @@ class Measure {
     new TriangleHeight().start(this, options)
     return this
   }
-  /**
-   *
-   * @param viewer
-   */
-  install(viewer) {
-    this._viewer = viewer
-    this._viewer.dataSources.add(this._layer)
-    Object.defineProperty(viewer, 'measure', {
-      value: this,
-      writable: false,
-    })
-  }
+
+  
 
   /**
    *
