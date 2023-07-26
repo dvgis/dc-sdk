@@ -153,10 +153,8 @@ module.exports = {
 ## 开始
 
 ```js
-global.DC = DC
-DC.use(DcCore) // Node 方式
-DC.ready(() => {
-  let viewer = new DC.Viewer(divId) // divId 为一个div节点的Id属性值，如果不传入，会无法初始化3D场景
+DC.ready().then(() => {
+  let viewer = new DC.Viewer(divId)
 })
 ```
 
