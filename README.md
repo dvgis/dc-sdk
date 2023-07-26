@@ -144,6 +144,20 @@ module.exports = {
 }
 ```
 
+`vite`
+
+[Project Template](https://github.com/dvgis/dc-vite)
+
+```js
+// vite.config.js
+import { defineConfig } from 'vite'
+import DC from '@dvgis/vite-plugin-dc'
+
+export default defineConfig({
+  plugins: [DC()],
+})
+```
+
 
 ## Start
 
