@@ -4,7 +4,7 @@
 
 import { Cesium } from '../../../namespace'
 import ImageryType from '../ImageryType'
-import BaiduMercatorTilingScheme from '../tiling-scheme/BaiduMercatorTilingScheme'
+import BD09TilingScheme from '../tiling-scheme/BD09TilingScheme.js'
 
 const TILE_URL = {
   img: '//shangetu{s}.map.bdimg.com/it/u=x={x};y={y};z={z};v=009;type=sate&fm=46',
@@ -29,7 +29,7 @@ class BaiduImageryProvider extends Cesium.UrlTemplateImageryProvider {
       for (let i = 0; i < 19; i++) {
         resolutions[i] = 256 * Math.pow(2, 18 - i)
       }
-      options['tilingScheme'] = new BaiduMercatorTilingScheme({
+      options['tilingScheme'] = new BD09TilingScheme({
         resolutions,
         rectangleSouthwestInMeters: new Cesium.Cartesian2(
           -20037726.37,

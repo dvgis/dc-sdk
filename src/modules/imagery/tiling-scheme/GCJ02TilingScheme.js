@@ -5,7 +5,7 @@
 import { Cesium } from '../../../namespace'
 import { CoordTransform } from '../../transform'
 
-class AmapMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
+class GCJ02TilingScheme extends Cesium.WebMercatorTilingScheme {
   constructor(options) {
     super(options)
     let projection = new Cesium.WebMercatorProjection()
@@ -36,4 +36,4 @@ class AmapMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
   }
 }
 
-export default AmapMercatorTilingScheme
+export default GCJ02TilingScheme

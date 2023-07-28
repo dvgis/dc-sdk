@@ -128,7 +128,7 @@ const EXAMPLE_LIST = [
         page: 'amap.html',
       },
       {
-        name: '高德地图(偏移纠正)',
+        name: '高德地图（偏移纠正）',
         page: 'amap_no_offset.html',
       },
       {
@@ -140,7 +140,7 @@ const EXAMPLE_LIST = [
         page: 'baidu.html',
       },
       {
-        name: '百度地图(偏移纠正)',
+        name: '百度地图（偏移纠正）',
         page: 'baidu_no_offset.html',
       },
       {
@@ -148,8 +148,12 @@ const EXAMPLE_LIST = [
         page: 'geovis.html',
       },
       {
-        name: '谷歌地图(已被墙)',
+        name: '谷歌地图',
         page: 'google.html',
+      },
+      {
+        name: '谷歌地图（偏移纠正）',
+        page: 'google_no_offset.html',
       },
       {
         name: '天地图',

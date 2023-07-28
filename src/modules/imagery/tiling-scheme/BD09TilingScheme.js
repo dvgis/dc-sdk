@@ -4,12 +4,12 @@
 
 import { Cesium } from '../../../namespace'
 import { CoordTransform } from '../../transform'
-import BaiduMercatorProjection from '../projection/BaiduMercatorProjection'
+import BD09Projection from '../projection/BD09Projection'
 
-class BaiduMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
+class BD09TilingScheme extends Cesium.WebMercatorTilingScheme {
   constructor(options) {
     super(options)
-    let projection = new BaiduMercatorProjection()
+    let projection = new BD09Projection()
     this._projection.project = function (cartographic, result) {
       result = result || {}
       result = CoordTransform.WGS84ToGCJ02(
@@ -49,7 +49,7 @@ class BaiduMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
    * @param y
    * @param level
    * @param result
-   * @returns {module:cesium.Rectangle|*}
+   * @returns {Rectangle|*}
    */
   tileXYToNativeRectangle(x, y, level, result) {
     const tileWidth = this.resolutions[level]
@@ -98,4 +98,4 @@ class BaiduMercatorTilingScheme extends Cesium.WebMercatorTilingScheme {
   }
 }
 
-export default BaiduMercatorTilingScheme
+export default BD09TilingScheme

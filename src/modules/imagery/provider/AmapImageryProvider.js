@@ -4,7 +4,7 @@
 
 import { Cesium } from '../../../namespace'
 import ImageryType from '../ImageryType'
-import AmapMercatorTilingScheme from '../tiling-scheme/AmapMercatorTilingScheme'
+import GCJ02TilingScheme from '../tiling-scheme/GCJ02TilingScheme.js'
 
 const TILE_URL = {
   img: '//webst{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}',
@@ -22,7 +22,7 @@ class AmapImageryProvider extends Cesium.UrlTemplateImageryProvider {
       ].join('')
     options['subdomains'] = options.subdomains || ['01', '02', '03', '04']
     if (options.crs === 'WGS84') {
-      options['tilingScheme'] = new AmapMercatorTilingScheme()
+      options['tilingScheme'] = new GCJ02TilingScheme()
     }
     super(options)
   }

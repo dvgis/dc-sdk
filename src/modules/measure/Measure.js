@@ -16,7 +16,7 @@ import MeasureType from './MeasureType'
 
 class Measure {
   constructor(viewer) {
-   if (!viewer) {
+    if (!viewer) {
       throw Error('missing viewer param')
     }
     this._viewer = viewer
@@ -121,8 +121,6 @@ class Measure {
     new TriangleHeight().start(this, options)
     return this
   }
-
-  
 
   /**
    *

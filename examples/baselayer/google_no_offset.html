@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>dc-example</title>
   <script src='/libs/dc-sdk/dc.min.js'></script>
-  <script src="../dat.gui.min.js"></script>
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
 
 <body>
-
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
@@ -20,7 +17,7 @@
     viewer = new DC.Viewer('viewer-container')
 
     let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE,{
-       style:'img'
+      style:'img'
     })
 
     viewer.addBaseLayer( baseLayer, {
@@ -29,21 +26,25 @@
     })
 
     let  baseLayer_img_cva = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE,{
-      style:'img_cva'
+      style:'img_cva',
+      crs:'WGS84'
     })
     viewer.addBaseLayer( baseLayer_img_cva, {
       iconUrl: '../assets/icon/img.png',
       name: '影像 + 标注'
     })
 
-    let baselayer_elc = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE)
+    let baselayer_elc = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE,{
+      crs:'WGS84'
+    })
     viewer.addBaseLayer(baselayer_elc, {
       iconUrl: '../assets/icon/elec.png',
       name: '电子'
     })
 
     let baselayer_ter = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.GOOGLE,{
-      style: 'ter'
+      style: 'ter',
+      crs:'WGS84'
     })
     viewer.addBaseLayer(baselayer_ter, {
       iconUrl: '../assets/icon/ter.png',
