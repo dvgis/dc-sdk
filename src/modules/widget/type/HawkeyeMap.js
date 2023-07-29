@@ -14,17 +14,12 @@ class HawkeyeMap extends Widget {
     super()
     this._wrapper = DomUtil.create('div', 'widget hawkeye-map', null)
     this._wrapper.setAttribute('id', Util.uuid())
-    this._baseLayers = []
     this._map = undefined
     this._state = State.INITIALIZED
   }
 
   get type() {
     return Widget.getWidgetType('hawkeye_map')
-  }
-
-  get baseLayers() {
-    return this._baseLayers
   }
 
   /**
@@ -45,7 +40,6 @@ class HawkeyeMap extends Widget {
       maximumZoomDistance: 40489014.0,
     })
     this._map = map
-
     this._ready = true
   }
 
@@ -111,14 +105,14 @@ class HawkeyeMap extends Widget {
       return this
     }
     if (baseLayer) {
-      if (this._baseLayers && this._baseLayers.length) {
-        this._map.imageryLayers.removeAll()
-      }
+      this._map.imageryLayers.removeAll()
       if (!Array.isArray(baseLayer)) {
         baseLayer = [baseLayer]
       }
       baseLayer.forEach((item) => {
-        this._baseLayers.push(this._map.imageryLayers.addImageryProvider(item))
+        this._map.imageryLayers.add(
+          Cesium.ImageryLayer.fromProviderAsync(item, {})
+        )
       })
     }
     return this
