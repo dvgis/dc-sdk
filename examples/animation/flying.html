@@ -54,8 +54,7 @@
       style: 'img',
       crs:'WGS84'
     })
-     baseLayer.defaultBrightness = 0.1
-    viewer.addBaseLayer( baseLayer)
+    viewer.addBaseLayer( baseLayer,{ brightness : 0.1})
     let layer = new DC.TilesetLayer('layer').addTo(viewer)
     let tileset = new DC.Tileset(
       '//resource.dvgis.cn/data/3dtiles/ljz/tileset.json'
