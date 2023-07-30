@@ -60,7 +60,6 @@ plot.draw(DC.OverlayType.POINT, (overlay) => {}, {})
 
   - returns `this`
 
-
 ## DC.Measure
 
 > viewer measure
@@ -68,7 +67,7 @@ plot.draw(DC.OverlayType.POINT, (overlay) => {}, {})
 ### example
 
 ```js
-viewer.use(new DC.Measure())
+let measure = new DC.Measure(viewer)
 ```
 
 ### creation
@@ -134,7 +133,7 @@ viewer.use(new DC.Measure())
     - `{Object} options`
   - returns `this`
 
-```json
+```js
 // options(optional)
 {
   "icon_center": "**.png",

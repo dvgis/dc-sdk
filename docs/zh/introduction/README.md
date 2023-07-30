@@ -220,7 +220,7 @@ DC.ready().then(() => {
 
 `运行效果` [更多示例](http://dc.dvgis.cn/#/examples)
 
-<iframe src="https://dc.dvgis.cn/#/editor?type=info&example=start" frameborder="0" height="500px" width="100%" >
+<iframe src="http://dc.dvgis.cn/#/editor?type=start&subType=create&example=create" frameborder="0" height="500px" width="100%" >
 </iframe>
 
 ## 从 v2.0 迁移
@@ -247,9 +247,9 @@ DC.ready().then(initViewer)
 
 ## 总架构图
 
-> DC 架构图，建议使用前先熟悉整体架构图，以便能够快速使用。[查看大图](http://dc.dvgis.cn/examples/images/base/dc2.x.png)
+> DC 架构图，建议使用前先熟悉整体架构图，以便能够快速使用。[查看大图](http://dc.dvgis.cn/examples/assets/images/base/dc2.x.png)
 
-<img src="http://dc.dvgis.cn/examples/images/base/dc2.x.png" style="width:100%;height:800px">
+<img src="http://dc.dvgis.cn/examples/assets/images/base/dc2.x.png" style="width:100%;height:800px">
 
 ## 技术扩展
 
@@ -280,9 +280,9 @@ GeoJSON 是一种对各种地理数据结构进行编码的格式，基于 Javas
 KML/CZML 是一个 JSON 格式的数据,描述 time-dynamic（时间、动态）图形场景,它描述了线、点、广告牌(标记)、模型、和其他图形原语,并指定他们如何随时间变化。
 
 :::tip
-数据转换可借助于 [CesiumLab](http://www.cesiumlab.com) 或者其他一些转换工具。[查看大图](http://dc.dvgis.cn/examples/images/base/data_transform.png)
+数据转换可借助于 [CesiumLab](http://www.cesiumlab.com) 或者其他一些转换工具。[查看大图](http://dc.dvgis.cn/examples/assets/images/base/data_transform.png)
 :::
-<img src="http://dc.dvgis.cn/examples/images/base/data_transform.png" style="width:100%;height:500px">
+<img src="http://dc.dvgis.cn/examples/assets/images/base/data_transform.png" style="width:100%;height:500px">
 
 ### 三维坐标
 
@@ -343,9 +343,9 @@ BD09 经纬度投影属于百度坐标系，它是在标准经纬度的基础上
 ## 群聊
 
 <p>
-<img src="http://dc.dvgis.cn/examples/images/base/q3.png?v=1" title="数字视觉" width="240px" height="332px"/>
-<img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2" title="数字视觉(已满)"  width="240px" height="332px"/>
-<img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=6" title="Cesium开心农场"  width="240px" height="332px"/>
+<img src="http://dc.dvgis.cn/examples/assets/images/base/q3.png?v=2" title="数字视觉" width="240px" height="332px"/>
+<img src="http://dc.dvgis.cn/examples/assets/images/base/q1.png?v=2" title="数字视觉(已满)"  width="240px" height="332px"/>
+<img src="http://dc.dvgis.cn/examples/assets/images/base/q2.png?v=6" title="Cesium开心农场"  width="240px" height="332px"/>
 </p>
 
 ## 感谢
@@ -362,5 +362,5 @@ BD09 经纬度投影属于百度坐标系，它是在标准经纬度的基础上
 <a href="https://www.paypal.com/paypalme/cavencj" target="_blank">
 <img src="https://www.paypalobjects.com/images/shared/paypal-logo-129x32.svg" style="margin-top:10px;margin-right:20px" />
 </a>
-<img src="http://dc.dvgis.cn/examples/images/base/sponsor.jpg?v=2" title="数字视觉"/>
+<img src="http://dc.dvgis.cn/examples/assets/images/base/sponsor.jpg?v=2" title="数字视觉"/>
 </p>

@@ -80,10 +80,12 @@ let measure = new DC.Measure(viewer)
 
 ### creation
 
-- **_constructor()_**
+- **_constructor(viewer)_**
 
   构造函数
-
+ 
+  - 参数
+    - `{Viewer} viewer`：场景
   - 返回值 `measure`
 
 ### methods
