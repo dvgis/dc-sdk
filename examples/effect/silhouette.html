@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -11,40 +9,29 @@
   <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
   <link href='../index.css' type='text/css' rel='stylesheet'>
 </head>
-
-
 <body>
 
 <div id="viewer-container" class="viewer-container"></div>
 <script>
   let viewer = undefined
-
+  let effect = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
     let baselayer_midnight = DC.ImageryLayerFactory.createAmapImageryLayer({style:'img'})
     viewer.addBaseLayer(baselayer_midnight)
-    viewer.use(new DC.Effect())
-    viewer.effect.silhouette.enable= true
+    effect = new DC.Effect(viewer)
+    effect.silhouette.enable= true
     addGuiController() // add controller
   }
 
   function addGuiController(){
     let controls = {
       enable:true,
-      color: '#00ff00',
-      length: 0.5,
     }
     let gui = new dat.GUI()
     gui.add(controls,'enable').onChange(value=>{
-      viewer.effect.silhouette.enable=value
+       effect.silhouette.enable=value
     })
-    gui.addColor(controls,'color').onChange(value=>{
-      viewer.effect.silhouette.color= DC.Color.fromCssColorString(value)
-    })
-    gui.add(controls,'length',0,5).step(0.1).onChange(value=>{
-      viewer.effect.silhouette.length=value
-    })
-
   }
   DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'

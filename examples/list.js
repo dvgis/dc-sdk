@@ -598,6 +598,10 @@ const EXAMPLE_LIST = [
         page: 'depth_of_field.html',
       },
       {
+        name: '轮廓',
+        page: 'silhouette.html',
+      },
+      {
         name: '夜光',
         page: 'night_vision.html',
       },
