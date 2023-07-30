@@ -6,9 +6,10 @@ import { Cesium } from '../../namespace'
 import { Transform } from '../transform'
 import Position from '../position/Position'
 
+
 export default function center(positions) {
   if (positions && Array.isArray(positions)) {
-    let heightMax = 0 // 位置最高的点的高度
+    let heightMax = 0
     positions.forEach(({ alt }) => (heightMax = Math.max(heightMax, alt)))
 
     let boundingSphere = Cesium.BoundingSphere.fromPoints(
