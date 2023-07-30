@@ -6,8 +6,8 @@ import { Cesium } from '../../../namespace'
 import State from '../../state/State'
 
 class Silhouette {
-  constructor() {
-    this._viewer = undefined
+  constructor(viewer) {
+    this._viewer = viewer
     this._delegate = undefined
     this._enable = false
     this._color = Cesium.Color.GREEN
@@ -76,20 +76,6 @@ class Silhouette {
       this._delegate.uniforms.length = this._length
       this._viewer.scene.postProcessStages.add(this._delegate)
     }
-  }
-
-  /**
-   *
-   * @param viewer
-   * @returns {Silhouette}
-   */
-  addTo(viewer) {
-    if (!viewer) {
-      return this
-    }
-    this._viewer = viewer
-    this._state = State.ADDED
-    return this
   }
 }
 
