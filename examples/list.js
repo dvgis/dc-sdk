@@ -398,11 +398,7 @@ const EXAMPLE_LIST = [
       {
         name: '动态图标',
         page: 'dynamic_billboard.html',
-      },
-      {
-        name: '标绘',
-        page: 'plot.html',
-      },
+      }
     ],
   },
   {
@@ -524,6 +520,20 @@ const EXAMPLE_LIST = [
     ],
   },
   {
+    name: '场景工具',
+    folder: 'tools',
+    children: [
+      {
+        name: '标绘',
+        page: 'plot.html',
+      },
+      {
+        name: '测量',
+        page: 'measure.html',
+      },
+    ],
+  },
+  {
     name: '场景动画',
     folder: 'animation',
     children: [
@@ -573,6 +583,10 @@ const EXAMPLE_LIST = [
     name: '场景效果',
     folder: 'effect',
     children: [
+      {
+        name: '天气效果',
+        page: 'weather.html',
+      },
       {
         name: '扫描圆',
         page: 'circle_scan.html',

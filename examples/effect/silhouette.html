@@ -19,7 +19,7 @@
     viewer = new DC.Viewer('viewer-container')
     let baselayer_midnight = DC.ImageryLayerFactory.createAmapImageryLayer({style:'img'})
     viewer.addBaseLayer(baselayer_midnight)
-    effect = new DC.Effect(viewer)
+    effect =  new DC.Effect(viewer)
     effect.silhouette.enable= true
     addGuiController() // add controller
   }
@@ -30,9 +30,10 @@
     }
     let gui = new dat.GUI()
     gui.add(controls,'enable').onChange(value=>{
-       effect.silhouette.enable=value
+      effect.silhouette.enable=value
     })
   }
+
   DC.ready({
     baseUrl:'../libs/dc-sdk/resources/'
   }).then(initViewer)
