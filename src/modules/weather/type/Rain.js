@@ -8,9 +8,9 @@ import { Util } from '../../utils'
 import RainShader from '../../material/shader/weather/RainShader.glsl'
 
 class Rain {
-  constructor() {
+  constructor(viewer) {
     this._id = Util.uuid()
-    this._viewer = undefined
+    this._viewer = viewer
     this._delegate = undefined
     this._enable = false
     this._speed = 10.0
