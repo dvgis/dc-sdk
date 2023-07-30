@@ -1,5 +1,13 @@
 # Change Log
 
+### 3.0.1
+
+#### Fixes 🔧
+- Optimization of measurement functions
+- Optimize Google Maps
+- Optimize weather effects
+- Optimize Chinese documentation
+
 ### 3.0.0
 
 #### Breaking Changes 📣
