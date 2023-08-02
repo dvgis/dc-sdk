@@ -2,6 +2,8 @@
  * @Author : Caven Chen
  */
 import Position from '../position/Position'
+import { Cesium } from '../../namespace'
+import { Transform } from '../transform'
 
 class Parse {
   /**
@@ -26,6 +28,10 @@ class Parse {
       result = Position.fromObject(position)
     } else if (Object(position) instanceof Position) {
       result = position
+    } else if (Object(position) instanceof Cesium.Cartesian3) {
+      result = Transform.transformCartesianToWGS84(position)
+    } else if (Object(position) instanceof Cesium.Cartographic) {
+      result = Transform.transformCartographicToWGS84(position)
     }
     return result
   }
