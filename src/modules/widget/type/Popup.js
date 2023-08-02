@@ -65,9 +65,11 @@ class Popup extends Widget {
   _installHook() {
     this.enable = true
     this._bindEvent()
+    const self = this
     Object.defineProperty(this._viewer, 'popup', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
   }
 

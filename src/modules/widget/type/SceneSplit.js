@@ -27,9 +27,11 @@ class SceneSplit extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'sceneSplit', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
   }
 

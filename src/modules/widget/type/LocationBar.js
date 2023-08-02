@@ -34,9 +34,11 @@ class LocationBar extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'locationBar', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
   }
 

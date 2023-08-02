@@ -41,9 +41,11 @@ class DistanceLegend extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'distanceLegend', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
   }
 
