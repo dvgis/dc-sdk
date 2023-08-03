@@ -22,9 +22,11 @@ class LoadingMask extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'loadingMask', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
   }
 

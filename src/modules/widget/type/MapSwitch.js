@@ -34,12 +34,14 @@ class MapSwitch extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'mapSwitch', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
     this.enable = true
-    let self = this
+    // let self = this
     this._wrapper.onmouseover = () => {
       let width = 80
       let rightMargin = 5
