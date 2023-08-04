@@ -59,9 +59,11 @@ class ContextMenu extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'contextMenu', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
     this._handler = new Cesium.ScreenSpaceEventHandler(this._viewer.canvas)
   }

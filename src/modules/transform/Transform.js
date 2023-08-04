@@ -27,6 +27,22 @@ class Transform {
   }
 
   /**
+   * Transforms Cartographic To WGS84
+   * @param cartographic
+   * @returns {Position}
+   */
+  static transformCartographicToWGS84(cartographic) {
+    if (cartographic) {
+      return new Position(
+        Cesium.Math.toDegrees(cartographic?.longitude || 0),
+        Cesium.Math.toDegrees(cartographic?.latitude || 0),
+        cartographic.height || 0
+      )
+    }
+    return new Position(0, 0)
+  }
+
+  /**
    * Transforms WGS84 To Cartesian
    * @param position
    * @returns {Cartesian3}

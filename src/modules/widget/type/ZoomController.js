@@ -154,9 +154,11 @@ class ZoomController extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'zoomController', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
   }
 

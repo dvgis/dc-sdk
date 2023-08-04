@@ -64,9 +64,11 @@ class HawkeyeMap extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'hawkeyeMap', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
     this._viewer.camera.percentageChanged = 0.01
   }

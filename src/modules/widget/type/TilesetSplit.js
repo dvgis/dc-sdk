@@ -26,9 +26,11 @@ class TilesetSplit extends Widget {
    * @private
    */
   _installHook() {
+    const self = this
     Object.defineProperty(this._viewer, 'tilesetSplit', {
-      value: this,
-      writable: false,
+      get() {
+        return self
+      },
     })
   }
 
