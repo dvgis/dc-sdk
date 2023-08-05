@@ -27,9 +27,10 @@ GeoJSON 是一种对各种地理数据结构进行编码的格式，基于 Javas
 KML/CZML 是一个 JSON 格式的数据,描述 time-dynamic（时间、动态）图形场景,它描述了线、点、广告牌(标记)、模型、和其他图形原语,并指定他们如何随时间变化。
 
 :::tip
-数据转换可借助于 [CesiumLab](http://www.cesiumlab.com) 或者其他一些转换工具。[查看大图](http://dc.dvgis.cn/examples/assets/images/base/data_transform.png)
+数据转换可借助于 [CesiumLab](http://www.cesiumlab.com) 或者其他一些转换工具。[查看大图](https://resource.dvgis.cn/assets/images/data_transform.png)
 :::
-<img src="http://dc.dvgis.cn/examples/assets/images/base/data_transform.png" style="width:100%;height:500px">
+
+<img src="https://resource.dvgis.cn/assets/images/data_transform.png" style="width:100%;height:500px">
 
 ## 三维坐标
 
