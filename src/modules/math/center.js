@@ -6,7 +6,6 @@ import { Cesium } from '../../namespace'
 import { Transform } from '../transform'
 import Position from '../position/Position'
 
-
 export default function center(positions) {
   if (positions && Array.isArray(positions)) {
     let heightMax = 0
