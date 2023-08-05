@@ -43,7 +43,7 @@ plot.draw(DC.OverlayType.POINT, (overlay) => {}, {})
 标绘
 
 - 参数
-  - `{String} type`：覆盖物类型，参照 [OverlayType](../base/#overlaytype)
+  - `{String} type`：覆盖物类型，参照 [OverlayType](./global#overlaytype)
   - `{Function} callback`：标绘完成的回调函数，参数为覆盖物
   - `{Object} style`：标绘的覆盖物样式设置
   - `{Boolean} clampToModel`：点位是否获取模型表面坐标

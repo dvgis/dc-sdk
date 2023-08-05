@@ -2,7 +2,7 @@ import { defineConfig } from 'vitepress'
 import zhConfig from './locales/zh.config.js'
 import enConfig from './locales/en.config.js'
 export default defineConfig({
-  base: '/docs/',
+  base: '/dc-docs/',
   cleanUrls: 'without-subfolders',
   head: [['link', { rel: 'icon', href: '/assets/favicon.png' }]],
   locales: {

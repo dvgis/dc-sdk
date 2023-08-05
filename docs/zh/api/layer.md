@@ -558,7 +558,7 @@ let layer = new DC.GpxLayer('id', '**/**.gpx')
 
 ## DC.ClusterLayer
 
-> 聚合图层，继承于[Layer](../dc-sdk/#layer)
+> 聚合图层，继承于[Layer](#dc-layer)
 
 ### example
 
@@ -612,7 +612,7 @@ viewer.addLayer(layer)
 
 ## DC.HeatMapLayer
 
-> 热区图层，继承于[Layer](../dc-sdk/#layer)
+> 热区图层，继承于[Layer](#dc-layer)
 
 ### example
 
@@ -668,7 +668,7 @@ viewer.addLayer(layer)
 
 ## DC.WindLayer
 
-> 风向图层，继承于[Layer](../dc-sdk/#layer)
+> 风向图层，继承于[Layer](#dc-layer)
 
 ### example
 
@@ -724,7 +724,7 @@ viewer.addLayer(layer)
 
 ## DC.ChartLayer
 
-> 图表图层，继承于[Layer](../layer/#layer)
+> 图表图层，继承于[Layer](#dc-layer)
 
 ### example
 
