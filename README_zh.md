@@ -173,26 +173,33 @@ DC.ready().then(() => {
 
 ## 示例
 
-|  ![picture](http://dc.dvgis.cn/examples/images/baselayer/baidu.png?v=3) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/tdt.png?v=2) | ![picture](http://dc.dvgis.cn/examples/images/baselayer/arcgis.png?v=3) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/china.gif) |
-|  :-----------------------------------------------------------: | :-----------------------------------------------------------: | :------------------------------------------------------------------: | :--------------------------------------------------------------: |
-|  ![picture](http://dc.dvgis.cn/examples/images/mini-scene/dfmz.gif) | ![picture](http://dc.dvgis.cn/examples/images/mini-scene/factory.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/layer/cluster_circle.gif) | ![picture](http://dc.dvgis.cn/examples/images/model/shp_custom_shader.gif) |
-|  ![picture](http://dc.dvgis.cn/examples/images/overlay/polyline_image_trail.gif) | ![picture](http://dc.dvgis.cn/examples/images/overlay/wall_trail.gif?v=1) | ![picture](http://dc.dvgis.cn/examples/images/overlay/water.gif?v=2)  |  ![picture](http://dc.dvgis.cn/examples/images/overlay/plot-overlay.png?v=3)   |
+|           ![picture](https://dc.dvgis.cn/examples/previews/baselayer/online/baidu.png)           |     ![picture](http://dc.dvgis.cn/examples/previews/baselayer/online/tdt.png)      |     ![picture](http://dc.dvgis.cn/examples/previews/baselayer/online/arcgis.png?v=3)     |        ![picture](http://dc.dvgis.cn/examples/previews/mini-scene/china.gif)         |
+|:------------------------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------:|:----------------------------------------------------------------------------------------:|:------------------------------------------------------------------------------------:|
+|               ![picture](http://dc.dvgis.cn/examples/previews/mini-scene/dfmz.gif)               |    ![picture](http://dc.dvgis.cn/examples/previews/mini-scene/factory.gif)     |        ![picture](http://dc.dvgis.cn/examples/previews/layer/cluster_circle.gif)         | ![picture](http://dc.dvgis.cn/examples/previews/model/3dtiles/shp_custom_shader.gif) |
+|        ![picture](http://dc.dvgis.cn/examples/previews/overlay/polyline/image_trail.gif)         | ![picture](http://dc.dvgis.cn/examples/previews/overlay/others/wall_trail.gif) |       ![picture](http://dc.dvgis.cn/examples/previews/overlay/primitive/water.gif)       |      ![picture](http://dc.dvgis.cn/examples/previews/scene-ext/tools/plot.png)       |
+
 
 [更多>>](http://dc.dvgis.cn/#/examples)
 
-## QQ 群
-
-<p>
-<img src="http://dc.dvgis.cn/examples/images/base/q3.png?v=6" style="width:60px;height:60px" title="数字视觉(2群)"/>
-<img src="http://dc.dvgis.cn/examples/images/base/q1.png?v=2" style="width:60px;height:60px" title="数字视觉(已满)"/>
-<img src="http://dc.dvgis.cn/examples/images/base/q2.png?v=6" style="width:60px;height:60px" title="Cesium开心农场"/>
-</p>
 
 ## 支持
 
 > 如果dc-sdk能够给您带来效益，请支持一下呗~
-<p>
-<img src="http://dc.dvgis.cn/examples/images/base/sponsor.jpg?v=2" style="width:60px;height:60px" title="数字视觉"/>
+
+<p style='display: flex;justify-content:space-around'>
+<img src="https://resource.dvgis.cn/assets/images/zfb.png" title="支付宝" width="240px" height="240px" />
+<img src="https://resource.dvgis.cn/assets/images/wx.png" title="微信"  width="240px" height="240px" />
+</p>
+
+
+
+
+## QQ 群
+
+<p style='display: flex;justify-content:space-between'>
+<img src="https://resource.dvgis.cn/assets/images/q3.png" title="数字视觉(二群)" width="240px" height="240px" style='margin-right: 15px'/>
+<img src="https://resource.dvgis.cn/assets/images/q1.png" title="数字视觉(已满)"  width="240px" height="240px" style='margin-right: 15px'/>
+<img src="https://resource.dvgis.cn/assets/images/q2.png" title="Cesium开心农场"  width="240px" height="240px"/>
 </p>
 
 ## 版权声明
