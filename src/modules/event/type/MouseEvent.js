@@ -207,7 +207,7 @@ class MouseEvent extends Event {
       }
     }
 
-    // for Primitve
+    // for Primitive
     else if (target?.primitive) {
       layer = this._viewer
         .getLayers()

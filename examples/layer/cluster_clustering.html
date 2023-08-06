@@ -21,7 +21,9 @@
     for (let i = 0; i < num; i++) {
       let lng = 120.38105869 + Math.random() * 0.5
       let lat = 31.10115627 + Math.random() * 0.5
-      list.push([lng,lat])
+      list.push({lng,lat,attr:{
+         id:DC.Util.uuid()
+      }})
     }
     return list
   }
@@ -36,6 +38,7 @@
     })
     layer.setPoints(generatePosition(10000))
     viewer.addLayer(layer)
+    layer.on(DC.MouseEventType.CLICK,e=>{console.log(e.overlay.attr)})
     viewer.flyToPosition("120.62244801448453,31.358576663788927,92653.79773798586,0,-90,0")
   }
   DC.ready({
