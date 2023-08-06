@@ -6,6 +6,7 @@ import { Cesium, Supercluster } from '../../../namespace'
 import State from '../../state/State'
 import Layer from '../Layer'
 import Parse from '../../parse/Parse'
+import { Util } from '../../utils'
 
 const DEF_OPT = {
   radius: 60,
@@ -172,6 +173,7 @@ class ClusterLayer extends Layer {
   }
 
   _changeCluster() {
+    this._cache = {}
     this._billboards.removeAll()
     this._labels.removeAll()
     let rectangle = this._viewer.camera.computeViewRectangle()
@@ -185,18 +187,24 @@ class ClusterLayer extends Layer {
         ],
         this._viewer.zoom
       )
+
       result.forEach((item) => {
-        if (item.properties) {
+        let overlayId = Util.uuid()
+        if (item.properties.cluster) {
           let count = item.properties.point_count
-          this._billboards.add({
+          let billboard = this._billboards.add({
             position: Cesium.Cartesian3.fromDegrees(
               +item.geometry.coordinates[0],
               +item.geometry.coordinates[1]
             ),
             image: this._getClusterImage(count),
           })
+          billboard.layerId = this.layerId
+          billboard.overlayId = overlayId
+          billboard.attr = { count: count }
+          this._cache[overlayId] = billboard
           if (this._options.showCount) {
-            this._labels.add({
+            let label = this._labels.add({
               position: Cesium.Cartesian3.fromDegrees(
                 +item.geometry.coordinates[0],
                 +item.geometry.coordinates[1]
@@ -208,15 +216,23 @@ class ClusterLayer extends Layer {
               scale: 0.8,
               pixelOffset: this._options.getCountOffset(count),
             })
+            label.layerId = this.layerId
+            label.overlayId = overlayId
+            label.attr = { count: count }
+            this._cache[overlayId] = label
           }
         } else {
-          this._billboards.add({
+          let billboard = this._billboards.add({
             position: Cesium.Cartesian3.fromDegrees(
               +item.geometry.coordinates[0],
               +item.geometry.coordinates[1]
             ),
             image: this._options.image,
           })
+          billboard.layerId = this.layerId
+          billboard.overlayId = overlayId
+          billboard.attr = item.properties
+          this._cache[overlayId] = billboard
         }
       })
     }
@@ -250,6 +266,7 @@ class ClusterLayer extends Layer {
               type: 'Point',
               coordinates: [position.lng, position.lat],
             },
+            properties: item.attr || {},
           }
         })
       )
