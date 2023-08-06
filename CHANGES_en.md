@@ -1,5 +1,20 @@
 # Change Log
 
+### 3.1.0 - 2023-08-06
+
+#### Breaking Changes 📣
+
+- Upgrading @cesium/engine to version 3.0.2
+
+#### Additions 🎉
+
+- Add support for cluster layer mouse events
+
+#### Fixes 🔧
+
+- Optimize component initialization for compatibility with third-party frameworks.
+- Optimize coordinate conversion function
+
 ### 3.0.1
 
 #### Fixes 🔧
