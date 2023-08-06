@@ -5,6 +5,7 @@
 #### Breaking Changes 📣
 
 - 升级 @cesium/engine 到 3.0.2版本
+- 文档搭建框架从 VuePress 变换至 VitePress 
 
 #### Additions 🎉
 

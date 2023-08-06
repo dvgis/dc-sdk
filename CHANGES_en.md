@@ -5,6 +5,7 @@
 #### Breaking Changes 📣
 
 - Upgrading @cesium/engine to version 3.0.2
+- Document building framework transformed from VuePress to VitePress
 
 #### Additions 🎉
 
