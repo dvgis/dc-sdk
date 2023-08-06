@@ -4,13 +4,13 @@ import enConfig from './locales/en.config.js'
 export default defineConfig({
   base: '/dc-docs/',
   cleanUrls: 'without-subfolders',
-  head: [['link', { rel: 'icon', href: '/assets/favicon.png' }]],
+  head: [['link', { rel: 'icon', href: '/dc-docs/assets/favicon.png' }]],
   locales: {
     root: zhConfig,
     // en: enConfig,
   },
   themeConfig: {
-    logo: '/assets/favicon.png',
+    logo: '/assets/logo.svg',
     search: {
       provider: 'local',
     },
