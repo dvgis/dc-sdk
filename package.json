@@ -18,6 +18,7 @@
   "type": "module",
   "main": "dist/index.cjs",
   "scripts": {
+    "dev": "rimraf dist && gulp dev",
     "build": "rimraf dist && gulp build",
     "build:node": "rimraf dist && gulp buildNode",
     "build:iife": "rimraf dist && gulp buildIIFE",
@@ -39,6 +40,7 @@
     "@rollup/plugin-node-resolve": "^15.0.2",
     "@rollup/plugin-terser": "^0.4.1",
     "chalk": "^5.2.0",
+    "chokidar": "^3.5.3",
     "esbuild": "^0.17.18",
     "esbuild-plugin-glsl": "^1.2.1",
     "esbuild-plugin-inline-image": "^0.0.9",

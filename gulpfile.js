@@ -1,6 +1,5 @@
 /**
  @author : Caven Chen
- @date : 2023-05-06
  **/
 
 'use strict'
@@ -21,6 +20,9 @@ import { babel } from '@rollup/plugin-babel'
 import startServer from './server.js'
 import inlineImage from 'esbuild-plugin-inline-image'
 import { glsl } from 'esbuild-plugin-glsl'
+import chokidar from 'chokidar'
+import shell from 'shelljs'
+import chalk from 'chalk'
 
 const obfuscatorConfig = {
   compact: true, //压缩代码
@@ -57,6 +59,26 @@ const buildConfig = {
 
 const packageJson = fse.readJsonSync('./package.json')
 
+const plugins = [
+  resolve({ preferBuiltins: true }),
+  commonjs(),
+  babel({
+    babelHelpers: 'runtime',
+    presets: [
+      [
+        '@babel/preset-env',
+        {
+          modules: false,
+          targets: {
+            browsers: ['> 1%', 'last 2 versions', 'ie >= 10'],
+          },
+        },
+      ],
+    ],
+    plugins: ['@babel/plugin-transform-runtime'],
+  }),
+]
+
 function getTime() {
   let now = new Date()
   let m = now.getMonth() + 1
@@ -69,26 +91,7 @@ function getTime() {
 async function buildNamespace(options) {
   const bundle = await rollup({
     input: 'libs/index.js',
-    plugins: [
-      commonjs(),
-      resolve({ preferBuiltins: true }),
-      babel({
-        babelHelpers: 'runtime',
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              modules: false,
-              targets: {
-                browsers: ['> 1%', 'last 2 versions', 'ie >= 10'],
-              },
-            },
-          ],
-        ],
-        plugins: ['@babel/plugin-transform-runtime'],
-      }),
-      terser(),
-    ],
+    plugins: [...plugins, ...[options.dev ? null : terser()]],
     onwarn: (message) => {
       // Ignore eval warnings in third-party code we don't have control over
       if (message.code === 'EVAL' && /protobufjs/.test(message.loc.file)) {
@@ -158,7 +161,8 @@ async function buildModules(options) {
   const exportNamespace = `
         export const __namespace = {
             Cesium: exports.Cesium,
-            Supercluster: exports.Supercluster
+            Supercluster: exports.Supercluster,
+            CryptoJS: exports.CryptoJS
         }
      `
 
@@ -319,6 +323,22 @@ async function deleteTempFile(options) {
   }
 }
 
+async function regenerate(option, content) {
+  await fse.remove('dist/dc.min.js')
+  await fse.remove('dist/dc.min.css')
+  await fse.outputFile(path.join('dist', 'namespace.js'), content)
+  await buildModules(option)
+  await buildCSS()
+  await gulp
+    .src(['dist/modules.js', 'dist/namespace.js'])
+    .pipe(concat('dc.min.js'))
+    .pipe(gulp.dest('dist'))
+    .on('end', () => {
+      addCopyright(option)
+      deleteTempFile(option)
+    })
+}
+
 export const build = gulp.series(
   () => buildNamespace({ node: true }),
   () => buildModules({ node: true }),
@@ -355,6 +375,38 @@ export const buildRelease = gulp.series(
   () => combineJs({ iife: true, obfuscate: true }),
   buildCSS,
   copyAssets
+)
+
+export const dev = gulp.series(
+  () => buildNamespace({ dev: true }),
+  copyAssets,
+  () => {
+    shell.echo(chalk.yellow('============= start dev =============='))
+    const watcher = chokidar.watch('src', {
+      persistent: true,
+      awaitWriteFinish: {
+        stabilityThreshold: 1000,
+        pollInterval: 100,
+      },
+    })
+    fse.readFile(path.join('dist', 'namespace.js'), 'utf8').then((content) => {
+      watcher
+        .on('ready', async () => {
+          await regenerate({ iife: true }, content)
+          await startServer()
+        })
+        .on('change', async () => {
+          let now = new Date()
+          await regenerate({ iife: true }, content)
+          shell.echo(
+            chalk.green(
+              `regenerate lib takes  ${new Date().getTime() - now.getTime()} ms`
+            )
+          )
+        })
+    })
+    return watcher
+  }
 )
 
 export const server = gulp.series(startServer)
