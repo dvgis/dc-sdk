@@ -178,7 +178,7 @@ viewer.addBaseLayer(baseLayer, {
 let terrain = DC.TerrainFactory.createUrlTerrain({
   url: '****/***',
 })
-viewer.addTerrain(terrain)
+viewer.setTerrain(terrain)
 ```
 
 ### static methods

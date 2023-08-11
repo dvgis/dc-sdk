@@ -9,7 +9,7 @@
 <a href="https://www.npmjs.com/package/@dvgis/dc-sdk" target="_blank">
  <img src="https://img.shields.io/npm/dt/@dvgis/dc-sdk?logo=npm"/>
 </a>
-<a href="https://resource.dvgis.cn/dc-docs/v2.x" target="_blank">
+<a href="https://resource.dvgis.cn/dc-docs/zh/" target="_blank">
  <img src="https://img.shields.io/badge/docs-online-yellow.svg"/>
 </a>
 <a href="http://dc.dvgis.cn" target="_blank">
