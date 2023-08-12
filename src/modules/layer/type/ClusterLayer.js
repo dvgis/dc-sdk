@@ -228,6 +228,7 @@ class ClusterLayer extends Layer {
               +item.geometry.coordinates[1]
             ),
             image: this._options.image,
+            ...item.properties.style,
           })
           billboard.layerId = this.layerId
           billboard.overlayId = overlayId
