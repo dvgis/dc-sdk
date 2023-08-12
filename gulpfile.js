@@ -328,15 +328,8 @@ async function regenerate(option, content) {
   await fse.remove('dist/dc.min.css')
   await fse.outputFile(path.join('dist', 'namespace.js'), content)
   await buildModules(option)
+  await combineJs(option)
   await buildCSS()
-  await gulp
-    .src(['dist/modules.js', 'dist/namespace.js'])
-    .pipe(concat('dc.min.js'))
-    .pipe(gulp.dest('dist'))
-    .on('end', () => {
-      addCopyright(option)
-      deleteTempFile(option)
-    })
 }
 
 export const build = gulp.series(
