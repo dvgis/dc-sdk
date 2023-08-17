@@ -38,6 +38,7 @@ export {
   KmlLayer,
   LabelLayer,
   PrimitiveLayer,
+  RasterTileLayer,
   TilesetLayer,
   VectorLayer,
 } from './layer'

@@ -3,7 +3,7 @@
  */
 
 import { Cesium } from '../../namespace'
-const { EllipsoidTerrainProvider, ImageryLayer } = Cesium
+const { ImageryLayer } = Cesium
 
 class BaseLayerPicker {
   constructor(options) {
@@ -20,31 +20,29 @@ class BaseLayerPicker {
     if (!imageryLayer || !imageryLayer.layers) {
       new Error('imagery format error')
     }
-    let imageryLayers = this._globe.imageryLayers
-    if (!this._selectedImageryLayer) {
-      for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
-        let layer = imageryLayer.layers[i]
-        if (layer) {
-          imageryLayers.add(
-            ImageryLayer.fromProviderAsync(layer, imageryLayer.options),
-            0
-          )
-        }
-      }
-    } else if (
+
+    if (
+      this._selectedImageryLayer &&
+      imageryLayer.id === this._selectedImageryLayer.id
+    ) {
+      return
+    }
+
+    if (
       this._selectedImageryLayer &&
       imageryLayer.id !== this._selectedImageryLayer.id
     ) {
-      imageryLayers.removeAll()
-      for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
-        let layer = imageryLayer.layers[i]
-        if (layer) {
-          imageryLayers.add(
-            ImageryLayer.fromProviderAsync(layer, imageryLayer.options),
-            0
-          )
-        }
+      for (let i = 0; i < this._selectedImageryLayer.cache.length; i++) {
+        this._globe.imageryLayers.remove(this._selectedImageryLayer.cache[i])
       }
+      imageryLayer.cache = []
+    }
+
+    for (let i = imageryLayer.layers.length - 1; i >= 0; i--) {
+      let layer = imageryLayer.layers[i]
+      let imagery = ImageryLayer.fromProviderAsync(layer, imageryLayer.options)
+      layer && this._globe.imageryLayers.add(imagery, 0)
+      imageryLayer.cache = [imagery]
     }
     this._selectedImageryLayer = imageryLayer
   }
@@ -70,7 +68,7 @@ class BaseLayerPicker {
     this._imageryLayers.push({
       id: `imagery-no-${this._count}`,
       layers: imageryLayers,
-      options: options,
+      cache: [],
     })
     return this
   }

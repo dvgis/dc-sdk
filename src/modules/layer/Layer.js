@@ -90,6 +90,8 @@ class Layer {
       } else {
         this._viewer.scene.primitives.add(this._delegate)
       }
+    } else if (this._delegate instanceof Cesium.ImageryLayer) {
+      this._viewer.imageryLayers.add(this._delegate)
     } else {
       this._viewer.dataSources.add(this._delegate)
     }
@@ -115,7 +117,9 @@ class Layer {
         } else {
           this._viewer.scene.primitives.remove(this._delegate)
         }
-      } else if (this._delegate.then) {
+      } else if (this._delegate instanceof Cesium.ImageryLayer) {
+        this._viewer.imageryLayers.remove(this._delegate)
+      } else if (this._delegate instanceof Promise) {
         this._delegate.then((dataSource) => {
           dataSource.entities.removeAll()
         })
