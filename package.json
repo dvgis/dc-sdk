@@ -26,7 +26,8 @@
     "prepublishOnly": "yarn run build:release",
     "server": "gulp server",
     "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs"
+    "docs:build": "vitepress build docs",
+    "lint": "eslint --fix src"
   },
   "devDependencies": {
     "@babel/core": "^7.21.4",
