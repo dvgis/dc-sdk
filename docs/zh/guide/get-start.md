@@ -13,8 +13,8 @@ npm install @dvgis/dc-sdk
 ```
 
 ```js
-import * as DC from '@dvgis/dc-sdk' 
-import '@dvgis/dc-sdk/dist/dc.core.min.css' 
+import * as DC from '@dvgis/dc-sdk'
+import '@dvgis/dc-sdk/dist/dc.core.min.css'
 ```
 
 `CDN`
@@ -56,7 +56,7 @@ DC.ready().then(() => {
 
 ## 应用配置
 
-由于 DC 框架将Cesium静态资源默认路径设置为 `./libs/dc-sdk/resources/`，这样需将 `Cesium` 相关的静态资源文件: `Assets`、`Workers` 、`ThirdParty` 复制到工程的 `libs/dc-sdk/resources` 目录下以保证三维场景能够正常呈现,也可通过全局函数进行 `Cesium` 相关的静态资源路基设置
+由于 DC 框架将 Cesium 静态资源默认路径设置为 `./libs/dc-sdk/resources/`，这样需将 `Cesium` 相关的静态资源文件: `Assets`、`Workers` 、`ThirdParty` 复制到工程的 `libs/dc-sdk/resources` 目录下以保证三维场景能够正常呈现,也可通过全局函数进行 `Cesium` 相关的静态资源路基设置
 
 > `npm / yarn / pnpm`
 
@@ -66,7 +66,7 @@ DC.ready().then(() => {
 // webpack.config.js
 
 const path = require('path')
-const CopywebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
@@ -87,13 +87,13 @@ module.exports = {
 // vue.config.js
 
 const path = require('path')
-const CopywebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
   // 其他配置
   chainWebpack: (config) => {
-    config.plugin('copy').use(CopywebpackPlugin, [
+    config.plugin('copy').use(CopyWebpackPlugin, [
       [
         {
           from: path.join(dvgisDist, 'dc-sdk/dist/resources'),
@@ -111,13 +111,13 @@ module.exports = {
 // vue.config.js
 
 const path = require('path')
-const CopywebpackPlugin = require('copy-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const dvgisDist = './node_modules/@dvgis'
 
 module.exports = {
   // 其他配置
   chainWebpack: (config) => {
-    config.plugin('copy').use(CopywebpackPlugin, [
+    config.plugin('copy').use(CopyWebpackPlugin, [
       {
         patterns: [
           {
@@ -141,11 +141,11 @@ npm install @dvgis/vite-plugin-dc
 
 ```js
 // vite.config.js
-import { defineConfig } from "vite";
-import DC from "@dvgis/vite-plugin-dc";
+import { defineConfig } from 'vite'
+import DC from '@dvgis/vite-plugin-dc'
 export default defineConfig({
   plugins: [DC()],
-});
+})
 ```
 
 `CDN`

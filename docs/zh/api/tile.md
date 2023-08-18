@@ -153,7 +153,7 @@ viewer.addBaseLayer(baseLayer, {
 //属性参数(可选)
 {
   "url": "", //地址：arcgis/wmts/xyx/single 有效
-  "style": "img", //样式：img、elec、ter。百度：normal、middlenight、dark，腾讯：img,1、4
+  "style": "img", //样式：img、elec、ter。百度：normal，dark，腾讯：img,1、4
   "key": "", //认证，仅天地图有效
   "subdomains": [],
   "crs":"WGS84",// 坐标系: WGS84 、BD09 、GCJ02，仅百度、高德有效

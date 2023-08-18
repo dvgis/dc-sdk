@@ -245,8 +245,6 @@ effect.silhouette.enable = true
 - `{Number} length`：长度
 - `{Array} selected`：设置后期作用的覆盖物
 
-
-
 ## DC.CircleScan
 
 > 扫描圈，继承于[Animation](#animation)
@@ -278,7 +276,6 @@ circleScan.start()
   "speed": 5 // 速度
 }
 ```
-
 
 ## DC.RadarScan
 

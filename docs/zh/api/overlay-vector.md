@@ -375,7 +375,7 @@ billboard.size = [20, 20]
 
   - 参数
     - `{Object} entity`：Cesium 覆盖物
-  - 返回值 `billbard`
+  - 返回值 `billboard`
 
 ## DC.Label
 
@@ -832,7 +832,7 @@ let divIcon = new DC.DivIcon(position, '<div></div>')
 ### properties
 
 - `{Position|String|Array} position`：坐标
-- `{String|Element} content`：内容 **_`writeonly`_**
+- `{String|Element} content`：内容 **_`writeOnly`_**
 
 ### methods
 
@@ -925,10 +925,6 @@ let box = new DC.Box(position, 20, 30, 40)
   } //根据距离设置可见
 }
 ```
-
-
-
-
 
 ## DC.Corridor
 
@@ -1123,10 +1119,10 @@ let ellipse = new DC.Ellipse(position, 20, 30)
 
 ### example
 
-  ```js
-  let position = new DC.Position(120, 20)
-  let ellipsoid = new DC.Ellipsoid(position, { x: 30, y: 30, z: 30 })
-  ```
+```js
+let position = new DC.Position(120, 20)
+let ellipsoid = new DC.Ellipsoid(position, { x: 30, y: 30, z: 30 })
+```
 
 ### creation
 

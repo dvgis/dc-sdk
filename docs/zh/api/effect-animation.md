@@ -474,8 +474,8 @@ tc.addTrack(track)
   "clampToTileset": false, // 是否贴物
   "interpolationType": "Linear", // 插值类型：Linear、Hermite、Lagrange
   "interpolationDegree": 2, // 插值度数
-  "endDelayTime": 0.5,// 结束时间延长时间，单位:秒，
-  "headingOffset":0,//旋转偏移
+  "endDelayTime": 0.5, // 结束时间延长时间，单位:秒，
+  "headingOffset": 0 //旋转偏移
 }
 ```
 

@@ -5,8 +5,9 @@
 > 框架主入口函数，使用框架时必须以其开始，否则使用框架
 
 ```js
-DC.ready({}).then(()=>{})
+DC.ready({}).then(() => {})
 ```
+
 - 参数
   - `{Object} config`：配置参数
 - 返回值 `Promise`
@@ -14,9 +15,9 @@ DC.ready({}).then(()=>{})
 ```json
 //属性参数（可选）
 {
-  "Cesium": '<自定义的Cesium库，如果未设置，将使用框架内部默认Cesium框架>',
-  "echarts": '<echarts库，设置后将加载echarts图层>',
-  "baseUrl": '<Cesium 静态资源路径，默认值为：“./libs/dc-sdk/resources/” >'
+  "Cesium": "<自定义的Cesium库，如果未设置，将使用框架内部默认Cesium框架>",
+  "echarts": "<echarts库，设置后将加载echarts图层>",
+  "baseUrl": "<Cesium 静态资源路径，默认值为：“./libs/dc-sdk/resources/” >"
 }
 ```
 
@@ -25,9 +26,10 @@ DC.ready({}).then(()=>{})
 > 框架中注册第三放框架包，
 
 ```js
-DC.registerLib("turf",turf)
-console.log(DC.__namspace.turf)
+DC.registerLib('turf', turf)
+console.log(DC.__namespace.turf)
 ```
+
 - 参数
   - `{String} name`：名称
   - `{Object} lib`: 库模块
@@ -37,8 +39,9 @@ console.log(DC.__namspace.turf)
 > 获取框架中注册的第三方框架包，
 
 ```js
-let turf =  DC.getLib("turf")
+let turf = DC.getLib('turf')
 ```
+
 - 参数
   - `{String} name`：名称
 - 返回值 `Object`

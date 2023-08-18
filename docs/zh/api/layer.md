@@ -563,7 +563,7 @@ let layer = new DC.GpxLayer('id', '**/**.gpx')
 ### example
 
 ```js
-let layer = new DC.ClusterLayer('id',{image:''})
+let layer = new DC.ClusterLayer('id', { image: '' })
 viewer.addLayer(layer)
 ```
 

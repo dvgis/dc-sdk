@@ -10,7 +10,7 @@ hero:
     - theme: brand
       text: 快速开始
       link: /zh/guide/introduction
-features: 
+features:
   - title: 简单
     details: 仅仅一个div和几行代码就能构建一个三维WebGis应用
   - title: 易用
