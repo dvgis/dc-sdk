@@ -331,43 +331,7 @@ async function regenerate(option, content) {
   await buildCSS()
 }
 
-export const build = gulp.series(
-  () => buildNamespace({ node: true }),
-  () => buildModules({ node: true }),
-  () => combineJs({ node: true }),
-  () => buildNamespace({ iife: true }),
-  () => buildModules({ iife: true }),
-  () => combineJs({ iife: true }),
-  buildCSS,
-  copyAssets
-)
-
-export const buildNode = gulp.series(
-  () => buildNamespace({ node: true }),
-  () => buildModules({ node: true }),
-  () => combineJs({ node: true }),
-  buildCSS,
-  copyAssets
-)
-
-export const buildIIFE = gulp.series(
-  () => buildNamespace({ iife: true }),
-  () => buildModules({ iife: true }),
-  () => combineJs({ iife: true }),
-  buildCSS,
-  copyAssets
-)
-
-export const buildRelease = gulp.series(
-  () => buildNamespace({ node: true }),
-  () => buildModules({ node: true }),
-  () => combineJs({ node: true, obfuscate: true }),
-  () => buildNamespace({ iife: true }),
-  () => buildModules({ iife: true }),
-  () => combineJs({ iife: true, obfuscate: true }),
-  buildCSS,
-  copyAssets
-)
+export const server = gulp.series(startServer)
 
 export const dev = gulp.series(
   () => buildNamespace({ dev: true }),
@@ -392,7 +356,7 @@ export const dev = gulp.series(
           await regenerate({ iife: true }, content)
           shell.echo(
             chalk.green(
-              `regenerate lib takes  ${new Date().getTime() - now.getTime()} ms`
+              `regenerate lib takes ${new Date().getTime() - now.getTime()} ms`
             )
           )
         })
@@ -401,4 +365,40 @@ export const dev = gulp.series(
   }
 )
 
-export const server = gulp.series(startServer)
+export const buildNode = gulp.series(
+  () => buildNamespace({ node: true }),
+  () => buildModules({ node: true }),
+  () => combineJs({ node: true }),
+  buildCSS,
+  copyAssets
+)
+
+export const buildIIFE = gulp.series(
+  () => buildNamespace({ iife: true }),
+  () => buildModules({ iife: true }),
+  () => combineJs({ iife: true }),
+  buildCSS,
+  copyAssets
+)
+
+export const build = gulp.series(
+  () => buildNamespace({ node: true }),
+  () => buildModules({ node: true }),
+  () => combineJs({ node: true }),
+  () => buildNamespace({ iife: true }),
+  () => buildModules({ iife: true }),
+  () => combineJs({ iife: true }),
+  buildCSS,
+  copyAssets
+)
+
+export const buildRelease = gulp.series(
+  () => buildNamespace({ node: true }),
+  () => buildModules({ node: true }),
+  () => combineJs({ node: true, obfuscate: true }),
+  () => buildNamespace({ iife: true }),
+  () => buildModules({ iife: true }),
+  () => combineJs({ iife: true, obfuscate: true }),
+  buildCSS,
+  copyAssets
+)

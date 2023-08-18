@@ -233,6 +233,10 @@ const EXAMPLE_LIST = [
         name: '经纬网格图层',
         page: 'graticule.html',
       },
+      {
+        name: '栅格瓦片图层(数据图层)',
+        page: 'raster_tile.html',
+      },
     ],
   },
   {
@@ -398,7 +402,7 @@ const EXAMPLE_LIST = [
       {
         name: '动态图标',
         page: 'dynamic_billboard.html',
-      }
+      },
     ],
   },
   {
@@ -677,4 +681,4 @@ const EXAMPLE_LIST = [
       },
     ],
   },
-]
+]``
