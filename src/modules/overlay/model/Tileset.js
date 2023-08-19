@@ -6,11 +6,13 @@ import { Cesium } from '../../../namespace'
 import Overlay from '../Overlay'
 import Parse from '../../parse/Parse'
 import State from '../../state/State'
+import { TilesetEvent } from '../../event'
 
 class Tileset extends Overlay {
   constructor(url, options = {}) {
     super()
     this._delegate = Cesium.Cesium3DTileset.fromUrl(url, options)
+    this._tilesetEvent = new TilesetEvent()
     this._tileVisibleCallback = undefined
     this._properties = undefined
     this._state = State.INITIALIZED
@@ -33,10 +35,9 @@ class Tileset extends Overlay {
    */
   _bindVisibleEvent() {
     this._tileVisibleCallback && this._tileVisibleCallback()
-    this._tileVisibleCallback = this._delegate.tileVisible.addEventListener(
-      this._updateTile,
-      this
-    )
+    this._tileVisibleCallback = this._delegate.then((tileset) => {
+      tileset.tileVisible.addEventListener(this._updateTile, this)
+    })
   }
 
   /**
@@ -248,6 +249,32 @@ class Tileset extends Overlay {
         tileset.style = style
       })
     }
+    return this
+  }
+
+  /**
+   * Subscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Overlay}
+   */
+  on(type, callback, context) {
+    this._overlayEvent.on(type, callback, context || this)
+    this._tilesetEvent.on(type, callback, context || this)
+    return this
+  }
+
+  /**
+   * Unsubscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Overlay}
+   */
+  off(type, callback, context) {
+    this._overlayEvent.off(type, callback, context || this)
+    this._tilesetEvent.off(type, callback, context || this)
     return this
   }
 }

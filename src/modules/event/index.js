@@ -18,6 +18,7 @@ export { default as SceneEvent } from './type/SceneEvent'
 export { default as LayerGroupEvent } from './type/LayerGroupEvent'
 export { default as LayerEvent } from './type/LayerEvent'
 export { default as OverlayEvent } from './type/OverlayEvent'
+export { default as TilesetEvent } from './type/TilesetEvent'
 
 /**
  * animation

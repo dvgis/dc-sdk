@@ -151,7 +151,7 @@ class MouseEvent extends Event {
       overlayId = target.primitive.overlayId
     }
 
-    // for Primitve
+    // for Primitive
     else if (target?.primitive) {
       overlayId = target.primitive.overlayId
     }
@@ -301,8 +301,10 @@ class MouseEvent extends Event {
     if (!movement?.position) {
       return false
     }
-    let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(MouseEventType.CLICK, mouseInfo)
+    this._raiseEvent(
+      MouseEventType.CLICK,
+      this._getMouseInfo(movement.position)
+    )
   }
 
   /**
@@ -315,8 +317,10 @@ class MouseEvent extends Event {
     if (!movement?.position) {
       return false
     }
-    let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(MouseEventType.DB_CLICK, mouseInfo)
+    this._raiseEvent(
+      MouseEventType.DB_CLICK,
+      this._getMouseInfo(movement.position)
+    )
   }
 
   /**
@@ -329,8 +333,10 @@ class MouseEvent extends Event {
     if (!movement?.position) {
       return false
     }
-    let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(MouseEventType.RIGHT_CLICK, mouseInfo)
+    this._raiseEvent(
+      MouseEventType.RIGHT_CLICK,
+      this._getMouseInfo(movement.position)
+    )
   }
 
   /**
@@ -368,8 +374,10 @@ class MouseEvent extends Event {
     if (!movement?.position) {
       return false
     }
-    let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(MouseEventType.LEFT_DOWN, mouseInfo)
+    this._raiseEvent(
+      MouseEventType.LEFT_DOWN,
+      this._getMouseInfo(movement.position)
+    )
   }
 
   /**
@@ -390,8 +398,10 @@ class MouseEvent extends Event {
     if (!movement?.position) {
       return false
     }
-    let mouseInfo = this._getMouseInfo(movement.position)
-    this._raiseEvent(MouseEventType.RIGHT_DOWN, mouseInfo)
+    this._raiseEvent(
+      MouseEventType.RIGHT_DOWN,
+      this._getMouseInfo(movement.position)
+    )
   }
 
   /**

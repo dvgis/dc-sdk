@@ -66,6 +66,18 @@ const OverlayEventType = {
   POSITION_UPDATE: 'positionUpdate',
 }
 
+const ModelEventType = {}
+
+const TileSetEventType = {
+  INITIAL_TILES_LOADED: 'initialTilesLoaded',
+  ALL_TILES_LOADED: 'allTilesLoaded ',
+  LOAD_PROGRESS: 'loadProgress ',
+  TILE_FAILED: 'tileFailed ',
+  TILE_LOAD: 'tileLoad',
+  TILE_UNLOAD: 'tileUnload',
+  TILE_VISIBLE: 'tileVisible',
+}
+
 const LayerGroupEventType = BaseEventType
 
 const LayerEventType = {
@@ -113,6 +125,7 @@ export {
   LayerGroupEventType,
   LayerEventType,
   OverlayEventType,
+  TileSetEventType,
   TrackEventType,
   PathEventType,
   PlotEventType,
