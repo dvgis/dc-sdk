@@ -13,8 +13,8 @@ class Plane extends Overlay {
   constructor(position, width, height, plane = {}) {
     super()
     this._position = Parse.parsePosition(position)
-    this._width = +width || 0
-    this._height = +height || 0
+    this._width = +width || 100
+    this._height = +height || 100
     if (plane.normal && typeof plane.normal === 'string') {
       let n = String(plane.normal).toLocaleUpperCase()
       plane.normal =
@@ -64,8 +64,9 @@ class Plane extends Overlay {
   }
 
   set width(width) {
+    const dimensions = this._delegate.plane.dimensions.getValue()
     this._width = +width || 0
-    this._delegate.plan.dimensions.x = this._width
+    dimensions.x = this._width
   }
 
   get width() {
@@ -73,8 +74,9 @@ class Plane extends Overlay {
   }
 
   set height(height) {
+    const dimensions = this._delegate.plane.dimensions.getValue()
     this._height = +height || 0
-    this._delegate.plan.dimensions.y = this._height
+    dimensions.y = this._height
   }
 
   get height() {
@@ -82,8 +84,9 @@ class Plane extends Overlay {
   }
 
   set distance(distance) {
+    const plane = this.entityGraphic.plane.getValue()
     this._distance = distance
-    this._delegate.plane.plane.distance = distance
+    plane.distance = distance
   }
 
   get distance() {
