@@ -45,11 +45,9 @@ class Rect extends Overlay {
    * @returns {Rect}
    */
   setLabel(text, textStyle) {
+    const rectangle = this._delegate.rectangle.coordinates.getValue()
     this._delegate.position = Cesium.Cartographic.toCartesian(
-      Cesium.Rectangle.center(
-        this._delegate.rectangle,
-        new Cesium.Cartographic()
-      )
+      Cesium.Rectangle.center(rectangle, new Cesium.Cartographic())
     )
     this._delegate.label = {
       ...textStyle,
