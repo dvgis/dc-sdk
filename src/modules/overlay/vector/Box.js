@@ -57,8 +57,10 @@ class Box extends Overlay {
   }
 
   set length(length) {
+    const dimensions = this._delegate.box.dimensions.getValue()
     this._length = length || 0
-    this._delegate.box.dimensions.x = +this._length
+    dimensions.x = +this._length
+    this._delegate.box.dimensions.setValue(dimensions)
   }
 
   get length() {
@@ -66,8 +68,10 @@ class Box extends Overlay {
   }
 
   set width(width) {
+    const dimensions = this._delegate.box.dimensions.getValue()
     this._width = width || 0
-    this._delegate.box.dimensions.y = +this._width
+    dimensions.y = +this._width
+    this._delegate.box.dimensions.setValue(dimensions)
   }
 
   get width() {
@@ -75,8 +79,10 @@ class Box extends Overlay {
   }
 
   set height(height) {
+    const dimensions = this._delegate.box.dimensions.getValue()
     this._height = height || 0
-    this._delegate.box.dimensions.z = +this._height
+    dimensions.z = +this._height
+    this._delegate.box.dimensions.setValue(dimensions)
   }
 
   get height() {
