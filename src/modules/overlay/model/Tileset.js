@@ -12,7 +12,7 @@ class Tileset extends Overlay {
   constructor(url, options = {}) {
     super()
     this._delegate = Cesium.Cesium3DTileset.fromUrl(url, options)
-    this._tilesetEvent = new TilesetEvent()
+    this._tilesetEvent = new TilesetEvent(this._delegate)
     this._tileVisibleCallback = undefined
     this._properties = undefined
     this._state = State.INITIALIZED
