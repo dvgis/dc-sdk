@@ -1,5 +1,23 @@
 # Change Log
 
+# Change Log
+
+### 3.2.0 - 2023-09-25
+
+#### Breaking Changes 📣
+
+- Upgraded @cesium/engine to version 4.0.0
+- framework to add development mode
+
+#### Additions 🎉
+
+- Added support for tileset hook events
+- Added RasterTileLayer
+
+#### Fixes 🔧
+
+- Optimize camera  position calculation
+
 ### 3.1.0 - 2023-08-06
 
 #### Breaking Changes 📣
