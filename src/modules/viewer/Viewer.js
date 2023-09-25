@@ -188,7 +188,7 @@ class Viewer {
   }
 
   get zoom() {
-    let height = this._delegate.camera.positionCartographic.height
+    let height = this.camera.positionCartographic.height
     let A = 40487.57
     let B = 0.00007096758
     let C = 91610.74
