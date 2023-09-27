@@ -40,4 +40,5 @@ export const THIRD_PART = {
   createGooglePhotorealistic3DTileset:
     Cesium.createGooglePhotorealistic3DTileset,
   createElevationBandMaterial: Cesium.createElevationBandMaterial,
+  ModelAnimationLoop: Cesium.ModelAnimationLoop,
 }

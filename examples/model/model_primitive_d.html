@@ -50,6 +50,18 @@
             item,
             '../assets/data/Cesium_Air.glb'
           )
+          model.on('ready', (model) => {
+            model.activeAnimations.add({
+              index: 0,
+              loop: 1,
+              multiplier: 1,
+            })
+            model.activeAnimations.add({
+              index: 1,
+              loop: 1,
+              multiplier: 1,
+            })
+          })
           model.setStyle({ scale: 50 })
           layer.addOverlay(model)
         })

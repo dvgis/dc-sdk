@@ -492,6 +492,10 @@ const EXAMPLE_LIST = [
         page: 'model_primitive.html',
       },
       {
+        name: '模型动画（图元）',
+        page: 'model_primitive_d.html',
+      },
+      {
         name: '3dtiles-3dmax',
         page: '3dtiles_3dmax.html',
       },

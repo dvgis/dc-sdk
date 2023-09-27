@@ -66,7 +66,10 @@ const OverlayEventType = {
   POSITION_UPDATE: 'positionUpdate',
 }
 
-const ModelEventType = {}
+const ModelEventType = {
+  READY: 'ready',
+  TEX_READY: 'texturesReady',
+}
 
 const TileSetEventType = {
   INITIAL_TILES_LOADED: 'initialTilesLoaded',
@@ -126,6 +129,7 @@ export {
   LayerEventType,
   OverlayEventType,
   TileSetEventType,
+  ModelEventType,
   TrackEventType,
   PathEventType,
   PlotEventType,
