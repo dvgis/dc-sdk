@@ -142,7 +142,9 @@ class Viewer {
   }
 
   get cameraPosition() {
-    let position = Transform.transformCartesianToWGS84(this.camera.positionWC)
+    let position = Transform.transformCartographicToWGS84(
+      this.camera.positionCartographic
+    )
     if (position) {
       position.heading = Cesium.Math.toDegrees(this.camera.heading)
       position.pitch = Cesium.Math.toDegrees(this.camera.pitch)
@@ -186,7 +188,7 @@ class Viewer {
   }
 
   get zoom() {
-    let height = this._delegate.camera.positionCartographic.height
+    let height = this.camera.positionCartographic.height
     let A = 40487.57
     let B = 0.00007096758
     let C = 91610.74
