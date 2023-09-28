@@ -50,7 +50,7 @@
             item,
             '../assets/data/Cesium_Air.glb'
           )
-          model.on('ready', (model) => {
+          model.on(DC.ModelEventType.READY, (model) => {
             model.activeAnimations.add({
               index: 0,
               loop: 1,
