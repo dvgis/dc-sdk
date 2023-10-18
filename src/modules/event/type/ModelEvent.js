@@ -33,7 +33,7 @@ class ModelEvent extends Event {
   }
 
   off(type, callback, context) {
-    this._tileset.then((model) => {
+    this._model.then((model) => {
       switch (type) {
         case ModelEventType.READY:
           model.readyEvent.removeEventListener(callback, context || this)
