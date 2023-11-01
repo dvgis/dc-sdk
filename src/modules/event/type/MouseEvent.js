@@ -236,6 +236,7 @@ class MouseEvent extends Event {
     let targetInfo = this._getTargetInfo(mouseInfo.target)
     let overlay = targetInfo?.overlay
     let layer = targetInfo?.layer
+
     // get Overlay Event
     if (overlay?.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
@@ -386,7 +387,10 @@ class MouseEvent extends Event {
    * @private
    */
   _leftUpHandler(movement) {
-    this._raiseEvent(MouseEventType.LEFT_UP, { movement })
+    this._raiseEvent(
+      MouseEventType.LEFT_UP,
+      this._getMouseInfo(movement.position)
+    )
   }
 
   /**
@@ -410,7 +414,10 @@ class MouseEvent extends Event {
    * @private
    */
   _rightUpHandler(movement) {
-    this._raiseEvent(MouseEventType.RIGHT_UP, { movement })
+    this._raiseEvent(
+      MouseEventType.RIGHT_UP,
+      this._getMouseInfo(movement.position)
+    )
   }
 
   /**
