@@ -110,6 +110,10 @@ const EXAMPLE_LIST = [
         page: 'overlay_mouse.html',
       },
       {
+        name: '要素鼠标事件(支持冒泡)',
+        page: 'overlay_mouse_propagation.html',
+      },
+      {
         name: '相机事件',
         page: 'camera.html',
       },

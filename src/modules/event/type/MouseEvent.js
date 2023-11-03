@@ -10,10 +10,11 @@ import Event from '../Event'
  * Mouse events in 3D scene, optimized Cesium event model
  */
 class MouseEvent extends Event {
-  constructor(viewer) {
+  constructor(viewer, eventPropagation) {
     super(MouseEventType)
     this._viewer = viewer
     this._selected = undefined
+    this._eventPropagation = eventPropagation
     this._registerEvent()
     this._addDefaultEvent()
   }
@@ -240,27 +241,41 @@ class MouseEvent extends Event {
     // get Overlay Event
     if (overlay?.overlayEvent) {
       event = overlay.overlayEvent.getEvent(type)
+      event &&
+        event.numberOfListeners > 0 &&
+        event.raiseEvent({
+          ...targetInfo,
+          ...mouseInfo,
+        })
     }
 
     // get Layer Event
-    if ((!event || event.numberOfListeners === 0) && layer?.layerEvent) {
+    if (
+      (!event || event.numberOfListeners === 0 || this._eventPropagation) &&
+      layer?.layerEvent
+    ) {
       event = layer.layerEvent.getEvent(type)
+      event &&
+        event.numberOfListeners > 0 &&
+        event.raiseEvent({
+          ...targetInfo,
+          ...mouseInfo,
+        })
     }
 
     // get Viewer Event
     if (
-      (!event || event.numberOfListeners === 0) &&
+      (!event || event.numberOfListeners === 0 || this._eventPropagation) &&
       this._viewer?.viewerEvent
     ) {
       event = this._viewer.viewerEvent.getEvent(type)
+      event &&
+        event.numberOfListeners > 0 &&
+        event.raiseEvent({
+          ...targetInfo,
+          ...mouseInfo,
+        })
     }
-
-    event &&
-      event.numberOfListeners > 0 &&
-      event.raiseEvent({
-        ...targetInfo,
-        ...mouseInfo,
-      })
 
     // get Drill Pick Event
     if (overlay?.allowDrillPicking) {

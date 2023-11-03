@@ -26,7 +26,9 @@
       }
 
       function initViewer() {
-        viewer = new DC.Viewer('viewer-container')
+        viewer = new DC.Viewer('viewer-container', {
+          eventPropagation: true,
+        })
         let baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
           style: 'img',
           crs: 'WGS84',
@@ -52,6 +54,7 @@
         viewer.on(DC.MouseEventType.CLICK, (e) => {
           console.log('我是场景事件')
         })
+
         viewer.flyTo(layer)
       }
       DC.ready({
