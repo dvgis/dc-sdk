@@ -110,6 +110,10 @@ const EXAMPLE_LIST = [
         page: 'overlay_mouse.html',
       },
       {
+        name: '要素鼠标事件(支持冒泡)',
+        page: 'overlay_mouse_propagation.html',
+      },
+      {
         name: '相机事件',
         page: 'camera.html',
       },
@@ -490,6 +494,10 @@ const EXAMPLE_LIST = [
       {
         name: '模型（图元）',
         page: 'model_primitive.html',
+      },
+      {
+        name: '模型动画（图元）',
+        page: 'model_primitive_d.html',
       },
       {
         name: '3dtiles-3dmax',

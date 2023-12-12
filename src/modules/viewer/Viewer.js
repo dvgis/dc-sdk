@@ -42,7 +42,7 @@ class Viewer {
     /**
      *  Registers events
      */
-    new MouseEvent(this) // Register global mouse events
+    new MouseEvent(this, options.eventPropagation) // Register global mouse events
     this._viewerEvent = new ViewerEvent() // Register viewer events
     this._sceneEvent = new SceneEvent(this) // Register scene events
 

@@ -1,53 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>dc-example</title>
+    <script src="/libs/dc-sdk/dc.min.js"></script>
+    <link href="/libs/dc-sdk/dc.min.css" type="text/css" rel="stylesheet" />
+    <link href="../index.css" type="text/css" rel="stylesheet" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <title>dc-example</title>
-  <script src='/libs/dc-sdk/dc.min.js'></script>
-  <link href='/libs/dc-sdk/dc.min.css' type='text/css' rel='stylesheet'>
-  <link href='../index.css' type='text/css' rel='stylesheet'>
-</head>
+  <body>
+    <div id="viewer-container" class="viewer-container"></div>
+    <script>
+      let viewer = undefined
 
-<body>
+      function generatePosition(num) {
+        let list = []
+        for (let i = 0; i < num; i++) {
+          let lng = 120.38105869 + Math.random() * 0.5
+          let lat = 31.10115627 + Math.random() * 0.5
+          list.push(
+            new DC.Position(
+              lng,
+              lat,
+              1000 * Math.random(),
+              3600 * Math.random()
+            )
+          )
+        }
+        return list
+      }
 
-<div id="viewer-container" class="viewer-container"></div>
-<script>
-  let viewer = undefined
-
-  function generatePosition(num) {
-    let list = []
-    for (let i = 0; i < num; i++) {
-      let lng = 120.38105869 + Math.random() * 0.5
-      let lat = 31.10115627 + Math.random() * 0.5
-      list.push(new DC.Position(lng, lat,1000 * Math.random(),3600 * Math.random()))
-    }
-    return list
-  }
-
-  function initViewer() {
-    viewer = new DC.Viewer('viewer-container')
-    let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
-      style:'img',
-      crs:'WGS84'
-    })
-    viewer.addBaseLayer( baseLayer,{
-      brightness:0.1
-    })
-    let layer = new DC.PrimitiveLayer('layer').addTo(viewer)
-    let positions = generatePosition(1000)
-    positions.forEach(item => {
-      let model = new DC.ModelPrimitive(item,"../assets/data/Cesium_Air.glb")
-      model.setStyle({scale:50})
-      layer.addOverlay(model)
-    })
-   viewer.flyToPosition("120.82005120445152,30.903795335982288,60975.10826917929,341.02,-50.29")
-
-  }
- DC.ready({
-    baseUrl:'../libs/dc-sdk/resources/'
-  }).then(initViewer)
-</script>
-</body>
+      function initViewer() {
+        viewer = new DC.Viewer('viewer-container')
+        let baseLayer = DC.ImageryLayerFactory.createImageryLayer(
+          DC.ImageryType.AMAP,
+          {
+            style: 'img',
+            crs: 'WGS84',
+          }
+        )
+        viewer.addBaseLayer(baseLayer, {
+          brightness: 0.1,
+        })
+        let layer = new DC.PrimitiveLayer('layer').addTo(viewer)
+        let positions = generatePosition(1000)
+        positions.forEach((item) => {
+          let model = new DC.ModelPrimitive(
+            item,
+            '../assets/data/Cesium_Air.glb'
+          )
+          model.setStyle({ scale: 50 })
+          layer.addOverlay(model)
+        })
+        viewer.flyToPosition(
+          '120.82005120445152,30.903795335982288,60975.10826917929,341.02,-50.29'
+        )
+      }
+      DC.ready({
+        baseUrl: '../libs/dc-sdk/resources/',
+      }).then(initViewer)
+    </script>
+  </body>
 </html>

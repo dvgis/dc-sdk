@@ -13,7 +13,7 @@ import { Util } from '../../utils'
 class DynamicBillboard extends DynamicOverlay {
   constructor(position, icon) {
     super()
-    this._posistion = Parse.parsePosition(position)
+    this._position = Parse.parsePosition(position)
     this._icon = icon
     this._delegate = new Cesium.Entity({ billboard: {} })
     this._state = State.INITIALIZED
@@ -54,7 +54,7 @@ class DynamicBillboard extends DynamicOverlay {
     this._startTime = Cesium.JulianDate.now()
     this._sampledPosition.addSample(
       this._startTime,
-      Transform.transformWGS84ToCartesian(this._posistion)
+      Transform.transformWGS84ToCartesian(this._position)
     )
     this._delegate.position = this._sampledPosition
     this._cache.push(this._startTime)

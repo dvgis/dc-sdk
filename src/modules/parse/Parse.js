@@ -49,19 +49,6 @@ class Parse {
       positions = positions.split(';').filter((item) => !!item)
     }
     return positions.map((item) => {
-      // if (typeof item === 'string') {
-      //   return Position.fromString(item)
-      // } else if (Array.isArray(item)) {
-      //   return Position.fromArray(item)
-      // } else if (
-      //   !(Object(item) instanceof Position) &&
-      //   Object(item).hasOwnProperty('lng') &&
-      //   Object(item).hasOwnProperty('lat')
-      // ) {
-      //   return Position.fromObject(item)
-      // } else if (Object(item) instanceof Position) {
-      //   return item
-      // }
       return this.parsePosition(item)
     })
   }

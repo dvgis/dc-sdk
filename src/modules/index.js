@@ -4,7 +4,12 @@
 
 export { default as Viewer } from './viewer/Viewer'
 
-export { MouseEventType, SceneEventType } from './event'
+export {
+  MouseEventType,
+  SceneEventType,
+  TileSetEventType,
+  ModelEventType,
+} from './event'
 
 export { MouseMode } from './option'
 

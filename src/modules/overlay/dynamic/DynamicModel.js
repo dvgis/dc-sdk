@@ -12,7 +12,7 @@ import { Util } from '../../utils'
 class DynamicModel extends DynamicOverlay {
   constructor(position, modelUrl) {
     super()
-    this._posistion = Parse.parsePosition(position)
+    this._position = Parse.parsePosition(position)
     this._modelUrl = modelUrl
     this._delegate = new Cesium.Entity({ model: {} })
     this._state = State.INITIALIZED
@@ -40,7 +40,7 @@ class DynamicModel extends DynamicOverlay {
     this._startTime = Cesium.JulianDate.now()
     this._sampledPosition.addSample(
       this._startTime,
-      Transform.transformWGS84ToCartesian(this._posistion)
+      Transform.transformWGS84ToCartesian(this._position)
     )
     this._delegate.position = this._sampledPosition
     this._delegate.orientation = new Cesium.VelocityOrientationProperty(

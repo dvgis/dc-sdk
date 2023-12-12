@@ -8,6 +8,7 @@ import State from '../../state/State'
 import Parse from '../../parse/Parse'
 import { Transform } from '../../transform'
 import { Util } from '../../utils'
+import { ModelEvent } from '../../event'
 
 class ModelPrimitive extends Overlay {
   constructor(position, modelUrl) {
@@ -15,6 +16,7 @@ class ModelPrimitive extends Overlay {
     this._position = Parse.parsePosition(position)
     this._modelUrl = modelUrl
     this._delegate = Cesium.Model.fromGltfAsync({ url: modelUrl })
+    this._modelEvent = new ModelEvent(this._delegate)
     this._state = State.INITIALIZED
   }
 
@@ -78,6 +80,32 @@ class ModelPrimitive extends Overlay {
     this._delegate.then((model) => {
       Util.merge(model, style)
     })
+    return this
+  }
+
+  /**
+   * Subscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Overlay}
+   */
+  on(type, callback, context) {
+    this._overlayEvent.on(type, callback, context || this)
+    this._modelEvent.on(type, callback, context || this)
+    return this
+  }
+
+  /**
+   * Unsubscribe event
+   * @param type
+   * @param callback
+   * @param context
+   * @returns {Overlay}
+   */
+  off(type, callback, context) {
+    this._overlayEvent.off(type, callback, context || this)
+    this._modelEvent.off(type, callback, context || this)
     return this
   }
 }
