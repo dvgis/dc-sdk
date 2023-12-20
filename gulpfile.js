@@ -338,6 +338,7 @@ export const dev = gulp.series(
   copyAssets,
   () => {
     shell.echo(chalk.yellow('============= start dev =============='))
+    let jsContent = null
     const watcher = chokidar.watch('src', {
       persistent: true,
       awaitWriteFinish: {
@@ -345,22 +346,25 @@ export const dev = gulp.series(
         pollInterval: 100,
       },
     })
-    fse.readFile(path.join('dist', 'namespace.js'), 'utf8').then((content) => {
-      watcher
-        .on('ready', async () => {
-          await regenerate({ iife: true }, content)
-          await startServer()
-        })
-        .on('change', async () => {
-          let now = new Date()
-          await regenerate({ iife: true }, content)
-          shell.echo(
-            chalk.green(
-              `regenerate lib takes ${new Date().getTime() - now.getTime()} ms`
-            )
+    watcher
+      .on('ready', async () => {
+        jsContent = fse.readFileSync(path.join('dist', 'namespace.js'), 'utf8')
+        await regenerate({ iife: true }, jsContent)
+        await startServer()
+      })
+      .on('change', async () => {
+        let now = new Date().getTime()
+        if (!jsContent) {
+          jsContent = fse.readFileSync(
+            path.join('dist', 'namespace.js'),
+            'utf8'
           )
-        })
-    })
+        }
+        await regenerate({ iife: true }, jsContent)
+        shell.echo(
+          chalk.bgGreen(`regenerate lib takes ${new Date().getTime() - now} ms`)
+        )
+      })
     return watcher
   }
 )

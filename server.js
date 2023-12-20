@@ -16,7 +16,9 @@ export default function start() {
     if (exists) {
       portfinder.getPort((err, port) => {
         server.listen(port)
-        shell.echo(chalk.yellow(`the url is : http://localhost:${port}`))
+        shell.echo('\nExamples running at: ')
+        shell.echo('- Local:  ' + chalk.yellow(`http://localhost:${port}`))
+        shell.echo('\n')
         server.use('/libs/dc-sdk/', express.static(dist))
         server.use(express.static('examples'))
       })
