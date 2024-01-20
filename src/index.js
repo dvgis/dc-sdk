@@ -19,6 +19,8 @@ export const config = {
 }
 
 export function ready(options = {}) {
+  __cmdOut && __cmdOut()
+
   if (options['baseUrl']) {
     this.config.baseUrl = options['baseUrl']
   }
@@ -41,8 +43,6 @@ export function ready(options = {}) {
   } else {
     registerLib('Supercluster', this['__namespace']['Supercluster'])
   }
-
-  this['__cmdOut'] && this['__cmdOut']()
 
   return new Promise((resolve, reject) => {
     const Cesium = getLib('Cesium')

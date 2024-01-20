@@ -97,8 +97,8 @@ async function buildModules(options) {
     'utf8'
   )
 
-  const exportCmdOut = `
-        export function __cmdOut() {
+  const cmdOutFunction = `
+        function __cmdOut() {
           ${cmdOut_content
             .replace('{{__VERSION__}}', packageJson.version)
             .replace('{{__TIME__}}', getTime())
@@ -123,10 +123,9 @@ async function buildModules(options) {
     await fse.outputFile(
       dcPath,
       `
-              ${exportVersion}
-              ${exportCmdOut}
               ${content}
-
+              ${cmdOutFunction}
+              ${exportVersion}
             `,
       {
         encoding: 'utf8',
@@ -145,10 +144,10 @@ async function buildModules(options) {
     await fse.outputFile(
       dcPath,
       `
-            ${exportNamespace}
-            ${exportVersion}
-            ${exportCmdOut}
             ${content}
+            ${exportVersion}
+            ${exportNamespace}
+            ${cmdOutFunction}
             `,
       {
         encoding: 'utf8',
