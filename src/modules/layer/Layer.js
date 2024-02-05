@@ -118,7 +118,7 @@ class Layer {
           this._viewer.scene.primitives.remove(this._delegate)
         }
       } else if (this._delegate instanceof Cesium.ImageryLayer) {
-        this._viewer.imageryLayers.remove(this._delegate)
+        this._viewer.imageryLayers.remove(this._delegate, false)
       } else if (this._delegate instanceof Promise) {
         this._delegate.then((dataSource) => {
           dataSource.entities.removeAll()
