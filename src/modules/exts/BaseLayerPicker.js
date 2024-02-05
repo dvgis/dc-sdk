@@ -42,7 +42,7 @@ class BaseLayerPicker {
       let layer = imageryLayer.layers[i]
       let imagery = ImageryLayer.fromProviderAsync(layer, imageryLayer.options)
       layer && this._globe.imageryLayers.add(imagery, 0)
-      imageryLayer.cache = [imagery]
+      imageryLayer.cache.push(imagery)
     }
     this._selectedImageryLayer = imageryLayer
   }
