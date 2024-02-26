@@ -234,6 +234,10 @@ const EXAMPLE_LIST = [
         page: 'cluster_circle.html',
       },
       {
+        name: '聚合图层(自定义图片)',
+        page: 'cluster_clustering_image.html',
+      },
+      {
         name: '经纬网格图层',
         page: 'graticule.html',
       },

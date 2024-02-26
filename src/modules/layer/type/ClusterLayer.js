@@ -48,6 +48,7 @@ class ClusterLayer extends Layer {
     })
     this._allCount = 0
     this._changedRemoveCallback = undefined
+    this._lastChangedTime = null
     this._state = State.INITIALIZED
   }
 
@@ -172,7 +173,12 @@ class ClusterLayer extends Layer {
     return image
   }
 
-  _changeCluster() {
+  _changeCluster(time) {
+    let now = Cesium.getTimestamp()
+    if (this._lastChangedTime && now - this._lastChangedTime <= 1000) {
+      return
+    }
+    this._lastChangedTime = now
     this._cache = {}
     this._billboards.removeAll()
     this._labels.removeAll()
@@ -187,7 +193,6 @@ class ClusterLayer extends Layer {
         ],
         this._viewer.zoom
       )
-
       result.forEach((item) => {
         let overlayId = Util.uuid()
         if (item.properties.cluster) {
