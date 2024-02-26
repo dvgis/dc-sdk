@@ -96,10 +96,10 @@ class ImageryLayerFactory {
   /**
    * Create single tile imagery layer
    * @param options
-   * @returns {Promise<ImageryProvider>}
+   * @returns {<SingleTileImageryProvider>}
    */
   static createSingleTileImageryLayer(options) {
-    return new Cesium.SingleTileImageryProvider.fromUrl(options.url, options)
+    return Cesium.SingleTileImageryProvider.fromUrl(options.url, options)
   }
 
   /**
