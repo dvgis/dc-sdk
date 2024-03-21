@@ -1,6 +1,18 @@
 # Change Log
 
-# Change Log
+### 3.3.0 - 2024-03-21
+
+#### Breaking Changes 📣
+
+- Upgraded @cesium/engine to version 8.0.0
+- Optimize packaging, remove rollup packaging
+
+#### Fixes 🔧
+
+- Optimize aggregated layer calculation interval
+- Solve raster tile deletion and destruction problem
+- Solve bottom image deletion problem
+- Solve the problem that single-image tiles can not be loaded
 
 ### 3.2.0 - 2023-09-25
 
