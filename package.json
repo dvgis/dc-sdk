@@ -65,5 +65,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@dvgis/dc-common": "^1.0.0"
+  }
 }

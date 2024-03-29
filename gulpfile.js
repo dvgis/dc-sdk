@@ -18,7 +18,13 @@ import { glsl } from 'esbuild-plugin-glsl'
 import shell from 'shelljs'
 import chalk from 'chalk'
 
+const dc_common_path = './node_modules/@dvgis/dc-common'
+
 const packageJson = fse.readJsonSync('./package.json')
+
+const c_packageJson = fse.readJsonSync(
+  path.join(dc_common_path, 'package.json')
+)
 
 const obfuscatorConfig = {
   compact: true, //压缩代码
@@ -44,7 +50,6 @@ const buildConfig = {
   sourcemap: false,
   write: true,
   logLevel: 'info',
-  external: [`http`, `https`, `url`, `zlib`],
   plugins: [
     inlineImage({
       limit: -1,
@@ -61,17 +66,6 @@ function getTime() {
   let d = now.getDate()
   d = d < 10 ? '0' + d : d
   return `${now.getFullYear()}-${m}-${d}`
-}
-
-async function buildNamespace(options) {
-  await esbuild.build({
-    ...buildConfig,
-    entryPoints: ['libs/index.js'],
-    format: 'iife',
-    globalName: options.node ? 'ns' : 'DC.__namespace',
-    minify: options.minify,
-    outfile: path.join('dist', options.node ? 'namespace.cjs' : 'namespace.js'),
-  })
 }
 
 async function buildCSS(options) {
@@ -104,17 +98,20 @@ async function buildModules(options) {
             .replace('{{__TIME__}}', getTime())
             .replace(
               '{{__ENGINE_VERSION__}}',
-              packageJson.devDependencies['@cesium/engine'].replace('^', '')
+              c_packageJson.devDependencies['@cesium/engine'].replace('^', '')
             )
             .replace('{{__AUTHOR__}}', packageJson.author)
             .replace('{{__HOME_PAGE__}}', packageJson.homepage)
             .replace('{{__REPOSITORY__}}', packageJson.repository)}
     }`
 
+  const importNamespace = `
+       import {Cesium , Supercluster } from '@dvgis/dc-common'
+     `
   const exportNamespace = `
         export const __namespace = {
-            Cesium: ns.Cesium,
-            Supercluster: ns.Supercluster
+            Cesium :  Cesium,
+            Supercluster: Supercluster
         }
      `
 
@@ -135,7 +132,7 @@ async function buildModules(options) {
       ...buildConfig,
       format: 'iife',
       globalName: 'DC',
-      outfile: path.join('dist', 'modules.js'),
+      outfile: path.join('dist', 'modules-iife.js'),
     })
   }
 
@@ -144,6 +141,7 @@ async function buildModules(options) {
     await fse.outputFile(
       dcPath,
       `
+            ${importNamespace}
             ${content}
             ${exportVersion}
             ${exportNamespace}
@@ -155,12 +153,13 @@ async function buildModules(options) {
     )
     await esbuild.build({
       ...buildConfig,
-      format: 'cjs',
+      format: 'esm',
       platform: 'node',
       define: {
         TransformStream: 'null',
       },
-      outfile: path.join('dist', 'modules.cjs'),
+      external: ['@dvgis/dc-common'],
+      outfile: path.join('dist', 'index.js'),
     })
   }
 
@@ -173,68 +172,47 @@ async function combineJs(options) {
   if (options.iife) {
     if (options.obfuscate) {
       await gulp
-        .src('dist/modules.js')
+        .src('dist/modules-iife.js')
         .pipe(javascriptObfuscator(obfuscatorConfig))
-        .pipe(gulp.src('dist/namespace.js'))
+        .pipe(gulp.src(path.join(dc_common_path, 'dist', '__namespace.js')))
         .pipe(concat('dc.min.js'))
         .pipe(gulp.dest('dist'))
         .on('end', () => {
           addCopyright(options)
-          deleteTempFile(options)
+          deleteTempFile()
         })
     } else {
       await gulp
-        .src(['dist/modules.js', 'dist/namespace.js'])
+        .src([
+          'dist/modules-iife.js',
+          path.join(dc_common_path, 'dist', '__namespace.js'),
+        ])
         .pipe(concat('dc.min.js'))
         .pipe(gulp.dest('dist'))
         .on('end', () => {
           addCopyright(options)
-          deleteTempFile(options)
+          deleteTempFile()
         })
     }
   }
 
   // combine for node
-  if (options.node) {
-    if (options.obfuscate) {
-      await gulp
-        .src('dist/modules.cjs')
-        .pipe(javascriptObfuscator(obfuscatorConfig))
-        .pipe(gulp.dest('dist'))
-        .on('end', async () => {
-          await gulp
-            .src(['dist/namespace.cjs', 'dist/modules.cjs'])
-            .pipe(concat('index.cjs'))
-            .pipe(gulp.dest('dist'))
-            .on('end', () => {
-              addCopyright(options)
-              deleteTempFile(options)
-            })
-        })
-    } else {
-      await gulp
-        .src(['dist/namespace.cjs', 'dist/modules.cjs'])
-        .pipe(concat('index.cjs'))
-        .pipe(gulp.dest('dist'))
-        .on('end', () => {
-          addCopyright(options)
-          deleteTempFile(options)
-        })
-    }
+  if (options.node && options.obfuscate) {
+    await gulp
+      .src('dist/index.js')
+      .pipe(javascriptObfuscator(obfuscatorConfig))
+      .pipe(gulp.dest('dist'))
+      .on('end', () => {
+        addCopyright(options)
+      })
   }
 }
 
 async function copyAssets() {
   await fse.emptyDir('dist/resources')
   await gulp
-    .src('./node_modules/@cesium/engine/Build/Workers/**', { nodir: true })
-    .pipe(gulp.dest('dist/resources/Workers'))
-  await gulp
-    .src('./node_modules/@cesium/engine/Source/Assets/**', { nodir: true })
-    .pipe(gulp.dest('dist/resources/Assets'))
-  await gulp
-    .src('./node_modules/@cesium/engine/Source/ThirdParty/**', { nodir: true })
-    .pipe(gulp.dest('dist/resources/ThirdParty'))
+    .src(dc_common_path + '/dist/resources/**', { nodir: true })
+    .pipe(gulp.dest('dist/resources'))
 }
 
 async function addCopyright(options) {
@@ -254,30 +232,19 @@ async function addCopyright(options) {
   }
 
   if (options.node) {
-    let filePath = path.join('dist', 'index.cjs')
+    let filePath = path.join('dist', 'index.js')
     const content = await fse.readFile(filePath, 'utf8')
     await fse.outputFile(filePath, `${header}${content}`, { encoding: 'utf8' })
   }
 }
 
-async function deleteTempFile(options) {
-  if (options.iife) {
-    await gulp
-      .src(['dist/namespace.js', 'dist/modules.js'], { read: false })
-      .pipe(clean())
-  }
-
-  if (options.node) {
-    await gulp
-      .src(['dist/namespace.cjs', 'dist/modules.cjs'], { read: false })
-      .pipe(clean())
-  }
+async function deleteTempFile() {
+  await gulp.src(['dist/modules-iife.js'], { read: false }).pipe(clean())
 }
 
 async function regenerate(option, content) {
   await fse.remove('dist/dc.min.js')
   await fse.remove('dist/dc.min.css')
-  await fse.outputFile(path.join('dist', 'namespace.js'), content)
   await buildModules(option)
   await combineJs(option)
   await buildCSS(option)
@@ -286,11 +253,9 @@ async function regenerate(option, content) {
 export const server = gulp.series(startServer)
 
 export const dev = gulp.series(
-  () => buildNamespace({ iife: true }),
-  copyAssets,
+  () => copyAssets(),
   () => {
     shell.echo(chalk.yellow('============= start dev =============='))
-    let jsContent = null
     const watcher = gulp.watch('src', {
       persistent: true,
       awaitWriteFinish: {
@@ -300,19 +265,12 @@ export const dev = gulp.series(
     })
     watcher
       .on('ready', async () => {
-        jsContent = fse.readFileSync(path.join('dist', 'namespace.js'), 'utf8')
-        await regenerate({ iife: true }, jsContent)
+        await regenerate({ iife: true })
         await startServer()
       })
       .on('change', async () => {
         let now = new Date().getTime()
-        if (!jsContent) {
-          jsContent = fse.readFileSync(
-            path.join('dist', 'namespace.js'),
-            'utf8'
-          )
-        }
-        await regenerate({ iife: true }, jsContent)
+        await regenerate({ iife: true })
         shell.echo(
           chalk.green(`regenerate lib takes ${new Date().getTime() - now} ms`)
         )
@@ -321,40 +279,34 @@ export const dev = gulp.series(
   }
 )
 
-export const buildNode = gulp.series(
-  () => buildNamespace({ node: true, minify: true }),
-  () => buildModules({ node: true }),
-  () => combineJs({ node: true }),
+export const buildIIFE = gulp.series(
+  () => buildModules({ iife: true }),
+  () => combineJs({ iife: true }),
   () => buildCSS({ minify: true }),
   copyAssets
 )
 
-export const buildIIFE = gulp.series(
-  () => buildNamespace({ iife: true, minify: true }),
-  () => buildModules({ iife: true }),
-  () => combineJs({ iife: true }),
+export const buildNode = gulp.series(
+  () => buildModules({ node: true }),
+  () => combineJs({ node: true }),
   () => buildCSS({ minify: true }),
   copyAssets
 )
 
 export const build = gulp.series(
-  () => buildNamespace({ node: true, minify: true }),
-  () => buildModules({ node: true }),
-  () => combineJs({ node: true }),
-  () => buildNamespace({ iife: true, minify: true }),
   () => buildModules({ iife: true }),
   () => combineJs({ iife: true }),
+  () => buildModules({ node: true }),
+  () => combineJs({ node: true }),
   () => buildCSS({ minify: true }),
   copyAssets
 )
 
 export const buildRelease = gulp.series(
-  () => buildNamespace({ node: true, minify: true }),
-  () => buildModules({ node: true }),
-  () => combineJs({ node: true, obfuscate: true }),
-  () => buildNamespace({ iife: true, minify: true }),
   () => buildModules({ iife: true }),
   () => combineJs({ iife: true, obfuscate: true }),
+  () => buildModules({ node: true }),
+  () => combineJs({ node: true, obfuscate: true }),
   () => buildCSS({ minify: true }),
   copyAssets
 )
