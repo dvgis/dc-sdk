@@ -9,7 +9,7 @@ import Parse from '../../parse/Parse'
 import { Util } from '../../utils'
 import { Transform } from '../../transform'
 
-class Ellipsoid extends Overlay {
+class Sphere extends Overlay {
   constructor(position, radius) {
     super()
     this._position = Parse.parsePosition(position)
@@ -19,7 +19,7 @@ class Ellipsoid extends Overlay {
   }
 
   get type() {
-    return Overlay.getOverlayType('ellipsoid')
+    return Overlay.getOverlayType('sphere')
   }
 
   set position(position) {
@@ -65,7 +65,7 @@ class Ellipsoid extends Overlay {
   /**
    * Sets Style
    * @param style
-   * @returns {Ellipsoid}
+   * @returns {Sphere}
    */
   setStyle(style) {
     if (Object.keys(style).length === 0) {
@@ -80,4 +80,4 @@ class Ellipsoid extends Overlay {
 
 Overlay.registerType('ellipsoid')
 
-export default Ellipsoid
+export default Sphere

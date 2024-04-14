@@ -36,6 +36,7 @@ export const THIRD_PART = {
   CustomShader: Cesium.CustomShader,
   UniformType: Cesium.UniformType,
   Math: Cesium.Math,
+  Ellipsoid: Cesium.Ellipsoid,
   Resource: Cesium.Resource,
   createGooglePhotorealistic3DTileset:
     Cesium.createGooglePhotorealistic3DTileset,
