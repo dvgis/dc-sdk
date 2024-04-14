@@ -4,7 +4,7 @@
 
 import { Cesium } from '../../namespace'
 import ImageryType from './ImageryType'
-import AmapImageryProvider from './provider/AmapImageryProvider'
+import AMapImageryProvider from './provider/AMapImageryProvider.js'
 import BaiduImageryProvider from './provider/BaiduImageryProvider'
 import GeoVisImageryProvider from './provider/GeoVisImageryProvider.js'
 import GoogleImageryProvider from './provider/GoogleImageryProvider'
@@ -15,10 +15,10 @@ class ImageryLayerFactory {
   /**
    * Create amap imagery layer
    * @param options
-   * @returns {Promise<AmapImageryProvider>}
+   * @returns {Promise<AMapImageryProvider>}
    */
-  static createAmapImageryLayer(options) {
-    return Promise.resolve(new AmapImageryProvider(options))
+  static createAMapImageryLayer(options) {
+    return Promise.resolve(new AMapImageryProvider(options))
   }
 
   /**
@@ -184,7 +184,7 @@ class ImageryLayerFactory {
     let promise = undefined
     switch (type) {
       case ImageryType.AMAP:
-        promise = this.createAmapImageryLayer(options)
+        promise = this.createAMapImageryLayer(options)
         break
       case ImageryType.BAIDU:
         promise = this.createBaiduImageryLayer(options)
