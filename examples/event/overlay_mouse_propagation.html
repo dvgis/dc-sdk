@@ -29,7 +29,7 @@
         viewer = new DC.Viewer('viewer-container', {
           eventPropagation: true,
         })
-        let baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+        let baseLayer = DC.ImageryLayerFactory.createImageryLayer(DC.ImageryType.AMAP,{
           style: 'img',
           crs: 'WGS84',
         })
