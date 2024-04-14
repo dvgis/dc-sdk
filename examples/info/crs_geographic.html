@@ -25,10 +25,7 @@
   let viewer = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    viewer.addBaseLayer(DC.ImageryLayerFactory.createCoordImageryLayer({
-      tilingScheme: new DC.WebMercatorTilingScheme(),
-      }
-    ))
+    viewer.addBaseLayer(DC.ImageryLayerFactory.createCoordImageryLayer())
     addGuiController() // add controller
   }
 
