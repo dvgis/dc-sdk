@@ -2,6 +2,105 @@
 
 构建地球表面的地形和图片，展现地球表面的真实状态
 
+
+## DC.CustomGeographicTilingScheme
+
+> 自定义地理平铺方案
+
+根据瓦片的比例尺`(degrees/px)`和切图原点重新计算瓦片行列号,最终会采用`EPSG:4326`的瓦片计算规则平铺瓦片`(可能会存在偏移)`
+
+### example
+
+```js
+ viewer.addBaseLayer(DC.ImageryLayerFactory.createCoordImageryLayer({
+  tilingScheme: new DC.CustomGeographicTilingScheme(
+    {
+      origin: [-180,90],
+      resolutions: [
+        0.703125,
+        0.3515625,
+        0.17578125,
+        0.087890625
+      ],
+    }
+  ),
+}))
+
+```
+
+
+### creation
+
+- **_constructor(options)_**
+
+  构造函数
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `tilingScheme`
+
+```json
+// 属性参数 
+{
+  "origin": [-180,90], // 切图原点，默认为[-180,90]，必选
+  "zoomOffset": 0, //瓦片的0级对应Cesium的瓦片层级，值为： 0 - Cesium层级，若瓦片的0级对应Cesium的10级，则值为 0 - 10 = -10，同时在瓦片请求时{z}的数值替换时也需加上这个层级偏移值
+  "tileSize": 256, //瓦片的大小，默认为256，即一张瓦片的大小为 256 * 256
+  "resolutions": [],//瓦片每一层级分辨率
+  "ellipsoid": DC.Ellipsoid.WGS84,// 平铺的椭球体,默认为 WGS84 椭球
+  "rectangle": DC.Rectangle.MAX_VALUE,//平铺方案覆盖的矩形（以弧度表示）
+}
+```
+
+## CustomMercatorTilingScheme
+
+> 自定义墨卡托平铺方案
+
+根据瓦片的比例尺`(meters/px)`和切图原点重新计算瓦片行列号,最终会采用`EPSG:3857`的瓦片计算规则平铺瓦片`(可能会存在偏移)`
+
+### example
+
+```js
+ viewer.addBaseLayer(DC.ImageryLayerFactory.createCoordImageryLayer({
+  tilingScheme: new DC.CustomGeographicTilingScheme(
+    {
+      origin: [-20037508.3427892, 20037508.3427892],
+      resolutions: [
+        156543.033928,
+        78271.516964,
+        39135.758482,
+        19567.879241,
+        9783.939621,
+      ],
+    }
+  ),
+}))
+
+```
+
+### creation
+
+- **_constructor(options)_**
+
+  构造函数
+
+  - 参数
+    - `{Object} options`：配置
+  - 返回值 `tilingScheme`
+
+```json
+// 属性参数 
+{
+  "origin": [-20037508.3427892, 20037508.3427892], //切图原点，默认为[-20037508.3427892, 20037508.3427892]，必选
+  "zoomOffset": 0, //瓦片的0级对应Cesium的瓦片层级，值为： 0 - Cesium层级，若瓦片的0级对应Cesium的10级，则值为 0 - 10 = -10，同时在瓦片请求时{z}的数值替换时也需加上这个层级偏移值
+  "tileSize": 256, //瓦片的大小，默认为256，即一张瓦片的大小为 256 * 256
+  "resolutions": [],//瓦片每一层级分辨率，必选
+  "ellipsoid": DC.Ellipsoid.WGS84,// 平铺的椭球体,默认为 WGS84 椭球
+  "rectangleSouthwestInMeters": null,//切片方案覆盖的矩形的西南角，以米为单位。如果不指定该参数或矩形NortheastInMeters，则在经度方向上覆盖整个地球，在纬度方向上覆盖等距离，形成正方形投影
+  "rectangleNortheastInMeters": null,//切片方案覆盖的矩形的东北角（以米为单位）。如果未指定此参数或矩形SouthwestInMeters，则在经度方向上覆盖整个地球，并在纬度方向上覆盖相等的距离，从而形成方形投影。
+}
+
+```
+
 ## DC.ImageryLayerFactory
 
 > 地图工厂, 用于创建各类地图瓦片

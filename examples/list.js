@@ -8,11 +8,23 @@ const EXAMPLE_LIST = [
         page: 'start.html',
       },
       {
-        name: '坐标参考',
-        page: 'coord.html',
+        name: '坐标参考-地理平铺',
+        page: 'crs_geographic.html',
       },
       {
-        name: '自定义Cesium',
+        name: '坐标参考-Web墨卡托平铺',
+        page: 'crs_webMercator.html',
+      },
+      {
+        name: '坐标参考-自定义地理平铺',
+        page: 'crs_custom_geographic.html',
+      },
+      {
+        name: '坐标参考-自定义墨卡托平铺',
+        page: 'crs_custom_mercator.html',
+      },
+      {
+        name: '自定义Cesium版本',
         page: 'custom.html',
       },
     ],
@@ -393,11 +405,11 @@ const EXAMPLE_LIST = [
       },
       {
         name: '球',
-        page: 'ellipsoid.html',
+        page: 'sphere.html',
       },
       {
         name: '轨迹球',
-        page: 'ellipsoid_trail.html',
+        page: 'sphere_trail.html',
       },
       {
         name: '平面',

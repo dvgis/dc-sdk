@@ -21,7 +21,12 @@ export { Transform, Transform as T, CoordTransform } from './transform'
 
 export { default as Parse, default as P } from './parse/Parse'
 
-export { ImageryType, ImageryLayerFactory } from './imagery'
+export {
+  ImageryType,
+  ImageryLayerFactory,
+  CustomGeographicTilingScheme,
+  CustomMercatorTilingScheme,
+} from './imagery'
 
 export { TerrainType, TerrainFactory } from './terrain'
 
@@ -88,7 +93,7 @@ export {
   Corridor,
   Cylinder,
   Ellipse,
-  Ellipsoid,
+  Sphere,
   Label,
   Plane,
   Point,

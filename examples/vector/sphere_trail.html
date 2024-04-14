@@ -27,7 +27,7 @@
     let layer = new DC.VectorLayer('layer')
     viewer.addLayer(layer)
 
-    let ellipsoid = new DC.Ellipsoid('-108.0, 40.0',{x:200000.0, y:200000.0, z:200000.0}).setStyle({
+    let ellipsoid = new DC.Sphere('-108.0, 40.0',{x:200000.0, y:200000.0, z:200000.0}).setStyle({
       maximumCone: DC.Math.PI_OVER_TWO,
       material: new DC.EllipsoidTrailMaterialProperty({
         color: DC.Color.fromCssColorString('#00ffff'),

@@ -1113,7 +1113,7 @@ let ellipse = new DC.Ellipse(position, 20, 30)
 }
 ```
 
-## DC.Ellipsoid
+## DC.Sphere
 
 > 球体要素，继承于[Overlay](#overlay)
 
@@ -1121,7 +1121,7 @@ let ellipse = new DC.Ellipse(position, 20, 30)
 
 ```js
 let position = new DC.Position(120, 20)
-let ellipsoid = new DC.Ellipsoid(position, { x: 30, y: 30, z: 30 })
+let ellipsoid = new DC.Sphere(position, { x: 30, y: 30, z: 30 })
 ```
 
 ### creation
@@ -1133,7 +1133,7 @@ let ellipsoid = new DC.Ellipsoid(position, { x: 30, y: 30, z: 30 })
   - 参数
     - `{Position|Number|String|Object} position`：坐标
     - `{Object} radius`：半径，格式是：`{x: 30, y: 30, z: 30}`
-  - 返回值 `ellipsoid`
+  - 返回值 `sphere`
 
 ### properties
 
