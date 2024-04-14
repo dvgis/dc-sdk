@@ -108,7 +108,7 @@
 ### example
 
 ```js
-let baseLayer = DC.ImageryLayerFactory.createAmapImageryLayer({
+let baseLayer = DC.ImageryLayerFactory.createAMapImageryLayer({
   style: 'img',
 })
 viewer.addBaseLayer(baseLayer, {
@@ -119,7 +119,7 @@ viewer.addBaseLayer(baseLayer, {
 
 ### static methods
 
-- **_createAmapImageryLayer(options)_**
+- **_createAMapImageryLayer(options)_**
 
   创建高德地图
 
