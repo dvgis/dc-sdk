@@ -1,6 +1,6 @@
 {
   "name": "@dvgis/dc-sdk",
-  "version": "3.3.0",
+  "version": "3.5.0",
   "license": "MIT",
   "description": "The SDK is based on Cesium for secondary development of 2, 3D all-in-one WebGis application framework, the framework optimizes the use of Cesium and add some additional features, designed for developers to quickly build WebGis applications.",
   "repository": "https://github.com/dvgis/dc-sdk.git",
@@ -16,7 +16,7 @@
   ],
   "author": "Caven Chen <cavencj@gmail.com>",
   "type": "module",
-  "main": "dist/index.cjs",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "rimraf dist && gulp dev",
     "build": "rimraf dist && gulp build",
@@ -35,7 +35,7 @@
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-transform-runtime": "^7.21.4",
     "@babel/preset-env": "^7.21.5",
-    "@cesium/engine": "^8.0.0",
+    "@cesium/engine": "^9.1.0",
     "chalk": "^5.2.0",
     "esbuild": "^0.20.1",
     "esbuild-plugin-glsl": "^1.2.1",
@@ -67,6 +67,6 @@
     "dist"
   ],
   "dependencies": {
-    "@dvgis/dc-common": "^1.0.0"
+    "@dvgis/dc-common": "^2.0.0"
   }
 }

@@ -200,7 +200,12 @@ async function combineJs(options) {
   if (options.node && options.obfuscate) {
     await gulp
       .src('dist/index.js')
-      .pipe(javascriptObfuscator(obfuscatorConfig))
+      .pipe(
+        javascriptObfuscator({
+          ...obfuscatorConfig,
+          target: 'browser-no-eval',
+        })
+      )
       .pipe(gulp.dest('dist'))
       .on('end', () => {
         addCopyright(options)

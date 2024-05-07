@@ -9,6 +9,8 @@ const DEF_BASE_URL = './libs/dc-sdk/resources/'
 
 let _baseUrl = DEF_BASE_URL
 
+let __isInitialized = false
+
 export const config = {
   set baseUrl(baseUrl) {
     _baseUrl = baseUrl
@@ -19,8 +21,10 @@ export const config = {
 }
 
 export function ready(options = {}) {
+  if(__isInitialized){
+     return Promise.resolve()
+  }
   __cmdOut && __cmdOut()
-
   if (options['baseUrl']) {
     this.config.baseUrl = options['baseUrl']
   }
@@ -75,6 +79,7 @@ export function ready(options = {}) {
         this[key] = modules[key]
       })
     }
+    __isInitialized = true
     resolve()
   }).catch((e) => {
     throw new Error(e.message)
