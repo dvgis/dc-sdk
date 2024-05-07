@@ -113,9 +113,9 @@ class SceneSplit extends Widget {
     }
     if (tileset) {
       this._tileset && this._viewer.scene.primitives.remove(this._tileset)
-      this._tileset = this._viewer.scene.primitives.add(
-        tileset.delegate || tileset
-      )
+      Promise.resolve(tileset.delegate || tileset).then((tileset) => {
+        this._tileset = this._viewer.scene.primitives.add(tileset)
+      })
     }
     return this
   }
@@ -130,8 +130,8 @@ class SceneSplit extends Widget {
       return this
     }
     if (baseLayer) {
-      baseLayer.then((provider) => {
-        this._baseLayer && this._viewer.imageryLayers.remove(this._baseLayer)
+      this._baseLayer && this._viewer.imageryLayers.remove(this._baseLayer)
+      Promise.resolve(baseLayer).then((provider) => {
         this._baseLayer =
           this._viewer.imageryLayers.addImageryProvider(provider)
         this._baseLayer.splitDirection = 1

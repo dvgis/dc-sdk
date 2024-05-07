@@ -10,11 +10,12 @@ import Event from '../Event'
  * Mouse events in 3D scene, optimized Cesium event model
  */
 class MouseEvent extends Event {
-  constructor(viewer, eventPropagation) {
+  constructor(viewer, options = {}) {
     super(MouseEventType)
     this._viewer = viewer
     this._selected = undefined
-    this._eventPropagation = eventPropagation
+    this._enableEventPropagation = options.enableEventPropagation
+    this._enableMouseOver = options.enableMouseOver
     this._registerEvent()
     this._addDefaultEvent()
   }
@@ -265,7 +266,9 @@ class MouseEvent extends Event {
 
     // get Viewer Event
     if (
-      (!event || event.numberOfListeners === 0 || this._eventPropagation) &&
+      (!event ||
+        event.numberOfListeners === 0 ||
+        this._enableEventPropagation) &&
       this._viewer?.viewerEvent
     ) {
       event = this._viewer.viewerEvent.getEvent(type)
@@ -370,14 +373,16 @@ class MouseEvent extends Event {
     this._raiseEvent(MouseEventType.MOUSE_MOVE, mouseInfo)
 
     // add event for overlay
-    if (
-      !this._selected ||
-      this._getOverlayId(this._selected.target) !==
-        this._getOverlayId(mouseInfo.target)
-    ) {
-      this._raiseEvent(MouseEventType.MOUSE_OUT, this._selected)
-      this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo)
-      this._selected = mouseInfo
+    if (this._enableMouseOver) {
+      if (
+        !this._selected ||
+        this._getOverlayId(this._selected.target) !==
+          this._getOverlayId(mouseInfo.target)
+      ) {
+        this._raiseEvent(MouseEventType.MOUSE_OUT, this._selected)
+        this._raiseEvent(MouseEventType.MOUSE_OVER, mouseInfo)
+        this._selected = mouseInfo
+      }
     }
   }
 
