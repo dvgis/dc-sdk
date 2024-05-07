@@ -21,8 +21,8 @@ export const config = {
 }
 
 export function ready(options = {}) {
-  if(__isInitialized){
-     return Promise.resolve()
+  if (__isInitialized) {
+    return Promise.resolve()
   }
   __cmdOut && __cmdOut()
   if (options['baseUrl']) {
