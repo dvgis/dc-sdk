@@ -143,12 +143,12 @@ class Viewer {
 
   get cameraPosition() {
     let position = Transform.transformCartographicToWGS84(
-      this.camera.positionCartographic
+      this.camera?.positionCartographic
     )
     if (position) {
-      position.heading = Cesium.Math.toDegrees(this.camera.heading)
-      position.pitch = Cesium.Math.toDegrees(this.camera.pitch)
-      position.roll = Cesium.Math.toDegrees(this.camera.roll)
+      position.heading = Cesium.Math.toDegrees(this.camera?.heading ?? 0)
+      position.pitch = Cesium.Math.toDegrees(this.camera?.pitch ?? 0)
+      position.roll = Cesium.Math.toDegrees(this.camera?.roll ?? 0)
     }
     return position
   }
