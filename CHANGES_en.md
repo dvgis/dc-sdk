@@ -1,5 +1,28 @@
 # Change Log
 
+### 3.5.0
+
+#### Breaking Changes 📣
+
+- Upgrade @cesium/engine to version 9.1.0.
+- Changed Ellipsoid entity class in overlay to Sphere entity class, Ellipsoid to Cesium.Ellipsoid
+
+#### Additions 🎉
+
+- Added custom TilingScheme for adding tiles by cutout origin and scale
+- Added enable control overlay move-in and move-out listening parameters
+- Add default Cesium clipping polygon
+
+#### Fixes 🔧
+
+- Fix for adding 3dtiles and baselayer to scene split component
+
+### 3.4.0 - 2024-04-04
+
+#### Fixes 🔧
+
+- Optimize the introduction of errors in Node mode
+
 ### 3.3.0 - 2024-03-21
 
 #### Breaking Changes 📣

@@ -5,11 +5,13 @@
 #### Breaking Changes 📣
 
 - 升级 @cesium/engine 到 9.1.0 版本
+- overlay中的Ellipsoid实体类变更为Sphere实体类,Ellipsoid为Cesium.Ellipsoid
 
 #### Additions 🎉 
 
 - 添加自定义TilingScheme，用于通过切图原点和比例尺添加瓦片
 - 添加启用控制覆盖物移入和移出监听参数
+- 添加默认Cesium裁剪面
 
 #### Fixes 🔧
 

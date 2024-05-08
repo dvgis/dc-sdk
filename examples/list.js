@@ -99,6 +99,10 @@ const EXAMPLE_LIST = [
         name: '近地天空盒',
         page: 'ground_sky_box.html',
       },
+      {
+        name: '地球(裁剪)',
+        page: 'globe_clip_polygon.html',
+      },
     ],
   },
   {
