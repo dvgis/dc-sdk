@@ -17,7 +17,7 @@
   let effect = undefined
   function initViewer() {
     viewer = new DC.Viewer('viewer-container')
-    let baselayer_midnight = DC.ImageryLayerFactory.createAmapImageryLayer({style:'img'})
+    let baselayer_midnight = DC.ImageryLayerFactory.createAMapImageryLayer({style:'img'})
     viewer.addBaseLayer(baselayer_midnight)
     effect =  new DC.Effect(viewer)
     effect.silhouette.enable= true
