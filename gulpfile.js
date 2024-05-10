@@ -275,10 +275,14 @@ export const dev = gulp.series(
       })
       .on('change', async () => {
         let now = new Date().getTime()
-        await regenerate({ iife: true })
-        shell.echo(
-          chalk.green(`regenerate lib takes ${new Date().getTime() - now} ms`)
-        )
+        try {
+          await regenerate({ iife: true })
+          shell.echo(
+            chalk.green(`regenerate lib takes ${new Date().getTime() - now} ms`)
+          )
+        } catch (e) {
+          shell.error(e)
+        }
       })
     return watcher
   }
