@@ -11,16 +11,20 @@ extendComponentView({
   init: function (ecModel, api) {
     this.api = api
     let viewer = api.getZr().viewer
-    viewer.scene.postRender.addEventListener(this.moveHandler, this)
+    viewer.clock.onTick.addEventListener(this.moveHandler, this)
   },
   moveHandler: function () {
-    this.api.dispatchAction({
-      type: 'GLMapRoam',
-    })
+    if (this.api.getZr().dom.style.visibility !== 'hidden') {
+      this.api.dispatchAction({
+        type: 'GLMapRoam',
+      })
+    }
   },
+
   render: function (t, e, i) {},
+
   dispose: function () {
     let viewer = this.api.getZr().viewer
-    viewer.scene.postRender.removeEventListener(this.moveHandler, this)
+    viewer.clock.onTick.removeEventListener(this.moveHandler, this)
   },
 })
