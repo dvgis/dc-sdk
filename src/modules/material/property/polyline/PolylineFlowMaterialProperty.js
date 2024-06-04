@@ -25,9 +25,9 @@ class PolylineFlowMaterialProperty extends MaterialProperty {
       result = {}
     }
     result.color = Cesium.Property.getValueOrUndefined(this._color, time)
-    result.speed = this._speed
-    result.percent = this._percent
-    result.gradient = this._gradient
+    result.speed = Cesium.Property.getValueOrUndefined(this._speed, time)
+    result.percent = Cesium.Property.getValueOrUndefined(this._percent, time)
+    result.gradient = Cesium.Property.getValueOrUndefined(this._gradient, time)
     return result
   }
 
