@@ -67,6 +67,16 @@ class Track {
     )
     this._state = State.INITIALIZED
   }
+  get currentDistance() {
+    return distance(Parse.parsePositions(this._pathPositions))
+  }
+  get currentPosition() {
+    const [pos] = this._pathPositions.slice(-1)
+    return Parse.parsePosition(pos)
+  }
+  get allDistance() {
+    return distance(this._positions)
+  }
 
   get trackId() {
     return this._id
@@ -217,10 +227,25 @@ class Track {
               this._positionIndex + 1 === this._positions.length
             )
           this._positionIndex++
+          // 无限循环
+          if (
+            this._options.loop &&
+            this._positionIndex === this._positions.length
+          ) {
+            this._restart()
+          }
         }
       }
     }
     this._setCameraView(viewer, viewOption)
+  }
+
+  /**
+   * 重头开始播放动画
+   */
+  _restart() {
+    this._startTime = Cesium.JulianDate.now()
+    this._resetTimeLine({})
   }
 
   /**

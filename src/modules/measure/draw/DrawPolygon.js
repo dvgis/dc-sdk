@@ -22,7 +22,9 @@ class DrawPolygon extends Draw {
         ...this._style,
         hierarchy: new Cesium.CallbackProperty(() => {
           if (this._positions.length > 2) {
-            return new Cesium.PolygonHierarchy(this._positions)
+            return new Cesium.PolygonHierarchy(
+              this._positions.map((item) => item.clone())
+            )
           } else {
             return null
           }

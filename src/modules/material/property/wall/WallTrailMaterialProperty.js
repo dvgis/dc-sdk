@@ -24,7 +24,7 @@ class WallTrailMaterialProperty extends MaterialProperty {
     }
     result.color = Cesium.Property.getValueOrUndefined(this._color, time)
     result.image = Cesium.Property.getValueOrUndefined(this._image, time)
-    result.speed = this._speed
+    result.speed = Cesium.Property.getValueOrUndefined(this._speed, time)
     return result
   }
 

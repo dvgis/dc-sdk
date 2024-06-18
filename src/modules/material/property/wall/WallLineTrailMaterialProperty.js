@@ -31,7 +31,7 @@ class WallLineTrailMaterialProperty extends MaterialProperty {
     result.color = Cesium.Property.getValueOrUndefined(this._color, time)
     result.image = Cesium.Property.getValueOrUndefined(this._image, time)
     result.repeat = Cesium.Property.getValueOrUndefined(this._repeat, time)
-    result.speed = this._speed
+    result.speed = Cesium.Property.getValueOrUndefined(this._speed, time)
     return result
   }
 

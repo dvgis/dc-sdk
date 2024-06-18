@@ -232,6 +232,8 @@ class TrackController {
     this._activedTrack && (this._activedTrack.viewed = false)
     this._activedTrack = undefined
     this._viewer.off(SceneEventType.POST_RENDER, this._onPostRender, this)
+    this._viewer.camera.lookAtTransform(Cesium.Matrix4.IDENTITY)
+    this._viewer.delegate.trackedEntity = undefined
     return this
   }
 }

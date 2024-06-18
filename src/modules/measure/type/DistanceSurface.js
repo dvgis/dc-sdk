@@ -108,10 +108,6 @@ class DistanceSurface extends MeasureBase {
    */
   start(measure, options) {
     this._startHook(measure, options)
-    this._startLabel.label.heightReference =
-      Cesium.HeightReference.CLAMP_TO_GROUND
-    this._resultLabel.label.heightReference =
-      Cesium.HeightReference.CLAMP_TO_GROUND
     new DrawPolyline({
       material: options.material || Cesium.Color.YELLOW.withAlpha(0.6),
       depthFailMaterial:

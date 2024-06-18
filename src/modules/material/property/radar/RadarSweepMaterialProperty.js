@@ -17,7 +17,7 @@ class RadarSweepMaterialProperty extends MaterialProperty {
   getValue(time, result) {
     result = Cesium.defaultValue(result, {})
     result.color = Cesium.Property.getValueOrUndefined(this._color, time)
-    result.speed = this._speed
+    result.speed = Cesium.Property.getValueOrUndefined(this._speed, time)
     return result
   }
 
