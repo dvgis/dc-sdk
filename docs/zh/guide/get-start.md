@@ -14,7 +14,7 @@ npm install @dvgis/dc-sdk
 
 ```js
 import * as DC from '@dvgis/dc-sdk'
-import '@dvgis/dc-sdk/dist/dc.core.min.css'
+import '@dvgis/dc-sdk/dist/dc.min.css'
 ```
 
 `CDN`
