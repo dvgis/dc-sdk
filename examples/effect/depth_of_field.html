@@ -50,10 +50,10 @@
       effect.depthOfField.delta=value
     })
     gui.add(controls,'sigma',0,5).step(0.1).onChange(value=>{
-      effect.depthOfField.delta=value
+      effect.depthOfField.sigma=value
     })
     gui.add(controls,'stepSize',0,10).step(0.1).onChange(value=>{
-      effect.depthOfField.delta=value
+      effect.depthOfField.stepSize=value
     })
   }
   DC.ready({
