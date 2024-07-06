@@ -38,7 +38,12 @@ class Tooltip extends Widget {
    */
   _updateWindowCoord(windowCoord) {
     let x = windowCoord.x + 10
-    let y = windowCoord.y - this._wrapper.offsetHeight / 2
+    let y = windowCoord.y - this._wrapper.offsetHeight / 2;
+    const offset = this.getViewerOffset();
+
+    x += offset.x;
+    y += offset.y;
+
     this._wrapper.style.cssText = `
     visibility:visible;
     z-index:1;

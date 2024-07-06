@@ -34,19 +34,19 @@ class Widget {
    * mount content
    * @private
    */
-  _mountContent() {}
+  _mountContent() { }
 
   /**
    * binds event
    * @private
    */
-  _bindEvent() {}
+  _bindEvent() { }
 
   /**
    * Unbinds event
    * @private
    */
-  _unbindEvent() {}
+  _unbindEvent() { }
 
   /**
    * When enable modifies the hook executed, the subclass copies it as required
@@ -70,13 +70,13 @@ class Widget {
    * @param windowCoord
    * @private
    */
-  _updateWindowCoord(windowCoord) {}
+  _updateWindowCoord(windowCoord) { }
 
   /**
    * Hook for installed
    * @private
    */
-  _installHook() {}
+  _installHook() { }
 
   /**
    * Installs to viewer
@@ -125,6 +125,13 @@ class Widget {
       (this._wrapper.style.cssText = `
     visibility:hidden;
     `)
+  }
+
+  getViewerOffset() {
+    if (!this._viewer) {
+      return { x: 0, y: 0 };
+    }
+    return this._viewer.getOffset();
   }
 
   /**

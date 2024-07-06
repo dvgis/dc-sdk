@@ -233,12 +233,19 @@ class ContextMenu extends Widget {
    * @private
    */
   _updateWindowCoord(windowCoord) {
-    let visibility = this._ulEl.hasChildNodes() ? 'visible' : 'hidden'
+    let visibility = this._ulEl.hasChildNodes() ? 'visible' : 'hidden';
+    let { x, y } = windowCoord;
+
+    const offset = this.getViewerOffset();
+
+    x += offset.x;
+    y += offset.y;
+
     this._wrapper.style.cssText = `
     visibility:${visibility};
     z-index:1;
-    transform:translate3d(${Math.round(windowCoord.x)}px,${Math.round(
-      windowCoord.y
+    transform:translate3d(${Math.round(x)}px,${Math.round(
+      y
     )}px, 0);
     `
   }
