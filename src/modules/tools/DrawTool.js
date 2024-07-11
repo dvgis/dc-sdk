@@ -29,6 +29,18 @@ class DrawTool {
     this._tooltipMess = tooltipMess
   }
 
+  _getEventPosition(e) {
+    const { overlay, layer, position, surfacePosition } = e;
+    if (!this._options.clampToModel) {
+      return surfacePosition;
+    }
+    if (!overlay && !layer) {
+      return surfacePosition;
+    }
+    return position;
+
+  }
+
   /**
    *
    * @param e
@@ -36,8 +48,7 @@ class DrawTool {
    * @private
    */
   _onClick(e) {
-    let position =
-      this._options.clampToModel && e.position ? e.position : e.surfacePosition
+    let position = this._getEventPosition(e);
     if (!position) {
       return false
     }
@@ -54,8 +65,7 @@ class DrawTool {
    */
   _onMouseMove(e) {
     this._viewer.tooltip.showAt(e.windowPosition, this._tooltipMess)
-    let position =
-      this._options.clampToModel && e.position ? e.position : e.surfacePosition
+    let position = this._getEventPosition(e);
     if (!position) {
       return false
     }
@@ -69,10 +79,7 @@ class DrawTool {
    * @private
    */
   _onRightClick(e) {
-    this._plotEvent.fire(
-      PlotEventType.DRAW_STOP,
-      this._options.clampToModel && e.position ? e.position : e.surfacePosition
-    )
+    this._plotEvent.fire(PlotEventType.DRAW_STOP, this._getEventPosition(e));
   }
 
   /**
@@ -92,7 +99,7 @@ class DrawTool {
         eyeOffset: new Cesium.Cartesian3(0, 0, -100),
         heightReference:
           this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&
-          !this._options.clampToModel
+            !this._options.clampToModel
             ? Cesium.HeightReference.CLAMP_TO_GROUND
             : Cesium.HeightReference.NONE,
       },
