@@ -52,6 +52,31 @@ class MouseEvent extends Event {
   }
 
   /**
+   * 调整位置，将视图位置从像素坐标转换为归一化设备独立像素坐标。
+   * 这个函数用于处理不同设备上因DPI不同导致的显示问题，确保在高DPI设备上也能正确显示。
+   *
+   * @param {Object} position - 像素坐标，包含x和y属性。
+   * @returns {Cesium.Cartesian2} - 归一化设备独立像素坐标。
+   */
+  _adjustPosition(position) {
+    // 获取容器的矩形信息，包括宽度和高度。
+    const containerRect = this._viewer.container.getBoundingClientRect()
+    // 计算容器的缩放因子，用于处理响应式布局或自适应大小的容器。
+    const scaleX = containerRect.width / this._viewer.container.offsetWidth
+    const scaleY = containerRect.height / this._viewer.container.offsetHeight
+
+    // 获取设备的像素比，用于处理高DPI设备的显示问题。
+    const dpiScale = window.devicePixelRatio
+
+    // 将像素坐标转换为归一化设备独立像素坐标，同时考虑了容器的缩放和设备的DPI。
+    const x = (position.x - containerRect.left) / scaleX / dpiScale
+    const y = (position.y - containerRect.top) / scaleY / dpiScale
+
+    // 返回转换后的坐标。
+    return new Cesium.Cartesian2(x, y)
+  }
+  
+  /**
    *
    * Gets the mouse information for the mouse event
    * @param position
@@ -59,14 +84,15 @@ class MouseEvent extends Event {
    *
    */
   _getMouseInfo(position) {
+    let adjustedPosition = this._adjustPosition(position)
     let scene = this._viewer.scene
-    let target = scene.pick(position)
+    let target = scene.pick(adjustedPosition)
     let cartesian = undefined
     let surfaceCartesian = undefined
     let wgs84Position = undefined
     let wgs84SurfacePosition = undefined
     if (scene.pickPositionSupported) {
-      cartesian = scene.pickPosition(position)
+      cartesian = scene.pickPosition(adjustedPosition)
     }
     if (cartesian) {
       let c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian)
@@ -82,11 +108,11 @@ class MouseEvent extends Event {
       scene.mode === Cesium.SceneMode.SCENE3D &&
       !(this._viewer.terrainProvider instanceof Cesium.EllipsoidTerrainProvider)
     ) {
-      let ray = scene.camera.getPickRay(position)
+      let ray = scene.camera.getPickRay(adjustedPosition)
       surfaceCartesian = scene.globe.pick(ray, scene)
     } else {
       surfaceCartesian = scene.camera.pickEllipsoid(
-        position,
+        adjustedPosition,
         Cesium.Ellipsoid.WGS84
       )
     }
@@ -103,7 +129,7 @@ class MouseEvent extends Event {
 
     return {
       target: target,
-      windowPosition: position,
+      windowPosition: adjustedPosition,
       position: cartesian,
       wgs84Position: wgs84Position,
       surfacePosition: surfaceCartesian,
