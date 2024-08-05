@@ -183,6 +183,9 @@ class ClusterLayer extends Layer {
     this._billboards.removeAll()
     this._labels.removeAll()
     let rectangle = this._viewer.camera.computeViewRectangle()
+    if (!rectangle) {
+      rectangle = this._viewer.viewBounds
+    }
     if (this._allCount) {
       let result = this._cluster.getClusters(
         [
