@@ -43,7 +43,13 @@ class Overlay {
 
   set show(show) {
     this._show = show
-    this._delegate && (this._delegate.show = this._show)
+    if(this._delegate && this._delegate.then){
+      this._delegate.then((obj) => {
+        obj.show = this._show
+      })
+    }else {  
+      this._delegate && (this._delegate.show = this._show)
+    }
   }
 
   get show() {
