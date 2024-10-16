@@ -149,7 +149,7 @@ class Transform {
    */
   static transformWGS84ToWindow(position, viewer) {
     let scene = viewer.scene
-    return Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+    return Cesium.SceneTransforms.worldToWindowCoordinates(
       scene,
       this.transformWGS84ToCartesian(position)
     )

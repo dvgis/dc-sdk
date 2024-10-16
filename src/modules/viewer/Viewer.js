@@ -31,13 +31,13 @@ class Viewer {
     }
     this._delegate = Cesium.Viewer
       ? new Cesium.Viewer(id, {
-        ...DEF_OPTS,
-        ...options,
-      })
+          ...DEF_OPTS,
+          ...options,
+        })
       : new CesiumViewer(id, {
-        ...DEF_OPTS,
-        ...options,
-      }) // Initialize the viewer
+          ...DEF_OPTS,
+          ...options,
+        }) // Initialize the viewer
 
     /**
      *  Registers events
@@ -657,20 +657,24 @@ class Viewer {
     return this
   }
 
+  /**
+   *
+   * @returns
+   */
   getOffset() {
-    const offset = { x: 0, y: 0 };
-    const container = this._delegate?.container;
+    const offset = { x: 0, y: 0 }
+    const container = this._delegate?.container
     if (container) {
       if (container.getBoundingClientRect) {
-        const rect = container.getBoundingClientRect();
-        offset.x = rect.left;
-        offset.y = rect.top;
+        const rect = container.getBoundingClientRect()
+        offset.x = rect.left
+        offset.y = rect.top
       } else {
-        offset.x = container.offsetLeft;
-        offset.y = container.offsetTop;
+        offset.x = container.offsetLeft
+        offset.y = container.offsetTop
       }
     }
-    return offset;
+    return offset
   }
 }
 

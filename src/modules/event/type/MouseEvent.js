@@ -75,7 +75,7 @@ class MouseEvent extends Event {
     // 返回转换后的坐标。
     return new Cesium.Cartesian2(x, y)
   }
-  
+
   /**
    *
    * Gets the mouse information for the mouse event
@@ -84,15 +84,14 @@ class MouseEvent extends Event {
    *
    */
   _getMouseInfo(position) {
-    let adjustedPosition = this._adjustPosition(position)
     let scene = this._viewer.scene
-    let target = scene.pick(adjustedPosition)
+    let target = scene.pick(position)
     let cartesian = undefined
     let surfaceCartesian = undefined
     let wgs84Position = undefined
     let wgs84SurfacePosition = undefined
     if (scene.pickPositionSupported) {
-      cartesian = scene.pickPosition(adjustedPosition)
+      cartesian = scene.pickPosition(position)
     }
     if (cartesian) {
       let c = Cesium.Ellipsoid.WGS84.cartesianToCartographic(cartesian)
@@ -108,11 +107,11 @@ class MouseEvent extends Event {
       scene.mode === Cesium.SceneMode.SCENE3D &&
       !(this._viewer.terrainProvider instanceof Cesium.EllipsoidTerrainProvider)
     ) {
-      let ray = scene.camera.getPickRay(adjustedPosition)
+      let ray = scene.camera.getPickRay(position)
       surfaceCartesian = scene.globe.pick(ray, scene)
     } else {
       surfaceCartesian = scene.camera.pickEllipsoid(
-        adjustedPosition,
+        position,
         Cesium.Ellipsoid.WGS84
       )
     }
@@ -129,7 +128,7 @@ class MouseEvent extends Event {
 
     return {
       target: target,
-      windowPosition: adjustedPosition,
+      windowPosition: position,
       position: cartesian,
       wgs84Position: wgs84Position,
       surfacePosition: surfaceCartesian,

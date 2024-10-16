@@ -45,7 +45,7 @@ class HtmlLayer extends Layer {
     this._renderRemoveCallback = scene.postRender.addEventListener(() => {
       let cp = this._viewer.camera.positionWC
       let cd = this._viewer.camera.direction
-      const offset = this._viewer.getOffset();
+      const offset = this._viewer.getOffset()
       this.eachOverlay((item) => {
         if (item && item.position) {
           let position = Transform.transformWGS84ToCartesian(item.position)
@@ -53,14 +53,14 @@ class HtmlLayer extends Layer {
             position,
             new Cesium.Cartesian3()
           )
-          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+          let windowCoord = Cesium.SceneTransforms.worldToWindowCoordinates(
             scene,
             position
           )
 
           if (windowCoord) {
-            windowCoord.x += offset.x;
-            windowCoord.y += offset.y;
+            windowCoord.x += offset.x
+            windowCoord.y += offset.y
           }
           item._updateStyle(
             windowCoord,

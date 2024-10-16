@@ -131,7 +131,7 @@ class WindLayer extends Layer {
 
     this._delegate.project = (coordinate) => {
       let position = Cesium.Cartesian3.fromDegrees(coordinate[0], coordinate[1])
-      let coord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+      let coord = Cesium.SceneTransforms.worldToWindowCoordinates(
         scene,
         position
       )

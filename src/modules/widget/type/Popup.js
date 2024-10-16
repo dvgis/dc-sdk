@@ -40,7 +40,7 @@ class Popup extends Widget {
           self._updateWindowCoord &&
           self._wrapper.style.visibility === 'visible'
         ) {
-          let windowCoord = Cesium.SceneTransforms.wgs84ToWindowCoordinates(
+          let windowCoord = Cesium.SceneTransforms.worldToWindowCoordinates(
             scene,
             self._position
           )
@@ -95,9 +95,10 @@ class Popup extends Widget {
       x = windowCoord.x
       y = windowCoord.y
     }
-    const offset = this.getViewerOffset();
-    x += offset.x;
-    y += offset.y;
+
+    let offset = this._getViewerOffset()
+    x += offset.x
+    y += offset.y
 
     this._wrapper.style.cssText = `
     visibility:visible;
