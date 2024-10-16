@@ -134,7 +134,9 @@ class EditTool {
         image: image,
         width: this._options.icon_size[0],
         height: this._options.icon_size[1],
-        eyeOffset: new Cesium.Cartesian3(0, 0, -100),
+        pixelOffset: this._options.pixelOffset || new Cesium.Cartesian2(0, 0),
+        eyeOffset: this._options.eyeOffset || new Cesium.Cartesian3(0, 0, -100),
+        disableDepthTestDistance: this._options.disableDepthTestDistance ?? 0,
         heightReference:
           this._viewer.scene.mode === Cesium.SceneMode.SCENE3D &&
           !this._options.clampToModel
