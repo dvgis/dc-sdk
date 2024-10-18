@@ -43,11 +43,11 @@ class Overlay {
 
   set show(show) {
     this._show = show
-    if(this._delegate && this._delegate.then){
+    if (Util.isPromise(this._delegate)) {
       this._delegate.then((obj) => {
         obj.show = this._show
       })
-    }else {  
+    } else {
       this._delegate && (this._delegate.show = this._show)
     }
   }
@@ -185,8 +185,8 @@ class Overlay {
         if (this['update'] && this['destroy']) {
           this._layer.delegate.add(this)
         }
-      } else if (this._delegate && this._delegate.then) {
-        // for 3dtiles
+      } else if (Util.isPromise(this._delegate)) {
+        // for 3d-tiles and i3s
         this._delegate.then((obj) => {
           this._layer.delegate.add(obj)
         })
@@ -221,8 +221,8 @@ class Overlay {
         if (this['update'] && this['destroy']) {
           this._layer.delegate.remove(this)
         }
-      } else if (this._delegate && this._delegate.then) {
-        // for 3dtiles
+      } else if (Util.isPromise(this._delegate)) {
+        // for 3d-tiles and i3s
         this._delegate.then((obj) => {
           this._layer.delegate.remove(obj)
         })

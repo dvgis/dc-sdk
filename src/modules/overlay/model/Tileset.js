@@ -67,6 +67,16 @@ class Tileset extends Overlay {
   }
 
   /**
+   *
+   * @param {*} callback
+   * @returns
+   */
+  ready(callback) {
+    this._delegate.then(callback)
+    return this
+  }
+
+  /**
    * Sets position
    * @param position
    * @returns {Tileset}
@@ -123,6 +133,7 @@ class Tileset extends Overlay {
    * @param {*} textStyle
    */
   setLabel(text, textStyle) {
+    console.warn('not support this function')
     return this
   }
 

@@ -170,6 +170,15 @@ class Util {
     }
     return new Blob([u8Arr], { type: mime })
   }
+
+  /**
+   *
+   * @param {*} obj
+   * @returns
+   */
+  static isPromise(obj) {
+    return Promise.resolve(obj) == obj
+  }
 }
 
 export default Util

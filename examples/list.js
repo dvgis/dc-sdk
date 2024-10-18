@@ -261,6 +261,10 @@ const EXAMPLE_LIST = [
         name: '栅格瓦片图层(数据图层)',
         page: 'raster_tile.html',
       },
+      {
+        name: 'i3s模型图层',
+        page: 'i3s.html',
+      },
     ],
   },
   {
@@ -539,6 +543,8 @@ const EXAMPLE_LIST = [
         name: '3dtiles-样式和自定shader',
         page: '3dtiles_style_and_shader.html',
       },
+
+      { name: 'i3s', page: 'i3s.html' },
     ],
   },
   {

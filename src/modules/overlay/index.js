@@ -26,6 +26,7 @@ export { default as DivIcon } from './html/DivIcon'
  * model
  */
 export { default as Model } from './model/Model'
+export { default as I3S } from './model/I3S'
 export { default as Tileset } from './model/Tileset'
 
 /**
@@ -49,7 +50,6 @@ export { default as ElecEllipsoidPrimitive } from './primitive/ElecEllipsoidPrim
 export { default as FlowLinePrimitive } from './primitive/FlowLinePrimitive'
 export { default as LabelPrimitive } from './primitive/LabelPrimitive'
 export { default as LightCylinderPrimitive } from './primitive/LightCylinderPrimitive'
-// export { default as ModelCollectionPrimitive } from './primitive/ModelCollectionPrimitive'
 export { default as ModelPrimitive } from './primitive/ModelPrimitive'
 export { default as PointPrimitive } from './primitive/PointPrimitive.js'
 export { default as PolylinePrimitive } from './primitive/PolylinePrimitive.js'
