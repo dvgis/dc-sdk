@@ -60,7 +60,7 @@
     "shelljs": "^0.8.5",
     "supercluster": "^8.0.1",
     "vinyl-sourcemaps-apply": "^0.2.1",
-    "vitepress": "^1.0.0-rc.44"
+    "vitepress": "^1.4.1"
   },
   "files": [
     "dist"

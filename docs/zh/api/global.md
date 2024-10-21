@@ -148,11 +148,13 @@ let turf = DC.getLib('turf')
 
 **_`DC.LayerType.PRIMITIVE`_**: 图元图层
 
-**_`DC.LayerType.TILESET`_**: 3dtiles 图层
+**_`DC.LayerType.TILESET`_**: 3d-tiles 图层
+
+**_`DC.LayerType.I3S`_**: i3s 图层
 
 **_`DC.LayerType.HTML`_**: html 图层
 
-**_`DC.LayerType.GEOJSON`_**: GeoJson 图层
+**_`DC.LayerType.GEOJSON`_**: geoJson 图层
 
 **_`DC.LayerType.CLUSTER`_**: 聚合图层
 
