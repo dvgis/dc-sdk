@@ -3,7 +3,7 @@
  */
 
 class GroundPolylinePrimitive {
-  constructor(postions) {}
+  constructor(positions) {}
 }
 
 export default GroundPolylinePrimitive

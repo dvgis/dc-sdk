@@ -98,7 +98,7 @@ class LightCylinderPrimitive extends Overlay {
    * @return {Cesium.GeometryInstance}
    */
   _createCylinderInstance(topPts, bottomPts, height) {
-    let newpts = bottomPts.slice()
+    let new_pts = bottomPts.slice()
     let length = bottomPts.length
     let len_2 = 2 * length
     let sts = []
@@ -121,13 +121,13 @@ class LightCylinderPrimitive extends Overlay {
     }
 
     for (let i in ep) {
-      newpts.push(ep[length - i - 1])
+      new_pts.push(ep[length - i - 1])
       sts.push(1 - i * st_interval, 1)
     }
 
     let polygon = Cesium.PolygonGeometry.createGeometry(
       new Cesium.PolygonGeometry({
-        polygonHierarchy: new Cesium.PolygonHierarchy(newpts),
+        polygonHierarchy: new Cesium.PolygonHierarchy(new_pts),
         perPositionHeight: true,
       })
     )
@@ -183,7 +183,7 @@ class LightCylinderPrimitive extends Overlay {
   _updatePrimitives() {
     this._delegate.removeAll()
 
-    const isGroud = this._center.alt === 0
+    const isGround = this._center.alt === 0
 
     let topPositions = this._computeEllipsePositions(
       this._center,
@@ -205,14 +205,14 @@ class LightCylinderPrimitive extends Overlay {
           polygonHierarchy: new Cesium.PolygonHierarchy(
             this._computeEllipsePositions(this._center, this._bottomRadius * 2)
           ),
-          perPositionHeight: !isGroud,
+          perPositionHeight: !isGround,
         }),
         asynchronous: false,
       }),
     }
 
     // ring
-    let ring = isGroud
+    let ring = isGround
       ? new Cesium.GroundPrimitive(circleOpt)
       : new Cesium.Primitive(circleOpt)
 
@@ -223,7 +223,7 @@ class LightCylinderPrimitive extends Overlay {
     })
 
     // circle
-    let circle = isGroud
+    let circle = isGround
       ? new Cesium.GroundPrimitive(circleOpt)
       : new Cesium.Primitive(circleOpt)
 
@@ -249,7 +249,7 @@ class LightCylinderPrimitive extends Overlay {
       asynchronous: false,
     })
 
-    if (isGroud) {
+    if (isGround) {
       Cesium.GroundPrimitive.initializeTerrainHeights().then(() => {
         this._delegate.add(ring)
         this._delegate.add(circle)
