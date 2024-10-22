@@ -21,12 +21,12 @@ global.viewer = viewer // 添加到全局变量
 
 ### creation
 
-- **_constructor(id,[options])_**
+- **_constructor(container,[options])_**
 
   构造函数
 
   - 参数
-    - `{String | Element } id`：容器 ID
+    - `{String | Cesium.Viewer } container`：容器
     - `{Object} options`：属性
   - 返回值 `viewer`
 
@@ -182,8 +182,8 @@ global.viewer = viewer // 添加到全局变量
   "brightness" : 1.0,
   "contrast" : 1.0,
   "hue" : 1.0,
-  "saturation : 1.0,
-  "gamma : 1.0,
+  "saturation" : 1.0,
+  "gamma" : 1.0,
 }
 ```
 

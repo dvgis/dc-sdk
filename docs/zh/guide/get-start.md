@@ -161,7 +161,7 @@ CDN 模式下开发时尽量不要使用 DC 为变量名或者命名空间，避
 通过安装代码提示工具包，能够在开发过程中提示和自动完成框架内部的接口，更好地提高开发效率
 
 ```shell
-npm install @dvgis/types -D
+npm install @dvgis/dc-sdk-types -D
 # yarn add @dvgis/types -D
 # pnpm add @dvgis/types -D
 ```
