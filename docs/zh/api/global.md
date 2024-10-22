@@ -15,8 +15,6 @@ DC.ready({}).then(() => {})
 ```json
 //属性参数（可选）
 {
-  "Cesium": "<自定义的Cesium库，如果未设置，将使用框架内部默认Cesium框架>",
-  "echarts": "<echarts库，设置后将加载echarts图层>",
   "baseUrl": "<Cesium 静态资源路径，默认值为：“./libs/dc-sdk/resources/” >"
 }
 ```
@@ -27,7 +25,7 @@ DC.ready({}).then(() => {})
 
 ```js
 DC.registerLib('turf', turf)
-console.log(DC.__namespace.turf)
+console.log(DC.getLib('turf'))
 ```
 
 - 参数

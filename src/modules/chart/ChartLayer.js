@@ -1,11 +1,9 @@
 /**
  * @Author : Caven Chen
  */
-import { echarts } from '../../namespace'
+import { getLib } from '../../global-api/lib-utils.js'
 import { Layer } from '../layer'
 import State from '../state/State.js'
-
-const { init } = echarts
 
 class ChartLayer extends Layer {
   constructor(id, option) {
@@ -40,10 +38,14 @@ class ChartLayer extends Layer {
   }
 
   _onAdd(viewer) {
+    let echarts = getLib('echarts')
+    if (!echarts) {
+      throw new Error('')
+    }
     this._viewer = viewer
     this._viewer.canvas.setAttribute('tabIndex', '0')
     this._delegate = this._createChartElement()
-    this._chart = init(this._delegate)
+    this._chart = echarts.init(this._delegate)
     Object(this._chart.getZr()).viewer = viewer
     this._option &&
       this._chart.setOption({ ...this._option, GLMap: {}, animation: false })

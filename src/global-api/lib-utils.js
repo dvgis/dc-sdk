@@ -11,6 +11,10 @@ const cache = {}
  */
 export function registerLib(name, lib) {
   cache[name] = lib
+  if (name === 'echarts' && this.registerEcharts) {
+    this.registerEcharts(lib)
+  }
+  return this
 }
 
 /**

@@ -2,28 +2,41 @@
  * @Author : Caven Chen
  */
 
-import { echarts, Cesium } from '../../namespace'
+import { Cesium } from '../../namespace'
 const { Cartesian3, Ellipsoid, Math: CesiumMath } = Cesium
-const { graphic, matrix } = echarts
 
-class GLMapCoordSys {
-  constructor(api) {
+export function createGLMapCoordSys(echarts) {
+  function GLMapCoordSys(api) {
     this._api = api
     this._viewer = Object(api.getZr()).viewer
     this._mapOffset = [0, 0]
     this.dimensions = ['lng', 'lat']
   }
 
-  getViewer() {
+  /**
+   *
+   * @returns
+   */
+  GLMapCoordSys.prototype.getViewer = function () {
     return this._viewer
   }
 
-  setMapOffset(mapOffset) {
+  /**
+   *
+   * @param {*} mapOffset
+   * @returns
+   */
+  GLMapCoordSys.prototype.setMapOffset = function (mapOffset) {
     this._mapOffset = mapOffset
     return this
   }
 
-  dataToPoint(data) {
+  /**
+   *
+   * @param {*} data
+   * @returns
+   */
+  GLMapCoordSys.prototype.dataToPoint = function (data) {
     let result = []
     let cartesian3 = Cartesian3.fromDegrees(data[0], data[1])
     if (!cartesian3) {
@@ -41,7 +54,12 @@ class GLMapCoordSys {
     return [coords.x - this._mapOffset[0], coords.y - this._mapOffset[1]]
   }
 
-  pointToData(point) {
+  /**
+   *
+   * @param {*} point
+   * @returns
+   */
+  GLMapCoordSys.prototype.pointToData = function (point) {
     let ellipsoid = this._viewer.scene.globe.ellipsoid
     let cartesian3 = new Cartesian3(
       point[0] + this._mapOffset[0],
@@ -55,16 +73,34 @@ class GLMapCoordSys {
     ]
   }
 
-  getViewRect() {
+  /**
+   *
+   * @returns
+   */
+  GLMapCoordSys.prototype.getViewRect = function () {
     let api = this._api
-    return new graphic.BoundingRect(0, 0, api.getWidth(), api.getHeight())
+    return new echarts.graphic.BoundingRect(
+      0,
+      0,
+      api.getWidth(),
+      api.getHeight()
+    )
   }
 
-  getRoamTransform() {
-    return matrix.create()
+  /**
+   *
+   * @returns
+   */
+  GLMapCoordSys.prototype.getRoamTransform = function () {
+    return echarts.matrix.create()
   }
 
-  static create(ecModel, api) {
+  /**
+   *
+   * @param {*} ecModel
+   * @param {*} api
+   */
+  GLMapCoordSys.create = function (ecModel, api) {
     let coordinateSys = undefined
     ecModel.eachComponent('GLMap', function (model) {
       coordinateSys = new GLMapCoordSys(api)
@@ -76,8 +112,7 @@ class GLMapCoordSys {
         (model.coordinateSystem = coordinateSys)
     })
   }
+
+  GLMapCoordSys.dimensions = ['lng', 'lat']
+  return GLMapCoordSys
 }
-
-GLMapCoordSys.dimensions = ['lng', 'lat']
-
-export default GLMapCoordSys

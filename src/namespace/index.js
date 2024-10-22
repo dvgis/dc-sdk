@@ -2,12 +2,12 @@
  * @Author : Caven Chen
  */
 
-import { getLib } from '../global-api/lib-utils.js'
+import { registerLib } from '../global-api'
 
-export const Cesium = getLib('Cesium')
+import { Cesium, Supercluster } from '@dvgis/dc-common'
 
-export const turf = getLib('turf')
+registerLib('Cesium', Cesium)
 
-export const echarts = getLib('echarts')
+registerLib('Supercluster', Supercluster)
 
-export const Supercluster = getLib('Supercluster')
+export { Cesium, Supercluster }

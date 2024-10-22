@@ -10,11 +10,11 @@ import gulp from 'gulp'
 import esbuild from 'esbuild'
 import concat from 'gulp-concat'
 import clean from 'gulp-clean'
-import javascriptObfuscator from 'gulp-javascript-obfuscator'
 import startServer from './server.js'
 import inlineImage from 'esbuild-plugin-inline-image'
 import { sassPlugin } from 'esbuild-sass-plugin'
 import { glsl } from 'esbuild-plugin-glsl'
+import GlobalsPlugin from 'esbuild-plugin-globals'
 import shell from 'shelljs'
 import chalk from 'chalk'
 
@@ -25,19 +25,6 @@ const packageJson = fse.readJsonSync('./package.json')
 const c_packageJson = fse.readJsonSync(
   path.join(dc_common_path, 'package.json')
 )
-
-const obfuscatorConfig = {
-  compact: true, //压缩代码
-  identifierNamesGenerator: 'hexadecimal', //标识符的混淆方式 hexadecimal(十六进制) mangled(短标识符)
-  renameGlobals: false, //是否启用全局变量和函数名称的混淆
-  rotateStringArray: true, //通过固定和随机（在代码混淆时生成）的位置移动数组。这使得将删除的字符串的顺序与其原始位置相匹配变得更加困难。如果原始源代码不小，建议使用此选项，因为辅助函数可以引起注意。
-  selfDefending: true, //混淆后的代码,不能使用代码美化,同时需要配置 compact:true;
-  stringArray: true, //删除字符串文字并将它们放在一个特殊的数组中
-  stringArrayEncoding: ['base64'],
-  stringArrayThreshold: 0.75,
-  transformObjectKeys: false,
-  unicodeEscapeSequence: false, //允许启用/禁用字符串转换为unicode转义序列。Unicode转义序列大大增加了代码大小，并且可以轻松地将字符串恢复为原始视图。建议仅对小型源代码启用此选项。
-}
 
 const buildConfig = {
   entryPoints: ['src/DC.js'],
@@ -57,6 +44,7 @@ const buildConfig = {
     glsl(),
     sassPlugin(),
   ],
+  external: ['@dvgis/dc-common', 'turf', 'echarts'],
 }
 
 function getTime() {
@@ -105,52 +93,36 @@ async function buildModules(options) {
             .replace('{{__REPOSITORY__}}', packageJson.repository)}
     }`
 
-  const importNamespace = `
-       import {Cesium , Supercluster } from '@dvgis/dc-common'
-     `
-  const exportNamespace = `
-        export const __namespace = {
-            Cesium :  Cesium,
-            Supercluster: Supercluster
-        }
-     `
-
-  // Build IIFE
-  if (options.iife) {
-    await fse.outputFile(
-      dcPath,
-      `
+  await fse.outputFile(
+    dcPath,
+    `
               ${content}
               ${cmdOutFunction}
               ${exportVersion}
             `,
-      {
-        encoding: 'utf8',
-      }
-    )
+    {
+      encoding: 'utf8',
+    }
+  )
+  // Build IIFE
+  if (options.iife) {
     await esbuild.build({
       ...buildConfig,
       format: 'iife',
       globalName: 'DC',
+      plugins: [
+        ...buildConfig.plugins,
+        GlobalsPlugin({
+          '@dvgis/dc-common': 'DC_Common',
+          charts: 'charts',
+        }),
+      ],
       outfile: path.join('dist', 'modules-iife.js'),
     })
   }
 
   // Build Node、
   if (options.node) {
-    await fse.outputFile(
-      dcPath,
-      `
-            ${importNamespace}
-            ${content}
-            ${exportVersion}
-            ${exportNamespace}
-            ${cmdOutFunction}
-            `,
-      {
-        encoding: 'utf8',
-      }
-    )
     await esbuild.build({
       ...buildConfig,
       format: 'esm',
@@ -158,7 +130,6 @@ async function buildModules(options) {
       define: {
         TransformStream: 'null',
       },
-      external: ['@dvgis/dc-common'],
       outfile: path.join('dist', 'index.js'),
     })
   }
@@ -170,42 +141,23 @@ async function buildModules(options) {
 async function combineJs(options) {
   // combine for iife
   if (options.iife) {
-    if (options.obfuscate) {
-      await gulp
-        .src('dist/modules-iife.js')
-        .pipe(javascriptObfuscator(obfuscatorConfig))
-        .pipe(gulp.src(path.join(dc_common_path, 'dist', '__namespace.js')))
-        .pipe(concat('dc.min.js'))
-        .pipe(gulp.dest('dist'))
-        .on('end', () => {
-          addCopyright(options)
-          deleteTempFile()
-        })
-    } else {
-      await gulp
-        .src([
-          'dist/modules-iife.js',
-          path.join(dc_common_path, 'dist', '__namespace.js'),
-        ])
-        .pipe(concat('dc.min.js'))
-        .pipe(gulp.dest('dist'))
-        .on('end', () => {
-          addCopyright(options)
-          deleteTempFile()
-        })
-    }
+    await gulp
+      .src([
+        path.join(dc_common_path, 'dist', 'dc.common.min.js'),
+        'dist/modules-iife.js',
+      ])
+      .pipe(concat('dc.min.js'))
+      .pipe(gulp.dest('dist'))
+      .on('end', () => {
+        addCopyright(options)
+        deleteTempFile()
+      })
   }
 
   // combine for node
   if (options.node && options.obfuscate) {
     await gulp
       .src('dist/index.js')
-      .pipe(
-        javascriptObfuscator({
-          ...obfuscatorConfig,
-          target: 'browser-no-eval',
-        })
-      )
       .pipe(gulp.dest('dist'))
       .on('end', () => {
         addCopyright(options)
@@ -313,9 +265,9 @@ export const build = gulp.series(
 
 export const buildRelease = gulp.series(
   () => buildModules({ iife: true }),
-  () => combineJs({ iife: true, obfuscate: true }),
+  () => combineJs({ iife: true }),
   () => buildModules({ node: true }),
-  () => combineJs({ node: true, obfuscate: true }),
+  () => combineJs({ node: true }),
   () => buildCSS({ minify: true }),
   copyAssets
 )

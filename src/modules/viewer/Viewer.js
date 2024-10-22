@@ -4,6 +4,7 @@
  */
 
 import { Cesium } from '../../namespace'
+import { getParam } from '../../global-api'
 import Parse from '../parse/Parse'
 import {
   LayerGroupEventType,
@@ -25,19 +26,32 @@ const DEF_OPTS = {
 }
 
 class Viewer {
-  constructor(id, options = {}) {
-    if (!id || (typeof id === 'string' && !document.getElementById(id))) {
-      throw new Error('Viewer：the id is empty')
+  constructor(container, options = {}) {
+    if (!getParam('isInitialized')) {
+      throw new Error('please do the ready function')
     }
-    this._delegate = Cesium.Viewer
-      ? new Cesium.Viewer(id, {
-          ...DEF_OPTS,
-          ...options,
-        })
-      : new CesiumViewer(id, {
-          ...DEF_OPTS,
-          ...options,
-        }) // Initialize the viewer
+    if (
+      !container ||
+      (typeof container === 'string' && !document.getElementById(container))
+    ) {
+      throw new Error('Viewer: the container is empty')
+    }
+    if (container instanceof HTMLElement) {
+      throw new Error('Viewer: not support the type container')
+    }
+
+    if (typeof container === 'string') {
+      const baseUrl = getParam('baseUrl')
+      baseUrl && Cesium.buildModuleUrl.setBaseUrl(baseUrl) // Initialize the Cesium_BASE_URL
+    }
+
+    this._delegate =
+      typeof container !== 'string'
+        ? container
+        : new CesiumViewer(container, {
+            ...DEF_OPTS,
+            ...options,
+          }) // Initialize the viewer
 
     /**
      *  Registers events
@@ -52,13 +66,17 @@ class Viewer {
     this._widgetContainer = DomUtil.create(
       'div',
       'viewer-widgets',
-      typeof id === 'string' ? document.getElementById(id) : id
+      typeof container === 'string'
+        ? document.getElementById(container)
+        : this._delegate.container
     ) //Register the widgets container
 
     this._layerContainer = DomUtil.create(
       'div',
       'viewer-layers',
-      typeof id === 'string' ? document.getElementById(id) : id
+      typeof container === 'string'
+        ? document.getElementById(container)
+        : this._delegate.container
     ) //Register the layers container
 
     this._baseLayerPicker = new BaseLayerPicker({
