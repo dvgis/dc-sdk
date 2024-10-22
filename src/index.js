@@ -30,7 +30,7 @@ export function ready(options = {}) {
   if (__isInitialized) {
     return Promise.resolve()
   }
-  // __cmdOut && __cmdOut()
+  __cmdOut && __cmdOut()
   if (options['baseUrl']) {
     this.config.baseUrl = options['baseUrl']
   }
