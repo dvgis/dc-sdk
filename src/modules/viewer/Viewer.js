@@ -36,6 +36,7 @@ class Viewer {
     ) {
       throw new Error('Viewer: the container is empty')
     }
+
     if (container instanceof HTMLElement) {
       throw new Error('Viewer: not support the type container')
     }

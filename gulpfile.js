@@ -117,6 +117,7 @@ async function buildModules(options) {
           charts: 'charts',
         }),
       ],
+      minify: options.minify,
       outfile: path.join('dist', 'modules-iife.js'),
     })
   }
@@ -130,6 +131,7 @@ async function buildModules(options) {
       define: {
         TransformStream: 'null',
       },
+      minify: options.minify,
       outfile: path.join('dist', 'index.js'),
     })
   }
@@ -199,7 +201,7 @@ async function deleteTempFile() {
   await gulp.src(['dist/modules-iife.js'], { read: false }).pipe(clean())
 }
 
-async function regenerate(option, content) {
+async function regenerate(option) {
   await fse.remove('dist/dc.min.js')
   await fse.remove('dist/dc.min.css')
   await buildModules(option)
@@ -222,13 +224,13 @@ export const dev = gulp.series(
     })
     watcher
       .on('ready', async () => {
-        await regenerate({ iife: true })
+        await regenerate({ iife: true, minify: false })
         await startServer()
       })
       .on('change', async () => {
         let now = new Date().getTime()
         try {
-          await regenerate({ iife: true })
+          await regenerate({ iife: true, minify: false })
           shell.echo(
             chalk.green(`regenerate lib takes ${new Date().getTime() - now} ms`)
           )
@@ -248,25 +250,25 @@ export const buildIIFE = gulp.series(
 )
 
 export const buildNode = gulp.series(
-  () => buildModules({ node: true }),
+  () => buildModules({ node: true, minify: true }),
   () => combineJs({ node: true }),
   () => buildCSS({ minify: true }),
   copyAssets
 )
 
 export const build = gulp.series(
-  () => buildModules({ iife: true }),
+  () => buildModules({ iife: true, minify: true }),
   () => combineJs({ iife: true }),
-  () => buildModules({ node: true }),
+  () => buildModules({ node: true, minify: true }),
   () => combineJs({ node: true }),
   () => buildCSS({ minify: true }),
   copyAssets
 )
 
 export const buildRelease = gulp.series(
-  () => buildModules({ iife: true }),
+  () => buildModules({ iife: true, minify: true }),
   () => combineJs({ iife: true }),
-  () => buildModules({ node: true }),
+  () => buildModules({ node: true, minify: true }),
   () => combineJs({ node: true }),
   () => buildCSS({ minify: true }),
   copyAssets
