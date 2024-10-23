@@ -52,8 +52,6 @@
     "gulp": "^4.0.2",
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
-    "gulp-javascript-obfuscator": "^1.1.6",
-    "javascript-obfuscator": "^4.0.2",
     "portfinder": "^1.0.32",
     "prettier": "^2.8.8",
     "rimraf": "^5.0.0",
