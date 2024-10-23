@@ -7,6 +7,9 @@ import State from '../state/State.js'
 
 class ChartLayer extends Layer {
   constructor(id, option) {
+    if (!getLib('echarts')) {
+      throw new Error('miss the echarts lib')
+    }
     super(id)
     this._option = option
     this._delegate = undefined
@@ -38,10 +41,7 @@ class ChartLayer extends Layer {
   }
 
   _onAdd(viewer) {
-    let echarts = getLib('echarts')
-    if (!echarts) {
-      throw new Error('')
-    }
+    const echarts = getLib('echarts')
     this._viewer = viewer
     this._viewer.canvas.setAttribute('tabIndex', '0')
     this._delegate = this._createChartElement()

@@ -2,7 +2,10 @@
  @Author: Caven Chen
  **/
 
-import { setParam } from './global-api'
+import { setParam, registerLib } from './global-api'
+
+import { registerEcharts } from './modules/chart'
+
 const DEF_BASE_URL = './libs/dc-sdk/resources/'
 let _baseUrl = DEF_BASE_URL
 let __isInitialized = false
@@ -15,7 +18,7 @@ export * from './modules/third-part'
 
 export { Math } from './modules/math'
 
-export { registerEcharts, ChartLayer } from './modules/chart'
+export { ChartLayer } from './modules/chart'
 
 export const config = {
   set baseUrl(baseUrl) {
@@ -31,11 +34,18 @@ export function ready(options = {}) {
     return Promise.resolve()
   }
   __cmdOut && __cmdOut()
-  if (options['baseUrl']) {
-    this.config.baseUrl = options['baseUrl']
-  }
-  __isInitialized = true
   return new Promise((resolve, reject) => {
+    //reset CESIUM_BASE_URL
+    if (options['baseUrl']) {
+      this.config.baseUrl = options['baseUrl']
+    }
+    //register echarts lib
+    if (options['echarts']) {
+      registerEcharts(options['echarts'])
+      registerLib('echarts', options['echarts'])
+    }
+    __isInitialized = true
+
     setParam('isInitialized', true)
     setParam('baseUrl', this.config.baseUrl)
     resolve()

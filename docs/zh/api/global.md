@@ -15,7 +15,8 @@ DC.ready({}).then(() => {})
 ```json
 //属性参数（可选）
 {
-  "baseUrl": "<Cesium 静态资源路径，默认值为：“./libs/dc-sdk/resources/” >"
+  "baseUrl": "<Cesium 静态资源路径，默认值为：“./libs/dc-sdk/resources/” >",
+  "echarts": "<echarts库，设置后用于ChartLayer>"
 }
 ```
 

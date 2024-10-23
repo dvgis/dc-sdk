@@ -14,7 +14,6 @@
     <div id="viewer-container" class="viewer-container"></div>
 
     <script>
-      DC.registerLib('echarts', window.echarts)
       let viewer = undefined
       function initViewer() {
         viewer = new DC.Viewer('viewer-container')
@@ -405,6 +404,7 @@
 
       DC.ready({
         baseUrl: '../libs/dc-sdk/resources/',
+        echarts: window.echarts,
       }).then(initViewer)
     </script>
   </body>
