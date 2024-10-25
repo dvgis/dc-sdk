@@ -162,6 +162,6 @@ CDN 模式下开发时尽量不要使用 DC 为变量名或者命名空间，避
 
 ```shell
 npm install @dvgis/dc-sdk-types -D
-# yarn add @dvgis/types -D
-# pnpm add @dvgis/types -D
+# yarn add @dvgis/dc-sdk-types -D
+# pnpm add @dvgis/dc-sdk-types -D
 ```
