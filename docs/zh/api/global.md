@@ -22,7 +22,7 @@ DC.ready({}).then(() => {})
 
 ## registerLib()
 
-> 框架中注册第三放框架包，
+> 框架中注册第三方框架包，
 
 ```js
 DC.registerLib('turf', turf)
@@ -184,6 +184,8 @@ let turf = DC.getLib('turf')
 **_`DC.OverlayType.LABEL`_**: 标签
 
 **_`DC.OverlayType.TILESET`_**: 3DTiles
+
+**_`DC.OverlayType.I3S`_**: i3s
 
 **_`DC.OverlayType.BOX`_**: 盒
 
