@@ -44,7 +44,7 @@ const buildConfig = {
     glsl(),
     sassPlugin(),
   ],
-  external: ['@dvgis/dc-common', 'turf', 'echarts'],
+  external: ['@dvgis/dc-common'],
 }
 
 function getTime() {
@@ -114,7 +114,6 @@ async function buildModules(options) {
         ...buildConfig.plugins,
         GlobalsPlugin({
           '@dvgis/dc-common': 'DC_Common',
-          charts: 'charts',
         }),
       ],
       minify: options.minify,
@@ -157,7 +156,7 @@ async function combineJs(options) {
   }
 
   // combine for node
-  if (options.node && options.obfuscate) {
+  if (options.node) {
     await gulp
       .src('dist/index.js')
       .pipe(gulp.dest('dist'))
