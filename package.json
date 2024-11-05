@@ -65,6 +65,6 @@
     "dist"
   ],
   "dependencies": {
-    "@dvgis/dc-common": "^4.0.0"
+    "@dvgis/dc-common": "^4.0.1"
   }
 }

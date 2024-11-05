@@ -18,10 +18,12 @@ import { Util, DomUtil } from '../utils'
 import { Transform } from '../transform'
 import createWidgets from '../widget'
 import createTools from '../tools'
-import { BaseLayerPicker, CesiumViewer } from '../exts'
+import { BaseLayerPicker } from '../exts'
 
 const DEF_OPTS = {
-  creditContainer: undefined,
+  creditContainer: document.createElement('div'),
+  creditViewport: document.createElement('div'),
+  baseLayer: false,
   shouldAnimate: true,
 }
 
@@ -49,10 +51,12 @@ class Viewer {
     this._delegate =
       typeof container !== 'string'
         ? container
-        : new CesiumViewer(container, {
+        : new Cesium.CesiumWidget(container, {
             ...DEF_OPTS,
             ...options,
           }) // Initialize the viewer
+
+    this._delegate.canvas.parentNode.className = 'viewer-canvas'
 
     /**
      *  Registers events

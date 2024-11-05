@@ -7,7 +7,6 @@ import State from '../../state/State'
 import { Util, DomUtil } from '../../utils'
 import { SceneEventType } from '../../event'
 import Widget from '../Widget'
-import { CesiumViewer } from '../../exts'
 
 class HawkeyeMap extends Widget {
   constructor() {
@@ -27,10 +26,14 @@ class HawkeyeMap extends Widget {
    * @private
    */
   _mountContent() {
-    let map = new CesiumViewer(this._wrapper, {
+    let map = new Cesium.CesiumWidget(this._wrapper, {
       sceneMode: Cesium.SceneMode.SCENE2D,
+      creditContainer: document.createElement('div'),
+      creditViewport: document.createElement('div'),
+      baseLayer: false,
     })
     map.imageryLayers.removeAll()
+    map.canvas.parentNode.className = 'viewer-canvas'
     Util.merge(map.scene.screenSpaceCameraController, {
       enableRotate: false,
       enableTranslate: false,
