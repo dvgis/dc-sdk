@@ -3,4 +3,4 @@
  */
 
 export { registerLib, getLib } from './lib-utils.js'
-export { setParam, getParam } from './paramter.js'
+export { setParam, getParam } from './parameter.js'
