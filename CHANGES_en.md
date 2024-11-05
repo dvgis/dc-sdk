@@ -1,5 +1,24 @@
 # Change Log
 
+### 4.0.0
+
+#### Breaking Changes 📣
+
+- Changes to the underlying packaging for fixing a DC is not extensible issue when using node mode [#199](https://github.com/dvgis/dc-sdk/issues/199)
+- Upgrade @cesium/engine to version 12.0.0.
+- Remove `__namespace` global variable, suggest using `getLib` to get required third-party framework modules.
+- Remove the extension module Viewer class and will use `CesiumWidget` as the scene builder class.
+
+#### Additions 🎉
+
+- Added SkyLine analysis feature
+- Improve the anchor style function in Plot.
+- Opened up some of Cesium's underlying native classes.
+
+#### Fixes 🔧
+
+- Fix mouse pickup issue
+
 ### 3.5.0
 
 #### Breaking Changes 📣
@@ -51,7 +70,7 @@
 
 #### Fixes 🔧
 
-- Optimize camera  position calculation
+- Optimize camera position calculation
 
 ### 3.1.0 - 2023-08-06
 
@@ -72,6 +91,7 @@
 ### 3.0.1
 
 #### Fixes 🔧
+
 - Optimization of measurement functions
 - Optimize Google Maps
 - Optimize weather effects
@@ -106,7 +126,6 @@
 - Optimize heat zone layer
 - Fix a number of issues caused by upgrading the Cesium framework
 
-
 ### 2.17.0 - 2022-10-29
 
 #### Breaking Changes 📣
@@ -128,7 +147,7 @@
 
 #### Fixes 🔧
 
-- Improve the scene export 
+- Improve the scene export
 - Improve terrain loading [#126](https://github.com/dvgis/dc-sdk/issues/126)
 
 ### 2.16.1 - 2022-08-21
@@ -173,7 +192,7 @@
 
 - Optimize position bar elevation value [#109](https://github.com/dvgis/dc-sdk/issues/109)
 - Fix the problem of incorrect recovery time of history track several times
-- Fix the problem of wrong display of the end of history track[#107](https://github.com/dvgis/dc-sdk/issues/107)  
+- Fix the problem of wrong display of the end of history track[#107](https://github.com/dvgis/dc-sdk/issues/107)
 - Fix the problem that the number of anchor points is wrong and the size cannot be set when editing the marker.
 
 ### 2.14.0 - 2022-06-04
@@ -305,7 +324,7 @@
 
 #### Fixes 🔧
 
-- Improve the function of clearing or removing the primitive layer 
+- Improve the function of clearing or removing the primitive layer
 - Improve the history track function
 
 ### 2.7.0 - 2021-11-13
@@ -333,7 +352,7 @@
 
 - Improve the DivIcon style
 - Improve the Popup config
-- Improve the terrian name option  [#74](https://github.com/dvgis/dc-sdk/pull/74)
+- Improve the terrian name option [#74](https://github.com/dvgis/dc-sdk/pull/74)
 
 ### 2.6.0 - 2021-10-10
 
@@ -427,7 +446,6 @@
 - Improve the function area
 - Improve the function of calculating the point position of a sector
 
-
 ### 2.3.0 - 2021-07-03
 
 #### Breaking Changes 📣
@@ -482,7 +500,7 @@
 
 #### Fixes 🔧
 
-- Improve the viewer destroy 
+- Improve the viewer destroy
 - Refine mouse and context-menu events for primitive
 
 ### 2.2.2 - 2021-05-29
@@ -510,7 +528,7 @@
 
 - Improve the wind layer add fix the issue[#28](https://github.com/dvgis/dc-sdk/issues/28)
 - Repair the problem that the auxiliary view cone of video fusion function cannot be displayed[#29](https://github.com/dvgis/dc-sdk/issues/29)
-- Improve the video primitive 
+- Improve the video primitive
 - Repair the problem that the animation function cannot be used after the scene time is stoped[#31](https://github.com/dvgis/dc-sdk/issues/31)
 
 ### 2.2.0 - 2021-05-09
