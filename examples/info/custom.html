@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title>dc-example</title>
-    <script src="/libs/dc-sdk/dc.min.js"></script>
     <script src="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Cesium.js"></script>
+    <script src="/libs/dc-sdk/dc.min.js"></script>
     <link
       href="https://cesium.com/downloads/cesiumjs/releases/1.117/Build/Cesium/Widgets/widgets.css"
       rel="stylesheet"
@@ -27,20 +27,8 @@
     <script>
       let viewer = undefined
       function initViewer() {
-        let CesiumViewer = new Cesium.Viewer('viewer-container', {
-          baseLayerPicker: false,
+        let CesiumViewer = new Cesium.CesiumWidget('viewer-container', {
           baseLayer: false,
-          animation: false,
-          fullscreenButton: false,
-          geocoder: false,
-          homeButton: false,
-          infoBox: false,
-          sceneModePicker: false,
-          selectionIndicator: false,
-          timeline: false,
-          navigationHelpButton: false,
-          navigationInstructionsInitiallyVisible: false,
-          creditContainer: undefined,
           shouldAnimate: true,
         })
         viewer = new DC.Viewer(CesiumViewer)

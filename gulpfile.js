@@ -86,7 +86,7 @@ async function buildModules(options) {
             .replace('{{__TIME__}}', getTime())
             .replace(
               '{{__ENGINE_VERSION__}}',
-              c_packageJson.devDependencies['@cesium/engine'].replace('^', '')
+              c_packageJson.dependencies['@cesium/engine'].replace('^', '')
             )
             .replace('{{__AUTHOR__}}', packageJson.author)
             .replace('{{__HOME_PAGE__}}', packageJson.homepage)

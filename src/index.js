@@ -44,8 +44,13 @@ export function ready(options = {}) {
       registerEcharts(options['echarts'])
       registerLib('echarts', options['echarts'])
     }
-    __isInitialized = true
 
+    //register echarts lib
+    if (options['turf']) {
+      registerLib('turf', options['turf'])
+    }
+
+    __isInitialized = true
     setParam('isInitialized', true)
     setParam('baseUrl', this.config.baseUrl)
     resolve()

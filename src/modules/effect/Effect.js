@@ -9,6 +9,7 @@ import DepthOfField from './type/DepthOfField'
 import LensFlare from './type/LensFlare'
 import NightVision from './type/NightVision'
 import Silhouette from './type/Silhouette'
+import SkyLine from './type/SkyLine.js'
 
 class Effect {
   constructor(viewer) {
@@ -22,6 +23,7 @@ class Effect {
     this._lensFlare = new LensFlare(viewer)
     this._night = new NightVision(viewer)
     this._silhouette = new Silhouette(viewer)
+    this._skyLine = new SkyLine(viewer)
   }
 
   get blackAndWhite() {
@@ -50,6 +52,10 @@ class Effect {
 
   get silhouette() {
     return this._silhouette
+  }
+
+  get skyLine() {
+    return this._skyLine
   }
 }
 

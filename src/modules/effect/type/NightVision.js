@@ -19,9 +19,7 @@ class NightVision {
 
   set enable(enable) {
     this._enable = enable
-    if (!this._delegate) {
-      this._createPostProcessStage()
-    }
+    !this._delegate && this._createPostProcessStage()
     this._delegate.enabled = enable
     this._state = enable ? State.ENABLED : State.DISABLED
   }

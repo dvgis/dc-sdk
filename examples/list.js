@@ -661,6 +661,44 @@ const EXAMPLE_LIST = [
         name: '镜头眩光',
         page: 'lens_flare.html',
       },
+      {
+        name: '天际线',
+        page: 'sky_line.html',
+      },
+    ],
+  },
+  {
+    name: 'Turf计算',
+    folder: 'turf',
+    children: [
+      {
+        name: '点缓冲',
+        page: 'point_buffer.html',
+      },
+      {
+        name: '线缓冲',
+        page: 'polyline_buffer.html',
+      },
+      {
+        name: '面缓冲',
+        page: 'polygon_buffer.html',
+      },
+      {
+        name: '比例面',
+        page: 'polygon_scale.html',
+      },
+      {
+        name: '旋转线',
+        page: 'polyline_rotate.html',
+      },
+      {
+        name: '旋转面',
+        page: 'polygon_rotate.html',
+      },
+      {
+        name: '扇形面',
+        page: 'polygon_sector.html',
+      },
     ],
   },
   {
