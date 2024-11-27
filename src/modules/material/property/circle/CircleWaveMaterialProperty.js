@@ -30,8 +30,8 @@ class CircleWaveMaterialProperty extends MaterialProperty {
     }
     result.color = Cesium.Property.getValueOrUndefined(this._color, time)
     result.speed = Cesium.Property.getValueOrUndefined(this._speed, time)
-    result.count = Cesium.Property.getValueOrUndefined(this._count, time)
-    result.gradient = Cesium.Property.getValueOrUndefined(this._gradient, time)
+    result.count =  this.count
+    result.gradient = this.gradient
     return result
   }
 
