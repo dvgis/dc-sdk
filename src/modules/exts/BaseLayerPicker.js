@@ -69,6 +69,7 @@ class BaseLayerPicker {
       id: `imagery-no-${this._count}`,
       layers: imageryLayers,
       cache: [],
+      options,
     })
     return this
   }
