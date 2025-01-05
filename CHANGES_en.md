@@ -1,5 +1,19 @@
 # Change Log
 
+### 4.1.1 - 2025-01-05
+
+#### Breaking Changes 📣
+- Emergency release to add analytics module
+
+### 4.1.0 - 2025-01-05
+
+#### Breaking Changes 📣
+- Upgrade @cesium/engine to version 13.0.0
+
+#### Fixes 🔧
+- Fix map configuration not working
+- Fix the wave circle animation
+
 ### 4.0.0
 
 #### Breaking Changes 📣
