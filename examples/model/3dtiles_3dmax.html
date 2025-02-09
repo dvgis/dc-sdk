@@ -26,7 +26,14 @@
     let layer = new DC.TilesetLayer('layer')
     viewer.addLayer(layer)
     let tileset = new DC.Tileset(
-      'http://data.marsgis.cn/3dtiles/max-ytlhz/tileset.json'
+      'https://wrj.shuixiongit.com/3Dtile/rcmx/tiles_01/tileset.json',
+      {
+        loadSiblings:false,
+        preferLeaves:true,
+        maximumScreenSpaceError:2,
+        skipLevelOfDetail:true,
+        baseScreenSpaceError:126
+      }
     )
     layer.addOverlay(tileset)
     viewer.flyTo(tileset)

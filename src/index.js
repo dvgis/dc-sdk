@@ -37,7 +37,7 @@ export function ready(options = {}) {
   return new Promise((resolve, reject) => {
     //reset CESIUM_BASE_URL
     if (options['baseUrl']) {
-      this.config.baseUrl = options['baseUrl']
+      config.baseUrl = options['baseUrl']
     }
     //register echarts lib
     if (options['echarts']) {

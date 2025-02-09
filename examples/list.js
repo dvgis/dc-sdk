@@ -324,10 +324,6 @@ const EXAMPLE_LIST = [
         page: 'polyline_lighting.html',
       },
       {
-        name: '发光线',
-        page: 'polyline_lighting.html',
-      },
-      {
         name: '发光轨迹线',
         page: 'polyline_lighting_trail.html',
       },
