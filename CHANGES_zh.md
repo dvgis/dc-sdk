@@ -1,5 +1,13 @@
 # Change Log
 
+### 4.2.0 - 2025-02-09
+
+#### Breaking Changes 📣
+- 升级 @cesium/engine 到 13.1.0 版本
+
+#### Fixes 🔧
+- 移除全局config 上下文
+
 ### 4.1.1 - 2025-01-05
 
 #### Breaking Changes 📣

@@ -1,5 +1,13 @@
 # Change Log
 
+### 4.2.0 - 2025-02-09
+
+#### Breaking Changes 📣
+- Upgrade @cesium/engine to version 13.1.0
+
+#### Fixes 🔧
+- remove the config context
+
 ### 4.1.1 - 2025-01-05
 
 #### Breaking Changes 📣
